@@ -723,9 +723,9 @@ function switchTab(t) {
   document.getElementById('view-friends').classList.toggle('hidden', t!=='friends');
   document.getElementById('view-translate').classList.toggle('hidden', t!=='translate');
   document.getElementById('view-services').classList.toggle('hidden', t!=='services');
-  // trang chủ & dịch vụ: ẩn ô tìm kiếm và bộ chọn thành phố cho gọn
+  // trang chủ & dịch vụ: ẩn ô tìm kiếm và bộ chọn thành phố cho gọn (giữ nút đăng nhập)
   const noChrome = t==='home' || t==='services';
-  document.querySelector('.search').style.display = noChrome ? 'none' : '';
+  document.querySelector('.search').style.visibility = noChrome ? 'hidden' : 'visible';
   document.querySelector('.city-bar').style.display = noChrome ? 'none' : '';
   const ph = { places:'Tìm phở, chợ Á, nail…', outings:'Tìm theo khu vực…', market:'Tìm đồ trẻ em, đồ ăn…', friends:'Tìm theo khu vực…', translate:'Tìm theo ngôn ngữ, lĩnh vực…' };
   if (ph[t]) document.getElementById('q').placeholder = ph[t];
