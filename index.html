@@ -185,6 +185,27 @@
   .hc-go { color: var(--jade); font-weight: 700; font-size: 14px; }
   .home-card-cta { background: linear-gradient(160deg, #fff, #f6efe4); border-color: #e6d9c4; }
 
+  /* services (Dịch vụ QTT) */
+  .svc-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+  .svc-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 24px;
+    display: flex; flex-direction: column; }
+  .svc-icon { width: 56px; height: 56px; border-radius: 15px; display: flex; align-items: center;
+    justify-content: center; font-size: 28px; margin-bottom: 14px; }
+  .svc-card h3 { font-size: 20px; letter-spacing: -.01em; }
+  .svc-for { font-size: 12.5px; font-weight: 600; color: var(--jade); margin: 4px 0 10px; }
+  .svc-card > p { color: #4a4036; font-size: 14px; line-height: 1.55; }
+  .svc-list { list-style: none; margin: 14px 0 18px; padding: 0; flex: 1; }
+  .svc-list li { font-size: 13.5px; color: #5a4f40; padding: 6px 0 6px 24px; position: relative; }
+  .svc-list li:before { content: "✓"; position: absolute; left: 0; color: var(--jade); font-weight: 800; }
+  .svc-btn { background: var(--jade); color: #fff; border: none; border-radius: 12px; padding: 13px;
+    font-weight: 700; font-size: 15px; cursor: pointer; font-family: inherit; }
+  .svc-btn:hover { filter: brightness(1.07); }
+  .svc-note { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 20px;
+    margin-top: 20px; font-size: 14.5px; color: #4a4036; line-height: 1.55; }
+  .svc-note b { color: var(--ink); }
+  .svc-contact { margin-top: 10px; font-weight: 600; }
+  .svc-contact a { color: var(--jade); text-decoration: none; }
+
   /* about section */
   .about-logo { width: 96px; height: 96px; border-radius: 999px; object-fit: cover;
     box-shadow: 0 6px 20px rgba(40,30,20,.12); margin-bottom: 14px; }
@@ -320,6 +341,7 @@
     <div class="tab" data-tab="market" onclick="switchTab('market')">Chợ cộng đồng</div>
     <div class="tab" data-tab="friends" onclick="switchTab('friends')">Kết bạn</div>
     <div class="tab" data-tab="translate" onclick="switchTab('translate')">Phiên dịch</div>
+    <div class="tab" data-tab="services" onclick="switchTab('services')">Dịch vụ QTT</div>
   </div>
   <div class="city-bar">
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8442e" stroke-width="2.2"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
@@ -369,6 +391,12 @@
         <h3>Phiên dịch</h3>
         <p>Khi bạn cần một người biết tiếng đi cùng lúc khám bệnh hay làm giấy tờ. Kết nối phiên dịch cộng đồng.</p>
         <span class="hc-go">Tìm phiên dịch →</span>
+      </article>
+      <article class="home-card" onclick="switchTab('services')">
+        <div class="hc-icon" style="background:#e3eef5">💻</div>
+        <h3>Dịch vụ QTT</h3>
+        <p>Bạn có nhà hàng hay tiệm nail? QTT Solutions thiết kế web, E-Menu QR và app quản lý kho cho bạn.</p>
+        <span class="hc-go">Xem dịch vụ →</span>
       </article>
       <article class="home-card home-card-cta" onclick="onAccountClick()">
         <div class="hc-icon" style="background:#ece4f2">✨</div>
@@ -507,6 +535,61 @@
   <button class="fab" id="tr-fab" onclick="onTrFab()">＋ Đăng</button>
 </div>
 
+<!-- DỊCH VỤ QTT -->
+<div id="view-services" class="hidden">
+  <section class="hero">
+    <h1>Dịch vụ công nghệ cho <span class="em">nhà hàng & tiệm nail</span></h1>
+    <p>QTT Solutions giúp cơ sở kinh doanh của người Việt tại Thụy Điển hiện đại hơn: website chuyên nghiệp, gọi món QR và quản lý kho thông minh.</p>
+  </section>
+  <main class="wrap">
+    <div class="svc-grid">
+      <article class="svc-card">
+        <div class="svc-icon" style="background:#e3eef5">🌐</div>
+        <h3>Thiết kế Website</h3>
+        <div class="svc-for">Nhà hàng · Tiệm nail · Dịch vụ</div>
+        <p>Website đẹp, chuẩn mobile, hiển thị thực đơn/bảng giá, giờ mở cửa, chỉ đường và nút đặt lịch. Giúp khách tìm thấy bạn trên Google.</p>
+        <ul class="svc-list">
+          <li>Giao diện riêng theo thương hiệu</li>
+          <li>Tối ưu điện thoại & tốc độ tải</li>
+          <li>Tích hợp bản đồ, đặt lịch, mạng xã hội</li>
+        </ul>
+        <button class="svc-btn" onclick="openLeadForm('Thiết kế Website')">Yêu cầu tư vấn / báo giá</button>
+      </article>
+
+      <article class="svc-card">
+        <div class="svc-icon" style="background:#fdeede">📱</div>
+        <h3>E-Menu (Menu QR)</h3>
+        <div class="svc-for">Nhà hàng · Quán ăn · Café</div>
+        <p>Khách quét mã QR tại bàn để xem thực đơn và gọi món. Bếp nhận đơn ngay, giảm sai sót, không cần in menu giấy tốn kém.</p>
+        <ul class="svc-list">
+          <li>Menu QR đa ngôn ngữ, ảnh món đẹp</li>
+          <li>Khách tự gọi món, bếp nhận đơn tức thì</li>
+          <li>Cập nhật giá & món ngay, không in lại</li>
+        </ul>
+        <button class="svc-btn" onclick="openLeadForm('E-Menu (Menu QR)')">Yêu cầu tư vấn / báo giá</button>
+      </article>
+
+      <article class="svc-card">
+        <div class="svc-icon" style="background:#e6f0ec">📦</div>
+        <h3>App Quản lý Kho</h3>
+        <div class="svc-for">Nhà hàng · Cơ sở có kho hàng</div>
+        <p>Ứng dụng quản lý xuất–nhập hàng hoá, theo dõi tồn kho, cảnh báo hết hàng và báo cáo chi phí. Nắm được lời lỗ theo từng nguyên liệu.</p>
+        <ul class="svc-list">
+          <li>Ghi nhận nhập hàng & xuất kho</li>
+          <li>Cảnh báo tồn kho thấp, hạn dùng</li>
+          <li>Báo cáo chi phí & doanh thu</li>
+        </ul>
+        <button class="svc-btn" onclick="openLeadForm('App Quản lý Kho')">Yêu cầu tư vấn / báo giá</button>
+      </article>
+    </div>
+
+    <div class="svc-note">
+      <b>Vì sao chọn QTT Solutions?</b> Chúng tôi là người Việt, hiểu cách vận hành của nhà hàng và tiệm nail Việt tại Thụy Điển. Tư vấn bằng tiếng Việt, hỗ trợ tận nơi, giá hợp lý cho cơ sở nhỏ.
+      <div class="svc-contact">Liên hệ trực tiếp: <a href="mailto:qttsolutions@gmail.com">qttsolutions@gmail.com</a></div>
+    </div>
+  </main>
+</div>
+
 <footer class="site-footer">
   <img class="foot-logo" id="footLogo" alt="QTT Solutions">
   <div class="foot-brand">Việt<span>Sthlm</span><span class="dot">.</span></div>
@@ -639,10 +722,11 @@ function switchTab(t) {
   document.getElementById('view-market').classList.toggle('hidden', t!=='market');
   document.getElementById('view-friends').classList.toggle('hidden', t!=='friends');
   document.getElementById('view-translate').classList.toggle('hidden', t!=='translate');
-  // trang chủ: ẩn ô tìm kiếm và bộ chọn thành phố cho gọn
-  const isHome = t==='home';
-  document.querySelector('.search').style.display = isHome ? 'none' : '';
-  document.querySelector('.city-bar').style.display = isHome ? 'none' : '';
+  document.getElementById('view-services').classList.toggle('hidden', t!=='services');
+  // trang chủ & dịch vụ: ẩn ô tìm kiếm và bộ chọn thành phố cho gọn
+  const noChrome = t==='home' || t==='services';
+  document.querySelector('.search').style.display = noChrome ? 'none' : '';
+  document.querySelector('.city-bar').style.display = noChrome ? 'none' : '';
   const ph = { places:'Tìm phở, chợ Á, nail…', outings:'Tìm theo khu vực…', market:'Tìm đồ trẻ em, đồ ăn…', friends:'Tìm theo khu vực…', translate:'Tìm theo ngôn ngữ, lĩnh vực…' };
   if (ph[t]) document.getElementById('q').placeholder = ph[t];
   if (t==='friends') renderFriends();
@@ -1201,6 +1285,54 @@ function submitTrRequest() {
   document.getElementById('tr-fab').textContent = '＋ Đăng yêu cầu';
   renderTranslate();
   callApi({ action:'addTransReq', ...item }).catch(()=>{});
+}
+
+// ============================================================
+// ===== DỊCH VỤ QTT — YÊU CẦU TƯ VẤN =====
+// ============================================================
+function openLeadForm(dichVu) {
+  document.getElementById('sheet').innerHTML = `
+    <button class="close-x" onclick="closeModal()">✕</button>
+    <div class="sheet-body">
+      <h2>Yêu cầu tư vấn</h2>
+      <div class="auth-note">Dịch vụ: <b>${dichVu}</b>. QTT Solutions sẽ liên hệ lại với bạn sớm.</div>
+      <div id="lead-msg" class="auth-msg"></div>
+      <div class="field"><label>Tên của bạn / cơ sở</label><input id="ld-ten" placeholder="VD: Nhà hàng Phở Việt"></div>
+      <div class="field"><label>Số điện thoại</label><input id="ld-sdt" placeholder="VD: 070-123 4567"></div>
+      <div class="field"><label>Email</label><input id="ld-email" type="email" value="${currentUser?currentUser.email:''}" placeholder="ban@email.com"></div>
+      <div class="row2">
+        <div class="field"><label>Thành phố</label><input id="ld-tp" value="${activeCity}" placeholder="VD: Stockholm"></div>
+        <div class="field"><label>Loại hình</label>
+          <select id="ld-loai"><option>Nhà hàng</option><option>Quán ăn / Café</option><option>Tiệm nail</option><option>Khác</option></select>
+        </div>
+      </div>
+      <div class="field"><label>Ghi chú (tuỳ chọn)</label><textarea id="ld-note" placeholder="Mô tả nhu cầu của bạn…"></textarea></div>
+      <button id="ld-btn" class="submit" onclick="submitLead('${dichVu.replace(/'/g,"")}')">Gửi yêu cầu</button>
+    </div>`;
+  openModalEl();
+}
+
+async function submitLead(dichVu) {
+  const v = id => document.getElementById(id).value.trim();
+  const ten = v('ld-ten'), sdt = v('ld-sdt'), email = v('ld-email');
+  if (!ten || (!sdt && !email)) {
+    document.getElementById('lead-msg').className = 'auth-msg err';
+    document.getElementById('lead-msg').textContent = 'Vui lòng nhập tên và ít nhất số điện thoại hoặc email.';
+    return;
+  }
+  const lead = { dich_vu:dichVu, ten, sdt, email, tp:v('ld-tp'), loai_hinh:v('ld-loai'), note:v('ld-note') };
+  btnLoad('ld-btn', true);
+  // 1) lưu vào Sheet (và backend tự gửi mail cho QTT)
+  callApi({ action:'addLead', ...lead }).catch(()=>{});
+  // 2) mở sẵn email tới QTT với nội dung điền sẵn
+  const body = `Dịch vụ quan tâm: ${dichVu}%0D%0ATên/cơ sở: ${ten}%0D%0AĐiện thoại: ${sdt}%0D%0AEmail: ${email}%0D%0AThành phố: ${v('ld-tp')}%0D%0ALoại hình: ${v('ld-loai')}%0D%0AGhi chú: ${v('ld-note')}`;
+  const mailto = `mailto:qttsolutions@gmail.com?subject=${encodeURIComponent('Yêu cầu tư vấn: '+dichVu)}&body=${body}`;
+  setTimeout(()=>{ window.location.href = mailto; }, 300);
+  // thông báo thành công
+  document.getElementById('lead-msg').className = 'auth-msg ok';
+  document.getElementById('lead-msg').textContent = 'Đã gửi yêu cầu! QTT Solutions sẽ liên hệ với bạn sớm. Đang mở email của bạn…';
+  btnLoad('ld-btn', false, 'Gửi yêu cầu');
+  setTimeout(closeModal, 2500);
 }
 
 // ===== MODAL =====
