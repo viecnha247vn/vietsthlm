@@ -161,6 +161,40 @@
   @media (min-width: 560px) { .modal { align-items: center; } .sheet { border-radius: 20px; } }
   .hidden { display: none !important; }
 
+  /* about section */
+  .about-logo { width: 96px; height: 96px; border-radius: 999px; object-fit: cover;
+    box-shadow: 0 6px 20px rgba(40,30,20,.12); margin-bottom: 14px; }
+  .about { max-width: 820px; margin: 40px auto 10px; background: #fff; border: 1px solid var(--line);
+    border-radius: 20px; padding: 32px 26px; text-align: center; }
+  .about-badge { display: inline-block; background: var(--paper-2); color: var(--jade); font-size: 12.5px;
+    font-weight: 700; padding: 5px 14px; border-radius: 999px; letter-spacing: .03em; margin-bottom: 14px; }
+  .about h2 { font-size: clamp(21px, 4vw, 28px); letter-spacing: -.02em; line-height: 1.2; max-width: 22ch; margin: 0 auto; }
+  .about > p { color: #4a4036; font-size: 15px; margin: 14px auto 0; max-width: 60ch; }
+  .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;
+    margin: 26px 0; text-align: left; }
+  .ab-item { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 15px; }
+  .ab-item span { font-size: 24px; } .ab-item b { display: block; margin: 6px 0 3px; font-size: 15px; }
+  .ab-item p { font-size: 13px; color: var(--muted); margin: 0; }
+  .about-brand { color: #4a4036; font-size: 14.5px; max-width: 62ch; margin: 0 auto !important;
+    padding-top: 6px; border-top: 1px solid var(--line); }
+  .about-brand b { color: var(--ink); }
+  .about-free { color: var(--jade) !important; font-size: 15px !important; margin-top: 16px !important; }
+
+  /* footer */
+  .foot-logo { width: 72px; height: 72px; border-radius: 999px; object-fit: cover;
+    box-shadow: 0 4px 14px rgba(40,30,20,.14); margin-bottom: 12px; }
+  .site-footer { text-align: center; padding: 40px 20px 34px; border-top: 1px solid var(--line);
+    background: var(--paper-2); margin-top: 10px; }
+  .foot-brand { font-weight: 800; font-size: 22px; color: var(--red); letter-spacing: -.02em; }
+  .foot-brand span { color: var(--ink); } .foot-brand .dot { color: var(--gold); }
+  .foot-tag { color: var(--muted); font-size: 13.5px; margin-top: 4px; }
+  .foot-by { font-size: 14px; margin-top: 14px; color: var(--ink); }
+  .foot-by b { color: var(--jade); }
+  .foot-mail { display: inline-block; margin-top: 10px; color: var(--jade); font-weight: 700;
+    text-decoration: none; font-size: 14.5px; background: #fff; border: 1px solid var(--line);
+    padding: 9px 18px; border-radius: 999px; }
+  .foot-copy { font-size: 12px; color: var(--muted); margin-top: 18px; }
+
   /* auth */
   .acc-btn { flex-shrink: 0; background: var(--ink); color: var(--paper); border: none;
     border-radius: 999px; padding: 9px 16px; font-size: 14px; font-weight: 700; cursor: pointer;
@@ -280,6 +314,23 @@
     <div class="count" id="count"></div>
     <div class="grid" id="grid"></div>
     <div class="empty hidden" id="empty">Chưa có địa điểm nào khớp. Thử bỏ bớt bộ lọc nhé.</div>
+
+    <section class="about">
+      <img class="about-logo" id="aboutLogo" alt="QTT Solutions">
+      <div class="about-badge">Về ViệtSthlm</div>
+      <h2>Người Việt mình ở Thụy Điển — giờ có một mái nhà chung</h2>
+      <p>ViệtSthlm là nền tảng cộng đồng dành cho người Việt và người châu Á đang sinh sống tại Thụy Điển. Xa quê hương, ai cũng từng có lúc lạc lõng — không biết mua gói mắm tôm ở đâu, con nhỏ thiếu bạn nói tiếng Việt, hay bối rối trước một lá thư từ cơ quan. ViệtSthlm ra đời để những khoảnh khắc ấy không còn đơn độc.</p>
+      <div class="about-grid">
+        <div class="ab-item"><span>🍜</span><b>Địa điểm</b><p>Quán ăn, chợ Á, dịch vụ Việt với đánh giá thật từ cộng đồng.</p></div>
+        <div class="ab-item"><span>👨‍👩‍👧</span><b>Đi chơi cùng con</b><p>Kết nối các gia đình, để con có bạn, bố mẹ có tri kỷ.</p></div>
+        <div class="ab-item"><span>🤝</span><b>Chợ cộng đồng</b><p>Cho, tặng, đổi đồ và nhờ nhau xách chút hương vị quê nhà.</p></div>
+        <div class="ab-item"><span>💗</span><b>Kết bạn</b><p>Người độc thân tìm người hợp gu, an toàn và tử tế.</p></div>
+        <div class="ab-item"><span>🗣️</span><b>Phiên dịch</b><p>Người biết tiếng đi cùng bạn lúc khám bệnh, làm giấy tờ.</p></div>
+        <div class="ab-item"><span>🇸🇪</span><b>Toàn Thụy Điển</b><p>Từ Stockholm tới Göteborg, Malmö và nhiều thành phố khác.</p></div>
+      </div>
+      <p class="about-brand">Một sản phẩm công nghệ của người Việt — phát triển bởi <b>QTT Solutions</b>, với mong muốn dùng công nghệ để gắn kết cộng đồng nơi xứ người. Đôi cánh trên logo mang ý nghĩa nâng đỡ, kết nối và cùng nhau bay xa.</p>
+      <p class="about-free"><b>Miễn phí · An toàn · Luôn bằng tiếng mẹ đẻ</b></p>
+    </section>
   </main>
 </div>
 
@@ -387,13 +438,24 @@
   <button class="fab" id="tr-fab" onclick="onTrFab()">＋ Đăng</button>
 </div>
 
+<footer class="site-footer">
+  <img class="foot-logo" id="footLogo" alt="QTT Solutions">
+  <div class="foot-brand">Việt<span>Sthlm</span><span class="dot">.</span></div>
+  <p class="foot-tag">Cộng đồng người Việt & châu Á tại Thụy Điển</p>
+  <p class="foot-by">Một sản phẩm của <b>QTT Solutions</b></p>
+  <a class="foot-mail" href="mailto:qttsolutions@gmail.com">✉ qttsolutions@gmail.com</a>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for the Vietnamese community</p>
+</footer>
+
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
   <div class="sheet" id="sheet"></div>
 </div>
 
 <script>
+const LOGO_QTT = "data:image/jpeg;base64,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";
+
 // ===== PLACES DATA =====
-const PLACES = [
+let PLACES = [
   { id:1, ten:"Phở Việt Söder", nhom:"Ăn uống", loai:"Phở", khuvuc:"Södermalm", tp:"Stockholm", diachi:"Götgatan 78, Stockholm", sdt:"08-123 456", gio:"11:00–21:00", mota:"Phở bò đậm vị miền Nam, nước dùng ninh xương 12 tiếng. Có bánh mì và cà phê sữa đá.", diem:4.6, rev:84, noibat:true, anh:"https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=600&q=70", map:"https://maps.google.com/?q=Götgatan+78+Stockholm" },
   { id:2, ten:"Asia Market Hötorgshallen", nhom:"Mua sắm", loai:"Chợ Á", khuvuc:"Norrmalm", tp:"Stockholm", diachi:"Hötorget, Stockholm", sdt:"08-222 333", gio:"09:00–18:00", mota:"Đầy đủ gia vị Việt, nước mắm, bánh tráng, rau thơm tươi, mì gói các loại.", diem:4.3, rev:51, noibat:false, anh:"https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=600&q=70", map:"https://maps.google.com/?q=Hötorget+Stockholm" },
   { id:3, ten:"Bún Bò Huế Mai", nhom:"Ăn uống", loai:"Bún", khuvuc:"Kungsholmen", tp:"Stockholm", diachi:"Fleminggatan 40, Stockholm", sdt:"08-444 555", gio:"11:30–20:00", mota:"Bún bò Huế cay đúng điệu, chả cua tự làm. Chủ quán người Huế.", diem:4.8, rev:67, noibat:true, anh:"https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&q=70", map:"https://maps.google.com/?q=Fleminggatan+40+Stockholm" },
@@ -409,6 +471,7 @@ const PLACES = [
 
 const AV = ['#c8442e','#2e6e5e','#d99b2b','#7b5ea7','#3a7ca5','#bb6b3d'];
 const initials = n => n.split(' ').slice(-1)[0][0];
+function avColor(id){ const s=String(id); let h=0; for(let i=0;i<s.length;i++) h=(h*31+s.charCodeAt(i))>>>0; return h%AV.length; }
 
 let OUTINGS = [
   { id:1, host:"Chị Hương", khuvuc:"Södermalm", tp:"Stockholm", diadiem:"Công viên Tantolunden", dia_addr:"Tantolunden, Södermalm", ngay:"CN 6/7", gio:"10:00", tuoi:"3–5 tuổi", note:"Mình đưa bé Su ra công viên chơi xích đu, nhà nào có bé tầm tuổi ra chơi cho vui nhé. Mình mang theo ít bánh.", going:["Chị Hương","Anh Tuấn","Chị Lan"], joined:false, color:0 },
@@ -552,7 +615,7 @@ function renderPlaces() {
   if (!list.length) { grid.innerHTML=''; empty.classList.remove('hidden'); return; }
   empty.classList.add('hidden');
   grid.innerHTML = list.map(p => `
-    <article class="card" onclick="openPlace(${p.id})">
+    <article class="card" onclick="openPlace('${p.id}')">
       <div class="thumb" style="background-image:url('${p.anh}')">
         ${p.noibat?'<span class="badge">★ Nổi bật</span>':''}
         <span class="cat-tag">${p.loai}</span>
@@ -569,7 +632,7 @@ function renderPlaces() {
     </article>`).join('');
 }
 function openPlace(id) {
-  const p = PLACES.find(x=>x.id===id);
+  const p = PLACES.find(x=>String(x.id)===String(id));
   document.getElementById('sheet').innerHTML = `
     <button class="close-x" onclick="closeModal()">✕</button>
     <div class="sheet-img" style="background-image:url('${p.anh}')"></div>
@@ -590,13 +653,18 @@ function openPlace(id) {
 
 // ===== OUTINGS =====
 function renderFeed() {
-  const list = OUTINGS.filter(o => o.tp===activeCity && (!query || [o.host,o.khuvuc,o.diadiem,o.note,o.tuoi].some(s=>s.toLowerCase().includes(query))));
+  const list = OUTINGS.filter(o => o.tp===activeCity && (!query || [o.host,o.khuvuc,o.diadiem,o.note,o.tuoi].some(s=>String(s||'').toLowerCase().includes(query))));
   const feed = document.getElementById('feed');
   if (!list.length) { feed.innerHTML = '<div class="empty">Chưa có buổi nào khớp. Sao anh/chị không tạo một buổi mới?</div>'; return; }
-  feed.innerHTML = list.map(o => `
+  const me = currentUser ? (currentUser.ten||'Bạn') : null;
+  feed.innerHTML = list.map((o,idx) => {
+    const col = (o.color!==undefined && o.color!=='') ? Number(o.color) : (idx % AV.length);
+    const going = Array.isArray(o.going) ? o.going : [];
+    const joined = me && going.includes(me);
+    return `
     <article class="outing">
       <div class="o-head">
-        <div class="avatar" style="background:${AV[o.color]}">${initials(o.host)}</div>
+        <div class="avatar" style="background:${AV[col%AV.length]}">${initials(o.host)}</div>
         <div><div class="o-host">${o.host}</div><div class="o-sub">${o.khuvuc}</div></div>
         <div class="o-when"><div class="d">${o.ngay}</div><div class="t">${o.gio}</div></div>
       </div>
@@ -608,19 +676,21 @@ function renderFeed() {
       </div>
       <div class="o-foot">
         <div class="going">
-          <div class="dots">${o.going.slice(0,4).map((g,i)=>`<span style="background:${AV[(o.color+i)%AV.length]}">${initials(g)}</span>`).join('')}</div>
-          <span class="going-n">${o.going.length} gia đình tham gia</span>
+          <div class="dots">${going.slice(0,4).map((g,i)=>`<span style="background:${AV[(col+i)%AV.length]}">${initials(g)}</span>`).join('')}</div>
+          <span class="going-n">${going.length} gia đình tham gia</span>
         </div>
-        <button class="join ${o.joined?'joined':''}" onclick="toggleJoin(${o.id})">${o.joined?'✓ Đã tham gia':'Tham gia'}</button>
+        <button class="join ${joined?'joined':''}" onclick="toggleJoin('${o.id}')">${joined?'✓ Đã tham gia':'Tham gia'}</button>
       </div>
-    </article>`).join('');
+    </article>`;
+  }).join('');
 }
 function toggleJoin(id) {
   requireLogin(() => {
-    const o = OUTINGS.find(x=>x.id===id);
+    const o = OUTINGS.find(x=>String(x.id)===String(id));
     const me = currentUser.ten || "Bạn";
-    if (o.joined) { o.joined=false; o.going = o.going.filter(g=>g!==me); }
-    else { o.joined=true; o.going.push(me); }
+    if (!Array.isArray(o.going)) o.going = [];
+    if (o.going.includes(me)) { o.going = o.going.filter(g=>g!==me); o.joined=false; }
+    else { o.going.push(me); o.joined=true; callApi({ action:'joinOuting', id:o.id, ten:me }).catch(()=>{}); }
     renderFeed();
   });
 }
@@ -648,8 +718,10 @@ function submitOuting() {
   const v = id => document.getElementById(id).value.trim();
   const host=v('f-host'), place=v('f-place');
   if (!host || !place) { alert('Vui lòng nhập ít nhất tên và địa điểm.'); return; }
-  OUTINGS.unshift({ id: Date.now(), host, tp:activeCity, khuvuc:v('f-area')||'Stockholm', diadiem:place, dia_addr:v('f-area')||place, ngay:v('f-day')||'Sắp tới', gio:v('f-time')||'', tuoi:v('f-age')||'Mọi lứa tuổi', note:v('f-note')||'', going:[host,"Bạn"], joined:true, color:Math.floor(Math.random()*AV.length) });
+  const item = { tp:activeCity, host, khuvuc:v('f-area')||activeCity, diadiem:place, dia_addr:v('f-area')||place, ngay:v('f-day')||'Sắp tới', gio:v('f-time')||'', tuoi:v('f-age')||'Mọi lứa tuổi', note:v('f-note')||'', going:[host], joined:false, email: currentUser?currentUser.email:'' };
+  OUTINGS.unshift(item);
   closeModal(); renderFeed();
+  callApi({ action:'addOuting', ...item }).catch(()=>{});
 }
 
 // ===== MARKET =====
@@ -665,7 +737,7 @@ function renderMarket() {
   if (!list.length) { grid.innerHTML=''; empty.classList.remove('hidden'); return; }
   empty.classList.add('hidden');
   grid.innerHTML = list.map(m => `
-    <article class="item" onclick="openItem(${m.id})">
+    <article class="item" onclick="openItem('${m.id}')">
       <div class="item-img" style="background-image:url('${m.anh}')">
         <span class="tag-type ${TYPE_CLASS[m.type]}">${TYPE_LABEL[m.type]}</span>
         <span class="tag-cat">${m.cat}</span>
@@ -681,7 +753,7 @@ function renderMarket() {
     </article>`).join('');
 }
 function openItem(id) {
-  const m = MARKET.find(x=>x.id===id);
+  const m = MARKET.find(x=>String(x.id)===String(id));
   document.getElementById('sheet').innerHTML = `
     <button class="close-x" onclick="closeModal()">✕</button>
     <div class="sheet-img" style="background-image:url('${m.anh}')"></div>
@@ -736,8 +808,10 @@ function submitItem() {
   const v = id => document.getElementById(id).value.trim();
   const title=v('m-title'), who=v('m-who');
   if (!title || !who) { alert('Vui lòng nhập ít nhất tiêu đề và tên.'); return; }
-  MARKET.unshift({ id:Date.now(), tp:activeCity, type:v('m-type'), cat:v('m-cat'), title, who, khuvuc:v('m-area')||'Stockholm', sdt:v('m-sdt')||'', desc:v('m-desc')||'', anh:"https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=600&q=70" });
+  const item = { tp:activeCity, type:v('m-type'), cat:v('m-cat'), title, who, khuvuc:v('m-area')||activeCity, sdt:v('m-sdt')||'', desc:v('m-desc')||'', anh:"https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=600&q=70", email: currentUser?currentUser.email:'' };
+  MARKET.unshift(item);
   closeModal(); renderMarket();
+  callApi({ action:'addMarket', ...item }).catch(()=>{});
 }
 
 // ============================================================
@@ -764,7 +838,7 @@ function renderFriends() {
 
 function renderDiscover() {
   const list = SINGLES.filter(p =>
-    p.tp===activeCity && !myMatches.includes(p.id) && !mySkips.includes(p.id) &&
+    p.tp===activeCity && !myMatches.map(String).includes(String(p.id)) && !mySkips.map(String).includes(String(p.id)) &&
     (!query || [p.ten,p.khuvuc,p.nghe,p.bio].some(s=>s.toLowerCase().includes(query)))
   );
   document.getElementById('fr-count').textContent = `${list.length} người có thể hợp gu`;
@@ -783,8 +857,8 @@ function renderDiscover() {
       <div class="pcard-bio">${p.bio}</div>
       <div class="pcard-tags">${p.so_thich.map(t=>`<span class="t">${t}</span>`).join('')}</div>
       <div class="pcard-act">
-        <button class="btn-skip" onclick="skipSingle(${p.id})">Bỏ qua</button>
-        <button class="btn-like" onclick="likeSingle(${p.id})">💗 Thích</button>
+        <button class="btn-skip" onclick="skipSingle('${p.id}')">Bỏ qua</button>
+        <button class="btn-like" onclick="likeSingle('${p.id}')">💗 Thích</button>
       </div>
     </article>`).join('');
 }
@@ -795,24 +869,22 @@ function likeSingle(id) {
   requireLogin(() => {
     if (!myProfile) { alert('Hãy tạo hồ sơ của bạn trước khi kết nối.'); openProfileForm(); return; }
     if (!myLikes.includes(id)) myLikes.push(id);
-    // giả lập: đối phương cũng thích lại (trong thực tế do backend quyết định)
-    const matched = Math.random() > 0.4;
-    if (matched) {
-      myMatches.push(id);
-      showMatch(id);
-    } else {
-      const p = SINGLES.find(x=>x.id===id);
-      mySkips.push(id);
-      renderDiscover();
-      // thông báo nhẹ
-      const el = document.getElementById('fr-count');
-      el.textContent = `Đã gửi lời thích tới ${p.ten}. Nếu ${p.ten} thích lại, hai bạn sẽ kết nối.`;
-    }
+    callApi({ action:'likeSingle', email: currentUser.email, target_id: id }).then(r => {
+      if (r && r.matched) { myMatches.push(id); showMatch(id); }
+      else {
+        const p = SINGLES.find(x=>String(x.id)===String(id));
+        mySkips.push(id); renderDiscover();
+        if (p) document.getElementById('fr-count').textContent = `Đã gửi lời thích tới ${p.ten}. Nếu ${p.ten} thích lại, hai bạn sẽ kết nối.`;
+      }
+    }).catch(() => {
+      // offline fallback: coi như match để demo
+      myMatches.push(id); showMatch(id);
+    });
   });
 }
 
 function showMatch(id) {
-  const p = SINGLES.find(x=>x.id===id);
+  const p = SINGLES.find(x=>String(x.id)===String(id));
   document.getElementById('sheet').innerHTML = `
     <button class="close-x" onclick="closeModal();renderFriends()">✕</button>
     <div class="match-pop">
@@ -829,7 +901,7 @@ function showMatch(id) {
 }
 
 function renderMatches() {
-  const list = SINGLES.filter(p=>myMatches.includes(p.id));
+  const list = SINGLES.filter(p=>myMatches.map(String).includes(String(p.id)));
   const box = document.getElementById('fr-match-list');
   if (!list.length) { box.innerHTML = '<div class="empty">Chưa có kết nối nào. Vào tab Gợi ý và gửi lời thích tới người bạn thấy hợp.</div>'; return; }
   box.innerHTML = list.map(p => `
@@ -868,7 +940,7 @@ function renderSgEvents() {
 }
 function joinSgEvent(id) {
   requireLogin(() => {
-    const o = SG_EVENTS.find(x=>x.id===id);
+    const o = SG_EVENTS.find(x=>String(x.id)===String(id));
     o.joined = !o.joined;
     if (o.joined) o.going.push(currentUser.ten||'Bạn'); else o.going = o.going.filter(g=>g!==(currentUser.ten||'Bạn'));
     renderSgEvents();
@@ -909,12 +981,14 @@ function saveProfile() {
   const ten = v('p-ten');
   if (!ten) { alert('Vui lòng nhập tên.'); return; }
   myProfile = { ten, tuoi:v('p-tuoi'), khuvuc:v('p-khuvuc'), nghe:v('p-nghe'), tim:v('p-tim'),
-    bio:v('p-bio'), so_thich:v('p-sothich').split(',').map(s=>s.trim()).filter(Boolean), sdt:v('p-sdt') };
+    bio:v('p-bio'), so_thich:v('p-sothich').split(',').map(s=>s.trim()).filter(Boolean), sdt:v('p-sdt'), tp:activeCity };
   closeModal(); renderFriends();
+  callApi({ action:'saveSingle', ...myProfile, email: currentUser.email }).catch(()=>{});
 }
 function deleteProfile() {
   if (confirm('Xoá hồ sơ độc thân của bạn? Người khác sẽ không còn thấy bạn.')) {
     myProfile = null; closeModal(); renderFriends();
+    if (currentUser) callApi({ action:'deleteSingle', email: currentUser.email }).catch(()=>{});
   }
 }
 
@@ -949,7 +1023,7 @@ function renderTrFind() {
     <article class="tr-card" style="position:relative">
       ${t.auth?'<span class="tr-badge">✓ Được cấp phép</span>':''}
       <div class="tr-top">
-        <div class="avatar" style="background:${AV[t.id%AV.length]}">${initials(t.ten)}</div>
+        <div class="avatar" style="background:${AV[avColor(t.id)]}">${initials(t.ten)}</div>
         <div><div class="tr-name">${t.ten}</div><div class="tr-role">${t.kn}</div></div>
       </div>
       <div class="tr-langs">${t.langs.map(l=>`<span class="lg">${l}</span>`).join('')}</div>
@@ -971,7 +1045,7 @@ function renderTrRequests() {
   box.innerHTML = list.map(r => `
     <article class="outing">
       <div class="o-head">
-        <div class="avatar" style="background:${AV[r.id%AV.length]}">${initials(r.who)}</div>
+        <div class="avatar" style="background:${AV[avColor(r.id)]}">${initials(r.who)}</div>
         <div><div class="o-host">${r.who}</div><div class="o-sub">${r.khuvuc}</div></div>
         <div class="o-when"><div class="d" style="font-size:12.5px">${r.khi}</div></div>
       </div>
@@ -1007,11 +1081,14 @@ function submitTranslator() {
   const v = id => document.getElementById(id).value.trim();
   const ten = v('t-ten');
   if (!ten) { alert('Vui lòng nhập tên.'); return; }
-  TRANSLATORS.unshift({ id:Date.now(), tp:activeCity, ten, khuvuc:v('t-khuvuc')||activeCity,
+  const item = { tp:activeCity, ten, khuvuc:v('t-khuvuc')||activeCity,
     langs:v('t-langs').split(',').map(s=>s.trim()).filter(Boolean),
     fields:v('t-fields').split(',').map(s=>s.trim()).filter(Boolean),
-    auth:document.getElementById('t-auth').checked, kn:v('t-kn')||'', bio:v('t-bio')||'', sdt:v('t-sdt')||'' });
+    auth:document.getElementById('t-auth').checked, kn:v('t-kn')||'', bio:v('t-bio')||'', sdt:v('t-sdt')||'',
+    email: currentUser?currentUser.email:'' };
+  TRANSLATORS.unshift(item);
   closeModal(); trSub='find'; renderTranslate();
+  callApi({ action:'addTranslator', ...item }).catch(()=>{});
 }
 
 function openTrRequestForm() {
@@ -1041,12 +1118,15 @@ function submitTrRequest() {
   const v = id => document.getElementById(id).value.trim();
   const who = v('tr-who');
   if (!who) { alert('Vui lòng nhập tên.'); return; }
-  TR_REQUESTS.unshift({ id:Date.now(), tp:activeCity, who, khuvuc:v('tr-area')||activeCity,
-    field:v('tr-field'), khi:v('tr-khi')||'Linh hoạt', note:v('tr-note')||'', sdt:v('tr-sdt')||'' });
+  const item = { tp:activeCity, who, khuvuc:v('tr-area')||activeCity,
+    field:v('tr-field'), khi:v('tr-khi')||'Linh hoạt', note:v('tr-note')||'', sdt:v('tr-sdt')||'',
+    email: currentUser?currentUser.email:'' };
+  TR_REQUESTS.unshift(item);
   closeModal(); trSub='requests';
   document.querySelectorAll('#tr-subtabs .sub-tab').forEach(x=>x.classList.toggle('on', x.dataset.sub==='requests'));
   document.getElementById('tr-fab').textContent = '＋ Đăng yêu cầu';
   renderTranslate();
+  callApi({ action:'addTransReq', ...item }).catch(()=>{});
 }
 
 // ===== MODAL =====
@@ -1101,6 +1181,7 @@ function loginDone(user) {
   currentUser = user;
   localStorage.setItem('vietsthlm_user', JSON.stringify(user));
   refreshAccBtn();
+  loadData();
 }
 
 // gọi API
@@ -1114,6 +1195,42 @@ async function callApi(payload) {
     body: JSON.stringify(payload)
   });
   return await res.json();
+}
+
+// ===== NẠP DỮ LIỆU TỪ GOOGLE SHEET =====
+let dataLoaded = false;
+async function loadData() {
+  try {
+    const r = await callApi({ action:'getAll', email: currentUser ? currentUser.email : '' });
+    if (!r || !r.ok) return;
+    if (Array.isArray(r.places))      PLACES = r.places.map(normNums);
+    if (Array.isArray(r.outings))     OUTINGS = r.outings;
+    if (Array.isArray(r.market))      MARKET = r.market;
+    if (Array.isArray(r.singles))     SINGLES = r.singles.map(normNums);
+    if (Array.isArray(r.translators)) TRANSLATORS = r.translators;
+    if (Array.isArray(r.transreq))    TR_REQUESTS = r.transreq;
+    if (Array.isArray(r.myLikes))     myLikes = r.myLikes.map(Number);
+    // khôi phục hồ sơ độc thân của mình (nếu có)
+    if (currentUser && Array.isArray(r.singles)) {
+      const mine = r.singles.find(s => String(s.email||'').toLowerCase() === currentUser.email.toLowerCase());
+      if (mine) myProfile = mine;
+    }
+    dataLoaded = true;
+    initCitySelector();
+    renderPlaces(); renderFeed(); renderMarket(); renderTranslate();
+    if (!document.getElementById('view-friends').classList.contains('hidden')) renderFriends();
+  } catch (e) {
+    // nếu lỗi mạng thì giữ dữ liệu mẫu sẵn có, app vẫn xem được
+    console.warn('Không tải được dữ liệu từ Sheet, dùng dữ liệu mẫu:', e);
+  }
+}
+function normNums(o){
+  if (o.diem!==undefined) o.diem = Number(o.diem)||0;
+  if (o.rev!==undefined)  o.rev  = Number(o.rev)||0;
+  if (o.id!==undefined)   o.id   = Number(o.id)||o.id;
+  if (o.tuoi!==undefined && !isNaN(o.tuoi)) o.tuoi = Number(o.tuoi);
+  if (o.noibat!==undefined) o.noibat = (o.noibat===true||o.noibat==='TRUE'||o.noibat==='true');
+  return o;
 }
 
 function authMsg(text, type) {
@@ -1277,7 +1394,13 @@ function requireLogin(action) {
 }
 
 initCitySelector();
+(function setLogos(){
+  const a = document.getElementById('aboutLogo'), f = document.getElementById('footLogo');
+  if (a) a.src = LOGO_QTT;
+  if (f) f.src = LOGO_QTT;
+})();
 renderPlaces(); renderFeed(); renderMarket();
+loadData();
 </script>
 </body>
 </html>
