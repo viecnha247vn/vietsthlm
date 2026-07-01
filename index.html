@@ -414,18 +414,18 @@
     <button id="countryBadge" class="country-badge" onclick="reopenSplash()" title="Đổi quốc gia" style="display:none"></button>
     <div class="search">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8a7d6b" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
-      <input id="q" type="text" placeholder="Tìm phở, chợ Á, nail…">
+      <input id="q" type="text" placeholder="Tìm phở, chợ Á, nail…" data-i18n-ph="search_places">
     </div>
-    <button id="accBtn" class="acc-btn" onclick="onAccountClick()">Đăng nhập</button>
+    <button id="accBtn" class="acc-btn" onclick="onAccountClick()" data-i18n="login">Đăng nhập</button>
   </div>
   <div class="tabs">
-    <div class="tab" data-tab="home" onclick="switchTab('home')">Trang chủ</div>
-    <div class="tab on" data-tab="places" onclick="switchTab('places')">Địa điểm</div>
-    <div class="tab" data-tab="outings" onclick="switchTab('outings')">Đi chơi cùng con</div>
-    <div class="tab" data-tab="market" onclick="switchTab('market')">Chợ cộng đồng</div>
-    <div class="tab" data-tab="friends" onclick="switchTab('friends')">Kết bạn</div>
-    <div class="tab" data-tab="translate" onclick="switchTab('translate')">Phiên dịch</div>
-    <div class="tab" data-tab="services" onclick="switchTab('services')">Dịch vụ QTT</div>
+    <div class="tab" data-tab="home" onclick="switchTab('home')" data-i18n="tab_home">Trang chủ</div>
+    <div class="tab on" data-tab="places" onclick="switchTab('places')" data-i18n="tab_places">Địa điểm</div>
+    <div class="tab" data-tab="outings" onclick="switchTab('outings')" data-i18n="tab_outings">Đi chơi cùng con</div>
+    <div class="tab" data-tab="market" onclick="switchTab('market')" data-i18n="tab_market">Chợ cộng đồng</div>
+    <div class="tab" data-tab="friends" onclick="switchTab('friends')" data-i18n="tab_friends">Kết bạn</div>
+    <div class="tab" data-tab="translate" onclick="switchTab('translate')" data-i18n="tab_translate">Phiên dịch</div>
+    <div class="tab" data-tab="services" onclick="switchTab('services')" data-i18n="tab_services">Dịch vụ QTT</div>
   </div>
   <div class="city-bar">
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8442e" stroke-width="2.2"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
@@ -439,77 +439,77 @@
   <section class="home-split">
     <div class="hs-left">
       <img class="home-logo" id="homeLogo" alt="QTT Solutions">
-      <h1>Người Việt mình ở Thụy Điển —<br><span class="em">giờ có một mái nhà chung</span></h1>
-      <p id="home-greeting">Từ quán phở hợp khẩu vị, buổi đưa con đi chơi cuối tuần, đến người bạn tâm giao hay người phiên dịch lúc cần — tất cả ở một nơi, bằng tiếng Việt.</p>
-      <button class="home-cta" onclick="switchTab('places')">Khám phá ngay →</button>
+      <h1><span data-i18n="home_title_1">Người Việt mình ở Thụy Điển —</span><br><span class="em" data-i18n="home_title_2">giờ có một mái nhà chung</span></h1>
+      <p id="home-greeting" data-i18n="home_greeting">Từ quán phở hợp khẩu vị, buổi đưa con đi chơi cuối tuần, đến người bạn tâm giao hay người phiên dịch lúc cần — tất cả ở một nơi, bằng tiếng Việt.</p>
+      <button class="home-cta" onclick="switchTab('places')" data-i18n="cta_explore">Khám phá ngay →</button>
     </div>
     <div class="hs-right">
       <section class="chat-box">
         <div class="chat-head">
           <div>
-            <div class="chat-title">💬 Phòng giao lưu</div>
-            <div class="chat-sub">Làm quen với người Việt khắp Thụy Điển</div>
+            <div class="chat-title" data-i18n="chat_title">💬 Phòng giao lưu</div>
+            <div class="chat-sub" data-i18n="chat_sub">Làm quen với người Việt khắp Thụy Điển</div>
           </div>
           <span class="chat-live" id="chatLive">● trực tuyến</span>
         </div>
-        <div class="chat-safety">Hãy lịch sự và tôn trọng nhau. Đừng chia sẻ thông tin nhạy cảm (địa chỉ nhà, số tài khoản). Bấm ⚑ để báo cáo tin xấu.</div>
+        <div class="chat-safety" data-i18n="chat_safety">Hãy lịch sự và tôn trọng nhau. Đừng chia sẻ thông tin nhạy cảm (địa chỉ nhà, số tài khoản). Bấm ⚑ để báo cáo tin xấu.</div>
         <div class="chat-messages" id="chatMessages">
-          <div class="chat-empty">Đang tải tin nhắn…</div>
+          <div class="chat-empty">…</div>
         </div>
         <div class="chat-input-row" id="chatInputRow">
-          <input id="chatInput" type="text" maxlength="500" placeholder="Nhập tin nhắn…" onkeydown="if(event.key==='Enter')sendChatMsg()">
-          <button class="chat-send" onclick="sendChatMsg()">Gửi</button>
+          <input id="chatInput" type="text" maxlength="500" placeholder="Nhập tin nhắn…" data-i18n-ph="chat_placeholder" onkeydown="if(event.key==='Enter')sendChatMsg()">
+          <button class="chat-send" onclick="sendChatMsg()" data-i18n="chat_send">Gửi</button>
         </div>
         <div class="chat-login-hint" id="chatLoginHint">
-          <button class="chat-login-btn" onclick="onAccountClick()">Đăng nhập để tham gia trò chuyện</button>
+          <button class="chat-login-btn" onclick="onAccountClick()" data-i18n="chat_login">Đăng nhập để tham gia trò chuyện</button>
         </div>
       </section>
     </div>
   </section>
 
   <main class="wrap">
-    <div class="home-section-label">Cộng đồng của bạn có gì</div>
+    <div class="home-section-label" data-i18n="section_have">Cộng đồng của bạn có gì</div>
     <div class="home-grid">
       <article class="home-card" onclick="switchTab('places')">
         <div class="hc-icon" style="background:#fdeede">🍜</div>
-        <h3>Địa điểm</h3>
-        <p>Quán ăn, chợ Á, tiệm nail và dịch vụ của người Việt gần bạn — với đánh giá thật từ chính cộng đồng mình.</p>
+        <h3 data-i18n="tab_places">Địa điểm</h3>
+        <p data-i18n="hc_places_d">Quán ăn, chợ Á, tiệm nail và dịch vụ của người Việt gần bạn — với đánh giá thật từ chính cộng đồng mình.</p>
         <span class="hc-go">Xem địa điểm →</span>
       </article>
       <article class="home-card" onclick="switchTab('outings')">
         <div class="hc-icon" style="background:#e6f0ec">👨‍👩‍👧</div>
-        <h3>Đi chơi cùng con</h3>
-        <p>Kết nối với các gia đình cùng cảnh ngộ, hẹn nhau ra công viên để con có bạn, bố mẹ có tri kỷ.</p>
+        <h3 data-i18n="tab_outings">Đi chơi cùng con</h3>
+        <p data-i18n="hc_outings_d">Kết nối với các gia đình cùng cảnh ngộ, hẹn nhau ra công viên để con có bạn, bố mẹ có tri kỷ.</p>
         <span class="hc-go">Xem buổi đi chơi →</span>
       </article>
       <article class="home-card" onclick="switchTab('market')">
         <div class="hc-icon" style="background:#fdeede">🤝</div>
-        <h3>Chợ cộng đồng</h3>
-        <p>Cho, tặng, đổi quần áo trẻ em, đồ gia đình, món ăn quê hương, hay nhờ nhau xách tay chút hương vị Việt Nam.</p>
+        <h3 data-i18n="tab_market">Chợ cộng đồng</h3>
+        <p data-i18n="hc_market_d">Cho, tặng, đổi quần áo trẻ em, đồ gia đình, món ăn quê hương, hay nhờ nhau xách tay chút hương vị Việt Nam.</p>
         <span class="hc-go">Vào chợ →</span>
       </article>
       <article class="home-card" onclick="switchTab('friends')">
         <div class="hc-icon" style="background:#fbe9ef">💗</div>
-        <h3>Kết bạn</h3>
-        <p>Nơi những người độc thân tìm người hợp gu, cùng văn hóa, cùng ngôn ngữ — một cách an toàn và tử tế.</p>
+        <h3 data-i18n="tab_friends">Kết bạn</h3>
+        <p data-i18n="hc_friends_d">Nơi những người độc thân tìm người hợp gu, cùng văn hóa, cùng ngôn ngữ — một cách an toàn và tử tế.</p>
         <span class="hc-go">Tìm bạn →</span>
       </article>
       <article class="home-card" onclick="switchTab('translate')">
         <div class="hc-icon" style="background:#e3eef5">🗣️</div>
-        <h3>Phiên dịch</h3>
-        <p>Khi bạn cần một người biết tiếng đi cùng lúc khám bệnh hay làm giấy tờ. Kết nối phiên dịch cộng đồng.</p>
+        <h3 data-i18n="tab_translate">Phiên dịch</h3>
+        <p data-i18n="hc_translate_d">Khi bạn cần một người biết tiếng đi cùng lúc khám bệnh hay làm giấy tờ. Kết nối phiên dịch cộng đồng.</p>
         <span class="hc-go">Tìm phiên dịch →</span>
       </article>
       <article class="home-card" onclick="switchTab('services')">
         <div class="hc-icon" style="background:#e3eef5">💻</div>
-        <h3>Dịch vụ QTT</h3>
-        <p>Bạn có nhà hàng hay tiệm nail? QTT Solutions thiết kế web, E-Menu QR và app quản lý kho cho bạn.</p>
+        <h3 data-i18n="tab_services">Dịch vụ QTT</h3>
+        <p data-i18n="hc_services_d">Bạn có nhà hàng hay tiệm nail? QTT Solutions thiết kế web, E-Menu QR và app quản lý kho cho bạn.</p>
         <span class="hc-go">Xem dịch vụ →</span>
       </article>
       <article class="home-card home-card-cta" onclick="onAccountClick()">
         <div class="hc-icon" style="background:#ece4f2">✨</div>
-        <h3>Tham gia cộng đồng</h3>
-        <p>Tạo tài khoản miễn phí để đăng tin, tham gia hoạt động và kết nối với người Việt khắp Thụy Điển.</p>
+        <h3 data-i18n="hc_join">Tham gia cộng đồng</h3>
+        <p data-i18n="hc_join_d">Tạo tài khoản miễn phí để đăng tin, tham gia hoạt động và kết nối với người Việt khắp Thụy Điển.</p>
         <span class="hc-go">Đăng nhập / Đăng ký →</span>
       </article>
     </div>
@@ -553,7 +553,7 @@
     </div>
     <div class="feed" id="feed"></div>
   </main>
-  <button class="fab" data-for="outings" onclick="openCreate()">＋ Tạo buổi đi chơi</button>
+  <button class="fab" data-for="outings" onclick="openCreate()" data-i18n="fab_outing">＋ Tạo buổi đi chơi</button>
 </div>
 
 <!-- MARKET -->
@@ -572,7 +572,7 @@
     <div class="mkt" id="mkt-grid"></div>
     <div class="empty hidden" id="mkt-empty">Chưa có tin nào khớp. Sao anh/chị không đăng tin đầu tiên?</div>
   </main>
-  <button class="fab" data-for="market" onclick="openPost()">＋ Đăng tin</button>
+  <button class="fab" data-for="market" onclick="openPost()" data-i18n="fab_post">＋ Đăng tin</button>
 </div>
 
 <!-- FRIENDS / KẾT BẠN -->
@@ -618,7 +618,7 @@
       <div class="feed" id="fr-event-list"></div>
     </div>
   </main>
-  <button class="fab" data-for="friends" onclick="openProfileForm()">✎ Hồ sơ của tôi</button>
+  <button class="fab" data-for="friends" onclick="openProfileForm()" data-i18n="fab_profile">✎ Hồ sơ của tôi</button>
 </div>
 
 <!-- PHIÊN DỊCH -->
@@ -758,9 +758,7 @@ function pickCountry(c) {
 }
 function applyCountry() {
   if (!activeCountry) return;
-  const g = GREETINGS[activeCountry.code];
-  const sub = document.getElementById('home-greeting');
-  if (sub && g) sub.textContent = g;
+  setLangFromCountry(activeCountry);
   const badge = document.getElementById('countryBadge');
   if (badge) { badge.textContent = activeCountry.fl; badge.style.display='inline-block'; }
 }
@@ -773,6 +771,108 @@ function showSplash() {
   else sp.classList.remove('hide');
 }
 function reopenSplash(){ document.getElementById('splash').classList.remove('hide'); window.scrollTo(0,0); }
+
+// ============================================================
+// ===== I18N — HỆ THỐNG ĐA NGÔN NGỮ (EN nền, VI, TH) =====
+// ============================================================
+// map mã nước -> ngôn ngữ. Nước chưa có bản dịch dùng 'en'.
+const COUNTRY_LANG = { vn:'vi', th:'th' };
+const I18N = {
+  en: {
+    tab_home:'Home', tab_places:'Places', tab_outings:'Outings with kids', tab_market:'Marketplace',
+    tab_friends:'Make friends', tab_translate:'Interpreter', tab_services:'QTT Services',
+    login:'Log in', logout:'Log out',
+    search_places:'Search food, Asian store, nails…', search_area:'Search by area…',
+    search_market:'Search kids items, food…', search_lang:'Search by language, field…',
+    home_title_1:'People far from home in Sweden —', home_title_2:'now have a shared home',
+    home_greeting:'From a favourite restaurant, a weekend outing with the kids, to a good friend or an interpreter when you need one — all in one place, in your own language.',
+    cta_explore:'Explore now →', section_have:'What your community offers',
+    hc_places_d:'Restaurants, Asian stores, nail salons and services near you — with real reviews from the community.',
+    hc_outings_d:'Connect with families in the same situation, meet at the park so kids have friends and parents have company.',
+    hc_market_d:'Give, gift or swap kids clothes, household items, food from home, or ask someone to carry a taste of home.',
+    hc_friends_d:'Where singles find someone compatible, same culture, same language — safely and kindly.',
+    hc_translate_d:'When you need someone who speaks the language to come along to the doctor or with paperwork.',
+    hc_services_d:'Run a restaurant or nail salon? QTT Solutions builds websites, QR E-Menu and inventory apps for you.',
+    hc_join:'Join the community', hc_join_d:'Create a free account to post, join activities and connect with people across Sweden.',
+    hc_login_go:'Log in / Sign up →',
+    chat_title:'💬 Community lounge', chat_sub:'Meet people from your community across Sweden',
+    chat_safety:'Please be kind and respectful. Don\'t share sensitive info (home address, bank details). Tap ⚑ to report.',
+    chat_placeholder:'Type a message…', chat_send:'Send', chat_login:'Log in to join the chat',
+    chat_empty:'No messages yet. Be the first to greet the community!',
+    fab_outing:'＋ Create outing', fab_post:'＋ Post', fab_profile:'✎ My profile',
+    join:'Join', joined:'✓ Joined', contact:'Contact', view_map:'View map', call:'Call',
+    add_place:'+ Add place',
+  },
+  vi: {
+    tab_home:'Trang chủ', tab_places:'Địa điểm', tab_outings:'Đi chơi cùng con', tab_market:'Chợ cộng đồng',
+    tab_friends:'Kết bạn', tab_translate:'Phiên dịch', tab_services:'Dịch vụ QTT',
+    login:'Đăng nhập', logout:'Đăng xuất',
+    search_places:'Tìm phở, chợ Á, nail…', search_area:'Tìm theo khu vực…',
+    search_market:'Tìm đồ trẻ em, đồ ăn…', search_lang:'Tìm theo ngôn ngữ, lĩnh vực…',
+    home_title_1:'Người Việt mình ở Thụy Điển —', home_title_2:'giờ có một mái nhà chung',
+    home_greeting:'Từ quán phở hợp khẩu vị, buổi đưa con đi chơi cuối tuần, đến người bạn tâm giao hay người phiên dịch lúc cần — tất cả ở một nơi, bằng tiếng Việt.',
+    cta_explore:'Khám phá ngay →', section_have:'Cộng đồng của bạn có gì',
+    hc_places_d:'Quán ăn, chợ Á, tiệm nail và dịch vụ của người Việt gần bạn — với đánh giá thật từ chính cộng đồng mình.',
+    hc_outings_d:'Kết nối với các gia đình cùng cảnh ngộ, hẹn nhau ra công viên để con có bạn, bố mẹ có tri kỷ.',
+    hc_market_d:'Cho, tặng, đổi quần áo trẻ em, đồ gia đình, món ăn quê hương, hay nhờ nhau xách tay chút hương vị Việt Nam.',
+    hc_friends_d:'Nơi những người độc thân tìm người hợp gu, cùng văn hóa, cùng ngôn ngữ — một cách an toàn và tử tế.',
+    hc_translate_d:'Khi bạn cần một người biết tiếng đi cùng lúc khám bệnh hay làm giấy tờ.',
+    hc_services_d:'Bạn có nhà hàng hay tiệm nail? QTT Solutions thiết kế web, E-Menu QR và app quản lý kho cho bạn.',
+    hc_join:'Tham gia cộng đồng', hc_join_d:'Tạo tài khoản miễn phí để đăng tin, tham gia hoạt động và kết nối với người Việt khắp Thụy Điển.',
+    hc_login_go:'Đăng nhập / Đăng ký →',
+    chat_title:'💬 Phòng giao lưu', chat_sub:'Làm quen với người Việt khắp Thụy Điển',
+    chat_safety:'Hãy lịch sự và tôn trọng nhau. Đừng chia sẻ thông tin nhạy cảm (địa chỉ nhà, số tài khoản). Bấm ⚑ để báo cáo tin xấu.',
+    chat_placeholder:'Nhập tin nhắn…', chat_send:'Gửi', chat_login:'Đăng nhập để tham gia trò chuyện',
+    chat_empty:'Chưa có tin nhắn nào. Hãy là người mở lời chào cộng đồng!',
+    fab_outing:'＋ Tạo buổi đi chơi', fab_post:'＋ Đăng tin', fab_profile:'✎ Hồ sơ của tôi',
+    join:'Tham gia', joined:'✓ Đã tham gia', contact:'Liên hệ', view_map:'Xem bản đồ', call:'Gọi',
+    add_place:'+ Thêm địa điểm',
+  },
+  th: {
+    tab_home:'หน้าแรก', tab_places:'สถานที่', tab_outings:'พาลูกไปเที่ยว', tab_market:'ตลาดชุมชน',
+    tab_friends:'หาเพื่อน', tab_translate:'ล่าม', tab_services:'บริการ QTT',
+    login:'เข้าสู่ระบบ', logout:'ออกจากระบบ',
+    search_places:'ค้นหาร้านอาหาร ร้านเอเชีย ทำเล็บ…', search_area:'ค้นหาตามพื้นที่…',
+    search_market:'ค้นหาของเด็ก อาหาร…', search_lang:'ค้นหาตามภาษา สาขา…',
+    home_title_1:'คนไกลบ้านในสวีเดน —', home_title_2:'ตอนนี้มีบ้านร่วมกันแล้ว',
+    home_greeting:'ตั้งแต่ร้านอาหารที่ถูกปาก การพาลูกไปเที่ยวสุดสัปดาห์ ไปจนถึงเพื่อนสนิทหรือล่ามเมื่อคุณต้องการ — ทุกอย่างอยู่ที่เดียว ในภาษาของคุณเอง',
+    cta_explore:'เริ่มสำรวจ →', section_have:'ชุมชนของคุณมีอะไรบ้าง',
+    hc_places_d:'ร้านอาหาร ร้านเอเชีย ร้านทำเล็บ และบริการใกล้คุณ — พร้อมรีวิวจริงจากชุมชน',
+    hc_outings_d:'เชื่อมต่อกับครอบครัวที่อยู่ในสถานการณ์เดียวกัน นัดเจอที่สวนเพื่อให้ลูกมีเพื่อนและพ่อแม่มีเพื่อนคุย',
+    hc_market_d:'ให้ แจก หรือแลกเสื้อผ้าเด็ก ของใช้ในบ้าน อาหารจากบ้านเกิด หรือฝากหิ้วรสชาติจากบ้าน',
+    hc_friends_d:'ที่ที่คนโสดได้เจอคนที่เข้ากันได้ วัฒนธรรมเดียวกัน ภาษาเดียวกัน — อย่างปลอดภัยและอบอุ่น',
+    hc_translate_d:'เมื่อคุณต้องการคนที่พูดภาษาได้ไปด้วยตอนหาหมอหรือทำเอกสาร',
+    hc_services_d:'มีร้านอาหารหรือร้านทำเล็บใช่ไหม? QTT Solutions สร้างเว็บไซต์ เมนู QR และแอปจัดการสต็อกให้คุณ',
+    hc_join:'เข้าร่วมชุมชน', hc_join_d:'สร้างบัญชีฟรีเพื่อโพสต์ เข้าร่วมกิจกรรม และเชื่อมต่อกับผู้คนทั่วสวีเดน',
+    hc_login_go:'เข้าสู่ระบบ / สมัครสมาชิก →',
+    chat_title:'💬 ห้องพบปะชุมชน', chat_sub:'พบปะผู้คนจากชุมชนของคุณทั่วสวีเดน',
+    chat_safety:'โปรดสุภาพและให้เกียรติกัน อย่าแชร์ข้อมูลส่วนตัว (ที่อยู่บ้าน ข้อมูลธนาคาร) แตะ ⚑ เพื่อรายงาน',
+    chat_placeholder:'พิมพ์ข้อความ…', chat_send:'ส่ง', chat_login:'เข้าสู่ระบบเพื่อร่วมสนทนา',
+    chat_empty:'ยังไม่มีข้อความ มาเป็นคนแรกที่ทักทายชุมชนกันเถอะ!',
+    fab_outing:'＋ สร้างทริป', fab_post:'＋ โพสต์', fab_profile:'✎ โปรไฟล์ของฉัน',
+    join:'เข้าร่วม', joined:'✓ เข้าร่วมแล้ว', contact:'ติดต่อ', view_map:'ดูแผนที่', call:'โทร',
+    add_place:'+ เพิ่มสถานที่',
+  }
+};
+let LANG = 'en';
+function t(key){ return (I18N[LANG] && I18N[LANG][key]) || I18N.en[key] || key; }
+
+function applyLang() {
+  // các phần tử có data-i18n sẽ được thay text
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.textContent = t(el.getAttribute('data-i18n'));
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    el.setAttribute('placeholder', t(el.getAttribute('data-i18n-ph')));
+  });
+  // cập nhật các phần render động
+  if (typeof renderFeed==='function') renderFeed();
+  if (typeof renderTranslate==='function' && !document.getElementById('view-translate').classList.contains('hidden')) renderTranslate();
+}
+function setLangFromCountry(c) {
+  LANG = (c && COUNTRY_LANG[c.code]) ? COUNTRY_LANG[c.code] : 'en';
+  applyLang();
+}
 
 
 // ===== PLACES DATA =====
@@ -883,23 +983,22 @@ function onCityChange() {
 }
 
 // ===== TABS =====
-function switchTab(t) {
-  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x.dataset.tab===t));
-  document.getElementById('view-home').classList.toggle('hidden', t!=='home');
-  document.getElementById('view-places').classList.toggle('hidden', t!=='places');
-  document.getElementById('view-outings').classList.toggle('hidden', t!=='outings');
-  document.getElementById('view-market').classList.toggle('hidden', t!=='market');
-  document.getElementById('view-friends').classList.toggle('hidden', t!=='friends');
-  document.getElementById('view-translate').classList.toggle('hidden', t!=='translate');
-  document.getElementById('view-services').classList.toggle('hidden', t!=='services');
-  // trang chủ & dịch vụ: ẩn ô tìm kiếm và bộ chọn thành phố cho gọn (giữ nút đăng nhập)
-  const noChrome = t==='home' || t==='services';
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x.dataset.tab===tab));
+  document.getElementById('view-home').classList.toggle('hidden', tab!=='home');
+  document.getElementById('view-places').classList.toggle('hidden', tab!=='places');
+  document.getElementById('view-outings').classList.toggle('hidden', tab!=='outings');
+  document.getElementById('view-market').classList.toggle('hidden', tab!=='market');
+  document.getElementById('view-friends').classList.toggle('hidden', tab!=='friends');
+  document.getElementById('view-translate').classList.toggle('hidden', tab!=='translate');
+  document.getElementById('view-services').classList.toggle('hidden', tab!=='services');
+  const noChrome = tab==='home' || tab==='services';
   document.querySelector('.search').style.visibility = noChrome ? 'hidden' : 'visible';
   document.querySelector('.city-bar').style.display = noChrome ? 'none' : '';
-  const ph = { places:'Tìm phở, chợ Á, nail…', outings:'Tìm theo khu vực…', market:'Tìm đồ trẻ em, đồ ăn…', friends:'Tìm theo khu vực…', translate:'Tìm theo ngôn ngữ, lĩnh vực…' };
-  if (ph[t]) document.getElementById('q').placeholder = ph[t];
-  if (t==='friends') renderFriends();
-  if (t==='translate') renderTranslate();
+  const ph = { places:t('search_places'), outings:t('search_area'), market:t('search_market'), friends:t('search_area'), translate:t('search_lang') };
+  if (ph[tab]) document.getElementById('q').placeholder = ph[tab];
+  if (tab==='friends') renderFriends();
+  if (tab==='translate') renderTranslate();
   window.scrollTo(0,0);
 }
 
@@ -1489,7 +1588,7 @@ async function loadChat(initial) {
       if (chatSeen.size>0 && em) em.remove();
     }
     if (chatSeen.size===0 && !box.querySelector('.cmsg')) {
-      box.innerHTML = '<div class="chat-empty">Chưa có tin nhắn nào. Hãy là người mở lời chào cộng đồng!</div>';
+      box.innerHTML = '<div class="chat-empty">'+t('chat_empty')+'</div>';
     }
     if (added) box.scrollTop = box.scrollHeight;
   } catch(e){ /* im lặng, thử lại lần polling sau */ }
@@ -1886,6 +1985,7 @@ renderPlaces(); renderFeed(); renderMarket();
 loadData();
 startChat();
 showSplash();
+applyLang();
 </script>
 </body>
 </html>
