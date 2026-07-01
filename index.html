@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ViệtSthlm — Cộng đồng Việt/Á ở Stockholm</title>
+<style>
+  :root {
+    --ink: #1a1410; --paper: #fbf7f0; --paper-2: #f3ece0;
+    --red: #c8442e; --gold: #d99b2b; --jade: #2e6e5e;
+    --line: #e0d6c5; --muted: #8a7d6b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--paper); color: var(--ink); -webkit-font-smoothing: antialiased; line-height: 1.5; }
+
+  header { position: sticky; top: 0; z-index: 50; background: rgba(251,247,240,.92);
+    backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .bar { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 14px; padding: 12px 18px; }
+  .logo { font-weight: 800; font-size: 20px; letter-spacing: -.02em; color: var(--red); white-space: nowrap; }
+  .logo span { color: var(--ink); } .logo .dot { color: var(--gold); }
+  .search { flex: 1; display: flex; align-items: center; gap: 8px; background: #fff;
+    border: 1px solid var(--line); border-radius: 999px; padding: 9px 16px; min-width: 0; }
+  .search input { border: none; outline: none; flex: 1; font-size: 15px; background: transparent;
+    color: var(--ink); min-width: 0; font-family: inherit; }
+  .search svg { flex-shrink: 0; }
+
+  .tabs { max-width: 1100px; margin: 0 auto; display: flex; gap: 2px; padding: 0 18px; overflow-x: auto; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { flex: 1; min-width: max-content; text-align: center; padding: 13px 14px; font-weight: 700;
+    font-size: 14.5px; color: var(--muted); cursor: pointer; border-bottom: 3px solid transparent;
+    transition: .15s; white-space: nowrap; }
+  .tab.on { color: var(--red); border-color: var(--red); }
+
+  .hero { max-width: 1100px; margin: 0 auto; padding: 30px 18px 18px; }
+  .hero h1 { font-size: clamp(26px, 5vw, 40px); line-height: 1.1; letter-spacing: -.03em; max-width: 18ch; font-weight: 800; }
+  .hero h1 .em { color: var(--red); }
+  .hero p { margin-top: 12px; font-size: 16px; color: var(--muted); max-width: 50ch; }
+
+  .chips { max-width: 1100px; margin: 0 auto; padding: 4px 18px 6px; display: flex; gap: 9px;
+    overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip { flex-shrink: 0; border: 1px solid var(--line); background: #fff; border-radius: 999px;
+    padding: 8px 16px; font-size: 14px; font-weight: 600; color: var(--ink); cursor: pointer;
+    transition: .15s; font-family: inherit; }
+  .chip:hover { border-color: var(--ink); }
+  .chip.on { background: var(--red); color: #fff; border-color: var(--red); }
+
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 14px 18px 90px; }
+  .count { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
+    cursor: pointer; transition: .18s; display: flex; flex-direction: column; }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(40,30,20,.10); }
+  .thumb { height: 158px; background-size: cover; background-position: center; position: relative; }
+  .badge { position: absolute; top: 10px; left: 10px; background: var(--gold); color: #fff;
+    font-size: 11px; font-weight: 700; padding: 4px 9px; border-radius: 999px; }
+  .cat-tag { position: absolute; bottom: 10px; left: 10px; background: rgba(26,20,16,.82);
+    color: #fff; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; }
+  .body { padding: 14px; flex: 1; display: flex; flex-direction: column; }
+  .name { font-size: 17px; font-weight: 700; letter-spacing: -.01em; }
+  .desc { font-size: 13.5px; color: var(--muted); margin-top: 5px; flex: 1; }
+  .meta { display: flex; align-items: center; gap: 10px; margin-top: 12px; font-size: 13px; }
+  .stars { color: var(--gold); font-weight: 700; } .stars .n { color: var(--ink); }
+  .rev { color: var(--muted); } .area { margin-left: auto; color: var(--jade); font-weight: 600; }
+  .empty { text-align: center; color: var(--muted); padding: 50px 20px; }
+
+  /* outings */
+  .feed { display: flex; flex-direction: column; gap: 14px; max-width: 640px; }
+  .outing { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
+  .o-head { display: flex; align-items: center; gap: 11px; }
+  .avatar { width: 42px; height: 42px; border-radius: 999px; flex-shrink: 0; display: flex;
+    align-items: center; justify-content: center; font-weight: 800; color: #fff; font-size: 16px; }
+  .o-host { font-weight: 700; font-size: 14.5px; }
+  .o-sub { font-size: 12.5px; color: var(--muted); }
+  .o-when { margin-left: auto; text-align: right; }
+  .o-when .d { font-weight: 800; color: var(--red); font-size: 14px; }
+  .o-when .t { font-size: 12px; color: var(--muted); }
+  .o-title { font-size: 18px; font-weight: 700; margin: 13px 0 6px; letter-spacing: -.01em; }
+  .o-note { font-size: 14.5px; color: #4a4036; }
+  .o-info { display: flex; flex-wrap: wrap; gap: 8px; margin: 13px 0; }
+  .pill { font-size: 12.5px; font-weight: 600; padding: 5px 11px; border-radius: 999px;
+    background: var(--paper-2); color: #5a4f40; display: inline-flex; align-items: center; gap: 5px; }
+  .pill.place { background: #e6f0ec; color: var(--jade); }
+  .pill.age { background: #fdeede; color: #9c6b14; }
+  .o-foot { display: flex; align-items: center; gap: 12px; border-top: 1px solid var(--line); padding-top: 13px; }
+  .going { display: flex; align-items: center; }
+  .going .dots { display: flex; }
+  .going .dots span { width: 26px; height: 26px; border-radius: 999px; border: 2px solid #fff;
+    margin-left: -8px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #fff; }
+  .going .dots span:first-child { margin-left: 0; }
+  .going-n { font-size: 13px; color: var(--muted); margin-left: 8px; }
+  .join { margin-left: auto; background: var(--jade); color: #fff; border: none; border-radius: 999px;
+    padding: 9px 20px; font-weight: 700; font-size: 14px; cursor: pointer; font-family: inherit; transition: .15s; }
+  .join:hover { filter: brightness(1.08); }
+  .join.joined { background: var(--paper-2); color: var(--jade); border: 1px solid var(--jade); }
+
+  .safety { border-radius: 14px; padding: 13px 16px; font-size: 13.5px; margin-bottom: 16px;
+    display: flex; gap: 10px; max-width: 640px; }
+  .safety.green { background: #e6f0ec; border: 1px solid #bcd9cf; color: var(--jade); }
+  .safety.gold { background: #fdeede; border: 1px solid #f0d4a8; color: #8a5a14; }
+  .safety b { font-weight: 700; }
+
+  /* marketplace */
+  .mkt { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+  .item { background: #fff; border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
+    cursor: pointer; transition: .18s; display: flex; flex-direction: column; }
+  .item:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(40,30,20,.10); }
+  .item-img { height: 150px; background-size: cover; background-position: center; position: relative; }
+  .tag-type { position: absolute; top: 10px; left: 10px; font-size: 11px; font-weight: 800;
+    padding: 4px 10px; border-radius: 999px; color: #fff; letter-spacing: .02em; }
+  .t-tang { background: var(--jade); } .t-doi { background: #7b5ea7; }
+  .t-free { background: var(--red); } .t-xach { background: #3a7ca5; }
+  .tag-cat { position: absolute; bottom: 10px; left: 10px; background: rgba(26,20,16,.82); color: #fff;
+    font-size: 11.5px; font-weight: 600; padding: 4px 10px; border-radius: 999px; }
+  .item-body { padding: 13px; flex: 1; display: flex; flex-direction: column; }
+  .item-title { font-size: 15.5px; font-weight: 700; letter-spacing: -.01em; }
+  .item-desc { font-size: 13px; color: var(--muted); margin-top: 4px; flex: 1; }
+  .item-meta { display: flex; align-items: center; gap: 8px; margin-top: 11px; font-size: 12.5px; }
+  .item-meta .who { font-weight: 600; } .item-meta .where { margin-left: auto; color: var(--jade); font-weight: 600; }
+
+  .fab { position: fixed; bottom: 22px; right: 22px; z-index: 40; background: var(--red); color: #fff;
+    border: none; border-radius: 999px; padding: 15px 22px; font-weight: 700; font-size: 15px;
+    cursor: pointer; box-shadow: 0 8px 22px rgba(200,68,46,.4); font-family: inherit;
+    display: flex; align-items: center; gap: 7px; }
+
+  .modal { position: fixed; inset: 0; z-index: 100; display: none; background: rgba(26,20,16,.5);
+    backdrop-filter: blur(3px); align-items: flex-end; justify-content: center; }
+  .modal.open { display: flex; }
+  .sheet { background: var(--paper); width: 100%; max-width: 560px; border-radius: 20px 20px 0 0;
+    max-height: 90vh; overflow-y: auto; animation: up .25s ease; }
+  @keyframes up { from { transform: translateY(40px); opacity:.6 } to { transform: none; opacity:1 } }
+  .sheet-img { height: 200px; background-size: cover; background-position: center; }
+  .sheet-body { padding: 20px; }
+  .sheet h2 { font-size: 24px; letter-spacing: -.02em; }
+  .sheet .sub { color: var(--muted); margin-top: 4px; font-size: 14px; }
+  .info-row { display: flex; gap: 10px; padding: 11px 0; border-bottom: 1px solid var(--line);
+    font-size: 14.5px; align-items: center; }
+  .info-row b { color: var(--muted); font-weight: 600; min-width: 78px; }
+  .close-x { position: sticky; top: 10px; float: right; margin: 10px; background: rgba(26,20,16,.8);
+    color: #fff; border: none; width: 34px; height: 34px; border-radius: 999px; font-size: 18px; cursor: pointer; z-index: 2; }
+  .cta-row { display: flex; gap: 10px; margin-top: 18px; }
+  .cta-row a, .cta-row button { flex: 1; text-align: center; text-decoration: none; font-weight: 600;
+    padding: 12px; border-radius: 12px; font-size: 15px; border: none; cursor: pointer; font-family: inherit; }
+  .cta-map { background: var(--jade); color: #fff; }
+  .cta-call { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .field input, .field textarea, .field select { width: 100%; font-family: inherit; font-size: 15px;
+    padding: 11px 13px; border: 1px solid var(--line); border-radius: 11px; background: #fff;
+    color: var(--ink); outline: none; }
+  .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--jade); }
+  .field textarea { resize: vertical; min-height: 70px; }
+  .row2 { display: flex; gap: 10px; } .row2 > * { flex: 1; }
+  .submit { width: 100%; background: var(--red); color: #fff; border: none; border-radius: 12px;
+    padding: 14px; font-weight: 700; font-size: 16px; cursor: pointer; font-family: inherit; margin-top: 4px; }
+
+  @media (min-width: 560px) { .modal { align-items: center; } .sheet { border-radius: 20px; } }
+  .hidden { display: none !important; }
+
+  /* auth */
+  .acc-btn { flex-shrink: 0; background: var(--ink); color: var(--paper); border: none;
+    border-radius: 999px; padding: 9px 16px; font-size: 14px; font-weight: 700; cursor: pointer;
+    font-family: inherit; white-space: nowrap; }
+  .acc-btn.in { background: var(--jade); }
+  .auth-note { font-size: 13px; color: var(--muted); margin: 4px 0 16px; }
+  .auth-switch { text-align: center; font-size: 14px; color: var(--muted); margin-top: 16px; }
+  .auth-switch a { color: var(--red); font-weight: 700; cursor: pointer; text-decoration: none; }
+  .auth-msg { padding: 10px 13px; border-radius: 10px; font-size: 13.5px; margin-bottom: 14px; display: none; }
+  .auth-msg.err { display: block; background: #fbe4df; color: #a8331f; border: 1px solid #f0c4b8; }
+  .auth-msg.ok  { display: block; background: #e6f0ec; color: var(--jade); border: 1px solid #bcd9cf; }
+  .otp-inputs { display: flex; gap: 8px; justify-content: space-between; margin-bottom: 14px; }
+  .otp-inputs input { width: 100%; text-align: center; font-size: 22px; font-weight: 700;
+    padding: 12px 0; border: 1px solid var(--line); border-radius: 11px; font-family: inherit; outline: none; }
+  .otp-inputs input:focus { border-color: var(--jade); }
+  .link-btn { background: none; border: none; color: var(--red); font-weight: 700; font-size: 13.5px;
+    cursor: pointer; font-family: inherit; padding: 0; }
+  .spin { display: inline-block; width: 15px; height: 15px; border: 2px solid rgba(255,255,255,.5);
+    border-top-color: #fff; border-radius: 999px; animation: sp .7s linear infinite; vertical-align: -2px; }
+  @keyframes sp { to { transform: rotate(360deg); } }
+
+  /* friends */
+  .safety.pink { background: #fbe9ef; border: 1px solid #f0c4d5; color: #a8336a; }
+  .safety.blue { background: #e3eef5; border: 1px solid #b8d2e4; color: #2a5a7a; }
+  .tr-card { background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px; display:flex; flex-direction:column; }
+  .tr-top { display:flex; align-items:center; gap:11px; }
+  .tr-badge { position:absolute; top:12px; right:12px; background:var(--jade); color:#fff; font-size:10.5px; font-weight:800; padding:3px 8px; border-radius:999px; }
+  .tr-name { font-weight:800; font-size:16px; }
+  .tr-role { font-size:12.5px; color:var(--muted); }
+  .tr-langs { display:flex; flex-wrap:wrap; gap:6px; margin:12px 0; }
+  .tr-langs .lg { font-size:12px; font-weight:600; padding:4px 10px; border-radius:999px; background:#e3eef5; color:#2a5a7a; }
+  .tr-fields { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; }
+  .tr-fields .f { font-size:12px; font-weight:600; padding:4px 10px; border-radius:999px; background:var(--paper-2); color:#5a4f40; }
+  .tr-bio { font-size:14px; color:#4a4036; flex:1; margin-bottom:12px; }
+  .tr-foot { display:flex; align-items:center; gap:10px; border-top:1px solid var(--line); padding-top:12px; }
+  .tr-where { color:var(--jade); font-weight:600; font-size:13px; }
+  .tr-contact { margin-left:auto; background:var(--jade); color:#fff; text-decoration:none; border-radius:999px; padding:9px 18px; font-weight:700; font-size:14px; }
+  .sub-tabs { max-width: 1100px; margin: 0 auto; display: flex; gap: 8px; padding: 4px 18px 0;
+    overflow-x: auto; }
+  .sub-tabs::-webkit-scrollbar { display: none; }
+  .sub-tab { flex-shrink: 0; padding: 8px 16px; border-radius: 999px; font-size: 14px; font-weight: 600;
+    background: #fff; border: 1px solid var(--line); color: var(--ink); cursor: pointer; white-space: nowrap; }
+  .sub-tab.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  /* city selector */
+  .city-bar { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 8px;
+    padding: 8px 18px 10px; border-top: 1px solid var(--line); }
+  .city-bar select { font-family: inherit; font-size: 15px; font-weight: 700; color: var(--ink);
+    background: transparent; border: none; outline: none; cursor: pointer; padding: 2px 4px; }
+  .city-hint { font-size: 12.5px; color: var(--muted); margin-left: auto; }
+
+  .profile-cta { text-align: center; background: #fff; border: 1px solid var(--line);
+    border-radius: 18px; padding: 34px 24px; max-width: 480px; margin: 0 auto; }
+  .profile-cta .pc-emoji { font-size: 48px; }
+  .profile-cta h3 { font-size: 21px; margin: 10px 0 6px; }
+  .profile-cta p { color: var(--muted); font-size: 14.5px; margin-bottom: 20px; }
+
+  .cards-swipe { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  .pcard { background: #fff; border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
+    display: flex; flex-direction: column; }
+  .pcard-img { height: 300px; background-size: cover; background-position: center; position: relative; }
+  .pcard-grad { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,20,16,.82) 0%, transparent 45%); }
+  .pcard-info { position: absolute; bottom: 14px; left: 16px; right: 16px; color: #fff; }
+  .pcard-name { font-size: 22px; font-weight: 800; letter-spacing: -.01em; }
+  .pcard-name .age { font-weight: 500; opacity: .9; }
+  .pcard-sub { font-size: 13.5px; opacity: .92; margin-top: 3px; }
+  .pcard-bio { padding: 14px 16px; font-size: 14px; color: #4a4036; flex: 1; }
+  .pcard-tags { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 16px 12px; }
+  .pcard-tags .t { font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px;
+    background: var(--paper-2); color: #5a4f40; }
+  .pcard-act { display: flex; gap: 10px; padding: 0 16px 16px; }
+  .pcard-act button { flex: 1; border: none; border-radius: 12px; padding: 12px; font-weight: 700;
+    font-size: 15px; cursor: pointer; font-family: inherit; }
+  .btn-skip { background: var(--paper-2); color: var(--muted); }
+  .btn-like { background: var(--red); color: #fff; }
+  .btn-report { position: absolute; top: 12px; right: 12px; background: rgba(26,20,16,.7); color: #fff;
+    border: none; width: 32px; height: 32px; border-radius: 999px; cursor: pointer; font-size: 14px; z-index: 2; }
+
+  .match-pop { text-align: center; padding: 30px 24px; }
+  .match-pop .mp-emoji { font-size: 56px; }
+  .match-pop h2 { font-size: 26px; margin: 8px 0; color: var(--red); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <div class="logo">Việt<span>Sthlm</span><span class="dot">.</span></div>
+    <div class="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8a7d6b" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+      <input id="q" type="text" placeholder="Tìm phở, chợ Á, nail…">
+    </div>
+    <button id="accBtn" class="acc-btn" onclick="onAccountClick()">Đăng nhập</button>
+  </div>
+  <div class="tabs">
+    <div class="tab on" data-tab="places" onclick="switchTab('places')">Địa điểm</div>
+    <div class="tab" data-tab="outings" onclick="switchTab('outings')">Đi chơi cùng con</div>
+    <div class="tab" data-tab="market" onclick="switchTab('market')">Chợ cộng đồng</div>
+    <div class="tab" data-tab="friends" onclick="switchTab('friends')">Kết bạn</div>
+    <div class="tab" data-tab="translate" onclick="switchTab('translate')">Phiên dịch</div>
+  </div>
+  <div class="city-bar">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8442e" stroke-width="2.2"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+    <select id="citySel" onchange="onCityChange()"></select>
+    <span class="city-hint" id="cityHint"></span>
+  </div>
+</header>
+
+<!-- PLACES -->
+<div id="view-places">
+  <section class="hero">
+    <h1>Quán ngon, chợ Á, dịch vụ Việt — <span class="em" id="hero-city">ngay tại Stockholm</span></h1>
+    <p id="hero-sub">Nơi người Việt và người châu Á tìm những chỗ hợp khẩu vị mình. Review thật, bằng tiếng Việt.</p>
+  </section>
+  <div class="chips" id="chips"></div>
+  <main class="wrap">
+    <div class="count" id="count"></div>
+    <div class="grid" id="grid"></div>
+    <div class="empty hidden" id="empty">Chưa có địa điểm nào khớp. Thử bỏ bớt bộ lọc nhé.</div>
+  </main>
+</div>
+
+<!-- OUTINGS -->
+<div id="view-outings" class="hidden">
+  <section class="hero">
+    <h1>Cùng con đi chơi, <span class="em">cùng bố mẹ kết bạn</span></h1>
+    <p>Phụ huynh Việt rủ nhau đưa con đi chơi ở các địa điểm công cộng tại Stockholm. Con có bạn, bố mẹ có cộng đồng.</p>
+  </section>
+  <main class="wrap">
+    <div class="safety green">
+      <span>🛡️</span>
+      <div><b>An toàn là trên hết:</b> mọi buổi đi chơi diễn ra ở địa điểm công cộng. Hãy gặp nhau ở chỗ đông người và tự trông con mình.</div>
+    </div>
+    <div class="feed" id="feed"></div>
+  </main>
+  <button class="fab" data-for="outings" onclick="openCreate()">＋ Tạo buổi đi chơi</button>
+</div>
+
+<!-- MARKET -->
+<div id="view-market" class="hidden">
+  <section class="hero">
+    <h1>Chợ cộng đồng — <span class="em">cho, tặng, đổi đồ</span></h1>
+    <p>Quần áo trẻ em, đồ ăn Việt, đồ gia đình, nhờ xách tay. Nhà mình thừa, nhà bạn cần — san sẻ cho nhau.</p>
+  </section>
+  <div class="chips" id="mkt-chips"></div>
+  <main class="wrap">
+    <div class="safety gold">
+      <span>🤝</span>
+      <div><b>Chợ tình thương, không mua bán:</b> chỉ cho – tặng – đổi và nhờ xách tay. Mọi thoả thuận do hai bên tự liên hệ. Hãy kiểm tra đồ kỹ, nhất là đồ an toàn cho bé (ghế ngồi ô tô, nôi…).</div>
+    </div>
+    <div class="count" id="mkt-count"></div>
+    <div class="mkt" id="mkt-grid"></div>
+    <div class="empty hidden" id="mkt-empty">Chưa có tin nào khớp. Sao anh/chị không đăng tin đầu tiên?</div>
+  </main>
+  <button class="fab" data-for="market" onclick="openPost()">＋ Đăng tin</button>
+</div>
+
+<!-- FRIENDS / KẾT BẠN -->
+<div id="view-friends" class="hidden">
+  <section class="hero">
+    <h1>Kết bạn — <span class="em">tìm người hợp gu</span></h1>
+    <p>Dành cho người Việt độc thân ở Stockholm muốn tìm bạn tâm giao, cùng văn hoá. Chỉ kết nối khi cả hai cùng thích.</p>
+  </section>
+  <div class="sub-tabs" id="fr-subtabs">
+    <div class="sub-tab on" data-sub="discover" onclick="switchFrSub('discover')">Gợi ý</div>
+    <div class="sub-tab" data-sub="matches" onclick="switchFrSub('matches')">Đã kết nối</div>
+    <div class="sub-tab" data-sub="events" onclick="switchFrSub('events')">Sự kiện độc thân</div>
+  </div>
+  <main class="wrap">
+    <div class="safety pink">
+      <span>💗</span>
+      <div><b>An toàn khi làm quen:</b> chỉ hiện cách liên hệ khi cả hai cùng thích. Gặp lần đầu ở nơi công cộng, đừng chia sẻ địa chỉ nhà hay thông tin tài chính. Có nút báo cáo nếu ai đó cư xử không đúng.</div>
+    </div>
+
+    <!-- màn chưa có hồ sơ -->
+    <div id="fr-noprofile" class="hidden">
+      <div class="profile-cta">
+        <div class="pc-emoji">🙋</div>
+        <h3>Tạo hồ sơ để bắt đầu</h3>
+        <p>Giới thiệu đôi nét về bạn để mọi người tìm thấy nhau. Bạn có thể ẩn/xoá hồ sơ bất cứ lúc nào.</p>
+        <button class="submit" style="max-width:280px;margin:0 auto" onclick="openProfileForm()">Tạo hồ sơ độc thân</button>
+      </div>
+    </div>
+
+    <!-- gợi ý -->
+    <div id="fr-discover">
+      <div class="count" id="fr-count"></div>
+      <div class="cards-swipe" id="fr-grid"></div>
+    </div>
+
+    <!-- đã kết nối -->
+    <div id="fr-matches" class="hidden">
+      <div class="feed" id="fr-match-list"></div>
+    </div>
+
+    <!-- sự kiện -->
+    <div id="fr-events" class="hidden">
+      <div class="feed" id="fr-event-list"></div>
+    </div>
+  </main>
+  <button class="fab" data-for="friends" onclick="openProfileForm()">✎ Hồ sơ của tôi</button>
+</div>
+
+<!-- PHIÊN DỊCH -->
+<div id="view-translate" class="hidden">
+  <section class="hero">
+    <h1>Phiên dịch cộng đồng — <span class="em">gỡ rào cản ngôn ngữ</span></h1>
+    <p>Cần người đi cùng khám bệnh, xem giấy tờ, gặp cơ quan? Kết nối với người Việt biết tiếng tại thành phố bạn.</p>
+  </section>
+  <div class="sub-tabs" id="tr-subtabs">
+    <div class="sub-tab on" data-sub="find" onclick="switchTrSub('find')">Tìm phiên dịch</div>
+    <div class="sub-tab" data-sub="requests" onclick="switchTrSub('requests')">Cần người dịch</div>
+  </div>
+  <div class="chips" id="tr-chips"></div>
+  <main class="wrap">
+    <div class="safety blue">
+      <span>🗣️</span>
+      <div><b>Phiên dịch cộng đồng, hỗ trợ đời thường:</b> đây không phải dịch vụ phiên dịch chính thức. Với việc quan trọng ở toà án, bệnh viện hay cơ quan nhà nước, hãy dùng phiên dịch viên được cấp phép (auktoriserad tolk). Chi phí do hai bên tự thoả thuận.</div>
+    </div>
+    <div class="count" id="tr-count"></div>
+    <div id="tr-find"><div class="grid" id="tr-grid"></div></div>
+    <div id="tr-requests" class="hidden"><div class="feed" id="tr-req-list"></div></div>
+  </main>
+  <button class="fab" id="tr-fab" onclick="onTrFab()">＋ Đăng</button>
+</div>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="sheet" id="sheet"></div>
+</div>
+
+<script>
+// ===== PLACES DATA =====
+const PLACES = [
+  { id:1, ten:"Phở Việt Söder", nhom:"Ăn uống", loai:"Phở", khuvuc:"Södermalm", tp:"Stockholm", diachi:"Götgatan 78, Stockholm", sdt:"08-123 456", gio:"11:00–21:00", mota:"Phở bò đậm vị miền Nam, nước dùng ninh xương 12 tiếng. Có bánh mì và cà phê sữa đá.", diem:4.6, rev:84, noibat:true, anh:"https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=600&q=70", map:"https://maps.google.com/?q=Götgatan+78+Stockholm" },
+  { id:2, ten:"Asia Market Hötorgshallen", nhom:"Mua sắm", loai:"Chợ Á", khuvuc:"Norrmalm", tp:"Stockholm", diachi:"Hötorget, Stockholm", sdt:"08-222 333", gio:"09:00–18:00", mota:"Đầy đủ gia vị Việt, nước mắm, bánh tráng, rau thơm tươi, mì gói các loại.", diem:4.3, rev:51, noibat:false, anh:"https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=600&q=70", map:"https://maps.google.com/?q=Hötorget+Stockholm" },
+  { id:3, ten:"Bún Bò Huế Mai", nhom:"Ăn uống", loai:"Bún", khuvuc:"Kungsholmen", tp:"Stockholm", diachi:"Fleminggatan 40, Stockholm", sdt:"08-444 555", gio:"11:30–20:00", mota:"Bún bò Huế cay đúng điệu, chả cua tự làm. Chủ quán người Huế.", diem:4.8, rev:67, noibat:true, anh:"https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&q=70", map:"https://maps.google.com/?q=Fleminggatan+40+Stockholm" },
+  { id:4, ten:"Nail Studio Linh", nhom:"Dịch vụ", loai:"Nail", khuvuc:"Östermalm", tp:"Stockholm", diachi:"Karlavägen 15, Stockholm", sdt:"070-123 4567", gio:"10:00–19:00", mota:"Làm móng gel, vẽ design theo yêu cầu. Thợ người Việt, nói tiếng Việt & tiếng Anh.", diem:4.7, rev:120, noibat:false, anh:"https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=70", map:"https://maps.google.com/?q=Karlavägen+15+Stockholm" },
+  { id:5, ten:"Bangkok Kitchen", nhom:"Ăn uống", loai:"Thái", khuvuc:"Vasastan", tp:"Stockholm", diachi:"Sankt Eriksgatan 50, Stockholm", sdt:"08-666 777", gio:"11:00–22:00", mota:"Pad Thái, tom yum, cà ri xanh. Phần ăn lớn, giá hợp lý cho khu Vasastan.", diem:4.4, rev:93, noibat:false, anh:"https://images.unsplash.com/photo-1559314809-0d155014e29e?w=600&q=70", map:"https://maps.google.com/?q=Sankt+Eriksgatan+50+Stockholm" },
+  { id:6, ten:"Chùa Phật Quang", nhom:"Cộng đồng", loai:"Chùa", khuvuc:"Solna", tp:"Stockholm", diachi:"Solna, Stockholm", sdt:"070-888 999", gio:"Cuối tuần", mota:"Chùa của cộng đồng người Việt. Lễ Vu Lan, Tết, các buổi tụng kinh cuối tuần.", diem:4.9, rev:38, noibat:false, anh:"https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=600&q=70", map:"https://maps.google.com/?q=Solna+Stockholm" },
+  { id:7, ten:"Seoul BBQ House", nhom:"Ăn uống", loai:"Hàn", khuvuc:"Södermalm", tp:"Stockholm", diachi:"Hornsgatan 92, Stockholm", sdt:"08-111 222", gio:"16:00–23:00", mota:"Nướng tại bàn, banchan miễn phí, soju đủ vị. Đông cuối tuần nên đặt trước.", diem:4.5, rev:76, noibat:true, anh:"https://images.unsplash.com/photo-1632558610666-4b97cc10b2f0?w=600&q=70", map:"https://maps.google.com/?q=Hornsgatan+92+Stockholm" },
+  { id:8, ten:"Tiệm Bánh Mì Sài Gòn", nhom:"Ăn uống", loai:"Bánh mì", khuvuc:"Norrmalm", tp:"Stockholm", diachi:"Drottninggatan 60, Stockholm", sdt:"070-555 6666", gio:"08:00–18:00", mota:"Bánh mì pate, thịt nguội, xíu mại. Bánh nóng giòn, làm trong ngày.", diem:4.6, rev:58, noibat:false, anh:"https://images.unsplash.com/photo-1558030006-450675393462?w=600&q=70", map:"https://maps.google.com/?q=Drottninggatan+60+Stockholm" },
+  { id:9, ten:"Phở Göteborg", nhom:"Ăn uống", loai:"Phở", khuvuc:"Centrum", tp:"Göteborg", diachi:"Andra Långgatan 10, Göteborg", sdt:"031-111 222", gio:"11:00–21:00", mota:"Quán phở lâu năm ở trung tâm Göteborg, đông người Việt lui tới cuối tuần.", diem:4.5, rev:62, noibat:true, anh:"https://images.unsplash.com/photo-1591814468924-caf88d1232e1?w=600&q=70", map:"https://maps.google.com/?q=Andra+Långgatan+10+Göteborg" },
+  { id:10, ten:"Á Đông Market", nhom:"Mua sắm", loai:"Chợ Á", khuvuc:"Angered", tp:"Göteborg", diachi:"Angered, Göteborg", sdt:"031-333 444", gio:"09:00–19:00", mota:"Siêu thị châu Á lớn ở Göteborg, đủ đồ Việt, Thái, Hàn, Trung.", diem:4.4, rev:40, noibat:false, anh:"https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=600&q=70", map:"https://maps.google.com/?q=Angered+Göteborg" },
+  { id:11, ten:"Sài Gòn Malmö", nhom:"Ăn uống", loai:"Phở", khuvuc:"Möllevången", tp:"Malmö", diachi:"Möllevångstorget, Malmö", sdt:"040-111 222", gio:"11:00–20:00", mota:"Quán Việt ở khu Möllan sôi động, giá sinh viên, phần ăn đầy đặn.", diem:4.6, rev:55, noibat:true, anh:"https://images.unsplash.com/photo-1569562211093-4ed0d0758f12?w=600&q=70", map:"https://maps.google.com/?q=Möllevångstorget+Malmö" },
+];
+
+const AV = ['#c8442e','#2e6e5e','#d99b2b','#7b5ea7','#3a7ca5','#bb6b3d'];
+const initials = n => n.split(' ').slice(-1)[0][0];
+
+let OUTINGS = [
+  { id:1, host:"Chị Hương", khuvuc:"Södermalm", tp:"Stockholm", diadiem:"Công viên Tantolunden", dia_addr:"Tantolunden, Södermalm", ngay:"CN 6/7", gio:"10:00", tuoi:"3–5 tuổi", note:"Mình đưa bé Su ra công viên chơi xích đu, nhà nào có bé tầm tuổi ra chơi cho vui nhé. Mình mang theo ít bánh.", going:["Chị Hương","Anh Tuấn","Chị Lan"], joined:false, color:0 },
+  { id:2, host:"Anh Minh", khuvuc:"Norrmalm", tp:"Stockholm", diadiem:"Junibacken (bảo tàng trẻ em)", dia_addr:"Galärvarvsvägen 8", ngay:"T7 12/7", gio:"13:00", tuoi:"2–6 tuổi", note:"Dẫn 2 nhóc đi Junibacken, nhà nào muốn đi chung mua vé nhóm rẻ hơn. Hẹn ở cổng chính.", going:["Anh Minh","Chị Thảo"], joined:false, color:1 },
+  { id:3, host:"Chị Ngọc", khuvuc:"Solna", tp:"Stockholm", diadiem:"Sân chơi Hagaparken", dia_addr:"Hagaparken, Solna", ngay:"CN 13/7", gio:"11:00", tuoi:"1–4 tuổi", note:"Picnic cuối tuần ở Haga, trải bạt cho các bé bò chơi. Ai mang đồ ăn Việt góp vui thì tuyệt!", going:["Chị Ngọc","Anh Hải","Chị Mai","Anh Đức"], joined:false, color:2 },
+  { id:4, host:"Chị Vân", khuvuc:"Centrum", tp:"Göteborg", diadiem:"Slottsskogen (công viên lớn)", dia_addr:"Slottsskogen, Göteborg", ngay:"CN 13/7", gio:"10:30", tuoi:"2–6 tuổi", note:"Nhà nào ở Göteborg có bé nhỏ ra Slottsskogen chơi cùng nhé, ở đó có cả vườn thú nhỏ miễn phí.", going:["Chị Vân","Anh Sơn"], joined:false, color:3 },
+];
+
+// ===== MARKET DATA =====
+// type: tang | doi | free | xach
+const MKT_CATS = ["Tất cả","Đồ trẻ em","Đồ ăn Việt","Đồ gia đình","Nhờ xách tay","Cho tặng miễn phí"];
+const TYPE_LABEL = { tang:"Tặng", doi:"Đổi", free:"Miễn phí", xach:"Xách tay" };
+const TYPE_CLASS = { tang:"t-tang", doi:"t-doi", free:"t-free", xach:"t-xach" };
+
+let MARKET = [
+  { id:1, type:"tang", cat:"Đồ trẻ em", title:"Quần áo bé gái size 80–92", who:"Chị Lan", khuvuc:"Södermalm", tp:"Stockholm", sdt:"070-111 2222", desc:"Con mình lớn rồi, để lại ~15 bộ còn rất đẹp cho bé gái 1–2 tuổi. Tặng miễn phí, ai cần ới mình.", anh:"https://images.unsplash.com/photo-1522771930-78848d9293e8?w=600&q=70" },
+  { id:2, type:"xach", cat:"Nhờ xách tay", title:"Mình sắp về Sài Gòn, xách hộ đồ", who:"Anh Tuấn", khuvuc:"Norrmalm", tp:"Stockholm", sdt:"070-333 4444", desc:"Cuối tháng 7 về SG 2 tuần. Ai cần gửi đồ về cho gia đình hoặc nhờ mua mang sang thì nhắn mình nhé. Còn ~5kg.", anh:"https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&q=70" },
+  { id:3, type:"tang", cat:"Đồ ăn Việt", title:"Còn dư mắm tôm & lá chanh", who:"Chị Mai", khuvuc:"Kungsholmen", tp:"Stockholm", sdt:"070-555 6666", desc:"Mới được người nhà gửi sang nhiều quá. Chia bớt lọ mắm tôm và ít lá chanh khô cho ai cần nấu bún riêu.", anh:"https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600&q=70" },
+  { id:4, type:"doi", cat:"Đồ trẻ em", title:"Đổi xe đẩy lấy ghế ăn dặm", who:"Anh Hải", khuvuc:"Solna", tp:"Stockholm", sdt:"070-777 8888", desc:"Xe đẩy gấp gọn còn tốt, muốn đổi lấy ghế ăn dặm cho bé. Nhà nào có nhu cầu đổi thì liên hệ nhé.", anh:"https://images.unsplash.com/photo-1591147834034-8b6e7e0b3b3c?w=600&q=70" },
+  { id:5, type:"free", cat:"Cho tặng miễn phí", title:"Cho nồi cơm điện còn dùng tốt", who:"Chị Thảo", khuvuc:"Vasastan", tp:"Stockholm", sdt:"070-999 0000", desc:"Nhà mua cái mới nên cho lại nồi cơm điện 1.8L còn chạy ngon. Ai lấy thì qua nhà mình lấy giúp.", anh:"https://images.unsplash.com/photo-1585515320310-259814833e62?w=600&q=70" },
+  { id:6, type:"tang", cat:"Đồ gia đình", title:"Bộ bát đĩa sứ còn nguyên", who:"Chị Hương", khuvuc:"Södermalm", tp:"Stockholm", sdt:"070-222 1111", desc:"Dọn nhà nên để lại bộ bát đĩa sứ trắng, đủ cho 6 người. Tặng ai mới sang dựng nhà cửa.", anh:"https://images.unsplash.com/photo-1578474846511-04ba529f0b88?w=600&q=70" },
+  { id:7, type:"tang", cat:"Đồ trẻ em", title:"Xe tập đi cho bé", who:"Chị Hoa", khuvuc:"Centrum", tp:"Göteborg", sdt:"031-555 666", desc:"Bé nhà mình đi vững rồi, tặng lại xe tập đi còn tốt cho gia đình ở Göteborg. Qua lấy giúp mình nhé.", anh:"https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&q=70" },
+  { id:8, type:"xach", cat:"Nhờ xách tay", title:"Sắp bay Malmö → Hà Nội", who:"Anh Dũng", khuvuc:"Möllevången", tp:"Malmö", sdt:"040-777 888", desc:"Giữa tháng 8 mình về Hà Nội. Ai ở Malmö cần gửi đồ về Bắc thì liên hệ, còn dư ~7kg hành lý.", anh:"https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&q=70" },
+];
+
+// ===== FRIENDS / SINGLES DATA =====
+let SINGLES = [
+  { id:1, ten:"Mai", tuoi:29, khuvuc:"Södermalm", tp:"Stockholm", nghe:"Y tá", tim:"Bạn nam 28–35", bio:"Sang Thụy Điển 4 năm, thích nấu ăn Việt, đi bộ trong rừng và cà phê cuối tuần. Tìm người chân thành để cùng đi đường dài.", so_thich:["Nấu ăn","Đi bộ","Cà phê","Phim Hàn"], anh:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=70", sdt:"070-111 2222" },
+  { id:2, ten:"Hùng", tuoi:34, khuvuc:"Kungsholmen", tp:"Stockholm", nghe:"Kỹ sư IT", tim:"Bạn nữ 27–33", bio:"Dân IT, hơi ít nói nhưng ấm áp. Mê bóng đá, đi phượt và ăn phở. Mong tìm người cùng xây tổ ấm nơi xứ lạnh.", so_thich:["Bóng đá","Phượt","Ẩm thực","Nhạc Trịnh"], anh:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=70", sdt:"070-333 4444" },
+  { id:3, ten:"Linh", tuoi:31, khuvuc:"Vasastan", tp:"Stockholm", nghe:"Chủ tiệm nail", tim:"Bạn nam nghiêm túc", bio:"Tự lập, vui vẻ, yêu trẻ con. Cuối tuần hay đi chợ Á nấu ăn. Tìm người trưởng thành, biết quan tâm gia đình.", so_thich:["Kinh doanh","Nấu ăn","Yoga","Du lịch"], anh:"https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&q=70", sdt:"070-555 6666" },
+  { id:4, ten:"Nam", tuoi:37, khuvuc:"Solna", tp:"Stockholm", nghe:"Đầu bếp", tim:"Bạn nữ 30–38", bio:"Đầu bếp nhà hàng Việt, nấu ăn là đam mê. Đã ổn định cuộc sống, mong tìm người bạn đời để sẻ chia mỗi ngày.", so_thich:["Ẩm thực","Câu cá","Đọc sách","Đi biển"], anh:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=70", sdt:"070-777 8888" },
+  { id:5, ten:"Trang", tuoi:28, khuvuc:"Centrum", tp:"Göteborg", nghe:"Sinh viên cao học", tim:"Bạn nam cùng chí hướng", bio:"Đang học thạc sĩ ở Göteborg, thích đọc sách, cà phê và đi biển mùa hè. Mong gặp người bạn hiền lành, chân thành.", so_thich:["Đọc sách","Cà phê","Đi biển","Nhiếp ảnh"], anh:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=70", sdt:"031-999 000" },
+];
+
+let SG_EVENTS = [
+  { id:1, host:"Nhóm Việt Sthlm", tp:"Stockholm", diadiem:"Fika giao lưu độc thân", dia_addr:"Café Pascal, Vasastan", ngay:"T7 19/7", gio:"15:00", note:"Buổi fika thân mật cho người độc thân làm quen tự nhiên. Không áp lực, chỉ trò chuyện. Đăng ký trước để giữ chỗ.", going:["Mai","Hùng","Linh"], joined:false, color:0 },
+  { id:2, host:"Nhóm Việt Sthlm", tp:"Stockholm", diadiem:"Đi bộ & picnic mùa hè", dia_addr:"Đảo Djurgården", ngay:"CN 27/7", gio:"12:00", note:"Cùng đi bộ vòng quanh Djurgården rồi picnic. Cách hay để gặp gỡ khi vận động ngoài trời. Mang theo ít đồ ăn góp vui.", going:["Nam","Linh"], joined:false, color:2 },
+];
+
+let myLikes = [];   // id mình đã thích
+let myMatches = []; // id đã match
+let mySkips = [];
+let myProfile = null;
+let frSub = 'discover';
+
+// ===== PHIÊN DỊCH DATA =====
+const TR_FIELDS = ["Tất cả","Y tế","Giấy tờ/Hành chính","Pháp lý","Đi cùng thường","Dịch văn bản"];
+let TRANSLATORS = [
+  { id:1, ten:"Anh Đức", tp:"Stockholm", khuvuc:"Södermalm", langs:["Việt","Thụy Điển","Anh"], fields:["Y tế","Giấy tờ/Hành chính"], auth:false, kn:"5 năm sống ở Thụy Điển, từng đi cùng nhiều người khám bệnh, làm giấy tờ Skatteverket.", bio:"Mình rảnh cuối tuần và buổi tối, sẵn lòng đi cùng khám bệnh hoặc giúp đọc thư từ cơ quan. Tự thoả thuận chi phí.", sdt:"070-123 4567" },
+  { id:2, ten:"Chị Lan", tp:"Stockholm", khuvuc:"Norrmalm", langs:["Việt","Thụy Điển"], fields:["Giấy tờ/Hành chính","Dịch văn bản"], auth:true, kn:"Phiên dịch viên được cấp phép (auktoriserad tolk), 8 năm kinh nghiệm.", bio:"Có chứng chỉ phiên dịch chính thức. Nhận dịch giấy tờ, đi cùng cơ quan nhà nước. Nhắn mình để trao đổi.", sdt:"070-222 3333" },
+  { id:3, ten:"Anh Hòa", tp:"Göteborg", khuvuc:"Centrum", langs:["Việt","Anh","Thụy Điển"], fields:["Đi cùng thường","Y tế"], auth:false, kn:"Sinh viên y khoa, hiểu thuật ngữ y tế cơ bản.", bio:"Mình học ngành y ở Göteborg, có thể giúp phiên dịch khi đi khám bệnh, hiểu các từ chuyên môn. Ưu tiên giúp người mới sang.", sdt:"031-444 5555" },
+  { id:4, ten:"Chị Mai", tp:"Malmö", khuvuc:"Möllevången", langs:["Việt","Thụy Điển","Đan Mạch"], fields:["Giấy tờ/Hành chính","Đi cùng thường"], auth:false, kn:"Sống ở Malmö 10 năm, quen việc giấy tờ cả Thụy Điển và Đan Mạch.", bio:"Ở khu Öresund nên rành cả thủ tục Thụy Điển lẫn Đan Mạch. Giúp được việc hành chính, thuê nhà, ngân hàng.", sdt:"040-666 7777" },
+];
+let TR_REQUESTS = [
+  { id:1, who:"Chị Hương", tp:"Stockholm", khuvuc:"Solna", field:"Y tế", khi:"Thứ 5 tuần này, 14:00", note:"Mình cần người đi cùng tới bệnh viện Karolinska khám cho con, dịch giúp phần trao đổi với bác sĩ. Xin cảm ơn.", sdt:"070-888 9999" },
+  { id:2, who:"Anh Tuấn", tp:"Stockholm", khuvuc:"Södermalm", field:"Giấy tờ/Hành chính", khi:"Linh hoạt", note:"Mình mới nhận thư từ Migrationsverket mà không hiểu hết. Cần người đọc và giải thích giúp, có thể trả phí.", sdt:"070-111 0000" },
+  { id:3, who:"Chị Thu", tp:"Göteborg", khuvuc:"Angered", field:"Đi cùng thường", khi:"Tuần sau", note:"Cần người đi cùng ra ngân hàng mở tài khoản và làm BankID. Mình chưa quen tiếng.", sdt:"031-222 1111" },
+];
+let trSub = 'find', trField = 'Tất cả';
+
+// ===== THÀNH PHỐ (mở rộng toàn Thụy Điển) =====
+const CITIES = ["Stockholm","Göteborg","Malmö","Uppsala","Västerås","Örebro","Linköping","Helsingborg","Norrköping","Lund","Umeå","Jönköping"];
+let activeCity = "Stockholm";
+try { const c = localStorage.getItem('vietsthlm_city'); if (c && CITIES.includes(c)) activeCity = c; } catch(e){}
+
+function initCitySelector() {
+  const sel = document.getElementById('citySel');
+  sel.innerHTML = CITIES.map(c=>`<option value="${c}"${c===activeCity?' selected':''}>${c}</option>`).join('');
+  updateCityHint();
+}
+function updateCityHint() {
+  const n = PLACES.filter(p=>p.tp===activeCity).length
+          + OUTINGS.filter(o=>o.tp===activeCity).length
+          + MARKET.filter(m=>m.tp===activeCity).length
+          + SINGLES.filter(s=>s.tp===activeCity).length
+          + TRANSLATORS.filter(t=>t.tp===activeCity).length;
+  const hint = document.getElementById('cityHint');
+  hint.textContent = n>0 ? `${n} mục ở ${activeCity}` : `Chưa có nội dung ở ${activeCity} — hãy là người đầu tiên!`;
+  const hc = document.getElementById('hero-city');
+  if (hc) hc.textContent = 'ngay tại ' + activeCity;
+}
+function onCityChange() {
+  activeCity = document.getElementById('citySel').value;
+  try { localStorage.setItem('vietsthlm_city', activeCity); } catch(e){}
+  updateCityHint();
+  renderPlaces(); renderFeed(); renderMarket(); renderFriends(); renderTranslate();
+  window.scrollTo(0,0);
+}
+
+// ===== TABS =====
+function switchTab(t) {
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x.dataset.tab===t));
+  document.getElementById('view-places').classList.toggle('hidden', t!=='places');
+  document.getElementById('view-outings').classList.toggle('hidden', t!=='outings');
+  document.getElementById('view-market').classList.toggle('hidden', t!=='market');
+  document.getElementById('view-friends').classList.toggle('hidden', t!=='friends');
+  document.getElementById('view-translate').classList.toggle('hidden', t!=='translate');
+  const ph = { places:'Tìm phở, chợ Á, nail…', outings:'Tìm theo khu vực…', market:'Tìm đồ trẻ em, đồ ăn…', friends:'Tìm theo khu vực…', translate:'Tìm theo ngôn ngữ, lĩnh vực…' };
+  document.getElementById('q').placeholder = ph[t];
+  if (t==='friends') renderFriends();
+  if (t==='translate') renderTranslate();
+  window.scrollTo(0,0);
+}
+
+// ===== PLACES =====
+const CATS = ["Tất cả","Ăn uống","Mua sắm","Dịch vụ","Cộng đồng"];
+let activeCat = "Tất cả", query = "", mktCat = "Tất cả";
+const chipsEl = document.getElementById('chips');
+CATS.forEach(c => {
+  const b = document.createElement('button');
+  b.className = 'chip' + (c==="Tất cả"?' on':''); b.textContent = c;
+  b.onclick = () => { activeCat=c; chipsEl.querySelectorAll('.chip').forEach(x=>x.classList.remove('on')); b.classList.add('on'); renderPlaces(); };
+  chipsEl.appendChild(b);
+});
+const mktChipsEl = document.getElementById('mkt-chips');
+MKT_CATS.forEach(c => {
+  const b = document.createElement('button');
+  b.className = 'chip' + (c==="Tất cả"?' on':''); b.textContent = c;
+  b.onclick = () => { mktCat=c; mktChipsEl.querySelectorAll('.chip').forEach(x=>x.classList.remove('on')); b.classList.add('on'); renderMarket(); };
+  mktChipsEl.appendChild(b);
+});
+const trChipsEl = document.getElementById('tr-chips');
+TR_FIELDS.forEach(c => {
+  const b = document.createElement('button');
+  b.className = 'chip' + (c==="Tất cả"?' on':''); b.textContent = c;
+  b.onclick = () => { trField=c; trChipsEl.querySelectorAll('.chip').forEach(x=>x.classList.remove('on')); b.classList.add('on'); renderTranslate(); };
+  trChipsEl.appendChild(b);
+});
+document.getElementById('q').addEventListener('input', e => { query = e.target.value.trim().toLowerCase(); renderPlaces(); renderFeed(); renderMarket(); renderTranslate(); });
+const stars = n => "★".repeat(Math.round(n)) + "☆".repeat(5-Math.round(n));
+
+function renderPlaces() {
+  const list = PLACES.filter(p => {
+    const okCity = p.tp === activeCity;
+    const okCat = activeCat==="Tất cả" || p.nhom===activeCat;
+    const okQ = !query || [p.ten,p.loai,p.khuvuc,p.mota].some(s=>s.toLowerCase().includes(query));
+    return okCity && okCat && okQ;
+  }).sort((a,b)=>(b.noibat-a.noibat)||(b.diem-a.diem));
+  const grid = document.getElementById('grid'), empty = document.getElementById('empty');
+  document.getElementById('count').textContent = `${list.length} địa điểm`;
+  if (!list.length) { grid.innerHTML=''; empty.classList.remove('hidden'); return; }
+  empty.classList.add('hidden');
+  grid.innerHTML = list.map(p => `
+    <article class="card" onclick="openPlace(${p.id})">
+      <div class="thumb" style="background-image:url('${p.anh}')">
+        ${p.noibat?'<span class="badge">★ Nổi bật</span>':''}
+        <span class="cat-tag">${p.loai}</span>
+      </div>
+      <div class="body">
+        <div class="name">${p.ten}</div>
+        <div class="desc">${p.mota}</div>
+        <div class="meta">
+          <span class="stars"><span class="n">${p.diem.toFixed(1)}</span> ${stars(p.diem)}</span>
+          <span class="rev">${p.rev} review</span>
+          <span class="area">${p.khuvuc}</span>
+        </div>
+      </div>
+    </article>`).join('');
+}
+function openPlace(id) {
+  const p = PLACES.find(x=>x.id===id);
+  document.getElementById('sheet').innerHTML = `
+    <button class="close-x" onclick="closeModal()">✕</button>
+    <div class="sheet-img" style="background-image:url('${p.anh}')"></div>
+    <div class="sheet-body">
+      <h2>${p.ten}</h2>
+      <div class="sub">${p.loai} · ${p.khuvuc} · ${p.diem.toFixed(1)} ${stars(p.diem)} (${p.rev})</div>
+      <p style="margin:14px 0;font-size:15px;">${p.mota}</p>
+      <div class="info-row"><b>Địa chỉ</b><span>${p.diachi}</span></div>
+      <div class="info-row"><b>Giờ mở</b><span>${p.gio}</span></div>
+      <div class="info-row"><b>Điện thoại</b><span>${p.sdt}</span></div>
+      <div class="cta-row">
+        <a class="cta-map" href="${p.map}" target="_blank">Xem bản đồ</a>
+        <a class="cta-call" href="tel:${p.sdt.replace(/\s/g,'')}">Gọi</a>
+      </div>
+    </div>`;
+  openModalEl();
+}
+
+// ===== OUTINGS =====
+function renderFeed() {
+  const list = OUTINGS.filter(o => o.tp===activeCity && (!query || [o.host,o.khuvuc,o.diadiem,o.note,o.tuoi].some(s=>s.toLowerCase().includes(query))));
+  const feed = document.getElementById('feed');
+  if (!list.length) { feed.innerHTML = '<div class="empty">Chưa có buổi nào khớp. Sao anh/chị không tạo một buổi mới?</div>'; return; }
+  feed.innerHTML = list.map(o => `
+    <article class="outing">
+      <div class="o-head">
+        <div class="avatar" style="background:${AV[o.color]}">${initials(o.host)}</div>
+        <div><div class="o-host">${o.host}</div><div class="o-sub">${o.khuvuc}</div></div>
+        <div class="o-when"><div class="d">${o.ngay}</div><div class="t">${o.gio}</div></div>
+      </div>
+      <div class="o-title">${o.diadiem}</div>
+      <div class="o-note">${o.note}</div>
+      <div class="o-info">
+        <span class="pill place">📍 ${o.dia_addr}</span>
+        <span class="pill age">👶 ${o.tuoi}</span>
+      </div>
+      <div class="o-foot">
+        <div class="going">
+          <div class="dots">${o.going.slice(0,4).map((g,i)=>`<span style="background:${AV[(o.color+i)%AV.length]}">${initials(g)}</span>`).join('')}</div>
+          <span class="going-n">${o.going.length} gia đình tham gia</span>
+        </div>
+        <button class="join ${o.joined?'joined':''}" onclick="toggleJoin(${o.id})">${o.joined?'✓ Đã tham gia':'Tham gia'}</button>
+      </div>
+    </article>`).join('');
+}
+function toggleJoin(id) {
+  requireLogin(() => {
+    const o = OUTINGS.find(x=>x.id===id);
+    const me = currentUser.ten || "Bạn";
+    if (o.joined) { o.joined=false; o.going = o.going.filter(g=>g!==me); }
+    else { o.joined=true; o.going.push(me); }
+    renderFeed();
+  });
+}
+function openCreate() {
+  if (!requireLogin(openCreate)) return;
+  document.getElementById('sheet').innerHTML = `
+    <button class="close-x" onclick="closeModal()">✕</button>
+    <div class="sheet-body">
+      <h2>Tạo buổi đi chơi</h2>
+      <div class="sub" style="margin-bottom:18px;">Rủ các gia đình khác cùng đưa con đi chơi.</div>
+      <div class="field"><label>Tên hiển thị của bạn</label><input id="f-host" value="${currentUser?(currentUser.ten||''):''}" placeholder="VD: Chị Hương"></div>
+      <div class="field"><label>Địa điểm (công cộng)</label><input id="f-place" placeholder="VD: Công viên Tantolunden"></div>
+      <div class="field"><label>Khu vực</label><input id="f-area" placeholder="VD: Södermalm"></div>
+      <div class="row2">
+        <div class="field"><label>Ngày</label><input id="f-day" placeholder="VD: CN 6/7"></div>
+        <div class="field"><label>Giờ</label><input id="f-time" placeholder="VD: 10:00"></div>
+      </div>
+      <div class="field"><label>Độ tuổi các bé</label><input id="f-age" placeholder="VD: 3–5 tuổi"></div>
+      <div class="field"><label>Lời nhắn</label><textarea id="f-note" placeholder="Vài dòng giới thiệu buổi đi chơi…"></textarea></div>
+      <button class="submit" onclick="submitOuting()">Đăng buổi đi chơi</button>
+    </div>`;
+  openModalEl();
+}
+function submitOuting() {
+  const v = id => document.getElementById(id).value.trim();
+  const host=v('f-host'), place=v('f-place');
+  if (!host || !place) { alert('Vui lòng nhập ít nhất tên và địa điểm.'); return; }
+  OUTINGS.unshift({ id: Date.now(), host, tp:activeCity, khuvuc:v('f-area')||'Stockholm', diadiem:place, dia_addr:v('f-area')||place, ngay:v('f-day')||'Sắp tới', gio:v('f-time')||'', tuoi:v('f-age')||'Mọi lứa tuổi', note:v('f-note')||'', going:[host,"Bạn"], joined:true, color:Math.floor(Math.random()*AV.length) });
+  closeModal(); renderFeed();
+}
+
+// ===== MARKET =====
+function renderMarket() {
+  const list = MARKET.filter(m => {
+    const okCity = m.tp === activeCity;
+    const okCat = mktCat==="Tất cả" || m.cat===mktCat;
+    const okQ = !query || [m.title,m.cat,m.khuvuc,m.desc,m.who].some(s=>s.toLowerCase().includes(query));
+    return okCity && okCat && okQ;
+  });
+  const grid = document.getElementById('mkt-grid'), empty = document.getElementById('mkt-empty');
+  document.getElementById('mkt-count').textContent = `${list.length} tin`;
+  if (!list.length) { grid.innerHTML=''; empty.classList.remove('hidden'); return; }
+  empty.classList.add('hidden');
+  grid.innerHTML = list.map(m => `
+    <article class="item" onclick="openItem(${m.id})">
+      <div class="item-img" style="background-image:url('${m.anh}')">
+        <span class="tag-type ${TYPE_CLASS[m.type]}">${TYPE_LABEL[m.type]}</span>
+        <span class="tag-cat">${m.cat}</span>
+      </div>
+      <div class="item-body">
+        <div class="item-title">${m.title}</div>
+        <div class="item-desc">${m.desc}</div>
+        <div class="item-meta">
+          <span class="who">${m.who}</span>
+          <span class="where">${m.khuvuc}</span>
+        </div>
+      </div>
+    </article>`).join('');
+}
+function openItem(id) {
+  const m = MARKET.find(x=>x.id===id);
+  document.getElementById('sheet').innerHTML = `
+    <button class="close-x" onclick="closeModal()">✕</button>
+    <div class="sheet-img" style="background-image:url('${m.anh}')"></div>
+    <div class="sheet-body">
+      <h2>${m.title}</h2>
+      <div class="sub"><span class="tag-type ${TYPE_CLASS[m.type]}" style="position:static;display:inline-block">${TYPE_LABEL[m.type]}</span> · ${m.cat} · ${m.khuvuc}</div>
+      <p style="margin:14px 0;font-size:15px;">${m.desc}</p>
+      <div class="info-row"><b>Người đăng</b><span>${m.who}</span></div>
+      <div class="info-row"><b>Khu vực</b><span>${m.khuvuc}</span></div>
+      <div class="cta-row">
+        <a class="cta-map" href="tel:${m.sdt.replace(/\s/g,'')}">Liên hệ ${m.who}</a>
+      </div>
+    </div>`;
+  openModalEl();
+}
+function openPost() {
+  if (!requireLogin(openPost)) return;
+  document.getElementById('sheet').innerHTML = `
+    <button class="close-x" onclick="closeModal()">✕</button>
+    <div class="sheet-body">
+      <h2>Đăng tin</h2>
+      <div class="sub" style="margin-bottom:18px;">Cho – tặng – đổi hoặc nhờ xách tay. Không mua bán có giá.</div>
+      <div class="field"><label>Tiêu đề</label><input id="m-title" placeholder="VD: Quần áo bé gái size 80"></div>
+      <div class="row2">
+        <div class="field"><label>Hình thức</label>
+          <select id="m-type">
+            <option value="tang">Tặng</option>
+            <option value="doi">Đổi</option>
+            <option value="free">Miễn phí</option>
+            <option value="xach">Xách tay</option>
+          </select>
+        </div>
+        <div class="field"><label>Mảng</label>
+          <select id="m-cat">
+            <option>Đồ trẻ em</option>
+            <option>Đồ ăn Việt</option>
+            <option>Đồ gia đình</option>
+            <option>Nhờ xách tay</option>
+            <option>Cho tặng miễn phí</option>
+          </select>
+        </div>
+      </div>
+      <div class="field"><label>Tên hiển thị</label><input id="m-who" value="${currentUser?(currentUser.ten||''):''}" placeholder="VD: Chị Lan"></div>
+      <div class="field"><label>Khu vực</label><input id="m-area" placeholder="VD: Södermalm"></div>
+      <div class="field"><label>Số liên hệ</label><input id="m-sdt" placeholder="VD: 070-123 4567"></div>
+      <div class="field"><label>Mô tả</label><textarea id="m-desc" placeholder="Mô tả món đồ, tình trạng…"></textarea></div>
+      <button class="submit" onclick="submitItem()">Đăng tin</button>
+    </div>`;
+  openModalEl();
+}
+function submitItem() {
+  const v = id => document.getElementById(id).value.trim();
+  const title=v('m-title'), who=v('m-who');
+  if (!title || !who) { alert('Vui lòng nhập ít nhất tiêu đề và tên.'); return; }
+  MARKET.unshift({ id:Date.now(), tp:activeCity, type:v('m-type'), cat:v('m-cat'), title, who, khuvuc:v('m-area')||'Stockholm', sdt:v('m-sdt')||'', desc:v('m-desc')||'', anh:"https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=600&q=70" });
+  closeModal(); renderMarket();
+}
+
+// ============================================================
+// ===== FRIENDS / KẾT BẠN =====
+// ============================================================
+function switchFrSub(s) {
+  frSub = s;
+  document.querySelectorAll('.sub-tab').forEach(x=>x.classList.toggle('on', x.dataset.sub===s));
+  renderFriends();
+}
+
+function renderFriends() {
+  const needProfile = !myProfile;
+  // màn hình gợi ý luôn xem được; chỉ khi thích/tạo hồ sơ mới cần đăng nhập
+  document.getElementById('fr-discover').classList.toggle('hidden', frSub!=='discover');
+  document.getElementById('fr-matches').classList.toggle('hidden', frSub!=='matches');
+  document.getElementById('fr-events').classList.toggle('hidden', frSub!=='events');
+  document.getElementById('fr-noprofile').classList.add('hidden');
+
+  if (frSub==='discover') renderDiscover();
+  else if (frSub==='matches') renderMatches();
+  else renderSgEvents();
+}
+
+function renderDiscover() {
+  const list = SINGLES.filter(p =>
+    p.tp===activeCity && !myMatches.includes(p.id) && !mySkips.includes(p.id) &&
+    (!query || [p.ten,p.khuvuc,p.nghe,p.bio].some(s=>s.toLowerCase().includes(query)))
+  );
+  document.getElementById('fr-count').textContent = `${list.length} người có thể hợp gu`;
+  const grid = document.getElementById('fr-grid');
+  if (!list.length) { grid.innerHTML = '<div class="empty">Hết gợi ý rồi. Quay lại sau nhé, cộng đồng đang lớn dần mỗi ngày.</div>'; return; }
+  grid.innerHTML = list.map(p => `
+    <article class="pcard">
+      <div class="pcard-img" style="background-image:url('${p.anh}')">
+        <button class="btn-report" onclick="reportUser('${p.ten}')" title="Báo cáo">⚑</button>
+        <div class="pcard-grad"></div>
+        <div class="pcard-info">
+          <div class="pcard-name">${p.ten} <span class="age">${p.tuoi}</span></div>
+          <div class="pcard-sub">${p.nghe} · ${p.khuvuc}</div>
+        </div>
+      </div>
+      <div class="pcard-bio">${p.bio}</div>
+      <div class="pcard-tags">${p.so_thich.map(t=>`<span class="t">${t}</span>`).join('')}</div>
+      <div class="pcard-act">
+        <button class="btn-skip" onclick="skipSingle(${p.id})">Bỏ qua</button>
+        <button class="btn-like" onclick="likeSingle(${p.id})">💗 Thích</button>
+      </div>
+    </article>`).join('');
+}
+
+function skipSingle(id) { mySkips.push(id); renderDiscover(); }
+
+function likeSingle(id) {
+  requireLogin(() => {
+    if (!myProfile) { alert('Hãy tạo hồ sơ của bạn trước khi kết nối.'); openProfileForm(); return; }
+    if (!myLikes.includes(id)) myLikes.push(id);
+    // giả lập: đối phương cũng thích lại (trong thực tế do backend quyết định)
+    const matched = Math.random() > 0.4;
+    if (matched) {
+      myMatches.push(id);
+      showMatch(id);
+    } else {
+      const p = SINGLES.find(x=>x.id===id);
+      mySkips.push(id);
+      renderDiscover();
+      // thông báo nhẹ
+      const el = document.getElementById('fr-count');
+      el.textContent = `Đã gửi lời thích tới ${p.ten}. Nếu ${p.ten} thích lại, hai bạn sẽ kết nối.`;
+    }
+  });
+}
+
+function showMatch(id) {
+  const p = SINGLES.find(x=>x.id===id);
+  document.getElementById('sheet').innerHTML = `
+    <button class="close-x" onclick="closeModal();renderFriends()">✕</button>
+    <div class="match-pop">
+      <div class="mp-emoji">💗</div>
+      <h2>Hai bạn đã kết nối!</h2>
+      <p style="color:var(--muted);margin-bottom:8px">Bạn và <b>${p.ten}</b> đều thích nhau.</p>
+      <p style="font-size:14px;color:var(--muted)">Giờ hai bạn có thể liên hệ. Nhớ gặp lần đầu ở nơi công cộng nhé.</p>
+      <div class="cta-row" style="margin-top:20px;padding:0 20px">
+        <a class="cta-map" href="tel:${p.sdt.replace(/\s/g,'')}">Liên hệ ${p.ten}</a>
+        <button class="cta-call" onclick="closeModal();switchFrSub('matches')">Xem kết nối</button>
+      </div>
+    </div>`;
+  openModalEl();
+}
+
+function renderMatches() {
+  const list = SINGLES.filter(p=>myMatches.includes(p.id));
+  const box = document.getElementById('fr-match-list');
+  if (!list.length) { box.innerHTML = '<div class="empty">Chưa có kết nối nào. Vào tab Gợi ý và gửi lời thích tới người bạn thấy hợp.</div>'; return; }
+  box.innerHTML = list.map(p => `
+    <article class="outing">
+      <div class="o-head">
+        <div class="avatar" style="background-image:url('${p.anh}');background-size:cover"></div>
+        <div><div class="o-host">${p.ten}, ${p.tuoi}</div><div class="o-sub">${p.nghe} · ${p.khuvuc}</div></div>
+      </div>
+      <div class="o-note" style="margin-top:10px">${p.bio}</div>
+      <div class="o-foot" style="margin-top:13px">
+        <button class="btn-report" style="position:static;width:auto;padding:8px 12px;border-radius:10px" onclick="reportUser('${p.ten}')">⚑ Báo cáo</button>
+        <a class="join" style="text-decoration:none" href="tel:${p.sdt.replace(/\s/g,'')}">Liên hệ</a>
+      </div>
+    </article>`).join('');
+}
+
+function renderSgEvents() {
+  const box = document.getElementById('fr-event-list');
+  const list = SG_EVENTS.filter(o => o.tp===activeCity);
+  if (!list.length) { box.innerHTML = `<div class="empty">Chưa có sự kiện độc thân nào ở ${activeCity}. Ghé lại sau nhé.</div>`; return; }
+  box.innerHTML = list.map(o => `
+    <article class="outing">
+      <div class="o-head">
+        <div class="avatar" style="background:${AV[o.color]}">💗</div>
+        <div><div class="o-host">${o.host}</div><div class="o-sub">Sự kiện độc thân</div></div>
+        <div class="o-when"><div class="d">${o.ngay}</div><div class="t">${o.gio}</div></div>
+      </div>
+      <div class="o-title">${o.diadiem}</div>
+      <div class="o-note">${o.note}</div>
+      <div class="o-info"><span class="pill place">📍 ${o.dia_addr}</span></div>
+      <div class="o-foot">
+        <span class="going-n">${o.going.length} người tham gia</span>
+        <button class="join ${o.joined?'joined':''}" onclick="joinSgEvent(${o.id})">${o.joined?'✓ Đã đăng ký':'Đăng ký'}</button>
+      </div>
+    </article>`).join('');
+}
+function joinSgEvent(id) {
+  requireLogin(() => {
+    const o = SG_EVENTS.find(x=>x.id===id);
+    o.joined = !o.joined;
+    if (o.joined) o.going.push(currentUser.ten||'Bạn'); else o.going = o.going.filter(g=>g!==(currentUser.ten||'Bạn'));
+    renderSgEvents();
+  });
+}
+
+function reportUser(ten) {
+  const reason = prompt(`Báo cáo ${ten} vì lý do gì? (VD: hồ sơ giả, quấy rối, lừa đảo…)\nBáo cáo sẽ được gửi tới quản trị viên.`);
+  if (reason) alert('Cảm ơn bạn đã báo cáo. Quản trị viên sẽ xem xét và xử lý.');
+}
+
+function openProfileForm() {
+  requireLogin(() => {
+    const p = myProfile || {};
+    document.getElementById('sheet').innerHTML = `
+      <button class="close-x" onclick="closeModal()">✕</button>
+      <div class="sheet-body">
+        <h2>Hồ sơ độc thân của tôi</h2>
+        <div class="auth-note">Thông tin này hiển thị cho người dùng khác. Bạn có thể xoá bất cứ lúc nào.</div>
+        <div class="field"><label>Tên hiển thị</label><input id="p-ten" value="${p.ten||currentUser.ten||''}" placeholder="Tên bạn"></div>
+        <div class="row2">
+          <div class="field"><label>Tuổi</label><input id="p-tuoi" type="number" value="${p.tuoi||''}" placeholder="VD: 30"></div>
+          <div class="field"><label>Khu vực</label><input id="p-khuvuc" value="${p.khuvuc||''}" placeholder="VD: Södermalm"></div>
+        </div>
+        <div class="field"><label>Nghề nghiệp</label><input id="p-nghe" value="${p.nghe||''}" placeholder="VD: Y tá"></div>
+        <div class="field"><label>Đang tìm</label><input id="p-tim" value="${p.tim||''}" placeholder="VD: Bạn nam 28–35, nghiêm túc"></div>
+        <div class="field"><label>Giới thiệu bản thân</label><textarea id="p-bio" placeholder="Vài dòng về bạn, sở thích, điều bạn mong muốn…">${p.bio||''}</textarea></div>
+        <div class="field"><label>Sở thích (cách nhau bằng dấu phẩy)</label><input id="p-sothich" value="${p.so_thich?p.so_thich.join(', '):''}" placeholder="Nấu ăn, Du lịch, Cà phê"></div>
+        <div class="field"><label>Số liên hệ (chỉ hiện khi đã kết nối)</label><input id="p-sdt" value="${p.sdt||''}" placeholder="070-123 4567"></div>
+        <button class="submit" onclick="saveProfile()">Lưu hồ sơ</button>
+        ${myProfile ? '<button class="submit" style="background:var(--paper-2);color:#a8331f;border:1px solid var(--line);margin-top:8px" onclick="deleteProfile()">Xoá hồ sơ</button>' : ''}
+      </div>`;
+    openModalEl();
+  });
+}
+function saveProfile() {
+  const v = id => document.getElementById(id).value.trim();
+  const ten = v('p-ten');
+  if (!ten) { alert('Vui lòng nhập tên.'); return; }
+  myProfile = { ten, tuoi:v('p-tuoi'), khuvuc:v('p-khuvuc'), nghe:v('p-nghe'), tim:v('p-tim'),
+    bio:v('p-bio'), so_thich:v('p-sothich').split(',').map(s=>s.trim()).filter(Boolean), sdt:v('p-sdt') };
+  closeModal(); renderFriends();
+}
+function deleteProfile() {
+  if (confirm('Xoá hồ sơ độc thân của bạn? Người khác sẽ không còn thấy bạn.')) {
+    myProfile = null; closeModal(); renderFriends();
+  }
+}
+
+// ============================================================
+// ===== PHIÊN DỊCH =====
+// ============================================================
+function switchTrSub(s) {
+  trSub = s;
+  document.querySelectorAll('#tr-subtabs .sub-tab').forEach(x=>x.classList.toggle('on', x.dataset.sub===s));
+  document.getElementById('tr-fab').textContent = s==='find' ? '＋ Làm phiên dịch' : '＋ Đăng yêu cầu';
+  renderTranslate();
+}
+function onTrFab() { trSub==='find' ? openTrProfileForm() : openTrRequestForm(); }
+
+function renderTranslate() {
+  document.getElementById('tr-find').classList.toggle('hidden', trSub!=='find');
+  document.getElementById('tr-requests').classList.toggle('hidden', trSub!=='requests');
+  if (trSub==='find') renderTrFind(); else renderTrRequests();
+}
+
+function renderTrFind() {
+  const list = TRANSLATORS.filter(t => {
+    const okCity = t.tp===activeCity;
+    const okField = trField==='Tất cả' || t.fields.includes(trField);
+    const okQ = !query || [t.ten,t.khuvuc,t.kn,t.bio,...t.langs,...t.fields].some(s=>s.toLowerCase().includes(query));
+    return okCity && okField && okQ;
+  }).sort((a,b)=>(b.auth-a.auth));
+  document.getElementById('tr-count').textContent = `${list.length} người phiên dịch ở ${activeCity}`;
+  const grid = document.getElementById('tr-grid');
+  if (!list.length) { grid.innerHTML = `<div class="empty">Chưa có người phiên dịch nào ở ${activeCity}. Bạn biết tiếng? Hãy đăng ký giúp cộng đồng.</div>`; return; }
+  grid.innerHTML = list.map(t => `
+    <article class="tr-card" style="position:relative">
+      ${t.auth?'<span class="tr-badge">✓ Được cấp phép</span>':''}
+      <div class="tr-top">
+        <div class="avatar" style="background:${AV[t.id%AV.length]}">${initials(t.ten)}</div>
+        <div><div class="tr-name">${t.ten}</div><div class="tr-role">${t.kn}</div></div>
+      </div>
+      <div class="tr-langs">${t.langs.map(l=>`<span class="lg">${l}</span>`).join('')}</div>
+      <div class="tr-fields">${t.fields.map(f=>`<span class="f">${f}</span>`).join('')}</div>
+      <div class="tr-bio">${t.bio}</div>
+      <div class="tr-foot">
+        <span class="tr-where">📍 ${t.khuvuc}</span>
+        <a class="tr-contact" href="tel:${t.sdt.replace(/\s/g,'')}">Liên hệ</a>
+      </div>
+    </article>`).join('');
+}
+
+function renderTrRequests() {
+  const list = TR_REQUESTS.filter(r => r.tp===activeCity &&
+    (!query || [r.who,r.khuvuc,r.field,r.note,r.khi].some(s=>s.toLowerCase().includes(query))));
+  document.getElementById('tr-count').textContent = `${list.length} yêu cầu ở ${activeCity}`;
+  const box = document.getElementById('tr-req-list');
+  if (!list.length) { box.innerHTML = `<div class="empty">Chưa có yêu cầu nào ở ${activeCity}. Cần người dịch? Bấm "Đăng yêu cầu".</div>`; return; }
+  box.innerHTML = list.map(r => `
+    <article class="outing">
+      <div class="o-head">
+        <div class="avatar" style="background:${AV[r.id%AV.length]}">${initials(r.who)}</div>
+        <div><div class="o-host">${r.who}</div><div class="o-sub">${r.khuvuc}</div></div>
+        <div class="o-when"><div class="d" style="font-size:12.5px">${r.khi}</div></div>
+      </div>
+      <div class="o-info" style="margin:12px 0 8px"><span class="pill" style="background:#e3eef5;color:#2a5a7a">🗣️ ${r.field}</span></div>
+      <div class="o-note">${r.note}</div>
+      <div class="o-foot" style="margin-top:13px">
+        <a class="join" style="text-decoration:none" href="tel:${r.sdt.replace(/\s/g,'')}">Nhận giúp</a>
+      </div>
+    </article>`).join('');
+}
+
+function openTrProfileForm() {
+  requireLogin(() => {
+    document.getElementById('sheet').innerHTML = `
+      <button class="close-x" onclick="closeModal()">✕</button>
+      <div class="sheet-body">
+        <h2>Đăng ký làm phiên dịch</h2>
+        <div class="auth-note">Giúp người mới sang gỡ rào cản ngôn ngữ. Chi phí do bạn và người cần tự thoả thuận.</div>
+        <div class="field"><label>Tên hiển thị</label><input id="t-ten" value="${currentUser.ten||''}" placeholder="VD: Anh Đức"></div>
+        <div class="field"><label>Khu vực</label><input id="t-khuvuc" placeholder="VD: Södermalm"></div>
+        <div class="field"><label>Ngôn ngữ (cách nhau dấu phẩy)</label><input id="t-langs" placeholder="VD: Việt, Thụy Điển, Anh"></div>
+        <div class="field"><label>Lĩnh vực giúp được</label><input id="t-fields" placeholder="VD: Y tế, Giấy tờ/Hành chính"></div>
+        <div class="field"><label>Kinh nghiệm (1 dòng)</label><input id="t-kn" placeholder="VD: 5 năm ở Thụy Điển, quen việc giấy tờ"></div>
+        <div class="field"><label style="display:flex;gap:8px;align-items:center;font-weight:600"><input type="checkbox" id="t-auth" style="width:auto"> Tôi có chứng chỉ phiên dịch chính thức (auktoriserad tolk)</label></div>
+        <div class="field"><label>Giới thiệu</label><textarea id="t-bio" placeholder="Vài dòng về bạn, thời gian rảnh…"></textarea></div>
+        <div class="field"><label>Số liên hệ</label><input id="t-sdt" placeholder="070-123 4567"></div>
+        <button class="submit" onclick="submitTranslator()">Đăng hồ sơ</button>
+      </div>`;
+    openModalEl();
+  });
+}
+function submitTranslator() {
+  const v = id => document.getElementById(id).value.trim();
+  const ten = v('t-ten');
+  if (!ten) { alert('Vui lòng nhập tên.'); return; }
+  TRANSLATORS.unshift({ id:Date.now(), tp:activeCity, ten, khuvuc:v('t-khuvuc')||activeCity,
+    langs:v('t-langs').split(',').map(s=>s.trim()).filter(Boolean),
+    fields:v('t-fields').split(',').map(s=>s.trim()).filter(Boolean),
+    auth:document.getElementById('t-auth').checked, kn:v('t-kn')||'', bio:v('t-bio')||'', sdt:v('t-sdt')||'' });
+  closeModal(); trSub='find'; renderTranslate();
+}
+
+function openTrRequestForm() {
+  requireLogin(() => {
+    document.getElementById('sheet').innerHTML = `
+      <button class="close-x" onclick="closeModal()">✕</button>
+      <div class="sheet-body">
+        <h2>Đăng yêu cầu cần phiên dịch</h2>
+        <div class="auth-note">Mô tả việc bạn cần giúp. Người phiên dịch sẽ liên hệ lại.</div>
+        <div class="field"><label>Tên hiển thị</label><input id="tr-who" value="${currentUser.ten||''}" placeholder="VD: Chị Hương"></div>
+        <div class="field"><label>Khu vực</label><input id="tr-area" placeholder="VD: Solna"></div>
+        <div class="field"><label>Lĩnh vực</label>
+          <select id="tr-field">
+            <option>Y tế</option><option>Giấy tờ/Hành chính</option><option>Pháp lý</option>
+            <option>Đi cùng thường</option><option>Dịch văn bản</option>
+          </select>
+        </div>
+        <div class="field"><label>Khi nào</label><input id="tr-khi" placeholder="VD: Thứ 5 tuần này, 14:00 hoặc Linh hoạt"></div>
+        <div class="field"><label>Mô tả việc cần giúp</label><textarea id="tr-note" placeholder="VD: Đi cùng tới bệnh viện dịch giúp khi khám…"></textarea></div>
+        <div class="field"><label>Số liên hệ</label><input id="tr-sdt" placeholder="070-123 4567"></div>
+        <button class="submit" onclick="submitTrRequest()">Đăng yêu cầu</button>
+      </div>`;
+    openModalEl();
+  });
+}
+function submitTrRequest() {
+  const v = id => document.getElementById(id).value.trim();
+  const who = v('tr-who');
+  if (!who) { alert('Vui lòng nhập tên.'); return; }
+  TR_REQUESTS.unshift({ id:Date.now(), tp:activeCity, who, khuvuc:v('tr-area')||activeCity,
+    field:v('tr-field'), khi:v('tr-khi')||'Linh hoạt', note:v('tr-note')||'', sdt:v('tr-sdt')||'' });
+  closeModal(); trSub='requests';
+  document.querySelectorAll('#tr-subtabs .sub-tab').forEach(x=>x.classList.toggle('on', x.dataset.sub==='requests'));
+  document.getElementById('tr-fab').textContent = '＋ Đăng yêu cầu';
+  renderTranslate();
+}
+
+// ===== MODAL =====
+function openModalEl(){ document.getElementById('modal').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeModal(){ document.getElementById('modal').classList.remove('open'); document.body.style.overflow=''; }
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+
+// ============================================================
+// ===== AUTH (đăng nhập bằng email + OTP + quên mật khẩu) =====
+// ============================================================
+// ⚠️ DÁN LINK WEB APP TỪ GOOGLE APPS SCRIPT VÀO ĐÂY:
+const API_URL = "https://script.google.com/macros/s/AKfycbzlYwMN4N4pmWJuqxNZpaQjqsCx4QhntlbvX4yyP3Lxm62gQcibwq-e56T8bEX23QiR/exec";
+
+let currentUser = null;
+
+// khôi phục phiên đăng nhập đã lưu trên máy
+try {
+  const saved = JSON.parse(localStorage.getItem('vietsthlm_user') || 'null');
+  if (saved) { currentUser = saved; }
+} catch(e){}
+
+function refreshAccBtn() {
+  const btn = document.getElementById('accBtn');
+  if (currentUser) { btn.textContent = currentUser.ten || currentUser.email.split('@')[0]; btn.classList.add('in'); }
+  else { btn.textContent = 'Đăng nhập'; btn.classList.remove('in'); }
+}
+refreshAccBtn();
+
+function onAccountClick() {
+  if (currentUser) {
+    // đang đăng nhập → hỏi đăng xuất
+    document.getElementById('sheet').innerHTML = `
+      <button class="close-x" onclick="closeModal()">✕</button>
+      <div class="sheet-body">
+        <h2>Xin chào, ${currentUser.ten || currentUser.email}</h2>
+        <div class="auth-note">${currentUser.email}</div>
+        <button class="submit" style="background:var(--paper-2);color:var(--ink);border:1px solid var(--line)" onclick="logout()">Đăng xuất</button>
+      </div>`;
+    openModalEl();
+  } else {
+    openAuth('login');
+  }
+}
+
+function logout() {
+  currentUser = null;
+  localStorage.removeItem('vietsthlm_user');
+  refreshAccBtn(); closeModal();
+}
+
+function loginDone(user) {
+  currentUser = user;
+  localStorage.setItem('vietsthlm_user', JSON.stringify(user));
+  refreshAccBtn();
+}
+
+// gọi API
+async function callApi(payload) {
+  if (API_URL.startsWith('PASTE')) {
+    return { ok:false, msg:'Chưa cấu hình API_URL. Hãy dán link Apps Script vào file.' };
+  }
+  const res = await fetch(API_URL, {
+    method:'POST',
+    headers:{ 'Content-Type':'text/plain;charset=utf-8' },
+    body: JSON.stringify(payload)
+  });
+  return await res.json();
+}
+
+function authMsg(text, type) {
+  const el = document.getElementById('auth-msg');
+  if (!el) return;
+  el.className = 'auth-msg ' + type;
+  el.textContent = text;
+}
+function btnLoad(id, on, label) {
+  const b = document.getElementById(id);
+  if (!b) return;
+  b.disabled = on;
+  b.innerHTML = on ? '<span class="spin"></span>' : label;
+}
+
+// ===== các màn hình auth =====
+function openAuth(screen, prefillEmail) {
+  const S = document.getElementById('sheet');
+  const email = prefillEmail || '';
+  if (screen === 'login') {
+    S.innerHTML = `
+      <button class="close-x" onclick="closeModal()">✕</button>
+      <div class="sheet-body">
+        <h2>Đăng nhập</h2>
+        <div class="auth-note">Đăng nhập để đăng tin và tham gia hoạt động cộng đồng.</div>
+        <div id="auth-msg" class="auth-msg"></div>
+        <div class="field"><label>Email</label><input id="a-email" type="email" value="${email}" placeholder="ban@email.com"></div>
+        <div class="field"><label>Mật khẩu</label><input id="a-pass" type="password" placeholder="Mật khẩu"></div>
+        <div style="text-align:right;margin:-6px 0 14px"><button class="link-btn" onclick="openAuth('forgot')">Quên mật khẩu?</button></div>
+        <button id="a-btn" class="submit" onclick="doLogin()">Đăng nhập</button>
+        <div class="auth-switch">Chưa có tài khoản? <a onclick="openAuth('register')">Đăng ký</a></div>
+      </div>`;
+  } else if (screen === 'register') {
+    S.innerHTML = `
+      <button class="close-x" onclick="closeModal()">✕</button>
+      <div class="sheet-body">
+        <h2>Tạo tài khoản</h2>
+        <div class="auth-note">Chúng tôi sẽ gửi mã xác thực 6 số tới email của bạn.</div>
+        <div id="auth-msg" class="auth-msg"></div>
+        <div class="field"><label>Tên hiển thị</label><input id="a-ten" placeholder="VD: Chị Hương"></div>
+        <div class="field"><label>Email</label><input id="a-email" type="email" value="${email}" placeholder="ban@email.com"></div>
+        <div class="field"><label>Mật khẩu (tối thiểu 6 ký tự)</label><input id="a-pass" type="password" placeholder="Tự đặt mật khẩu"></div>
+        <button id="a-btn" class="submit" onclick="doRegister()">Gửi mã xác thực</button>
+        <div class="auth-switch">Đã có tài khoản? <a onclick="openAuth('login')">Đăng nhập</a></div>
+      </div>`;
+  } else if (screen === 'otp') {
+    S.innerHTML = `
+      <button class="close-x" onclick="closeModal()">✕</button>
+      <div class="sheet-body">
+        <h2>Nhập mã xác thực</h2>
+        <div class="auth-note">Mã 6 số đã gửi tới <b>${email}</b>. Kiểm tra cả hộp thư spam.</div>
+        <div id="auth-msg" class="auth-msg"></div>
+        <div class="otp-inputs" id="otp-box">
+          ${[0,1,2,3,4,5].map(i=>`<input maxlength="1" inputmode="numeric" data-i="${i}">`).join('')}
+        </div>
+        <button id="a-btn" class="submit" onclick="doVerify('${email}')">Xác thực</button>
+        <div class="auth-switch">Không nhận được mã? <a onclick="doResend('${email}')">Gửi lại</a></div>
+      </div>`;
+    setupOtpInputs();
+  } else if (screen === 'forgot') {
+    S.innerHTML = `
+      <button class="close-x" onclick="closeModal()">✕</button>
+      <div class="sheet-body">
+        <h2>Quên mật khẩu</h2>
+        <div class="auth-note">Nhập email, chúng tôi sẽ gửi mã đặt lại mật khẩu.</div>
+        <div id="auth-msg" class="auth-msg"></div>
+        <div class="field"><label>Email</label><input id="a-email" type="email" value="${email}" placeholder="ban@email.com"></div>
+        <button id="a-btn" class="submit" onclick="doForgot()">Gửi mã</button>
+        <div class="auth-switch"><a onclick="openAuth('login')">← Quay lại đăng nhập</a></div>
+      </div>`;
+  } else if (screen === 'reset') {
+    S.innerHTML = `
+      <button class="close-x" onclick="closeModal()">✕</button>
+      <div class="sheet-body">
+        <h2>Đặt mật khẩu mới</h2>
+        <div class="auth-note">Nhập mã đã gửi tới <b>${email}</b> và mật khẩu mới.</div>
+        <div id="auth-msg" class="auth-msg"></div>
+        <div class="field"><label>Mã 6 số</label><input id="a-ma" inputmode="numeric" placeholder="Mã trong email"></div>
+        <div class="field"><label>Mật khẩu mới</label><input id="a-pass" type="password" placeholder="Tối thiểu 6 ký tự"></div>
+        <button id="a-btn" class="submit" onclick="doReset('${email}')">Đặt lại mật khẩu</button>
+      </div>`;
+  }
+  openModalEl();
+}
+
+function setupOtpInputs() {
+  const box = document.getElementById('otp-box');
+  const ins = [...box.querySelectorAll('input')];
+  ins.forEach((inp, i) => {
+    inp.addEventListener('input', () => { if (inp.value && i < 5) ins[i+1].focus(); });
+    inp.addEventListener('keydown', e => { if (e.key==='Backspace' && !inp.value && i>0) ins[i-1].focus(); });
+  });
+  ins[0].focus();
+}
+function readOtp() { return [...document.querySelectorAll('#otp-box input')].map(i=>i.value).join(''); }
+
+// ===== hành động auth =====
+async function doRegister() {
+  const ten = document.getElementById('a-ten').value.trim();
+  const email = document.getElementById('a-email').value.trim();
+  const pass = document.getElementById('a-pass').value;
+  if (!email || !pass) return authMsg('Vui lòng nhập email và mật khẩu.', 'err');
+  btnLoad('a-btn', true);
+  const r = await callApi({ action:'register', email, pass, ten });
+  btnLoad('a-btn', false, 'Gửi mã xác thực');
+  if (r.ok) openAuth('otp', email);
+  else authMsg(r.msg, 'err');
+}
+async function doVerify(email) {
+  const ma = readOtp();
+  if (ma.length !== 6) return authMsg('Nhập đủ 6 số.', 'err');
+  btnLoad('a-btn', true);
+  const r = await callApi({ action:'verifyOtp', email, ma });
+  btnLoad('a-btn', false, 'Xác thực');
+  if (r.ok) { loginDone(r.user); closeModal(); }
+  else authMsg(r.msg, 'err');
+}
+async function doResend(email) {
+  authMsg('Đang gửi lại mã…', 'ok');
+  const r = await callApi({ action:'resendOtp', email });
+  authMsg(r.msg, r.ok ? 'ok' : 'err');
+}
+async function doLogin() {
+  const email = document.getElementById('a-email').value.trim();
+  const pass = document.getElementById('a-pass').value;
+  if (!email || !pass) return authMsg('Vui lòng nhập email và mật khẩu.', 'err');
+  btnLoad('a-btn', true);
+  const r = await callApi({ action:'login', email, pass });
+  btnLoad('a-btn', false, 'Đăng nhập');
+  if (r.ok) { loginDone(r.user); closeModal(); if (pendingAction) { const a=pendingAction; pendingAction=null; a(); } }
+  else if (r.needVerify) { authMsg(r.msg, 'err'); setTimeout(()=>openAuth('otp', email), 900); }
+  else authMsg(r.msg, 'err');
+}
+async function doForgot() {
+  const email = document.getElementById('a-email').value.trim();
+  if (!email) return authMsg('Vui lòng nhập email.', 'err');
+  btnLoad('a-btn', true);
+  const r = await callApi({ action:'forgotPassword', email });
+  btnLoad('a-btn', false, 'Gửi mã');
+  if (r.ok) openAuth('reset', email);
+  else authMsg(r.msg, 'err');
+}
+async function doReset(email) {
+  const ma = document.getElementById('a-ma').value.trim();
+  const pass = document.getElementById('a-pass').value;
+  if (!ma || !pass) return authMsg('Nhập mã và mật khẩu mới.', 'err');
+  btnLoad('a-btn', true);
+  const r = await callApi({ action:'resetPassword', email, ma, pass });
+  btnLoad('a-btn', false, 'Đặt lại mật khẩu');
+  if (r.ok) { authMsg(r.msg, 'ok'); setTimeout(()=>openAuth('login', email), 1200); }
+  else authMsg(r.msg, 'err');
+}
+
+// ===== cổng chặn: cần đăng nhập mới làm được =====
+let pendingAction = null;
+function requireLogin(action) {
+  if (currentUser) { action(); return true; }
+  pendingAction = action;
+  openAuth('login');
+  return false;
+}
+
+initCitySelector();
+renderPlaces(); renderFeed(); renderMarket();
+</script>
+</body>
+</html>
