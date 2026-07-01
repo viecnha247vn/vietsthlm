@@ -185,6 +185,40 @@
   .hc-go { color: var(--jade); font-weight: 700; font-size: 14px; }
   .home-card-cta { background: linear-gradient(160deg, #fff, #f6efe4); border-color: #e6d9c4; }
 
+  /* community chat */
+  .chat-box { max-width: 720px; margin: 34px auto 0; background: #fff; border: 1px solid var(--line);
+    border-radius: 20px; overflow: hidden; }
+  .chat-head { display: flex; align-items: center; gap: 12px; padding: 18px 20px 14px; border-bottom: 1px solid var(--line); }
+  .chat-title { font-size: 18px; font-weight: 800; letter-spacing: -.01em; }
+  .chat-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .chat-live { margin-left: auto; font-size: 12px; font-weight: 700; color: var(--jade); white-space: nowrap; }
+  .chat-safety { font-size: 12px; color: #8a5a14; background: #fdeede; padding: 9px 20px; line-height: 1.45; }
+  .chat-messages { height: 340px; overflow-y: auto; padding: 16px 20px; display: flex; flex-direction: column; gap: 12px; }
+  .chat-empty { text-align: center; color: var(--muted); font-size: 14px; margin: auto; }
+  .cmsg { display: flex; gap: 10px; align-items: flex-start; }
+  .cmsg .av { width: 34px; height: 34px; border-radius: 999px; flex-shrink: 0; color: #fff;
+    display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+  .cmsg-body { flex: 1; min-width: 0; }
+  .cmsg-top { display: flex; align-items: baseline; gap: 8px; }
+  .cmsg-name { font-weight: 700; font-size: 13.5px; }
+  .cmsg-time { font-size: 11px; color: var(--muted); }
+  .cmsg-report { margin-left: auto; background: none; border: none; color: var(--muted); cursor: pointer;
+    font-size: 13px; opacity: .5; }
+  .cmsg-report:hover { opacity: 1; color: var(--red); }
+  .cmsg-text { font-size: 14.5px; color: #2a2018; margin-top: 2px; word-wrap: break-word; overflow-wrap: anywhere; }
+  .cmsg.mine .cmsg-name { color: var(--jade); }
+  .chat-input-row { display: none; gap: 10px; padding: 14px 20px; border-top: 1px solid var(--line); background: var(--paper); }
+  .chat-input-row.on { display: flex; }
+  .chat-input-row input { flex: 1; font-family: inherit; font-size: 15px; padding: 11px 15px;
+    border: 1px solid var(--line); border-radius: 999px; outline: none; background: #fff; }
+  .chat-input-row input:focus { border-color: var(--jade); }
+  .chat-send { background: var(--jade); color: #fff; border: none; border-radius: 999px; padding: 11px 22px;
+    font-weight: 700; font-size: 15px; cursor: pointer; font-family: inherit; }
+  .chat-login-hint { padding: 14px 20px; border-top: 1px solid var(--line); background: var(--paper); text-align: center; }
+  .chat-login-hint.hide { display: none; }
+  .chat-login-btn { background: var(--red); color: #fff; border: none; border-radius: 999px; padding: 11px 24px;
+    font-weight: 700; font-size: 14.5px; cursor: pointer; font-family: inherit; }
+
   /* services (Dịch vụ QTT) */
   .svc-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
   .svc-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 24px;
@@ -406,6 +440,27 @@
       </article>
     </div>
 
+    <section class="chat-box">
+      <div class="chat-head">
+        <div>
+          <div class="chat-title">💬 Phòng giao lưu cộng đồng</div>
+          <div class="chat-sub">Trò chuyện, làm quen với người Việt khắp Thụy Điển</div>
+        </div>
+        <span class="chat-live" id="chatLive">● trực tuyến</span>
+      </div>
+      <div class="chat-safety">Hãy lịch sự và tôn trọng nhau. Đừng chia sẻ thông tin cá nhân nhạy cảm (địa chỉ nhà, số tài khoản). Bấm ⚑ để báo cáo tin xấu.</div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-empty">Đang tải tin nhắn…</div>
+      </div>
+      <div class="chat-input-row" id="chatInputRow">
+        <input id="chatInput" type="text" maxlength="500" placeholder="Nhập tin nhắn…" onkeydown="if(event.key==='Enter')sendChatMsg()">
+        <button class="chat-send" onclick="sendChatMsg()">Gửi</button>
+      </div>
+      <div class="chat-login-hint" id="chatLoginHint">
+        <button class="chat-login-btn" onclick="onAccountClick()">Đăng nhập để tham gia trò chuyện</button>
+      </div>
+    </section>
+
     <section class="about">
       <div class="about-badge">Về ViệtSthlm</div>
       <h2>Một sản phẩm của người Việt, cho người Việt</h2>
@@ -608,17 +663,17 @@ const LOGO_QTT = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBAU
 
 // ===== PLACES DATA =====
 let PLACES = [
-  { id:1, ten:"Phở Việt Söder", nhom:"Ăn uống", loai:"Phở", khuvuc:"Södermalm", tp:"Stockholm", diachi:"Götgatan 78, Stockholm", sdt:"08-123 456", gio:"11:00–21:00", mota:"Phở bò đậm vị miền Nam, nước dùng ninh xương 12 tiếng. Có bánh mì và cà phê sữa đá.", diem:4.6, rev:84, noibat:true, anh:"https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=600&q=70", map:"https://maps.google.com/?q=Götgatan+78+Stockholm" },
-  { id:2, ten:"Asia Market Hötorgshallen", nhom:"Mua sắm", loai:"Chợ Á", khuvuc:"Norrmalm", tp:"Stockholm", diachi:"Hötorget, Stockholm", sdt:"08-222 333", gio:"09:00–18:00", mota:"Đầy đủ gia vị Việt, nước mắm, bánh tráng, rau thơm tươi, mì gói các loại.", diem:4.3, rev:51, noibat:false, anh:"https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=600&q=70", map:"https://maps.google.com/?q=Hötorget+Stockholm" },
-  { id:3, ten:"Bún Bò Huế Mai", nhom:"Ăn uống", loai:"Bún", khuvuc:"Kungsholmen", tp:"Stockholm", diachi:"Fleminggatan 40, Stockholm", sdt:"08-444 555", gio:"11:30–20:00", mota:"Bún bò Huế cay đúng điệu, chả cua tự làm. Chủ quán người Huế.", diem:4.8, rev:67, noibat:true, anh:"https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&q=70", map:"https://maps.google.com/?q=Fleminggatan+40+Stockholm" },
-  { id:4, ten:"Nail Studio Linh", nhom:"Dịch vụ", loai:"Nail", khuvuc:"Östermalm", tp:"Stockholm", diachi:"Karlavägen 15, Stockholm", sdt:"070-123 4567", gio:"10:00–19:00", mota:"Làm móng gel, vẽ design theo yêu cầu. Thợ người Việt, nói tiếng Việt & tiếng Anh.", diem:4.7, rev:120, noibat:false, anh:"https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=70", map:"https://maps.google.com/?q=Karlavägen+15+Stockholm" },
-  { id:5, ten:"Bangkok Kitchen", nhom:"Ăn uống", loai:"Thái", khuvuc:"Vasastan", tp:"Stockholm", diachi:"Sankt Eriksgatan 50, Stockholm", sdt:"08-666 777", gio:"11:00–22:00", mota:"Pad Thái, tom yum, cà ri xanh. Phần ăn lớn, giá hợp lý cho khu Vasastan.", diem:4.4, rev:93, noibat:false, anh:"https://images.unsplash.com/photo-1559314809-0d155014e29e?w=600&q=70", map:"https://maps.google.com/?q=Sankt+Eriksgatan+50+Stockholm" },
-  { id:6, ten:"Chùa Phật Quang", nhom:"Cộng đồng", loai:"Chùa", khuvuc:"Solna", tp:"Stockholm", diachi:"Solna, Stockholm", sdt:"070-888 999", gio:"Cuối tuần", mota:"Chùa của cộng đồng người Việt. Lễ Vu Lan, Tết, các buổi tụng kinh cuối tuần.", diem:4.9, rev:38, noibat:false, anh:"https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=600&q=70", map:"https://maps.google.com/?q=Solna+Stockholm" },
-  { id:7, ten:"Seoul BBQ House", nhom:"Ăn uống", loai:"Hàn", khuvuc:"Södermalm", tp:"Stockholm", diachi:"Hornsgatan 92, Stockholm", sdt:"08-111 222", gio:"16:00–23:00", mota:"Nướng tại bàn, banchan miễn phí, soju đủ vị. Đông cuối tuần nên đặt trước.", diem:4.5, rev:76, noibat:true, anh:"https://images.unsplash.com/photo-1632558610666-4b97cc10b2f0?w=600&q=70", map:"https://maps.google.com/?q=Hornsgatan+92+Stockholm" },
-  { id:8, ten:"Tiệm Bánh Mì Sài Gòn", nhom:"Ăn uống", loai:"Bánh mì", khuvuc:"Norrmalm", tp:"Stockholm", diachi:"Drottninggatan 60, Stockholm", sdt:"070-555 6666", gio:"08:00–18:00", mota:"Bánh mì pate, thịt nguội, xíu mại. Bánh nóng giòn, làm trong ngày.", diem:4.6, rev:58, noibat:false, anh:"https://images.unsplash.com/photo-1558030006-450675393462?w=600&q=70", map:"https://maps.google.com/?q=Drottninggatan+60+Stockholm" },
-  { id:9, ten:"Phở Göteborg", nhom:"Ăn uống", loai:"Phở", khuvuc:"Centrum", tp:"Göteborg", diachi:"Andra Långgatan 10, Göteborg", sdt:"031-111 222", gio:"11:00–21:00", mota:"Quán phở lâu năm ở trung tâm Göteborg, đông người Việt lui tới cuối tuần.", diem:4.5, rev:62, noibat:true, anh:"https://images.unsplash.com/photo-1591814468924-caf88d1232e1?w=600&q=70", map:"https://maps.google.com/?q=Andra+Långgatan+10+Göteborg" },
-  { id:10, ten:"Á Đông Market", nhom:"Mua sắm", loai:"Chợ Á", khuvuc:"Angered", tp:"Göteborg", diachi:"Angered, Göteborg", sdt:"031-333 444", gio:"09:00–19:00", mota:"Siêu thị châu Á lớn ở Göteborg, đủ đồ Việt, Thái, Hàn, Trung.", diem:4.4, rev:40, noibat:false, anh:"https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=600&q=70", map:"https://maps.google.com/?q=Angered+Göteborg" },
-  { id:11, ten:"Sài Gòn Malmö", nhom:"Ăn uống", loai:"Phở", khuvuc:"Möllevången", tp:"Malmö", diachi:"Möllevångstorget, Malmö", sdt:"040-111 222", gio:"11:00–20:00", mota:"Quán Việt ở khu Möllan sôi động, giá sinh viên, phần ăn đầy đặn.", diem:4.6, rev:55, noibat:true, anh:"https://images.unsplash.com/photo-1569562211093-4ed0d0758f12?w=600&q=70", map:"https://maps.google.com/?q=Möllevångstorget+Malmö" },
+  { id:1, ten:"Phở Việt Söder", nhom:"Ăn uống", loai:"Phở", khuvuc:"Södermalm", tp:"Stockholms län", diachi:"Götgatan 78, Stockholm", sdt:"08-123 456", gio:"11:00–21:00", mota:"Phở bò đậm vị miền Nam, nước dùng ninh xương 12 tiếng. Có bánh mì và cà phê sữa đá.", diem:4.6, rev:84, noibat:true, anh:"https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=600&q=70", map:"https://maps.google.com/?q=Götgatan+78+Stockholm" },
+  { id:2, ten:"Asia Market Hötorgshallen", nhom:"Mua sắm", loai:"Chợ Á", khuvuc:"Norrmalm", tp:"Stockholms län", diachi:"Hötorget, Stockholm", sdt:"08-222 333", gio:"09:00–18:00", mota:"Đầy đủ gia vị Việt, nước mắm, bánh tráng, rau thơm tươi, mì gói các loại.", diem:4.3, rev:51, noibat:false, anh:"https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=600&q=70", map:"https://maps.google.com/?q=Hötorget+Stockholm" },
+  { id:3, ten:"Bún Bò Huế Mai", nhom:"Ăn uống", loai:"Bún", khuvuc:"Kungsholmen", tp:"Stockholms län", diachi:"Fleminggatan 40, Stockholm", sdt:"08-444 555", gio:"11:30–20:00", mota:"Bún bò Huế cay đúng điệu, chả cua tự làm. Chủ quán người Huế.", diem:4.8, rev:67, noibat:true, anh:"https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&q=70", map:"https://maps.google.com/?q=Fleminggatan+40+Stockholm" },
+  { id:4, ten:"Nail Studio Linh", nhom:"Dịch vụ", loai:"Nail", khuvuc:"Östermalm", tp:"Stockholms län", diachi:"Karlavägen 15, Stockholm", sdt:"070-123 4567", gio:"10:00–19:00", mota:"Làm móng gel, vẽ design theo yêu cầu. Thợ người Việt, nói tiếng Việt & tiếng Anh.", diem:4.7, rev:120, noibat:false, anh:"https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=70", map:"https://maps.google.com/?q=Karlavägen+15+Stockholm" },
+  { id:5, ten:"Bangkok Kitchen", nhom:"Ăn uống", loai:"Thái", khuvuc:"Vasastan", tp:"Stockholms län", diachi:"Sankt Eriksgatan 50, Stockholm", sdt:"08-666 777", gio:"11:00–22:00", mota:"Pad Thái, tom yum, cà ri xanh. Phần ăn lớn, giá hợp lý cho khu Vasastan.", diem:4.4, rev:93, noibat:false, anh:"https://images.unsplash.com/photo-1559314809-0d155014e29e?w=600&q=70", map:"https://maps.google.com/?q=Sankt+Eriksgatan+50+Stockholm" },
+  { id:6, ten:"Chùa Phật Quang", nhom:"Cộng đồng", loai:"Chùa", khuvuc:"Solna", tp:"Stockholms län", diachi:"Solna, Stockholm", sdt:"070-888 999", gio:"Cuối tuần", mota:"Chùa của cộng đồng người Việt. Lễ Vu Lan, Tết, các buổi tụng kinh cuối tuần.", diem:4.9, rev:38, noibat:false, anh:"https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=600&q=70", map:"https://maps.google.com/?q=Solna+Stockholm" },
+  { id:7, ten:"Seoul BBQ House", nhom:"Ăn uống", loai:"Hàn", khuvuc:"Södermalm", tp:"Stockholms län", diachi:"Hornsgatan 92, Stockholm", sdt:"08-111 222", gio:"16:00–23:00", mota:"Nướng tại bàn, banchan miễn phí, soju đủ vị. Đông cuối tuần nên đặt trước.", diem:4.5, rev:76, noibat:true, anh:"https://images.unsplash.com/photo-1632558610666-4b97cc10b2f0?w=600&q=70", map:"https://maps.google.com/?q=Hornsgatan+92+Stockholm" },
+  { id:8, ten:"Tiệm Bánh Mì Sài Gòn", nhom:"Ăn uống", loai:"Bánh mì", khuvuc:"Norrmalm", tp:"Stockholms län", diachi:"Drottninggatan 60, Stockholm", sdt:"070-555 6666", gio:"08:00–18:00", mota:"Bánh mì pate, thịt nguội, xíu mại. Bánh nóng giòn, làm trong ngày.", diem:4.6, rev:58, noibat:false, anh:"https://images.unsplash.com/photo-1558030006-450675393462?w=600&q=70", map:"https://maps.google.com/?q=Drottninggatan+60+Stockholm" },
+  { id:9, ten:"Phở Göteborg", nhom:"Ăn uống", loai:"Phở", khuvuc:"Centrum", tp:"Västra Götalands län", diachi:"Andra Långgatan 10, Göteborg", sdt:"031-111 222", gio:"11:00–21:00", mota:"Quán phở lâu năm ở trung tâm Göteborg, đông người Việt lui tới cuối tuần.", diem:4.5, rev:62, noibat:true, anh:"https://images.unsplash.com/photo-1591814468924-caf88d1232e1?w=600&q=70", map:"https://maps.google.com/?q=Andra+Långgatan+10+Göteborg" },
+  { id:10, ten:"Á Đông Market", nhom:"Mua sắm", loai:"Chợ Á", khuvuc:"Angered", tp:"Västra Götalands län", diachi:"Angered, Göteborg", sdt:"031-333 444", gio:"09:00–19:00", mota:"Siêu thị châu Á lớn ở Göteborg, đủ đồ Việt, Thái, Hàn, Trung.", diem:4.4, rev:40, noibat:false, anh:"https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=600&q=70", map:"https://maps.google.com/?q=Angered+Göteborg" },
+  { id:11, ten:"Sài Gòn Malmö", nhom:"Ăn uống", loai:"Phở", khuvuc:"Möllevången", tp:"Skåne län", diachi:"Möllevångstorget, Malmö", sdt:"040-111 222", gio:"11:00–20:00", mota:"Quán Việt ở khu Möllan sôi động, giá sinh viên, phần ăn đầy đặn.", diem:4.6, rev:55, noibat:true, anh:"https://images.unsplash.com/photo-1569562211093-4ed0d0758f12?w=600&q=70", map:"https://maps.google.com/?q=Möllevångstorget+Malmö" },
 ];
 
 const AV = ['#c8442e','#2e6e5e','#d99b2b','#7b5ea7','#3a7ca5','#bb6b3d'];
@@ -626,10 +681,10 @@ const initials = n => n.split(' ').slice(-1)[0][0];
 function avColor(id){ const s=String(id); let h=0; for(let i=0;i<s.length;i++) h=(h*31+s.charCodeAt(i))>>>0; return h%AV.length; }
 
 let OUTINGS = [
-  { id:1, host:"Chị Hương", khuvuc:"Södermalm", tp:"Stockholm", diadiem:"Công viên Tantolunden", dia_addr:"Tantolunden, Södermalm", ngay:"CN 6/7", gio:"10:00", tuoi:"3–5 tuổi", note:"Mình đưa bé Su ra công viên chơi xích đu, nhà nào có bé tầm tuổi ra chơi cho vui nhé. Mình mang theo ít bánh.", going:["Chị Hương","Anh Tuấn","Chị Lan"], joined:false, color:0 },
-  { id:2, host:"Anh Minh", khuvuc:"Norrmalm", tp:"Stockholm", diadiem:"Junibacken (bảo tàng trẻ em)", dia_addr:"Galärvarvsvägen 8", ngay:"T7 12/7", gio:"13:00", tuoi:"2–6 tuổi", note:"Dẫn 2 nhóc đi Junibacken, nhà nào muốn đi chung mua vé nhóm rẻ hơn. Hẹn ở cổng chính.", going:["Anh Minh","Chị Thảo"], joined:false, color:1 },
-  { id:3, host:"Chị Ngọc", khuvuc:"Solna", tp:"Stockholm", diadiem:"Sân chơi Hagaparken", dia_addr:"Hagaparken, Solna", ngay:"CN 13/7", gio:"11:00", tuoi:"1–4 tuổi", note:"Picnic cuối tuần ở Haga, trải bạt cho các bé bò chơi. Ai mang đồ ăn Việt góp vui thì tuyệt!", going:["Chị Ngọc","Anh Hải","Chị Mai","Anh Đức"], joined:false, color:2 },
-  { id:4, host:"Chị Vân", khuvuc:"Centrum", tp:"Göteborg", diadiem:"Slottsskogen (công viên lớn)", dia_addr:"Slottsskogen, Göteborg", ngay:"CN 13/7", gio:"10:30", tuoi:"2–6 tuổi", note:"Nhà nào ở Göteborg có bé nhỏ ra Slottsskogen chơi cùng nhé, ở đó có cả vườn thú nhỏ miễn phí.", going:["Chị Vân","Anh Sơn"], joined:false, color:3 },
+  { id:1, host:"Chị Hương", khuvuc:"Södermalm", tp:"Stockholms län", diadiem:"Công viên Tantolunden", dia_addr:"Tantolunden, Södermalm", ngay:"CN 6/7", gio:"10:00", tuoi:"3–5 tuổi", note:"Mình đưa bé Su ra công viên chơi xích đu, nhà nào có bé tầm tuổi ra chơi cho vui nhé. Mình mang theo ít bánh.", going:["Chị Hương","Anh Tuấn","Chị Lan"], joined:false, color:0 },
+  { id:2, host:"Anh Minh", khuvuc:"Norrmalm", tp:"Stockholms län", diadiem:"Junibacken (bảo tàng trẻ em)", dia_addr:"Galärvarvsvägen 8", ngay:"T7 12/7", gio:"13:00", tuoi:"2–6 tuổi", note:"Dẫn 2 nhóc đi Junibacken, nhà nào muốn đi chung mua vé nhóm rẻ hơn. Hẹn ở cổng chính.", going:["Anh Minh","Chị Thảo"], joined:false, color:1 },
+  { id:3, host:"Chị Ngọc", khuvuc:"Solna", tp:"Stockholms län", diadiem:"Sân chơi Hagaparken", dia_addr:"Hagaparken, Solna", ngay:"CN 13/7", gio:"11:00", tuoi:"1–4 tuổi", note:"Picnic cuối tuần ở Haga, trải bạt cho các bé bò chơi. Ai mang đồ ăn Việt góp vui thì tuyệt!", going:["Chị Ngọc","Anh Hải","Chị Mai","Anh Đức"], joined:false, color:2 },
+  { id:4, host:"Chị Vân", khuvuc:"Centrum", tp:"Västra Götalands län", diadiem:"Slottsskogen (công viên lớn)", dia_addr:"Slottsskogen, Göteborg", ngay:"CN 13/7", gio:"10:30", tuoi:"2–6 tuổi", note:"Nhà nào ở Göteborg có bé nhỏ ra Slottsskogen chơi cùng nhé, ở đó có cả vườn thú nhỏ miễn phí.", going:["Chị Vân","Anh Sơn"], joined:false, color:3 },
 ];
 
 // ===== MARKET DATA =====
@@ -639,28 +694,28 @@ const TYPE_LABEL = { tang:"Tặng", doi:"Đổi", free:"Miễn phí", xach:"Xác
 const TYPE_CLASS = { tang:"t-tang", doi:"t-doi", free:"t-free", xach:"t-xach" };
 
 let MARKET = [
-  { id:1, type:"tang", cat:"Đồ trẻ em", title:"Quần áo bé gái size 80–92", who:"Chị Lan", khuvuc:"Södermalm", tp:"Stockholm", sdt:"070-111 2222", desc:"Con mình lớn rồi, để lại ~15 bộ còn rất đẹp cho bé gái 1–2 tuổi. Tặng miễn phí, ai cần ới mình.", anh:"https://images.unsplash.com/photo-1522771930-78848d9293e8?w=600&q=70" },
-  { id:2, type:"xach", cat:"Nhờ xách tay", title:"Mình sắp về Sài Gòn, xách hộ đồ", who:"Anh Tuấn", khuvuc:"Norrmalm", tp:"Stockholm", sdt:"070-333 4444", desc:"Cuối tháng 7 về SG 2 tuần. Ai cần gửi đồ về cho gia đình hoặc nhờ mua mang sang thì nhắn mình nhé. Còn ~5kg.", anh:"https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&q=70" },
-  { id:3, type:"tang", cat:"Đồ ăn Việt", title:"Còn dư mắm tôm & lá chanh", who:"Chị Mai", khuvuc:"Kungsholmen", tp:"Stockholm", sdt:"070-555 6666", desc:"Mới được người nhà gửi sang nhiều quá. Chia bớt lọ mắm tôm và ít lá chanh khô cho ai cần nấu bún riêu.", anh:"https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600&q=70" },
-  { id:4, type:"doi", cat:"Đồ trẻ em", title:"Đổi xe đẩy lấy ghế ăn dặm", who:"Anh Hải", khuvuc:"Solna", tp:"Stockholm", sdt:"070-777 8888", desc:"Xe đẩy gấp gọn còn tốt, muốn đổi lấy ghế ăn dặm cho bé. Nhà nào có nhu cầu đổi thì liên hệ nhé.", anh:"https://images.unsplash.com/photo-1591147834034-8b6e7e0b3b3c?w=600&q=70" },
-  { id:5, type:"free", cat:"Cho tặng miễn phí", title:"Cho nồi cơm điện còn dùng tốt", who:"Chị Thảo", khuvuc:"Vasastan", tp:"Stockholm", sdt:"070-999 0000", desc:"Nhà mua cái mới nên cho lại nồi cơm điện 1.8L còn chạy ngon. Ai lấy thì qua nhà mình lấy giúp.", anh:"https://images.unsplash.com/photo-1585515320310-259814833e62?w=600&q=70" },
-  { id:6, type:"tang", cat:"Đồ gia đình", title:"Bộ bát đĩa sứ còn nguyên", who:"Chị Hương", khuvuc:"Södermalm", tp:"Stockholm", sdt:"070-222 1111", desc:"Dọn nhà nên để lại bộ bát đĩa sứ trắng, đủ cho 6 người. Tặng ai mới sang dựng nhà cửa.", anh:"https://images.unsplash.com/photo-1578474846511-04ba529f0b88?w=600&q=70" },
-  { id:7, type:"tang", cat:"Đồ trẻ em", title:"Xe tập đi cho bé", who:"Chị Hoa", khuvuc:"Centrum", tp:"Göteborg", sdt:"031-555 666", desc:"Bé nhà mình đi vững rồi, tặng lại xe tập đi còn tốt cho gia đình ở Göteborg. Qua lấy giúp mình nhé.", anh:"https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&q=70" },
-  { id:8, type:"xach", cat:"Nhờ xách tay", title:"Sắp bay Malmö → Hà Nội", who:"Anh Dũng", khuvuc:"Möllevången", tp:"Malmö", sdt:"040-777 888", desc:"Giữa tháng 8 mình về Hà Nội. Ai ở Malmö cần gửi đồ về Bắc thì liên hệ, còn dư ~7kg hành lý.", anh:"https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&q=70" },
+  { id:1, type:"tang", cat:"Đồ trẻ em", title:"Quần áo bé gái size 80–92", who:"Chị Lan", khuvuc:"Södermalm", tp:"Stockholms län", sdt:"070-111 2222", desc:"Con mình lớn rồi, để lại ~15 bộ còn rất đẹp cho bé gái 1–2 tuổi. Tặng miễn phí, ai cần ới mình.", anh:"https://images.unsplash.com/photo-1522771930-78848d9293e8?w=600&q=70" },
+  { id:2, type:"xach", cat:"Nhờ xách tay", title:"Mình sắp về Sài Gòn, xách hộ đồ", who:"Anh Tuấn", khuvuc:"Norrmalm", tp:"Stockholms län", sdt:"070-333 4444", desc:"Cuối tháng 7 về SG 2 tuần. Ai cần gửi đồ về cho gia đình hoặc nhờ mua mang sang thì nhắn mình nhé. Còn ~5kg.", anh:"https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&q=70" },
+  { id:3, type:"tang", cat:"Đồ ăn Việt", title:"Còn dư mắm tôm & lá chanh", who:"Chị Mai", khuvuc:"Kungsholmen", tp:"Stockholms län", sdt:"070-555 6666", desc:"Mới được người nhà gửi sang nhiều quá. Chia bớt lọ mắm tôm và ít lá chanh khô cho ai cần nấu bún riêu.", anh:"https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600&q=70" },
+  { id:4, type:"doi", cat:"Đồ trẻ em", title:"Đổi xe đẩy lấy ghế ăn dặm", who:"Anh Hải", khuvuc:"Solna", tp:"Stockholms län", sdt:"070-777 8888", desc:"Xe đẩy gấp gọn còn tốt, muốn đổi lấy ghế ăn dặm cho bé. Nhà nào có nhu cầu đổi thì liên hệ nhé.", anh:"https://images.unsplash.com/photo-1591147834034-8b6e7e0b3b3c?w=600&q=70" },
+  { id:5, type:"free", cat:"Cho tặng miễn phí", title:"Cho nồi cơm điện còn dùng tốt", who:"Chị Thảo", khuvuc:"Vasastan", tp:"Stockholms län", sdt:"070-999 0000", desc:"Nhà mua cái mới nên cho lại nồi cơm điện 1.8L còn chạy ngon. Ai lấy thì qua nhà mình lấy giúp.", anh:"https://images.unsplash.com/photo-1585515320310-259814833e62?w=600&q=70" },
+  { id:6, type:"tang", cat:"Đồ gia đình", title:"Bộ bát đĩa sứ còn nguyên", who:"Chị Hương", khuvuc:"Södermalm", tp:"Stockholms län", sdt:"070-222 1111", desc:"Dọn nhà nên để lại bộ bát đĩa sứ trắng, đủ cho 6 người. Tặng ai mới sang dựng nhà cửa.", anh:"https://images.unsplash.com/photo-1578474846511-04ba529f0b88?w=600&q=70" },
+  { id:7, type:"tang", cat:"Đồ trẻ em", title:"Xe tập đi cho bé", who:"Chị Hoa", khuvuc:"Centrum", tp:"Västra Götalands län", sdt:"031-555 666", desc:"Bé nhà mình đi vững rồi, tặng lại xe tập đi còn tốt cho gia đình ở Göteborg. Qua lấy giúp mình nhé.", anh:"https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&q=70" },
+  { id:8, type:"xach", cat:"Nhờ xách tay", title:"Sắp bay Malmö → Hà Nội", who:"Anh Dũng", khuvuc:"Möllevången", tp:"Skåne län", sdt:"040-777 888", desc:"Giữa tháng 8 mình về Hà Nội. Ai ở Malmö cần gửi đồ về Bắc thì liên hệ, còn dư ~7kg hành lý.", anh:"https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&q=70" },
 ];
 
 // ===== FRIENDS / SINGLES DATA =====
 let SINGLES = [
-  { id:1, ten:"Mai", tuoi:29, khuvuc:"Södermalm", tp:"Stockholm", nghe:"Y tá", tim:"Bạn nam 28–35", bio:"Sang Thụy Điển 4 năm, thích nấu ăn Việt, đi bộ trong rừng và cà phê cuối tuần. Tìm người chân thành để cùng đi đường dài.", so_thich:["Nấu ăn","Đi bộ","Cà phê","Phim Hàn"], anh:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=70", sdt:"070-111 2222" },
-  { id:2, ten:"Hùng", tuoi:34, khuvuc:"Kungsholmen", tp:"Stockholm", nghe:"Kỹ sư IT", tim:"Bạn nữ 27–33", bio:"Dân IT, hơi ít nói nhưng ấm áp. Mê bóng đá, đi phượt và ăn phở. Mong tìm người cùng xây tổ ấm nơi xứ lạnh.", so_thich:["Bóng đá","Phượt","Ẩm thực","Nhạc Trịnh"], anh:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=70", sdt:"070-333 4444" },
-  { id:3, ten:"Linh", tuoi:31, khuvuc:"Vasastan", tp:"Stockholm", nghe:"Chủ tiệm nail", tim:"Bạn nam nghiêm túc", bio:"Tự lập, vui vẻ, yêu trẻ con. Cuối tuần hay đi chợ Á nấu ăn. Tìm người trưởng thành, biết quan tâm gia đình.", so_thich:["Kinh doanh","Nấu ăn","Yoga","Du lịch"], anh:"https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&q=70", sdt:"070-555 6666" },
-  { id:4, ten:"Nam", tuoi:37, khuvuc:"Solna", tp:"Stockholm", nghe:"Đầu bếp", tim:"Bạn nữ 30–38", bio:"Đầu bếp nhà hàng Việt, nấu ăn là đam mê. Đã ổn định cuộc sống, mong tìm người bạn đời để sẻ chia mỗi ngày.", so_thich:["Ẩm thực","Câu cá","Đọc sách","Đi biển"], anh:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=70", sdt:"070-777 8888" },
-  { id:5, ten:"Trang", tuoi:28, khuvuc:"Centrum", tp:"Göteborg", nghe:"Sinh viên cao học", tim:"Bạn nam cùng chí hướng", bio:"Đang học thạc sĩ ở Göteborg, thích đọc sách, cà phê và đi biển mùa hè. Mong gặp người bạn hiền lành, chân thành.", so_thich:["Đọc sách","Cà phê","Đi biển","Nhiếp ảnh"], anh:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=70", sdt:"031-999 000" },
+  { id:1, ten:"Mai", tuoi:29, khuvuc:"Södermalm", tp:"Stockholms län", nghe:"Y tá", tim:"Bạn nam 28–35", bio:"Sang Thụy Điển 4 năm, thích nấu ăn Việt, đi bộ trong rừng và cà phê cuối tuần. Tìm người chân thành để cùng đi đường dài.", so_thich:["Nấu ăn","Đi bộ","Cà phê","Phim Hàn"], anh:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=70", sdt:"070-111 2222" },
+  { id:2, ten:"Hùng", tuoi:34, khuvuc:"Kungsholmen", tp:"Stockholms län", nghe:"Kỹ sư IT", tim:"Bạn nữ 27–33", bio:"Dân IT, hơi ít nói nhưng ấm áp. Mê bóng đá, đi phượt và ăn phở. Mong tìm người cùng xây tổ ấm nơi xứ lạnh.", so_thich:["Bóng đá","Phượt","Ẩm thực","Nhạc Trịnh"], anh:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=70", sdt:"070-333 4444" },
+  { id:3, ten:"Linh", tuoi:31, khuvuc:"Vasastan", tp:"Stockholms län", nghe:"Chủ tiệm nail", tim:"Bạn nam nghiêm túc", bio:"Tự lập, vui vẻ, yêu trẻ con. Cuối tuần hay đi chợ Á nấu ăn. Tìm người trưởng thành, biết quan tâm gia đình.", so_thich:["Kinh doanh","Nấu ăn","Yoga","Du lịch"], anh:"https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&q=70", sdt:"070-555 6666" },
+  { id:4, ten:"Nam", tuoi:37, khuvuc:"Solna", tp:"Stockholms län", nghe:"Đầu bếp", tim:"Bạn nữ 30–38", bio:"Đầu bếp nhà hàng Việt, nấu ăn là đam mê. Đã ổn định cuộc sống, mong tìm người bạn đời để sẻ chia mỗi ngày.", so_thich:["Ẩm thực","Câu cá","Đọc sách","Đi biển"], anh:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=70", sdt:"070-777 8888" },
+  { id:5, ten:"Trang", tuoi:28, khuvuc:"Centrum", tp:"Västra Götalands län", nghe:"Sinh viên cao học", tim:"Bạn nam cùng chí hướng", bio:"Đang học thạc sĩ ở Göteborg, thích đọc sách, cà phê và đi biển mùa hè. Mong gặp người bạn hiền lành, chân thành.", so_thich:["Đọc sách","Cà phê","Đi biển","Nhiếp ảnh"], anh:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=70", sdt:"031-999 000" },
 ];
 
 let SG_EVENTS = [
-  { id:1, host:"Nhóm Việt Sthlm", tp:"Stockholm", diadiem:"Fika giao lưu độc thân", dia_addr:"Café Pascal, Vasastan", ngay:"T7 19/7", gio:"15:00", note:"Buổi fika thân mật cho người độc thân làm quen tự nhiên. Không áp lực, chỉ trò chuyện. Đăng ký trước để giữ chỗ.", going:["Mai","Hùng","Linh"], joined:false, color:0 },
-  { id:2, host:"Nhóm Việt Sthlm", tp:"Stockholm", diadiem:"Đi bộ & picnic mùa hè", dia_addr:"Đảo Djurgården", ngay:"CN 27/7", gio:"12:00", note:"Cùng đi bộ vòng quanh Djurgården rồi picnic. Cách hay để gặp gỡ khi vận động ngoài trời. Mang theo ít đồ ăn góp vui.", going:["Nam","Linh"], joined:false, color:2 },
+  { id:1, host:"Nhóm Việt Sthlm", tp:"Stockholms län", diadiem:"Fika giao lưu độc thân", dia_addr:"Café Pascal, Vasastan", ngay:"T7 19/7", gio:"15:00", note:"Buổi fika thân mật cho người độc thân làm quen tự nhiên. Không áp lực, chỉ trò chuyện. Đăng ký trước để giữ chỗ.", going:["Mai","Hùng","Linh"], joined:false, color:0 },
+  { id:2, host:"Nhóm Việt Sthlm", tp:"Stockholms län", diadiem:"Đi bộ & picnic mùa hè", dia_addr:"Đảo Djurgården", ngay:"CN 27/7", gio:"12:00", note:"Cùng đi bộ vòng quanh Djurgården rồi picnic. Cách hay để gặp gỡ khi vận động ngoài trời. Mang theo ít đồ ăn góp vui.", going:["Nam","Linh"], joined:false, color:2 },
 ];
 
 let myLikes = [];   // id mình đã thích
@@ -672,22 +727,22 @@ let frSub = 'discover';
 // ===== PHIÊN DỊCH DATA =====
 const TR_FIELDS = ["Tất cả","Y tế","Giấy tờ/Hành chính","Pháp lý","Đi cùng thường","Dịch văn bản"];
 let TRANSLATORS = [
-  { id:1, ten:"Anh Đức", tp:"Stockholm", khuvuc:"Södermalm", langs:["Việt","Thụy Điển","Anh"], fields:["Y tế","Giấy tờ/Hành chính"], auth:false, kn:"5 năm sống ở Thụy Điển, từng đi cùng nhiều người khám bệnh, làm giấy tờ Skatteverket.", bio:"Mình rảnh cuối tuần và buổi tối, sẵn lòng đi cùng khám bệnh hoặc giúp đọc thư từ cơ quan. Tự thoả thuận chi phí.", sdt:"070-123 4567" },
-  { id:2, ten:"Chị Lan", tp:"Stockholm", khuvuc:"Norrmalm", langs:["Việt","Thụy Điển"], fields:["Giấy tờ/Hành chính","Dịch văn bản"], auth:true, kn:"Phiên dịch viên được cấp phép (auktoriserad tolk), 8 năm kinh nghiệm.", bio:"Có chứng chỉ phiên dịch chính thức. Nhận dịch giấy tờ, đi cùng cơ quan nhà nước. Nhắn mình để trao đổi.", sdt:"070-222 3333" },
-  { id:3, ten:"Anh Hòa", tp:"Göteborg", khuvuc:"Centrum", langs:["Việt","Anh","Thụy Điển"], fields:["Đi cùng thường","Y tế"], auth:false, kn:"Sinh viên y khoa, hiểu thuật ngữ y tế cơ bản.", bio:"Mình học ngành y ở Göteborg, có thể giúp phiên dịch khi đi khám bệnh, hiểu các từ chuyên môn. Ưu tiên giúp người mới sang.", sdt:"031-444 5555" },
-  { id:4, ten:"Chị Mai", tp:"Malmö", khuvuc:"Möllevången", langs:["Việt","Thụy Điển","Đan Mạch"], fields:["Giấy tờ/Hành chính","Đi cùng thường"], auth:false, kn:"Sống ở Malmö 10 năm, quen việc giấy tờ cả Thụy Điển và Đan Mạch.", bio:"Ở khu Öresund nên rành cả thủ tục Thụy Điển lẫn Đan Mạch. Giúp được việc hành chính, thuê nhà, ngân hàng.", sdt:"040-666 7777" },
+  { id:1, ten:"Anh Đức", tp:"Stockholms län", khuvuc:"Södermalm", langs:["Việt","Thụy Điển","Anh"], fields:["Y tế","Giấy tờ/Hành chính"], auth:false, kn:"5 năm sống ở Thụy Điển, từng đi cùng nhiều người khám bệnh, làm giấy tờ Skatteverket.", bio:"Mình rảnh cuối tuần và buổi tối, sẵn lòng đi cùng khám bệnh hoặc giúp đọc thư từ cơ quan. Tự thoả thuận chi phí.", sdt:"070-123 4567" },
+  { id:2, ten:"Chị Lan", tp:"Stockholms län", khuvuc:"Norrmalm", langs:["Việt","Thụy Điển"], fields:["Giấy tờ/Hành chính","Dịch văn bản"], auth:true, kn:"Phiên dịch viên được cấp phép (auktoriserad tolk), 8 năm kinh nghiệm.", bio:"Có chứng chỉ phiên dịch chính thức. Nhận dịch giấy tờ, đi cùng cơ quan nhà nước. Nhắn mình để trao đổi.", sdt:"070-222 3333" },
+  { id:3, ten:"Anh Hòa", tp:"Västra Götalands län", khuvuc:"Centrum", langs:["Việt","Anh","Thụy Điển"], fields:["Đi cùng thường","Y tế"], auth:false, kn:"Sinh viên y khoa, hiểu thuật ngữ y tế cơ bản.", bio:"Mình học ngành y ở Göteborg, có thể giúp phiên dịch khi đi khám bệnh, hiểu các từ chuyên môn. Ưu tiên giúp người mới sang.", sdt:"031-444 5555" },
+  { id:4, ten:"Chị Mai", tp:"Skåne län", khuvuc:"Möllevången", langs:["Việt","Thụy Điển","Đan Mạch"], fields:["Giấy tờ/Hành chính","Đi cùng thường"], auth:false, kn:"Sống ở Malmö 10 năm, quen việc giấy tờ cả Thụy Điển và Đan Mạch.", bio:"Ở khu Öresund nên rành cả thủ tục Thụy Điển lẫn Đan Mạch. Giúp được việc hành chính, thuê nhà, ngân hàng.", sdt:"040-666 7777" },
 ];
 let TR_REQUESTS = [
-  { id:1, who:"Chị Hương", tp:"Stockholm", khuvuc:"Solna", field:"Y tế", khi:"Thứ 5 tuần này, 14:00", note:"Mình cần người đi cùng tới bệnh viện Karolinska khám cho con, dịch giúp phần trao đổi với bác sĩ. Xin cảm ơn.", sdt:"070-888 9999" },
-  { id:2, who:"Anh Tuấn", tp:"Stockholm", khuvuc:"Södermalm", field:"Giấy tờ/Hành chính", khi:"Linh hoạt", note:"Mình mới nhận thư từ Migrationsverket mà không hiểu hết. Cần người đọc và giải thích giúp, có thể trả phí.", sdt:"070-111 0000" },
-  { id:3, who:"Chị Thu", tp:"Göteborg", khuvuc:"Angered", field:"Đi cùng thường", khi:"Tuần sau", note:"Cần người đi cùng ra ngân hàng mở tài khoản và làm BankID. Mình chưa quen tiếng.", sdt:"031-222 1111" },
+  { id:1, who:"Chị Hương", tp:"Stockholms län", khuvuc:"Solna", field:"Y tế", khi:"Thứ 5 tuần này, 14:00", note:"Mình cần người đi cùng tới bệnh viện Karolinska khám cho con, dịch giúp phần trao đổi với bác sĩ. Xin cảm ơn.", sdt:"070-888 9999" },
+  { id:2, who:"Anh Tuấn", tp:"Stockholms län", khuvuc:"Södermalm", field:"Giấy tờ/Hành chính", khi:"Linh hoạt", note:"Mình mới nhận thư từ Migrationsverket mà không hiểu hết. Cần người đọc và giải thích giúp, có thể trả phí.", sdt:"070-111 0000" },
+  { id:3, who:"Chị Thu", tp:"Västra Götalands län", khuvuc:"Angered", field:"Đi cùng thường", khi:"Tuần sau", note:"Cần người đi cùng ra ngân hàng mở tài khoản và làm BankID. Mình chưa quen tiếng.", sdt:"031-222 1111" },
 ];
 let trSub = 'find', trField = 'Tất cả';
 
-// ===== THÀNH PHỐ (mở rộng toàn Thụy Điển) =====
-const CITIES = ["Stockholm","Göteborg","Malmö","Uppsala","Västerås","Örebro","Linköping","Helsingborg","Norrköping","Lund","Umeå","Jönköping"];
-let activeCity = "Stockholm";
-try { const c = localStorage.getItem('vietsthlm_city'); if (c && CITIES.includes(c)) activeCity = c; } catch(e){}
+// ===== LÄN (21 tỉnh/vùng của Thụy Điển) =====
+const CITIES = ["Stockholms län","Uppsala län","Södermanlands län","Östergötlands län","Jönköpings län","Kronobergs län","Kalmar län","Gotlands län","Blekinge län","Skåne län","Hallands län","Västra Götalands län","Värmlands län","Örebro län","Västmanlands län","Dalarnas län","Gävleborgs län","Västernorrlands län","Jämtlands län","Västerbottens län","Norrbottens län"];
+let activeCity = "Stockholms län";
+try { const c = localStorage.getItem('vietsthlm_lan'); if (c && CITIES.includes(c)) activeCity = c; } catch(e){}
 
 function initCitySelector() {
   const sel = document.getElementById('citySel');
@@ -707,7 +762,7 @@ function updateCityHint() {
 }
 function onCityChange() {
   activeCity = document.getElementById('citySel').value;
-  try { localStorage.setItem('vietsthlm_city', activeCity); } catch(e){}
+  try { localStorage.setItem('vietsthlm_lan', activeCity); } catch(e){}
   updateCityHint();
   renderPlaces(); renderFeed(); renderMarket(); renderFriends(); renderTranslate();
   window.scrollTo(0,0);
@@ -1288,6 +1343,104 @@ function submitTrRequest() {
 }
 
 // ============================================================
+// ===== CHAT CỘNG ĐỒNG (trang chủ) =====
+// ============================================================
+let chatSince = 0;
+let chatTimer = null;
+let chatSeen = new Set();
+
+function initChatUI() {
+  const canPost = !!currentUser;
+  document.getElementById('chatInputRow').classList.toggle('on', canPost);
+  document.getElementById('chatLoginHint').classList.toggle('hide', canPost);
+}
+
+async function loadChat(initial) {
+  try {
+    const r = await callApi({ action:'getChat', since: initial ? 0 : chatSince });
+    if (!r || !r.ok || !Array.isArray(r.messages)) return;
+    const box = document.getElementById('chatMessages');
+    if (initial) { box.innerHTML=''; chatSeen.clear(); }
+    let added = false;
+    r.messages.forEach(m => {
+      const id = String(m.id);
+      if (chatSeen.has(id)) return;
+      chatSeen.add(id);
+      chatSince = Math.max(chatSince, Number(m.id)||0);
+      box.appendChild(renderChatMsg(m));
+      added = true;
+    });
+    if (box.querySelector('.chat-empty')) {
+      const em = box.querySelector('.chat-empty');
+      if (chatSeen.size>0 && em) em.remove();
+    }
+    if (chatSeen.size===0 && !box.querySelector('.cmsg')) {
+      box.innerHTML = '<div class="chat-empty">Chưa có tin nhắn nào. Hãy là người mở lời chào cộng đồng!</div>';
+    }
+    if (added) box.scrollTop = box.scrollHeight;
+  } catch(e){ /* im lặng, thử lại lần polling sau */ }
+}
+
+function renderChatMsg(m) {
+  const el = document.createElement('div');
+  const mine = currentUser && String(m.email||'').toLowerCase()===currentUser.email.toLowerCase();
+  el.className = 'cmsg' + (mine?' mine':'');
+  const t = m.ngay_tao ? new Date(m.ngay_tao) : new Date(Number(m.id));
+  const hh = isNaN(t) ? '' : ('0'+t.getHours()).slice(-2)+':'+('0'+t.getMinutes()).slice(-2);
+  const name = m.ten || (m.email||'?').split('@')[0];
+  el.innerHTML = `
+    <div class="av" style="background:${AV[avColor(m.email||name)]}">${initials(name)}</div>
+    <div class="cmsg-body">
+      <div class="cmsg-top">
+        <span class="cmsg-name">${escapeHtml(name)}</span>
+        <span class="cmsg-time">${hh}</span>
+        <button class="cmsg-report" title="Báo cáo" onclick="reportChatMsg('${m.id}')">⚑</button>
+      </div>
+      <div class="cmsg-text">${escapeHtml(m.noidung||'')}</div>
+    </div>`;
+  return el;
+}
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+async function sendChatMsg() {
+  if (!currentUser) { onAccountClick(); return; }
+  const inp = document.getElementById('chatInput');
+  const text = inp.value.trim();
+  if (!text) return;
+  inp.value = '';
+  const r = await callApi({ action:'sendChat', email: currentUser.email, ten: currentUser.ten||'', noidung: text });
+  if (r && r.ok && r.item) {
+    // hiện ngay tin của mình
+    if (!chatSeen.has(String(r.item.id))) {
+      chatSeen.add(String(r.item.id));
+      chatSince = Math.max(chatSince, Number(r.item.id)||0);
+      const box = document.getElementById('chatMessages');
+      const em = box.querySelector('.chat-empty'); if (em) em.remove();
+      box.appendChild(renderChatMsg(r.item));
+      box.scrollTop = box.scrollHeight;
+    }
+  } else if (r && r.msg) {
+    alert(r.msg);
+  }
+}
+
+async function reportChatMsg(id) {
+  if (!confirm('Báo cáo và ẩn tin nhắn này?')) return;
+  const r = await callApi({ action:'reportChat', id });
+  if (r && r.ok) { chatSince=0; loadChat(true); }
+}
+
+function startChat() {
+  initChatUI();
+  loadChat(true);
+  if (chatTimer) clearInterval(chatTimer);
+  chatTimer = setInterval(()=>{
+    // chỉ polling khi đang ở trang chủ để tiết kiệm
+    if (!document.getElementById('view-home').classList.contains('hidden')) loadChat(false);
+  }, 5000);
+}
+
+// ============================================================
 // ===== DỊCH VỤ QTT — YÊU CẦU TƯ VẤN =====
 // ============================================================
 function openLeadForm(dichVu) {
@@ -1301,7 +1454,7 @@ function openLeadForm(dichVu) {
       <div class="field"><label>Số điện thoại</label><input id="ld-sdt" placeholder="VD: 070-123 4567"></div>
       <div class="field"><label>Email</label><input id="ld-email" type="email" value="${currentUser?currentUser.email:''}" placeholder="ban@email.com"></div>
       <div class="row2">
-        <div class="field"><label>Thành phố</label><input id="ld-tp" value="${activeCity}" placeholder="VD: Stockholm"></div>
+        <div class="field"><label>Län / Khu vực</label><input id="ld-tp" value="${activeCity}" placeholder="VD: Stockholms län"></div>
         <div class="field"><label>Loại hình</label>
           <select id="ld-loai"><option>Nhà hàng</option><option>Quán ăn / Café</option><option>Tiệm nail</option><option>Khác</option></select>
         </div>
@@ -1381,6 +1534,7 @@ function logout() {
   currentUser = null;
   localStorage.removeItem('vietsthlm_user');
   refreshAccBtn(); closeModal();
+  if (typeof initChatUI === 'function') initChatUI();
 }
 
 function loginDone(user) {
@@ -1388,6 +1542,7 @@ function loginDone(user) {
   localStorage.setItem('vietsthlm_user', JSON.stringify(user));
   refreshAccBtn();
   loadData();
+  if (typeof initChatUI === 'function') initChatUI();
 }
 
 // gọi API
@@ -1608,6 +1763,7 @@ initCitySelector();
 switchTab('home');
 renderPlaces(); renderFeed(); renderMarket();
 loadData();
+startChat();
 </script>
 </body>
 </html>
