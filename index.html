@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ViệtSthlm — Cộng đồng Việt/Á ở Stockholm</title>
+<title>WeShare — Community for people far from home in Sweden</title>
 <style>
   :root {
     --ink: #1a1410; --paper: #fbf7f0; --paper-2: #f3ece0;
@@ -14,6 +14,30 @@
   html { scroll-behavior: smooth; }
   body { font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: var(--paper); color: var(--ink); -webkit-font-smoothing: antialiased; line-height: 1.5; }
+
+  /* splash / country picker */
+  .splash { position: fixed; inset: 0; z-index: 2000; background: linear-gradient(165deg, #fbf7f0, #f0e7d8);
+    overflow-y: auto; display: flex; align-items: flex-start; justify-content: center; }
+  .splash.hide { display: none; }
+  .splash-inner { max-width: 640px; width: 100%; padding: 44px 22px 50px; text-align: center; }
+  .splash-logo { width: 96px; height: 96px; border-radius: 999px; object-fit: cover;
+    box-shadow: 0 8px 26px rgba(40,30,20,.16); }
+  .splash-brand { font-size: 40px; font-weight: 800; letter-spacing: -.03em; color: var(--red); margin-top: 14px; }
+  .splash-intro { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px;
+    margin: 20px 0 8px; text-align: left; }
+  .splash-intro p { font-size: 14.5px; line-height: 1.55; color: #4a4036; }
+  .splash-intro .lang-en { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); color: var(--muted); }
+  .splash-pick { font-size: 13px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+    color: var(--muted); margin: 24px 0 14px; }
+  .flag-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 12px; }
+  .flag-btn { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 14px 8px;
+    cursor: pointer; transition: .15s; font-family: inherit; display: flex; flex-direction: column;
+    align-items: center; gap: 7px; }
+  .flag-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(40,30,20,.12); border-color: #d4c8b4; }
+  .flag-btn .fl { font-size: 34px; line-height: 1; }
+  .flag-btn .nm { font-size: 12.5px; font-weight: 600; color: var(--ink); }
+  .country-badge { flex-shrink: 0; background: #fff; border: 1px solid var(--line); border-radius: 999px;
+    width: 38px; height: 38px; font-size: 20px; cursor: pointer; line-height: 1; padding: 0; }
 
   header { position: sticky; top: 0; z-index: 50; background: rgba(251,247,240,.92);
     backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
@@ -369,9 +393,25 @@
 </head>
 <body>
 
+<!-- MÀN CHỌN QUỐC GIA (splash) -->
+<div id="splash" class="splash">
+  <div class="splash-inner">
+    <img class="splash-logo" id="splashLogo" alt="WeShare">
+    <h1 class="splash-brand">WeShare</h1>
+    <div class="splash-intro">
+      <p class="lang-sv"><b>Välkommen!</b> WeShare är en gemenskapsplattform som förenar människor långt hemifrån — så att du kan känna dig trygg och hemma i ditt nya hemland. Hitta restauranger, vänner, hjälp och stöd på ditt eget språk.</p>
+      <p class="lang-en"><b>Welcome!</b> WeShare is a community platform connecting people far from home — so you can feel confident and at home in your new country. Find places, friends, help and support in your own language.</p>
+    </div>
+    <div class="splash-pick">Välj ditt land · Choose your country</div>
+    <div class="flag-grid" id="flagGrid"></div>
+  </div>
+</div>
+
+
 <header>
   <div class="bar">
-    <div class="logo" onclick="switchTab('home')" style="cursor:pointer">Việt<span>Sthlm</span><span class="dot">.</span></div>
+    <div class="logo" onclick="switchTab('home')" style="cursor:pointer">We<span>Share</span><span class="dot">.</span></div>
+    <button id="countryBadge" class="country-badge" onclick="reopenSplash()" title="Đổi quốc gia" style="display:none"></button>
     <div class="search">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8a7d6b" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
       <input id="q" type="text" placeholder="Tìm phở, chợ Á, nail…">
@@ -400,7 +440,7 @@
     <div class="hs-left">
       <img class="home-logo" id="homeLogo" alt="QTT Solutions">
       <h1>Người Việt mình ở Thụy Điển —<br><span class="em">giờ có một mái nhà chung</span></h1>
-      <p>Từ quán phở hợp khẩu vị, buổi đưa con đi chơi cuối tuần, đến người bạn tâm giao hay người phiên dịch lúc cần — tất cả ở một nơi, bằng tiếng Việt.</p>
+      <p id="home-greeting">Từ quán phở hợp khẩu vị, buổi đưa con đi chơi cuối tuần, đến người bạn tâm giao hay người phiên dịch lúc cần — tất cả ở một nơi, bằng tiếng Việt.</p>
       <button class="home-cta" onclick="switchTab('places')">Khám phá ngay →</button>
     </div>
     <div class="hs-right">
@@ -476,9 +516,9 @@
 
 
     <section class="about">
-      <div class="about-badge">Về ViệtSthlm</div>
+      <div class="about-badge">Về WeShare</div>
       <h2>Một sản phẩm của người Việt, cho người Việt</h2>
-      <p>ViệtSthlm là nền tảng cộng đồng dành cho người Việt và người châu Á đang sinh sống tại Thụy Điển. Xa quê hương, ai cũng từng có lúc lạc lõng — không biết mua gói mắm tôm ở đâu, con nhỏ thiếu bạn nói tiếng Việt, hay bối rối trước một lá thư từ cơ quan. ViệtSthlm ra đời để những khoảnh khắc ấy không còn đơn độc.</p>
+      <p>WeShare là nền tảng cộng đồng dành cho người Việt và người châu Á đang sinh sống tại Thụy Điển. Xa quê hương, ai cũng từng có lúc lạc lõng — không biết mua gói mắm tôm ở đâu, con nhỏ thiếu bạn nói tiếng Việt, hay bối rối trước một lá thư từ cơ quan. WeShare ra đời để những khoảnh khắc ấy không còn đơn độc.</p>
       <p class="about-brand">Nền tảng được phát triển bởi <b>QTT Solutions</b> — công ty công nghệ do chính người Việt sáng lập, với mong muốn dùng công nghệ để gắn kết cộng đồng nơi xứ người. Đôi cánh trên logo mang ý nghĩa nâng đỡ, kết nối và cùng nhau bay xa.</p>
       <p class="about-free"><b>Miễn phí · An toàn · Luôn bằng tiếng mẹ đẻ</b></p>
     </section>
@@ -661,7 +701,7 @@
 
 <footer class="site-footer">
   <img class="foot-logo" id="footLogo" alt="QTT Solutions">
-  <div class="foot-brand">Việt<span>Sthlm</span><span class="dot">.</span></div>
+  <div class="foot-brand">We<span>Share</span><span class="dot">.</span></div>
   <p class="foot-tag">Cộng đồng người Việt & châu Á tại Thụy Điển</p>
   <p class="foot-by">Một sản phẩm của <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:qttsolutions@gmail.com">✉ qttsolutions@gmail.com</a>
@@ -674,6 +714,66 @@
 
 <script>
 const LOGO_QTT = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBAUEBAYFBQUGBgYHCQ4JCQgICRINDQoOFRIWFhUSFBQXGiEcFxgfGRQUHScdHyIjJSUlFhwpLCgkKyEkJST/2wBDAQYGBgkICREJCREkGBQYJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCT/wAARCADwAPADASIAAhEBAxEB/8QAHAABAAEFAQEAAAAAAAAAAAAAAAQDBQYHCAIB/8QAVhAAAQMDAQQFBggICQsDBQAAAQIDBAAFEQYSITFRBxNBYXEIFCIygZEVQlJigqGxshYjM0NykqLRJTQ3VWNzdJTBFyQmNURUZHWzwtInU+FlhJXw8f/EABkBAAMBAQEAAAAAAAAAAAAAAAABAgMEBf/EACoRAAICAQQBBAEEAwEAAAAAAAABAgMRBBIhMUEiMlFhEzNxgZEUI/Ch/9oADAMBAAIRAxEAPwDqmlKUAKUpQApSlAClKjTrlGtyEqkObJWcIQkFS3DySkb1HwoAk1RlTI0JrrZL7TLfynFBI+uoG1drlvSBbI57VALfUPDelHt2j3Cq8WzQorof2C9I/wDffUXHPeeHgMCmIo/DS5H+r7fKkjscWnqW/evBPsBr11V5kZ25ESID8VpsuqH0lYH7NUJOq7Ww+qMw6udKTxYhNl5Y8dncn2kVT8/1HN/itqjQUdi5z+0vH6DefrVT2snciX8DbZzJuNwf7uu6se5sJr5+DdpJyuE28ebxLn3iajCz3qQf871C62DxTCjIaHvVtmvo0lFX/GZ93k/1k9wD3JIFP+Q5+CYLBaE8LVBH/wBuj91DYLQr1rVBPjHR+6oR0VYicqiOLPNcl1X2qoNFWMHKYjiTzTIdT9iqMr5f/fyGH8L/AL+CSdN2gHKILTJ5tZb+6RX34FCDmNcLgx3df1g9zgVUY6Tio/i067Rv6uc6R7lEihs14Y/imoXlAcEzI7bo96dg/XRx8hz8EjqbzHx1cmJLGfVebLaj9JOR+zT4Zcjj+ELfJjjtcQOub96d49oFRfPdRwv41a4s9HauC9sLx+g5u/aqpH1XbHnkx5DjkCSrgzNbLKj4FW5XsJo2sNyLnFmxprXWxn2n2/lNqCh9VVqgyrNCludf1ZZkdj7Ci25+sOPgciqBVdrad4FzYHaAG30jw3JX+z7anBRdaVFg3KLcUqMd3KkHDjagUrbPJSTvB8alUhilKUAKUpQApSlAClKUAKUpQApVOTJZiMLffcS002NpS1HAAq1JYkX87cpDke3fFjn0VyBzc7Up+ZxPxvk0Cye13KRc1Fq0bHVglK5rgy2nmED45/ZHM8KkQrVGt6lvkrekrH4yS8dpxQ8ewdwwO6vF0vEOxMtIWlSnXPxceKwnacdIHqoT3c9wHaRVvRZp1+/G6gUlEc702xleW8f0qh+UPduT3HjVJcEt84XZUc1KqetTFgi/CK0kpVJKtiM2e9zB2iOSAfZXwaZeuPp364OzQd/mrOWYw7tkHK/pE+FXxppDLaW20JQhAwlKRgJHIDsr1Rux0G3PuKUWHHhMpYisNMNJ4NtoCUj2CqtKVJYpSlAClKUAKUpQAqlJix5jKmJLLT7SvWbcSFJPsNVaUAWE6Zct3p2Ke7Axv82cy9GPdsE5T9Ejwo3qVy3rSxqCJ8HqJ2Uykq24rh/Tx6B7lgeJq/V5cbQ6hSHEpWhQIUlQyCORFVuz2Rtx7SJMtca4lD+VNPoH4uSyrZcSO49o7jkHlUYXKRa1Bq7BJZOAma2MN+Dg+Ie/1TzHCoirJMsRL2n1pLHFdseVho/1SvzZ7t6e4can2y8RL0262lK23m/Qfivp2XGiexSeR7CMg9hNDXHHQJ889lyBzwpVmMd+wErhockW7iqKn0lsd7fNPzP1fk1dI0lmYwh+O4l1pwbSVpOQRSKyVaUpSGKUpQApSlACqcmS1DjuSH3EttNpKlLUcBIHbVTOKsrKfh+UiWvfbmF7UdHZIWPzh5pB9XmfS+TTQme4sZ67vonz21NstnbjRVjenk44Plch8Xx4Lte1x5CbbbWkyrm6naS2ThDKeHWOEcE8hxUdw7SPN8u78Zxq22xtD10kgltK/UZRwLrmPijlxUdw7cSbNZmbOwtKVrekPK6yRJc9d9fylfYBwA3Cn9snvhFKz2Fu2rclyHlTbi+MPS3BhRHyUj4iB2JHtyd9XWlKTeeyksdClKUhilKUAKUqLc7pBs8JybcZbMSM0MrdeWEpHtP2UASqVoXXflDuuFyDpFnq0b0m4Pp3nvbQeHir3V50P5Q70fqoWrGVPt7kiewn0x+mgcfFO/uNdH+LZt3YMP8AJr3Yyb8pUO03i332E3OtkxmXGc9V1pQUD3dx7jvqZXObilKUAKUpQAq2XexNXNTcltxcSewPxEtoemj5pHBSD2pO7wO+rnSmnjoTWeyz2m9uuyVWu6NIjXNtO1spP4uQgfnGyeI5jint7CfsqK/apC58BCnGnDtSYiR657XED5fMfG8eMi8Wdi8R0tuKW060rrGH2zhxlY4KSf8ADgRuO6otlu7zzztruaUN3OOnaVsjCJDecB1HceBHxTu5EvvlE9cMukWSzMYbkMOJcacAUlSeBFVas0gGwyVzWx/B7ytqSgcGFH86Pmn4363ys3gHO8Uikz7SlKQxSlRblPRbYTklaVLKcBKE8XFE4Skd5JA9tAEK6lV1lCzsqIb2QuYtJwQ2eDYPYV4PgkHmKq3e6NWK3haWS44pSWY8dvALrh3JQnl/gAT2VUtMJUGIS+tK5Lqi7IcHBSzxx3AAAdwFWuzp+Hrmq/u5MVraZtyDw2OC3vFeMD5o+capJfwQ89Lsp6JWmQ1PkSFpduapK0ynBwOySEhPJAG4DxPEmsmrVlvuciwaouDKfiyHDsHgtJOce4g1sq33Bi5R0vsLyk8QeKTyNXbBp5MNNcpra+0SaUpWR1ClKcKAFCQBknFYtrTpK09oZoi5S9uWU5bhs+k8v2fFHecCuetddL+oNbFyMHTbbYrd5pHWcrH9Ivirw3DurerTzs66Mbb4w77Nwa76dbJpoOQ7PsXe4pyk7CvxDR+cscT3J94rn3VGsL5rCb53epzkhST+LaHotNdyUDcPHj31FsenrrqOciBZ4D0yQr4jSdyBzUeCR3nFbq0r0N6a0mlufru7W5yTjaTEcfCGEeO0QXD7h3Gu5KrT/bONuy79jWOiOjbUGunQqBG6mEDhc18ENDuT2rPcPaRXvWvRjqHQzilzo/Xwc4TNYBLZ5bXag9x9hNdKR+kLRLSUR4+o7K2hACUITIQlKRyHYBV9YlQLxFUph+NNjOApJbUlxCgew4yDWD1lillrg1Wlg1hPk4403q286Rm+eWWc5FWfXR6zbo5LSdx+3ka6M6L+lxGvVqt8q3Oxbky31jimgVMKTnGQeKd54H2E1Zdc+T7bbp1k3TC0W2UcqMVWfN3D3dqD4ZHcKtdntt26Meh3UU1cVy33tyQWys4KkpKktpUkjcQApRBHaaq2dd0cr3CrjZVLD6NzyLzbYjpakXCIy4OKHHkpI9hNU/wis387QP7wj99cjaX0NqDXb0o2iGiWtjZU+486lOCrOMlW8k4PurIf8geuv5ph/wB6bqHpYReJT5KWom+VE6Y/COzfztb/AO8o/fU1l5qQ2l1lxDjahlKkKBB8CK5TndCGtbdDfmyLTFDMdtTrhTJbUQlIycDt3Csl8nK+y4+pZVlDy1QpEVT4aJ9FDiSn0gOzIUQee7lUz00VFyhLOCo6h7lGUcZOiqUpXIdQq132zqubLbsZ0R58VRcivkZ2FdoVzQoblDtHeBV0pTTxyhNZWGW2zXRF6gKU4z1L7aizJjr3lpwesk8x2g9oIPbVK2qNrl/BDhPUlJXDUTn0Bxb8U5GOaSORqJfEKsVwRqBkHzdQSzcUDtb+K74oJ3/NJ5CrpdIRuEQdStKJDZDsd3iErHA+B3g8wTTeO/BKb68k6lRbZOTcYbcgILajlK2zxbWDhST3ggipVSWKtLg+E74lBGY9vAWeSn1D0R9FJJ8VjlVwmSm4UR6U8SG2UKcVjkBk1FscV2LbkGQMSXyX3/6xZyR7NyfACmvkT+C36pdcmGNYIy1IduJIeWk72oyfyiu4nIQO9XdV9ZZbYZQ00hLbaEhKUpGAkDcAKsem8XSXOv6t6ZK+oinlHbJAI/SVtK8CKv5py44Jjz6jXXSLaFxZrV5jggOYQ6R8VY9U+0bvZVvst+fZdDsZzq3R66OIUPDtFZHar3GkuzdNXvZKkurabU4dzqM7kk9igMYPbu7axXUml5em5HXNbbkQn8W+OKO5XI9/A111tNfjl2eTfFp/mr68/TNh2nU0W47LTpDD/wAlR9FXgf8ACrzWmYt2CwESMJPyhwPjyrKrTqqVBCUOHzmP2An0gO4/vrKyhro6KNcnxMzytX9O2uLxo+1W5mzvIjO3BbqFv7OVoSlI9XO4E7XHu3Vsa3XKNc2Oujr2gNykncpJ5EVpjynziJpz+tkfdRS08U7EpHXdL/W5RZo1ZkXCWpalPSZT68lRJW46o+8k1tXQ/QBcroET9TuLtUIDa82Tjr1j5xO5seOT3CoHk8oQvpCypKVbEF5ScjOycoGRyO81tXp51K5YdDrixnC3IujoiApOCG8Erx9EY+lXbfbPeqocHHTXHY7JGsNVdKsezNOab6PWG7Va2iULnMj8bJUOKkqO/Hzj6R7hWuWIc++ziI7Eu4zHPSOwhTziu88TVfTVgkalv0CzRVBDkx0N7ZGQ2nipWO4An2V17pbSdp0fa27faYqWW0gbbmMuPK+UtXEk/wD8p2WR06wllhXCVzy3wcoP9H+r4zJde0xeEtgZJ81UcDwG+oFpvNz05M85tc2Rb5KDglpRQc8lJ4HwIrtfFax6Z+jeBqCxS75DjIbvEJovdYgYMhCRlSFczjJB45GOBrOvWbntmi56Tat0GeOiXpf/AAzV8D3lLTN3QkqbWgbKJSRxIHYocSOW8doF06cSE9GN3zzZ/wCsiuXbbc5NpnxrlCcLciK4l5pQ5pOfceHtrry9WqJ0iaHXEWstM3SKhxtY3lskBaD34OKzvqVVkZLoumx2QcX2czdHumLnqiXMbtmoItlWwhJWp6Stougk7hs7yBjfyyOdZyOibVI3npFg/wD5B7/yrXWtNCXjQsxqLeGWMP7RZdaWFpcCSASO0cRuI7a8aZ6P9QaxQ85ZLUZTTJwtwlKEA8gpRAJ7hXZL1etSWP2OaPHpceSldbreY8qXbpF6mSkNOLZWUzHFtOgEgkb8FJxWa+T1/KFn/gXvtRVtHQjr4DHwEn+9Nf8AlW0+hnoouOj50i9XzqW5jjXUMx217fVpJBUpShuycAYGe2outr/G0mVTXPem0bapSleSemKUpQB5dbQ82ptxCVoUClSVDIIPEGrFplxcBcnT76ypUAgx1KO9yMrOwe8pwUH9Ec6v9WDUo+DpEG/I3CGvqpPfHcICs/oq2V/RNVHngiXHqJI/g2+bPCPcQSOSX0jf+sgZ+gedXaoF6iuS7c51ABktEPM/1iTlI9uMeBNSYUpudDZlNZ6t5CXE55EZpFIg3zElcK37iJL4Lg/o0emr2EhKfpVS1ZMdiWN5EZWzLlFMRg9occISD7Mk+yqjZ841I8vOUxIyWx+k4oqV9SEe+o1z/wA+1TaYfFEVDs5YPDaADaPrWo+yqj2iZdMu8CGzb4TENhOy0w2lpA5JAwPsqvSlQWa36SrE4xKTd2U5ZdAQ9geqsbgT3EbvEd9W6y6/mW5kRJzabhExs7Lh9MDlk8R3GtqyI7UthbD7aXGnElKkKGQoHsrWGpejeXBWuTaNqVG49Rxcb8PlD6/GuuqyEo7Jnl6miyE3bT57PEq12a+5f09JDMg7zb3zsE/oE7vZn3VZGJT1veU2tKhskhbSxgg9vgatCnC0tTagUrScFJGCD3iqr092UUqecLigNnbUckjsye2uuMGuM5R5k5qTzjDM4sN5ESWzKaWeqWQlY5pJ358KxbyoSfNNOcutkfdRXqySt7rJVxG2P8ai+U66TatLK47Snzn6DdYqO26J6Gmm5VSTMd8nUg9ISt/+wPfeRWZeU4y4bTYXwD1SJTqFHkVIBH3TWDeTgSrpGUTw+D3vvIrf/SLpFOtdJzLSClMggOxlq4JdTvTnuO8HuJqbZqN6kzqqg5UuKOc+hSY1D6TLMt9QShwuspJ+WptQT9e7211gtRSglKSogZAzjNcOvtTbTcFsuoehzYjuFJPorZcSfqIPbW+tFeURbnILUXVjb0eWgBKpbDRW2784pG9J54BHhwq9XTKbU48k6W1RTjLgm6k6flaaujttmaPuTMlr4siQhG0OxSSnaBB5g1dNI9MNk1829aVtG2XJ9tSGo8hYUh7IIwlY4nuIB5Zq1a41Z0ZdIlsTbl3Zbs8nENyLCdcfQ4eASnZ9IHtT293GsGtPQbKjMIn6rv0SwMk7TbY9J844HjhJ7cDaIrJQq2epbWaOdm70vKNd3qy3DTFwdtd1jLjSo+5SFcCOxSTwKT2EV130fx3I2h7Ay7kLTAY2gez0BWBajRoHVNkg22836VPlQSkIuJjnrlpB3pUQkAgjcd3fx31mKOkzSbLaUInqShIACRHcwAOz1am+/wDJFIqmn8cmyFr7owj6/vVnlTpimoUFLodZbHpvbRSQAr4o9E5PHlWC9MGvZ+g3YWkdKtNWiO3HQ8XmEjaCSogISCMD1SSd5OfGtq2jXFivs0QrfLW8+Ulez1K0gAcTkjFaB8ow46QGv+Xs/fcp6b1zUZdIL/TFyj2zPvJ/1ZfNUC+fDVzfn+bljqutx6GdvOMAccD3Vt6tE+S/vTqPxjfY5W9qz1KSsaRenbdabFKUrA2FKUoAVRmxGp0R6I+naafbU2sc0kYP21WpQBZdJSXX7I0xJXtSoalRHie1bZ2c+0AK9tVrLiO7Nt/AR3ytsY/NuemPcSofRqLbj5lqy6w8+hLaanIHZtb21/dQfbUt3EbULC8kCVHU0e9SCFJ+pS6uXZEehZsuOXGSR+VlrA8EAN/ak1FtY851TepJ3hlEeIk8sJLiv+oPdUnTZKrKw4eLpW7+stSv8ajaUytN2fP565yDnuSQ2PuUfIeUX2lKVBYrDta3PUGmXBd7aEzLdgCRHdTnqj8sEbwD28cHf21mNfFJC0lKgCDuIPbVReHloicXJYTwank9IemNQNgX3T7nWYx1rKkqUPBXoqrEbyuzNr62zTnnWid7MlsocR7eCh9dbL1D0Q2i7OKft7zlsdUclLaQpon9Hs9h9lYfM6GNQxwVRpcCUBwG0ptR94I+uu+qypdPH0eVfRc/dFP7RjMG4dTKbWThOcK8DuNZZ0yWF3V3RhAukJBekWhQdcQjeS3s7DmB3bleANYLd7fcbBLMO5RHYr2MgLG5Q5pI3EeFZPoLpFc068Ys9K37e7gKA3qb7wO3wrW2DeJw5wY6aark4T4TMS8m9WekZQH83vfebrqbGa13pDRmi4+q1aq0tMbaU8y407CaUOryopO0EH0kH0eHDfwFbDKgkZJwB2mvPvnvnk9iiO2ODCtfdE9i14nzh8KhXJKdlE1hI2iBwCxwWPHeOwitL3Tyd9ZQ5GxDVbri0TucQ/1Rx3pUN3sJroO6aysdoBD89pbg/NMnbWfYOHtrAtT9KCnm1NsLMJg9iTl5wezh7PfW1ErlxHo59RKlcy7+j1p7o2f6NLQH7Lbk3jUT6CHZ7ikpbjjG8ISog4+s9p7K15OuEq5yVy50hyQ8repxw5P/AMDuFZ/0T32fe7vdFONuCE1FwkklQ2yrgTwzjO6tcKwUKxyNZWqSm1J5ZrTNSgnFYRkzHRzqeQy2+zbdptxIWk9cgZBGR21Vb6M9VrUEm2JSD2qfRgfXW6LH/qaB/Zmvuip1Y5OjBiehNDo0qw4/IcQ9PfAStaPVQkfFTz37ye3dyrRflIEjpCax/NzP33K6grl7yklY6QmR/wDTmfvuV06R/wCww1K9BlHkuHKdSeMb7HK3zWhfJa9XUnjG+xyt9VGp/UZWn/TQpSlYGwpSlAClKUAWK7/5tqaxyhuDvXw1HntI2x9bf11KvW0hVvkp/NS2wfBeWz98VF1YNlq2SP8A2blGOe5Stg/UupOpMpsklwHBaCXR9FQV/hV/BHlnvTqdnT9t/szR/ZFRdGj+BNvtXKlKPiX11K06rasFtP8AwzX3RUXRx/gUo7USpST7H10eGHlF7pSlQWKUpQApilKALVqTTNt1TblQbizto9ZC07ltK+Uk9h+3trR+p+izUWn3VrisKucPPoux05WB85HEezIroWlb06idXXRz36aFvfZyYXXojmHklpxPYsFCh799V/h6QoBAcW4ORdKvqrpLU6prELziFYY97Wj1oy3UtrUPmFSSknuJHjWn7j5QsWxyHYjeglwprR2VtSXENKQe8BGa7Y6lz6j/AOnBLRKHc/8AwsNrsmqtQYTbrVK2Fbus6vq0frqwKznTfQWouJlajnbW/JjRlHf3KcO/3D21iln8p26C7BV4ssRVtXgFMQqDrXeCo4V4bvGt4aX1jY9YwRMstwalIGNtA3ONHktJ3pPjWV110V1hG1Glpz3knRLbDtNvEODGajR20kJbbTgDd/8Au+uainCVeBrp578kv9E/ZXN1ptki9XBm3xUFbzytkADgO1R5ADfXEjva8I6Hsn+poH9nb+6Km1Yr5qax6FszT13uDcVhpAbbCjlbuBjCUjeo+FaA155Q16vxdhadQuzwDlPXkgyXB4jc37Mnvq66ZT6JnbGHZubXfS3pvQiVMSpHndxxlMGMQpzu2zwQPHfyBrmHXutJmv8AUCrzMjsxlBtLLbTWSEISSQCTxPpHfu8KskaLKukxLEZp6XLfX6KEJK3HFHu4k1ujQHk5SpRbn6vdMVncoW9hf4xX6axuT4Jye8V2xhXQsvs5JTnc8Lom+SyCE6lJG7ajDPscrfVQrPZbdYILcC1QmIcZv1W2U7I8TzPed9Ta4bZ75OR2Vw2xURSlKzLFKUoAUpSgCyay3WFau1EiMsex9BqVqEbVguQ/4V37pqLrLfYXE/LfjoHtfQKlahOzYLkf+Fd+6atdL/vgjyzxpsFNkjtni0FNfqqKf8KjaUygXdg/mbm/u7lEOD79SrLlC7hHJ/JS1keCwHP+81Etn+barvMY7hIQxMSOeUltX/TT76PkPKL9SlKgsUpSgBSlKAFKUoAVjesej3T2uooZvMFK3UjDUlv0Hmv0Vcu45HdWSUpptPKE0nwzlHX/AEG6h0eHJkBKrxa07y6yj8a0PnoHZ3pyPCsAtN1uFknN3C2TX4cpv1XmV7KvDvHcd1d21rjX/Qfp7WfWTIiRaLqrJ84YQNh0/wBIjcD4jB7zXbXq/Fhyz03mBh2hfKPZfCLdrFkMqV6AuMdHoHvcQN6fFOR3CoF/6abDpRh619H0BD0hQ2XLrISSCeaQd6/E4T3Gtaay6OtRaEkbF4hERyrZbmM+mw54K7D3HBrxo/o91FrmV1dmglTKVYclunZYa8Vdp7hk1p+Gr3+DL8tns8lpvF5uV9nOXC7Tn5spfrOvryQOQ7AO4YFZ3oHoQ1FrMNzJiFWi1q3h99H4x0fMQd/tVgeNbm0B0Gaf0f1UycE3e6JwQ8+j8W0fmI3geJyfCtlVlZqscVmlem8zMZ0Z0dad0JG6u0QgH1DDst30nnfFXYO4YHdWTAUpXG228s60klhClKUhilKUAKUpQApSlAFi1adpq2R+PX3KMnHclW2fqRUnU2VWKU2OLoS0PpKCf8ai3fMrVNjijeGQ/MWOWygNp+tw+6pd6JWqBGH56W3kdyMuH7lX8EeWfGyI2onkYIEqOlwd6kK2VfUtHuqJdf8AMdT2eduCJAdgOHvUAtH1oI+lUu9gR1wrhuAjPgLP9Gv0FewEpV9GvGqoT06xyBGGZbGzJj/1rZC0j2kY9tEe0Eui70qPbprVygx5rBy1IbS6jwIzUioLFKUoAUpSgBVCXOi29kvzJLMZlPFx5YQke07qwHpg6VUdHlvaiwm25F5mJJZQv1GUDcXFjtGdwHac9gNc+2qz606Yby6rrJFzdQQXZEpzZYYB4DknuSkZ7q6KqHJbpPCMLLtr2pZZ1CvpN0U251atVWba4bpSD/jV5t16tl4QXLbcYk1A3lUd5LgHuJrn5HkvXws5VqG2Icx6iWHCn35H2VhOqejvVnRfKanv7TSNvDVxgOqCQrsBUMFJ7jx76tUVy4jLkh3WR5lHg7E41DlXm2QnSzKuENhwAHYdeSlWOeCa1N0LdMz+qJCdOagWlVyCCqNKwB5yAMlKgN22BvyOIB7Rvp9KXQdedeavcvcO4WxhhcdpoIkBZXlOc8ARjfWX4sT2zeDX8mY7oLJtGZeNOXCM5Fl3G0yI7qdlxp19tSVjkQTvr5Cu+m7bFaiQ7haY0dpOy200+2lKByAB3VznfvJ2vmnbJOu8i5WdxmEwt9aG0r2lBIyQMpxmtf6a08vVF+g2WMphl+a51aFup9FJwTvwM9lbx00JJtS4MZXyTw4naf4SWT+eLd/eUfvqQ3dYDsVctubGXHbztvJdSUJxxyrOBXOY8l3UfH4Wsf6rn/jWw9O9E91tHRXe9HPTLeuXcFuqbdQFdUnaCANrIz8U9lYzrrS4lk1jOb7ibB/CWyfzxbv7yj99Pwksv88W7+8o/fXPivJd1Id/wtY/1XP/ABrX2utCyuj+8otNwehyXlsJfC46Ts4UVAD0gDn0TWkNPXJ4jIzldOKy4nYv4SWT+d7d/eUfvr01f7Q+6hpq6QXHFnZShEhBKjyAB31y5ovoOvGudPs3qBPtTDDq1oCH0r2gUqKTwSR2VmmkfJ3v2ntT2m7v3O0ONQpTb60NpXtKCTnAynjSnTXHK3clRtm8ek39SlK5ToFKUoAUpVCfMZt0KRMkK2WY7anVnklIyfsoAs9sPn2q7vMxlERtqC2ezawXF/fQPZUt7EnUUdvBIix1unuUshKfqSuqek4jsayMuSU7MqUVSnx2hxw7RHsyB7K92RPnD0+4cRIfKGzn8236A95Cz9Krl2RHonzIrc2I9GeGW3kKbUO4jBqLZJTkm3oRIVmSwSw+ea07ifbuV4EVcKtLn8G3xLucMXABtXJLyR6J+kkEeKE86lFP5IunVfBlxuFiX6KGl+dRO9hwkkD9Fe0PAprIKsWp2XY7ce9xG1OSLcStTaeLrB/KIHM4AUO9Iq8xpLMyO1IYcS406gLQtJ3KSRkEeynLnkmPHpKlKUqSxXwnAr7SgDj/AKari/P6T731xJEdxEdtPyUJQnAHtJPtrozods0Wz9HVkTGQgGTHTLeUBvW44Nok/UPACtOeUZoyTa9Sp1OwypUG4hCHnEjc0+kbODy2kgYPMGrl0K9M8CyWtrTWpXvNmGCREmEEoSgnPVrxwwTuVwxuOMb++xOdMdng4oNQte46Fq3ags0TUNlm2uc2lyNKZU2sKHDI3HxBwQeYqk1q7Tr7Iebv1qW0RnbEtvHvzWs+lTpzs9utMq0abmIuFykIU0ZDB2mowO4q2uClY4AZ37zyPHCEpPCR1TnFLLOftNTXbPqW1y2Fnro8xlSVDtIWB9Yz767jFcidDOiZOrdZQ3Cyo222uIkynSPR9E5QjPNRA3cgTXXYrp1jTkkYaVPa2Yz0mfye6j/5c/8AcNcvdEX8penf7V/2KrqHpM/k91H/AMuf+4a5e6Iv5S9O/wBq/wCxVVpv0pk3/qROxxwpQcBSuE7Aa5e8pP8AlCY/5c199yuoa5f8pP8AlBY/5c199yurSfqHPqfYbX8nwf8AplB/tEj/AKhrZNa38nzd0ZQf6+R/1DWyKxu97/c0q9iFKUrM0FKUoAVj+pT8KTIFgTvTJX5xKHKO2QSD+kvZT4bVX2Q+3GYcfeWltptJWtajgJSBkk1Y9LNOSxIv0pCkPXEhTSFDe1HTnq09xIJUe9XdVR45Ilz6Sfe5TsS3OebkedPEMsf1ijgH2Zye4GpUKK3BiMxWs9WyhLac8cAYq3o/hO+KXxYt2UDkp9Q3n6KDjxWeVXakUvkVGuUFFxhOxlqUjbHorTxQoHKVDvBAI8Kk0pDIFonLnRSl9IRLYV1UhA4JWO0dxBCh3EVbLX/o5dTZ1+jAlqU7AV2Nq4rY+1Se7I+LU25tqt0kXdlBUlKQiWhIyVtjgoDtUjJPeCoccVWudvjX62lhTh2HAlxp9pXpNqG9LiDzBwQapNfwQ1/ZPpVnsF2fkqdttyCW7pEA60JGEvIPquo+arl2HIq8UmsFJ5WRSlKQyPPt8W6Q3oU6O1JjPJKHGnUhSVjkQa0xqnyZ4Mt5b+m7qq37Rz5tKQXWx3JUDtAeOa2hfNZwLJObt/UTJs5aNvzeI11ikp5nlUi0anh3eJJk9XJhpinDwlt9WUbs787sYrSFkocxZE4Rn7jmy8eTjrK1xXpbSbZcuqG11UVautWPmpUkZPdnPKsJsXwNEvKW9URbmqG2Sl5mIUtvJVyIUOHMbjXVznSlaMrcag3V+I2cKltxiWh35J4VD1la9BaisiNRXe0s3NklKUyWE7LxycAbQKTuPYTurphq5dTRzy0y7iYEnp80ppODCtmjtOPiEhwF5LoDOEk+ls7yVLPNVbyts9u6W+POabebbkNpdSh5soWkEZwpJ3g91Yxp3op0Vp59qfbrEwJKcKbdfUp1SDzG2Tg94q+WDUMTUUd9+Gh5KGHlMK61IB2k8cYJ3b657JQfsRvWpL3M+ass7modM3S0MuoZcmxXGEuLBKUlSSMkCtRaK8n67aX1XbL0/eoD7UJ7rFNoZWFKGyRgEnHbWznNdQEonKbh3GQqDK80dQyxtq2sHeAD6u7jUJnpQtsh1xpq03xa2jhxKYmSg8iAd3tpQslFOK6YShGTTZmI4Uq2QtQxJ92nWxtDyX4ISXStICTtDIwc1ZJPSZaW33URIlyuDbJw4/Fj7TafbnfWZoZdWo+lXoXuXSBqVu7RLrDiNoioYLbzS1KJSpRzkfpVsFrV9qk2B6+xnVvxWElTgQn00kcUkHGDvqVb7/Bulo+FYqyuOEKUoY9JOyMlJHYRVwnKDzEmUVJYZZ+jTSEjQ+k49llSmpTrTjqy40kpSQpZVwO/trKax068tCdPx74vzhDElRQy1sZdcUCRgJB7j217s+sY92npgqtt0hPrSVp86jlAUBx31Mm28saSSwi/0pSkMUpVov12di9VAt6UO3SXkMIVvS2kes6v5ic+04A400s8CbwskO7KOorqLG3vhRil24qHBXahj27lK+aAPjVdbtNXBifiEpXKeUGo7Z4KWeGe4YJPcDXi02yPYbcGQ6VY2nXpDp9J1Z3qcUeZ493gKo2tC7nKN4eSUtlJRDQoYKWzxWRzXgeCQO0mm3/RKT89k22QE22E3GStThTkrcVxcWTlSj3kkn21KpSpLFKUoAGrK3/o/JDKhi2Pr/Fq7IzhPqHkhRO7kTjgRi9V4eZbkNLZeQlxtaSlSFDIUDxBFAmW292Y3FLUmK6I1xikqjyMZAzxQodqFcCPaN4FfbJe03NLkd9rzW4RsJkxVHJQTwUD8ZB7FdviCKpMyHLG8iHMcUuEshMeUs5KCeDbh+pKjx4HfgqqXmxIuampcd4w7jHB6iUgZKc8UqHxkHtSfZg76v6ZP2i60qz2q/F6T8GXNkQrokE9VtZbfSPjtK+MOY4jtHbV4qWsFJp9GF3+1sPakXNtGo2LXekspQ605sqDiPi5SfDv4CrBdL3fNQaZ1FZ5Pmz8q39WpUiHkoeRtZUPEAZ9h5Vnt20lY766HrjbI8h0DHWKThWPEYNSrXZrfZY/m9viMxmiclLacZPfz9tGQLTY7/YE6ajOomRGojbCUrQpYGxgb0kc+PjWuVhf+Tq7yGG1NwX7olcVKhj0Nobx3bgPZWyX9BaYkyjKdssRTpOSQkgE+AOPqq5TbNb7hBECVEacijZwzjCRjhgDlRkMHyJcoTjTLaZkZSylICUupJJxwxmsQ6OJ8S2sXiBLksx5DM91a0OrCSEnG/f2bjWQxdD6chSWpUe0RW3mlBaFpBylQ4HjVW56QsN5k+dT7ZHffxguEEE+OOPtoAx/o3dTLlaknNAmPIuKi052LG/ePeK96LP+lersf7039iqy6JDjwY6I0VhthlAwlDacAeyqMO0QYEqVKjRkNPy1Bb605y4RwJ99AGBGNMk6h1yzDKuvcioS2BxJ2eA+yrzoC82drSkRpMuNHXHRsyELWEFK87yQefHNZLHtUKLNkTmY6ESZOOtcHFeOGat9w0Tp26yTJmWmM68o5UvBTtHmcEZoyBgSFol27XE+2jFreSA0QMJWsesR7/rFfGYk3R9pi3qIFvWm5Q0InMZyWnFIwHB4k/4csbNNnt5txtvmjIhlGwWEpwjZ5YFVBboggC3+btmIG+q6kjKdjGMY5YoyGDXVotltn6EsTUu6ptcpt9xUR8qAw4FKOMHjw+oVcbdqK/WrUsCzXObb7uzN2gl6MNlxvAzlQG7H/wA8qyZelLG7bG7Y5bIy4bZJQ0pOQgk5JB4ilo0pZLE6XbbbY8dwjG2kEqxyyd9GQLtSlWe7X4x5HwbbGRNui05DOcIZSfjuq+Kn6z2ChLINpdlS+XxNqQ2yyyZc+SSmNFQcKcPaSfioHEqO4eOBXmxWVVu66ZNeEm5SsGQ+BgbuCEDsQnO4eJO819stjFuU5LlvmZcpAHXyVDGR2IQPioHYkeJyd9U5Ml69PLgwXFNxUEpkykHBJ7W2z8rmr4vAb/Vf0iftnx1X4QyVR0b7awvD6uyQsH8mOaQfW5kbPYqr1wqnHjtRGG2GG0ttNpCUISMBIHACqlJlIUpSkMUpSgBSlKAPDzLUlpbLzaXG1gpUhYyFA8QRVoC5GnvRc62Tax6rm9TkUcldqkfO4jtyN4vVKYsEGfbrff4SUPpQ+yrDjTiFYKT2LQobweRBq1idc9N+hcw7crcnhOaRl5of0qB6w+ekeIHGpjtrft7in7OW0BR2nIbm5pw9pSR+TUeYBB7R21Xg3diY6Yy0rjTEjKoz25YHMdih3pJFNP8Aolrz5JMObGnx0SYj7b7LgylxtQUlXgRVarLL0w0JC5tqkOWqYs7S1sAFt0/0jZ9FXjuV31SF9uVr9G921ZbH+2QAXWvFSPXR7lDvo256Ddj3F/pUWBdIV1Z66DKZkt8CppYVjuPI+NSqktPIpSlAClKUAKUpQApSo0+5wrUz186WzGb+U6sJB7hniaAbwSaoy5keBHXJlPtsMtjKnHFBKUjvJqym/wBwuvo2O2rLZ4TJwLTXilHrr9wHfVWLphpT6Jl3krustB2kKeSA0yf6NseinxOVd9Vtx2Ruz7SObhdNSehakuW63q4z3kYddH9C2eH6ah4A8aulutkCwQ1IjpDTYy4664rKlq7VrWd5PMmk67x4TgjpC5EtYyiMyNpxQ5nsSPnKIHfUdu1SLktL95UhSUnabhNnLSD2FR/OK8Rgdg7aG/6BLn7KZdkai9FguxrYfWfGUuSRyR2pR87iezHrVd48dqKyhhhtDTTYCUoQMBIHYBVSlLJWBSlKQxSlKAFKUoAUpSgBSlKAFR5tui3FsNyWkuBJ2kngpB5pUN6T3ipFKALSGrtbPyKxc44+I6oIfSO5Xqq9uD3mq0S9w5TojqWqPJP+zyE9W57AfW8U5FXCqMqHGmtFmSw0+2fiOJCh7jTFggz9M2m4vecOxUtyuyQwotOj6aSD76jC0XuD/Eb6X0AbmrgyHP20bKvfmpBsi4w/g64SooHBtSuub/VXkgeBFfevvUbPWRYkxIPrMOFpR+irI/ap5fWSdq7wR/hLUUbAfsbEodq4csZP0XAn7a+fhVsHEiyXtjmfNOsHvbKql/DgQcSbfcY+O0sFwe9varyNTWfOFz2WVcnstn9oCn/AsfZR/C+1j1xPQeS4D4/7Kfhfaj6vnyzyTAfP/ZUtN+tC/VukE+EhH76Kv1oT610gjxkI/fRhfDHz8kI6qSo4j2a9v8sQy2Pespr58KailZEewtRgeC5stIx9FsK+2pJ1PZs4RcGHVcmj1h/ZzXr4bS4R5tBuEjPJgtj3r2RR14Fy/JE+Cb7N/j17EdB4tW9gI/bXtH3AVIg6YtNvf85RFD0r/eZCi87+sokj2Yr6X73Jx1USJDTn1n3S4ofRRgftV8FlckD+EbjJkg8W2z1LfuTvPtUaMv5HtRVl3uHEdLAWp+T/ALuwkuOe0Dh4nAqj1d2uX5VYtkc/EbIW+od6vVR7No94q4RYcaE0GozDTDY37LaQkfVVapKwRoNui25tSIzIRtnaWoklSzzUo71HvJqTSlIYpSlAClKUAKUpQB//2Q==";
+
+// ===== 16 QUOC GIA (cong dong nhap cu lon o Thuy Dien) =====
+const COUNTRIES = [
+  { code:'vn', fl:'🇻🇳', name:'Việt Nam' },
+  { code:'sy', fl:'🇸🇾', name:'سوريا' },
+  { code:'iq', fl:'🇮🇶', name:'العراق' },
+  { code:'fi', fl:'🇫🇮', name:'Suomi' },
+  { code:'ir', fl:'🇮🇷', name:'ایران' },
+  { code:'pl', fl:'🇵🇱', name:'Polska' },
+  { code:'so', fl:'🇸🇴', name:'Soomaaliya' },
+  { code:'th', fl:'🇹🇭', name:'ไทย' },
+  { code:'cn', fl:'🇨🇳', name:'中国' },
+  { code:'tr', fl:'🇹🇷', name:'Türkiye' },
+  { code:'in', fl:'🇮🇳', name:'India' },
+  { code:'af', fl:'🇦🇫', name:'افغانستان' },
+  { code:'xk', fl:'🇽🇰', name:'Kosovo' },
+  { code:'er', fl:'🇪🇷', name:'ኤርትራ' },
+  { code:'ba', fl:'🇧🇦', name:'Bosna' },
+  { code:'ua', fl:'🇺🇦', name:'Україна' },
+];
+const GREETINGS = {
+  vn: 'Chào mừng! Nơi kết nối người Việt xa quê tại Thụy Điển — để bạn tự tin và ấm lòng nơi quê hương thứ hai.',
+  th: 'ยินดีต้อนรับ! พื้นที่เชื่อมโยงชุมชนของคุณในสวีเดน',
+  cn: '欢迎！在瑞典连接您的社区，让您在第二故乡安心生活。',
+  pl: 'Witamy! Miejsce, które łączy Twoją społeczność w Szwecji.',
+  fi: 'Tervetuloa! Yhteisösi kohtaamispaikka Ruotsissa.',
+  tr: 'Hoş geldiniz! İsveçte topluluğunuzu birbirine bağlayan yer.',
+  ua: 'Ласкаво просимо! Місце, що обєднує вашу спільноту у Швеції.',
+};
+let activeCountry = null;
+try { activeCountry = JSON.parse(localStorage.getItem('weshare_country')||'null'); } catch(e){}
+function renderFlags() {
+  const grid = document.getElementById('flagGrid');
+  grid.innerHTML = COUNTRIES.map((c,i) => '<button class="flag-btn" onclick="pickCountryByIdx('+i+')"><span class="fl">'+c.fl+'</span><span class="nm">'+c.name+'</span></button>').join('');
+}
+function pickCountryByIdx(i){ pickCountry(COUNTRIES[i]); }
+function pickCountry(c) {
+  activeCountry = c;
+  try { localStorage.setItem('weshare_country', JSON.stringify(c)); } catch(e){}
+  applyCountry();
+  document.getElementById('splash').classList.add('hide');
+}
+function applyCountry() {
+  if (!activeCountry) return;
+  const g = GREETINGS[activeCountry.code];
+  const sub = document.getElementById('home-greeting');
+  if (sub && g) sub.textContent = g;
+  const badge = document.getElementById('countryBadge');
+  if (badge) { badge.textContent = activeCountry.fl; badge.style.display='inline-block'; }
+}
+function showSplash() {
+  renderFlags();
+  const sp = document.getElementById('splash');
+  const sl = document.getElementById('splashLogo');
+  if (sl) sl.src = LOGO_QTT;
+  if (activeCountry) { sp.classList.add('hide'); applyCountry(); }
+  else sp.classList.remove('hide');
+}
+function reopenSplash(){ document.getElementById('splash').classList.remove('hide'); window.scrollTo(0,0); }
+
 
 // ===== PLACES DATA =====
 let PLACES = [
@@ -1785,6 +1885,7 @@ switchTab('home');
 renderPlaces(); renderFeed(); renderMarket();
 loadData();
 startChat();
+showSplash();
 </script>
 </body>
 </html>
