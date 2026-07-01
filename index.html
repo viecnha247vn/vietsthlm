@@ -161,6 +161,30 @@
   @media (min-width: 560px) { .modal { align-items: center; } .sheet { border-radius: 20px; } }
   .hidden { display: none !important; }
 
+  /* home / landing */
+  .home-hero { max-width: 760px; margin: 0 auto; text-align: center; padding: 44px 20px 16px; }
+  .home-logo { width: 104px; height: 104px; border-radius: 999px; object-fit: cover;
+    box-shadow: 0 8px 26px rgba(40,30,20,.14); margin-bottom: 20px; }
+  .home-hero h1 { font-size: clamp(28px, 5.5vw, 46px); line-height: 1.12; letter-spacing: -.03em; font-weight: 800; }
+  .home-hero h1 .em { color: var(--red); }
+  .home-hero p { color: var(--muted); font-size: 16.5px; margin: 16px auto 0; max-width: 52ch; }
+  .home-cta { margin-top: 24px; background: var(--red); color: #fff; border: none; border-radius: 999px;
+    padding: 14px 30px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit;
+    box-shadow: 0 8px 22px rgba(200,68,46,.32); }
+  .home-cta:hover { filter: brightness(1.06); }
+  .home-section-label { text-align: center; font-size: 13px; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--muted); margin: 34px 0 18px; }
+  .home-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  .home-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 22px;
+    cursor: pointer; transition: .18s; display: flex; flex-direction: column; }
+  .home-card:hover { transform: translateY(-4px); box-shadow: 0 14px 32px rgba(40,30,20,.10); border-color: #d4c8b4; }
+  .hc-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center;
+    justify-content: center; font-size: 26px; margin-bottom: 14px; }
+  .home-card h3 { font-size: 19px; letter-spacing: -.01em; }
+  .home-card p { color: var(--muted); font-size: 14px; margin: 7px 0 14px; flex: 1; line-height: 1.5; }
+  .hc-go { color: var(--jade); font-weight: 700; font-size: 14px; }
+  .home-card-cta { background: linear-gradient(160deg, #fff, #f6efe4); border-color: #e6d9c4; }
+
   /* about section */
   .about-logo { width: 96px; height: 96px; border-radius: 999px; object-fit: cover;
     box-shadow: 0 6px 20px rgba(40,30,20,.12); margin-bottom: 14px; }
@@ -282,7 +306,7 @@
 
 <header>
   <div class="bar">
-    <div class="logo">Việt<span>Sthlm</span><span class="dot">.</span></div>
+    <div class="logo" onclick="switchTab('home')" style="cursor:pointer">Việt<span>Sthlm</span><span class="dot">.</span></div>
     <div class="search">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8a7d6b" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
       <input id="q" type="text" placeholder="Tìm phở, chợ Á, nail…">
@@ -290,6 +314,7 @@
     <button id="accBtn" class="acc-btn" onclick="onAccountClick()">Đăng nhập</button>
   </div>
   <div class="tabs">
+    <div class="tab" data-tab="home" onclick="switchTab('home')">Trang chủ</div>
     <div class="tab on" data-tab="places" onclick="switchTab('places')">Địa điểm</div>
     <div class="tab" data-tab="outings" onclick="switchTab('outings')">Đi chơi cùng con</div>
     <div class="tab" data-tab="market" onclick="switchTab('market')">Chợ cộng đồng</div>
@@ -303,6 +328,66 @@
   </div>
 </header>
 
+<!-- HOME / TRANG CHỦ -->
+<div id="view-home" class="hidden">
+  <section class="home-hero">
+    <img class="home-logo" id="homeLogo" alt="QTT Solutions">
+    <h1>Người Việt mình ở Thụy Điển —<br><span class="em">giờ có một mái nhà chung</span></h1>
+    <p>Từ quán phở hợp khẩu vị, buổi đưa con đi chơi cuối tuần, đến người bạn tâm giao hay người phiên dịch lúc cần — tất cả ở một nơi, bằng tiếng Việt.</p>
+    <button class="home-cta" onclick="switchTab('places')">Khám phá ngay →</button>
+  </section>
+
+  <main class="wrap">
+    <div class="home-section-label">Cộng đồng của bạn có gì</div>
+    <div class="home-grid">
+      <article class="home-card" onclick="switchTab('places')">
+        <div class="hc-icon" style="background:#fdeede">🍜</div>
+        <h3>Địa điểm</h3>
+        <p>Quán ăn, chợ Á, tiệm nail và dịch vụ của người Việt gần bạn — với đánh giá thật từ chính cộng đồng mình.</p>
+        <span class="hc-go">Xem địa điểm →</span>
+      </article>
+      <article class="home-card" onclick="switchTab('outings')">
+        <div class="hc-icon" style="background:#e6f0ec">👨‍👩‍👧</div>
+        <h3>Đi chơi cùng con</h3>
+        <p>Kết nối với các gia đình cùng cảnh ngộ, hẹn nhau ra công viên để con có bạn, bố mẹ có tri kỷ.</p>
+        <span class="hc-go">Xem buổi đi chơi →</span>
+      </article>
+      <article class="home-card" onclick="switchTab('market')">
+        <div class="hc-icon" style="background:#fdeede">🤝</div>
+        <h3>Chợ cộng đồng</h3>
+        <p>Cho, tặng, đổi quần áo trẻ em, đồ gia đình, món ăn quê hương, hay nhờ nhau xách tay chút hương vị Việt Nam.</p>
+        <span class="hc-go">Vào chợ →</span>
+      </article>
+      <article class="home-card" onclick="switchTab('friends')">
+        <div class="hc-icon" style="background:#fbe9ef">💗</div>
+        <h3>Kết bạn</h3>
+        <p>Nơi những người độc thân tìm người hợp gu, cùng văn hóa, cùng ngôn ngữ — một cách an toàn và tử tế.</p>
+        <span class="hc-go">Tìm bạn →</span>
+      </article>
+      <article class="home-card" onclick="switchTab('translate')">
+        <div class="hc-icon" style="background:#e3eef5">🗣️</div>
+        <h3>Phiên dịch</h3>
+        <p>Khi bạn cần một người biết tiếng đi cùng lúc khám bệnh hay làm giấy tờ. Kết nối phiên dịch cộng đồng.</p>
+        <span class="hc-go">Tìm phiên dịch →</span>
+      </article>
+      <article class="home-card home-card-cta" onclick="onAccountClick()">
+        <div class="hc-icon" style="background:#ece4f2">✨</div>
+        <h3>Tham gia cộng đồng</h3>
+        <p>Tạo tài khoản miễn phí để đăng tin, tham gia hoạt động và kết nối với người Việt khắp Thụy Điển.</p>
+        <span class="hc-go">Đăng nhập / Đăng ký →</span>
+      </article>
+    </div>
+
+    <section class="about">
+      <div class="about-badge">Về ViệtSthlm</div>
+      <h2>Một sản phẩm của người Việt, cho người Việt</h2>
+      <p>ViệtSthlm là nền tảng cộng đồng dành cho người Việt và người châu Á đang sinh sống tại Thụy Điển. Xa quê hương, ai cũng từng có lúc lạc lõng — không biết mua gói mắm tôm ở đâu, con nhỏ thiếu bạn nói tiếng Việt, hay bối rối trước một lá thư từ cơ quan. ViệtSthlm ra đời để những khoảnh khắc ấy không còn đơn độc.</p>
+      <p class="about-brand">Nền tảng được phát triển bởi <b>QTT Solutions</b> — công ty công nghệ do chính người Việt sáng lập, với mong muốn dùng công nghệ để gắn kết cộng đồng nơi xứ người. Đôi cánh trên logo mang ý nghĩa nâng đỡ, kết nối và cùng nhau bay xa.</p>
+      <p class="about-free"><b>Miễn phí · An toàn · Luôn bằng tiếng mẹ đẻ</b></p>
+    </section>
+  </main>
+</div>
+
 <!-- PLACES -->
 <div id="view-places">
   <section class="hero">
@@ -315,22 +400,6 @@
     <div class="grid" id="grid"></div>
     <div class="empty hidden" id="empty">Chưa có địa điểm nào khớp. Thử bỏ bớt bộ lọc nhé.</div>
 
-    <section class="about">
-      <img class="about-logo" id="aboutLogo" alt="QTT Solutions">
-      <div class="about-badge">Về ViệtSthlm</div>
-      <h2>Người Việt mình ở Thụy Điển — giờ có một mái nhà chung</h2>
-      <p>ViệtSthlm là nền tảng cộng đồng dành cho người Việt và người châu Á đang sinh sống tại Thụy Điển. Xa quê hương, ai cũng từng có lúc lạc lõng — không biết mua gói mắm tôm ở đâu, con nhỏ thiếu bạn nói tiếng Việt, hay bối rối trước một lá thư từ cơ quan. ViệtSthlm ra đời để những khoảnh khắc ấy không còn đơn độc.</p>
-      <div class="about-grid">
-        <div class="ab-item"><span>🍜</span><b>Địa điểm</b><p>Quán ăn, chợ Á, dịch vụ Việt với đánh giá thật từ cộng đồng.</p></div>
-        <div class="ab-item"><span>👨‍👩‍👧</span><b>Đi chơi cùng con</b><p>Kết nối các gia đình, để con có bạn, bố mẹ có tri kỷ.</p></div>
-        <div class="ab-item"><span>🤝</span><b>Chợ cộng đồng</b><p>Cho, tặng, đổi đồ và nhờ nhau xách chút hương vị quê nhà.</p></div>
-        <div class="ab-item"><span>💗</span><b>Kết bạn</b><p>Người độc thân tìm người hợp gu, an toàn và tử tế.</p></div>
-        <div class="ab-item"><span>🗣️</span><b>Phiên dịch</b><p>Người biết tiếng đi cùng bạn lúc khám bệnh, làm giấy tờ.</p></div>
-        <div class="ab-item"><span>🇸🇪</span><b>Toàn Thụy Điển</b><p>Từ Stockholm tới Göteborg, Malmö và nhiều thành phố khác.</p></div>
-      </div>
-      <p class="about-brand">Một sản phẩm công nghệ của người Việt — phát triển bởi <b>QTT Solutions</b>, với mong muốn dùng công nghệ để gắn kết cộng đồng nơi xứ người. Đôi cánh trên logo mang ý nghĩa nâng đỡ, kết nối và cùng nhau bay xa.</p>
-      <p class="about-free"><b>Miễn phí · An toàn · Luôn bằng tiếng mẹ đẻ</b></p>
-    </section>
   </main>
 </div>
 
@@ -564,13 +633,18 @@ function onCityChange() {
 // ===== TABS =====
 function switchTab(t) {
   document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x.dataset.tab===t));
+  document.getElementById('view-home').classList.toggle('hidden', t!=='home');
   document.getElementById('view-places').classList.toggle('hidden', t!=='places');
   document.getElementById('view-outings').classList.toggle('hidden', t!=='outings');
   document.getElementById('view-market').classList.toggle('hidden', t!=='market');
   document.getElementById('view-friends').classList.toggle('hidden', t!=='friends');
   document.getElementById('view-translate').classList.toggle('hidden', t!=='translate');
+  // trang chủ: ẩn ô tìm kiếm và bộ chọn thành phố cho gọn
+  const isHome = t==='home';
+  document.querySelector('.search').style.display = isHome ? 'none' : '';
+  document.querySelector('.city-bar').style.display = isHome ? 'none' : '';
   const ph = { places:'Tìm phở, chợ Á, nail…', outings:'Tìm theo khu vực…', market:'Tìm đồ trẻ em, đồ ăn…', friends:'Tìm theo khu vực…', translate:'Tìm theo ngôn ngữ, lĩnh vực…' };
-  document.getElementById('q').placeholder = ph[t];
+  if (ph[t]) document.getElementById('q').placeholder = ph[t];
   if (t==='friends') renderFriends();
   if (t==='translate') renderTranslate();
   window.scrollTo(0,0);
@@ -1395,10 +1469,11 @@ function requireLogin(action) {
 
 initCitySelector();
 (function setLogos(){
-  const a = document.getElementById('aboutLogo'), f = document.getElementById('footLogo');
-  if (a) a.src = LOGO_QTT;
+  const h = document.getElementById('homeLogo'), f = document.getElementById('footLogo');
+  if (h) h.src = LOGO_QTT;
   if (f) f.src = LOGO_QTT;
 })();
+switchTab('home');
 renderPlaces(); renderFeed(); renderMarket();
 loadData();
 </script>
