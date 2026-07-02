@@ -727,6 +727,7 @@ const LOGO_QTT = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBAU
 
 // ===== 16 QUOC GIA (cong dong nhap cu lon o Thuy Dien) =====
 const COUNTRIES = [
+  { code:'se', fl:'🇸🇪', name:'Sverige' },
   { code:'vn', fl:'🇻🇳', name:'Việt Nam' },
   { code:'sy', fl:'🇸🇾', name:'سوريا' },
   { code:'iq', fl:'🇮🇶', name:'العراق' },
@@ -786,7 +787,7 @@ function reopenSplash(){ document.getElementById('splash').classList.remove('hid
 // ===== I18N — HỆ THỐNG ĐA NGÔN NGỮ (EN nền, VI, TH) =====
 // ============================================================
 // map mã nước -> ngôn ngữ. Nước chưa có bản dịch dùng 'en'.
-const COUNTRY_LANG = { vn:'vi', th:'th' };
+const COUNTRY_LANG = { se:'sv', vn:'vi', th:'th' };
 const I18N = {
   en: {
     tab_home:'Home', tab_places:'Places', tab_outings:'Outings with kids', tab_market:'Marketplace',
@@ -875,7 +876,97 @@ const I18N = {
     about_badge:'About WeShare', about_title:'A product by Vietnamese, for the community', about_p:'WeShare is a community platform for people living far from home in Sweden. WeShare exists so those moments of feeling lost are no longer lonely.', about_brand_pre:'Built by', about_brand_post:'— a technology company connecting communities abroad.', about_free:'Free · Safe · Always in your own language',
     foot_tag:'Community for people far from home in Sweden', foot_by:'A product of',
     right_in:'in', items_in:'items in', nothing_in:'No content in',
-    c_open:'Open', c_call:'Call', c_map:'View map', c_contact:'Contact', c_area:'Area', c_phone:'Phone', c_addr:'Address', c_poster:'Posted by', c_get_help:'Get help', c_skip:'Skip', c_like:'💗 Like', c_report:'⚑ Report', c_featured:'★ Featured', c_certified:'✓ Certified', photo_choose:'📷 Choose photo', photo_err:'Could not process the image. Please try another.', photo_avatar:'Profile photo', photo_img:'Photo',
+    c_open:'Open', c_call:'Call', c_map:'View map', c_contact:'Contact', c_area:'Area', c_phone:'Phone', c_addr:'Address', c_poster:'Posted by', c_get_help:'Get help', c_skip:'Skip', c_like:'💗 Like', c_report:'⚑ Report', c_featured:'★ Featured', c_certified:'✓ Certified', photo_choose:'📷 Choose photo', photo_err:'Could not process the image. Please try another.', photo_avatar:'Profile photo', photo_img:'Photo', photo_save:'Save photo',
+  },
+  sv: {
+    tab_home:'Hem', tab_places:'Platser', tab_outings:'Utflykter med barn', tab_market:'Marknad',
+    tab_friends:'Hitta vänner', tab_translate:'Tolk', tab_services:'QTT-tjänster',
+    login:'Logga in', logout:'Logga ut',
+    search_places:'Sök mat, asiatisk butik, naglar…', search_area:'Sök efter område…',
+    search_market:'Sök barnsaker, mat…', search_lang:'Sök efter språk, område…',
+    home_title_1:'Människor långt hemifrån i Sverige —', home_title_2:'har nu ett gemensamt hem',
+    home_greeting:'Från en favoritrestaurang, en helgutflykt med barnen, till en god vän eller en tolk när du behöver — allt på ett ställe, på ditt eget språk.',
+    cta_explore:'Utforska nu →', section_have:'Vad din gemenskap erbjuder',
+    hc_places_d:'Restauranger, asiatiska butiker, nagelsalonger och tjänster nära dig — med riktiga recensioner från gemenskapen.',
+    hc_outings_d:'Få kontakt med familjer i samma situation, träffas i parken så att barnen får vänner och föräldrarna sällskap.',
+    hc_market_d:'Ge, skänk eller byt barnkläder, husgeråd, mat hemifrån, eller be någon ta med en smak av hemma.',
+    hc_friends_d:'Där singlar hittar någon som passar, samma kultur, samma språk — tryggt och vänligt.',
+    hc_translate_d:'När du behöver någon som talar språket med till läkaren eller med pappersarbete.',
+    hc_services_d:'Driver du en restaurang eller nagelsalong? QTT Solutions bygger webbplatser, QR-meny och lagerappar åt dig.',
+    hc_join:'Gå med i gemenskapen', hc_join_d:'Skapa ett gratis konto för att publicera, delta i aktiviteter och få kontakt med människor i hela Sverige.',
+    hc_login_go:'Logga in / Registrera →',
+    chat_title:'💬 Gemenskapslounge', chat_sub:'Träffa människor från din gemenskap i hela Sverige',
+    chat_safety:'Var snäll och respektfull. Dela inte känslig info (hemadress, bankuppgifter). Tryck ⚑ för att rapportera.',
+    chat_placeholder:'Skriv ett meddelande…', chat_send:'Skicka', chat_login:'Logga in för att delta i chatten',
+    chat_empty:'Inga meddelanden än. Bli först med att hälsa på gemenskapen!',
+    fab_outing:'＋ Skapa utflykt', fab_post:'＋ Publicera', fab_profile:'✎ Min profil',
+    join:'Gå med', joined:'✓ Med', contact:'Kontakt', view_map:'Visa karta', call:'Ring',
+    add_place:'+ Lägg till plats',
+    au_login:'Logga in', au_login_sub:'Logga in för att publicera och delta i gemenskapens aktiviteter.',
+    au_register:'Skapa konto', au_register_sub:'Vi skickar en 6-siffrig kod till din e-post.',
+    au_email:'E-post', au_pass:'Lösenord', au_pass6:'Lösenord (minst 6 tecken)',
+    au_forgot:'Glömt lösenord?', au_no_acc:'Inget konto?', au_have_acc:'Har du redan ett konto?',
+    au_signup:'Registrera', au_send_code:'Skicka verifieringskod', au_display_name:'Visningsnamn',
+    au_otp_title:'Ange verifieringskod', au_otp_sub:'En 6-siffrig kod skickades till',
+    au_otp_check:'Kolla även skräpposten.', au_verify:'Verifiera', au_no_code:'Fick du ingen kod?',
+    au_resend:'Skicka igen', au_forgot_title:'Glömt lösenord', au_forgot_sub:'Ange din e-post; vi skickar en återställningskod.',
+    au_send:'Skicka kod', au_back_login:'← Tillbaka till inloggning', au_reset_title:'Ange nytt lösenord',
+    au_reset_sub:'Ange koden som skickades till', au_code6:'6-siffrig kod', au_new_pass:'Nytt lösenord',
+    au_reset_btn:'Återställ lösenord', au_hello:'Hej', au_min6:'Minst 6 tecken',
+    au_need_ep:'Ange e-post och lösenord.', au_need_6:'Ange alla 6 siffror.',
+    err_generic:'Något gick fel.',
+    of_title:'Skapa utflykt', of_sub:'Bjud in andra familjer att ta med barnen ut tillsammans.',
+    of_yourname:'Ditt visningsnamn', of_place:'Plats (offentlig)', of_area:'Område',
+    of_day:'Dag', of_time:'Tid', of_ages:'Barnens ålder', of_msg:'Meddelande',
+    of_msg_ph:'Några rader om utflykten…', of_post:'Publicera utflykt', of_need:'Ange minst ett namn och en plats.',
+    mk_post:'Publicera', mk_sub:'Ge – skänk – byt eller be någon ta med. Ingen försäljning mot betalning.',
+    mk_title:'Titel', mk_type:'Typ', mk_cat:'Kategori', mk_name:'Visningsnamn',
+    mk_area:'Område', mk_phone:'Kontaktnummer', mk_desc:'Beskrivning', mk_desc_ph:'Beskriv föremålet, skick…',
+    mk_post_btn:'Publicera', mk_need:'Ange minst en titel och ett namn.',
+    type_give:'Ge', type_swap:'Byt', type_free:'Gratis', type_carry:'Ta med',
+    cat_kids:'Barnsaker', cat_food:'Vietnamesisk mat', cat_home:'Husgeråd', cat_carry:'Budförfrågan', cat_free:'Gratis att hämta',
+    empty_outings:'Inga utflykter matchar. Varför inte skapa en?', empty_matches:'Inga kontakter än. Gå till Förslag och skicka en gilla-markering till någon du gillar.', empty_translators:'Inga tolkar här än. Talar du språket? Registrera dig för att hjälpa gemenskapen.', empty_sgevents:'Inga singelevenemang här än. Kom tillbaka senare.', empty_treq:'Inga förfrågningar här än. Behöver du tolk? Tryck "Publicera förfrågan".', empty_discover:'Inga fler förslag. Kom tillbaka senare, gemenskapen växer varje dag.', empty_market:'Inga inlägg matchar. Varför inte publicera det första?', empty_places:'Inga platser matchar. Prova att rensa några filter.',
+    hero_places_1:'God mat, asiatiska butiker, vietnamesiska tjänster —', hero_places_city:'i ditt område', hero_places_sub:'Där vietnameser och asiater hittar ställen som passar deras smak. Riktiga recensioner, på ditt språk.',
+    hero_out_1:'Ta med barnen ut,', hero_out_2:'skaffa vänner som föräldrar', hero_out_sub:'Vietnamesiska föräldrar bjuder in varandra att ta med barnen till offentliga platser i Sverige.', hero_out_safe_b:'Säkerhet först:', hero_out_safe:'varje utflykt sker offentligt. Träffas på livliga, öppna platser.',
+    hero_mk_1:'Gemenskapsmarknad —', hero_mk_2:'ge, skänk, byt', hero_mk_sub:'Barnkläder, vietnamesisk mat, husgeråd, budhjälp.', hero_mk_note_b:'En marknad av vänlighet, inte för vinst:', hero_mk_note:'endast ge – skänk – byt och budhjälp.',
+    hero_fr_1:'Hitta vänner —', hero_fr_2:'hitta någon som passar', hero_fr_sub:'För vietnamesiska singlar i Sverige som söker en själsfrände.', hero_fr_safe_b:'Trygg dejting:', hero_fr_safe:'kontakt visas bara när båda gillar varandra. Träffas första gången offentligt.',
+    sub_discover:'Förslag', sub_matches:'Kontakter', sub_events:'Singelevenemang', fr_create_title:'Skapa en profil för att börja', fr_create_sub:'Berätta lite om dig så ni kan hitta varandra.', fr_create_btn:'Skapa singelprofil',
+    hero_tr_1:'Gemenskapstolkning —', hero_tr_2:'bryt språkbarriären', hero_tr_sub:'Behöver du någon som följer med till läkaren eller med pappersarbete? Få kontakt med människor som talar språket.', sub_find:'Hitta tolk', sub_req:'Förfrågningar', hero_tr_note_b:'Gemenskapstolkning för vardagliga behov:', hero_tr_note:'detta är inte en officiell tolktjänst.',
+    svc_hero_1:'Tekniktjänster för', svc_hero_2:'restauranger & nagelsalonger', svc_hero_sub:'QTT Solutions hjälper vietnamesiska företag i Sverige att modernisera.',
+    svc_web:'Webbdesign', svc_web_for:'Restaurang · Nagelsalong · Tjänster', svc_web_d:'En snygg, mobilanpassad webbplats som visar din meny, öppettider, vägbeskrivning och bokning.', svc_web_1:'Anpassad design för ditt varumärke', svc_web_2:'Optimerad för mobil & snabbhet', svc_web_3:'Kartor, bokning, sociala medier integrerade',
+    svc_menu:'E-Menu (QR-meny)', svc_menu_for:'Restaurang · Matställe · Café', svc_menu_d:'Kunder skannar en QR-kod vid bordet för att se menyn och beställa.', svc_menu_1:'Flerspråkig QR-meny med bilder', svc_menu_2:'Kunder beställer själva, köket får det direkt', svc_menu_3:'Uppdatera priser & rätter direkt',
+    svc_inv:'Lagerapp', svc_inv_for:'Restaurang · Företag med lager', svc_inv_d:'Hantera lager in/ut, spåra lager, varna för lågt lager och rapportera kostnader.', svc_inv_1:'Registrera lager in & ut', svc_inv_2:'Varningar för lågt lager & utgångsdatum', svc_inv_3:'Kostnads- & intäktsrapporter',
+    svc_quote:'Begär rådgivning / offert', svc_why:'Varför välja QTT Solutions?', svc_why_d:'Vi är vietnameser och förstår hur vietnamesiska restauranger och nagelsalonger i Sverige fungerar.', svc_contact:'Kontakta direkt:',
+    about_badge:'Om WeShare', about_title:'En produkt av vietnameser, för gemenskapen', about_p:'WeShare är en gemenskapsplattform för människor som bor långt hemifrån i Sverige. WeShare finns till för att de stunderna av att känna sig vilsen inte längre ska vara ensamma.', about_brand_pre:'Byggd av', about_brand_post:'— ett teknikföretag som kopplar samman gemenskaper utomlands.', about_free:'Gratis · Tryggt · Alltid på ditt eget språk',
+    foot_tag:'Gemenskap för människor långt hemifrån i Sverige', foot_by:'En produkt av',
+    right_in:'i', items_in:'objekt i', nothing_in:'Inget innehåll i',
+    c_open:'Öppet', c_call:'Ring', c_map:'Visa karta', c_contact:'Kontakt', c_area:'Område', c_phone:'Telefon', c_addr:'Adress', c_poster:'Publicerad av', c_get_help:'Få hjälp', c_skip:'Hoppa över', c_like:'💗 Gilla', c_report:'⚑ Rapportera', c_featured:'★ Utvald', c_certified:'✓ Certifierad',
+    photo_choose:'📷 Välj foto', photo_err:'Kunde inte bearbeta bilden. Prova en annan.', photo_avatar:'Profilbild', photo_img:'Foto', photo_save:'Spara foto',
+    trf_medical:'Sjukvård', trf_admin:'Dokument/Myndighet', trf_legal:'Juridik', trf_accompany:'Allmänt sällskap', trf_doc:'Dokumentöversättning',
+    pf_title:'Min singelprofil', pf_sub:'Detta visas för andra användare. Du kan radera det när som helst.',
+    pf_name:'Visningsnamn', pf_age:'Ålder', pf_area:'Område', pf_job:'Yrke', pf_looking:'Söker',
+    pf_bio:'Om dig själv', pf_bio_ph:'Några rader om dig, intressen, vad du söker…',
+    pf_interests:'Intressen (kommaseparerade)', pf_phone:'Kontaktnummer (visas bara efter matchning)',
+    pf_save:'Spara profil', pf_delete:'Radera profil', pf_need_name:'Ange ett namn.',
+    pf_del_confirm:'Radera din singelprofil? Andra kommer inte längre att se dig.',
+    match_title:'Ni har fått kontakt!', match_both:'Du och', match_both2:'gillade varandra.',
+    match_first:'Nu kan ni kontakta varandra. Kom ihåg att träffas på en offentlig plats först.',
+    match_view:'Visa kontakter', like_need_profile:'Skapa din profil innan du får kontakt.',
+    report_reason:'Rapportera denna användare av vilken anledning? (t.ex. falsk profil, trakasserier, bedrägeri…)\\nRapporten skickas till administratörer.',
+    report_thanks:'Tack för din rapport. Administratörer granskar och agerar.', report_confirm:'Rapportera och dölj detta meddelande?',
+    tr_reg_title:'Registrera dig som tolk', tr_reg_sub:'Hjälp nykomlingar att övervinna språkbarriären. Avgifter kommer ni överens om själva.',
+    tr_name:'Visningsnamn', tr_area:'Område', tr_langs:'Språk (kommaseparerade)',
+    tr_fields:'Områden du kan hjälpa till med', tr_exp:'Erfarenhet (en rad)',
+    tr_auth:'Jag har ett officiellt tolkintyg (auktoriserad tolk)', tr_bio:'Presentation',
+    tr_bio_ph:'Några rader om dig, din tillgänglighet…', tr_phone:'Kontaktnummer', tr_post:'Publicera profil',
+    trq_title:'Publicera en tolkförfrågan', trq_sub:'Beskriv vad du behöver hjälp med. Tolkar kontaktar dig.',
+    trq_name:'Visningsnamn', trq_area:'Område', trq_field:'Område', trq_when:'När',
+    trq_desc:'Beskriv vad du behöver', trq_phone:'Kontaktnummer', trq_post:'Publicera förfrågan',
+    ld_title:'Begär rådgivning', ld_sub:'Tjänst:', ld_after:'. QTT Solutions kontaktar dig snart.',
+    ld_name:'Ditt namn / företag', ld_phone:'Telefonnummer', ld_email:'E-post', ld_lan:'Län / Område',
+    ld_type:'Typ', ld_note:'Anteckning (valfritt)', ld_note_ph:'Beskriv dina behov…', ld_send:'Skicka förfrågan',
+    ld_need:'Ange ett namn och minst telefon eller e-post.', ld_ok:'Förfrågan skickad! QTT Solutions kontaktar dig snart. Öppnar din e-post…',
+    biz_rest:'Restaurang', biz_cafe:'Matställe / Café', biz_nail:'Nagelsalong', biz_other:'Annat',
   },
   vi: {
     tab_home:'Trang chủ', tab_places:'Địa điểm', tab_outings:'Đi chơi cùng con', tab_market:'Chợ cộng đồng',
@@ -964,7 +1055,7 @@ const I18N = {
     about_badge:'Về WeShare', about_title:'Một sản phẩm của người Việt, cho cộng đồng', about_p:'WeShare là nền tảng cộng đồng dành cho những người xa quê đang sinh sống tại Thụy Điển. WeShare ra đời để những khoảnh khắc lạc lõng ấy không còn đơn độc.', about_brand_pre:'Phát triển bởi', about_brand_post:'— công ty công nghệ gắn kết cộng đồng nơi xứ người.', about_free:'Miễn phí · An toàn · Luôn bằng tiếng mẹ đẻ',
     foot_tag:'Cộng đồng người xa quê tại Thụy Điển', foot_by:'Một sản phẩm của',
     right_in:'tại', items_in:'mục ở', nothing_in:'Chưa có nội dung ở',
-    c_open:'Giờ mở', c_call:'Gọi', c_map:'Xem bản đồ', c_contact:'Liên hệ', c_area:'Khu vực', c_phone:'Điện thoại', c_addr:'Địa chỉ', c_poster:'Người đăng', c_get_help:'Nhận giúp', c_skip:'Bỏ qua', c_like:'💗 Thích', c_report:'⚑ Báo cáo', c_featured:'★ Nổi bật', c_certified:'✓ Được cấp phép', photo_choose:'📷 Chọn ảnh', photo_err:'Không xử lý được ảnh. Hãy thử ảnh khác.', photo_avatar:'Ảnh đại diện', photo_img:'Hình ảnh',
+    c_open:'Giờ mở', c_call:'Gọi', c_map:'Xem bản đồ', c_contact:'Liên hệ', c_area:'Khu vực', c_phone:'Điện thoại', c_addr:'Địa chỉ', c_poster:'Người đăng', c_get_help:'Nhận giúp', c_skip:'Bỏ qua', c_like:'💗 Thích', c_report:'⚑ Báo cáo', c_featured:'★ Nổi bật', c_certified:'✓ Được cấp phép', photo_choose:'📷 Chọn ảnh', photo_err:'Không xử lý được ảnh. Hãy thử ảnh khác.', photo_avatar:'Ảnh đại diện', photo_img:'Hình ảnh', photo_save:'Lưu ảnh',
   },
   th: {
     tab_home:'หน้าแรก', tab_places:'สถานที่', tab_outings:'พาลูกไปเที่ยว', tab_market:'ตลาดชุมชน',
@@ -1053,7 +1144,7 @@ const I18N = {
     about_badge:'เกี่ยวกับ WeShare', about_title:'ผลิตภัณฑ์โดยคนเวียดนาม เพื่อชุมชน', about_p:'WeShare เป็นแพลตฟอร์มชุมชนสำหรับผู้ที่อยู่ไกลบ้านในสวีเดน WeShare เกิดขึ้นเพื่อให้ช่วงเวลาที่รู้สึกเคว้งคว้างไม่โดดเดี่ยวอีกต่อไป', about_brand_pre:'พัฒนาโดย', about_brand_post:'— บริษัทเทคโนโลยีที่เชื่อมชุมชนในต่างแดน', about_free:'ฟรี · ปลอดภัย · ในภาษาของคุณเสมอ',
     foot_tag:'ชุมชนสำหรับผู้อยู่ไกลบ้านในสวีเดน', foot_by:'ผลิตภัณฑ์ของ',
     right_in:'ที่', items_in:'รายการใน', nothing_in:'ยังไม่มีเนื้อหาใน',
-    c_open:'เวลาเปิด', c_call:'โทร', c_map:'ดูแผนที่', c_contact:'ติดต่อ', c_area:'พื้นที่', c_phone:'โทรศัพท์', c_addr:'ที่อยู่', c_poster:'โพสต์โดย', c_get_help:'ขอความช่วยเหลือ', c_skip:'ข้าม', c_like:'💗 ถูกใจ', c_report:'⚑ รายงาน', c_featured:'★ แนะนำ', c_certified:'✓ ได้รับการรับรอง', photo_choose:'📷 เลือกรูป', photo_err:'ประมวลผลรูปไม่ได้ ลองรูปอื่น', photo_avatar:'รูปโปรไฟล์', photo_img:'รูปภาพ',
+    c_open:'เวลาเปิด', c_call:'โทร', c_map:'ดูแผนที่', c_contact:'ติดต่อ', c_area:'พื้นที่', c_phone:'โทรศัพท์', c_addr:'ที่อยู่', c_poster:'โพสต์โดย', c_get_help:'ขอความช่วยเหลือ', c_skip:'ข้าม', c_like:'💗 ถูกใจ', c_report:'⚑ รายงาน', c_featured:'★ แนะนำ', c_certified:'✓ ได้รับการรับรอง', photo_choose:'📷 เลือกรูป', photo_err:'ประมวลผลรูปไม่ได้ ลองรูปอื่น', photo_avatar:'รูปโปรไฟล์', photo_img:'รูปภาพ', photo_save:'บันทึกรูป',
   }
 };
 let LANG = 'en';
@@ -1819,7 +1910,7 @@ function renderChatMsg(m) {
   const hh = isNaN(t) ? '' : ('0'+t.getHours()).slice(-2)+':'+('0'+t.getMinutes()).slice(-2);
   const name = m.ten || (m.email||'?').split('@')[0];
   el.innerHTML = `
-    <div class="av" style="background:${AV[avColor(m.email||name)]}">${initials(name)}</div>
+    <div class="av" style="background:${AV[avColor(m.email||name)]}${m.anh?`;background-image:url('${m.anh}');background-size:cover;background-position:center`:''}">${m.anh?'':initials(name)}</div>
     <div class="cmsg-body">
       <div class="cmsg-top">
         <span class="cmsg-name">${escapeHtml(name)}</span>
@@ -1840,7 +1931,7 @@ async function sendChatMsg() {
   const btn = document.querySelector('.chat-send');
   if (btn) { btn.disabled = true; btn.textContent = '…'; }
   try {
-    const r = await callApi({ action:'sendChat', email: currentUser.email, ten: currentUser.ten||'', noidung: text });
+    const r = await callApi({ action:'sendChat', email: currentUser.email, ten: currentUser.ten||'', anh: currentUser.anh||'', noidung: text });
     if (r && r.ok && r.item) {
       inp.value = '';
       if (!chatSeen.has(String(r.item.id))) {
@@ -1955,7 +2046,9 @@ function onAccountClick() {
       <div class="sheet-body">
         <h2>${t('au_hello')}, ${currentUser.ten || currentUser.email}</h2>
         <div class="auth-note">${currentUser.email}</div>
-        <button class="submit" style="background:var(--paper-2);color:var(--ink);border:1px solid var(--line)" onclick="logout()">${t('logout')}</button>
+        ${photoFieldHTML(t('photo_avatar'), 'acc-anh-prev', 'acc-anh', currentUser.anh||'', true)}
+        <button class="submit" onclick="saveAccountAvatar()">${t('photo_save')}</button>
+        <button class="submit" style="background:var(--paper-2);color:var(--ink);border:1px solid var(--line);margin-top:8px" onclick="logout()">${t('logout')}</button>
       </div>`;
     openModalEl();
   } else {
@@ -2247,6 +2340,16 @@ function requireLogin(action) {
   pendingAction = action;
   openAuth('login');
   return false;
+}
+
+function saveAccountAvatar() {
+  if (!currentUser) return;
+  const anh = document.getElementById('acc-anh').value;
+  currentUser.anh = anh;
+  localStorage.setItem('vietsthlm_user', JSON.stringify(currentUser));
+  refreshAccBtn();
+  closeModal();
+  callApi({ action:'updateAvatar', email: currentUser.email, anh }).catch(()=>{});
 }
 
 initCitySelector();
