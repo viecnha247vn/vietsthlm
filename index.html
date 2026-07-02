@@ -1192,6 +1192,11 @@ function switchTab(tab) {
   document.querySelector('.city-bar').style.display = noChrome ? 'none' : '';
   const ph = { places:t('search_places'), outings:t('search_area'), market:t('search_market'), friends:t('search_area'), translate:t('search_lang') };
   if (ph[tab]) document.getElementById('q').placeholder = ph[tab];
+  // chỉ hiện nút FAB của tab đang mở (tránh các nút chồng lên nhau chặn click)
+  document.querySelectorAll('.fab').forEach(f => {
+    const forTab = f.dataset.for || (f.id==='tr-fab' ? 'translate' : '');
+    f.style.display = (forTab===tab) ? '' : 'none';
+  });
   if (tab==='friends') renderFriends();
   if (tab==='translate') renderTranslate();
   window.scrollTo(0,0);
@@ -1316,7 +1321,7 @@ function toggleJoin(id) {
   });
 }
 function openCreate() {
-  if (!requireLogin(openCreate)) return;
+  requireLogin(() => {
   document.getElementById('sheet').innerHTML = `
     <button class="close-x" onclick="closeModal()">✕</button>
     <div class="sheet-body">
@@ -1334,6 +1339,7 @@ function openCreate() {
       <button class="submit" onclick="submitOuting()">${t('of_post')}</button>
     </div>`;
   openModalEl();
+  });
 }
 function submitOuting() {
   const v = id => document.getElementById(id).value.trim();
@@ -1391,7 +1397,7 @@ function openItem(id) {
   openModalEl();
 }
 function openPost() {
-  if (!requireLogin(openPost)) return;
+  requireLogin(() => {
   document.getElementById('sheet').innerHTML = `
     <button class="close-x" onclick="closeModal()">✕</button>
     <div class="sheet-body">
@@ -1424,6 +1430,7 @@ function openPost() {
       <button class="submit" onclick="submitItem()">${t('mk_post_btn')}</button>
     </div>`;
   openModalEl();
+  });
 }
 function submitItem() {
   const v = id => document.getElementById(id).value.trim();
