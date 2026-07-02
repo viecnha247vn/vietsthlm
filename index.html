@@ -172,6 +172,16 @@
   .cta-call { background: #fff; color: var(--ink); border: 1px solid var(--line); }
 
   .field { margin-bottom: 14px; }
+  .photo-pick { display: flex; align-items: center; gap: 14px; }
+  .photo-prev { width: 74px; height: 74px; flex-shrink: 0; background: var(--paper-2);
+    background-size: cover; background-position: center; border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center; }
+  .photo-prev:not([style*="url"]):before { content: "📷"; font-size: 24px; opacity: .4; }
+  .photo-prev.loading { opacity: .5; }
+  .photo-btn { display: inline-block; background: var(--paper-2); border: 1px solid var(--line);
+    border-radius: 10px; padding: 10px 16px; font-size: 14px; font-weight: 600; cursor: pointer;
+    color: var(--ink); font-family: inherit; }
+  .photo-btn:hover { background: #ece3d3; }
   .field label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
   .field input, .field textarea, .field select { width: 100%; font-family: inherit; font-size: 15px;
     padding: 11px 13px; border: 1px solid var(--line); border-radius: 11px; background: #fff;
@@ -865,7 +875,7 @@ const I18N = {
     about_badge:'About WeShare', about_title:'A product by Vietnamese, for the community', about_p:'WeShare is a community platform for people living far from home in Sweden. WeShare exists so those moments of feeling lost are no longer lonely.', about_brand_pre:'Built by', about_brand_post:'— a technology company connecting communities abroad.', about_free:'Free · Safe · Always in your own language',
     foot_tag:'Community for people far from home in Sweden', foot_by:'A product of',
     right_in:'in', items_in:'items in', nothing_in:'No content in',
-    c_open:'Open', c_call:'Call', c_map:'View map', c_contact:'Contact', c_area:'Area', c_phone:'Phone', c_addr:'Address', c_poster:'Posted by', c_get_help:'Get help', c_skip:'Skip', c_like:'💗 Like', c_report:'⚑ Report', c_featured:'★ Featured', c_certified:'✓ Certified',
+    c_open:'Open', c_call:'Call', c_map:'View map', c_contact:'Contact', c_area:'Area', c_phone:'Phone', c_addr:'Address', c_poster:'Posted by', c_get_help:'Get help', c_skip:'Skip', c_like:'💗 Like', c_report:'⚑ Report', c_featured:'★ Featured', c_certified:'✓ Certified', photo_choose:'📷 Choose photo', photo_err:'Could not process the image. Please try another.', photo_avatar:'Profile photo', photo_img:'Photo',
   },
   vi: {
     tab_home:'Trang chủ', tab_places:'Địa điểm', tab_outings:'Đi chơi cùng con', tab_market:'Chợ cộng đồng',
@@ -954,7 +964,7 @@ const I18N = {
     about_badge:'Về WeShare', about_title:'Một sản phẩm của người Việt, cho cộng đồng', about_p:'WeShare là nền tảng cộng đồng dành cho những người xa quê đang sinh sống tại Thụy Điển. WeShare ra đời để những khoảnh khắc lạc lõng ấy không còn đơn độc.', about_brand_pre:'Phát triển bởi', about_brand_post:'— công ty công nghệ gắn kết cộng đồng nơi xứ người.', about_free:'Miễn phí · An toàn · Luôn bằng tiếng mẹ đẻ',
     foot_tag:'Cộng đồng người xa quê tại Thụy Điển', foot_by:'Một sản phẩm của',
     right_in:'tại', items_in:'mục ở', nothing_in:'Chưa có nội dung ở',
-    c_open:'Giờ mở', c_call:'Gọi', c_map:'Xem bản đồ', c_contact:'Liên hệ', c_area:'Khu vực', c_phone:'Điện thoại', c_addr:'Địa chỉ', c_poster:'Người đăng', c_get_help:'Nhận giúp', c_skip:'Bỏ qua', c_like:'💗 Thích', c_report:'⚑ Báo cáo', c_featured:'★ Nổi bật', c_certified:'✓ Được cấp phép',
+    c_open:'Giờ mở', c_call:'Gọi', c_map:'Xem bản đồ', c_contact:'Liên hệ', c_area:'Khu vực', c_phone:'Điện thoại', c_addr:'Địa chỉ', c_poster:'Người đăng', c_get_help:'Nhận giúp', c_skip:'Bỏ qua', c_like:'💗 Thích', c_report:'⚑ Báo cáo', c_featured:'★ Nổi bật', c_certified:'✓ Được cấp phép', photo_choose:'📷 Chọn ảnh', photo_err:'Không xử lý được ảnh. Hãy thử ảnh khác.', photo_avatar:'Ảnh đại diện', photo_img:'Hình ảnh',
   },
   th: {
     tab_home:'หน้าแรก', tab_places:'สถานที่', tab_outings:'พาลูกไปเที่ยว', tab_market:'ตลาดชุมชน',
@@ -1043,7 +1053,7 @@ const I18N = {
     about_badge:'เกี่ยวกับ WeShare', about_title:'ผลิตภัณฑ์โดยคนเวียดนาม เพื่อชุมชน', about_p:'WeShare เป็นแพลตฟอร์มชุมชนสำหรับผู้ที่อยู่ไกลบ้านในสวีเดน WeShare เกิดขึ้นเพื่อให้ช่วงเวลาที่รู้สึกเคว้งคว้างไม่โดดเดี่ยวอีกต่อไป', about_brand_pre:'พัฒนาโดย', about_brand_post:'— บริษัทเทคโนโลยีที่เชื่อมชุมชนในต่างแดน', about_free:'ฟรี · ปลอดภัย · ในภาษาของคุณเสมอ',
     foot_tag:'ชุมชนสำหรับผู้อยู่ไกลบ้านในสวีเดน', foot_by:'ผลิตภัณฑ์ของ',
     right_in:'ที่', items_in:'รายการใน', nothing_in:'ยังไม่มีเนื้อหาใน',
-    c_open:'เวลาเปิด', c_call:'โทร', c_map:'ดูแผนที่', c_contact:'ติดต่อ', c_area:'พื้นที่', c_phone:'โทรศัพท์', c_addr:'ที่อยู่', c_poster:'โพสต์โดย', c_get_help:'ขอความช่วยเหลือ', c_skip:'ข้าม', c_like:'💗 ถูกใจ', c_report:'⚑ รายงาน', c_featured:'★ แนะนำ', c_certified:'✓ ได้รับการรับรอง',
+    c_open:'เวลาเปิด', c_call:'โทร', c_map:'ดูแผนที่', c_contact:'ติดต่อ', c_area:'พื้นที่', c_phone:'โทรศัพท์', c_addr:'ที่อยู่', c_poster:'โพสต์โดย', c_get_help:'ขอความช่วยเหลือ', c_skip:'ข้าม', c_like:'💗 ถูกใจ', c_report:'⚑ รายงาน', c_featured:'★ แนะนำ', c_certified:'✓ ได้รับการรับรอง', photo_choose:'📷 เลือกรูป', photo_err:'ประมวลผลรูปไม่ได้ ลองรูปอื่น', photo_avatar:'รูปโปรไฟล์', photo_img:'รูปภาพ',
   }
 };
 let LANG = 'en';
@@ -1327,6 +1337,7 @@ function openCreate() {
     <div class="sheet-body">
       <h2>${t('of_title')}</h2>
       <div class="sub" style="margin-bottom:18px;">${t('of_sub')}</div>
+      ${photoFieldHTML(t('photo_img'), 'f-anh-prev', 'f-anh', '', false)}
       <div class="field"><label>${t('of_yourname')}</label><input id="f-host" value="${currentUser?(currentUser.ten||''):''}" placeholder=""></div>
       <div class="field"><label>${t('of_place')}</label><input id="f-place" placeholder=""></div>
       <div class="field"><label>${t('of_area')}</label><input id="f-area" placeholder=""></div>
@@ -1345,7 +1356,7 @@ function submitOuting() {
   const v = id => document.getElementById(id).value.trim();
   const host=v('f-host'), place=v('f-place');
   if (!host || !place) { alert(t('of_need')); return; }
-  const item = { tp:activeCity, host, khuvuc:v('f-area')||activeCity, diadiem:place, dia_addr:v('f-area')||place, ngay:v('f-day')||'—', gio:v('f-time')||'', tuoi:v('f-age')||'—', note:v('f-note')||'', going:[host], joined:false, email: currentUser?currentUser.email:'' };
+  const item = { tp:activeCity, host, khuvuc:v('f-area')||activeCity, diadiem:place, dia_addr:v('f-area')||place, ngay:v('f-day')||'—', gio:v('f-time')||'', tuoi:v('f-age')||'—', note:v('f-note')||'', anh:v('f-anh')||'', going:[host], joined:false, email: currentUser?currentUser.email:'' };
   OUTINGS.unshift(item);
   closeModal(); renderFeed();
   callApi({ action:'addOuting', ...item }).catch(()=>{});
@@ -1403,6 +1414,7 @@ function openPost() {
     <div class="sheet-body">
       <h2>${t('mk_post')}</h2>
       <div class="sub" style="margin-bottom:18px;">${t('mk_sub')}</div>
+      ${photoFieldHTML(t('photo_img'), 'm-anh-prev', 'm-anh', '', false)}
       <div class="field"><label>${t('mk_title')}</label><input id="m-title" placeholder=""></div>
       <div class="row2">
         <div class="field"><label>${t('mk_type')}</label>
@@ -1436,7 +1448,7 @@ function submitItem() {
   const v = id => document.getElementById(id).value.trim();
   const title=v('m-title'), who=v('m-who');
   if (!title || !who) { alert(t('mk_need')); return; }
-  const item = { tp:activeCity, type:v('m-type'), cat:v('m-cat'), title, who, khuvuc:v('m-area')||activeCity, sdt:v('m-sdt')||'', desc:v('m-desc')||'', anh:"https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=600&q=70", email: currentUser?currentUser.email:'' };
+  const item = { tp:activeCity, type:v('m-type'), cat:v('m-cat'), title, who, khuvuc:v('m-area')||activeCity, sdt:v('m-sdt')||'', desc:v('m-desc')||'', anh:v('m-anh')||"https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=600&q=70", email: currentUser?currentUser.email:'' };
   MARKET.unshift(item);
   closeModal(); renderMarket();
   callApi({ action:'addMarket', ...item }).catch(()=>{});
@@ -1588,6 +1600,7 @@ function openProfileForm() {
       <div class="sheet-body">
         <h2>${t('pf_title')}</h2>
         <div class="auth-note">${t('pf_sub')}</div>
+        ${photoFieldHTML(t('photo_avatar'), 'p-anh-prev', 'p-anh', p.anh, true)}
         <div class="field"><label>${t('pf_name')}</label><input id="p-ten" value="${p.ten||currentUser.ten||''}" placeholder=""></div>
         <div class="row2">
           <div class="field"><label>${t('pf_age')}</label><input id="p-tuoi" type="number" value="${p.tuoi||''}" placeholder=""></div>
@@ -1608,8 +1621,9 @@ function saveProfile() {
   const v = id => document.getElementById(id).value.trim();
   const ten = v('p-ten');
   if (!ten) { alert(t('pf_need_name')); return; }
+  const anh = v('p-anh') || (myProfile && myProfile.anh) || '';
   myProfile = { ten, tuoi:v('p-tuoi'), khuvuc:v('p-khuvuc'), nghe:v('p-nghe'), tim:v('p-tim'),
-    bio:v('p-bio'), so_thich:v('p-sothich').split(',').map(s=>s.trim()).filter(Boolean), sdt:v('p-sdt'), tp:activeCity };
+    bio:v('p-bio'), so_thich:v('p-sothich').split(',').map(s=>s.trim()).filter(Boolean), sdt:v('p-sdt'), anh, tp:activeCity };
   closeModal(); renderFriends();
   callApi({ action:'saveSingle', ...myProfile, email: currentUser.email }).catch(()=>{});
 }
@@ -1651,7 +1665,7 @@ function renderTrFind() {
     <article class="tr-card" style="position:relative">
       ${tr.auth?'<span class="tr-badge">'+t('c_certified')+'</span>':''}
       <div class="tr-top">
-        <div class="avatar" style="background:${AV[avColor(tr.id)]}">${initials(tr.ten)}</div>
+        <div class="avatar" style="background:${AV[avColor(tr.id)]}${tr.anh?`;background-image:url('${tr.anh}');background-size:cover`:''}">${tr.anh?'':initials(tr.ten)}</div>
         <div><div class="tr-name">${tr.ten}</div><div class="tr-role">${tr.kn}</div></div>
       </div>
       <div class="tr-langs">${tr.langs.map(l=>`<span class="lg">${l}</span>`).join('')}</div>
@@ -1692,6 +1706,7 @@ function openTrProfileForm() {
       <div class="sheet-body">
         <h2>${t('tr_reg_title')}</h2>
         <div class="auth-note">${t('tr_reg_sub')}</div>
+        ${photoFieldHTML(t('photo_avatar'), 't-anh-prev', 't-anh', '', true)}
         <div class="field"><label>${t('tr_name')}</label><input id="t-ten" value="${currentUser.ten||''}" placeholder=""></div>
         <div class="field"><label>${t('tr_area')}</label><input id="t-khuvuc" placeholder=""></div>
         <div class="field"><label>${t('tr_langs')}</label><input id="t-langs" placeholder=""></div>
@@ -1712,7 +1727,7 @@ function submitTranslator() {
   const item = { tp:activeCity, ten, khuvuc:v('t-khuvuc')||activeCity,
     langs:v('t-langs').split(',').map(s=>s.trim()).filter(Boolean),
     fields:v('t-fields').split(',').map(s=>s.trim()).filter(Boolean),
-    auth:document.getElementById('t-auth').checked, kn:v('t-kn')||'', bio:v('t-bio')||'', sdt:v('t-sdt')||'',
+    auth:document.getElementById('t-auth').checked, kn:v('t-kn')||'', bio:v('t-bio')||'', sdt:v('t-sdt')||'', anh:v('t-anh')||'',
     email: currentUser?currentUser.email:'' };
   TRANSLATORS.unshift(item);
   closeModal(); trSub='find'; renderTranslate();
@@ -2165,6 +2180,68 @@ async function doReset(email) {
 
 // ===== cổng chặn: cần đăng nhập mới làm được =====
 let pendingAction = null;
+// ============================================================
+// ===== ẢNH: chọn + nén nhỏ + xem trước (dùng chung mọi form) =====
+// ============================================================
+// Nén ảnh về tối đa maxPx, trả về data URL (base64) để lưu thẳng vào Sheet.
+function compressImage(file, maxPx, quality) {
+  maxPx = maxPx || 400; quality = quality || 0.7;
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        let { width:w, height:h } = img;
+        if (w > h) { if (w > maxPx) { h = h*maxPx/w; w = maxPx; } }
+        else { if (h > maxPx) { w = w*maxPx/h; h = maxPx; } }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.onerror = reject;
+      img.src = e.target.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+// HTML cho ô chọn ảnh. previewId để hiện ảnh, storeId (input hidden) để giữ data URL.
+function photoFieldHTML(label, previewId, storeId, existing, round) {
+  const shape = round ? 'border-radius:999px' : 'border-radius:12px';
+  const has = existing ? `background-image:url('${existing}')` : '';
+  return `
+    <div class="field">
+      <label>${label}</label>
+      <div class="photo-pick">
+        <div class="photo-prev" id="${previewId}" style="${shape};${has}"></div>
+        <label class="photo-btn">
+          ${t('photo_choose')}
+          <input type="file" accept="image/*" style="display:none"
+                 onchange="onPickPhoto(event,'${previewId}','${storeId}')">
+        </label>
+      </div>
+      <input type="hidden" id="${storeId}" value="${existing||''}">
+    </div>`;
+}
+
+async function onPickPhoto(ev, previewId, storeId) {
+  const file = ev.target.files && ev.target.files[0];
+  if (!file) return;
+  const prev = document.getElementById(previewId);
+  prev.classList.add('loading');
+  try {
+    const dataUrl = await compressImage(file, 400, 0.7);
+    prev.style.backgroundImage = `url('${dataUrl}')`;
+    document.getElementById(storeId).value = dataUrl;
+  } catch(e) {
+    alert(t('photo_err'));
+  } finally {
+    prev.classList.remove('loading');
+  }
+}
+
 function requireLogin(action) {
   if (currentUser) { action(); return true; }
   pendingAction = action;
