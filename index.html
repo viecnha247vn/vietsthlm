@@ -250,6 +250,12 @@
     font-size: 13px; opacity: .5; }
   .cmsg-report:hover { opacity: 1; color: var(--red); }
   .cmsg-text { font-size: 14.5px; color: #2a2018; margin-top: 2px; word-wrap: break-word; overflow-wrap: anywhere; }
+  .cmsg-trans { display: none; font-size: 14px; color: var(--jade); margin-top: 5px; padding-top: 5px;
+    border-top: 1px dashed var(--line); word-wrap: break-word; overflow-wrap: anywhere; font-style: italic; }
+  .cmsg-tr-btn { background: none; border: none; color: var(--muted); font-size: 12px; font-weight: 600;
+    cursor: pointer; padding: 3px 0 0; font-family: inherit; }
+  .cmsg-tr-btn:hover { color: var(--jade); text-decoration: underline; }
+  .cmsg-tr-btn:disabled { opacity: .6; cursor: default; text-decoration: none; }
   .cmsg.mine .cmsg-name { color: var(--jade); }
   .chat-input-row { display: none; gap: 10px; padding: 14px 20px; border-top: 1px solid var(--line); background: var(--paper); }
   .chat-input-row.on { display: flex; }
@@ -872,7 +878,7 @@ const I18N = {
     about_badge:'About WeShare', about_title:'A product by Vietnamese, for the community', about_p:'WeShare is a community platform for people living far from home in Sweden. WeShare exists so those moments of feeling lost are no longer lonely.', about_brand_pre:'Built by', about_brand_post:'— a technology company connecting communities abroad.', about_free:'Free · Safe · Always in your own language',
     foot_tag:'Community for people far from home in Sweden', foot_by:'A product of',
     right_in:'in', items_in:'items in', nothing_in:'No content in',
-    c_open:'Open', c_call:'Call', c_map:'View map', c_contact:'Contact', c_area:'Area', c_phone:'Phone', c_addr:'Address', c_poster:'Posted by', c_get_help:'Get help', c_skip:'Skip', c_like:'💗 Like', c_report:'⚑ Report', c_featured:'★ Featured', c_certified:'✓ Certified', photo_choose:'📷 Choose photo', photo_err:'Could not process the image. Please try another.', photo_avatar:'Profile photo', photo_img:'Photo', photo_save:'Save photo',
+    c_open:'Open', c_call:'Call', c_map:'View map', c_contact:'Contact', c_area:'Area', c_phone:'Phone', c_addr:'Address', c_poster:'Posted by', c_get_help:'Get help', c_skip:'Skip', c_like:'💗 Like', c_report:'⚑ Report', c_featured:'★ Featured', c_certified:'✓ Certified', photo_choose:'📷 Choose photo', photo_err:'Could not process the image. Please try another.', photo_avatar:'Profile photo', photo_img:'Photo', photo_save:'Save photo', tr_show:'Translate', tr_hide:'Show original', tr_loading:'Translating…', tr_fail:'Translation failed',
   },
   sv: {
     tab_home:'Hem', tab_places:'Platser', tab_outings:'Utflykter med barn', tab_market:'Marknad',
@@ -937,7 +943,7 @@ const I18N = {
     foot_tag:'Gemenskap för människor långt hemifrån i Sverige', foot_by:'En produkt av',
     right_in:'i', items_in:'objekt i', nothing_in:'Inget innehåll i',
     c_open:'Öppet', c_call:'Ring', c_map:'Visa karta', c_contact:'Kontakt', c_area:'Område', c_phone:'Telefon', c_addr:'Adress', c_poster:'Publicerad av', c_get_help:'Få hjälp', c_skip:'Hoppa över', c_like:'💗 Gilla', c_report:'⚑ Rapportera', c_featured:'★ Utvald', c_certified:'✓ Certifierad',
-    photo_choose:'📷 Välj foto', photo_err:'Kunde inte bearbeta bilden. Prova en annan.', photo_avatar:'Profilbild', photo_img:'Foto', photo_save:'Spara foto',
+    photo_choose:'📷 Välj foto', photo_err:'Kunde inte bearbeta bilden. Prova en annan.', photo_avatar:'Profilbild', photo_img:'Foto', photo_save:'Spara foto', tr_show:'Översätt', tr_hide:'Visa original', tr_loading:'Översätter…', tr_fail:'Översättning misslyckades',
     trf_medical:'Sjukvård', trf_admin:'Dokument/Myndighet', trf_legal:'Juridik', trf_accompany:'Allmänt sällskap', trf_doc:'Dokumentöversättning',
     pf_title:'Min singelprofil', pf_sub:'Detta visas för andra användare. Du kan radera det när som helst.',
     pf_name:'Visningsnamn', pf_age:'Ålder', pf_area:'Område', pf_job:'Yrke', pf_looking:'Söker',
@@ -1027,7 +1033,7 @@ const I18N = {
     foot_tag:'스웨덴에서 고향을 떠나온 사람들을 위한 커뮤니티', foot_by:'제품 제공',
     right_in:'지역:', items_in:'개 항목 —', nothing_in:'콘텐츠가 없습니다 —',
     c_open:'영업', c_call:'전화', c_map:'지도 보기', c_contact:'연락처', c_area:'지역', c_phone:'전화', c_addr:'주소', c_poster:'게시자', c_get_help:'도움 받기', c_skip:'건너뛰기', c_like:'💗 좋아요', c_report:'⚑ 신고', c_featured:'★ 추천', c_certified:'✓ 인증됨',
-    photo_choose:'📷 사진 선택', photo_err:'이미지를 처리할 수 없습니다. 다른 사진을 시도하세요.', photo_avatar:'프로필 사진', photo_img:'사진', photo_save:'사진 저장',
+    photo_choose:'📷 사진 선택', photo_err:'이미지를 처리할 수 없습니다. 다른 사진을 시도하세요.', photo_avatar:'프로필 사진', photo_img:'사진', photo_save:'사진 저장', tr_show:'번역', tr_hide:'원문 보기', tr_loading:'번역 중…', tr_fail:'번역 실패',
     trf_medical:'의료', trf_admin:'서류/행정', trf_legal:'법률', trf_accompany:'일반 동행', trf_doc:'문서 번역',
     pf_title:'내 싱글 프로필', pf_sub:'다른 사용자에게 표시됩니다. 언제든 삭제할 수 있습니다.',
     pf_name:'표시 이름', pf_age:'나이', pf_area:'지역', pf_job:'직업', pf_looking:'찾는 대상',
@@ -1117,7 +1123,7 @@ const I18N = {
     foot_tag:'Komunidad para sa mga taong malayo sa tahanan sa Sweden', foot_by:'Isang produkto ng',
     right_in:'sa', items_in:'item sa', nothing_in:'Walang nilalaman sa',
     c_open:'Bukas', c_call:'Tumawag', c_map:'Tingnan ang mapa', c_contact:'Contact', c_area:'Lugar', c_phone:'Telepono', c_addr:'Address', c_poster:'Nag-post', c_get_help:'Humingi ng tulong', c_skip:'Laktawan', c_like:'💗 Like', c_report:'⚑ I-report', c_featured:'★ Tampok', c_certified:'✓ Sertipikado',
-    photo_choose:'📷 Pumili ng larawan', photo_err:'Hindi ma-process ang larawan. Subukan ang iba.', photo_avatar:'Larawan ng profile', photo_img:'Larawan', photo_save:'I-save ang larawan',
+    photo_choose:'📷 Pumili ng larawan', photo_err:'Hindi ma-process ang larawan. Subukan ang iba.', photo_avatar:'Larawan ng profile', photo_img:'Larawan', photo_save:'I-save ang larawan', tr_show:'Isalin', tr_hide:'Ipakita ang orihinal', tr_loading:'Isinasalin…', tr_fail:'Nabigo ang pagsasalin',
     trf_medical:'Medikal', trf_admin:'Dokumento/Administratibo', trf_legal:'Legal', trf_accompany:'Pangkalahatang pagsama', trf_doc:'Pagsasalin ng dokumento',
     pf_title:'Aking singles profile', pf_sub:'Ipinapakita ito sa ibang user. Puwede mong burahin anumang oras.',
     pf_name:'Display name', pf_age:'Edad', pf_area:'Lugar', pf_job:'Trabaho', pf_looking:'Hinahanap',
@@ -1231,7 +1237,7 @@ const I18N = {
     about_badge:'Về WeShare', about_title:'Một sản phẩm của người Việt, cho cộng đồng', about_p:'WeShare là nền tảng cộng đồng dành cho những người xa quê đang sinh sống tại Thụy Điển. WeShare ra đời để những khoảnh khắc lạc lõng ấy không còn đơn độc.', about_brand_pre:'Phát triển bởi', about_brand_post:'— công ty công nghệ gắn kết cộng đồng nơi xứ người.', about_free:'Miễn phí · An toàn · Luôn bằng tiếng mẹ đẻ',
     foot_tag:'Cộng đồng người xa quê tại Thụy Điển', foot_by:'Một sản phẩm của',
     right_in:'tại', items_in:'mục ở', nothing_in:'Chưa có nội dung ở',
-    c_open:'Giờ mở', c_call:'Gọi', c_map:'Xem bản đồ', c_contact:'Liên hệ', c_area:'Khu vực', c_phone:'Điện thoại', c_addr:'Địa chỉ', c_poster:'Người đăng', c_get_help:'Nhận giúp', c_skip:'Bỏ qua', c_like:'💗 Thích', c_report:'⚑ Báo cáo', c_featured:'★ Nổi bật', c_certified:'✓ Được cấp phép', photo_choose:'📷 Chọn ảnh', photo_err:'Không xử lý được ảnh. Hãy thử ảnh khác.', photo_avatar:'Ảnh đại diện', photo_img:'Hình ảnh', photo_save:'Lưu ảnh',
+    c_open:'Giờ mở', c_call:'Gọi', c_map:'Xem bản đồ', c_contact:'Liên hệ', c_area:'Khu vực', c_phone:'Điện thoại', c_addr:'Địa chỉ', c_poster:'Người đăng', c_get_help:'Nhận giúp', c_skip:'Bỏ qua', c_like:'💗 Thích', c_report:'⚑ Báo cáo', c_featured:'★ Nổi bật', c_certified:'✓ Được cấp phép', photo_choose:'📷 Chọn ảnh', photo_err:'Không xử lý được ảnh. Hãy thử ảnh khác.', photo_avatar:'Ảnh đại diện', photo_img:'Hình ảnh', photo_save:'Lưu ảnh', tr_show:'Dịch', tr_hide:'Xem bản gốc', tr_loading:'Đang dịch…', tr_fail:'Dịch không thành công',
   },
   th: {
     tab_home:'หน้าแรก', tab_places:'สถานที่', tab_outings:'พาลูกไปเที่ยว', tab_market:'ตลาดชุมชน',
@@ -1320,7 +1326,7 @@ const I18N = {
     about_badge:'เกี่ยวกับ WeShare', about_title:'ผลิตภัณฑ์โดยคนเวียดนาม เพื่อชุมชน', about_p:'WeShare เป็นแพลตฟอร์มชุมชนสำหรับผู้ที่อยู่ไกลบ้านในสวีเดน WeShare เกิดขึ้นเพื่อให้ช่วงเวลาที่รู้สึกเคว้งคว้างไม่โดดเดี่ยวอีกต่อไป', about_brand_pre:'พัฒนาโดย', about_brand_post:'— บริษัทเทคโนโลยีที่เชื่อมชุมชนในต่างแดน', about_free:'ฟรี · ปลอดภัย · ในภาษาของคุณเสมอ',
     foot_tag:'ชุมชนสำหรับผู้อยู่ไกลบ้านในสวีเดน', foot_by:'ผลิตภัณฑ์ของ',
     right_in:'ที่', items_in:'รายการใน', nothing_in:'ยังไม่มีเนื้อหาใน',
-    c_open:'เวลาเปิด', c_call:'โทร', c_map:'ดูแผนที่', c_contact:'ติดต่อ', c_area:'พื้นที่', c_phone:'โทรศัพท์', c_addr:'ที่อยู่', c_poster:'โพสต์โดย', c_get_help:'ขอความช่วยเหลือ', c_skip:'ข้าม', c_like:'💗 ถูกใจ', c_report:'⚑ รายงาน', c_featured:'★ แนะนำ', c_certified:'✓ ได้รับการรับรอง', photo_choose:'📷 เลือกรูป', photo_err:'ประมวลผลรูปไม่ได้ ลองรูปอื่น', photo_avatar:'รูปโปรไฟล์', photo_img:'รูปภาพ', photo_save:'บันทึกรูป',
+    c_open:'เวลาเปิด', c_call:'โทร', c_map:'ดูแผนที่', c_contact:'ติดต่อ', c_area:'พื้นที่', c_phone:'โทรศัพท์', c_addr:'ที่อยู่', c_poster:'โพสต์โดย', c_get_help:'ขอความช่วยเหลือ', c_skip:'ข้าม', c_like:'💗 ถูกใจ', c_report:'⚑ รายงาน', c_featured:'★ แนะนำ', c_certified:'✓ ได้รับการรับรอง', photo_choose:'📷 เลือกรูป', photo_err:'ประมวลผลรูปไม่ได้ ลองรูปอื่น', photo_avatar:'รูปโปรไฟล์', photo_img:'รูปภาพ', photo_save:'บันทึกรูป', tr_show:'แปล', tr_hide:'ดูต้นฉบับ', tr_loading:'กำลังแปล…', tr_fail:'แปลไม่สำเร็จ',
   }
 };
 let LANG = 'en';
@@ -2082,8 +2088,8 @@ function renderChatMsg(m) {
   const el = document.createElement('div');
   const mine = currentUser && String(m.email||'').toLowerCase()===currentUser.email.toLowerCase();
   el.className = 'cmsg' + (mine?' mine':'');
-  const t = m.ngay_tao ? new Date(m.ngay_tao) : new Date(Number(m.id));
-  const hh = isNaN(t) ? '' : ('0'+t.getHours()).slice(-2)+':'+('0'+t.getMinutes()).slice(-2);
+  const tm = m.ngay_tao ? new Date(m.ngay_tao) : new Date(Number(m.id));
+  const hh = isNaN(tm) ? '' : ('0'+tm.getHours()).slice(-2)+':'+('0'+tm.getMinutes()).slice(-2);
   const name = m.ten || (m.email||'?').split('@')[0];
   el.innerHTML = `
     <div class="av" style="background:${AV[avColor(m.email||name)]}${m.anh?`;background-image:url('${m.anh}');background-size:cover;background-position:center`:''}">${m.anh?'':initials(name)}</div>
@@ -2093,9 +2099,40 @@ function renderChatMsg(m) {
         <span class="cmsg-time">${hh}</span>
         <button class="cmsg-report" title="Báo cáo" onclick="reportChatMsg('${m.id}')">⚑</button>
       </div>
-      <div class="cmsg-text">${escapeHtml(m.noidung||'')}</div>
+      <div class="cmsg-text" id="cmsg-text-${m.id}">${escapeHtml(m.noidung||'')}</div>
+      <div class="cmsg-trans" id="cmsg-trans-${m.id}"></div>
+      <button class="cmsg-tr-btn" onclick="translateChatMsg('${m.id}', this)">${t('tr_show')}</button>
     </div>`;
   return el;
+}
+window.__chatText = window.__chatText || {};
+async function translateChatMsg(id, btn) {
+  const box = document.getElementById('cmsg-trans-'+id);
+  const src = document.getElementById('cmsg-text-'+id);
+  if (!box || !src) return;
+  // đã dịch rồi thì bật/tắt hiển thị
+  if (box.dataset.done) {
+    const showing = box.style.display !== 'none';
+    box.style.display = showing ? 'none' : 'block';
+    btn.textContent = showing ? t('tr_show') : t('tr_hide');
+    return;
+  }
+  btn.textContent = t('tr_loading'); btn.disabled = true;
+  try {
+    const r = await callApi({ action:'translate', text: src.textContent, target: LANG });
+    if (r && r.ok && r.text) {
+      box.textContent = r.text;
+      box.dataset.done = '1';
+      box.style.display = 'block';
+      btn.textContent = t('tr_hide');
+    } else {
+      btn.textContent = t('tr_fail');
+    }
+  } catch(e) {
+    btn.textContent = t('tr_fail');
+  } finally {
+    btn.disabled = false;
+  }
 }
 function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
