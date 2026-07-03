@@ -445,7 +445,7 @@
   </div>
   <div class="tabs">
     <div class="tab" data-tab="home" onclick="switchTab('home')" data-i18n="tab_home">Trang chủ</div>
-    <div class="tab on" data-tab="places" onclick="switchTab('places')" data-i18n="tab_places">Địa điểm</div>
+    <div class="tab on" data-tab="places" onclick="switchTab('places')" data-i18n="tab_places">Check-in</div>
     <div class="tab" data-tab="outings" onclick="switchTab('outings')" data-i18n="tab_outings">Đi chơi cùng con</div>
     <div class="tab" data-tab="market" onclick="switchTab('market')" data-i18n="tab_market">Chợ cộng đồng</div>
     <div class="tab" data-tab="friends" onclick="switchTab('friends')" data-i18n="tab_friends">Kết bạn</div>
@@ -496,7 +496,7 @@
     <div class="home-grid">
       <article class="home-card" onclick="switchTab('places')">
         <div class="hc-icon" style="background:#fdeede">🍜</div>
-        <h3 data-i18n="tab_places">Địa điểm</h3>
+        <h3 data-i18n="tab_places">Check-in</h3>
         <p data-i18n="hc_places_d">Quán ăn, cửa hàng, tiệm nail và dịch vụ gần bạn — với đánh giá thật từ cộng đồng.</p>
         <span class="hc-go">Xem địa điểm →</span>
       </article>
@@ -533,7 +533,7 @@
       <article class="home-card home-card-cta" onclick="onAccountClick()">
         <div class="hc-icon" style="background:#ece4f2">✨</div>
         <h3 data-i18n="hc_join">Tham gia cộng đồng</h3>
-        <p data-i18n="hc_join_d">Tạo tài khoản miễn phí để đăng tin, tham gia hoạt động và kết nối với mọi người khắp Thụy Điển.</p>
+        <p data-i18n="hc_join_d">Tạo tài khoản để đăng tin, tham gia hoạt động và kết nối với mọi người khắp Thụy Điển.</p>
         <span class="hc-go">Đăng nhập / Đăng ký →</span>
       </article>
     </div>
@@ -544,7 +544,7 @@
       <h2 data-i18n="about_title">Xây dựng cho mọi cộng đồng xa quê</h2>
       <p data-i18n="about_p">WeShare là nền tảng cộng đồng dành cho tất cả những người xa quê đang sinh sống tại Thụy Điển — dù bạn đến từ đất nước nào. Xa quê hương, ai cũng từng có lúc lạc lõng, bối rối trước một lá thư từ cơ quan hay thiếu một người đồng hương để trò chuyện. WeShare ra đời để những khoảnh khắc ấy không còn đơn độc.</p>
       <p class="about-brand"><span data-i18n="about_brand_pre">Phát triển bởi</span> <b>QTT Solutions</b> <span data-i18n="about_brand_post">— công ty công nghệ, dùng công nghệ để gắn kết cộng đồng nơi xứ người.</span></p>
-      <p class="about-free"><b data-i18n="about_free">Miễn phí · An toàn · Luôn bằng tiếng mẹ đẻ</b></p>
+      <p class="about-free"><b data-i18n="about_free">An toàn · Gần gũi · Bằng ngôn ngữ của bạn</b></p>
     </section>
   </main>
 </div>
@@ -718,7 +718,7 @@
 
     <div class="svc-note">
       <b data-i18n="svc_why">Vì sao chọn QTT Solutions?</b> <span data-i18n="svc_why_d">Chúng tôi hiểu cách vận hành của các nhà hàng và tiệm nail nhỏ tại Thụy Điển, và hỗ trợ bạn bằng chính ngôn ngữ của bạn.</span>
-      <div class="svc-contact"><span data-i18n="svc_contact">Liên hệ trực tiếp:</span> <a href="mailto:qttsolutions@gmail.com">qttsolutions@gmail.com</a></div>
+      <div class="svc-contact"><span data-i18n="svc_contact">Liên hệ trực tiếp:</span> <a href="mailto:weshare.sverige@gmail.com">weshare.sverige@gmail.com</a></div>
     </div>
   </main>
 </div>
@@ -727,7 +727,7 @@
   <div class="foot-brand">We<span>Share</span><span class="dot">.</span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
-  <a class="foot-mail" href="mailto:qttsolutions@gmail.com">✉ qttsolutions@gmail.com</a>
+  <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
   <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home</p>
 </footer>
 
@@ -802,7 +802,7 @@ function reopenSplash(){ document.getElementById('splash').classList.remove('hid
 const COUNTRY_LANG = { se:'sv', vn:'vi', th:'th', kr:'ko', ph:'tl' };
 const I18N = {
   en: {
-    tab_home:'Home', tab_places:'Places', tab_outings:'Outings with kids', tab_market:'Marketplace',
+    tab_home:'Home', tab_places:'Check-in', tab_outings:'Outings with kids', tab_market:'Marketplace',
     tab_friends:'Make friends', tab_translate:'Interpreter', tab_services:'QTT Services',
     login:'Log in', logout:'Log out',
     search_places:'Search food, Asian store, nails…', search_area:'Search by area…',
@@ -816,7 +816,7 @@ const I18N = {
     hc_friends_d:'Where singles find someone compatible, same culture, same language — safely and kindly.',
     hc_translate_d:'When you need someone who speaks the language to come along to the doctor or with paperwork.',
     hc_services_d:'Run a restaurant or nail salon? QTT Solutions builds websites, QR E-Menu and inventory apps for you.',
-    hc_join:'Join the community', hc_join_d:'Create a free account to post, join activities and connect with people across Sweden.',
+    hc_join:'Join the community', hc_join_d:'Create an account to post, join activities and connect with people across Sweden.',
     hc_login_go:'Log in / Sign up →',
     chat_title:'💬 Community lounge', chat_sub:'Meet people from every community across Sweden',
     chat_safety:'Please be kind and respectful. Don\'t share sensitive info (home address, bank details). Tap ⚑ to report.',
@@ -885,13 +885,13 @@ const I18N = {
     svc_menu:'E-Menu (QR Menu)', svc_menu_for:'Restaurant · Eatery · Café', svc_menu_d:'Customers scan a QR code at the table to view the menu and order.', svc_menu_1:'Multilingual QR menu with photos', svc_menu_2:'Customers self-order, kitchen gets it instantly', svc_menu_3:'Update prices & items instantly',
     svc_inv:'Inventory App', svc_inv_for:'Restaurant · Businesses with stock', svc_inv_d:'Manage stock in/out, track inventory, warn of low stock and report costs.', svc_inv_1:'Record stock in & out', svc_inv_2:'Low stock & expiry alerts', svc_inv_3:'Cost & revenue reports',
     svc_quote:'Request consultation / quote', svc_why:'Why choose QTT Solutions?', svc_why_d:'We understand how small restaurants and salons run in Sweden, and support you in your own language.', svc_contact:'Contact directly:',
-    about_badge:'About WeShare', about_title:'Built for every community far from home', about_p:'WeShare is a community platform for everyone living far from home in Sweden — whatever country you come from. WeShare exists so those moments of feeling lost are no longer lonely.', about_brand_pre:'Built by', about_brand_post:'— a technology company connecting communities abroad.', about_free:'Free · Safe · Always in your own language',
+    about_badge:'About WeShare', about_title:'Built for every community far from home', about_p:'WeShare is a community platform for everyone living far from home in Sweden — whatever country you come from. WeShare exists so those moments of feeling lost are no longer lonely.', about_brand_pre:'Built by', about_brand_post:'— a technology company connecting communities abroad.', about_free:'Safe · Welcoming · In your own language',
     foot_tag:'Community for people far from home in Sweden', foot_by:'A product of',
     right_in:'in', items_in:'items in', nothing_in:'No content in',
     c_open:'Open', c_call:'Call', c_map:'View map', c_contact:'Contact', c_area:'Area', c_phone:'Phone', c_addr:'Address', c_poster:'Posted by', c_get_help:'Get help', c_skip:'Skip', c_like:'💗 Like', c_report:'⚑ Report', c_featured:'★ Featured', c_certified:'✓ Certified', photo_choose:'📷 Choose photo', photo_err:'Could not process the image. Please try another.', photo_avatar:'Profile photo', photo_img:'Photo', photo_save:'Save photo', tr_show:'Translate', tr_hide:'Show original', tr_loading:'Translating…', tr_fail:'Translation failed',
   },
   sv: {
-    tab_home:'Hem', tab_places:'Platser', tab_outings:'Utflykter med barn', tab_market:'Marknad',
+    tab_home:'Hem', tab_places:'Check-in', tab_outings:'Utflykter med barn', tab_market:'Marknad',
     tab_friends:'Hitta vänner', tab_translate:'Tolk', tab_services:'QTT-tjänster',
     login:'Logga in', logout:'Logga ut',
     search_places:'Sök mat, asiatisk butik, naglar…', search_area:'Sök efter område…',
@@ -905,7 +905,7 @@ const I18N = {
     hc_friends_d:'Där singlar hittar någon som passar, samma kultur, samma språk — tryggt och vänligt.',
     hc_translate_d:'När du behöver någon som talar språket med till läkaren eller med pappersarbete.',
     hc_services_d:'Driver du en restaurang eller nagelsalong? QTT Solutions bygger webbplatser, QR-meny och lagerappar åt dig.',
-    hc_join:'Gå med i gemenskapen', hc_join_d:'Skapa ett gratis konto för att publicera, delta i aktiviteter och få kontakt med människor i hela Sverige.',
+    hc_join:'Gå med i gemenskapen', hc_join_d:'Skapa ett konto för att publicera, delta i aktiviteter och få kontakt med människor i hela Sverige.',
     hc_login_go:'Logga in / Registrera →',
     chat_title:'💬 Gemenskapslounge', chat_sub:'Träffa människor från alla gemenskaper i hela Sverige',
     chat_safety:'Var snäll och respektfull. Dela inte känslig info (hemadress, bankuppgifter). Tryck ⚑ för att rapportera.',
@@ -949,7 +949,7 @@ const I18N = {
     svc_menu:'E-Menu (QR-meny)', svc_menu_for:'Restaurang · Matställe · Café', svc_menu_d:'Kunder skannar en QR-kod vid bordet för att se menyn och beställa.', svc_menu_1:'Flerspråkig QR-meny med bilder', svc_menu_2:'Kunder beställer själva, köket får det direkt', svc_menu_3:'Uppdatera priser & rätter direkt',
     svc_inv:'Lagerapp', svc_inv_for:'Restaurang · Företag med lager', svc_inv_d:'Hantera lager in/ut, spåra lager, varna för lågt lager och rapportera kostnader.', svc_inv_1:'Registrera lager in & ut', svc_inv_2:'Varningar för lågt lager & utgångsdatum', svc_inv_3:'Kostnads- & intäktsrapporter',
     svc_quote:'Begär rådgivning / offert', svc_why:'Varför välja QTT Solutions?', svc_why_d:'Vi förstår hur små restauranger och salonger fungerar i Sverige och hjälper dig på ditt eget språk.', svc_contact:'Kontakta direkt:',
-    about_badge:'Om WeShare', about_title:'Byggd för alla gemenskaper långt hemifrån', about_p:'WeShare är en gemenskapsplattform för alla som bor långt hemifrån i Sverige — oavsett vilket land du kommer från. WeShare finns till för att de stunderna av att känna sig vilsen inte längre ska vara ensamma.', about_brand_pre:'Byggd av', about_brand_post:'— ett teknikföretag som kopplar samman gemenskaper utomlands.', about_free:'Gratis · Tryggt · Alltid på ditt eget språk',
+    about_badge:'Om WeShare', about_title:'Byggd för alla gemenskaper långt hemifrån', about_p:'WeShare är en gemenskapsplattform för alla som bor långt hemifrån i Sverige — oavsett vilket land du kommer från. WeShare finns till för att de stunderna av att känna sig vilsen inte längre ska vara ensamma.', about_brand_pre:'Byggd av', about_brand_post:'— ett teknikföretag som kopplar samman gemenskaper utomlands.', about_free:'Tryggt · Välkomnande · På ditt eget språk',
     foot_tag:'Gemenskap för människor långt hemifrån i Sverige', foot_by:'En produkt av',
     right_in:'i', items_in:'objekt i', nothing_in:'Inget innehåll i',
     c_open:'Öppet', c_call:'Ring', c_map:'Visa karta', c_contact:'Kontakt', c_area:'Område', c_phone:'Telefon', c_addr:'Adress', c_poster:'Publicerad av', c_get_help:'Få hjälp', c_skip:'Hoppa över', c_like:'💗 Gilla', c_report:'⚑ Rapportera', c_featured:'★ Utvald', c_certified:'✓ Certifierad',
@@ -981,7 +981,7 @@ const I18N = {
     biz_rest:'Restaurang', biz_cafe:'Matställe / Café', biz_nail:'Nagelsalong', biz_other:'Annat',
   },
   ko: {
-    tab_home:'홈', tab_places:'장소', tab_outings:'아이와 나들이', tab_market:'마켓',
+    tab_home:'홈', tab_places:'체크인', tab_outings:'아이와 나들이', tab_market:'마켓',
     tab_friends:'친구 찾기', tab_translate:'통역', tab_services:'QTT 서비스',
     login:'로그인', logout:'로그아웃',
     search_places:'음식, 아시아 마트, 네일 검색…', search_area:'지역으로 검색…',
@@ -995,7 +995,7 @@ const I18N = {
     hc_friends_d:'싱글들이 같은 문화, 같은 언어의 잘 맞는 사람을 안전하고 따뜻하게 만나는 곳.',
     hc_translate_d:'병원이나 서류 처리에 언어가 되는 사람이 함께 가야 할 때.',
     hc_services_d:'식당이나 네일샵을 운영하세요? QTT Solutions가 웹사이트, QR 메뉴, 재고 앱을 만들어 드립니다.',
-    hc_join:'커뮤니티 가입', hc_join_d:'무료 계정을 만들어 글을 올리고 활동에 참여하며 스웨덴 전역의 사람들과 연결되세요.',
+    hc_join:'커뮤니티 가입', hc_join_d:'계정을 만들어 글을 올리고 활동에 참여하며 스웨덴 전역의 사람들과 연결되세요.',
     hc_login_go:'로그인 / 회원가입 →',
     chat_title:'💬 커뮤니티 라운지', chat_sub:'스웨덴 전역의 다양한 사람들과 만나세요',
     chat_safety:'친절하고 존중해 주세요. 민감한 정보(집 주소, 은행 정보)는 공유하지 마세요. 신고하려면 ⚑를 누르세요.',
@@ -1039,7 +1039,7 @@ const I18N = {
     svc_menu:'E-Menu (QR 메뉴)', svc_menu_for:'식당 · 분식점 · 카페', svc_menu_d:'고객이 테이블에서 QR 코드를 스캔해 메뉴를 보고 주문합니다.', svc_menu_1:'사진이 있는 다국어 QR 메뉴', svc_menu_2:'고객이 직접 주문, 주방이 즉시 받음', svc_menu_3:'가격과 메뉴 즉시 업데이트',
     svc_inv:'재고 앱', svc_inv_for:'식당 · 재고가 있는 사업체', svc_inv_d:'입출고 관리, 재고 추적, 재고 부족 경고, 비용 보고.', svc_inv_1:'입고 및 출고 기록', svc_inv_2:'재고 부족 및 유통기한 알림', svc_inv_3:'비용 및 매출 보고서',
     svc_quote:'상담 / 견적 요청', svc_why:'왜 QTT Solutions인가요?', svc_why_d:'스웨덴의 작은 식당과 살롱이 어떻게 운영되는지 이해하며 당신의 언어로 지원합니다.', svc_contact:'직접 연락:',
-    about_badge:'WeShare 소개', about_title:'고향을 떠난 모든 커뮤니티를 위해', about_p:'WeShare는 어느 나라에서 왔든 스웨덴에서 고향을 떠나 사는 모든 사람을 위한 커뮤니티 플랫폼입니다. 길을 잃은 듯한 순간이 더는 외롭지 않도록 WeShare가 있습니다.', about_brand_pre:'제작', about_brand_post:'— 해외 커뮤니티를 연결하는 기술 회사.', about_free:'무료 · 안전 · 언제나 당신의 언어로',
+    about_badge:'WeShare 소개', about_title:'고향을 떠난 모든 커뮤니티를 위해', about_p:'WeShare는 어느 나라에서 왔든 스웨덴에서 고향을 떠나 사는 모든 사람을 위한 커뮤니티 플랫폼입니다. 길을 잃은 듯한 순간이 더는 외롭지 않도록 WeShare가 있습니다.', about_brand_pre:'제작', about_brand_post:'— 해외 커뮤니티를 연결하는 기술 회사.', about_free:'안전 · 따뜻함 · 당신의 언어로',
     foot_tag:'스웨덴에서 고향을 떠나온 사람들을 위한 커뮤니티', foot_by:'제품 제공',
     right_in:'지역:', items_in:'개 항목 —', nothing_in:'콘텐츠가 없습니다 —',
     c_open:'영업', c_call:'전화', c_map:'지도 보기', c_contact:'연락처', c_area:'지역', c_phone:'전화', c_addr:'주소', c_poster:'게시자', c_get_help:'도움 받기', c_skip:'건너뛰기', c_like:'💗 좋아요', c_report:'⚑ 신고', c_featured:'★ 추천', c_certified:'✓ 인증됨',
@@ -1071,7 +1071,7 @@ const I18N = {
     biz_rest:'식당', biz_cafe:'분식점 / 카페', biz_nail:'네일샵', biz_other:'기타',
   },
   tl: {
-    tab_home:'Home', tab_places:'Mga Lugar', tab_outings:'Lakad kasama ang mga bata', tab_market:'Palengke',
+    tab_home:'Home', tab_places:'Check-in', tab_outings:'Lakad kasama ang mga bata', tab_market:'Palengke',
     tab_friends:'Maghanap ng kaibigan', tab_translate:'Interpreter', tab_services:'QTT Services',
     login:'Mag-log in', logout:'Mag-log out',
     search_places:'Maghanap ng pagkain, Asian store, kuko…', search_area:'Maghanap ayon sa lugar…',
@@ -1085,7 +1085,7 @@ const I18N = {
     hc_friends_d:'Kung saan nakakahanap ang mga single ng bagay na tugma, parehong kultura, parehong wika — ligtas at mabait.',
     hc_translate_d:'Kapag kailangan mo ng marunong sa wika na sasama sa doktor o sa papeles.',
     hc_services_d:'May restawran o nail salon ka ba? Gumagawa ang QTT Solutions ng website, QR E-Menu at inventory app para sa iyo.',
-    hc_join:'Sumali sa komunidad', hc_join_d:'Gumawa ng libreng account para makapag-post, sumali sa mga aktibidad at kumonekta sa mga tao sa buong Sweden.',
+    hc_join:'Sumali sa komunidad', hc_join_d:'Gumawa ng account para makapag-post, sumali sa mga aktibidad at kumonekta sa mga tao sa buong Sweden.',
     hc_login_go:'Mag-log in / Mag-sign up →',
     chat_title:'💬 Community lounge', chat_sub:'Makilala ang mga tao mula sa iba\'t ibang komunidad sa buong Sweden',
     chat_safety:'Maging mabait at magalang. Huwag magbahagi ng sensitibong impormasyon (address ng bahay, detalye ng bangko). Pindutin ang ⚑ para mag-report.',
@@ -1129,7 +1129,7 @@ const I18N = {
     svc_menu:'E-Menu (QR Menu)', svc_menu_for:'Restawran · Karinderya · Café', svc_menu_d:'Nag-scan ang mga customer ng QR code sa mesa para tingnan ang menu at mag-order.', svc_menu_1:'Multilingual na QR menu na may larawan', svc_menu_2:'Mag-order mismo ang customer, agad matatanggap ng kusina', svc_menu_3:'I-update ang presyo & item agad',
     svc_inv:'Inventory App', svc_inv_for:'Restawran · Negosyong may stock', svc_inv_d:'Pamahalaan ang stock in/out, subaybayan ang inventory, babala sa kulang na stock at mag-ulat ng gastos.', svc_inv_1:'Itala ang stock in & out', svc_inv_2:'Babala sa kulang na stock & expiry', svc_inv_3:'Ulat ng gastos & kita',
     svc_quote:'Humiling ng konsultasyon / quote', svc_why:'Bakit piliin ang QTT Solutions?', svc_why_d:'Nauunawaan namin kung paano gumagana ang maliliit na restawran at salon sa Sweden, at tinutulungan ka sa sarili mong wika.', svc_contact:'Direktang contact:',
-    about_badge:'Tungkol sa WeShare', about_title:'Ginawa para sa bawat komunidad na malayo sa tahanan', about_p:'Ang WeShare ay platform ng komunidad para sa lahat ng nakatira nang malayo sa tahanan sa Sweden — saanmang bansa ka nanggaling. Umiiral ang WeShare para hindi na maging mag-isa ang mga sandali ng pagkaligaw.', about_brand_pre:'Ginawa ng', about_brand_post:'— kumpanya ng teknolohiya na nag-uugnay ng mga komunidad sa ibang bansa.', about_free:'Libre · Ligtas · Palaging sa iyong wika',
+    about_badge:'Tungkol sa WeShare', about_title:'Ginawa para sa bawat komunidad na malayo sa tahanan', about_p:'Ang WeShare ay platform ng komunidad para sa lahat ng nakatira nang malayo sa tahanan sa Sweden — saanmang bansa ka nanggaling. Umiiral ang WeShare para hindi na maging mag-isa ang mga sandali ng pagkaligaw.', about_brand_pre:'Ginawa ng', about_brand_post:'— kumpanya ng teknolohiya na nag-uugnay ng mga komunidad sa ibang bansa.', about_free:'Ligtas · Mainit na pagtanggap · Sa iyong wika',
     foot_tag:'Komunidad para sa mga taong malayo sa tahanan sa Sweden', foot_by:'Isang produkto ng',
     right_in:'sa', items_in:'item sa', nothing_in:'Walang nilalaman sa',
     c_open:'Bukas', c_call:'Tumawag', c_map:'Tingnan ang mapa', c_contact:'Contact', c_area:'Lugar', c_phone:'Telepono', c_addr:'Address', c_poster:'Nag-post', c_get_help:'Humingi ng tulong', c_skip:'Laktawan', c_like:'💗 Like', c_report:'⚑ I-report', c_featured:'★ Tampok', c_certified:'✓ Sertipikado',
@@ -1161,7 +1161,7 @@ const I18N = {
     biz_rest:'Restawran', biz_cafe:'Karinderya / Café', biz_nail:'Nail salon', biz_other:'Iba pa',
   },
   vi: {
-    tab_home:'Trang chủ', tab_places:'Địa điểm', tab_outings:'Đi chơi cùng con', tab_market:'Chợ cộng đồng',
+    tab_home:'Trang chủ', tab_places:'Check-in', tab_outings:'Đi chơi cùng con', tab_market:'Chợ cộng đồng',
     tab_friends:'Kết bạn', tab_translate:'Phiên dịch', tab_services:'Dịch vụ QTT',
     login:'Đăng nhập', logout:'Đăng xuất',
     search_places:'Tìm phở, chợ Á, nail…', search_area:'Tìm theo khu vực…',
@@ -1175,7 +1175,7 @@ const I18N = {
     hc_friends_d:'Nơi những người độc thân tìm người hợp gu, cùng văn hóa, cùng ngôn ngữ — một cách an toàn và tử tế.',
     hc_translate_d:'Khi bạn cần một người biết tiếng đi cùng lúc khám bệnh hay làm giấy tờ.',
     hc_services_d:'Bạn có nhà hàng hay tiệm nail? QTT Solutions thiết kế web, E-Menu QR và app quản lý kho cho bạn.',
-    hc_join:'Tham gia cộng đồng', hc_join_d:'Tạo tài khoản miễn phí để đăng tin, tham gia hoạt động và kết nối với mọi người khắp Thụy Điển.',
+    hc_join:'Tham gia cộng đồng', hc_join_d:'Tạo tài khoản để đăng tin, tham gia hoạt động và kết nối với mọi người khắp Thụy Điển.',
     hc_login_go:'Đăng nhập / Đăng ký →',
     chat_title:'💬 Phòng giao lưu', chat_sub:'Kết nối với mọi người khắp Thụy Điển',
     chat_safety:'Hãy lịch sự và tôn trọng nhau. Đừng chia sẻ thông tin nhạy cảm (địa chỉ nhà, số tài khoản). Bấm ⚑ để báo cáo tin xấu.',
@@ -1244,13 +1244,13 @@ const I18N = {
     svc_menu:'E-Menu (Menu QR)', svc_menu_for:'Nhà hàng · Quán ăn · Café', svc_menu_d:'Khách quét mã QR tại bàn để xem thực đơn và gọi món.', svc_menu_1:'Menu QR đa ngôn ngữ, ảnh món đẹp', svc_menu_2:'Khách tự gọi món, bếp nhận đơn tức thì', svc_menu_3:'Cập nhật giá & món ngay, không in lại',
     svc_inv:'App Quản lý Kho', svc_inv_for:'Nhà hàng · Cơ sở có kho hàng', svc_inv_d:'Quản lý xuất–nhập hàng hoá, theo dõi tồn kho, cảnh báo hết hàng và báo cáo chi phí.', svc_inv_1:'Ghi nhận nhập hàng & xuất kho', svc_inv_2:'Cảnh báo tồn kho thấp, hạn dùng', svc_inv_3:'Báo cáo chi phí & doanh thu',
     svc_quote:'Yêu cầu tư vấn / báo giá', svc_why:'Vì sao chọn QTT Solutions?', svc_why_d:'Chúng tôi hiểu cách vận hành của các nhà hàng và tiệm nail nhỏ tại Thụy Điển, và hỗ trợ bạn bằng chính ngôn ngữ của bạn.', svc_contact:'Liên hệ trực tiếp:',
-    about_badge:'Về WeShare', about_title:'Xây dựng cho mọi cộng đồng xa quê', about_p:'WeShare là nền tảng cộng đồng dành cho tất cả những người xa quê đang sinh sống tại Thụy Điển — dù bạn đến từ đất nước nào. WeShare ra đời để những khoảnh khắc lạc lõng ấy không còn đơn độc.', about_brand_pre:'Phát triển bởi', about_brand_post:'— công ty công nghệ gắn kết cộng đồng nơi xứ người.', about_free:'Miễn phí · An toàn · Luôn bằng tiếng mẹ đẻ',
+    about_badge:'Về WeShare', about_title:'Xây dựng cho mọi cộng đồng xa quê', about_p:'WeShare là nền tảng cộng đồng dành cho tất cả những người xa quê đang sinh sống tại Thụy Điển — dù bạn đến từ đất nước nào. WeShare ra đời để những khoảnh khắc lạc lõng ấy không còn đơn độc.', about_brand_pre:'Phát triển bởi', about_brand_post:'— công ty công nghệ gắn kết cộng đồng nơi xứ người.', about_free:'An toàn · Gần gũi · Bằng ngôn ngữ của bạn',
     foot_tag:'Cộng đồng cho mọi người xa quê tại Thụy Điển', foot_by:'Một sản phẩm của',
     right_in:'tại', items_in:'mục ở', nothing_in:'Chưa có nội dung ở',
     c_open:'Giờ mở', c_call:'Gọi', c_map:'Xem bản đồ', c_contact:'Liên hệ', c_area:'Khu vực', c_phone:'Điện thoại', c_addr:'Địa chỉ', c_poster:'Người đăng', c_get_help:'Nhận giúp', c_skip:'Bỏ qua', c_like:'💗 Thích', c_report:'⚑ Báo cáo', c_featured:'★ Nổi bật', c_certified:'✓ Được cấp phép', photo_choose:'📷 Chọn ảnh', photo_err:'Không xử lý được ảnh. Hãy thử ảnh khác.', photo_avatar:'Ảnh đại diện', photo_img:'Hình ảnh', photo_save:'Lưu ảnh', tr_show:'Dịch', tr_hide:'Xem bản gốc', tr_loading:'Đang dịch…', tr_fail:'Dịch không thành công',
   },
   th: {
-    tab_home:'หน้าแรก', tab_places:'สถานที่', tab_outings:'พาลูกไปเที่ยว', tab_market:'ตลาดชุมชน',
+    tab_home:'หน้าแรก', tab_places:'เช็คอิน', tab_outings:'พาลูกไปเที่ยว', tab_market:'ตลาดชุมชน',
     tab_friends:'หาเพื่อน', tab_translate:'ล่าม', tab_services:'บริการ QTT',
     login:'เข้าสู่ระบบ', logout:'ออกจากระบบ',
     search_places:'ค้นหาร้านอาหาร ร้านเอเชีย ทำเล็บ…', search_area:'ค้นหาตามพื้นที่…',
@@ -1264,7 +1264,7 @@ const I18N = {
     hc_friends_d:'ที่ที่คนโสดได้เจอคนที่เข้ากันได้ วัฒนธรรมเดียวกัน ภาษาเดียวกัน — อย่างปลอดภัยและอบอุ่น',
     hc_translate_d:'เมื่อคุณต้องการคนที่พูดภาษาได้ไปด้วยตอนหาหมอหรือทำเอกสาร',
     hc_services_d:'มีร้านอาหารหรือร้านทำเล็บใช่ไหม? QTT Solutions สร้างเว็บไซต์ เมนู QR และแอปจัดการสต็อกให้คุณ',
-    hc_join:'เข้าร่วมชุมชน', hc_join_d:'สร้างบัญชีฟรีเพื่อโพสต์ เข้าร่วมกิจกรรม และเชื่อมต่อกับผู้คนทั่วสวีเดน',
+    hc_join:'เข้าร่วมชุมชน', hc_join_d:'สร้างบัญชีเพื่อโพสต์ เข้าร่วมกิจกรรม และเชื่อมต่อกับผู้คนทั่วสวีเดน',
     hc_login_go:'เข้าสู่ระบบ / สมัครสมาชิก →',
     chat_title:'💬 ห้องพบปะชุมชน', chat_sub:'พบปะผู้คนหลากหลายทั่วสวีเดน',
     chat_safety:'โปรดสุภาพและให้เกียรติกัน อย่าแชร์ข้อมูลส่วนตัว (ที่อยู่บ้าน ข้อมูลธนาคาร) แตะ ⚑ เพื่อรายงาน',
@@ -1333,7 +1333,7 @@ const I18N = {
     svc_menu:'E-Menu (เมนู QR)', svc_menu_for:'ร้านอาหาร · ร้านอาหาร · คาเฟ่', svc_menu_d:'ลูกค้าสแกน QR ที่โต๊ะเพื่อดูเมนูและสั่ง', svc_menu_1:'เมนู QR หลายภาษา พร้อมรูป', svc_menu_2:'ลูกค้าสั่งเอง ครัวรับทันที', svc_menu_3:'อัปเดตราคาและเมนูได้ทันที',
     svc_inv:'แอปจัดการสต็อก', svc_inv_for:'ร้านอาหาร · ธุรกิจที่มีสต็อก', svc_inv_d:'จัดการรับเข้า–เบิกออก ติดตามสต็อก แจ้งเตือนของหมด และรายงานต้นทุน', svc_inv_1:'บันทึกรับเข้าและเบิกออก', svc_inv_2:'แจ้งเตือนสต็อกต่ำและวันหมดอายุ', svc_inv_3:'รายงานต้นทุนและรายได้',
     svc_quote:'ขอคำปรึกษา / ใบเสนอราคา', svc_why:'ทำไมต้องเลือก QTT Solutions?', svc_why_d:'เราเข้าใจการทำงานของร้านอาหารและร้านทำเล็บขนาดเล็กในสวีเดน และช่วยเหลือคุณด้วยภาษาของคุณเอง', svc_contact:'ติดต่อโดยตรง:',
-    about_badge:'เกี่ยวกับ WeShare', about_title:'สร้างเพื่อทุกชุมชนที่อยู่ไกลบ้าน', about_p:'WeShare เป็นแพลตฟอร์มชุมชนสำหรับทุกคนที่อยู่ไกลบ้านในสวีเดน ไม่ว่าคุณจะมาจากประเทศใด WeShare เกิดขึ้นเพื่อให้ช่วงเวลาที่รู้สึกเคว้งคว้างไม่โดดเดี่ยวอีกต่อไป', about_brand_pre:'พัฒนาโดย', about_brand_post:'— บริษัทเทคโนโลยีที่เชื่อมชุมชนในต่างแดน', about_free:'ฟรี · ปลอดภัย · ในภาษาของคุณเสมอ',
+    about_badge:'เกี่ยวกับ WeShare', about_title:'สร้างเพื่อทุกชุมชนที่อยู่ไกลบ้าน', about_p:'WeShare เป็นแพลตฟอร์มชุมชนสำหรับทุกคนที่อยู่ไกลบ้านในสวีเดน ไม่ว่าคุณจะมาจากประเทศใด WeShare เกิดขึ้นเพื่อให้ช่วงเวลาที่รู้สึกเคว้งคว้างไม่โดดเดี่ยวอีกต่อไป', about_brand_pre:'พัฒนาโดย', about_brand_post:'— บริษัทเทคโนโลยีที่เชื่อมชุมชนในต่างแดน', about_free:'ปลอดภัย · อบอุ่น · ในภาษาของคุณ',
     foot_tag:'ชุมชนสำหรับผู้อยู่ไกลบ้านในสวีเดน', foot_by:'ผลิตภัณฑ์ของ',
     right_in:'ที่', items_in:'รายการใน', nothing_in:'ยังไม่มีเนื้อหาใน',
     c_open:'เวลาเปิด', c_call:'โทร', c_map:'ดูแผนที่', c_contact:'ติดต่อ', c_area:'พื้นที่', c_phone:'โทรศัพท์', c_addr:'ที่อยู่', c_poster:'โพสต์โดย', c_get_help:'ขอความช่วยเหลือ', c_skip:'ข้าม', c_like:'💗 ถูกใจ', c_report:'⚑ รายงาน', c_featured:'★ แนะนำ', c_certified:'✓ ได้รับการรับรอง', photo_choose:'📷 เลือกรูป', photo_err:'ประมวลผลรูปไม่ได้ ลองรูปอื่น', photo_avatar:'รูปโปรไฟล์', photo_img:'รูปภาพ', photo_save:'บันทึกรูป', tr_show:'แปล', tr_hide:'ดูต้นฉบับ', tr_loading:'กำลังแปล…', tr_fail:'แปลไม่สำเร็จ',
@@ -2229,7 +2229,7 @@ async function submitLead(dichVu) {
   btnLoad('ld-btn', true);
   callApi({ action:'addLead', ...lead }).catch(()=>{});
   const body = `Service: ${dichVu}%0D%0AName: ${ten}%0D%0APhone: ${sdt}%0D%0AEmail: ${email}%0D%0AArea: ${v('ld-tp')}%0D%0AType: ${v('ld-loai')}%0D%0ANote: ${v('ld-note')}`;
-  const mailto = `mailto:qttsolutions@gmail.com?subject=${encodeURIComponent(t('ld_title')+': '+dichVu)}&body=${body}`;
+  const mailto = `mailto:weshare.sverige@gmail.com?subject=${encodeURIComponent(t('ld_title')+': '+dichVu)}&body=${body}`;
   setTimeout(()=>{ window.location.href = mailto; }, 300);
   document.getElementById('lead-msg').className = 'auth-msg ok';
   document.getElementById('lead-msg').textContent = t('ld_ok');
