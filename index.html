@@ -172,6 +172,20 @@
   .cta-call { background: #fff; color: var(--ink); border: 1px solid var(--line); }
 
   .field { margin-bottom: 14px; }
+  .del-post { background: none; border: 1px solid var(--line); border-radius: 8px; cursor: pointer;
+    font-size: 15px; line-height: 1; padding: 7px 9px; color: #c8442e; }
+  .del-post:hover { background: #fbeae6; border-color: #e6b3a8; }
+  .del-post-full { width: 100%; margin-top: 10px; background: #fbeae6; border: 1px solid #e6b3a8;
+    color: #c8442e; border-radius: 12px; padding: 12px; font-size: 15px; font-weight: 700; cursor: pointer;
+    font-family: inherit; }
+  .del-post-full:hover { background: #f7ddd6; }
+  .edit-post { background: none; border: 1px solid var(--line); border-radius: 8px; cursor: pointer;
+    font-size: 15px; line-height: 1; padding: 7px 9px; color: var(--jade); }
+  .edit-post:hover { background: #e6f2ed; border-color: #a8d4c4; }
+  .edit-post-full { width: 100%; margin-top: 8px; background: #e6f2ed; border: 1px solid #a8d4c4;
+    color: var(--jade); border-radius: 12px; padding: 12px; font-size: 15px; font-weight: 700; cursor: pointer;
+    font-family: inherit; }
+  .edit-post-full:hover { background: #d9ebe3; }
   .photo-pick { display: flex; align-items: center; gap: 14px; }
   .photo-prev { width: 74px; height: 74px; flex-shrink: 0; background: var(--paper-2);
     background-size: cover; background-position: center; border: 1px solid var(--line);
@@ -888,7 +902,7 @@ const I18N = {
     about_badge:'About WeShare', about_title:'Built for every community far from home', about_p:'WeShare is a community platform for everyone living far from home in Sweden — whatever country you come from. WeShare exists so those moments of feeling lost are no longer lonely.', about_brand_pre:'Built by', about_brand_post:'— a technology company connecting communities abroad.', about_free:'Safe · Welcoming · In your own language',
     foot_tag:'Community for people far from home in Sweden', foot_by:'A product of',
     right_in:'in', items_in:'items in', nothing_in:'No content in',
-    c_open:'Open', c_call:'Call', c_map:'View map', c_contact:'Contact', c_area:'Area', c_phone:'Phone', c_addr:'Address', c_poster:'Posted by', c_get_help:'Get help', c_skip:'Skip', c_like:'💗 Like', c_report:'⚑ Report', c_featured:'★ Featured', c_certified:'✓ Certified', photo_choose:'📷 Choose photo', photo_err:'Could not process the image. Please try another.', photo_avatar:'Profile photo', photo_img:'Photo', photo_save:'Save photo', tr_show:'Translate', tr_hide:'Show original', tr_loading:'Translating…', tr_fail:'Translation failed',
+    c_open:'Open', c_call:'Call', c_map:'View map', c_contact:'Contact', c_area:'Area', c_phone:'Phone', c_addr:'Address', c_poster:'Posted by', c_get_help:'Get help', c_skip:'Skip', c_like:'💗 Like', c_report:'⚑ Report', c_featured:'★ Featured', c_certified:'✓ Certified', photo_choose:'📷 Choose photo', photo_err:'Could not process the image. Please try another.', photo_avatar:'Profile photo', photo_img:'Photo', photo_save:'Save photo', post_delete:'Delete', post_del_confirm:'Delete this post? This cannot be undone.', post_edit:'Edit', post_save:'Save changes', tr_show:'Translate', tr_hide:'Show original', tr_loading:'Translating…', tr_fail:'Translation failed',
   },
   sv: {
     tab_home:'Hem', tab_places:'Check-in', tab_outings:'Utflykter med barn', tab_market:'Marknad',
@@ -953,7 +967,7 @@ const I18N = {
     foot_tag:'Gemenskap för människor långt hemifrån i Sverige', foot_by:'En produkt av',
     right_in:'i', items_in:'objekt i', nothing_in:'Inget innehåll i',
     c_open:'Öppet', c_call:'Ring', c_map:'Visa karta', c_contact:'Kontakt', c_area:'Område', c_phone:'Telefon', c_addr:'Adress', c_poster:'Publicerad av', c_get_help:'Få hjälp', c_skip:'Hoppa över', c_like:'💗 Gilla', c_report:'⚑ Rapportera', c_featured:'★ Utvald', c_certified:'✓ Certifierad',
-    photo_choose:'📷 Välj foto', photo_err:'Kunde inte bearbeta bilden. Prova en annan.', photo_avatar:'Profilbild', photo_img:'Foto', photo_save:'Spara foto', tr_show:'Översätt', tr_hide:'Visa original', tr_loading:'Översätter…', tr_fail:'Översättning misslyckades',
+    photo_choose:'📷 Välj foto', photo_err:'Kunde inte bearbeta bilden. Prova en annan.', photo_avatar:'Profilbild', photo_img:'Foto', photo_save:'Spara foto', post_delete:'Radera', post_del_confirm:'Radera detta inlägg? Detta kan inte ångras.', post_edit:'Redigera', post_save:'Spara ändringar', tr_show:'Översätt', tr_hide:'Visa original', tr_loading:'Översätter…', tr_fail:'Översättning misslyckades',
     trf_medical:'Sjukvård', trf_admin:'Dokument/Myndighet', trf_legal:'Juridik', trf_accompany:'Allmänt sällskap', trf_doc:'Dokumentöversättning',
     pf_title:'Min singelprofil', pf_sub:'Detta visas för andra användare. Du kan radera det när som helst.',
     pf_name:'Visningsnamn', pf_age:'Ålder', pf_area:'Område', pf_job:'Yrke', pf_looking:'Söker',
@@ -1043,7 +1057,7 @@ const I18N = {
     foot_tag:'스웨덴에서 고향을 떠나온 사람들을 위한 커뮤니티', foot_by:'제품 제공',
     right_in:'지역:', items_in:'개 항목 —', nothing_in:'콘텐츠가 없습니다 —',
     c_open:'영업', c_call:'전화', c_map:'지도 보기', c_contact:'연락처', c_area:'지역', c_phone:'전화', c_addr:'주소', c_poster:'게시자', c_get_help:'도움 받기', c_skip:'건너뛰기', c_like:'💗 좋아요', c_report:'⚑ 신고', c_featured:'★ 추천', c_certified:'✓ 인증됨',
-    photo_choose:'📷 사진 선택', photo_err:'이미지를 처리할 수 없습니다. 다른 사진을 시도하세요.', photo_avatar:'프로필 사진', photo_img:'사진', photo_save:'사진 저장', tr_show:'번역', tr_hide:'원문 보기', tr_loading:'번역 중…', tr_fail:'번역 실패',
+    photo_choose:'📷 사진 선택', photo_err:'이미지를 처리할 수 없습니다. 다른 사진을 시도하세요.', photo_avatar:'프로필 사진', photo_img:'사진', photo_save:'사진 저장', post_delete:'삭제', post_del_confirm:'이 게시물을 삭제할까요? 되돌릴 수 없습니다.', post_edit:'수정', post_save:'변경사항 저장', tr_show:'번역', tr_hide:'원문 보기', tr_loading:'번역 중…', tr_fail:'번역 실패',
     trf_medical:'의료', trf_admin:'서류/행정', trf_legal:'법률', trf_accompany:'일반 동행', trf_doc:'문서 번역',
     pf_title:'내 싱글 프로필', pf_sub:'다른 사용자에게 표시됩니다. 언제든 삭제할 수 있습니다.',
     pf_name:'표시 이름', pf_age:'나이', pf_area:'지역', pf_job:'직업', pf_looking:'찾는 대상',
@@ -1133,7 +1147,7 @@ const I18N = {
     foot_tag:'Komunidad para sa mga taong malayo sa tahanan sa Sweden', foot_by:'Isang produkto ng',
     right_in:'sa', items_in:'item sa', nothing_in:'Walang nilalaman sa',
     c_open:'Bukas', c_call:'Tumawag', c_map:'Tingnan ang mapa', c_contact:'Contact', c_area:'Lugar', c_phone:'Telepono', c_addr:'Address', c_poster:'Nag-post', c_get_help:'Humingi ng tulong', c_skip:'Laktawan', c_like:'💗 Like', c_report:'⚑ I-report', c_featured:'★ Tampok', c_certified:'✓ Sertipikado',
-    photo_choose:'📷 Pumili ng larawan', photo_err:'Hindi ma-process ang larawan. Subukan ang iba.', photo_avatar:'Larawan ng profile', photo_img:'Larawan', photo_save:'I-save ang larawan', tr_show:'Isalin', tr_hide:'Ipakita ang orihinal', tr_loading:'Isinasalin…', tr_fail:'Nabigo ang pagsasalin',
+    photo_choose:'📷 Pumili ng larawan', photo_err:'Hindi ma-process ang larawan. Subukan ang iba.', photo_avatar:'Larawan ng profile', photo_img:'Larawan', photo_save:'I-save ang larawan', post_delete:'Burahin', post_del_confirm:'Burahin ang post na ito? Hindi na ito maibabalik.', post_edit:'I-edit', post_save:'I-save ang pagbabago', tr_show:'Isalin', tr_hide:'Ipakita ang orihinal', tr_loading:'Isinasalin…', tr_fail:'Nabigo ang pagsasalin',
     trf_medical:'Medikal', trf_admin:'Dokumento/Administratibo', trf_legal:'Legal', trf_accompany:'Pangkalahatang pagsama', trf_doc:'Pagsasalin ng dokumento',
     pf_title:'Aking singles profile', pf_sub:'Ipinapakita ito sa ibang user. Puwede mong burahin anumang oras.',
     pf_name:'Display name', pf_age:'Edad', pf_area:'Lugar', pf_job:'Trabaho', pf_looking:'Hinahanap',
@@ -1247,7 +1261,7 @@ const I18N = {
     about_badge:'Về WeShare', about_title:'Xây dựng cho mọi cộng đồng xa quê', about_p:'WeShare là nền tảng cộng đồng dành cho tất cả những người xa quê đang sinh sống tại Thụy Điển — dù bạn đến từ đất nước nào. WeShare ra đời để những khoảnh khắc lạc lõng ấy không còn đơn độc.', about_brand_pre:'Phát triển bởi', about_brand_post:'— công ty công nghệ gắn kết cộng đồng nơi xứ người.', about_free:'An toàn · Gần gũi · Bằng ngôn ngữ của bạn',
     foot_tag:'Cộng đồng cho mọi người xa quê tại Thụy Điển', foot_by:'Một sản phẩm của',
     right_in:'tại', items_in:'mục ở', nothing_in:'Chưa có nội dung ở',
-    c_open:'Giờ mở', c_call:'Gọi', c_map:'Xem bản đồ', c_contact:'Liên hệ', c_area:'Khu vực', c_phone:'Điện thoại', c_addr:'Địa chỉ', c_poster:'Người đăng', c_get_help:'Nhận giúp', c_skip:'Bỏ qua', c_like:'💗 Thích', c_report:'⚑ Báo cáo', c_featured:'★ Nổi bật', c_certified:'✓ Được cấp phép', photo_choose:'📷 Chọn ảnh', photo_err:'Không xử lý được ảnh. Hãy thử ảnh khác.', photo_avatar:'Ảnh đại diện', photo_img:'Hình ảnh', photo_save:'Lưu ảnh', tr_show:'Dịch', tr_hide:'Xem bản gốc', tr_loading:'Đang dịch…', tr_fail:'Dịch không thành công',
+    c_open:'Giờ mở', c_call:'Gọi', c_map:'Xem bản đồ', c_contact:'Liên hệ', c_area:'Khu vực', c_phone:'Điện thoại', c_addr:'Địa chỉ', c_poster:'Người đăng', c_get_help:'Nhận giúp', c_skip:'Bỏ qua', c_like:'💗 Thích', c_report:'⚑ Báo cáo', c_featured:'★ Nổi bật', c_certified:'✓ Được cấp phép', photo_choose:'📷 Chọn ảnh', photo_err:'Không xử lý được ảnh. Hãy thử ảnh khác.', photo_avatar:'Ảnh đại diện', photo_img:'Hình ảnh', photo_save:'Lưu ảnh', post_delete:'Xoá', post_del_confirm:'Xoá tin này? Không thể hoàn tác.', post_edit:'Sửa', post_save:'Lưu thay đổi', tr_show:'Dịch', tr_hide:'Xem bản gốc', tr_loading:'Đang dịch…', tr_fail:'Dịch không thành công',
   },
   th: {
     tab_home:'หน้าแรก', tab_places:'เช็คอิน', tab_outings:'พาลูกไปเที่ยว', tab_market:'ตลาดชุมชน',
@@ -1336,7 +1350,7 @@ const I18N = {
     about_badge:'เกี่ยวกับ WeShare', about_title:'สร้างเพื่อทุกชุมชนที่อยู่ไกลบ้าน', about_p:'WeShare เป็นแพลตฟอร์มชุมชนสำหรับทุกคนที่อยู่ไกลบ้านในสวีเดน ไม่ว่าคุณจะมาจากประเทศใด WeShare เกิดขึ้นเพื่อให้ช่วงเวลาที่รู้สึกเคว้งคว้างไม่โดดเดี่ยวอีกต่อไป', about_brand_pre:'พัฒนาโดย', about_brand_post:'— บริษัทเทคโนโลยีที่เชื่อมชุมชนในต่างแดน', about_free:'ปลอดภัย · อบอุ่น · ในภาษาของคุณ',
     foot_tag:'ชุมชนสำหรับผู้อยู่ไกลบ้านในสวีเดน', foot_by:'ผลิตภัณฑ์ของ',
     right_in:'ที่', items_in:'รายการใน', nothing_in:'ยังไม่มีเนื้อหาใน',
-    c_open:'เวลาเปิด', c_call:'โทร', c_map:'ดูแผนที่', c_contact:'ติดต่อ', c_area:'พื้นที่', c_phone:'โทรศัพท์', c_addr:'ที่อยู่', c_poster:'โพสต์โดย', c_get_help:'ขอความช่วยเหลือ', c_skip:'ข้าม', c_like:'💗 ถูกใจ', c_report:'⚑ รายงาน', c_featured:'★ แนะนำ', c_certified:'✓ ได้รับการรับรอง', photo_choose:'📷 เลือกรูป', photo_err:'ประมวลผลรูปไม่ได้ ลองรูปอื่น', photo_avatar:'รูปโปรไฟล์', photo_img:'รูปภาพ', photo_save:'บันทึกรูป', tr_show:'แปล', tr_hide:'ดูต้นฉบับ', tr_loading:'กำลังแปล…', tr_fail:'แปลไม่สำเร็จ',
+    c_open:'เวลาเปิด', c_call:'โทร', c_map:'ดูแผนที่', c_contact:'ติดต่อ', c_area:'พื้นที่', c_phone:'โทรศัพท์', c_addr:'ที่อยู่', c_poster:'โพสต์โดย', c_get_help:'ขอความช่วยเหลือ', c_skip:'ข้าม', c_like:'💗 ถูกใจ', c_report:'⚑ รายงาน', c_featured:'★ แนะนำ', c_certified:'✓ ได้รับการรับรอง', photo_choose:'📷 เลือกรูป', photo_err:'ประมวลผลรูปไม่ได้ ลองรูปอื่น', photo_avatar:'รูปโปรไฟล์', photo_img:'รูปภาพ', photo_save:'บันทึกรูป', post_delete:'ลบ', post_del_confirm:'ลบโพสต์นี้? ไม่สามารถย้อนกลับได้', post_edit:'แก้ไข', post_save:'บันทึกการเปลี่ยนแปลง', tr_show:'แปล', tr_hide:'ดูต้นฉบับ', tr_loading:'กำลังแปล…', tr_fail:'แปลไม่สำเร็จ',
   }
 };
 let LANG = 'en';
@@ -1570,6 +1584,33 @@ function openPlace(id) {
   openModalEl();
 }
 
+// ===== Xoá tin (dùng chung) =====
+// Chủ tin = email trùng (dữ liệu từ server lưu ở 'nguoi_dang' hoặc 'email')
+function ownsPost(item) {
+  if (!currentUser || !item) return false;
+  const owner = String(item.nguoi_dang || item.email || '').toLowerCase();
+  return owner && owner === currentUser.email.toLowerCase();
+}
+function delBtnHTML(postType, id) {
+  return `<button class="del-post" title="${t('post_delete')}" onclick="deletePost('${postType}','${id}')">🗑</button>`;
+}
+async function deletePost(postType, id) {
+  if (!confirm(t('post_del_confirm'))) return;
+  try {
+    const r = await callApi({ action:'deletePost', postType, id, email: currentUser.email });
+    if (r && r.ok) {
+      // xoá khỏi danh sách đang hiển thị
+      if (postType==='outing')     OUTINGS = OUTINGS.filter(x=>String(x.id)!==String(id));
+      if (postType==='market')     MARKET = MARKET.filter(x=>String(x.id)!==String(id));
+      if (postType==='translator') TRANSLATORS = TRANSLATORS.filter(x=>String(x.id)!==String(id));
+      if (postType==='transreq')   TR_REQUESTS = TR_REQUESTS.filter(x=>String(x.id)!==String(id));
+      renderFeed(); renderMarket(); if (typeof renderTranslate==='function') renderTranslate();
+    } else {
+      alert((r && r.msg) ? r.msg : t('err_generic'));
+    }
+  } catch(e) { alert(t('err_generic')); }
+}
+
 // ===== OUTINGS =====
 function renderFeed() {
   const list = OUTINGS.filter(o => o.tp===activeCity && (!query || [o.host,o.khuvuc,o.diadiem,o.note,o.tuoi].some(s=>String(s||'').toLowerCase().includes(query))));
@@ -1598,7 +1639,11 @@ function renderFeed() {
           <div class="dots">${going.slice(0,4).map((g,i)=>`<span style="background:${AV[(col+i)%AV.length]}">${initials(g)}</span>`).join('')}</div>
           <span class="going-n">${going.length} gia đình tham gia</span>
         </div>
-        <button class="join ${joined?'joined':''}" onclick="toggleJoin('${o.id}')">${joined?'✓ Đã tham gia':'Tham gia'}</button>
+        <div style="display:flex;gap:6px;align-items:center">
+          ${ownsPost(o)?`<button class="edit-post" title="${t('post_edit')}" onclick="openCreate(OUTINGS.find(x=>String(x.id)==='${o.id}'))">✎</button>`:''}
+          ${ownsPost(o)?delBtnHTML('outing', o.id):''}
+          <button class="join ${joined?'joined':''}" onclick="toggleJoin('${o.id}')">${joined?'✓ Đã tham gia':'Tham gia'}</button>
+        </div>
       </div>
     </article>`;
   }).join('');
@@ -1613,33 +1658,43 @@ function toggleJoin(id) {
     renderFeed();
   });
 }
-function openCreate() {
+function openCreate(editItem) {
   requireLogin(() => {
+  const e = editItem || {};
+  const isEdit = !!editItem;
   document.getElementById('sheet').innerHTML = `
     <button class="close-x" onclick="closeModal()">✕</button>
     <div class="sheet-body">
-      <h2>${t('of_title')}</h2>
+      <h2>${isEdit?t('post_edit'):t('of_title')}</h2>
       <div class="sub" style="margin-bottom:18px;">${t('of_sub')}</div>
-      ${photoFieldHTML(t('photo_img'), 'f-anh-prev', 'f-anh', '', false)}
-      <div class="field"><label>${t('of_yourname')}</label><input id="f-host" value="${currentUser?(currentUser.ten||''):''}" placeholder=""></div>
-      <div class="field"><label>${t('of_place')}</label><input id="f-place" placeholder=""></div>
-      <div class="field"><label>${t('of_area')}</label><input id="f-area" placeholder=""></div>
+      ${photoFieldHTML(t('photo_img'), 'f-anh-prev', 'f-anh', e.anh||'', false)}
+      <div class="field"><label>${t('of_yourname')}</label><input id="f-host" value="${e.host||(currentUser?(currentUser.ten||''):'')}" placeholder=""></div>
+      <div class="field"><label>${t('of_place')}</label><input id="f-place" value="${e.diadiem||''}" placeholder=""></div>
+      <div class="field"><label>${t('of_area')}</label><input id="f-area" value="${e.khuvuc||''}" placeholder=""></div>
       <div class="row2">
-        <div class="field"><label>${t('of_day')}</label><input id="f-day" placeholder=""></div>
-        <div class="field"><label>${t('of_time')}</label><input id="f-time" placeholder=""></div>
+        <div class="field"><label>${t('of_day')}</label><input id="f-day" value="${e.ngay||''}" placeholder=""></div>
+        <div class="field"><label>${t('of_time')}</label><input id="f-time" value="${e.gio||''}" placeholder=""></div>
       </div>
-      <div class="field"><label>${t('of_ages')}</label><input id="f-age" placeholder=""></div>
-      <div class="field"><label>${t('of_msg')}</label><textarea id="f-note" placeholder="${t('of_msg_ph')}"></textarea></div>
-      <button class="submit" onclick="submitOuting()">${t('of_post')}</button>
+      <div class="field"><label>${t('of_ages')}</label><input id="f-age" value="${e.tuoi||''}" placeholder=""></div>
+      <div class="field"><label>${t('of_msg')}</label><textarea id="f-note" placeholder="${t('of_msg_ph')}">${e.note||''}</textarea></div>
+      <button class="submit" onclick="submitOuting('${isEdit?e.id:''}')">${isEdit?t('post_save'):t('of_post')}</button>
     </div>`;
   openModalEl();
   });
 }
-function submitOuting() {
+function submitOuting(editId) {
   const v = id => document.getElementById(id).value.trim();
   const host=v('f-host'), place=v('f-place');
   if (!host || !place) { alert(t('of_need')); return; }
-  const item = { tp:activeCity, host, khuvuc:v('f-area')||activeCity, diadiem:place, dia_addr:v('f-area')||place, ngay:v('f-day')||'—', gio:v('f-time')||'', tuoi:v('f-age')||'—', note:v('f-note')||'', anh:v('f-anh')||'', going:[host], joined:false, email: currentUser?currentUser.email:'' };
+  const fields = { host, khuvuc:v('f-area')||activeCity, diadiem:place, dia_addr:v('f-area')||place, ngay:v('f-day')||'—', gio:v('f-time')||'', tuoi:v('f-age')||'—', note:v('f-note')||'', anh:v('f-anh')||'' };
+  if (editId) {
+    const o = OUTINGS.find(x=>String(x.id)===String(editId));
+    if (o) Object.assign(o, fields);
+    closeModal(); renderFeed();
+    callApi({ action:'editPost', postType:'outing', id:editId, email:currentUser.email, data:fields }).catch(()=>{});
+    return;
+  }
+  const item = { tp:activeCity, ...fields, going:[host], joined:false, email: currentUser?currentUser.email:'' };
   OUTINGS.unshift(item);
   closeModal(); renderFeed();
   callApi({ action:'addOuting', ...item }).catch(()=>{});
@@ -1687,51 +1742,64 @@ function openItem(id) {
       <div class="cta-row">
         <a class="cta-map" href="tel:${m.sdt.replace(/\s/g,'')}">Liên hệ ${m.who}</a>
       </div>
+      ${ownsPost(m)?`<button class="del-post-full" onclick="closeModal();deletePost('market','${m.id}')">🗑 ${t('post_delete')}</button>`:''}
+      ${ownsPost(m)?`<button class="edit-post-full" onclick="closeModal();openPost(MARKET.find(x=>String(x.id)==='${m.id}'))">✎ ${t('post_edit')}</button>`:''}
     </div>`;
   openModalEl();
 }
-function openPost() {
+function openPost(editItem) {
   requireLogin(() => {
+  const e = editItem || {};
+  const isEdit = !!editItem;
+  const sel = (v,cur)=> v===cur?' selected':'';
   document.getElementById('sheet').innerHTML = `
     <button class="close-x" onclick="closeModal()">✕</button>
     <div class="sheet-body">
-      <h2>${t('mk_post')}</h2>
+      <h2>${isEdit?t('post_edit'):t('mk_post')}</h2>
       <div class="sub" style="margin-bottom:18px;">${t('mk_sub')}</div>
-      ${photoFieldHTML(t('photo_img'), 'm-anh-prev', 'm-anh', '', false)}
-      <div class="field"><label>${t('mk_title')}</label><input id="m-title" placeholder=""></div>
+      ${photoFieldHTML(t('photo_img'), 'm-anh-prev', 'm-anh', e.anh&&e.anh.indexOf('unsplash')<0?e.anh:'', false)}
+      <div class="field"><label>${t('mk_title')}</label><input id="m-title" value="${(e.title||'').replace(/"/g,'&quot;')}" placeholder=""></div>
       <div class="row2">
         <div class="field"><label>${t('mk_type')}</label>
           <select id="m-type">
-            <option value="tang">${t('type_give')}</option>
-            <option value="doi">${t('type_swap')}</option>
-            <option value="free">${t('type_free')}</option>
-            <option value="xach">${t('type_carry')}</option>
+            <option value="tang"${sel('tang',e.type)}>${t('type_give')}</option>
+            <option value="doi"${sel('doi',e.type)}>${t('type_swap')}</option>
+            <option value="free"${sel('free',e.type)}>${t('type_free')}</option>
+            <option value="xach"${sel('xach',e.type)}>${t('type_carry')}</option>
           </select>
         </div>
         <div class="field"><label>${t('mk_cat')}</label>
           <select id="m-cat">
-            <option value="Đồ trẻ em">${t('cat_kids')}</option>
-            <option value="Đồ ăn Việt">${t('cat_food')}</option>
-            <option value="Đồ gia đình">${t('cat_home')}</option>
-            <option value="Nhờ xách tay">${t('cat_carry')}</option>
-            <option value="Cho tặng miễn phí">${t('cat_free')}</option>
+            <option value="Đồ trẻ em"${sel('Đồ trẻ em',e.cat)}>${t('cat_kids')}</option>
+            <option value="Đồ ăn Việt"${sel('Đồ ăn Việt',e.cat)}>${t('cat_food')}</option>
+            <option value="Đồ gia đình"${sel('Đồ gia đình',e.cat)}>${t('cat_home')}</option>
+            <option value="Nhờ xách tay"${sel('Nhờ xách tay',e.cat)}>${t('cat_carry')}</option>
+            <option value="Cho tặng miễn phí"${sel('Cho tặng miễn phí',e.cat)}>${t('cat_free')}</option>
           </select>
         </div>
       </div>
-      <div class="field"><label>${t('mk_name')}</label><input id="m-who" value="${currentUser?(currentUser.ten||''):''}" placeholder=""></div>
-      <div class="field"><label>${t('mk_area')}</label><input id="m-area" placeholder=""></div>
-      <div class="field"><label>${t('mk_phone')}</label><input id="m-sdt" placeholder=""></div>
-      <div class="field"><label>${t('mk_desc')}</label><textarea id="m-desc" placeholder="${t('mk_desc_ph')}"></textarea></div>
-      <button class="submit" onclick="submitItem()">${t('mk_post_btn')}</button>
+      <div class="field"><label>${t('mk_name')}</label><input id="m-who" value="${(e.who||(currentUser?(currentUser.ten||''):'')).replace(/"/g,'&quot;')}" placeholder=""></div>
+      <div class="field"><label>${t('mk_area')}</label><input id="m-area" value="${(e.khuvuc||'').replace(/"/g,'&quot;')}" placeholder=""></div>
+      <div class="field"><label>${t('mk_phone')}</label><input id="m-sdt" value="${(e.sdt||'').replace(/"/g,'&quot;')}" placeholder=""></div>
+      <div class="field"><label>${t('mk_desc')}</label><textarea id="m-desc" placeholder="${t('mk_desc_ph')}">${e.desc||''}</textarea></div>
+      <button class="submit" onclick="submitItem('${isEdit?e.id:''}')">${isEdit?t('post_save'):t('mk_post_btn')}</button>
     </div>`;
   openModalEl();
   });
 }
-function submitItem() {
+function submitItem(editId) {
   const v = id => document.getElementById(id).value.trim();
   const title=v('m-title'), who=v('m-who');
   if (!title || !who) { alert(t('mk_need')); return; }
-  const item = { tp:activeCity, type:v('m-type'), cat:v('m-cat'), title, who, khuvuc:v('m-area')||activeCity, sdt:v('m-sdt')||'', desc:v('m-desc')||'', anh:v('m-anh')||"https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=600&q=70", email: currentUser?currentUser.email:'' };
+  const fields = { type:v('m-type'), cat:v('m-cat'), title, who, khuvuc:v('m-area')||activeCity, sdt:v('m-sdt')||'', desc:v('m-desc')||'', anh:v('m-anh')||"https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=600&q=70" };
+  if (editId) {
+    const m = MARKET.find(x=>String(x.id)===String(editId));
+    if (m) Object.assign(m, fields);
+    closeModal(); renderMarket();
+    callApi({ action:'editPost', postType:'market', id:editId, email:currentUser.email, data:fields }).catch(()=>{});
+    return;
+  }
+  const item = { tp:activeCity, ...fields, email: currentUser?currentUser.email:'' };
   MARKET.unshift(item);
   closeModal(); renderMarket();
   callApi({ action:'addMarket', ...item }).catch(()=>{});
@@ -1956,7 +2024,11 @@ function renderTrFind() {
       <div class="tr-bio">${tr.bio}</div>
       <div class="tr-foot">
         <span class="tr-where">📍 ${tr.khuvuc}</span>
-        <a class="tr-contact" href="tel:${tr.sdt.replace(/\s/g,'')}">${t('c_contact')}</a>
+        <div style="display:flex;gap:6px;align-items:center">
+          ${ownsPost(tr)?`<button class="edit-post" title="${t('post_edit')}" onclick="openTrProfileForm(TRANSLATORS.find(x=>String(x.id)==='${tr.id}'))">✎</button>`:''}
+          ${ownsPost(tr)?delBtnHTML('translator', tr.id):''}
+          <a class="tr-contact" href="tel:${tr.sdt.replace(/\s/g,'')}">${t('c_contact')}</a>
+        </div>
       </div>
     </article>`).join('');
 }
@@ -1976,77 +2048,102 @@ function renderTrRequests() {
       </div>
       <div class="o-info" style="margin:12px 0 8px"><span class="pill" style="background:#e3eef5;color:#2a5a7a">🗣️ ${r.field}</span></div>
       <div class="o-note">${r.note}</div>
-      <div class="o-foot" style="margin-top:13px">
+      <div class="o-foot" style="margin-top:13px;display:flex;gap:6px;align-items:center;justify-content:space-between">
         <a class="join" style="text-decoration:none" href="tel:${r.sdt.replace(/\s/g,'')}">${t('c_get_help')}</a>
+        <div style="display:flex;gap:6px;align-items:center">
+          ${ownsPost(r)?`<button class="edit-post" title="${t('post_edit')}" onclick="openTrRequestForm(TR_REQUESTS.find(x=>String(x.id)==='${r.id}'))">✎</button>`:''}
+          ${ownsPost(r)?delBtnHTML('transreq', r.id):''}
+        </div>
       </div>
     </article>`).join('');
 }
 
-function openTrProfileForm() {
+function openTrProfileForm(editItem) {
   requireLogin(() => {
+    const e = editItem || {};
+    const isEdit = !!editItem;
+    const langs = Array.isArray(e.langs) ? e.langs.join(', ') : (e.langs||'');
+    const flds = Array.isArray(e.fields) ? e.fields.join(', ') : (e.fields||'');
     document.getElementById('sheet').innerHTML = `
       <button class="close-x" onclick="closeModal()">✕</button>
       <div class="sheet-body">
-        <h2>${t('tr_reg_title')}</h2>
+        <h2>${isEdit?t('post_edit'):t('tr_reg_title')}</h2>
         <div class="auth-note">${t('tr_reg_sub')}</div>
-        ${photoFieldHTML(t('photo_avatar'), 't-anh-prev', 't-anh', '', true)}
-        <div class="field"><label>${t('tr_name')}</label><input id="t-ten" value="${currentUser.ten||''}" placeholder=""></div>
-        <div class="field"><label>${t('tr_area')}</label><input id="t-khuvuc" placeholder=""></div>
-        <div class="field"><label>${t('tr_langs')}</label><input id="t-langs" placeholder=""></div>
-        <div class="field"><label>${t('tr_fields')}</label><input id="t-fields" placeholder=""></div>
-        <div class="field"><label>${t('tr_exp')}</label><input id="t-kn" placeholder=""></div>
-        <div class="field"><label style="display:flex;gap:8px;align-items:center;font-weight:600"><input type="checkbox" id="t-auth" style="width:auto"> ${t('tr_auth')}</label></div>
-        <div class="field"><label>${t('tr_bio')}</label><textarea id="t-bio" placeholder="${t('tr_bio_ph')}"></textarea></div>
-        <div class="field"><label>${t('tr_phone')}</label><input id="t-sdt" placeholder="070-123 4567"></div>
-        <button class="submit" onclick="submitTranslator()">${t('tr_post')}</button>
+        ${photoFieldHTML(t('photo_avatar'), 't-anh-prev', 't-anh', e.anh||'', true)}
+        <div class="field"><label>${t('tr_name')}</label><input id="t-ten" value="${(e.ten||currentUser.ten||'').replace(/"/g,'&quot;')}" placeholder=""></div>
+        <div class="field"><label>${t('tr_area')}</label><input id="t-khuvuc" value="${(e.khuvuc||'').replace(/"/g,'&quot;')}" placeholder=""></div>
+        <div class="field"><label>${t('tr_langs')}</label><input id="t-langs" value="${langs.replace(/"/g,'&quot;')}" placeholder=""></div>
+        <div class="field"><label>${t('tr_fields')}</label><input id="t-fields" value="${flds.replace(/"/g,'&quot;')}" placeholder=""></div>
+        <div class="field"><label>${t('tr_exp')}</label><input id="t-kn" value="${(e.kn||'').replace(/"/g,'&quot;')}" placeholder=""></div>
+        <div class="field"><label style="display:flex;gap:8px;align-items:center;font-weight:600"><input type="checkbox" id="t-auth" style="width:auto" ${e.auth?'checked':''}> ${t('tr_auth')}</label></div>
+        <div class="field"><label>${t('tr_bio')}</label><textarea id="t-bio" placeholder="${t('tr_bio_ph')}">${e.bio||''}</textarea></div>
+        <div class="field"><label>${t('tr_phone')}</label><input id="t-sdt" value="${(e.sdt||'').replace(/"/g,'&quot;')}" placeholder="070-123 4567"></div>
+        <button class="submit" onclick="submitTranslator('${isEdit?e.id:''}')">${isEdit?t('post_save'):t('tr_post')}</button>
       </div>`;
     openModalEl();
   });
 }
-function submitTranslator() {
+function submitTranslator(editId) {
   const v = id => document.getElementById(id).value.trim();
   const ten = v('t-ten');
   if (!ten) { alert(t('pf_need_name')); return; }
-  const item = { tp:activeCity, ten, khuvuc:v('t-khuvuc')||activeCity,
+  const fields = { ten, khuvuc:v('t-khuvuc')||activeCity,
     langs:v('t-langs').split(',').map(s=>s.trim()).filter(Boolean),
     fields:v('t-fields').split(',').map(s=>s.trim()).filter(Boolean),
-    auth:document.getElementById('t-auth').checked, kn:v('t-kn')||'', bio:v('t-bio')||'', sdt:v('t-sdt')||'', anh:v('t-anh')||'',
-    email: currentUser?currentUser.email:'' };
+    auth:document.getElementById('t-auth').checked, kn:v('t-kn')||'', bio:v('t-bio')||'', sdt:v('t-sdt')||'', anh:v('t-anh')||'' };
+  if (editId) {
+    const tr = TRANSLATORS.find(x=>String(x.id)===String(editId));
+    if (tr) Object.assign(tr, fields);
+    closeModal(); trSub='find'; renderTranslate();
+    callApi({ action:'editPost', postType:'translator', id:editId, email:currentUser.email, data:fields }).catch(()=>{});
+    return;
+  }
+  const item = { tp:activeCity, ...fields, email: currentUser?currentUser.email:'' };
   TRANSLATORS.unshift(item);
   closeModal(); trSub='find'; renderTranslate();
   callApi({ action:'addTranslator', ...item }).catch(()=>{});
 }
 
-function openTrRequestForm() {
+function openTrRequestForm(editItem) {
   requireLogin(() => {
+    const e = editItem || {};
+    const isEdit = !!editItem;
+    const sel = (val)=> val===e.field?' selected':'';
     document.getElementById('sheet').innerHTML = `
       <button class="close-x" onclick="closeModal()">✕</button>
       <div class="sheet-body">
-        <h2>${t('trq_title')}</h2>
+        <h2>${isEdit?t('post_edit'):t('trq_title')}</h2>
         <div class="auth-note">${t('trq_sub')}</div>
-        <div class="field"><label>${t('trq_name')}</label><input id="tr-who" value="${currentUser.ten||''}" placeholder=""></div>
-        <div class="field"><label>${t('trq_area')}</label><input id="tr-area" placeholder=""></div>
+        <div class="field"><label>${t('trq_name')}</label><input id="tr-who" value="${(e.who||currentUser.ten||'').replace(/"/g,'&quot;')}" placeholder=""></div>
+        <div class="field"><label>${t('trq_area')}</label><input id="tr-area" value="${(e.khuvuc||'').replace(/"/g,'&quot;')}" placeholder=""></div>
         <div class="field"><label>${t('trq_field')}</label>
           <select id="tr-field">
-            <option value="Y tế">${t('trf_medical')}</option><option value="Giấy tờ/Hành chính">${t('trf_admin')}</option><option value="Pháp lý">${t('trf_legal')}</option>
-            <option value="Đi cùng thường">${t('trf_accompany')}</option><option value="Dịch văn bản">${t('trf_doc')}</option>
+            <option value="Y tế"${sel('Y tế')}>${t('trf_medical')}</option><option value="Giấy tờ/Hành chính"${sel('Giấy tờ/Hành chính')}>${t('trf_admin')}</option><option value="Pháp lý"${sel('Pháp lý')}>${t('trf_legal')}</option>
+            <option value="Đi cùng thường"${sel('Đi cùng thường')}>${t('trf_accompany')}</option><option value="Dịch văn bản"${sel('Dịch văn bản')}>${t('trf_doc')}</option>
           </select>
         </div>
-        <div class="field"><label>${t('trq_when')}</label><input id="tr-khi" placeholder=""></div>
-        <div class="field"><label>${t('trq_desc')}</label><textarea id="tr-note" placeholder=""></textarea></div>
-        <div class="field"><label>${t('trq_phone')}</label><input id="tr-sdt" placeholder="070-123 4567"></div>
-        <button class="submit" onclick="submitTrRequest()">${t('trq_post')}</button>
+        <div class="field"><label>${t('trq_when')}</label><input id="tr-khi" value="${(e.khi||'').replace(/"/g,'&quot;')}" placeholder=""></div>
+        <div class="field"><label>${t('trq_desc')}</label><textarea id="tr-note" placeholder="">${e.note||''}</textarea></div>
+        <div class="field"><label>${t('trq_phone')}</label><input id="tr-sdt" value="${(e.sdt||'').replace(/"/g,'&quot;')}" placeholder="070-123 4567"></div>
+        <button class="submit" onclick="submitTrRequest('${isEdit?e.id:''}')">${isEdit?t('post_save'):t('trq_post')}</button>
       </div>`;
     openModalEl();
   });
 }
-function submitTrRequest() {
+function submitTrRequest(editId) {
   const v = id => document.getElementById(id).value.trim();
   const who = v('tr-who');
   if (!who) { alert(t('pf_need_name')); return; }
-  const item = { tp:activeCity, who, khuvuc:v('tr-area')||activeCity,
-    field:v('tr-field'), khi:v('tr-khi')||'—', note:v('tr-note')||'', sdt:v('tr-sdt')||'',
-    email: currentUser?currentUser.email:'' };
+  const fields = { who, khuvuc:v('tr-area')||activeCity,
+    field:v('tr-field'), khi:v('tr-khi')||'—', note:v('tr-note')||'', sdt:v('tr-sdt')||'' };
+  if (editId) {
+    const r = TR_REQUESTS.find(x=>String(x.id)===String(editId));
+    if (r) Object.assign(r, fields);
+    closeModal(); trSub='requests'; renderTranslate();
+    callApi({ action:'editPost', postType:'transreq', id:editId, email:currentUser.email, data:fields }).catch(()=>{});
+    return;
+  }
+  const item = { tp:activeCity, ...fields, email: currentUser?currentUser.email:'' };
   TR_REQUESTS.unshift(item);
   closeModal(); trSub='requests';
   document.querySelectorAll('#tr-subtabs .sub-tab').forEach(x=>x.classList.toggle('on', x.dataset.sub==='requests'));
