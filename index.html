@@ -245,6 +245,9 @@
     color: var(--jade); border-radius: 12px; padding: 12px; font-size: 15px; font-weight: 700; cursor: pointer;
     font-family: inherit; transition: background .16s ease; }
   .edit-post-full:hover { background: #d9ebe3; }
+  .item-actions { display: flex; gap: 6px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); }
+  .item-actions .edit-post, .item-actions .del-post { flex: 1; font-size: 13px; font-weight: 600; display: flex;
+    align-items: center; justify-content: center; gap: 4px; }
   .photo-pick { display: flex; align-items: center; gap: 14px; }
   .photo-prev { width: 74px; height: 74px; flex-shrink: 0; background: var(--paper-2);
     background-size: cover; background-position: center; border: 1px solid var(--line);
@@ -1777,8 +1780,14 @@ function openPlace(id) {
 
 // ===== Xoá tin (dùng chung) =====
 // Chủ tin = email trùng (dữ liệu từ server lưu ở 'nguoi_dang' hoặc 'email')
+// Quản trị viên thấy nút trên MỌI tin để dọn dẹp.
+const ADMIN_EMAILS = ['weshare.sverige@gmail.com'];
+function isAdminUser() {
+  return currentUser && ADMIN_EMAILS.indexOf(String(currentUser.email||'').toLowerCase()) !== -1;
+}
 function ownsPost(item) {
   if (!currentUser || !item) return false;
+  if (isAdminUser()) return true;
   const owner = String(item.nguoi_dang || item.email || '').toLowerCase();
   return owner && owner === currentUser.email.toLowerCase();
 }
@@ -1904,18 +1913,22 @@ function renderMarket() {
   if (!list.length) { grid.innerHTML=''; empty.classList.remove('hidden'); return; }
   empty.classList.add('hidden');
   grid.innerHTML = list.map(m => `
-    <article class="item" onclick="openItem('${m.id}')">
-      <div class="item-img" style="background-image:url('${m.anh}')">
+    <article class="item">
+      <div class="item-img" onclick="openItem('${m.id}')" style="background-image:url('${m.anh}')">
         <span class="tag-type ${TYPE_CLASS[m.type]}">${TYPE_LABEL[m.type]}</span>
         <span class="tag-cat">${m.cat}</span>
       </div>
       <div class="item-body">
-        <div class="item-title">${m.title}</div>
-        <div class="item-desc">${m.desc}</div>
+        <div class="item-title" onclick="openItem('${m.id}')">${m.title}</div>
+        <div class="item-desc" onclick="openItem('${m.id}')">${m.desc}</div>
         <div class="item-meta">
           <span class="who">${m.who}</span>
           <span class="where">${m.khuvuc}</span>
         </div>
+        ${ownsPost(m)?`<div class="item-actions">
+          <button class="edit-post" title="${t('post_edit')}" onclick="event.stopPropagation();openPost(MARKET.find(x=>String(x.id)==='${m.id}'))">✎ ${t('post_edit')}</button>
+          <button class="del-post" title="${t('post_delete')}" onclick="event.stopPropagation();deletePost('market','${m.id}')">🗑 ${t('post_delete')}</button>
+        </div>`:''}
       </div>
     </article>`).join('');
 }
