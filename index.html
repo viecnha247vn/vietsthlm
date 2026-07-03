@@ -172,6 +172,34 @@
   .cta-call { background: #fff; color: var(--ink); border: 1px solid var(--line); }
 
   .field { margin-bottom: 14px; }
+  .ev-chips { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 10px; -webkit-overflow-scrolling: touch; }
+  .ev-chip { flex-shrink: 0; background: var(--paper-2); border: 1px solid var(--line); border-radius: 999px;
+    padding: 7px 14px; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--ink); font-family: inherit; white-space: nowrap; }
+  .ev-chip.on { background: var(--jade); color: #fff; border-color: var(--jade); }
+  #ev-grid { display: grid; gap: 14px; }
+  .ev-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+  .ev-img { height: 150px; background-size: cover; background-position: center; }
+  .ev-body { padding: 15px 16px; }
+  .ev-topic { display: inline-block; font-size: 12px; font-weight: 700; color: var(--jade);
+    background: #e6f2ed; border-radius: 999px; padding: 3px 10px; margin-bottom: 8px; }
+  .ev-title { font-size: 17px; font-weight: 800; letter-spacing: -.01em; line-height: 1.3; }
+  .ev-meta { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0; font-size: 13px; color: var(--muted); }
+  .ev-note { font-size: 14px; color: #4a4036; margin-bottom: 12px; }
+  .ev-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .ev-join { background: var(--red); color: #fff; text-decoration: none; font-weight: 700; font-size: 14px;
+    padding: 10px 18px; border-radius: 12px; }
+  .ev-join:hover { filter: brightness(1.05); }
+  .ev-join-off { background: var(--paper-2); color: var(--muted); cursor: default; }
+  .ev-count { margin-bottom: 4px; }
+  .ev-topline { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+  .ev-topic { margin-bottom: 0 !important; }
+  .ev-live { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 800;
+    color: #fff; background: var(--red); border-radius: 999px; padding: 3px 10px; animation: evBlink 1.3s ease-in-out infinite; }
+  @keyframes evBlink { 0%,100%{opacity:1} 50%{opacity:.55} }
+  .ev-soon { font-size: 12px; font-weight: 700; color: #b8791a; background: #fdf1dc; border-radius: 999px; padding: 3px 10px; }
+  .ev-ended { font-size: 12px; font-weight: 700; color: var(--muted); background: var(--paper-2); border-radius: 999px; padding: 3px 10px; }
+  .ev-past { opacity: .72; }
+  .ev-count-host { font-size: 12.5px; color: var(--jade); font-weight: 700; }
   .del-post { background: none; border: 1px solid var(--line); border-radius: 8px; cursor: pointer;
     font-size: 15px; line-height: 1; padding: 7px 9px; color: #c8442e; }
   .del-post:hover { background: #fbeae6; border-color: #e6b3a8; }
@@ -463,6 +491,7 @@
     <div class="tab" data-tab="outings" onclick="switchTab('outings')" data-i18n="tab_outings">Đi chơi cùng con</div>
     <div class="tab" data-tab="market" onclick="switchTab('market')" data-i18n="tab_market">Chợ cộng đồng</div>
     <div class="tab" data-tab="friends" onclick="switchTab('friends')" data-i18n="tab_friends">Kết bạn</div>
+    <div class="tab" data-tab="fun" onclick="switchTab('fun')" data-i18n="tab_fun">Giải trí</div>
     <div class="tab" data-tab="translate" onclick="switchTab('translate')" data-i18n="tab_translate">Phiên dịch</div>
     <div class="tab" data-tab="services" onclick="switchTab('services')" data-i18n="tab_services">Dịch vụ QTT</div>
   </div>
@@ -531,6 +560,12 @@
         <h3 data-i18n="tab_friends">Kết bạn</h3>
         <p data-i18n="hc_friends_d">Nơi những người độc thân tìm người hợp gu, cùng văn hóa, cùng ngôn ngữ — một cách an toàn và tử tế.</p>
         <span class="hc-go">Tìm bạn →</span>
+      </article>
+      <article class="home-card" onclick="switchTab('fun')">
+        <div class="hc-icon" style="background:#f3e9fb">🎤</div>
+        <h3 data-i18n="tab_fun">Giải trí</h3>
+        <p data-i18n="hc_fun_d">Đêm karaoke, quẩy nhạc DJ, tâm sự, chơi game — mọi người tự tạo sự kiện live theo chủ đề mình thích.</p>
+        <span class="hc-go" data-i18n="hc_fun_go">Vào giải trí →</span>
       </article>
       <article class="home-card" onclick="switchTab('translate')">
         <div class="hc-icon" style="background:#e3eef5">🗣️</div>
@@ -657,6 +692,20 @@
     </div>
   </main>
   <button class="fab" data-for="friends" onclick="openProfileForm()" data-i18n="fab_profile">✎ Hồ sơ của tôi</button>
+</div>
+
+<!-- GIẢI TRÍ -->
+<div id="view-fun" class="hidden">
+  <main class="wrap">
+    <section class="hero">
+      <h1><span data-i18n="ev_hero_1">Giải trí —</span> <span class="em" data-i18n="ev_hero_2">tạo hoặc tham gia sự kiện</span></h1>
+      <p data-i18n="ev_hero_sub">Đêm karaoke, quẩy nhạc DJ, tâm sự sẻ chia, chơi game và nhiều hơn nữa — do chính cộng đồng tạo ra.</p>
+      <div class="safe-note"><b data-i18n="ev_note_b">Cách hoạt động:</b> <span data-i18n="ev_note">sự kiện diễn ra trên nền tảng bạn chọn (Zoom, Meet, TikTok, Facebook…). Thêm link để mọi người vào tham gia.</span></div>
+    </section>
+    <div class="ev-count" id="ev-count"></div>
+    <div id="ev-grid"></div>
+  </main>
+  <button class="fab" data-for="fun" onclick="openEventForm()" data-i18n="fab_event">＋ Tạo sự kiện</button>
 </div>
 
 <!-- PHIÊN DỊCH -->
@@ -902,7 +951,14 @@ const I18N = {
     about_badge:'About WeShare', about_title:'Built for every community far from home', about_p:'WeShare is a community platform for everyone living far from home in Sweden — whatever country you come from. WeShare exists so those moments of feeling lost are no longer lonely.', about_brand_pre:'Built by', about_brand_post:'— a technology company connecting communities abroad.', about_free:'Safe · Welcoming · In your own language',
     foot_tag:'Community for people far from home in Sweden', foot_by:'A product of',
     right_in:'in', items_in:'items in', nothing_in:'No content in',
-    c_open:'Open', c_call:'Call', c_map:'View map', c_contact:'Contact', c_area:'Area', c_phone:'Phone', c_addr:'Address', c_poster:'Posted by', c_get_help:'Get help', c_skip:'Skip', c_like:'💗 Like', c_report:'⚑ Report', c_featured:'★ Featured', c_certified:'✓ Certified', photo_choose:'📷 Choose photo', photo_err:'Could not process the image. Please try another.', photo_avatar:'Profile photo', photo_img:'Photo', photo_save:'Save photo', post_delete:'Delete', post_del_confirm:'Delete this post? This cannot be undone.', post_edit:'Edit', post_save:'Save changes', tr_show:'Translate', tr_hide:'Show original', tr_loading:'Translating…', tr_fail:'Translation failed',
+    c_open:'Open', c_call:'Call', c_map:'View map', c_contact:'Contact', c_area:'Area', c_phone:'Phone', c_addr:'Address', c_poster:'Posted by', c_get_help:'Get help', c_skip:'Skip', c_like:'💗 Like', c_report:'⚑ Report', c_featured:'★ Featured', c_certified:'✓ Certified', photo_choose:'📷 Choose photo', photo_err:'Could not process the image. Please try another.', photo_avatar:'Profile photo', photo_img:'Photo', photo_save:'Save photo', post_delete:'Delete', post_del_confirm:'Delete this post? This cannot be undone.', post_edit:'Edit', post_save:'Save changes', tab_fun:'Live & Fun', hc_fun_d:'Karaoke nights, DJ sets, heart-to-heart talks, games — anyone can host a live event on any topic.', hc_fun_go:'Explore Live →',
+    ev_hero_1:'Live & Fun —', ev_hero_2:'host or join events', ev_hero_sub:'Karaoke nights, DJ sets, heart-to-heart talks, games and more — created by the community.',
+    ev_note_b:'How it works:', ev_note:'events happen on your chosen platform (Zoom, Meet, TikTok, Facebook…). Add the link so people can join.',
+    fab_event:'＋ Create event', ev_create:'Create an event', ev_edit:'Edit event',
+    ev_host:'Your display name', ev_topic:'Topic', ev_title:'Event title', ev_when:'When (date & time)',
+    ev_link:'Live link (Zoom, Meet, TikTok…)', ev_desc:'Description', ev_desc_ph:'A few words about your event…',
+    ev_post:'Post event', ev_need:'Please enter a title and a live link.', ev_join:'Join live', ev_live:'LIVE NOW', ev_soon:'Starting soon', ev_ended:'Ended', ev_hosted:'hosted', ev_start:'Start (date & time)', ev_dur:'Duration', ev_min:'min', ev_need_time:'Please choose a start date and time.', ev_empty:'No events yet. Be the first to host one!',
+    topic_karaoke:'🎤 Karaoke', topic_dj:'🎧 DJ / Music', topic_talk:'💬 Heart-to-heart', topic_game:'🎮 Games', topic_study:'📚 Study together', topic_sport:'⚽ Sports', topic_other:'✨ Other', tr_show:'Translate', tr_hide:'Show original', tr_loading:'Translating…', tr_fail:'Translation failed',
   },
   sv: {
     tab_home:'Hem', tab_places:'Check-in', tab_outings:'Utflykter med barn', tab_market:'Marknad',
@@ -967,7 +1023,14 @@ const I18N = {
     foot_tag:'Gemenskap för människor långt hemifrån i Sverige', foot_by:'En produkt av',
     right_in:'i', items_in:'objekt i', nothing_in:'Inget innehåll i',
     c_open:'Öppet', c_call:'Ring', c_map:'Visa karta', c_contact:'Kontakt', c_area:'Område', c_phone:'Telefon', c_addr:'Adress', c_poster:'Publicerad av', c_get_help:'Få hjälp', c_skip:'Hoppa över', c_like:'💗 Gilla', c_report:'⚑ Rapportera', c_featured:'★ Utvald', c_certified:'✓ Certifierad',
-    photo_choose:'📷 Välj foto', photo_err:'Kunde inte bearbeta bilden. Prova en annan.', photo_avatar:'Profilbild', photo_img:'Foto', photo_save:'Spara foto', post_delete:'Radera', post_del_confirm:'Radera detta inlägg? Detta kan inte ångras.', post_edit:'Redigera', post_save:'Spara ändringar', tr_show:'Översätt', tr_hide:'Visa original', tr_loading:'Översätter…', tr_fail:'Översättning misslyckades',
+    photo_choose:'📷 Välj foto', photo_err:'Kunde inte bearbeta bilden. Prova en annan.', photo_avatar:'Profilbild', photo_img:'Foto', photo_save:'Spara foto', post_delete:'Radera', post_del_confirm:'Radera detta inlägg? Detta kan inte ångras.', post_edit:'Redigera', post_save:'Spara ändringar', tab_fun:'Live & Nöje', hc_fun_d:'Karaokekvällar, DJ-set, hjärtliga samtal, spel — vem som helst kan skapa ett liveevent.', hc_fun_go:'Utforska Live →',
+    ev_hero_1:'Live & Nöje —', ev_hero_2:'skapa eller delta i event', ev_hero_sub:'Karaokekvällar, DJ-set, hjärtliga samtal, spel och mer — skapat av gemenskapen.',
+    ev_note_b:'Så funkar det:', ev_note:'event sker på din valda plattform (Zoom, Meet, TikTok, Facebook…). Lägg till länken så folk kan delta.',
+    fab_event:'＋ Skapa event', ev_create:'Skapa ett event', ev_edit:'Redigera event',
+    ev_host:'Ditt visningsnamn', ev_topic:'Ämne', ev_title:'Eventtitel', ev_when:'När (datum & tid)',
+    ev_link:'Livelänk (Zoom, Meet, TikTok…)', ev_desc:'Beskrivning', ev_desc_ph:'Några ord om ditt event…',
+    ev_post:'Publicera event', ev_need:'Ange en titel och en livelänk.', ev_join:'Delta live', ev_live:'LIVE NU', ev_soon:'Börjar snart', ev_ended:'Avslutat', ev_hosted:'genomförda', ev_start:'Start (datum & tid)', ev_dur:'Längd', ev_min:'min', ev_need_time:'Välj startdatum och tid.', ev_empty:'Inga event än. Bli först med att skapa ett!',
+    topic_karaoke:'🎤 Karaoke', topic_dj:'🎧 DJ / Musik', topic_talk:'💬 Hjärtligt samtal', topic_game:'🎮 Spel', topic_study:'📚 Plugga ihop', topic_sport:'⚽ Sport', topic_other:'✨ Annat', tr_show:'Översätt', tr_hide:'Visa original', tr_loading:'Översätter…', tr_fail:'Översättning misslyckades',
     trf_medical:'Sjukvård', trf_admin:'Dokument/Myndighet', trf_legal:'Juridik', trf_accompany:'Allmänt sällskap', trf_doc:'Dokumentöversättning',
     pf_title:'Min singelprofil', pf_sub:'Detta visas för andra användare. Du kan radera det när som helst.',
     pf_name:'Visningsnamn', pf_age:'Ålder', pf_area:'Område', pf_job:'Yrke', pf_looking:'Söker',
@@ -1057,7 +1120,14 @@ const I18N = {
     foot_tag:'스웨덴에서 고향을 떠나온 사람들을 위한 커뮤니티', foot_by:'제품 제공',
     right_in:'지역:', items_in:'개 항목 —', nothing_in:'콘텐츠가 없습니다 —',
     c_open:'영업', c_call:'전화', c_map:'지도 보기', c_contact:'연락처', c_area:'지역', c_phone:'전화', c_addr:'주소', c_poster:'게시자', c_get_help:'도움 받기', c_skip:'건너뛰기', c_like:'💗 좋아요', c_report:'⚑ 신고', c_featured:'★ 추천', c_certified:'✓ 인증됨',
-    photo_choose:'📷 사진 선택', photo_err:'이미지를 처리할 수 없습니다. 다른 사진을 시도하세요.', photo_avatar:'프로필 사진', photo_img:'사진', photo_save:'사진 저장', post_delete:'삭제', post_del_confirm:'이 게시물을 삭제할까요? 되돌릴 수 없습니다.', post_edit:'수정', post_save:'변경사항 저장', tr_show:'번역', tr_hide:'원문 보기', tr_loading:'번역 중…', tr_fail:'번역 실패',
+    photo_choose:'📷 사진 선택', photo_err:'이미지를 처리할 수 없습니다. 다른 사진을 시도하세요.', photo_avatar:'프로필 사진', photo_img:'사진', photo_save:'사진 저장', post_delete:'삭제', post_del_confirm:'이 게시물을 삭제할까요? 되돌릴 수 없습니다.', post_edit:'수정', post_save:'변경사항 저장', tab_fun:'라이브 & 즐길거리', hc_fun_d:'노래방, DJ 셋, 속마음 나누기, 게임 — 누구나 원하는 주제로 라이브를 열 수 있어요.', hc_fun_go:'라이브 보기 →',
+    ev_hero_1:'라이브 & 즐길거리 —', ev_hero_2:'이벤트 열거나 참여하기', ev_hero_sub:'노래방, DJ 셋, 속마음 나누기, 게임 등 — 커뮤니티가 만듭니다.',
+    ev_note_b:'이용 방법:', ev_note:'이벤트는 선택한 플랫폼(Zoom, Meet, TikTok, Facebook…)에서 진행됩니다. 링크를 추가해 참여하게 하세요.',
+    fab_event:'＋ 이벤트 만들기', ev_create:'이벤트 만들기', ev_edit:'이벤트 수정',
+    ev_host:'표시 이름', ev_topic:'주제', ev_title:'이벤트 제목', ev_when:'언제 (날짜 & 시간)',
+    ev_link:'라이브 링크 (Zoom, Meet, TikTok…)', ev_desc:'설명', ev_desc_ph:'이벤트에 대한 몇 마디…',
+    ev_post:'이벤트 올리기', ev_need:'제목과 라이브 링크를 입력하세요.', ev_join:'라이브 참여', ev_live:'라이브 중', ev_soon:'곧 시작', ev_ended:'종료됨', ev_hosted:'회 진행', ev_start:'시작 (날짜 & 시간)', ev_dur:'길이', ev_min:'분', ev_need_time:'시작 날짜와 시간을 선택하세요.', ev_empty:'아직 이벤트가 없습니다. 첫 이벤트를 열어보세요!',
+    topic_karaoke:'🎤 노래방', topic_dj:'🎧 DJ / 음악', topic_talk:'💬 속마음 나누기', topic_game:'🎮 게임', topic_study:'📚 함께 공부', topic_sport:'⚽ 스포츠', topic_other:'✨ 기타', tr_show:'번역', tr_hide:'원문 보기', tr_loading:'번역 중…', tr_fail:'번역 실패',
     trf_medical:'의료', trf_admin:'서류/행정', trf_legal:'법률', trf_accompany:'일반 동행', trf_doc:'문서 번역',
     pf_title:'내 싱글 프로필', pf_sub:'다른 사용자에게 표시됩니다. 언제든 삭제할 수 있습니다.',
     pf_name:'표시 이름', pf_age:'나이', pf_area:'지역', pf_job:'직업', pf_looking:'찾는 대상',
@@ -1147,7 +1217,14 @@ const I18N = {
     foot_tag:'Komunidad para sa mga taong malayo sa tahanan sa Sweden', foot_by:'Isang produkto ng',
     right_in:'sa', items_in:'item sa', nothing_in:'Walang nilalaman sa',
     c_open:'Bukas', c_call:'Tumawag', c_map:'Tingnan ang mapa', c_contact:'Contact', c_area:'Lugar', c_phone:'Telepono', c_addr:'Address', c_poster:'Nag-post', c_get_help:'Humingi ng tulong', c_skip:'Laktawan', c_like:'💗 Like', c_report:'⚑ I-report', c_featured:'★ Tampok', c_certified:'✓ Sertipikado',
-    photo_choose:'📷 Pumili ng larawan', photo_err:'Hindi ma-process ang larawan. Subukan ang iba.', photo_avatar:'Larawan ng profile', photo_img:'Larawan', photo_save:'I-save ang larawan', post_delete:'Burahin', post_del_confirm:'Burahin ang post na ito? Hindi na ito maibabalik.', post_edit:'I-edit', post_save:'I-save ang pagbabago', tr_show:'Isalin', tr_hide:'Ipakita ang orihinal', tr_loading:'Isinasalin…', tr_fail:'Nabigo ang pagsasalin',
+    photo_choose:'📷 Pumili ng larawan', photo_err:'Hindi ma-process ang larawan. Subukan ang iba.', photo_avatar:'Larawan ng profile', photo_img:'Larawan', photo_save:'I-save ang larawan', post_delete:'Burahin', post_del_confirm:'Burahin ang post na ito? Hindi na ito maibabalik.', post_edit:'I-edit', post_save:'I-save ang pagbabago', tab_fun:'Live & Saya', hc_fun_d:'Karaoke, DJ set, tapatan ng usap, laro — kahit sino ay puwedeng mag-host ng live event.', hc_fun_go:'Tuklasin ang Live →',
+    ev_hero_1:'Live & Saya —', ev_hero_2:'mag-host o sumali sa event', ev_hero_sub:'Karaoke night, DJ set, tapatan ng usap, laro at iba pa — likha ng komunidad.',
+    ev_note_b:'Paano ito gumagana:', ev_note:'nagaganap ang event sa napili mong platform (Zoom, Meet, TikTok, Facebook…). Idagdag ang link para makasali ang iba.',
+    fab_event:'＋ Gumawa ng event', ev_create:'Gumawa ng event', ev_edit:'I-edit ang event',
+    ev_host:'Iyong display name', ev_topic:'Paksa', ev_title:'Pamagat ng event', ev_when:'Kailan (petsa at oras)',
+    ev_link:'Live link (Zoom, Meet, TikTok…)', ev_desc:'Paglalarawan', ev_desc_ph:'Ilang salita tungkol sa event mo…',
+    ev_post:'I-post ang event', ev_need:'Pakilagay ang pamagat at live link.', ev_join:'Sumali sa live', ev_live:'LIVE NGAYON', ev_soon:'Malapit nang magsimula', ev_ended:'Tapos na', ev_hosted:'na-host', ev_start:'Simula (petsa at oras)', ev_dur:'Tagal', ev_min:'min', ev_need_time:'Pumili ng petsa at oras ng simula.', ev_empty:'Wala pang event. Ikaw ang mauna!',
+    topic_karaoke:'🎤 Karaoke', topic_dj:'🎧 DJ / Musika', topic_talk:'💬 Tapatan ng usap', topic_game:'🎮 Mga laro', topic_study:'📚 Sabay mag-aral', topic_sport:'⚽ Isports', topic_other:'✨ Iba pa', tr_show:'Isalin', tr_hide:'Ipakita ang orihinal', tr_loading:'Isinasalin…', tr_fail:'Nabigo ang pagsasalin',
     trf_medical:'Medikal', trf_admin:'Dokumento/Administratibo', trf_legal:'Legal', trf_accompany:'Pangkalahatang pagsama', trf_doc:'Pagsasalin ng dokumento',
     pf_title:'Aking singles profile', pf_sub:'Ipinapakita ito sa ibang user. Puwede mong burahin anumang oras.',
     pf_name:'Display name', pf_age:'Edad', pf_area:'Lugar', pf_job:'Trabaho', pf_looking:'Hinahanap',
@@ -1261,7 +1338,14 @@ const I18N = {
     about_badge:'Về WeShare', about_title:'Xây dựng cho mọi cộng đồng xa quê', about_p:'WeShare là nền tảng cộng đồng dành cho tất cả những người xa quê đang sinh sống tại Thụy Điển — dù bạn đến từ đất nước nào. WeShare ra đời để những khoảnh khắc lạc lõng ấy không còn đơn độc.', about_brand_pre:'Phát triển bởi', about_brand_post:'— công ty công nghệ gắn kết cộng đồng nơi xứ người.', about_free:'An toàn · Gần gũi · Bằng ngôn ngữ của bạn',
     foot_tag:'Cộng đồng cho mọi người xa quê tại Thụy Điển', foot_by:'Một sản phẩm của',
     right_in:'tại', items_in:'mục ở', nothing_in:'Chưa có nội dung ở',
-    c_open:'Giờ mở', c_call:'Gọi', c_map:'Xem bản đồ', c_contact:'Liên hệ', c_area:'Khu vực', c_phone:'Điện thoại', c_addr:'Địa chỉ', c_poster:'Người đăng', c_get_help:'Nhận giúp', c_skip:'Bỏ qua', c_like:'💗 Thích', c_report:'⚑ Báo cáo', c_featured:'★ Nổi bật', c_certified:'✓ Được cấp phép', photo_choose:'📷 Chọn ảnh', photo_err:'Không xử lý được ảnh. Hãy thử ảnh khác.', photo_avatar:'Ảnh đại diện', photo_img:'Hình ảnh', photo_save:'Lưu ảnh', post_delete:'Xoá', post_del_confirm:'Xoá tin này? Không thể hoàn tác.', post_edit:'Sửa', post_save:'Lưu thay đổi', tr_show:'Dịch', tr_hide:'Xem bản gốc', tr_loading:'Đang dịch…', tr_fail:'Dịch không thành công',
+    c_open:'Giờ mở', c_call:'Gọi', c_map:'Xem bản đồ', c_contact:'Liên hệ', c_area:'Khu vực', c_phone:'Điện thoại', c_addr:'Địa chỉ', c_poster:'Người đăng', c_get_help:'Nhận giúp', c_skip:'Bỏ qua', c_like:'💗 Thích', c_report:'⚑ Báo cáo', c_featured:'★ Nổi bật', c_certified:'✓ Được cấp phép', photo_choose:'📷 Chọn ảnh', photo_err:'Không xử lý được ảnh. Hãy thử ảnh khác.', photo_avatar:'Ảnh đại diện', photo_img:'Hình ảnh', photo_save:'Lưu ảnh', post_delete:'Xoá', post_del_confirm:'Xoá tin này? Không thể hoàn tác.', post_edit:'Sửa', post_save:'Lưu thay đổi', tab_fun:'Giải trí', hc_fun_d:'Đêm karaoke, quẩy nhạc DJ, tâm sự, chơi game — mọi người tự tạo sự kiện live theo chủ đề mình thích.', hc_fun_go:'Vào giải trí →',
+    ev_hero_1:'Giải trí —', ev_hero_2:'tạo hoặc tham gia sự kiện', ev_hero_sub:'Đêm karaoke, quẩy nhạc DJ, tâm sự sẻ chia, chơi game và nhiều hơn nữa — do chính cộng đồng tạo ra.',
+    ev_note_b:'Cách hoạt động:', ev_note:'sự kiện diễn ra trên nền tảng bạn chọn (Zoom, Meet, TikTok, Facebook…). Thêm link để mọi người vào tham gia.',
+    fab_event:'＋ Tạo sự kiện', ev_create:'Tạo sự kiện', ev_edit:'Sửa sự kiện',
+    ev_host:'Tên hiển thị của bạn', ev_topic:'Chủ đề', ev_title:'Tên sự kiện', ev_when:'Khi nào (ngày & giờ)',
+    ev_link:'Link live (Zoom, Meet, TikTok…)', ev_desc:'Mô tả', ev_desc_ph:'Vài dòng về sự kiện của bạn…',
+    ev_post:'Đăng sự kiện', ev_need:'Vui lòng nhập tên sự kiện và link live.', ev_join:'Vào live', ev_live:'ĐANG LIVE', ev_soon:'Sắp diễn ra', ev_ended:'Đã kết thúc', ev_hosted:'buổi đã tổ chức', ev_start:'Bắt đầu (ngày & giờ)', ev_dur:'Thời lượng', ev_min:'phút', ev_need_time:'Vui lòng chọn ngày giờ bắt đầu.', ev_empty:'Chưa có sự kiện nào. Hãy là người đầu tiên tạo nhé!',
+    topic_karaoke:'🎤 Karaoke', topic_dj:'🎧 DJ / Nghe nhạc', topic_talk:'💬 Tâm sự', topic_game:'🎮 Game', topic_study:'📚 Học chung', topic_sport:'⚽ Thể thao', topic_other:'✨ Khác', tr_show:'Dịch', tr_hide:'Xem bản gốc', tr_loading:'Đang dịch…', tr_fail:'Dịch không thành công',
   },
   th: {
     tab_home:'หน้าแรก', tab_places:'เช็คอิน', tab_outings:'พาลูกไปเที่ยว', tab_market:'ตลาดชุมชน',
@@ -1350,7 +1434,14 @@ const I18N = {
     about_badge:'เกี่ยวกับ WeShare', about_title:'สร้างเพื่อทุกชุมชนที่อยู่ไกลบ้าน', about_p:'WeShare เป็นแพลตฟอร์มชุมชนสำหรับทุกคนที่อยู่ไกลบ้านในสวีเดน ไม่ว่าคุณจะมาจากประเทศใด WeShare เกิดขึ้นเพื่อให้ช่วงเวลาที่รู้สึกเคว้งคว้างไม่โดดเดี่ยวอีกต่อไป', about_brand_pre:'พัฒนาโดย', about_brand_post:'— บริษัทเทคโนโลยีที่เชื่อมชุมชนในต่างแดน', about_free:'ปลอดภัย · อบอุ่น · ในภาษาของคุณ',
     foot_tag:'ชุมชนสำหรับผู้อยู่ไกลบ้านในสวีเดน', foot_by:'ผลิตภัณฑ์ของ',
     right_in:'ที่', items_in:'รายการใน', nothing_in:'ยังไม่มีเนื้อหาใน',
-    c_open:'เวลาเปิด', c_call:'โทร', c_map:'ดูแผนที่', c_contact:'ติดต่อ', c_area:'พื้นที่', c_phone:'โทรศัพท์', c_addr:'ที่อยู่', c_poster:'โพสต์โดย', c_get_help:'ขอความช่วยเหลือ', c_skip:'ข้าม', c_like:'💗 ถูกใจ', c_report:'⚑ รายงาน', c_featured:'★ แนะนำ', c_certified:'✓ ได้รับการรับรอง', photo_choose:'📷 เลือกรูป', photo_err:'ประมวลผลรูปไม่ได้ ลองรูปอื่น', photo_avatar:'รูปโปรไฟล์', photo_img:'รูปภาพ', photo_save:'บันทึกรูป', post_delete:'ลบ', post_del_confirm:'ลบโพสต์นี้? ไม่สามารถย้อนกลับได้', post_edit:'แก้ไข', post_save:'บันทึกการเปลี่ยนแปลง', tr_show:'แปล', tr_hide:'ดูต้นฉบับ', tr_loading:'กำลังแปล…', tr_fail:'แปลไม่สำเร็จ',
+    c_open:'เวลาเปิด', c_call:'โทร', c_map:'ดูแผนที่', c_contact:'ติดต่อ', c_area:'พื้นที่', c_phone:'โทรศัพท์', c_addr:'ที่อยู่', c_poster:'โพสต์โดย', c_get_help:'ขอความช่วยเหลือ', c_skip:'ข้าม', c_like:'💗 ถูกใจ', c_report:'⚑ รายงาน', c_featured:'★ แนะนำ', c_certified:'✓ ได้รับการรับรอง', photo_choose:'📷 เลือกรูป', photo_err:'ประมวลผลรูปไม่ได้ ลองรูปอื่น', photo_avatar:'รูปโปรไฟล์', photo_img:'รูปภาพ', photo_save:'บันทึกรูป', post_delete:'ลบ', post_del_confirm:'ลบโพสต์นี้? ไม่สามารถย้อนกลับได้', post_edit:'แก้ไข', post_save:'บันทึกการเปลี่ยนแปลง', tab_fun:'ไลฟ์ & บันเทิง', hc_fun_d:'คาราโอเกะ ดีเจเซ็ต พูดคุยจากใจ เกม — ใครก็สร้างอีเวนต์ไลฟ์ได้ทุกหัวข้อ', hc_fun_go:'สำรวจไลฟ์ →',
+    ev_hero_1:'ไลฟ์ & บันเทิง —', ev_hero_2:'สร้างหรือเข้าร่วมอีเวนต์', ev_hero_sub:'คืนคาราโอเกะ ดีเจเซ็ต พูดคุยจากใจ เกม และอื่นๆ — สร้างโดยชุมชน',
+    ev_note_b:'วิธีใช้งาน:', ev_note:'อีเวนต์จัดบนแพลตฟอร์มที่คุณเลือก (Zoom, Meet, TikTok, Facebook…) เพิ่มลิงก์เพื่อให้คนเข้าร่วม',
+    fab_event:'＋ สร้างอีเวนต์', ev_create:'สร้างอีเวนต์', ev_edit:'แก้ไขอีเวนต์',
+    ev_host:'ชื่อที่แสดงของคุณ', ev_topic:'หัวข้อ', ev_title:'ชื่ออีเวนต์', ev_when:'เมื่อไหร่ (วันและเวลา)',
+    ev_link:'ลิงก์ไลฟ์ (Zoom, Meet, TikTok…)', ev_desc:'รายละเอียด', ev_desc_ph:'สองสามคำเกี่ยวกับอีเวนต์ของคุณ…',
+    ev_post:'โพสต์อีเวนต์', ev_need:'กรุณากรอกชื่ออีเวนต์และลิงก์ไลฟ์', ev_join:'เข้าร่วมไลฟ์', ev_live:'กำลังไลฟ์', ev_soon:'กำลังจะเริ่ม', ev_ended:'จบแล้ว', ev_hosted:'ครั้งที่จัด', ev_start:'เริ่ม (วันและเวลา)', ev_dur:'ระยะเวลา', ev_min:'นาที', ev_need_time:'กรุณาเลือกวันและเวลาเริ่ม', ev_empty:'ยังไม่มีอีเวนต์ มาเป็นคนแรกกันเถอะ!',
+    topic_karaoke:'🎤 คาราโอเกะ', topic_dj:'🎧 ดีเจ / เพลง', topic_talk:'💬 พูดคุยจากใจ', topic_game:'🎮 เกม', topic_study:'📚 เรียนด้วยกัน', topic_sport:'⚽ กีฬา', topic_other:'✨ อื่นๆ', tr_show:'แปล', tr_hide:'ดูต้นฉบับ', tr_loading:'กำลังแปล…', tr_fail:'แปลไม่สำเร็จ',
   }
 };
 let LANG = 'en';
@@ -1370,6 +1461,7 @@ function applyLang() {
   if (typeof renderMarket==='function') renderMarket();
   if (typeof refreshAccBtn==='function') refreshAccBtn();
   if (typeof renderTranslate==='function' && !document.getElementById('view-translate').classList.contains('hidden')) renderTranslate();
+  if (typeof renderEvents==='function' && !document.getElementById('view-fun').classList.contains('hidden')) renderEvents();
 }
 function setLangFromCountry(c) {
   LANG = (c && COUNTRY_LANG[c.code]) ? COUNTRY_LANG[c.code] : 'en';
@@ -1455,6 +1547,13 @@ let TR_REQUESTS = [
 ];
 let trSub = 'find', trField = 'Tất cả';
 
+let EVENTS = [
+  { id:1, host:"Anh Khoa", tp:"Stockholms län", chude:"karaoke", title:"Đêm karaoke cuối tuần — hát cho vui", khi:"", start_ts:Date.now()+2*3600000, phut:120, link:"https://meet.google.com/", note:"Mở phòng hát online, ai thích ca hát thì vào giao lưu cho vui, không ngại giọng nhé!", anh:"" },
+  { id:2, host:"DJ Minh", tp:"Stockholms län", chude:"dj", title:"Quẩy nhạc Việt cùng DJ Minh", khi:"", start_ts:Date.now()-1800000, phut:90, link:"https://www.tiktok.com/", note:"Livestream nhạc Việt remix, nhận request bài hát. Vào quẩy cho đỡ nhớ nhà!", anh:"" },
+  { id:3, host:"Chị Lan", tp:"Västra Götalands län", chude:"talk", title:"Tâm sự: làm mẹ nơi xứ người", khi:"", start_ts:Date.now()+26*3600000, phut:60, link:"https://zoom.us/", note:"Buổi trò chuyện nhẹ nhàng cho các mẹ bỉm xa quê. Chia sẻ, lắng nghe, không phán xét.", anh:"" },
+];
+let evTopic = 'all';
+
 // ===== LÄN (21 tỉnh/vùng của Thụy Điển) =====
 const CITIES = ["Stockholms län","Uppsala län","Södermanlands län","Östergötlands län","Jönköpings län","Kronobergs län","Kalmar län","Gotlands län","Blekinge län","Skåne län","Hallands län","Västra Götalands län","Värmlands län","Örebro län","Västmanlands län","Dalarnas län","Gävleborgs län","Västernorrlands län","Jämtlands län","Västerbottens län","Norrbottens län"];
 let activeCity = "Stockholms län";
@@ -1480,7 +1579,7 @@ function onCityChange() {
   activeCity = document.getElementById('citySel').value;
   try { localStorage.setItem('vietsthlm_lan', activeCity); } catch(e){}
   updateCityHint();
-  renderPlaces(); renderFeed(); renderMarket(); renderFriends(); renderTranslate();
+  renderPlaces(); renderFeed(); renderMarket(); renderFriends(); renderTranslate(); renderEvents();
   window.scrollTo(0,0);
 }
 
@@ -1493,11 +1592,12 @@ function switchTab(tab) {
   document.getElementById('view-market').classList.toggle('hidden', tab!=='market');
   document.getElementById('view-friends').classList.toggle('hidden', tab!=='friends');
   document.getElementById('view-translate').classList.toggle('hidden', tab!=='translate');
+  document.getElementById('view-fun').classList.toggle('hidden', tab!=='fun');
   document.getElementById('view-services').classList.toggle('hidden', tab!=='services');
   const noChrome = tab==='home' || tab==='services';
   document.querySelector('.search').style.visibility = noChrome ? 'hidden' : 'visible';
   document.querySelector('.city-bar').style.display = noChrome ? 'none' : '';
-  const ph = { places:t('search_places'), outings:t('search_area'), market:t('search_market'), friends:t('search_area'), translate:t('search_lang') };
+  const ph = { places:t('search_places'), outings:t('search_area'), market:t('search_market'), friends:t('search_area'), translate:t('search_lang'), fun:t('search_area') };
   if (ph[tab]) document.getElementById('q').placeholder = ph[tab];
   // chỉ hiện nút FAB của tab đang mở (tránh các nút chồng lên nhau chặn click)
   document.querySelectorAll('.fab').forEach(f => {
@@ -1506,6 +1606,7 @@ function switchTab(tab) {
   });
   if (tab==='friends') renderFriends();
   if (tab==='translate') renderTranslate();
+  if (tab==='fun') renderEvents();
   window.scrollTo(0,0);
 }
 
@@ -1533,7 +1634,7 @@ TR_FIELDS.forEach(c => {
   b.onclick = () => { trField=c; trChipsEl.querySelectorAll('.chip').forEach(x=>x.classList.remove('on')); b.classList.add('on'); renderTranslate(); };
   trChipsEl.appendChild(b);
 });
-document.getElementById('q').addEventListener('input', e => { query = e.target.value.trim().toLowerCase(); renderPlaces(); renderFeed(); renderMarket(); renderTranslate(); });
+document.getElementById('q').addEventListener('input', e => { query = e.target.value.trim().toLowerCase(); renderPlaces(); renderFeed(); renderMarket(); renderTranslate(); renderEvents(); });
 const stars = n => "★".repeat(Math.round(n)) + "☆".repeat(5-Math.round(n));
 
 function renderPlaces() {
@@ -2153,9 +2254,150 @@ function submitTrRequest(editId) {
 }
 
 // ============================================================
-// ===== CHAT CỘNG ĐỒNG (trang chủ) =====
+// ===== GIẢI TRÍ / SỰ KIỆN LIVE =====
 // ============================================================
-let chatSince = 0;
+const EV_TOPICS = ['karaoke','dj','talk','game','study','sport','other'];
+function evTopicLabel(code){ return t('topic_'+code) || t('topic_other'); }
+
+// Trạng thái sự kiện dựa trên giờ bắt đầu + thời lượng
+function evStatus(e) {
+  const ts = Number(e.start_ts||0);
+  if (!ts) return { key:'none' };
+  const now = Date.now();
+  const end = ts + (Number(e.phut||60))*60000;
+  if (now >= ts && now <= end) return { key:'live' };       // đang live
+  if (ts > now && ts - now <= 3600000) return { key:'soon' }; // sắp diễn ra (<1h)
+  if (ts > now) return { key:'upcoming' };                    // sắp tới
+  return { key:'ended' };                                     // đã qua
+}
+// Đếm số buổi đã live xong của mỗi host (trong activeCity)
+function hostLiveCount(host) {
+  return EVENTS.filter(e => e.host===host && e.tp===activeCity && evStatus(e).key==='ended').length;
+}
+function evWhenText(e) {
+  const ts = Number(e.start_ts||0);
+  if (!ts) return e.khi || '';
+  const d = new Date(ts);
+  const pad = n => ('0'+n).slice(-2);
+  return `${pad(d.getDate())}/${pad(d.getMonth()+1)} · ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+function renderEvents() {
+  let list = EVENTS.filter(e => e.tp===activeCity &&
+    (evTopic==='all' || e.chude===evTopic) &&
+    (!query || [e.host,e.title,e.note,e.khi].some(s=>String(s||'').toLowerCase().includes(query))));
+  // sắp xếp: đang live → sắp diễn ra → sắp tới (gần nhất trước) → đã qua (mới nhất trước)
+  const rank = { live:0, soon:1, upcoming:2, none:3, ended:4 };
+  list.sort((a,b) => {
+    const sa=evStatus(a), sb=evStatus(b);
+    if (rank[sa.key] !== rank[sb.key]) return rank[sa.key]-rank[sb.key];
+    const ta=Number(a.start_ts||0), tb=Number(b.start_ts||0);
+    if (sa.key==='ended') return tb-ta;   // đã qua: mới nhất trước
+    return ta-tb;                          // còn lại: gần nhất trước
+  });
+  const grid = document.getElementById('ev-grid');
+  const cnt = document.getElementById('ev-count');
+  const chips = ['all',...EV_TOPICS].map(c =>
+    `<button class="ev-chip ${evTopic===c?'on':''}" onclick="setEvTopic('${c}')">${c==='all'?'⭐ '+ (LANG==='vi'?'Tất cả':'All'):evTopicLabel(c)}</button>`
+  ).join('');
+  cnt.innerHTML = `<div class="ev-chips">${chips}</div>`;
+  if (!list.length) { grid.innerHTML = '<div class="empty">'+t('ev_empty')+'</div>'; return; }
+  grid.innerHTML = list.map(e => {
+    const st = evStatus(e);
+    const badge = st.key==='live' ? `<span class="ev-live">🔴 ${t('ev_live')}</span>`
+                : st.key==='soon' ? `<span class="ev-soon">⏰ ${t('ev_soon')}</span>`
+                : st.key==='ended' ? `<span class="ev-ended">${t('ev_ended')}</span>` : '';
+    const count = hostLiveCount(e.host);
+    const countHtml = count>0 ? `<span class="ev-count-host">✓ ${count} ${t('ev_hosted')}</span>` : '';
+    return `
+    <article class="ev-card ${st.key==='ended'?'ev-past':''}">
+      ${e.anh?`<div class="ev-img" style="background-image:url('${e.anh}')"></div>`:''}
+      <div class="ev-body">
+        <div class="ev-topline">
+          <span class="ev-topic">${evTopicLabel(e.chude)}</span>
+          ${badge}
+        </div>
+        <div class="ev-title">${escapeHtml(e.title)}</div>
+        <div class="ev-meta">
+          <span class="ev-host">👤 ${escapeHtml(e.host)}</span>
+          <span class="ev-when">🕐 ${evWhenText(e)}</span>
+          ${countHtml}
+        </div>
+        ${e.note?`<div class="ev-note">${escapeHtml(e.note)}</div>`:''}
+        <div class="ev-foot">
+          ${st.key==='ended'
+            ? `<span class="ev-join ev-join-off">${t('ev_ended')}</span>`
+            : `<a class="ev-join" href="${e.link}" target="_blank" rel="noopener">▶ ${t('ev_join')}</a>`}
+          ${ownsPost(e)?`<div style="display:flex;gap:6px">
+            <button class="edit-post" title="${t('post_edit')}" onclick="openEventForm(EVENTS.find(x=>String(x.id)==='${e.id}'))">✎</button>
+            ${delBtnHTML('event', e.id)}
+          </div>`:''}
+        </div>
+      </div>
+    </article>`;
+  }).join('');
+}
+function setEvTopic(c){ evTopic = c; renderEvents(); }
+// Tự động cập nhật nhãn Live mỗi phút khi đang ở tab Giải trí
+setInterval(() => {
+  const view = document.getElementById('view-fun');
+  if (view && !view.classList.contains('hidden')) renderEvents();
+}, 60000);
+
+function openEventForm(editItem) {
+  requireLogin(() => {
+    const e = editItem || {};
+    const isEdit = !!editItem;
+    const opts = EV_TOPICS.map(c => `<option value="${c}"${c===e.chude?' selected':''}>${evTopicLabel(c)}</option>`).join('');
+    // giá trị mặc định cho ô datetime-local (định dạng YYYY-MM-DDTHH:MM)
+    let dtVal = '';
+    if (e.start_ts) {
+      const d = new Date(Number(e.start_ts));
+      const pad = n => ('0'+n).slice(-2);
+      dtVal = `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+    }
+    const durOpts = [30,60,90,120,180].map(m => `<option value="${m}"${Number(e.phut)===m?' selected':''}>${m} ${t('ev_min')}</option>`).join('');
+    document.getElementById('sheet').innerHTML = `
+      <button class="close-x" onclick="closeModal()">✕</button>
+      <div class="sheet-body">
+        <h2>${isEdit?t('ev_edit'):t('ev_create')}</h2>
+        <div class="auth-note">${t('ev_note')}</div>
+        ${photoFieldHTML(t('photo_img'), 'e-anh-prev', 'e-anh', e.anh||'', false)}
+        <div class="field"><label>${t('ev_host')}</label><input id="e-host" value="${(e.host||currentUser.ten||'').replace(/"/g,'&quot;')}" placeholder=""></div>
+        <div class="field"><label>${t('ev_topic')}</label><select id="e-chude">${opts}</select></div>
+        <div class="field"><label>${t('ev_title')}</label><input id="e-title" value="${(e.title||'').replace(/"/g,'&quot;')}" placeholder=""></div>
+        <div class="row2">
+          <div class="field"><label>${t('ev_start')}</label><input id="e-start" type="datetime-local" value="${dtVal}"></div>
+          <div class="field"><label>${t('ev_dur')}</label><select id="e-phut">${durOpts}</select></div>
+        </div>
+        <div class="field"><label>${t('ev_link')}</label><input id="e-link" value="${(e.link||'').replace(/"/g,'&quot;')}" placeholder="https://"></div>
+        <div class="field"><label>${t('ev_desc')}</label><textarea id="e-note" placeholder="${t('ev_desc_ph')}">${e.note||''}</textarea></div>
+        <button class="submit" onclick="submitEvent('${isEdit?e.id:''}')">${isEdit?t('post_save'):t('ev_post')}</button>
+      </div>`;
+    openModalEl();
+  });
+}
+function submitEvent(editId) {
+  const v = id => document.getElementById(id).value.trim();
+  const title=v('e-title'), link=v('e-link'), startStr=v('e-start');
+  if (!title || !link) { alert(t('ev_need')); return; }
+  if (!startStr) { alert(t('ev_need_time')); return; }
+  const start_ts = new Date(startStr).getTime();
+  const fields = { host:v('e-host')||(currentUser.ten||''), chude:v('e-chude'), title, khi:'', start_ts, phut:Number(v('e-phut'))||60, link, note:v('e-note')||'', anh:v('e-anh')||'' };
+  if (editId) {
+    const ev = EVENTS.find(x=>String(x.id)===String(editId));
+    if (ev) Object.assign(ev, fields);
+    closeModal(); renderEvents();
+    callApi({ action:'editPost', postType:'event', id:editId, email:currentUser.email, data:fields }).catch(()=>{});
+    return;
+  }
+  const item = { tp:activeCity, ...fields, email: currentUser?currentUser.email:'' };
+  EVENTS.unshift(item);
+  closeModal(); renderEvents();
+  callApi({ action:'addEvent', ...item }).catch(()=>{});
+}
+
+
 let chatTimer = null;
 let chatSeen = new Set();
 
@@ -2417,6 +2659,7 @@ async function loadData() {
     if (Array.isArray(r.singles))     SINGLES = r.singles.map(normNums);
     if (Array.isArray(r.translators)) TRANSLATORS = r.translators;
     if (Array.isArray(r.transreq))    TR_REQUESTS = r.transreq;
+    if (Array.isArray(r.events))      EVENTS = r.events;
     if (Array.isArray(r.myLikes))     myLikes = r.myLikes.map(Number);
     // khôi phục hồ sơ độc thân của mình (nếu có)
     if (currentUser && Array.isArray(r.singles)) {
@@ -2425,7 +2668,7 @@ async function loadData() {
     }
     dataLoaded = true;
     initCitySelector();
-    renderPlaces(); renderFeed(); renderMarket(); renderTranslate();
+    renderPlaces(); renderFeed(); renderMarket(); renderTranslate(); renderEvents();
     if (!document.getElementById('view-friends').classList.contains('hidden')) renderFriends();
   } catch (e) {
     // nếu lỗi mạng thì giữ dữ liệu mẫu sẵn có, app vẫn xem được
