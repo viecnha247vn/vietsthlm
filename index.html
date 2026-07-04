@@ -61,19 +61,19 @@
 
   /* --- MÁY TÍNH: thanh dọc cố định bên trái --- */
   @media (min-width: 900px) {
-    .tabs { position: fixed; top: 0; left: 0; bottom: 0; width: 210px; z-index: 60;
-      flex-direction: column; gap: 4px; padding: 84px 12px 20px; overflow-y: auto;
+    header { z-index: 70; }
+    .tabs { position: fixed; top: 64px; left: 0; bottom: 0; width: 210px; z-index: 55;
+      flex-direction: column; gap: 4px; padding: 16px 12px 20px; overflow-y: auto;
       background: #fff; border-right: 1px solid var(--line); }
     .tab { padding: 12px 14px; border-radius: 12px; }
     .tab:hover { color: var(--red); background: rgba(200,68,46,.07); }
     .tab:active { transform: scale(.97); }
     .tab.on { color: #fff; background: var(--red); }
     .tab.on:hover { background: var(--red); }
-    /* header trải rộng, nhưng phần thanh trên cùng (logo/search) đẩy sang phải */
-    header .bar { padding-left: 228px; }
-    header .city-bar { padding-left: 228px; }
-    /* đẩy toàn bộ trang nội dung sang phải để chừa chỗ cho sidebar */
+    .tab.on .tab-tx { color: #fff; }
+    /* header content và nội dung trang đều chừa chỗ cho sidebar 210px */
     div[id^="view-"] { margin-left: 210px; }
+    .city-bar { padding-left: 226px !important; }
   }
 
   /* --- ĐIỆN THOẠI: thanh nút cố định dưới đáy (kiểu Facebook) --- */
@@ -91,6 +91,12 @@
     .tab.on .tab-ic { transform: scale(1.12); }
     /* chừa chỗ dưới đáy để nội dung không bị thanh che */
     body { padding-bottom: 72px; }
+    /* thanh trên cùng: giữ logo + cờ + đăng nhập; ô tìm kiếm thu gọn */
+    header .bar { gap: 9px; padding: 10px 14px; }
+    header .bar .search { flex: 1; min-width: 0; }
+    header .bar .acc-btn { flex-shrink: 0; }
+    header .bar .logo { flex-shrink: 0; }
+    header .bar .country-badge { flex-shrink: 0; }
   }
 
   .hero { max-width: 1100px; margin: 0 auto; padding: 30px 18px 18px; }
@@ -618,24 +624,26 @@
     </div>
     <button id="accBtn" class="acc-btn" onclick="onAccountClick()" data-i18n="login">Đăng nhập</button>
   </div>
-  <nav class="tabs">
-    <div class="tab" data-tab="home" onclick="switchTab('home')"><span class="tab-ic">🏠</span><span class="tab-tx" data-i18n="tab_home">Trang chủ</span></div>
-    <div class="tab on" data-tab="places" onclick="switchTab('places')"><span class="tab-ic">📍</span><span class="tab-tx" data-i18n="tab_places">Check-in</span></div>
-    <div class="tab" data-tab="fun" onclick="switchTab('fun')"><span class="tab-ic">🎤</span><span class="tab-tx" data-i18n="tab_fun">Giải trí</span></div>
-    <div class="tab" data-tab="share" onclick="switchTab('share')"><span class="tab-ic">📣</span><span class="tab-tx" data-i18n="tab_share">Chia sẻ</span></div>
-    <div class="tab" data-tab="articles" onclick="switchTab('articles')"><span class="tab-ic">📚</span><span class="tab-tx" data-i18n="tab_articles">Cẩm nang</span></div>
-    <div class="tab" data-tab="friends" onclick="switchTab('friends')"><span class="tab-ic">💗</span><span class="tab-tx" data-i18n="tab_friends">Kết bạn</span></div>
-    <div class="tab" data-tab="market" onclick="switchTab('market')"><span class="tab-ic">🛍️</span><span class="tab-tx" data-i18n="tab_market">Chợ cộng đồng</span></div>
-    <div class="tab" data-tab="outings" onclick="switchTab('outings')"><span class="tab-ic">👨‍👩‍👧</span><span class="tab-tx" data-i18n="tab_outings">Đi chơi cùng con</span></div>
-    <div class="tab" data-tab="translate" onclick="switchTab('translate')"><span class="tab-ic">🗣️</span><span class="tab-tx" data-i18n="tab_translate">Phiên dịch</span></div>
-    <div class="tab" data-tab="services" onclick="switchTab('services')"><span class="tab-ic">💻</span><span class="tab-tx" data-i18n="tab_services">Dịch vụ QTT</span></div>
-  </nav>
   <div class="city-bar">
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8442e" stroke-width="2.2"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
     <select id="citySel" onchange="onCityChange()"></select>
     <span class="city-hint" id="cityHint"></span>
   </div>
 </header>
+
+<nav class="tabs">
+  <div class="tab" data-tab="home" onclick="switchTab('home')"><span class="tab-ic">🏠</span><span class="tab-tx" data-i18n="tab_home">Trang chủ</span></div>
+  <div class="tab on" data-tab="places" onclick="switchTab('places')"><span class="tab-ic">📍</span><span class="tab-tx" data-i18n="tab_places">Check-in</span></div>
+  <div class="tab" data-tab="fun" onclick="switchTab('fun')"><span class="tab-ic">🎤</span><span class="tab-tx" data-i18n="tab_fun">Giải trí</span></div>
+  <div class="tab" data-tab="share" onclick="switchTab('share')"><span class="tab-ic">📣</span><span class="tab-tx" data-i18n="tab_share">Chia sẻ</span></div>
+  <div class="tab" data-tab="articles" onclick="switchTab('articles')"><span class="tab-ic">📚</span><span class="tab-tx" data-i18n="tab_articles">Cẩm nang</span></div>
+  <div class="tab" data-tab="friends" onclick="switchTab('friends')"><span class="tab-ic">💗</span><span class="tab-tx" data-i18n="tab_friends">Kết bạn</span></div>
+  <div class="tab" data-tab="market" onclick="switchTab('market')"><span class="tab-ic">🛍️</span><span class="tab-tx" data-i18n="tab_market">Chợ cộng đồng</span></div>
+  <div class="tab" data-tab="outings" onclick="switchTab('outings')"><span class="tab-ic">👨‍👩‍👧</span><span class="tab-tx" data-i18n="tab_outings">Đi chơi cùng con</span></div>
+  <div class="tab" data-tab="translate" onclick="switchTab('translate')"><span class="tab-ic">🗣️</span><span class="tab-tx" data-i18n="tab_translate">Phiên dịch</span></div>
+  <div class="tab" data-tab="services" onclick="switchTab('services')"><span class="tab-ic">💻</span><span class="tab-tx" data-i18n="tab_services">Dịch vụ QTT</span></div>
+</nav>
+
 
 <!-- HOME / TRANG CHỦ -->
 <div id="view-home" class="hidden">
@@ -904,7 +912,7 @@
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v9-nav</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v10-nav</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
