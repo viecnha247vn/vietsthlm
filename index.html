@@ -882,7 +882,7 @@
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v5-chat</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v6-chat</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -2717,12 +2717,14 @@ async function loadChat(initial) {
     if (initial) { box.innerHTML=''; chatSeen.clear(); }
     let added = false;
     r.messages.forEach(m => {
-      const id = String(m.id);
-      if (chatSeen.has(id)) return;
-      chatSeen.add(id);
-      chatSince = Math.max(chatSince, Number(m.id)||0);
-      box.appendChild(renderChatMsg(m));
-      added = true;
+      try {
+        const id = String(m.id);
+        if (chatSeen.has(id)) return;
+        chatSeen.add(id);
+        chatSince = Math.max(chatSince, Number(m.id)||0);
+        box.appendChild(renderChatMsg(m));
+        added = true;
+      } catch(msgErr) { /* bỏ qua tin lỗi, tiếp tục các tin còn lại */ }
     });
     if (box.querySelector('.chat-empty')) {
       const em = box.querySelector('.chat-empty');
@@ -2795,23 +2797,31 @@ async function sendChatMsg() {
   if (!text) return;
   const btn = document.querySelector('.chat-send');
   if (btn) { btn.disabled = true; btn.textContent = '…'; }
+  let sent = false;
   try {
     const r = await callApi({ action:'sendChat', email: currentUser.email, ten: currentUser.ten||'', anh: currentUser.anh||'', noidung: text });
     if (r && r.ok && r.item) {
+      sent = true;
       inp.value = '';
-      if (!chatSeen.has(String(r.item.id))) {
-        chatSeen.add(String(r.item.id));
-        chatSince = Math.max(chatSince, Number(r.item.id)||0);
-        const box = document.getElementById('chatMessages');
-        const em = box.querySelector('.chat-empty'); if (em) em.remove();
-        box.appendChild(renderChatMsg(r.item));
-        box.scrollTop = box.scrollHeight;
+      // hiển thị tin vừa gửi — nếu phần hiển thị lỗi thì BỎ QUA, không báo lỗi gửi
+      try {
+        if (!chatSeen.has(String(r.item.id))) {
+          chatSeen.add(String(r.item.id));
+          chatSince = Math.max(chatSince, Number(r.item.id)||0);
+          const box = document.getElementById('chatMessages');
+          const em = box.querySelector('.chat-empty'); if (em) em.remove();
+          box.appendChild(renderChatMsg(r.item));
+          box.scrollTop = box.scrollHeight;
+        }
+      } catch(renderErr) {
+        // tin đã gửi ok, chỉ hiển thị lỗi — tải lại cả phòng chat cho chắc
+        chatSince = 0; loadChat(true);
       }
     } else {
-      alert(r && r.msg ? r.msg : t('err_generic'));
+      alert(r && r.msg ? r.msg : 'Không gửi được (không rõ lý do).');
     }
   } catch(e) {
-    alert(t('err_generic'));
+    if (!sent) alert('Lỗi khi gửi: ' + (e && e.message ? e.message : e));
   } finally {
     if (btn) { btn.disabled = false; btn.textContent = 'Gửi'; }
   }
