@@ -1620,7 +1620,7 @@ let PLACES = [
 ];
 
 const AV = ['#c8442e','#2e6e5e','#d99b2b','#7b5ea7','#3a7ca5','#bb6b3d'];
-const initials = n => n.split(' ').slice(-1)[0][0];
+const initials = n => { const s = String(n||'').trim(); if(!s) return '?'; const last = s.split(/\s+/).slice(-1)[0]; return (last && last[0]) ? last[0].toUpperCase() : '?'; };
 function avColor(id){ const s=String(id); let h=0; for(let i=0;i<s.length;i++) h=(h*31+s.charCodeAt(i))>>>0; return h%AV.length; }
 
 let OUTINGS = [
