@@ -54,7 +54,10 @@
   .tabs::-webkit-scrollbar { display: none; }
   .tab { flex: 1; min-width: max-content; text-align: center; padding: 13px 14px; font-weight: 700;
     font-size: 14.5px; color: var(--muted); cursor: pointer; border-bottom: 3px solid transparent;
-    transition: .15s; white-space: nowrap; }
+    transition: color .15s ease, border-color .15s ease, background .15s ease, transform .1s ease;
+    white-space: nowrap; border-radius: 8px 8px 0 0; }
+  .tab:hover { color: var(--red); background: rgba(200,68,46,.06); }
+  .tab:active { transform: scale(.94); background: rgba(200,68,46,.12); }
   .tab.on { color: var(--red); border-color: var(--red); }
 
   .hero { max-width: 1100px; margin: 0 auto; padding: 30px 18px 18px; }
@@ -1593,6 +1596,7 @@ function applyLang() {
   if (typeof renderTranslate==='function' && !document.getElementById('view-translate').classList.contains('hidden')) renderTranslate();
   if (typeof renderEvents==='function' && !document.getElementById('view-fun').classList.contains('hidden')) renderEvents();
   if (typeof renderShare==='function' && !document.getElementById('view-share').classList.contains('hidden')) renderShare();
+  if (typeof renderHomeFeed==='function') renderHomeFeed();
 }
 function setLangFromCountry(c) {
   LANG = (c && COUNTRY_LANG[c.code]) ? COUNTRY_LANG[c.code] : 'en';
@@ -1710,7 +1714,7 @@ function onCityChange() {
   activeCity = document.getElementById('citySel').value;
   try { localStorage.setItem('vietsthlm_lan', activeCity); } catch(e){}
   updateCityHint();
-  renderPlaces(); renderFeed(); renderMarket(); renderFriends(); renderTranslate(); renderEvents(); renderShare();
+  renderPlaces(); renderFeed(); renderMarket(); renderFriends(); renderTranslate(); renderEvents(); renderShare(); renderHomeFeed();
   window.scrollTo(0,0);
 }
 
@@ -1740,6 +1744,7 @@ function switchTab(tab) {
   if (tab==='translate') renderTranslate();
   if (tab==='fun') renderEvents();
   if (tab==='share') renderShare();
+  if (tab==='home') renderHomeFeed();
   window.scrollTo(0,0);
 }
 
@@ -1767,7 +1772,7 @@ TR_FIELDS.forEach(c => {
   b.onclick = () => { trField=c; trChipsEl.querySelectorAll('.chip').forEach(x=>x.classList.remove('on')); b.classList.add('on'); renderTranslate(); };
   trChipsEl.appendChild(b);
 });
-document.getElementById('q').addEventListener('input', e => { query = e.target.value.trim().toLowerCase(); renderPlaces(); renderFeed(); renderMarket(); renderTranslate(); renderEvents(); renderShare(); });
+document.getElementById('q').addEventListener('input', e => { query = e.target.value.trim().toLowerCase(); renderPlaces(); renderFeed(); renderMarket(); renderTranslate(); renderEvents(); renderShare(); renderHomeFeed(); });
 const stars = n => "★".repeat(Math.round(n)) + "☆".repeat(5-Math.round(n));
 
 function renderPlaces() {
@@ -1938,6 +1943,75 @@ function submitOuting(editId) {
   OUTINGS.unshift(item);
   closeModal(); renderFeed();
   callApi({ action:'addOuting', ...item }).catch(()=>{});
+}
+
+// ===== BẢNG TIN TRANG CHỦ (tổng hợp bài mới từ các trang con) =====
+function feedTimeMs(it){ return it.ngay_tao ? new Date(it.ngay_tao).getTime() : (Number(it.id)||0); }
+function feedTimeAgo(ms){
+  if (!ms) return '';
+  const diff = Date.now() - ms;
+  const m = Math.floor(diff/60000), h = Math.floor(diff/3600000), d = Math.floor(diff/86400000);
+  if (d >= 1) return d + t('feed_ago_d');
+  if (h >= 1) return h + t('feed_ago_h');
+  if (m >= 1) return m + t('feed_ago_m');
+  return t('feed_ago_now');
+}
+function renderHomeFeed() {
+  const box = document.getElementById('home-feed');
+  if (!box) return;
+  const BADGE = {
+    market:   { tab:'market',   label:'feed_market',     color:'#c8442e', bg:'#fdeede' },
+    outing:   { tab:'outings',  label:'feed_outing',     color:'#2f8f6b', bg:'#e6f0ec' },
+    event:    { tab:'fun',      label:'feed_event',      color:'#8b5cf6', bg:'#f3e9fb' },
+    share:    { tab:'share',    label:'feed_share',      color:'#2f8f6b', bg:'#e6f0ec' },
+    treq:     { tab:'translate',label:'feed_treq',       color:'#3b7fa6', bg:'#e3eef5' },
+  };
+  const items = [];
+  // Chợ
+  MARKET.filter(m=>m.tp===activeCity).forEach(m=> items.push({
+    type:'market', id:m.id, ms:feedTimeMs(m), who:m.who||'', anh:m.anh,
+    text:(m.title||'') + (m.desc?(' — '+m.desc):''), thumb:(m.anh && m.anh.indexOf('http')===0)?m.anh:'' }));
+  // Đi chơi
+  OUTINGS.filter(o=>o.tp===activeCity).forEach(o=> items.push({
+    type:'outing', id:o.id, ms:feedTimeMs(o), who:o.host||'', anh:o.anh,
+    text:(o.diadiem||'') + (o.note?(' — '+o.note):''), thumb:(o.anh && o.anh.indexOf('http')===0)?o.anh:'' }));
+  // Giải trí (sự kiện)
+  EVENTS.filter(e=>e.tp===activeCity).forEach(e=> items.push({
+    type:'event', id:e.id, ms:feedTimeMs(e), who:e.host||'', anh:e.anh,
+    text:(e.title||''), thumb:(e.anh && e.anh.indexOf('http')===0)?e.anh:'' }));
+  // Chia sẻ (còn hạn 72h)
+  POSTS.filter(p=>p.tp===activeCity && (Date.now()-feedTimeMs(p))<=72*3600000).forEach(p=> items.push({
+    type:'share', id:p.id, ms:feedTimeMs(p), who:p.host||'', anh:p.anh_dd,
+    text:(p.noidung||''), thumb:(p.media && /\.(jpg|jpeg|png|gif|webp)(\?|$)/i.test(p.media))?p.media:'' }));
+  // Yêu cầu phiên dịch
+  TR_REQUESTS.filter(r=>r.tp===activeCity).forEach(r=> items.push({
+    type:'treq', id:r.id, ms:feedTimeMs(r), who:r.who||'', anh:'',
+    text:(r.field?('['+r.field+'] '):'') + (r.note||''), thumb:'' }));
+
+  items.sort((a,b)=> b.ms - a.ms);
+  const top = items.slice(0, 20);
+  if (!top.length) { box.innerHTML = '<div class="feed-empty">'+t('feed_empty')+'</div>'; return; }
+  box.innerHTML = top.map(it => {
+    const b = BADGE[it.type];
+    const name = it.who || '—';
+    const ava = it.anh && it.anh.indexOf('http')===0
+      ? `background-image:url('${it.anh}')`
+      : `background:${AV[avColor(name)]}`;
+    const avaTxt = (it.anh && it.anh.indexOf('http')===0) ? '' : initials(name);
+    return `
+    <article class="feed-card" onclick="switchTab('${b.tab}')">
+      <div class="feed-top">
+        <div class="feed-ava" style="${ava}">${avaTxt}</div>
+        <div class="feed-who">
+          <div class="feed-name">${escapeHtml(name)}</div>
+          <div class="feed-sub"><span class="feed-badge" style="color:${b.color};background:${b.bg}">${t(b.label)}</span><span>· ${feedTimeAgo(it.ms)}</span></div>
+        </div>
+        <span class="feed-arrow">›</span>
+      </div>
+      ${it.text?`<div class="feed-text">${escapeHtml(it.text.length>160?it.text.slice(0,160)+'…':it.text)}</div>`:''}
+      ${it.thumb?`<div class="feed-media" style="background-image:url('${it.thumb}')"></div>`:''}
+    </article>`;
+  }).join('');
 }
 
 // ===== MARKET =====
@@ -2909,7 +2983,7 @@ async function loadData() {
     }
     dataLoaded = true;
     initCitySelector();
-    renderPlaces(); renderFeed(); renderMarket(); renderTranslate(); renderEvents(); renderShare();
+    renderPlaces(); renderFeed(); renderMarket(); renderTranslate(); renderEvents(); renderShare(); renderHomeFeed();
     if (!document.getElementById('view-friends').classList.contains('hidden')) renderFriends();
   } catch (e) {
     // nếu lỗi mạng thì giữ dữ liệu mẫu sẵn có, app vẫn xem được
