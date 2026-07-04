@@ -230,6 +230,38 @@
   .sh-link { display: inline-block; background: var(--paper-2); border: 1px solid var(--line); border-radius: 10px;
     padding: 10px 14px; font-size: 14px; font-weight: 600; color: var(--jade); text-decoration: none; word-break: break-all; }
   .sh-link:hover { background: #e6f2ed; }
+  /* Cẩm nang */
+  #art-grid { display: grid; gap: 14px; max-width: 720px; margin: 0 auto; }
+  .art-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; cursor: pointer;
+    transition: transform .16s ease, box-shadow .18s ease, border-color .18s ease; }
+  .art-card:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(40,30,20,.10); border-color: #e0d6c2; }
+  .art-img { height: 160px; background-size: cover; background-position: center; }
+  .art-body { padding: 16px 18px; }
+  .art-cat { display: inline-block; font-size: 12px; font-weight: 700; color: var(--jade);
+    background: #e6f2ed; border-radius: 999px; padding: 3px 11px; margin-bottom: 9px; }
+  .art-title { font-size: 18px; font-weight: 800; line-height: 1.32; letter-spacing: -.01em; }
+  .art-teaser { font-size: 14.5px; color: #4a4036; line-height: 1.55; margin: 8px 0 12px; }
+  .art-foot { display: flex; align-items: center; justify-content: space-between; }
+  .art-lock { font-size: 13.5px; font-weight: 700; color: var(--red); }
+  .art-teaser-full { font-size: 15.5px; color: #2a2018; line-height: 1.6; white-space: pre-wrap; }
+  .art-full { font-size: 15.5px; color: #2a2018; line-height: 1.7; margin-top: 4px; }
+  .art-disclaimer { margin-top: 18px; padding: 11px 13px; background: #fdf6e9; border: 1px solid #ecd9b0;
+    border-radius: 10px; font-size: 12.5px; color: #8a6d2f; }
+  .pw-loading { text-align: center; color: var(--muted); padding: 20px; font-size: 20px; }
+  .paywall { margin-top: 18px; border: 2px dashed #e0d6c2; border-radius: 16px; padding: 22px 18px;
+    text-align: center; background: linear-gradient(180deg,#fffdf9,#f7efe2); }
+  .pw-lock { font-size: 30px; }
+  .pw-title { font-size: 17px; font-weight: 800; margin: 6px 0 4px; }
+  .pw-sub { font-size: 14px; color: var(--muted); margin-bottom: 16px; }
+  .pw-tiers { display: grid; grid-template-columns: repeat(3,1fr); gap: 9px; margin-bottom: 14px; }
+  .pw-tier { border: 1px solid var(--line); border-radius: 12px; padding: 13px 6px; background: #fff; }
+  .pw-tier-name { font-size: 12.5px; color: var(--muted); font-weight: 600; margin-bottom: 5px; }
+  .pw-price { font-size: 17px; font-weight: 800; color: var(--ink); line-height: 1.15; }
+  .pw-price span { display: block; font-size: 11px; font-weight: 600; color: var(--muted); }
+  .pw-best { border-color: var(--jade); box-shadow: 0 0 0 2px rgba(47,143,107,.15); position: relative; }
+  .pw-soon { font-size: 13px; color: #4a4036; }
+  .pw-soon a { color: var(--jade); font-weight: 700; }
+  @media (max-width:520px){ .pw-tiers { grid-template-columns: 1fr; } }
   .del-post { background: none; border: 1px solid var(--line); border-radius: 8px; cursor: pointer;
     font-size: 15px; line-height: 1; padding: 7px 9px; color: #c8442e;
     transition: background .16s ease, border-color .16s ease, transform .12s ease; }
@@ -556,6 +588,7 @@
     <div class="tab on" data-tab="places" onclick="switchTab('places')" data-i18n="tab_places">Check-in</div>
     <div class="tab" data-tab="fun" onclick="switchTab('fun')" data-i18n="tab_fun">Giải trí</div>
     <div class="tab" data-tab="share" onclick="switchTab('share')" data-i18n="tab_share">Chia sẻ</div>
+    <div class="tab" data-tab="articles" onclick="switchTab('articles')" data-i18n="tab_articles">Cẩm nang</div>
     <div class="tab" data-tab="friends" onclick="switchTab('friends')" data-i18n="tab_friends">Kết bạn</div>
     <div class="tab" data-tab="market" onclick="switchTab('market')" data-i18n="tab_market">Chợ cộng đồng</div>
     <div class="tab" data-tab="outings" onclick="switchTab('outings')" data-i18n="tab_outings">Đi chơi cùng con</div>
@@ -799,6 +832,18 @@
   <button class="fab" data-for="share" onclick="openShareForm()" data-i18n="fab_share">＋ Đăng bài</button>
 </div>
 
+<!-- CẨM NANG (nội dung trả phí) -->
+<div id="view-articles" class="hidden">
+  <main class="wrap">
+    <section class="hero">
+      <h1><span data-i18n="art_hero_1">Cẩm nang & kiến thức —</span> <span class="em" data-i18n="art_hero_2">luật Thụy Điển dễ hiểu</span></h1>
+      <p data-i18n="art_hero_sub">Bài chuyên sâu về luật và quy định Thụy Điển, viết cho cộng đồng mình. Phần mở đầu miễn phí; toàn bài dành cho thành viên.</p>
+    </section>
+    <div id="art-grid"></div>
+  </main>
+  <button class="fab" data-for="articles" onclick="openArticleForm()" data-i18n="fab_article">＋ Viết bài mới</button>
+</div>
+
 <!-- PHIÊN DỊCH -->
 <div id="view-translate" class="hidden">
   <section class="hero">
@@ -882,7 +927,7 @@
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v7-share</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v8-camnang</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -1048,7 +1093,9 @@ const I18N = {
     fab_event:'＋ Create event', ev_create:'Create an event', ev_edit:'Edit event',
     ev_host:'Your display name', ev_topic:'Topic', ev_title:'Event title', ev_when:'When (date & time)',
     ev_link:'Live link (Zoom, Meet, TikTok…)', ev_desc:'Description', ev_desc_ph:'A few words about your event…',
-    ev_post:'Post event', ev_need:'Please enter a title and a live link.', ev_join:'Join live', ev_live:'LIVE NOW', ev_soon:'Starting soon', ev_ended:'Ended', ev_hosted:'hosted', ev_start:'Start (date & time)', ev_dur:'Duration', ev_min:'min', ev_need_time:'Please choose a start date and time.', tab_share:'Share', feed_label:'Latest activity', feed_empty:'No activity yet. Be the first to post something!', feed_market:'Marketplace', feed_outing:'Outing', feed_event:'Live event', feed_share:'Share', feed_translator:'Interpreter', feed_treq:'Interpreter request', feed_ago_now:'just now', feed_ago_m:'m ago', feed_ago_h:'h ago', feed_ago_d:'d ago',
+    ev_post:'Post event', ev_need:'Please enter a title and a live link.', ev_join:'Join live', ev_live:'LIVE NOW', ev_soon:'Starting soon', ev_ended:'Ended', ev_hosted:'hosted', ev_start:'Start (date & time)', ev_dur:'Duration', ev_min:'min', ev_need_time:'Please choose a start date and time.', tab_share:'Share', feed_label:'Latest activity', feed_empty:'No activity yet. Be the first to post something!', feed_market:'Marketplace', feed_outing:'Outing', feed_event:'Live event', feed_share:'Share', feed_translator:'Interpreter', feed_treq:'Interpreter request', feed_ago_now:'just now', feed_ago_m:'m ago', feed_ago_h:'h ago', feed_ago_d:'d ago', tab_articles:'Guides', art_hero_1:'Guides & know-how —', art_hero_2:'Swedish law made simple', art_hero_sub:'In-depth guides on Swedish law and rules, written for our community. Free intro; full guide for members.',
+    fab_article:'＋ New guide', art_create:'Create a guide', art_edit:'Edit guide', art_cat:'Topic', art_title:'Title', art_teaser:'Free intro (hook readers)', art_teaser_ph:'A few lines that show the value and make people want to read on…', art_body:'Full content (locked)', art_body_ph:'The full guide — only members can read this part…', art_post:'Publish guide', art_need:'Please enter a title and intro.', art_empty:'No guides yet.',
+    art_read:'Read more', art_locked_title:'This guide is for members', art_locked_sub:'Unlock the full guide to keep reading.', art_buy_single:'Single guide', art_buy_month:'Monthly', art_buy_year:'Yearly', art_per_month:'/month', art_per_year:'/year', art_soon:'Payment coming soon. To buy now, contact:', art_disclaimer:'For reference only — not a substitute for official legal advice.',
     sh_hero_1:'Community board —', sh_hero_2:'share news, photos & videos', sh_hero_sub:'Post anything useful for the community. Posts auto-delete after 72 hours to keep things fresh.',
     sh_note_b:'Note:', sh_note:'every post disappears automatically after 72 hours.',
     fab_share:'＋ New post', sh_create:'Create a post', sh_content:'What do you want to share?',
@@ -1127,7 +1174,9 @@ const I18N = {
     fab_event:'＋ Skapa event', ev_create:'Skapa ett event', ev_edit:'Redigera event',
     ev_host:'Ditt visningsnamn', ev_topic:'Ämne', ev_title:'Eventtitel', ev_when:'När (datum & tid)',
     ev_link:'Livelänk (Zoom, Meet, TikTok…)', ev_desc:'Beskrivning', ev_desc_ph:'Några ord om ditt event…',
-    ev_post:'Publicera event', ev_need:'Ange en titel och en livelänk.', ev_join:'Delta live', ev_live:'LIVE NU', ev_soon:'Börjar snart', ev_ended:'Avslutat', ev_hosted:'genomförda', ev_start:'Start (datum & tid)', ev_dur:'Längd', ev_min:'min', ev_need_time:'Välj startdatum och tid.', tab_share:'Dela', feed_label:'Senaste aktivitet', feed_empty:'Ingen aktivitet än. Bli först med att publicera något!', feed_market:'Marknad', feed_outing:'Utflykt', feed_event:'Liveevent', feed_share:'Dela', feed_translator:'Tolk', feed_treq:'Tolkförfrågan', feed_ago_now:'nyss', feed_ago_m:'m sedan', feed_ago_h:'h sedan', feed_ago_d:'d sedan',
+    ev_post:'Publicera event', ev_need:'Ange en titel och en livelänk.', ev_join:'Delta live', ev_live:'LIVE NU', ev_soon:'Börjar snart', ev_ended:'Avslutat', ev_hosted:'genomförda', ev_start:'Start (datum & tid)', ev_dur:'Längd', ev_min:'min', ev_need_time:'Välj startdatum och tid.', tab_share:'Dela', feed_label:'Senaste aktivitet', feed_empty:'Ingen aktivitet än. Bli först med att publicera något!', feed_market:'Marknad', feed_outing:'Utflykt', feed_event:'Liveevent', feed_share:'Dela', feed_translator:'Tolk', feed_treq:'Tolkförfrågan', feed_ago_now:'nyss', feed_ago_m:'m sedan', feed_ago_h:'h sedan', feed_ago_d:'d sedan', tab_articles:'Guider', art_hero_1:'Guider & kunskap —', art_hero_2:'svensk lag enkelt förklarad', art_hero_sub:'Fördjupade guider om svensk lag och regler, skrivna för vår gemenskap. Gratis intro; hela guiden för medlemmar.',
+    fab_article:'＋ Ny guide', art_create:'Skapa en guide', art_edit:'Redigera guide', art_cat:'Ämne', art_title:'Titel', art_teaser:'Gratis intro (fånga läsaren)', art_teaser_ph:'Några rader som visar värdet och får folk att vilja läsa vidare…', art_body:'Hela innehållet (låst)', art_body_ph:'Hela guiden — bara medlemmar kan läsa denna del…', art_post:'Publicera guide', art_need:'Ange en titel och intro.', art_empty:'Inga guider än.',
+    art_read:'Läs mer', art_locked_title:'Denna guide är för medlemmar', art_locked_sub:'Lås upp hela guiden för att läsa vidare.', art_buy_single:'Enskild guide', art_buy_month:'Månad', art_buy_year:'År', art_per_month:'/mån', art_per_year:'/år', art_soon:'Betalning kommer snart. För att köpa nu, kontakta:', art_disclaimer:'Endast för referens — ersätter inte officiell juridisk rådgivning.',
     sh_hero_1:'Anslagstavla —', sh_hero_2:'dela nyheter, foton & videor', sh_hero_sub:'Publicera allt som är användbart för gemenskapen. Inlägg raderas automatiskt efter 72 timmar.',
     sh_note_b:'Obs:', sh_note:'varje inlägg försvinner automatiskt efter 72 timmar.',
     fab_share:'＋ Nytt inlägg', sh_create:'Skapa ett inlägg', sh_content:'Vad vill du dela?',
@@ -1231,7 +1280,9 @@ const I18N = {
     fab_event:'＋ 이벤트 만들기', ev_create:'이벤트 만들기', ev_edit:'이벤트 수정',
     ev_host:'표시 이름', ev_topic:'주제', ev_title:'이벤트 제목', ev_when:'언제 (날짜 & 시간)',
     ev_link:'라이브 링크 (Zoom, Meet, TikTok…)', ev_desc:'설명', ev_desc_ph:'이벤트에 대한 몇 마디…',
-    ev_post:'이벤트 올리기', ev_need:'제목과 라이브 링크를 입력하세요.', ev_join:'라이브 참여', ev_live:'라이브 중', ev_soon:'곧 시작', ev_ended:'종료됨', ev_hosted:'회 진행', ev_start:'시작 (날짜 & 시간)', ev_dur:'길이', ev_min:'분', ev_need_time:'시작 날짜와 시간을 선택하세요.', tab_share:'공유', feed_label:'최근 활동', feed_empty:'아직 활동이 없습니다. 첫 게시물을 올려보세요!', feed_market:'마켓', feed_outing:'나들이', feed_event:'라이브', feed_share:'공유', feed_translator:'통역', feed_treq:'통역 요청', feed_ago_now:'방금', feed_ago_m:'분 전', feed_ago_h:'시간 전', feed_ago_d:'일 전',
+    ev_post:'이벤트 올리기', ev_need:'제목과 라이브 링크를 입력하세요.', ev_join:'라이브 참여', ev_live:'라이브 중', ev_soon:'곧 시작', ev_ended:'종료됨', ev_hosted:'회 진행', ev_start:'시작 (날짜 & 시간)', ev_dur:'길이', ev_min:'분', ev_need_time:'시작 날짜와 시간을 선택하세요.', tab_share:'공유', feed_label:'최근 활동', feed_empty:'아직 활동이 없습니다. 첫 게시물을 올려보세요!', feed_market:'마켓', feed_outing:'나들이', feed_event:'라이브', feed_share:'공유', feed_translator:'통역', feed_treq:'통역 요청', feed_ago_now:'방금', feed_ago_m:'분 전', feed_ago_h:'시간 전', feed_ago_d:'일 전', tab_articles:'가이드', art_hero_1:'가이드 & 노하우 —', art_hero_2:'쉽게 풀어쓴 스웨덴 법', art_hero_sub:'스웨덴 법과 규정에 대한 심층 가이드, 우리 커뮤니티를 위해 작성. 무료 소개; 전체 내용은 회원용.',
+    fab_article:'＋ 새 가이드', art_create:'가이드 작성', art_edit:'가이드 수정', art_cat:'주제', art_title:'제목', art_teaser:'무료 소개 (독자 유인)', art_teaser_ph:'가치를 보여주고 더 읽고 싶게 만드는 몇 줄…', art_body:'전체 내용 (잠김)', art_body_ph:'전체 가이드 — 회원만 읽을 수 있는 부분…', art_post:'가이드 게시', art_need:'제목과 소개를 입력하세요.', art_empty:'아직 가이드가 없습니다.',
+    art_read:'더 읽기', art_locked_title:'이 가이드는 회원 전용입니다', art_locked_sub:'전체 가이드를 열어 계속 읽으세요.', art_buy_single:'개별 가이드', art_buy_month:'월간', art_buy_year:'연간', art_per_month:'/월', art_per_year:'/년', art_soon:'결제 곧 제공 예정. 지금 구매하려면 문의:', art_disclaimer:'참고용일 뿐 — 공식 법률 자문을 대체하지 않습니다.',
     sh_hero_1:'커뮤니티 게시판 —', sh_hero_2:'뉴스, 사진, 영상 공유', sh_hero_sub:'커뮤니티에 유용한 것을 올려보세요. 게시물은 72시간 후 자동 삭제됩니다.',
     sh_note_b:'참고:', sh_note:'모든 게시물은 72시간 후 자동으로 사라집니다.',
     fab_share:'＋ 새 게시물', sh_create:'게시물 작성', sh_content:'무엇을 공유하시겠어요?',
@@ -1335,7 +1386,9 @@ const I18N = {
     fab_event:'＋ Gumawa ng event', ev_create:'Gumawa ng event', ev_edit:'I-edit ang event',
     ev_host:'Iyong display name', ev_topic:'Paksa', ev_title:'Pamagat ng event', ev_when:'Kailan (petsa at oras)',
     ev_link:'Live link (Zoom, Meet, TikTok…)', ev_desc:'Paglalarawan', ev_desc_ph:'Ilang salita tungkol sa event mo…',
-    ev_post:'I-post ang event', ev_need:'Pakilagay ang pamagat at live link.', ev_join:'Sumali sa live', ev_live:'LIVE NGAYON', ev_soon:'Malapit nang magsimula', ev_ended:'Tapos na', ev_hosted:'na-host', ev_start:'Simula (petsa at oras)', ev_dur:'Tagal', ev_min:'min', ev_need_time:'Pumili ng petsa at oras ng simula.', tab_share:'Ibahagi', feed_label:'Pinakabagong aktibidad', feed_empty:'Wala pang aktibidad. Ikaw ang mauna!', feed_market:'Palengke', feed_outing:'Lakad', feed_event:'Live event', feed_share:'Ibahagi', feed_translator:'Interpreter', feed_treq:'Kahilingan sa interpreter', feed_ago_now:'ngayon lang', feed_ago_m:'m nakaraan', feed_ago_h:'h nakaraan', feed_ago_d:'d nakaraan',
+    ev_post:'I-post ang event', ev_need:'Pakilagay ang pamagat at live link.', ev_join:'Sumali sa live', ev_live:'LIVE NGAYON', ev_soon:'Malapit nang magsimula', ev_ended:'Tapos na', ev_hosted:'na-host', ev_start:'Simula (petsa at oras)', ev_dur:'Tagal', ev_min:'min', ev_need_time:'Pumili ng petsa at oras ng simula.', tab_share:'Ibahagi', feed_label:'Pinakabagong aktibidad', feed_empty:'Wala pang aktibidad. Ikaw ang mauna!', feed_market:'Palengke', feed_outing:'Lakad', feed_event:'Live event', feed_share:'Ibahagi', feed_translator:'Interpreter', feed_treq:'Kahilingan sa interpreter', feed_ago_now:'ngayon lang', feed_ago_m:'m nakaraan', feed_ago_h:'h nakaraan', feed_ago_d:'d nakaraan', tab_articles:'Gabay', art_hero_1:'Gabay & kaalaman —', art_hero_2:'batas ng Sweden na pinadali', art_hero_sub:'Malalim na gabay tungkol sa batas at patakaran ng Sweden, para sa ating komunidad. Libreng intro; buong gabay para sa miyembro.',
+    fab_article:'＋ Bagong gabay', art_create:'Gumawa ng gabay', art_edit:'I-edit ang gabay', art_cat:'Paksa', art_title:'Pamagat', art_teaser:'Libreng intro (pang-akit)', art_teaser_ph:'Ilang linya na nagpapakita ng halaga at nakaka-engganyong magbasa pa…', art_body:'Buong nilalaman (naka-lock)', art_body_ph:'Ang buong gabay — miyembro lang ang makakabasa nito…', art_post:'I-publish ang gabay', art_need:'Pakilagay ang pamagat at intro.', art_empty:'Wala pang gabay.',
+    art_read:'Basahin pa', art_locked_title:'Ang gabay na ito ay para sa miyembro', art_locked_sub:'I-unlock ang buong gabay para magpatuloy.', art_buy_single:'Isang gabay', art_buy_month:'Buwanan', art_buy_year:'Taunan', art_per_month:'/buwan', art_per_year:'/taon', art_soon:'Malapit nang dumating ang bayad. Para bumili ngayon, makipag-ugnayan:', art_disclaimer:'Para sa sanggunian lamang — hindi kapalit ng opisyal na legal na payo.',
     sh_hero_1:'Community board —', sh_hero_2:'ibahagi ang balita, larawan & video', sh_hero_sub:'Mag-post ng anumang kapaki-pakinabang. Awtomatikong nabubura ang post pagkatapos ng 72 oras.',
     sh_note_b:'Tandaan:', sh_note:'lahat ng post ay awtomatikong mawawala pagkatapos ng 72 oras.',
     fab_share:'＋ Bagong post', sh_create:'Gumawa ng post', sh_content:'Ano ang gusto mong ibahagi?',
@@ -1463,7 +1516,9 @@ const I18N = {
     fab_event:'＋ Tạo sự kiện', ev_create:'Tạo sự kiện', ev_edit:'Sửa sự kiện',
     ev_host:'Tên hiển thị của bạn', ev_topic:'Chủ đề', ev_title:'Tên sự kiện', ev_when:'Khi nào (ngày & giờ)',
     ev_link:'Link live (Zoom, Meet, TikTok…)', ev_desc:'Mô tả', ev_desc_ph:'Vài dòng về sự kiện của bạn…',
-    ev_post:'Đăng sự kiện', ev_need:'Vui lòng nhập tên sự kiện và link live.', ev_join:'Vào live', ev_live:'ĐANG LIVE', ev_soon:'Sắp diễn ra', ev_ended:'Đã kết thúc', ev_hosted:'buổi đã tổ chức', ev_start:'Bắt đầu (ngày & giờ)', ev_dur:'Thời lượng', ev_min:'phút', ev_need_time:'Vui lòng chọn ngày giờ bắt đầu.', tab_share:'Chia sẻ', feed_label:'Hoạt động mới nhất', feed_empty:'Chưa có hoạt động nào. Hãy là người đầu tiên đăng nhé!', feed_market:'Chợ', feed_outing:'Đi chơi', feed_event:'Sự kiện live', feed_share:'Chia sẻ', feed_translator:'Phiên dịch', feed_treq:'Cần phiên dịch', feed_ago_now:'vừa xong', feed_ago_m:'phút trước', feed_ago_h:'giờ trước', feed_ago_d:'ngày trước',
+    ev_post:'Đăng sự kiện', ev_need:'Vui lòng nhập tên sự kiện và link live.', ev_join:'Vào live', ev_live:'ĐANG LIVE', ev_soon:'Sắp diễn ra', ev_ended:'Đã kết thúc', ev_hosted:'buổi đã tổ chức', ev_start:'Bắt đầu (ngày & giờ)', ev_dur:'Thời lượng', ev_min:'phút', ev_need_time:'Vui lòng chọn ngày giờ bắt đầu.', tab_share:'Chia sẻ', feed_label:'Hoạt động mới nhất', feed_empty:'Chưa có hoạt động nào. Hãy là người đầu tiên đăng nhé!', feed_market:'Chợ', feed_outing:'Đi chơi', feed_event:'Sự kiện live', feed_share:'Chia sẻ', feed_translator:'Phiên dịch', feed_treq:'Cần phiên dịch', feed_ago_now:'vừa xong', feed_ago_m:'phút trước', feed_ago_h:'giờ trước', feed_ago_d:'ngày trước', tab_articles:'Cẩm nang', art_hero_1:'Cẩm nang & kiến thức —', art_hero_2:'luật Thụy Điển dễ hiểu', art_hero_sub:'Bài chuyên sâu về luật và quy định Thụy Điển, viết cho cộng đồng mình. Phần mở đầu miễn phí; toàn bài dành cho thành viên.',
+    fab_article:'＋ Viết bài mới', art_create:'Viết bài cẩm nang', art_edit:'Sửa bài', art_cat:'Chủ đề', art_title:'Tiêu đề', art_teaser:'Phần mở đầu miễn phí (thu hút người đọc)', art_teaser_ph:'Vài dòng cho thấy giá trị và khiến người ta muốn đọc tiếp…', art_body:'Nội dung đầy đủ (khoá lại)', art_body_ph:'Toàn bộ bài viết — chỉ thành viên mới đọc được phần này…', art_post:'Đăng bài', art_need:'Vui lòng nhập tiêu đề và phần mở đầu.', art_empty:'Chưa có bài nào.',
+    art_read:'Đọc tiếp', art_locked_title:'Nội dung này dành cho thành viên', art_locked_sub:'Mở khoá để đọc toàn bộ bài viết.', art_buy_single:'Mua lẻ bài này', art_buy_month:'Gói tháng', art_buy_year:'Gói năm', art_per_month:'/tháng', art_per_year:'/năm', art_soon:'Thanh toán sẽ sớm ra mắt. Để mua ngay, liên hệ:', art_disclaimer:'Chỉ mang tính tham khảo — không thay thế tư vấn pháp lý chính thức.',
     sh_hero_1:'Bảng tin cộng đồng —', sh_hero_2:'chia sẻ tin tức, ảnh & video', sh_hero_sub:'Đăng bất cứ điều gì hữu ích cho cộng đồng. Bài tự xoá sau 72 giờ để bảng tin luôn mới.',
     sh_note_b:'Lưu ý:', sh_note:'mỗi bài sẽ tự động biến mất sau 72 giờ.',
     fab_share:'＋ Đăng bài', sh_create:'Đăng bài chia sẻ', sh_content:'Bạn muốn chia sẻ điều gì?',
@@ -1566,7 +1621,9 @@ const I18N = {
     fab_event:'＋ สร้างอีเวนต์', ev_create:'สร้างอีเวนต์', ev_edit:'แก้ไขอีเวนต์',
     ev_host:'ชื่อที่แสดงของคุณ', ev_topic:'หัวข้อ', ev_title:'ชื่ออีเวนต์', ev_when:'เมื่อไหร่ (วันและเวลา)',
     ev_link:'ลิงก์ไลฟ์ (Zoom, Meet, TikTok…)', ev_desc:'รายละเอียด', ev_desc_ph:'สองสามคำเกี่ยวกับอีเวนต์ของคุณ…',
-    ev_post:'โพสต์อีเวนต์', ev_need:'กรุณากรอกชื่ออีเวนต์และลิงก์ไลฟ์', ev_join:'เข้าร่วมไลฟ์', ev_live:'กำลังไลฟ์', ev_soon:'กำลังจะเริ่ม', ev_ended:'จบแล้ว', ev_hosted:'ครั้งที่จัด', ev_start:'เริ่ม (วันและเวลา)', ev_dur:'ระยะเวลา', ev_min:'นาที', ev_need_time:'กรุณาเลือกวันและเวลาเริ่ม', tab_share:'แชร์', feed_label:'กิจกรรมล่าสุด', feed_empty:'ยังไม่มีกิจกรรม มาเป็นคนแรกกันเถอะ!', feed_market:'ตลาด', feed_outing:'ทริป', feed_event:'ไลฟ์', feed_share:'แชร์', feed_translator:'ล่าม', feed_treq:'คำขอล่าม', feed_ago_now:'เมื่อกี้', feed_ago_m:'น. ที่แล้ว', feed_ago_h:'ชม. ที่แล้ว', feed_ago_d:'วันที่แล้ว',
+    ev_post:'โพสต์อีเวนต์', ev_need:'กรุณากรอกชื่ออีเวนต์และลิงก์ไลฟ์', ev_join:'เข้าร่วมไลฟ์', ev_live:'กำลังไลฟ์', ev_soon:'กำลังจะเริ่ม', ev_ended:'จบแล้ว', ev_hosted:'ครั้งที่จัด', ev_start:'เริ่ม (วันและเวลา)', ev_dur:'ระยะเวลา', ev_min:'นาที', ev_need_time:'กรุณาเลือกวันและเวลาเริ่ม', tab_share:'แชร์', feed_label:'กิจกรรมล่าสุด', feed_empty:'ยังไม่มีกิจกรรม มาเป็นคนแรกกันเถอะ!', feed_market:'ตลาด', feed_outing:'ทริป', feed_event:'ไลฟ์', feed_share:'แชร์', feed_translator:'ล่าม', feed_treq:'คำขอล่าม', feed_ago_now:'เมื่อกี้', feed_ago_m:'น. ที่แล้ว', feed_ago_h:'ชม. ที่แล้ว', feed_ago_d:'วันที่แล้ว', tab_articles:'คู่มือ', art_hero_1:'คู่มือ & ความรู้ —', art_hero_2:'กฎหมายสวีเดนเข้าใจง่าย', art_hero_sub:'คู่มือเชิงลึกเกี่ยวกับกฎหมายและระเบียบสวีเดน เขียนเพื่อชุมชนของเรา บทนำฟรี; เนื้อหาเต็มสำหรับสมาชิก',
+    fab_article:'＋ คู่มือใหม่', art_create:'สร้างคู่มือ', art_edit:'แก้ไขคู่มือ', art_cat:'หัวข้อ', art_title:'ชื่อเรื่อง', art_teaser:'บทนำฟรี (ดึงดูดผู้อ่าน)', art_teaser_ph:'สองสามบรรทัดที่แสดงคุณค่าและทำให้อยากอ่านต่อ…', art_body:'เนื้อหาเต็ม (ล็อก)', art_body_ph:'คู่มือฉบับเต็ม — เฉพาะสมาชิกเท่านั้นที่อ่านได้…', art_post:'เผยแพร่คู่มือ', art_need:'กรุณากรอกชื่อเรื่องและบทนำ', art_empty:'ยังไม่มีคู่มือ',
+    art_read:'อ่านต่อ', art_locked_title:'คู่มือนี้สำหรับสมาชิก', art_locked_sub:'ปลดล็อกคู่มือฉบับเต็มเพื่ออ่านต่อ', art_buy_single:'คู่มือเดี่ยว', art_buy_month:'รายเดือน', art_buy_year:'รายปี', art_per_month:'/เดือน', art_per_year:'/ปี', art_soon:'ระบบชำระเงินกำลังจะมา ต้องการซื้อตอนนี้ ติดต่อ:', art_disclaimer:'เพื่อการอ้างอิงเท่านั้น — ไม่ใช่การทดแทนคำแนะนำทางกฎหมายอย่างเป็นทางการ',
     sh_hero_1:'บอร์ดชุมชน —', sh_hero_2:'แชร์ข่าว รูปภาพ & วิดีโอ', sh_hero_sub:'โพสต์สิ่งที่มีประโยชน์ต่อชุมชน โพสต์จะถูกลบอัตโนมัติหลัง 72 ชั่วโมง',
     sh_note_b:'หมายเหตุ:', sh_note:'ทุกโพสต์จะหายไปอัตโนมัติหลัง 72 ชั่วโมง',
     fab_share:'＋ โพสต์ใหม่', sh_create:'สร้างโพสต์', sh_content:'คุณอยากแชร์อะไร?',
@@ -1596,6 +1653,7 @@ function applyLang() {
   if (typeof renderTranslate==='function' && !document.getElementById('view-translate').classList.contains('hidden')) renderTranslate();
   if (typeof renderEvents==='function' && !document.getElementById('view-fun').classList.contains('hidden')) renderEvents();
   if (typeof renderShare==='function' && !document.getElementById('view-share').classList.contains('hidden')) renderShare();
+  if (typeof renderArticles==='function' && !document.getElementById('view-articles').classList.contains('hidden')) renderArticles();
   if (typeof renderHomeFeed==='function') renderHomeFeed();
 }
 function setLangFromCountry(c) {
@@ -1714,7 +1772,7 @@ function onCityChange() {
   activeCity = document.getElementById('citySel').value;
   try { localStorage.setItem('vietsthlm_lan', activeCity); } catch(e){}
   updateCityHint();
-  renderPlaces(); renderFeed(); renderMarket(); renderFriends(); renderTranslate(); renderEvents(); renderShare(); renderHomeFeed();
+  renderPlaces(); renderFeed(); renderMarket(); renderFriends(); renderTranslate(); renderEvents(); renderShare(); renderArticles(); renderHomeFeed();
   window.scrollTo(0,0);
 }
 
@@ -1729,11 +1787,12 @@ function switchTab(tab) {
   document.getElementById('view-translate').classList.toggle('hidden', tab!=='translate');
   document.getElementById('view-fun').classList.toggle('hidden', tab!=='fun');
   document.getElementById('view-share').classList.toggle('hidden', tab!=='share');
+  document.getElementById('view-articles').classList.toggle('hidden', tab!=='articles');
   document.getElementById('view-services').classList.toggle('hidden', tab!=='services');
   const noChrome = tab==='home' || tab==='services';
   document.querySelector('.search').style.visibility = noChrome ? 'hidden' : 'visible';
   document.querySelector('.city-bar').style.display = noChrome ? 'none' : '';
-  const ph = { places:t('search_places'), outings:t('search_area'), market:t('search_market'), friends:t('search_area'), translate:t('search_lang'), fun:t('search_area'), share:t('search_area') };
+  const ph = { places:t('search_places'), outings:t('search_area'), market:t('search_market'), friends:t('search_area'), translate:t('search_lang'), fun:t('search_area'), share:t('search_area'), articles:t('search_area') };
   if (ph[tab]) document.getElementById('q').placeholder = ph[tab];
   // chỉ hiện nút FAB của tab đang mở (tránh các nút chồng lên nhau chặn click)
   document.querySelectorAll('.fab').forEach(f => {
@@ -1744,6 +1803,7 @@ function switchTab(tab) {
   if (tab==='translate') renderTranslate();
   if (tab==='fun') renderEvents();
   if (tab==='share') renderShare();
+  if (tab==='articles') renderArticles();
   if (tab==='home') renderHomeFeed();
   window.scrollTo(0,0);
 }
@@ -2701,6 +2761,124 @@ function submitShare() {
   callApi({ action:'addPost', ...item }).catch(()=>{});
 }
 
+// ============================================================
+// ===== CẨM NANG (nội dung trả phí) =====
+// ============================================================
+const ART_PRICE = { single:29, month:199, year:899 };  // giá tiền (kr)
+let ARTICLES = [
+  { id:1, chude:'Cư trú', title:'Gia hạn giấy phép cư trú 2026: những mốc thời gian không được bỏ lỡ', teaser:'Nhiều người nộp hồ sơ gia hạn quá sát ngày hết hạn và gặp rắc rối lớn. Có 3 mốc thời gian quan trọng và một lỗi phổ biến khiến hồ sơ bị chậm hàng tháng trời. Bài này chỉ rõ từng bước cần làm và thời điểm nộp để không bị gián đoạn quyền cư trú.', anh:'', nguoi_dang:'', co_noidung:true },
+  { id:2, chude:'Thuế', title:'Khai thuế ở Thụy Điển: các khoản khấu trừ người mới hay bỏ sót', teaser:'Rất nhiều người đi làm ở Thụy Điển không biết mình có thể được hoàn lại một khoản tiền đáng kể mỗi năm nhờ các khoản khấu trừ hợp lệ. Bài này liệt kê những khoản hay bị bỏ sót nhất và cách kê khai đúng với Skatteverket.', anh:'', nguoi_dang:'', co_noidung:true },
+];
+
+function renderArticles() {
+  const grid = document.getElementById('art-grid');
+  if (!grid) return;
+  const list = ARTICLES.slice().sort((a,b)=> feedTimeMs(b) - feedTimeMs(a));
+  if (!list.length) { grid.innerHTML = '<div class="empty">'+t('art_empty')+'</div>'; return; }
+  grid.innerHTML = list.map(a => `
+    <article class="art-card" onclick="openArticle('${a.id}')">
+      ${a.anh?`<div class="art-img" style="background-image:url('${a.anh}')"></div>`:''}
+      <div class="art-body">
+        ${a.chude?`<span class="art-cat">${escapeHtml(a.chude)}</span>`:''}
+        <div class="art-title">${escapeHtml(a.title||'')}</div>
+        <div class="art-teaser">${escapeHtml((a.teaser||'').length>180?a.teaser.slice(0,180)+'…':(a.teaser||''))}</div>
+        <div class="art-foot">
+          <span class="art-lock">🔒 ${t('art_read')} →</span>
+          ${ownsPost(a)?`<div style="display:flex;gap:6px" onclick="event.stopPropagation()">
+            <button class="edit-post" title="${t('post_edit')}" onclick="openArticleForm(ARTICLES.find(x=>String(x.id)==='${a.id}'))">✎</button>
+            ${delBtnHTML('article', a.id)}
+          </div>`:''}
+        </div>
+      </div>
+    </article>`).join('');
+}
+
+async function openArticle(id) {
+  const a = ARTICLES.find(x=>String(x.id)===String(id));
+  if (!a) return;
+  const priceCard = `
+    <div class="paywall">
+      <div class="pw-lock">🔒</div>
+      <div class="pw-title">${t('art_locked_title')}</div>
+      <div class="pw-sub">${t('art_locked_sub')}</div>
+      <div class="pw-tiers">
+        <div class="pw-tier"><div class="pw-tier-name">${t('art_buy_single')}</div><div class="pw-price">${ART_PRICE.single} kr</div></div>
+        <div class="pw-tier pw-best"><div class="pw-tier-name">${t('art_buy_month')}</div><div class="pw-price">${ART_PRICE.month} kr<span>${t('art_per_month')}</span></div></div>
+        <div class="pw-tier"><div class="pw-tier-name">${t('art_buy_year')}</div><div class="pw-price">${ART_PRICE.year} kr<span>${t('art_per_year')}</span></div></div>
+      </div>
+      <div class="pw-soon">${t('art_soon')} <a href="mailto:weshare.sverige@gmail.com">weshare.sverige@gmail.com</a></div>
+    </div>`;
+  document.getElementById('sheet').innerHTML = `
+    <button class="close-x" onclick="closeModal()">✕</button>
+    <div class="sheet-body art-detail">
+      ${a.chude?`<span class="art-cat">${escapeHtml(a.chude)}</span>`:''}
+      <h2 style="margin:6px 0 10px">${escapeHtml(a.title||'')}</h2>
+      ${a.anh?`<div class="art-img" style="height:200px;border-radius:12px;margin-bottom:14px;background-image:url('${a.anh}')"></div>`:''}
+      <div class="art-teaser-full">${escapeHtml(a.teaser||'')}</div>
+      <div id="art-body-slot"><div class="pw-loading">…</div></div>
+    </div>`;
+  openModalEl();
+  // lấy phần thân bài từ server (chỉ quản trị / người đã mua mới nhận được)
+  try {
+    const r = await callApi({ action:'readArticle', id:a.id, email: currentUser?currentUser.email:'' });
+    const slot = document.getElementById('art-body-slot');
+    if (!slot) return;
+    if (r && r.ok && r.unlocked && r.body) {
+      slot.innerHTML = `<div class="art-full">${escapeHtml(r.body).replace(/\n/g,'<br>')}</div>
+        <div class="art-disclaimer">⚖️ ${t('art_disclaimer')}</div>`;
+    } else {
+      slot.innerHTML = priceCard;
+    }
+  } catch(e) {
+    const slot = document.getElementById('art-body-slot');
+    if (slot) slot.innerHTML = priceCard;
+  }
+}
+
+function openArticleForm(editItem) {
+  requireLogin(() => {
+    const e = editItem || {};
+    const isEdit = !!editItem;
+    document.getElementById('sheet').innerHTML = `
+      <button class="close-x" onclick="closeModal()">✕</button>
+      <div class="sheet-body">
+        <h2>${isEdit?t('art_edit'):t('art_create')}</h2>
+        ${photoFieldHTML(t('photo_img'), 'art-anh-prev', 'art-anh', e.anh||'', false)}
+        <div class="field"><label>${t('art_cat')}</label><input id="art-chude" value="${(e.chude||'').replace(/"/g,'&quot;')}" placeholder=""></div>
+        <div class="field"><label>${t('art_title')}</label><input id="art-title" value="${(e.title||'').replace(/"/g,'&quot;')}" placeholder=""></div>
+        <div class="field"><label>${t('art_teaser')}</label><textarea id="art-teaser" rows="4" placeholder="${t('art_teaser_ph')}">${e.teaser||''}</textarea></div>
+        <div class="field"><label>${t('art_body')}</label><textarea id="art-body" rows="10" placeholder="${t('art_body_ph')}">${isEdit&&e.__body?e.__body:''}</textarea></div>
+        <button class="submit" onclick="submitArticle('${isEdit?e.id:''}')">${isEdit?t('post_save'):t('art_post')}</button>
+      </div>`;
+    openModalEl();
+    // khi sửa: nạp sẵn phần thân bài (chỉ quản trị mới lấy được)
+    if (isEdit) {
+      callApi({ action:'readArticle', id:e.id, email: currentUser.email }).then(r=>{
+        if (r && r.ok && r.body!==undefined) {
+          const ta = document.getElementById('art-body'); if (ta) ta.value = r.body || '';
+        }
+      }).catch(()=>{});
+    }
+  });
+}
+function submitArticle(editId) {
+  const v = id => document.getElementById(id).value.trim();
+  const title=v('art-title'), teaser=v('art-teaser');
+  if (!title || !teaser) { alert(t('art_need')); return; }
+  const fields = { chude:v('art-chude'), title, teaser, body:document.getElementById('art-body').value, anh:v('art-anh')||'' };
+  if (editId) {
+    const a = ARTICLES.find(x=>String(x.id)===String(editId));
+    if (a) Object.assign(a, { chude:fields.chude, title:fields.title, teaser:fields.teaser, anh:fields.anh, co_noidung:!!fields.body });
+    closeModal(); renderArticles();
+    callApi({ action:'editPost', postType:'article', id:editId, email:currentUser.email, data:fields }).catch(()=>{});
+    return;
+  }
+  const item = { chude:fields.chude, title, teaser, anh:fields.anh, co_noidung:!!fields.body, nguoi_dang:currentUser.email, email:currentUser.email, ngay_tao:new Date().toISOString() };
+  ARTICLES.unshift(item);
+  closeModal(); renderArticles();
+  callApi({ action:'addArticle', ...fields, email:currentUser.email }).catch(()=>{});
+}
+
 let chatTimer = null;
 let chatSeen = new Set();
 
@@ -2987,6 +3165,7 @@ async function loadData() {
     if (Array.isArray(r.transreq))    TR_REQUESTS = r.transreq;
     if (Array.isArray(r.events))      EVENTS = r.events;
     if (Array.isArray(r.posts))       POSTS = r.posts;
+    if (Array.isArray(r.articles))    ARTICLES = r.articles;
     if (Array.isArray(r.myLikes))     myLikes = r.myLikes.map(Number);
     // khôi phục hồ sơ độc thân của mình (nếu có)
     if (currentUser && Array.isArray(r.singles)) {
