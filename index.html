@@ -882,7 +882,7 @@
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v6-chat</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v7-share</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -1982,7 +1982,7 @@ function renderHomeFeed() {
   // Chia sẻ (còn hạn 72h)
   POSTS.filter(p=>p.tp===activeCity && (Date.now()-feedTimeMs(p))<=72*3600000).forEach(p=> items.push({
     type:'share', id:p.id, ms:feedTimeMs(p), who:p.host||'', anh:p.anh_dd,
-    text:(p.noidung||''), thumb:(p.media && /\.(jpg|jpeg|png|gif|webp)(\?|$)/i.test(p.media))?p.media:'' }));
+    text:(p.noidung||''), thumb:(p.media && (/^data:image\//i.test(p.media) || /\.(jpg|jpeg|png|gif|webp)(\?|$)/i.test(p.media)))?p.media:'' }));
   // Yêu cầu phiên dịch
   TR_REQUESTS.filter(r=>r.tp===activeCity).forEach(r=> items.push({
     type:'treq', id:r.id, ms:feedTimeMs(r), who:r.who||'', anh:'',
@@ -2644,6 +2644,8 @@ function timeAgo(iso) {
 function mediaHTML(url) {
   if (!url) return '';
   const u = url.trim();
+  // ảnh tải lên dạng base64 (data:image/...) → hiện thành hình
+  if (/^data:image\//i.test(u)) return `<div class="sh-media" style="background-image:url('${u}')"></div>`;
   const yt = u.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{6,})/);
   if (yt) return `<div class="sh-embed"><iframe src="https://www.youtube.com/embed/${yt[1]}" frameborder="0" allowfullscreen></iframe></div>`;
   if (/\.(jpg|jpeg|png|gif|webp)(\?|$)/i.test(u)) return `<div class="sh-media" style="background-image:url('${u}')"></div>`;
