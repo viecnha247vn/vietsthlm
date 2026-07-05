@@ -275,7 +275,8 @@
   .sh-name { font-weight: 700; font-size: 15px; }
   .sh-time { font-size: 12px; color: var(--muted); }
   .sh-text { font-size: 15px; color: #2a2018; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word; overflow-wrap: anywhere; margin-bottom: 10px; }
-  .sh-media { height: 220px; background-size: cover; background-position: center; border-radius: 12px; }
+  .sh-media { max-height: 320px; background-size: contain; background-repeat: no-repeat; background-position: center;
+    border-radius: 12px; background-color: #f2ece1; aspect-ratio: 4 / 3; }
   .sh-embed { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 12px; overflow: hidden; }
   .sh-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
   .sh-link { display: inline-block; background: var(--paper-2); border: 1px solid var(--line); border-radius: 10px;
@@ -415,7 +416,8 @@
   .feed-sub { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
   .feed-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
   .feed-text { font-size: 14.5px; color: #2a2018; line-height: 1.5; word-wrap: break-word; overflow-wrap: anywhere; }
-  .feed-media { margin-top: 10px; height: 180px; border-radius: 12px; background-size: cover; background-position: center; }
+  .feed-media { margin-top: 10px; max-height: 240px; aspect-ratio: 4 / 3; border-radius: 12px;
+    background-size: contain; background-repeat: no-repeat; background-position: center; background-color: #f2ece1; }
   .feed-arrow { color: var(--muted); font-size: 18px; flex-shrink: 0; transition: transform .16s ease, color .16s ease; }
   .feed-card:hover .feed-arrow { transform: translateX(3px); color: var(--jade); }
   .feed-empty { text-align: center; color: var(--muted); padding: 30px 16px; font-size: 14px; }
@@ -509,6 +511,9 @@
     padding-top: 6px; border-top: 1px solid var(--line); }
   .about-brand b { color: var(--ink); }
   .about-free { color: var(--jade) !important; font-size: 15px !important; margin-top: 16px !important; }
+  #view-about .about { max-width: 720px; margin: 0 auto; padding: 40px 20px; text-align: center; }
+  .about-contact { margin-top: 22px; font-size: 14.5px; color: var(--muted); }
+  .about-contact a { color: var(--jade); font-weight: 700; }
 
   /* footer */
   .foot-logo { width: 72px; height: 72px; border-radius: 999px; object-fit: cover;
@@ -660,6 +665,7 @@
   <div class="tab" data-tab="outings" onclick="switchTab('outings')"><span class="tab-ic">👨‍👩‍👧</span><span class="tab-tx" data-i18n="tab_outings">Đi chơi cùng con</span></div>
   <div class="tab" data-tab="translate" onclick="switchTab('translate')"><span class="tab-ic">🗣️</span><span class="tab-tx" data-i18n="tab_translate">Phiên dịch</span></div>
   <div class="tab" data-tab="services" onclick="switchTab('services')"><span class="tab-ic">💻</span><span class="tab-tx" data-i18n="tab_services">Dịch vụ QTT</span></div>
+  <div class="tab" data-tab="about" onclick="switchTab('about')"><span class="tab-ic">💙</span><span class="tab-tx" data-i18n="tab_about">Về chúng tôi</span></div>
 </nav>
 
 
@@ -700,15 +706,6 @@
       <div class="home-section-label" data-i18n="feed_label">Hoạt động mới nhất</div>
     </div>
     <div id="home-feed" class="home-feed"></div>
-
-
-    <section class="about">
-      <div class="about-badge" data-i18n="about_badge">Về WeShare</div>
-      <h2 data-i18n="about_title">Xây dựng cho mọi cộng đồng xa quê</h2>
-      <p data-i18n="about_p">WeShare là nền tảng cộng đồng dành cho tất cả những người xa quê đang sinh sống tại Thụy Điển — dù bạn đến từ đất nước nào. Xa quê hương, ai cũng từng có lúc lạc lõng, bối rối trước một lá thư từ cơ quan hay thiếu một người đồng hương để trò chuyện. WeShare ra đời để những khoảnh khắc ấy không còn đơn độc.</p>
-      <p class="about-brand"><span data-i18n="about_brand_pre">Phát triển bởi</span> <b>QTT Solutions</b> <span data-i18n="about_brand_post">— công ty công nghệ, dùng công nghệ để gắn kết cộng đồng nơi xứ người.</span></p>
-      <p class="about-free"><b data-i18n="about_free">An toàn · Gần gũi · Bằng ngôn ngữ của bạn</b></p>
-    </section>
   </main>
 </div>
 
@@ -925,12 +922,26 @@
   </main>
 </div>
 
+<!-- VỀ CHÚNG TÔI -->
+<div id="view-about" class="hidden">
+  <main class="wrap">
+    <section class="about">
+      <div class="about-badge" data-i18n="about_badge">Về chúng tôi</div>
+      <h2 data-i18n="about_title">Xây dựng cho mọi cộng đồng xa quê</h2>
+      <p data-i18n="about_p">WeShare là nền tảng cộng đồng dành cho tất cả những người xa quê đang sinh sống tại Thụy Điển — dù bạn đến từ đất nước nào. Xa quê hương, ai cũng từng có lúc lạc lõng, bối rối trước một lá thư từ cơ quan hay thiếu một người đồng hương để trò chuyện. WeShare ra đời để những khoảnh khắc ấy không còn đơn độc.</p>
+      <p class="about-brand"><span data-i18n="about_brand_pre">Phát triển bởi</span> <b>QTT Solutions</b> <span data-i18n="about_brand_post">— công ty công nghệ, dùng công nghệ để gắn kết cộng đồng nơi xứ người.</span></p>
+      <p class="about-free"><b data-i18n="about_free">An toàn · Gần gũi · Bằng ngôn ngữ của bạn</b></p>
+      <div class="about-contact"><span data-i18n="svc_contact">Liên hệ trực tiếp:</span> <a href="mailto:weshare.sverige@gmail.com">weshare.sverige@gmail.com</a></div>
+    </section>
+  </main>
+</div>
+
 <footer class="site-footer">
   <div class="foot-brand">We<span>Share</span><span class="dot">.</span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v18-chatload</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v19-cleanup</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -1007,7 +1018,7 @@ const COUNTRY_LANG = { se:'sv', vn:'vi', th:'th', kr:'ko', ph:'tl' };
 const I18N = {
   en: {
     tab_home:'Home', tab_places:'Check-in', tab_outings:'Outings with kids', tab_market:'Marketplace',
-    tab_friends:'Make friends', tab_translate:'Interpreter', tab_services:'QTT Services',
+    tab_friends:'Make friends', tab_translate:'Interpreter', tab_services:'QTT Services', tab_about:'About us',
     login:'Log in', logout:'Log out',
     search_places:'Search food, Asian store, nails…', search_area:'Search by area…',
     search_market:'Search kids items, food…', search_lang:'Search by language, field…',
@@ -1089,7 +1100,7 @@ const I18N = {
     svc_menu:'E-Menu (QR Menu)', svc_menu_for:'Restaurant · Eatery · Café', svc_menu_d:'Customers scan a QR code at the table to view the menu and order.', svc_menu_1:'Multilingual QR menu with photos', svc_menu_2:'Customers self-order, kitchen gets it instantly', svc_menu_3:'Update prices & items instantly',
     svc_inv:'Inventory App', svc_inv_for:'Restaurant · Businesses with stock', svc_inv_d:'Manage stock in/out, track inventory, warn of low stock and report costs.', svc_inv_1:'Record stock in & out', svc_inv_2:'Low stock & expiry alerts', svc_inv_3:'Cost & revenue reports',
     svc_quote:'Request consultation / quote', svc_why:'Why choose QTT Solutions?', svc_why_d:'We understand how small restaurants and salons run in Sweden, and support you in your own language.', svc_contact:'Contact directly:',
-    about_badge:'About WeShare', about_title:'Built for every community far from home', about_p:'WeShare is a community platform for everyone living far from home in Sweden — whatever country you come from. WeShare exists so those moments of feeling lost are no longer lonely.', about_brand_pre:'Built by', about_brand_post:'— a technology company connecting communities abroad.', about_free:'Safe · Welcoming · In your own language',
+    about_badge:'About us', about_title:'Built for every community far from home', about_p:'WeShare is a community platform for everyone living far from home in Sweden — whatever country you come from. WeShare exists so those moments of feeling lost are no longer lonely.', about_brand_pre:'Built by', about_brand_post:'— a technology company connecting communities abroad.', about_free:'Safe · Welcoming · In your own language',
     foot_tag:'Community for people far from home in Sweden', foot_by:'A product of',
     right_in:'in', items_in:'items in', nothing_in:'No content in',
     c_open:'Open', c_call:'Call', c_map:'View map', c_contact:'Contact', c_area:'Area', c_phone:'Phone', c_addr:'Address', c_poster:'Posted by', c_get_help:'Get help', c_skip:'Skip', c_like:'💗 Like', c_report:'⚑ Report', c_featured:'★ Featured', c_certified:'✓ Certified', photo_choose:'📷 Choose photo', photo_err:'Could not process the image. Please try another.', photo_avatar:'Profile photo', photo_img:'Photo', photo_save:'Save photo', prof_title:'My profile', prof_sub:'This info can appear on your public profile.', prof_displayname:'Display name', prof_fullname:'Full name', prof_dob:'Date of birth', prof_gender:'Gender', prof_g_m:'Male', prof_g_f:'Female', prof_g_o:'Other', prof_area:'Area (län)', prof_job:'Occupation', prof_bio:'About me', prof_bio_ph:'A few lines about yourself…', prof_phone:'Phone', prof_save:'Save profile', prof_saved:'Profile saved.', pf_from_account:'Auto-filled from your profile — edit anytime.', post_delete:'Delete', post_del_confirm:'Delete this post? This cannot be undone.', post_edit:'Edit', post_save:'Save changes', tab_fun:'Live', hc_fun_d:'Karaoke nights, DJ sets, heart-to-heart talks, games — anyone can host a live event on any topic.', hc_fun_go:'Explore Live →',
@@ -1112,7 +1123,7 @@ const I18N = {
   },
   sv: {
     tab_home:'Hem', tab_places:'Check-in', tab_outings:'Utflykter med barn', tab_market:'Marknad',
-    tab_friends:'Hitta vänner', tab_translate:'Tolk', tab_services:'QTT-tjänster',
+    tab_friends:'Hitta vänner', tab_translate:'Tolk', tab_services:'QTT-tjänster', tab_about:'Om oss',
     login:'Logga in', logout:'Logga ut',
     search_places:'Sök mat, asiatisk butik, naglar…', search_area:'Sök efter område…',
     search_market:'Sök barnsaker, mat…', search_lang:'Sök efter språk, område…',
@@ -1169,7 +1180,7 @@ const I18N = {
     svc_menu:'E-Menu (QR-meny)', svc_menu_for:'Restaurang · Matställe · Café', svc_menu_d:'Kunder skannar en QR-kod vid bordet för att se menyn och beställa.', svc_menu_1:'Flerspråkig QR-meny med bilder', svc_menu_2:'Kunder beställer själva, köket får det direkt', svc_menu_3:'Uppdatera priser & rätter direkt',
     svc_inv:'Lagerapp', svc_inv_for:'Restaurang · Företag med lager', svc_inv_d:'Hantera lager in/ut, spåra lager, varna för lågt lager och rapportera kostnader.', svc_inv_1:'Registrera lager in & ut', svc_inv_2:'Varningar för lågt lager & utgångsdatum', svc_inv_3:'Kostnads- & intäktsrapporter',
     svc_quote:'Begär rådgivning / offert', svc_why:'Varför välja QTT Solutions?', svc_why_d:'Vi förstår hur små restauranger och salonger fungerar i Sverige och hjälper dig på ditt eget språk.', svc_contact:'Kontakta direkt:',
-    about_badge:'Om WeShare', about_title:'Byggd för alla gemenskaper långt hemifrån', about_p:'WeShare är en gemenskapsplattform för alla som bor långt hemifrån i Sverige — oavsett vilket land du kommer från. WeShare finns till för att de stunderna av att känna sig vilsen inte längre ska vara ensamma.', about_brand_pre:'Byggd av', about_brand_post:'— ett teknikföretag som kopplar samman gemenskaper utomlands.', about_free:'Tryggt · Välkomnande · På ditt eget språk',
+    about_badge:'Om oss', about_title:'Byggd för alla gemenskaper långt hemifrån', about_p:'WeShare är en gemenskapsplattform för alla som bor långt hemifrån i Sverige — oavsett vilket land du kommer från. WeShare finns till för att de stunderna av att känna sig vilsen inte längre ska vara ensamma.', about_brand_pre:'Byggd av', about_brand_post:'— ett teknikföretag som kopplar samman gemenskaper utomlands.', about_free:'Tryggt · Välkomnande · På ditt eget språk',
     foot_tag:'Gemenskap för människor långt hemifrån i Sverige', foot_by:'En produkt av',
     right_in:'i', items_in:'objekt i', nothing_in:'Inget innehåll i',
     c_open:'Öppet', c_call:'Ring', c_map:'Visa karta', c_contact:'Kontakt', c_area:'Område', c_phone:'Telefon', c_addr:'Adress', c_poster:'Publicerad av', c_get_help:'Få hjälp', c_skip:'Hoppa över', c_like:'💗 Gilla', c_report:'⚑ Rapportera', c_featured:'★ Utvald', c_certified:'✓ Certifierad',
@@ -1218,7 +1229,7 @@ const I18N = {
   },
   ko: {
     tab_home:'홈', tab_places:'체크인', tab_outings:'아이와 나들이', tab_market:'마켓',
-    tab_friends:'친구 찾기', tab_translate:'통역', tab_services:'QTT 서비스',
+    tab_friends:'친구 찾기', tab_translate:'통역', tab_services:'QTT 서비스', tab_about:'회사 소개',
     login:'로그인', logout:'로그아웃',
     search_places:'음식, 아시아 마트, 네일 검색…', search_area:'지역으로 검색…',
     search_market:'아동용품, 음식 검색…', search_lang:'언어, 분야로 검색…',
@@ -1275,7 +1286,7 @@ const I18N = {
     svc_menu:'E-Menu (QR 메뉴)', svc_menu_for:'식당 · 분식점 · 카페', svc_menu_d:'고객이 테이블에서 QR 코드를 스캔해 메뉴를 보고 주문합니다.', svc_menu_1:'사진이 있는 다국어 QR 메뉴', svc_menu_2:'고객이 직접 주문, 주방이 즉시 받음', svc_menu_3:'가격과 메뉴 즉시 업데이트',
     svc_inv:'재고 앱', svc_inv_for:'식당 · 재고가 있는 사업체', svc_inv_d:'입출고 관리, 재고 추적, 재고 부족 경고, 비용 보고.', svc_inv_1:'입고 및 출고 기록', svc_inv_2:'재고 부족 및 유통기한 알림', svc_inv_3:'비용 및 매출 보고서',
     svc_quote:'상담 / 견적 요청', svc_why:'왜 QTT Solutions인가요?', svc_why_d:'스웨덴의 작은 식당과 살롱이 어떻게 운영되는지 이해하며 당신의 언어로 지원합니다.', svc_contact:'직접 연락:',
-    about_badge:'WeShare 소개', about_title:'고향을 떠난 모든 커뮤니티를 위해', about_p:'WeShare는 어느 나라에서 왔든 스웨덴에서 고향을 떠나 사는 모든 사람을 위한 커뮤니티 플랫폼입니다. 길을 잃은 듯한 순간이 더는 외롭지 않도록 WeShare가 있습니다.', about_brand_pre:'제작', about_brand_post:'— 해외 커뮤니티를 연결하는 기술 회사.', about_free:'안전 · 따뜻함 · 당신의 언어로',
+    about_badge:'회사 소개', about_title:'고향을 떠난 모든 커뮤니티를 위해', about_p:'WeShare는 어느 나라에서 왔든 스웨덴에서 고향을 떠나 사는 모든 사람을 위한 커뮤니티 플랫폼입니다. 길을 잃은 듯한 순간이 더는 외롭지 않도록 WeShare가 있습니다.', about_brand_pre:'제작', about_brand_post:'— 해외 커뮤니티를 연결하는 기술 회사.', about_free:'안전 · 따뜻함 · 당신의 언어로',
     foot_tag:'스웨덴에서 고향을 떠나온 사람들을 위한 커뮤니티', foot_by:'제품 제공',
     right_in:'지역:', items_in:'개 항목 —', nothing_in:'콘텐츠가 없습니다 —',
     c_open:'영업', c_call:'전화', c_map:'지도 보기', c_contact:'연락처', c_area:'지역', c_phone:'전화', c_addr:'주소', c_poster:'게시자', c_get_help:'도움 받기', c_skip:'건너뛰기', c_like:'💗 좋아요', c_report:'⚑ 신고', c_featured:'★ 추천', c_certified:'✓ 인증됨',
@@ -1324,7 +1335,7 @@ const I18N = {
   },
   tl: {
     tab_home:'Home', tab_places:'Check-in', tab_outings:'Lakad kasama ang mga bata', tab_market:'Palengke',
-    tab_friends:'Maghanap ng kaibigan', tab_translate:'Interpreter', tab_services:'QTT Services',
+    tab_friends:'Maghanap ng kaibigan', tab_translate:'Interpreter', tab_services:'QTT Services', tab_about:'Tungkol sa amin',
     login:'Mag-log in', logout:'Mag-log out',
     search_places:'Maghanap ng pagkain, Asian store, kuko…', search_area:'Maghanap ayon sa lugar…',
     search_market:'Maghanap ng gamit ng bata, pagkain…', search_lang:'Maghanap ayon sa wika, larangan…',
@@ -1381,7 +1392,7 @@ const I18N = {
     svc_menu:'E-Menu (QR Menu)', svc_menu_for:'Restawran · Karinderya · Café', svc_menu_d:'Nag-scan ang mga customer ng QR code sa mesa para tingnan ang menu at mag-order.', svc_menu_1:'Multilingual na QR menu na may larawan', svc_menu_2:'Mag-order mismo ang customer, agad matatanggap ng kusina', svc_menu_3:'I-update ang presyo & item agad',
     svc_inv:'Inventory App', svc_inv_for:'Restawran · Negosyong may stock', svc_inv_d:'Pamahalaan ang stock in/out, subaybayan ang inventory, babala sa kulang na stock at mag-ulat ng gastos.', svc_inv_1:'Itala ang stock in & out', svc_inv_2:'Babala sa kulang na stock & expiry', svc_inv_3:'Ulat ng gastos & kita',
     svc_quote:'Humiling ng konsultasyon / quote', svc_why:'Bakit piliin ang QTT Solutions?', svc_why_d:'Nauunawaan namin kung paano gumagana ang maliliit na restawran at salon sa Sweden, at tinutulungan ka sa sarili mong wika.', svc_contact:'Direktang contact:',
-    about_badge:'Tungkol sa WeShare', about_title:'Ginawa para sa bawat komunidad na malayo sa tahanan', about_p:'Ang WeShare ay platform ng komunidad para sa lahat ng nakatira nang malayo sa tahanan sa Sweden — saanmang bansa ka nanggaling. Umiiral ang WeShare para hindi na maging mag-isa ang mga sandali ng pagkaligaw.', about_brand_pre:'Ginawa ng', about_brand_post:'— kumpanya ng teknolohiya na nag-uugnay ng mga komunidad sa ibang bansa.', about_free:'Ligtas · Mainit na pagtanggap · Sa iyong wika',
+    about_badge:'Tungkol sa amin', about_title:'Ginawa para sa bawat komunidad na malayo sa tahanan', about_p:'Ang WeShare ay platform ng komunidad para sa lahat ng nakatira nang malayo sa tahanan sa Sweden — saanmang bansa ka nanggaling. Umiiral ang WeShare para hindi na maging mag-isa ang mga sandali ng pagkaligaw.', about_brand_pre:'Ginawa ng', about_brand_post:'— kumpanya ng teknolohiya na nag-uugnay ng mga komunidad sa ibang bansa.', about_free:'Ligtas · Mainit na pagtanggap · Sa iyong wika',
     foot_tag:'Komunidad para sa mga taong malayo sa tahanan sa Sweden', foot_by:'Isang produkto ng',
     right_in:'sa', items_in:'item sa', nothing_in:'Walang nilalaman sa',
     c_open:'Bukas', c_call:'Tumawag', c_map:'Tingnan ang mapa', c_contact:'Contact', c_area:'Lugar', c_phone:'Telepono', c_addr:'Address', c_poster:'Nag-post', c_get_help:'Humingi ng tulong', c_skip:'Laktawan', c_like:'💗 Like', c_report:'⚑ I-report', c_featured:'★ Tampok', c_certified:'✓ Sertipikado',
@@ -1430,7 +1441,7 @@ const I18N = {
   },
   vi: {
     tab_home:'Trang chủ', tab_places:'Check-in', tab_outings:'Đi chơi cùng con', tab_market:'Chợ cộng đồng',
-    tab_friends:'Kết bạn', tab_translate:'Phiên dịch', tab_services:'Dịch vụ QTT',
+    tab_friends:'Kết bạn', tab_translate:'Phiên dịch', tab_services:'Dịch vụ QTT', tab_about:'Về chúng tôi',
     login:'Đăng nhập', logout:'Đăng xuất',
     search_places:'Tìm phở, chợ Á, nail…', search_area:'Tìm theo khu vực…',
     search_market:'Tìm đồ trẻ em, đồ ăn…', search_lang:'Tìm theo ngôn ngữ, lĩnh vực…',
@@ -1512,7 +1523,7 @@ const I18N = {
     svc_menu:'E-Menu (Menu QR)', svc_menu_for:'Nhà hàng · Quán ăn · Café', svc_menu_d:'Khách quét mã QR tại bàn để xem thực đơn và gọi món.', svc_menu_1:'Menu QR đa ngôn ngữ, ảnh món đẹp', svc_menu_2:'Khách tự gọi món, bếp nhận đơn tức thì', svc_menu_3:'Cập nhật giá & món ngay, không in lại',
     svc_inv:'App Quản lý Kho', svc_inv_for:'Nhà hàng · Cơ sở có kho hàng', svc_inv_d:'Quản lý xuất–nhập hàng hoá, theo dõi tồn kho, cảnh báo hết hàng và báo cáo chi phí.', svc_inv_1:'Ghi nhận nhập hàng & xuất kho', svc_inv_2:'Cảnh báo tồn kho thấp, hạn dùng', svc_inv_3:'Báo cáo chi phí & doanh thu',
     svc_quote:'Yêu cầu tư vấn / báo giá', svc_why:'Vì sao chọn QTT Solutions?', svc_why_d:'Chúng tôi hiểu cách vận hành của các nhà hàng và tiệm nail nhỏ tại Thụy Điển, và hỗ trợ bạn bằng chính ngôn ngữ của bạn.', svc_contact:'Liên hệ trực tiếp:',
-    about_badge:'Về WeShare', about_title:'Xây dựng cho mọi cộng đồng xa quê', about_p:'WeShare là nền tảng cộng đồng dành cho tất cả những người xa quê đang sinh sống tại Thụy Điển — dù bạn đến từ đất nước nào. WeShare ra đời để những khoảnh khắc lạc lõng ấy không còn đơn độc.', about_brand_pre:'Phát triển bởi', about_brand_post:'— công ty công nghệ gắn kết cộng đồng nơi xứ người.', about_free:'An toàn · Gần gũi · Bằng ngôn ngữ của bạn',
+    about_badge:'Về chúng tôi', about_title:'Xây dựng cho mọi cộng đồng xa quê', about_p:'WeShare là nền tảng cộng đồng dành cho tất cả những người xa quê đang sinh sống tại Thụy Điển — dù bạn đến từ đất nước nào. WeShare ra đời để những khoảnh khắc lạc lõng ấy không còn đơn độc.', about_brand_pre:'Phát triển bởi', about_brand_post:'— công ty công nghệ gắn kết cộng đồng nơi xứ người.', about_free:'An toàn · Gần gũi · Bằng ngôn ngữ của bạn',
     foot_tag:'Cộng đồng cho mọi người xa quê tại Thụy Điển', foot_by:'Một sản phẩm của',
     right_in:'tại', items_in:'mục ở', nothing_in:'Chưa có nội dung ở',
     c_open:'Giờ mở', c_call:'Gọi', c_map:'Xem bản đồ', c_contact:'Liên hệ', c_area:'Khu vực', c_phone:'Điện thoại', c_addr:'Địa chỉ', c_poster:'Người đăng', c_get_help:'Nhận giúp', c_skip:'Bỏ qua', c_like:'💗 Thích', c_report:'⚑ Báo cáo', c_featured:'★ Nổi bật', c_certified:'✓ Được cấp phép', photo_choose:'📷 Chọn ảnh', photo_err:'Không xử lý được ảnh. Hãy thử ảnh khác.', photo_avatar:'Ảnh đại diện', photo_img:'Hình ảnh', photo_save:'Lưu ảnh', prof_title:'Hồ sơ của tôi', prof_sub:'Thông tin này có thể hiển thị trên hồ sơ công khai của bạn.', prof_displayname:'Tên hiển thị', prof_fullname:'Họ và tên', prof_dob:'Ngày sinh', prof_gender:'Giới tính', prof_g_m:'Nam', prof_g_f:'Nữ', prof_g_o:'Khác', prof_area:'Khu vực (län)', prof_job:'Nghề nghiệp', prof_bio:'Giới thiệu bản thân', prof_bio_ph:'Vài dòng về bạn…', prof_phone:'Số điện thoại', prof_save:'Lưu hồ sơ', prof_saved:'Đã lưu hồ sơ.', pf_from_account:'Tự động lấy từ hồ sơ cá nhân — sửa lại bất cứ lúc nào.', post_delete:'Xoá', post_del_confirm:'Xoá tin này? Không thể hoàn tác.', post_edit:'Sửa', post_save:'Lưu thay đổi', tab_fun:'Live', hc_fun_d:'Đêm karaoke, quẩy nhạc DJ, tâm sự, chơi game — mọi người tự tạo sự kiện live theo chủ đề mình thích.', hc_fun_go:'Vào giải trí →',
@@ -1535,7 +1546,7 @@ const I18N = {
   },
   th: {
     tab_home:'หน้าแรก', tab_places:'เช็คอิน', tab_outings:'พาลูกไปเที่ยว', tab_market:'ตลาดชุมชน',
-    tab_friends:'หาเพื่อน', tab_translate:'ล่าม', tab_services:'บริการ QTT',
+    tab_friends:'หาเพื่อน', tab_translate:'ล่าม', tab_services:'บริการ QTT', tab_about:'เกี่ยวกับเรา',
     login:'เข้าสู่ระบบ', logout:'ออกจากระบบ',
     search_places:'ค้นหาร้านอาหาร ร้านเอเชีย ทำเล็บ…', search_area:'ค้นหาตามพื้นที่…',
     search_market:'ค้นหาของเด็ก อาหาร…', search_lang:'ค้นหาตามภาษา สาขา…',
@@ -1617,7 +1628,7 @@ const I18N = {
     svc_menu:'E-Menu (เมนู QR)', svc_menu_for:'ร้านอาหาร · ร้านอาหาร · คาเฟ่', svc_menu_d:'ลูกค้าสแกน QR ที่โต๊ะเพื่อดูเมนูและสั่ง', svc_menu_1:'เมนู QR หลายภาษา พร้อมรูป', svc_menu_2:'ลูกค้าสั่งเอง ครัวรับทันที', svc_menu_3:'อัปเดตราคาและเมนูได้ทันที',
     svc_inv:'แอปจัดการสต็อก', svc_inv_for:'ร้านอาหาร · ธุรกิจที่มีสต็อก', svc_inv_d:'จัดการรับเข้า–เบิกออก ติดตามสต็อก แจ้งเตือนของหมด และรายงานต้นทุน', svc_inv_1:'บันทึกรับเข้าและเบิกออก', svc_inv_2:'แจ้งเตือนสต็อกต่ำและวันหมดอายุ', svc_inv_3:'รายงานต้นทุนและรายได้',
     svc_quote:'ขอคำปรึกษา / ใบเสนอราคา', svc_why:'ทำไมต้องเลือก QTT Solutions?', svc_why_d:'เราเข้าใจการทำงานของร้านอาหารและร้านทำเล็บขนาดเล็กในสวีเดน และช่วยเหลือคุณด้วยภาษาของคุณเอง', svc_contact:'ติดต่อโดยตรง:',
-    about_badge:'เกี่ยวกับ WeShare', about_title:'สร้างเพื่อทุกชุมชนที่อยู่ไกลบ้าน', about_p:'WeShare เป็นแพลตฟอร์มชุมชนสำหรับทุกคนที่อยู่ไกลบ้านในสวีเดน ไม่ว่าคุณจะมาจากประเทศใด WeShare เกิดขึ้นเพื่อให้ช่วงเวลาที่รู้สึกเคว้งคว้างไม่โดดเดี่ยวอีกต่อไป', about_brand_pre:'พัฒนาโดย', about_brand_post:'— บริษัทเทคโนโลยีที่เชื่อมชุมชนในต่างแดน', about_free:'ปลอดภัย · อบอุ่น · ในภาษาของคุณ',
+    about_badge:'เกี่ยวกับเรา', about_title:'สร้างเพื่อทุกชุมชนที่อยู่ไกลบ้าน', about_p:'WeShare เป็นแพลตฟอร์มชุมชนสำหรับทุกคนที่อยู่ไกลบ้านในสวีเดน ไม่ว่าคุณจะมาจากประเทศใด WeShare เกิดขึ้นเพื่อให้ช่วงเวลาที่รู้สึกเคว้งคว้างไม่โดดเดี่ยวอีกต่อไป', about_brand_pre:'พัฒนาโดย', about_brand_post:'— บริษัทเทคโนโลยีที่เชื่อมชุมชนในต่างแดน', about_free:'ปลอดภัย · อบอุ่น · ในภาษาของคุณ',
     foot_tag:'ชุมชนสำหรับผู้อยู่ไกลบ้านในสวีเดน', foot_by:'ผลิตภัณฑ์ของ',
     right_in:'ที่', items_in:'รายการใน', nothing_in:'ยังไม่มีเนื้อหาใน',
     c_open:'เวลาเปิด', c_call:'โทร', c_map:'ดูแผนที่', c_contact:'ติดต่อ', c_area:'พื้นที่', c_phone:'โทรศัพท์', c_addr:'ที่อยู่', c_poster:'โพสต์โดย', c_get_help:'ขอความช่วยเหลือ', c_skip:'ข้าม', c_like:'💗 ถูกใจ', c_report:'⚑ รายงาน', c_featured:'★ แนะนำ', c_certified:'✓ ได้รับการรับรอง', photo_choose:'📷 เลือกรูป', photo_err:'ประมวลผลรูปไม่ได้ ลองรูปอื่น', photo_avatar:'รูปโปรไฟล์', photo_img:'รูปภาพ', photo_save:'บันทึกรูป', prof_title:'โปรไฟล์ของฉัน', prof_sub:'ข้อมูลนี้อาจแสดงบนโปรไฟล์สาธารณะของคุณ', prof_displayname:'ชื่อที่แสดง', prof_fullname:'ชื่อเต็ม', prof_dob:'วันเกิด', prof_gender:'เพศ', prof_g_m:'ชาย', prof_g_f:'หญิง', prof_g_o:'อื่นๆ', prof_area:'พื้นที่ (län)', prof_job:'อาชีพ', prof_bio:'เกี่ยวกับฉัน', prof_bio_ph:'สองสามบรรทัดเกี่ยวกับคุณ…', prof_phone:'โทรศัพท์', prof_save:'บันทึกโปรไฟล์', prof_saved:'บันทึกโปรไฟล์แล้ว', pf_from_account:'กรอกอัตโนมัติจากโปรไฟล์ของคุณ — แก้ไขได้ทุกเมื่อ', post_delete:'ลบ', post_del_confirm:'ลบโพสต์นี้? ไม่สามารถย้อนกลับได้', post_edit:'แก้ไข', post_save:'บันทึกการเปลี่ยนแปลง', tab_fun:'ไลฟ์', hc_fun_d:'คาราโอเกะ ดีเจเซ็ต พูดคุยจากใจ เกม — ใครก็สร้างอีเวนต์ไลฟ์ได้ทุกหัวข้อ', hc_fun_go:'สำรวจไลฟ์ →',
@@ -1668,30 +1679,13 @@ function setLangFromCountry(c) {
 
 
 // ===== PLACES DATA =====
-let PLACES = [
-  { id:1, ten:"Phở Việt Söder", nhom:"Ăn uống", loai:"Phở", khuvuc:"Södermalm", tp:"Stockholms län", diachi:"Götgatan 78, Stockholm", sdt:"08-123 456", gio:"11:00–21:00", mota:"Phở bò đậm vị miền Nam, nước dùng ninh xương 12 tiếng. Có bánh mì và cà phê sữa đá.", diem:4.6, rev:84, noibat:true, anh:"https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=600&q=70", map:"https://maps.google.com/?q=Götgatan+78+Stockholm" },
-  { id:2, ten:"Asia Market Hötorgshallen", nhom:"Mua sắm", loai:"Chợ Á", khuvuc:"Norrmalm", tp:"Stockholms län", diachi:"Hötorget, Stockholm", sdt:"08-222 333", gio:"09:00–18:00", mota:"Đầy đủ gia vị Việt, nước mắm, bánh tráng, rau thơm tươi, mì gói các loại.", diem:4.3, rev:51, noibat:false, anh:"https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=600&q=70", map:"https://maps.google.com/?q=Hötorget+Stockholm" },
-  { id:3, ten:"Bún Bò Huế Mai", nhom:"Ăn uống", loai:"Bún", khuvuc:"Kungsholmen", tp:"Stockholms län", diachi:"Fleminggatan 40, Stockholm", sdt:"08-444 555", gio:"11:30–20:00", mota:"Bún bò Huế cay đúng điệu, chả cua tự làm. Chủ quán người Huế.", diem:4.8, rev:67, noibat:true, anh:"https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&q=70", map:"https://maps.google.com/?q=Fleminggatan+40+Stockholm" },
-  { id:4, ten:"Nail Studio Linh", nhom:"Dịch vụ", loai:"Nail", khuvuc:"Östermalm", tp:"Stockholms län", diachi:"Karlavägen 15, Stockholm", sdt:"070-123 4567", gio:"10:00–19:00", mota:"Làm móng gel, vẽ design theo yêu cầu. Thợ người Việt, nói tiếng Việt & tiếng Anh.", diem:4.7, rev:120, noibat:false, anh:"https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=70", map:"https://maps.google.com/?q=Karlavägen+15+Stockholm" },
-  { id:5, ten:"Bangkok Kitchen", nhom:"Ăn uống", loai:"Thái", khuvuc:"Vasastan", tp:"Stockholms län", diachi:"Sankt Eriksgatan 50, Stockholm", sdt:"08-666 777", gio:"11:00–22:00", mota:"Pad Thái, tom yum, cà ri xanh. Phần ăn lớn, giá hợp lý cho khu Vasastan.", diem:4.4, rev:93, noibat:false, anh:"https://images.unsplash.com/photo-1559314809-0d155014e29e?w=600&q=70", map:"https://maps.google.com/?q=Sankt+Eriksgatan+50+Stockholm" },
-  { id:6, ten:"Chùa Phật Quang", nhom:"Cộng đồng", loai:"Chùa", khuvuc:"Solna", tp:"Stockholms län", diachi:"Solna, Stockholm", sdt:"070-888 999", gio:"Cuối tuần", mota:"Chùa của cộng đồng người Việt. Lễ Vu Lan, Tết, các buổi tụng kinh cuối tuần.", diem:4.9, rev:38, noibat:false, anh:"https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=600&q=70", map:"https://maps.google.com/?q=Solna+Stockholm" },
-  { id:7, ten:"Seoul BBQ House", nhom:"Ăn uống", loai:"Hàn", khuvuc:"Södermalm", tp:"Stockholms län", diachi:"Hornsgatan 92, Stockholm", sdt:"08-111 222", gio:"16:00–23:00", mota:"Nướng tại bàn, banchan miễn phí, soju đủ vị. Đông cuối tuần nên đặt trước.", diem:4.5, rev:76, noibat:true, anh:"https://images.unsplash.com/photo-1632558610666-4b97cc10b2f0?w=600&q=70", map:"https://maps.google.com/?q=Hornsgatan+92+Stockholm" },
-  { id:8, ten:"Tiệm Bánh Mì Sài Gòn", nhom:"Ăn uống", loai:"Bánh mì", khuvuc:"Norrmalm", tp:"Stockholms län", diachi:"Drottninggatan 60, Stockholm", sdt:"070-555 6666", gio:"08:00–18:00", mota:"Bánh mì pate, thịt nguội, xíu mại. Bánh nóng giòn, làm trong ngày.", diem:4.6, rev:58, noibat:false, anh:"https://images.unsplash.com/photo-1558030006-450675393462?w=600&q=70", map:"https://maps.google.com/?q=Drottninggatan+60+Stockholm" },
-  { id:9, ten:"Phở Göteborg", nhom:"Ăn uống", loai:"Phở", khuvuc:"Centrum", tp:"Västra Götalands län", diachi:"Andra Långgatan 10, Göteborg", sdt:"031-111 222", gio:"11:00–21:00", mota:"Quán phở lâu năm ở trung tâm Göteborg, đông người Việt lui tới cuối tuần.", diem:4.5, rev:62, noibat:true, anh:"https://images.unsplash.com/photo-1591814468924-caf88d1232e1?w=600&q=70", map:"https://maps.google.com/?q=Andra+Långgatan+10+Göteborg" },
-  { id:10, ten:"Á Đông Market", nhom:"Mua sắm", loai:"Chợ Á", khuvuc:"Angered", tp:"Västra Götalands län", diachi:"Angered, Göteborg", sdt:"031-333 444", gio:"09:00–19:00", mota:"Siêu thị châu Á lớn ở Göteborg, đủ đồ Việt, Thái, Hàn, Trung.", diem:4.4, rev:40, noibat:false, anh:"https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=600&q=70", map:"https://maps.google.com/?q=Angered+Göteborg" },
-  { id:11, ten:"Sài Gòn Malmö", nhom:"Ăn uống", loai:"Phở", khuvuc:"Möllevången", tp:"Skåne län", diachi:"Möllevångstorget, Malmö", sdt:"040-111 222", gio:"11:00–20:00", mota:"Quán Việt ở khu Möllan sôi động, giá sinh viên, phần ăn đầy đặn.", diem:4.6, rev:55, noibat:true, anh:"https://images.unsplash.com/photo-1569562211093-4ed0d0758f12?w=600&q=70", map:"https://maps.google.com/?q=Möllevångstorget+Malmö" },
-];
+let PLACES = [];
 
 const AV = ['#c8442e','#2e6e5e','#d99b2b','#7b5ea7','#3a7ca5','#bb6b3d'];
 const initials = n => { const s = String(n||'').trim(); if(!s) return '?'; const last = s.split(/\s+/).slice(-1)[0]; return (last && last[0]) ? last[0].toUpperCase() : '?'; };
 function avColor(id){ const s=String(id); let h=0; for(let i=0;i<s.length;i++) h=(h*31+s.charCodeAt(i))>>>0; return h%AV.length; }
 
-let OUTINGS = [
-  { id:1, host:"Chị Hương", khuvuc:"Södermalm", tp:"Stockholms län", diadiem:"Công viên Tantolunden", dia_addr:"Tantolunden, Södermalm", ngay:"CN 6/7", gio:"10:00", tuoi:"3–5 tuổi", note:"Mình đưa bé Su ra công viên chơi xích đu, nhà nào có bé tầm tuổi ra chơi cho vui nhé. Mình mang theo ít bánh.", going:["Chị Hương","Anh Tuấn","Chị Lan"], joined:false, color:0 },
-  { id:2, host:"Anh Minh", khuvuc:"Norrmalm", tp:"Stockholms län", diadiem:"Junibacken (bảo tàng trẻ em)", dia_addr:"Galärvarvsvägen 8", ngay:"T7 12/7", gio:"13:00", tuoi:"2–6 tuổi", note:"Dẫn 2 nhóc đi Junibacken, nhà nào muốn đi chung mua vé nhóm rẻ hơn. Hẹn ở cổng chính.", going:["Anh Minh","Chị Thảo"], joined:false, color:1 },
-  { id:3, host:"Chị Ngọc", khuvuc:"Solna", tp:"Stockholms län", diadiem:"Sân chơi Hagaparken", dia_addr:"Hagaparken, Solna", ngay:"CN 13/7", gio:"11:00", tuoi:"1–4 tuổi", note:"Picnic cuối tuần ở Haga, trải bạt cho các bé bò chơi. Ai mang đồ ăn Việt góp vui thì tuyệt!", going:["Chị Ngọc","Anh Hải","Chị Mai","Anh Đức"], joined:false, color:2 },
-  { id:4, host:"Chị Vân", khuvuc:"Centrum", tp:"Västra Götalands län", diadiem:"Slottsskogen (công viên lớn)", dia_addr:"Slottsskogen, Göteborg", ngay:"CN 13/7", gio:"10:30", tuoi:"2–6 tuổi", note:"Nhà nào ở Göteborg có bé nhỏ ra Slottsskogen chơi cùng nhé, ở đó có cả vườn thú nhỏ miễn phí.", going:["Chị Vân","Anh Sơn"], joined:false, color:3 },
-];
+let OUTINGS = [];
 
 // ===== MARKET DATA =====
 // type: tang | doi | free | xach
@@ -1699,25 +1693,10 @@ const MKT_CATS = ["Tất cả","Đồ trẻ em","Đồ ăn Việt","Đồ gia đ
 const TYPE_LABEL = { tang:"Tặng", doi:"Đổi", free:"Miễn phí", xach:"Xách tay" };
 const TYPE_CLASS = { tang:"t-tang", doi:"t-doi", free:"t-free", xach:"t-xach" };
 
-let MARKET = [
-  { id:1, type:"tang", cat:"Đồ trẻ em", title:"Quần áo bé gái size 80–92", who:"Chị Lan", khuvuc:"Södermalm", tp:"Stockholms län", sdt:"070-111 2222", desc:"Con mình lớn rồi, để lại ~15 bộ còn rất đẹp cho bé gái 1–2 tuổi. Tặng miễn phí, ai cần ới mình.", anh:"https://images.unsplash.com/photo-1522771930-78848d9293e8?w=600&q=70" },
-  { id:2, type:"xach", cat:"Nhờ xách tay", title:"Mình sắp về Sài Gòn, xách hộ đồ", who:"Anh Tuấn", khuvuc:"Norrmalm", tp:"Stockholms län", sdt:"070-333 4444", desc:"Cuối tháng 7 về SG 2 tuần. Ai cần gửi đồ về cho gia đình hoặc nhờ mua mang sang thì nhắn mình nhé. Còn ~5kg.", anh:"https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&q=70" },
-  { id:3, type:"tang", cat:"Đồ ăn Việt", title:"Còn dư mắm tôm & lá chanh", who:"Chị Mai", khuvuc:"Kungsholmen", tp:"Stockholms län", sdt:"070-555 6666", desc:"Mới được người nhà gửi sang nhiều quá. Chia bớt lọ mắm tôm và ít lá chanh khô cho ai cần nấu bún riêu.", anh:"https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600&q=70" },
-  { id:4, type:"doi", cat:"Đồ trẻ em", title:"Đổi xe đẩy lấy ghế ăn dặm", who:"Anh Hải", khuvuc:"Solna", tp:"Stockholms län", sdt:"070-777 8888", desc:"Xe đẩy gấp gọn còn tốt, muốn đổi lấy ghế ăn dặm cho bé. Nhà nào có nhu cầu đổi thì liên hệ nhé.", anh:"https://images.unsplash.com/photo-1591147834034-8b6e7e0b3b3c?w=600&q=70" },
-  { id:5, type:"free", cat:"Cho tặng miễn phí", title:"Cho nồi cơm điện còn dùng tốt", who:"Chị Thảo", khuvuc:"Vasastan", tp:"Stockholms län", sdt:"070-999 0000", desc:"Nhà mua cái mới nên cho lại nồi cơm điện 1.8L còn chạy ngon. Ai lấy thì qua nhà mình lấy giúp.", anh:"https://images.unsplash.com/photo-1585515320310-259814833e62?w=600&q=70" },
-  { id:6, type:"tang", cat:"Đồ gia đình", title:"Bộ bát đĩa sứ còn nguyên", who:"Chị Hương", khuvuc:"Södermalm", tp:"Stockholms län", sdt:"070-222 1111", desc:"Dọn nhà nên để lại bộ bát đĩa sứ trắng, đủ cho 6 người. Tặng ai mới sang dựng nhà cửa.", anh:"https://images.unsplash.com/photo-1578474846511-04ba529f0b88?w=600&q=70" },
-  { id:7, type:"tang", cat:"Đồ trẻ em", title:"Xe tập đi cho bé", who:"Chị Hoa", khuvuc:"Centrum", tp:"Västra Götalands län", sdt:"031-555 666", desc:"Bé nhà mình đi vững rồi, tặng lại xe tập đi còn tốt cho gia đình ở Göteborg. Qua lấy giúp mình nhé.", anh:"https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&q=70" },
-  { id:8, type:"xach", cat:"Nhờ xách tay", title:"Sắp bay Malmö → Hà Nội", who:"Anh Dũng", khuvuc:"Möllevången", tp:"Skåne län", sdt:"040-777 888", desc:"Giữa tháng 8 mình về Hà Nội. Ai ở Malmö cần gửi đồ về Bắc thì liên hệ, còn dư ~7kg hành lý.", anh:"https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&q=70" },
-];
+let MARKET = [];
 
 // ===== FRIENDS / SINGLES DATA =====
-let SINGLES = [
-  { id:1, ten:"Mai", tuoi:29, khuvuc:"Södermalm", tp:"Stockholms län", nghe:"Y tá", tim:"Bạn nam 28–35", bio:"Sang Thụy Điển 4 năm, thích nấu ăn Việt, đi bộ trong rừng và cà phê cuối tuần. Tìm người chân thành để cùng đi đường dài.", so_thich:["Nấu ăn","Đi bộ","Cà phê","Phim Hàn"], anh:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=70", sdt:"070-111 2222" },
-  { id:2, ten:"Hùng", tuoi:34, khuvuc:"Kungsholmen", tp:"Stockholms län", nghe:"Kỹ sư IT", tim:"Bạn nữ 27–33", bio:"Dân IT, hơi ít nói nhưng ấm áp. Mê bóng đá, đi phượt và ăn phở. Mong tìm người cùng xây tổ ấm nơi xứ lạnh.", so_thich:["Bóng đá","Phượt","Ẩm thực","Nhạc Trịnh"], anh:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=70", sdt:"070-333 4444" },
-  { id:3, ten:"Linh", tuoi:31, khuvuc:"Vasastan", tp:"Stockholms län", nghe:"Chủ tiệm nail", tim:"Bạn nam nghiêm túc", bio:"Tự lập, vui vẻ, yêu trẻ con. Cuối tuần hay đi chợ Á nấu ăn. Tìm người trưởng thành, biết quan tâm gia đình.", so_thich:["Kinh doanh","Nấu ăn","Yoga","Du lịch"], anh:"https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&q=70", sdt:"070-555 6666" },
-  { id:4, ten:"Nam", tuoi:37, khuvuc:"Solna", tp:"Stockholms län", nghe:"Đầu bếp", tim:"Bạn nữ 30–38", bio:"Đầu bếp nhà hàng Việt, nấu ăn là đam mê. Đã ổn định cuộc sống, mong tìm người bạn đời để sẻ chia mỗi ngày.", so_thich:["Ẩm thực","Câu cá","Đọc sách","Đi biển"], anh:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=70", sdt:"070-777 8888" },
-  { id:5, ten:"Trang", tuoi:28, khuvuc:"Centrum", tp:"Västra Götalands län", nghe:"Sinh viên cao học", tim:"Bạn nam cùng chí hướng", bio:"Đang học thạc sĩ ở Göteborg, thích đọc sách, cà phê và đi biển mùa hè. Mong gặp người bạn hiền lành, chân thành.", so_thich:["Đọc sách","Cà phê","Đi biển","Nhiếp ảnh"], anh:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=70", sdt:"031-999 000" },
-];
+let SINGLES = [];
 
 let SG_EVENTS = [
   { id:1, host:"Nhóm Việt Sthlm", tp:"Stockholms län", diadiem:"Fika giao lưu độc thân", dia_addr:"Café Pascal, Vasastan", ngay:"T7 19/7", gio:"15:00", note:"Buổi fika thân mật cho người độc thân làm quen tự nhiên. Không áp lực, chỉ trò chuyện. Đăng ký trước để giữ chỗ.", going:["Mai","Hùng","Linh"], joined:false, color:0 },
@@ -1732,24 +1711,11 @@ let frSub = 'discover';
 
 // ===== PHIÊN DỊCH DATA =====
 const TR_FIELDS = ["Tất cả","Y tế","Giấy tờ/Hành chính","Pháp lý","Đi cùng thường","Dịch văn bản"];
-let TRANSLATORS = [
-  { id:1, ten:"Anh Đức", tp:"Stockholms län", khuvuc:"Södermalm", langs:["Việt","Thụy Điển","Anh"], fields:["Y tế","Giấy tờ/Hành chính"], auth:false, kn:"5 năm sống ở Thụy Điển, từng đi cùng nhiều người khám bệnh, làm giấy tờ Skatteverket.", bio:"Mình rảnh cuối tuần và buổi tối, sẵn lòng đi cùng khám bệnh hoặc giúp đọc thư từ cơ quan. Tự thoả thuận chi phí.", sdt:"070-123 4567" },
-  { id:2, ten:"Chị Lan", tp:"Stockholms län", khuvuc:"Norrmalm", langs:["Việt","Thụy Điển"], fields:["Giấy tờ/Hành chính","Dịch văn bản"], auth:true, kn:"Phiên dịch viên được cấp phép (auktoriserad tolk), 8 năm kinh nghiệm.", bio:"Có chứng chỉ phiên dịch chính thức. Nhận dịch giấy tờ, đi cùng cơ quan nhà nước. Nhắn mình để trao đổi.", sdt:"070-222 3333" },
-  { id:3, ten:"Anh Hòa", tp:"Västra Götalands län", khuvuc:"Centrum", langs:["Việt","Anh","Thụy Điển"], fields:["Đi cùng thường","Y tế"], auth:false, kn:"Sinh viên y khoa, hiểu thuật ngữ y tế cơ bản.", bio:"Mình học ngành y ở Göteborg, có thể giúp phiên dịch khi đi khám bệnh, hiểu các từ chuyên môn. Ưu tiên giúp người mới sang.", sdt:"031-444 5555" },
-  { id:4, ten:"Chị Mai", tp:"Skåne län", khuvuc:"Möllevången", langs:["Việt","Thụy Điển","Đan Mạch"], fields:["Giấy tờ/Hành chính","Đi cùng thường"], auth:false, kn:"Sống ở Malmö 10 năm, quen việc giấy tờ cả Thụy Điển và Đan Mạch.", bio:"Ở khu Öresund nên rành cả thủ tục Thụy Điển lẫn Đan Mạch. Giúp được việc hành chính, thuê nhà, ngân hàng.", sdt:"040-666 7777" },
-];
-let TR_REQUESTS = [
-  { id:1, who:"Chị Hương", tp:"Stockholms län", khuvuc:"Solna", field:"Y tế", khi:"Thứ 5 tuần này, 14:00", note:"Mình cần người đi cùng tới bệnh viện Karolinska khám cho con, dịch giúp phần trao đổi với bác sĩ. Xin cảm ơn.", sdt:"070-888 9999" },
-  { id:2, who:"Anh Tuấn", tp:"Stockholms län", khuvuc:"Södermalm", field:"Giấy tờ/Hành chính", khi:"Linh hoạt", note:"Mình mới nhận thư từ Migrationsverket mà không hiểu hết. Cần người đọc và giải thích giúp, có thể trả phí.", sdt:"070-111 0000" },
-  { id:3, who:"Chị Thu", tp:"Västra Götalands län", khuvuc:"Angered", field:"Đi cùng thường", khi:"Tuần sau", note:"Cần người đi cùng ra ngân hàng mở tài khoản và làm BankID. Mình chưa quen tiếng.", sdt:"031-222 1111" },
-];
+let TRANSLATORS = [];
+let TR_REQUESTS = [];
 let trSub = 'find', trField = 'Tất cả';
 
-let EVENTS = [
-  { id:1, host:"Anh Khoa", tp:"Stockholms län", chude:"karaoke", title:"Đêm karaoke cuối tuần — hát cho vui", khi:"", start_ts:Date.now()+2*3600000, phut:120, link:"https://meet.google.com/", note:"Mở phòng hát online, ai thích ca hát thì vào giao lưu cho vui, không ngại giọng nhé!", anh:"" },
-  { id:2, host:"DJ Minh", tp:"Stockholms län", chude:"dj", title:"Quẩy nhạc Việt cùng DJ Minh", khi:"", start_ts:Date.now()-1800000, phut:90, link:"https://www.tiktok.com/", note:"Livestream nhạc Việt remix, nhận request bài hát. Vào quẩy cho đỡ nhớ nhà!", anh:"" },
-  { id:3, host:"Chị Lan", tp:"Västra Götalands län", chude:"talk", title:"Tâm sự: làm mẹ nơi xứ người", khi:"", start_ts:Date.now()+26*3600000, phut:60, link:"https://zoom.us/", note:"Buổi trò chuyện nhẹ nhàng cho các mẹ bỉm xa quê. Chia sẻ, lắng nghe, không phán xét.", anh:"" },
-];
+let EVENTS = [];
 let evTopic = 'all';
 
 // ===== LÄN (21 tỉnh/vùng của Thụy Điển) =====
@@ -1794,7 +1760,8 @@ function switchTab(tab) {
   document.getElementById('view-share').classList.toggle('hidden', tab!=='share');
   document.getElementById('view-articles').classList.toggle('hidden', tab!=='articles');
   document.getElementById('view-services').classList.toggle('hidden', tab!=='services');
-  const noChrome = tab==='home' || tab==='services';
+  document.getElementById('view-about').classList.toggle('hidden', tab!=='about');
+  const noChrome = tab==='home' || tab==='services' || tab==='about';
   // Ô tìm kiếm chỉ hiện ở các trang cần tìm; bộ lọc địa điểm luôn hiển thị
   const sb = document.getElementById('barSearch');
   if (sb) sb.style.display = noChrome ? 'none' : '';
@@ -2718,12 +2685,7 @@ function submitEvent(editId) {
 // ===== CHIA SẺ / BẢNG TIN (tự xoá sau 72h) =====
 // ============================================================
 const SHARE_TTL = 72*3600000; // 72 giờ
-let POSTS = [
-  { id:1, host:"Chị Mai", tp:"Stockholms län", anh_dd:"", loai:"text", ngay_tao:new Date(Date.now()-5*3600000).toISOString(),
-    noidung:"Chợ Á ở Solna cuối tuần này có nhập rau muống với các loại rau thơm tươi nhé cả nhà. Ai cần thì tranh thủ ra sớm kẻo hết!", media:"" },
-  { id:2, host:"Anh Nam", tp:"Stockholms län", anh_dd:"", loai:"link", ngay_tao:new Date(Date.now()-20*3600000).toISOString(),
-    noidung:"Chia sẻ video hướng dẫn khai thuế ở Thụy Điển bằng tiếng Việt, rất dễ hiểu cho ai mới sang:", media:"https://www.youtube.com/" },
-];
+let POSTS = [];
 function fmtTimeLeft(iso) {
   const created = new Date(iso).getTime();
   const left = SHARE_TTL - (Date.now() - created);
@@ -2805,10 +2767,7 @@ function submitShare() {
 // ===== CẨM NANG (nội dung trả phí) =====
 // ============================================================
 const ART_PRICE = { single:29, month:199, year:899 };  // giá tiền (kr)
-let ARTICLES = [
-  { id:1, chude:'Cư trú', title:'Gia hạn giấy phép cư trú 2026: những mốc thời gian không được bỏ lỡ', teaser:'Nhiều người nộp hồ sơ gia hạn quá sát ngày hết hạn và gặp rắc rối lớn. Có 3 mốc thời gian quan trọng và một lỗi phổ biến khiến hồ sơ bị chậm hàng tháng trời. Bài này chỉ rõ từng bước cần làm và thời điểm nộp để không bị gián đoạn quyền cư trú.', anh:'', nguoi_dang:'', co_noidung:true },
-  { id:2, chude:'Thuế', title:'Khai thuế ở Thụy Điển: các khoản khấu trừ người mới hay bỏ sót', teaser:'Rất nhiều người đi làm ở Thụy Điển không biết mình có thể được hoàn lại một khoản tiền đáng kể mỗi năm nhờ các khoản khấu trừ hợp lệ. Bài này liệt kê những khoản hay bị bỏ sót nhất và cách kê khai đúng với Skatteverket.', anh:'', nguoi_dang:'', co_noidung:true },
-];
+let ARTICLES = [];
 
 function renderArticles() {
   const grid = document.getElementById('art-grid');
