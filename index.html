@@ -930,7 +930,7 @@
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v16-avatar</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v17-chatload</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -2930,8 +2930,9 @@ function initChatUI() {
 async function loadChat(initial) {
   try {
     const r = await callApi({ action:'getChat', since: initial ? 0 : chatSince });
-    if (!r || !r.ok || !Array.isArray(r.messages)) return;
+    if (!r || !r.ok || !Array.isArray(r.messages)) return false;
     const box = document.getElementById('chatMessages');
+    if (!box) return false;
     if (initial) { box.innerHTML=''; chatSeen.clear(); }
     let added = false;
     r.messages.forEach(m => {
@@ -2952,7 +2953,8 @@ async function loadChat(initial) {
       box.innerHTML = '<div class="chat-empty">'+t('chat_empty')+'</div>';
     }
     if (added) box.scrollTop = box.scrollHeight;
-  } catch(e){ /* im lặng, thử lại lần polling sau */ }
+    return true;  // đọc thành công (dù có tin hay không)
+  } catch(e){ return false; }
 }
 
 function renderChatMsg(m) {
@@ -3053,7 +3055,14 @@ async function reportChatMsg(id) {
 
 function startChat() {
   initChatUI();
-  loadChat(true);
+  // Tải lần đầu, thử lại tối đa 5 lần nếu chưa hiện được tin (DOM/kết nối chưa sẵn sàng)
+  let tries = 0;
+  const firstLoad = async () => {
+    const ok = await loadChat(true);
+    tries++;
+    if (!ok && tries < 5) setTimeout(firstLoad, 800);
+  };
+  firstLoad();
   if (chatTimer) clearInterval(chatTimer);
   chatTimer = setInterval(()=>{
     // chỉ polling khi đang ở trang chủ để tiết kiệm
