@@ -504,19 +504,24 @@
   .credit-chip { background: linear-gradient(135deg,#fff3d6,#ffe6a8) !important; border-color: #e6c976 !important;
     font-weight: 700 !important; color: #8a6d2f !important; }
   .gift-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; background: #fff;
-    border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
-  .gift-grid button { border: 1px solid var(--line); background: var(--paper); border-radius: 12px; cursor: pointer;
-    padding: 10px 4px; display: flex; flex-direction: column; align-items: center; gap: 3px; font-family: inherit;
-    transition: transform .12s ease, background .15s ease; }
-  .gift-grid button:hover { background: #fff; transform: translateY(-2px); }
-  .gg-emoji { font-size: 24px; }
+    border: 1px solid var(--line); border-radius: 12px; padding: 10px; max-height: 240px; overflow-y: auto; }
+  .gift-grid button { border: 1px solid var(--line); background: var(--paper); border-radius: 14px; cursor: pointer;
+    padding: 10px 4px 8px; display: flex; flex-direction: column; align-items: center; gap: 3px; font-family: inherit;
+    transition: transform .12s ease, background .15s ease, box-shadow .15s ease; }
+  .gift-grid button:hover { background: #fff; transform: translateY(-3px) scale(1.04); box-shadow: 0 6px 14px rgba(0,0,0,.10); }
+  .gg-ic { width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; }
+  .gg-ic svg { width: 46px; height: 46px; display: block; }
+  .gg-ic .big-emoji { font-size: 38px; line-height: 1; }
   .gg-label { font-size: 11px; color: var(--ink); font-weight: 600; }
   .gg-cost { font-size: 10.5px; color: #8a6d2f; font-weight: 700; }
   .gift-cmsg { justify-content: flex-start; }
-  .gift-card { display: flex; align-items: center; gap: 10px; background: linear-gradient(135deg,#fff6ea,#ffe9d6);
-    border: 1px solid #f0d9b8; border-radius: 14px; padding: 10px 14px; }
-  .gift-emoji { font-size: 28px; animation: giftPop .5s ease; display: inline-block; }
-  @keyframes giftPop { 0%{transform:scale(0) rotate(-20deg)} 60%{transform:scale(1.3)} 100%{transform:scale(1)} }
+  .gift-card { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center;
+    background: linear-gradient(160deg,#fff6ea,#ffe9d6); border: 1px solid #f0d9b8; border-radius: 18px;
+    padding: 16px 20px; margin: 2px auto; max-width: 220px; }
+  .gift-big { width: 72px; height: 72px; display: flex; align-items: center; justify-content: center; animation: giftPop .55s cubic-bezier(.2,1.4,.5,1); }
+  .gift-big svg { width: 72px; height: 72px; filter: drop-shadow(0 4px 8px rgba(0,0,0,.12)); }
+  .gift-big .big-emoji { font-size: 60px; line-height: 1; }
+  @keyframes giftPop { 0%{transform:scale(0) rotate(-25deg)} 60%{transform:scale(1.25) rotate(6deg)} 100%{transform:scale(1) rotate(0)} }
   .gift-text { font-size: 14px; color: #6a4e26; }
   .credit-packs { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin: 14px 0 4px; }
   .credit-pack { border: 1px solid var(--line); border-radius: 14px; padding: 16px 8px; text-align: center;
@@ -1022,7 +1027,7 @@
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v26-qrcenter</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v27-gifts</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -3016,10 +3021,9 @@ function renderChatMsg(m) {
     const g = GIFTS[gm[1]];
     el.className = 'cmsg gift-cmsg';
     el.innerHTML = `
-      <div class="av" style="background:${AV[avColor(m.email||name)]}${m.anh?`;background-image:url('${m.anh}');background-size:cover;background-position:center`:''}">${m.anh?'':initials(name)}</div>
       <div class="gift-card">
-        <span class="gift-emoji">${g.emoji}</span>
-        <span class="gift-text"><b>${escapeHtml(name)}</b> đã gửi ${g.label}</span>
+        <span class="gift-big">${giftGraphic(g)}</span>
+        <span class="gift-text"><b>${escapeHtml(name)}</b> đã tặng <b>${g.label}</b></span>
         <span class="cmsg-time">${hh}</span>
       </div>`;
     return el;
@@ -3175,8 +3179,8 @@ function toggleChatPanel(which) {
     panel.innerHTML = '<div class="color-row">' + CHAT_COLORS.map((c,i)=>`<button class="cc-dot${i===chatMsgColor?' on':''}" style="background:${c||'#efe8dc'}" onclick="pickChatColor(${i})" title="${i===0?'Mặc định':''}">${i===0?'✕':''}</button>`).join('') + '</div>';
   } else if (which === 'gift') {
     panel.innerHTML = '<div class="gift-grid">' +
-      Object.keys(GIFTS).map(k=>`<button onclick="sendGift('${k}')"><span class="gg-emoji">${GIFTS[k].emoji}</span><span class="gg-label">${GIFTS[k].label}</span><span class="gg-cost">${GIFTS[k].cost}💎</span></button>`).join('') +
-      `<button class="gg-video" onclick="videoGiftInfo()"><span class="gg-emoji">🎥</span><span class="gg-label">Video chào</span><span class="gg-cost">5💎</span></button>` +
+      Object.keys(GIFTS).map(k=>`<button onclick="sendGift('${k}')"><span class="gg-ic">${giftGraphic(GIFTS[k])}</span><span class="gg-label">${GIFTS[k].label}</span><span class="gg-cost">${GIFTS[k].cost}💎</span></button>`).join('') +
+      `<button class="gg-video" onclick="videoGiftInfo()"><span class="gg-ic"><span class="big-emoji">🎥</span></span><span class="gg-label">Video chào</span><span class="gg-cost">5💎</span></button>` +
       '</div>';
   } else if (which === 'theme') {
     panel.innerHTML = '<div class="theme-grid">' + CHAT_THEMES.map(th=>`
@@ -3202,10 +3206,23 @@ const CREDIT_PACKS = [
   { credit:300, price:199, qr: SWISH_QR_199 },
 ];
 const GIFTS = {
-  flower: { emoji:'🌸', label:'Hoa',      cost:1 },
-  clap:   { emoji:'👏', label:'Vỗ tay',   cost:1 },
-  hello:  { emoji:'👋', label:'Xin chào', cost:1 },
+  hello: { label:'Xin chào', cost:1, emoji:'👋' },
+  clap: { label:'Vỗ tay', cost:1, emoji:'👏' },
+  love: { label:'Yêu thích', cost:1, emoji:'😍' },
+  party: { label:'Chúc mừng', cost:1, emoji:'🎉' },
+  flower: { label:'Hoa', cost:1, svg:`<svg viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'><g fill='#ff9dc4'><circle cx='32' cy='15' r='11'/><circle cx='49' cy='27' r='11'/><circle cx='43' cy='47' r='11'/><circle cx='21' cy='47' r='11'/><circle cx='15' cy='27' r='11'/></g><g fill='#ffb9d6' opacity='.55'><circle cx='29' cy='12' r='4'/><circle cx='46' cy='24' r='4'/></g><circle cx='32' cy='31' r='10' fill='#ffd54a'/><circle cx='28' cy='28' r='3' fill='#fff' opacity='.6'/></svg>` },
+  heart: { label:'Trái tim', cost:2, svg:`<svg viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='ght' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#ff6b8b'/><stop offset='1' stop-color='#e83a5c'/></linearGradient></defs><path d='M32 55C11 40 7 28 7 20 7 12 13 6 21 6c5 0 9 3 11 7 2-4 6-7 11-7 8 0 14 6 14 14 0 8-4 20-25 35z' fill='url(#ght)'/><ellipse cx='21' cy='19' rx='5' ry='7' fill='#fff' opacity='.35'/></svg>` },
+  star: { label:'Ngôi sao', cost:2, svg:`<svg viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='gst' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#ffe27a'/><stop offset='1' stop-color='#f5a623'/></linearGradient></defs><path d='M32 5l8 16.5L58 24 45 36l3 18-16-8.5L16 54l3-18L6 24l18-2.5z' fill='url(#gst)'/><circle cx='25' cy='23' r='3' fill='#fff' opacity='.55'/></svg>` },
+  rose: { label:'Hoa hồng', cost:3, svg:`<svg viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='grs' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#ff5e7e'/><stop offset='1' stop-color='#d61f45'/></linearGradient></defs><path d='M30 40h4v18h-4z' fill='#3a9e6a'/><path d='M34 48c5-2 9 1 10 5-4 1-9-1-10-5z' fill='#43b578'/><circle cx='32' cy='26' r='17' fill='url(#grs)'/><path d='M32 14c-7 0-11 5-11 9s4 8 11 8 11-4 11-8-4-9-11-9z' fill='#ff87a0' opacity='.65'/><path d='M32 19c-4 0-6 3-6 5s2 4 6 4 6-2 6-4-2-5-6-5z' fill='#b3153a'/><circle cx='32' cy='24' r='2.5' fill='#ff9db0'/></svg>` },
+  coffee: { label:'Cà phê', cost:3, svg:`<svg viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'><g stroke='#c9a06a' stroke-width='2.5' fill='none' stroke-linecap='round'><path d='M23 18c-2-3 2-5 0-8'/><path d='M32 18c-2-3 2-5 0-8'/><path d='M41 18c-2-3 2-5 0-8'/></g><path d='M13 25h32v15a14 14 0 01-14 14h-4a14 14 0 01-14-14z' fill='#fff8ef' stroke='#d8b78a' stroke-width='2.5'/><path d='M45 29h4a7 7 0 010 14h-4' fill='none' stroke='#d8b78a' stroke-width='3'/><rect x='13' y='25' width='32' height='6' rx='2' fill='#8a5a2b'/></svg>` },
+  balloon: { label:'Bóng bay', cost:3, svg:`<svg viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'><defs><radialGradient id='gbl' cx='.4' cy='.35'><stop offset='0' stop-color='#ff8fae'/><stop offset='1' stop-color='#e5396a'/></radialGradient></defs><path d='M32 46c0 7-7 7-7 12' fill='none' stroke='#c9a06a' stroke-width='1.5'/><ellipse cx='32' cy='24' rx='17' ry='20' fill='url(#gbl)'/><path d='M29 44h6l-3 5z' fill='#e5396a'/><ellipse cx='24' cy='17' rx='4' ry='6' fill='#fff' opacity='.4'/></svg>` },
+  teddy: { label:'Gấu bông', cost:5, svg:`<svg viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='gtd' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#cf9165'/><stop offset='1' stop-color='#a9683c'/></linearGradient></defs><circle cx='15' cy='16' r='8' fill='url(#gtd)'/><circle cx='49' cy='16' r='8' fill='url(#gtd)'/><circle cx='15' cy='16' r='4' fill='#e6c9a8'/><circle cx='49' cy='16' r='4' fill='#e6c9a8'/><circle cx='32' cy='35' r='21' fill='url(#gtd)'/><circle cx='32' cy='41' r='9.5' fill='#e6c9a8'/><circle cx='24' cy='31' r='3' fill='#3a2a1a'/><circle cx='40' cy='31' r='3' fill='#3a2a1a'/><circle cx='23' cy='30' r='1' fill='#fff'/><circle cx='39' cy='30' r='1' fill='#fff'/><circle cx='32' cy='38' r='2.5' fill='#3a2a1a'/><path d='M27 43q5 4 10 0' fill='none' stroke='#3a2a1a' stroke-width='1.6' stroke-linecap='round'/></svg>` },
+  cake: { label:'Bánh kem', cost:5, svg:`<svg viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'><rect x='11' y='34' width='42' height='21' rx='4' fill='#ffb3cd'/><path d='M11 36q5.25 6 10.5 0t10.5 0 10.5 0 10.5 0v4H11z' fill='#fff3f7'/><rect x='11' y='30' width='42' height='7' rx='3' fill='#fff'/><rect x='30' y='15' width='4' height='13' fill='#7ac0e8'/><path d='M32 9c2 2 2 4 0 6-2-2-2-4 0-6z' fill='#ffd54a'/><g fill='#ff5e7e'><circle cx='20' cy='45' r='2'/><circle cx='32' cy='48' r='2'/><circle cx='44' cy='45' r='2'/></g></svg>` },
+  giftbox: { label:'Hộp quà', cost:8, svg:`<svg viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='ggb' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#ff7a9c'/><stop offset='1' stop-color='#e5396a'/></linearGradient></defs><rect x='13' y='28' width='38' height='27' rx='3' fill='url(#ggb)'/><rect x='10' y='21' width='44' height='11' rx='3' fill='#ff9ab3'/><rect x='28' y='21' width='8' height='34' fill='#ffd54a'/><path d='M32 21C24 9 12 17 30 21z' fill='#ffd54a'/><path d='M32 21C40 9 52 17 34 21z' fill='#ffd54a'/><circle cx='32' cy='20' r='4.5' fill='#ffca28'/></svg>` },
+  crown: { label:'Vương miện', cost:20, svg:`<svg viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='gcr' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#ffe27a'/><stop offset='1' stop-color='#f5a623'/></linearGradient></defs><path d='M10 46L7 21l15 11 10-17 10 17 15-11-3 25z' fill='url(#gcr)'/><rect x='10' y='45' width='44' height='9' rx='2' fill='#e8961a'/><circle cx='7' cy='19' r='3.5' fill='#ff5e7e'/><circle cx='57' cy='19' r='3.5' fill='#ff5e7e'/><circle cx='32' cy='13' r='3.5' fill='#ff5e7e'/><g fill='#fff'><circle cx='20' cy='49' r='2'/><circle cx='32' cy='49' r='2'/><circle cx='44' cy='49' r='2'/></g></svg>` },
+  diamond: { label:'Kim cương', cost:20, svg:`<svg viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='gdm' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#a6ecff'/><stop offset='1' stop-color='#4bb8e8'/></linearGradient></defs><path d='M20 11h24l10 15-22 27L10 26z' fill='url(#gdm)'/><path d='M10 26h44L32 53z' fill='#7fd4f0'/><path d='M20 11L10 26h18z' fill='#c8f2ff'/><path d='M44 11l10 15H36z' fill='#c8f2ff'/><path d='M28 26h8l-4 27z' fill='#5fc4e8'/><circle cx='29' cy='17' r='2' fill='#fff' opacity='.8'/></svg>` },
 };
+function giftGraphic(g){ return g.svg ? g.svg : `<span class="big-emoji">${g.emoji}</span>`; }
 function myCredit(){ return (currentUser && Number(currentUser.credit))||0; }
 
 function refreshCreditChip() {
