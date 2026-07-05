@@ -930,7 +930,7 @@
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v15-sync</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v16-avatar</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -3131,7 +3131,13 @@ async function syncProfile() {
   try {
     const r = await callApi({ action:'getProfile', email: currentUser.email });
     if (r && r.ok && r.user) {
+      const localAnh = currentUser.anh;
       Object.assign(currentUser, r.user);
+      // nếu máy chủ chưa có ảnh mà máy đang có ảnh tốt → giữ ảnh local, và lưu lên máy chủ
+      if ((!r.user.anh || !String(r.user.anh).trim()) && localAnh) {
+        currentUser.anh = localAnh;
+        callApi({ action:'saveProfile', email: currentUser.email, anh: localAnh }).catch(()=>{});
+      }
       localStorage.setItem('vietsthlm_user', JSON.stringify(currentUser));
       if (typeof refreshAccBtn === 'function') refreshAccBtn();
     }
@@ -3479,22 +3485,24 @@ function photoFieldHTML(label, previewId, storeId, existing, round) {
         <label class="photo-btn">
           ${t('photo_choose')}
           <input type="file" accept="image/*" style="display:none"
-                 onchange="onPickPhoto(event,'${previewId}','${storeId}')">
+                 onchange="onPickPhoto(event,'${previewId}','${storeId}',${round?'true':'false'})">
         </label>
       </div>
       <input type="hidden" id="${storeId}" value="${existing||''}">
     </div>`;
 }
 
-async function onPickPhoto(ev, previewId, storeId) {
+async function onPickPhoto(ev, previewId, storeId, isAvatar) {
   const file = ev.target.files && ev.target.files[0];
   if (!file) return;
   const prev = document.getElementById(previewId);
   prev.classList.add('loading');
   try {
-    const dataUrl = await compressImage(file, 400, 0.7);
+    // Ảnh đại diện chỉ cần nhỏ (hiển thị 40px) → nén mạnh để chắc chắn lưu được lên Sheet
+    const dataUrl = isAvatar ? await compressImage(file, 160, 0.6) : await compressImage(file, 400, 0.7);
     prev.style.backgroundImage = `url('${dataUrl}')`;
     document.getElementById(storeId).value = dataUrl;
+    if (dataUrl.length > 48000) { alert('Ảnh hơi lớn, hãy thử ảnh nhẹ hơn.'); }
   } catch(e) {
     alert(t('photo_err'));
   } finally {
