@@ -62,7 +62,9 @@
   .tab { display: flex; align-items: center; gap: 11px; cursor: pointer; font-weight: 700;
     color: var(--muted); white-space: nowrap; user-select: none;
     transition: color .15s ease, background .15s ease, transform .1s ease; }
-  .tab-ic { font-size: 20px; line-height: 1; flex-shrink: 0; }
+  .tab-ic { font-size: 20px; line-height: 1; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .tab-ic svg { width: 22px; height: 22px; display: block; }
+  .tab.on .tab-ic svg { stroke-width: 2; }
   .tab-tx { font-size: 14.5px; }
 
   /* --- MÁY TÍNH: thanh dọc cố định bên trái --- */
@@ -655,17 +657,17 @@
 </header>
 
 <nav class="tabs">
-  <div class="tab" data-tab="home" onclick="switchTab('home')"><span class="tab-ic">🏠</span><span class="tab-tx" data-i18n="tab_home">Trang chủ</span></div>
-  <div class="tab on" data-tab="places" onclick="switchTab('places')"><span class="tab-ic">📍</span><span class="tab-tx" data-i18n="tab_places">Check-in</span></div>
-  <div class="tab" data-tab="fun" onclick="switchTab('fun')"><span class="tab-ic">🎤</span><span class="tab-tx" data-i18n="tab_fun">Live</span></div>
-  <div class="tab" data-tab="share" onclick="switchTab('share')"><span class="tab-ic">📣</span><span class="tab-tx" data-i18n="tab_share">Chia sẻ</span></div>
-  <div class="tab" data-tab="articles" onclick="switchTab('articles')"><span class="tab-ic">📚</span><span class="tab-tx" data-i18n="tab_articles">Cẩm nang</span></div>
-  <div class="tab" data-tab="friends" onclick="switchTab('friends')"><span class="tab-ic">💗</span><span class="tab-tx" data-i18n="tab_friends">Kết bạn</span></div>
-  <div class="tab" data-tab="market" onclick="switchTab('market')"><span class="tab-ic">🛍️</span><span class="tab-tx" data-i18n="tab_market">Chợ cộng đồng</span></div>
-  <div class="tab" data-tab="outings" onclick="switchTab('outings')"><span class="tab-ic">👨‍👩‍👧</span><span class="tab-tx" data-i18n="tab_outings">Đi chơi cùng con</span></div>
-  <div class="tab" data-tab="translate" onclick="switchTab('translate')"><span class="tab-ic">🗣️</span><span class="tab-tx" data-i18n="tab_translate">Phiên dịch</span></div>
-  <div class="tab" data-tab="services" onclick="switchTab('services')"><span class="tab-ic">💻</span><span class="tab-tx" data-i18n="tab_services">Dịch vụ QTT</span></div>
-  <div class="tab" data-tab="about" onclick="switchTab('about')"><span class="tab-ic">💙</span><span class="tab-tx" data-i18n="tab_about">Về chúng tôi</span></div>
+  <div class="tab" data-tab="home" onclick="switchTab('home')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M4 11.5 12 5l8 6.5'/><path d='M6 10.5V19h12v-8.5'/><path d='M10 19v-4.5h4V19'/></svg></span><span class="tab-tx" data-i18n="tab_home">Trang chủ</span></div>
+  <div class="tab on" data-tab="places" onclick="switchTab('places')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M12 21c3.5-3.6 6-6.8 6-10a6 6 0 1 0-12 0c0 3.2 2.5 6.4 6 10z'/><circle cx='12' cy='11' r='2.2'/></svg></span><span class="tab-tx" data-i18n="tab_places">Check-in</span></div>
+  <div class="tab" data-tab="fun" onclick="switchTab('fun')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='2'/><path d='M8.6 8.6a5 5 0 0 0 0 6.8'/><path d='M15.4 8.6a5 5 0 0 1 0 6.8'/><path d='M6.2 6.2a9 9 0 0 0 0 11.6'/><path d='M17.8 6.2a9 9 0 0 1 0 11.6'/></svg></span><span class="tab-tx" data-i18n="tab_fun">Live</span></div>
+  <div class="tab" data-tab="share" onclick="switchTab('share')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='6' cy='12' r='2.2'/><circle cx='17.5' cy='6' r='2.2'/><circle cx='17.5' cy='18' r='2.2'/><path d='m8 11 7.5-3.8M8 13l7.5 3.8'/></svg></span><span class="tab-tx" data-i18n="tab_share">Chia sẻ</span></div>
+  <div class="tab" data-tab="articles" onclick="switchTab('articles')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M12 6.5C10.4 5.4 8 5 5.5 5v12c2.5 0 4.9.4 6.5 1.5 1.6-1.1 4-1.5 6.5-1.5V5c-2.5 0-4.9.4-6.5 1.5z'/><path d='M12 6.5v12'/></svg></span><span class="tab-tx" data-i18n="tab_articles">Cẩm nang</span></div>
+  <div class="tab" data-tab="friends" onclick="switchTab('friends')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M12 20s-6.5-4.2-6.5-9A3.4 3.4 0 0 1 12 9.2 3.4 3.4 0 0 1 18.5 11c0 4.8-6.5 9-6.5 9z'/></svg></span><span class="tab-tx" data-i18n="tab_friends">Kết bạn</span></div>
+  <div class="tab" data-tab="market" onclick="switchTab('market')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M6.5 8h11l-1 11.5h-9z'/><path d='M9.2 8V6.4a2.8 2.8 0 0 1 5.6 0V8'/></svg></span><span class="tab-tx" data-i18n="tab_market">Chợ cộng đồng</span></div>
+  <div class="tab" data-tab="outings" onclick="switchTab('outings')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='8' cy='7' r='2.4'/><path d='M4 20v-3.5a4 4 0 0 1 8 0V20'/><circle cx='16.5' cy='9' r='1.8'/><path d='M14 20v-3a3 3 0 0 1 6 0v3'/></svg></span><span class="tab-tx" data-i18n="tab_outings">Đi chơi cùng con</span></div>
+  <div class="tab" data-tab="translate" onclick="switchTab('translate')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='8.2'/><path d='M3.8 9.5h16.4M3.8 14.5h16.4'/><path d='M12 3.8c2.6 2.6 2.6 13.8 0 16.4M12 3.8c-2.6 2.6-2.6 13.8 0 16.4'/></svg></span><span class="tab-tx" data-i18n="tab_translate">Phiên dịch</span></div>
+  <div class="tab" data-tab="services" onclick="switchTab('services')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><rect x='3.5' y='5' width='17' height='11' rx='1.6'/><path d='M2 19.5h20'/></svg></span><span class="tab-tx" data-i18n="tab_services">Dịch vụ QTT</span></div>
+  <div class="tab" data-tab="about" onclick="switchTab('about')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='8.2'/><path d='M12 11.2v4.6'/><circle cx='12' cy='8.2' r='.4' fill='currentColor'/></svg></span><span class="tab-tx" data-i18n="tab_about">Về chúng tôi</span></div>
 </nav>
 
 
@@ -941,7 +943,7 @@
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v19-cleanup</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v20-icons</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
