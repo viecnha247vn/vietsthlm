@@ -468,6 +468,38 @@
   .cmsg.mine .cmsg-name { color: var(--jade); }
   .chat-input-row { display: none; gap: 10px; padding: 14px 20px; border-top: 1px solid var(--line); background: var(--paper); }
   .chat-input-row.on { display: flex; }
+  /* thanh công cụ định dạng */
+  .chat-toolbar { display: none; gap: 4px; padding: 6px 16px 0; align-items: center; }
+  .chat-toolbar.on { display: flex; }
+  .chat-toolbar button { border: 1px solid var(--line); background: #fff; border-radius: 8px; cursor: pointer;
+    font-size: 14px; padding: 5px 9px; color: var(--ink); font-family: inherit; transition: background .15s ease, border-color .15s ease; }
+  .chat-toolbar button:hover { background: var(--paper-2); border-color: #d4c8b4; }
+  .chat-toolbar .tb-theme { margin-left: auto; font-size: 12.5px; font-weight: 600; color: var(--jade); }
+  /* bảng chọn (emoji / màu / nền) */
+  .chat-panel { display: none; padding: 0 16px; }
+  .chat-panel.on { display: block; padding: 10px 16px 0; }
+  .emoji-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 3px; background: #fff;
+    border: 1px solid var(--line); border-radius: 12px; padding: 8px; max-height: 150px; overflow-y: auto; }
+  .emoji-grid button { border: none; background: none; cursor: pointer; font-size: 20px; padding: 5px; border-radius: 8px; }
+  .emoji-grid button:hover { background: var(--paper-2); }
+  .color-row { display: flex; gap: 8px; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+  .cc-dot { width: 28px; height: 28px; border-radius: 999px; border: 2px solid #fff; box-shadow: 0 0 0 1px var(--line);
+    cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 13px; }
+  .cc-dot.on { box-shadow: 0 0 0 2px var(--ink); transform: scale(1.1); }
+  .theme-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; background: #fff;
+    border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+  .theme-cell { border: 2px solid transparent; border-radius: 10px; background: none; cursor: pointer; padding: 4px;
+    display: flex; flex-direction: column; align-items: center; gap: 4px; position: relative; font-family: inherit; }
+  .theme-cell.on { border-color: var(--jade); }
+  .theme-prev { width: 100%; height: 40px; border-radius: 8px; border: 1px solid var(--line); }
+  .theme-name { font-size: 11px; color: var(--ink); font-weight: 600; }
+  .theme-lock { position: absolute; top: 6px; right: 6px; font-size: 9.5px; background: rgba(0,0,0,.6); color: #fff;
+    padding: 1px 5px; border-radius: 999px; }
+  .ct-locked { text-align: center; background: linear-gradient(180deg,#fffdf9,#f7efe2); border: 1px dashed #e0d6c2;
+    border-radius: 12px; padding: 16px; }
+  .chat-messages.chat-dark .cmsg-text { color: #f0ece5; }
+  .chat-messages.chat-dark .cmsg-name { color: #ffd9b0; }
+  .chat-messages.chat-dark .cmsg-time { color: #b0a89c; }
   .chat-input-row input { flex: 1; font-family: inherit; font-size: 15px; padding: 11px 15px;
     border: 1px solid var(--line); border-radius: 999px; outline: none; background: #fff; }
   .chat-input-row input:focus { border-color: var(--jade); }
@@ -695,6 +727,14 @@
         <div class="chat-safety" data-i18n="chat_safety">Hãy lịch sự và tôn trọng nhau. Đừng chia sẻ thông tin nhạy cảm (địa chỉ nhà, số tài khoản). Bấm ⚑ để báo cáo tin xấu.</div>
         <div class="chat-messages" id="chatMessages">
           <div class="chat-empty">…</div>
+        </div>
+        <div class="chat-panel" id="chatPanel"></div>
+        <div class="chat-toolbar" id="chatToolbar">
+          <button onclick="fmtBold()" title="In đậm"><b>B</b></button>
+          <button onclick="fmtItalic()" title="In nghiêng"><i>I</i></button>
+          <button onclick="toggleChatPanel('color')" title="Màu chữ">🎨</button>
+          <button onclick="toggleChatPanel('emoji')" title="Biểu cảm">😊</button>
+          <button onclick="toggleChatPanel('theme')" title="Nền phòng chat" class="tb-theme">🖼️ Nền</button>
         </div>
         <div class="chat-input-row" id="chatInputRow">
           <input id="chatInput" type="text" maxlength="500" placeholder="Nhập tin nhắn…" data-i18n-ph="chat_placeholder" onkeydown="if(event.key==='Enter')sendChatMsg()">
@@ -947,7 +987,7 @@
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v21-logo</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v22-chatstyle</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -2892,6 +2932,9 @@ function initChatUI() {
   const canPost = !!currentUser;
   document.getElementById('chatInputRow').classList.toggle('on', canPost);
   document.getElementById('chatLoginHint').classList.toggle('hide', canPost);
+  const tb = document.getElementById('chatToolbar');
+  if (tb) tb.classList.toggle('on', canPost);
+  applyChatTheme(chatTheme);  // áp nền đã lưu
 }
 
 async function loadChat(initial) {
@@ -2931,6 +2974,7 @@ function renderChatMsg(m) {
   const tm = m.ngay_tao ? new Date(m.ngay_tao) : new Date(Number(m.id));
   const hh = isNaN(tm) ? '' : ('0'+tm.getHours()).slice(-2)+':'+('0'+tm.getMinutes()).slice(-2);
   const name = m.ten || (m.email||'?').split('@')[0];
+  const fmt = formatChatText(m.noidung||'');
   el.innerHTML = `
     <div class="av" style="background:${AV[avColor(m.email||name)]}${m.anh?`;background-image:url('${m.anh}');background-size:cover;background-position:center`:''}">${m.anh?'':initials(name)}</div>
     <div class="cmsg-body">
@@ -2939,7 +2983,7 @@ function renderChatMsg(m) {
         <span class="cmsg-time">${hh}</span>
         <button class="cmsg-report" title="Báo cáo" onclick="reportChatMsg('${m.id}')">⚑</button>
       </div>
-      <div class="cmsg-text" id="cmsg-text-${m.id}">${escapeHtml(m.noidung||'')}</div>
+      <div class="cmsg-text" id="cmsg-text-${m.id}"${fmt.color?` style="color:${fmt.color}"`:''} data-plain="${escapeHtml(plainChatText(m.noidung||''))}">${fmt.html}</div>
       <div class="cmsg-trans" id="cmsg-trans-${m.id}"></div>
       <button class="cmsg-tr-btn" onclick="translateChatMsg('${m.id}', this)">${t('tr_show')}</button>
     </div>`;
@@ -2959,7 +3003,7 @@ async function translateChatMsg(id, btn) {
   }
   btn.textContent = t('tr_loading'); btn.disabled = true;
   try {
-    const r = await callApi({ action:'translate', text: src.textContent, target: LANG });
+    const r = await callApi({ action:'translate', text: (src.dataset.plain||src.textContent), target: LANG });
     if (r && r.ok && r.text) {
       box.textContent = r.text;
       box.dataset.done = '1';
@@ -2977,16 +3021,132 @@ async function translateChatMsg(id, btn) {
 }
 function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
+// ============================================================
+// ===== ĐỊNH DẠNG CHAT: in đậm / nghiêng / màu chữ / emoji =====
+// ============================================================
+const CHAT_COLORS = ['', '#c8442e', '#2e6e5e', '#d99b2b', '#7b5ea7', '#3a7ca5', '#c2456f'];
+let chatMsgColor = 0; // chỉ số màu chữ đang chọn (0 = mặc định)
+
+// Chuyển văn bản có ký hiệu định dạng thành HTML AN TOÀN (escape trước, rồi mới áp định dạng)
+function formatChatText(raw) {
+  let s = String(raw||'');
+  let color = '';
+  const cm = s.match(/^\u00a7c(\d)\u00a7/);   // token màu ở đầu tin: §c<N>§
+  if (cm) { color = CHAT_COLORS[+cm[1]] || ''; s = s.slice(cm[0].length); }
+  s = escapeHtml(s);
+  s = s.replace(/\*\*([^*\n]+)\*\*/g, '<b>$1</b>');   // **đậm**
+  s = s.replace(/(^|[\s(])_([^_\n]+)_/g, '$1<i>$2</i>'); // _nghiêng_
+  return { html: s, color };
+}
+// lấy văn bản thuần (bỏ token + ký hiệu) để dịch
+function plainChatText(raw) {
+  let s = String(raw||'').replace(/^\u00a7c\d\u00a7/, '');
+  return s.replace(/\*\*/g,'').replace(/_/g,'');
+}
+
+function fmtWrap(mark) {
+  const inp = document.getElementById('chatInput'); if (!inp) return;
+  const s = inp.selectionStart, e = inp.selectionEnd, v = inp.value;
+  const sel = v.slice(s, e) || (mark==='**'?'chữ đậm':'chữ nghiêng');
+  inp.value = v.slice(0,s) + mark + sel + mark + v.slice(e);
+  inp.focus();
+  inp.setSelectionRange(s+mark.length, s+mark.length+sel.length);
+}
+function fmtBold(){ fmtWrap('**'); }
+function fmtItalic(){ fmtWrap('_'); }
+
+function insertEmoji(em) {
+  const inp = document.getElementById('chatInput'); if (!inp) return;
+  const s = inp.selectionStart, v = inp.value;
+  inp.value = v.slice(0,s) + em + v.slice(inp.selectionEnd);
+  inp.focus(); inp.setSelectionRange(s+em.length, s+em.length);
+}
+function pickChatColor(i) {
+  chatMsgColor = i;
+  document.querySelectorAll('.cc-dot').forEach((d,idx)=> d.classList.toggle('on', idx===i));
+  const inp = document.getElementById('chatInput'); if (inp) { inp.style.color = CHAT_COLORS[i] || ''; inp.focus(); }
+}
+
+const CHAT_EMOJIS = ['😊','😂','🥰','😍','😎','🤩','😅','😭','😴','🤔','😜','🥳','🤗','😇','🙌','👍','👏','🙏','💪','🎉','🔥','❤️','💯','✨','🌟','🌸','🍜','☕','🇻🇳','🇸🇪'];
+
+// ============================================================
+// ===== NỀN KHUNG CHAT THEO CHỦ ĐỀ (cá nhân hoá — có gói trả phí) =====
+// ============================================================
+const CHAT_THEMES = [
+  { id:'default', name:'Mặc định', bg:'#ffffff', free:true },
+  { id:'cream',   name:'Kem ấm',   bg:'linear-gradient(160deg,#fdf6ec,#f7ede0)', free:true },
+  { id:'mint',    name:'Bạc hà',   bg:'linear-gradient(160deg,#eef7f2,#e2f0ea)', free:true },
+  { id:'sky',     name:'Trời xanh',bg:'linear-gradient(160deg,#eef4fb,#e3edf7)', free:true },
+  { id:'sunset',  name:'Hoàng hôn',bg:'linear-gradient(160deg,#fff0e6,#ffe0e6,#ffe9d6)', premium:true, price:19 },
+  { id:'sakura',  name:'Hoa anh đào', bg:'linear-gradient(160deg,#fdeef4,#f7e0ec,#fce8f0)', premium:true, price:19 },
+  { id:'ocean',   name:'Đại dương', bg:'linear-gradient(160deg,#e6f2f7,#d6eaf2,#e0f0f5)', premium:true, price:29 },
+  { id:'night',   name:'Đêm sao',  bg:'linear-gradient(160deg,#2a2438,#3a3450)', premium:true, price:29, dark:true },
+];
+let chatTheme = 'default';
+try { chatTheme = localStorage.getItem('weshare_chat_theme') || 'default'; } catch(e){}
+
+function applyChatTheme(id) {
+  const th = CHAT_THEMES.find(x=>x.id===id) || CHAT_THEMES[0];
+  const box = document.getElementById('chatMessages');
+  if (box) {
+    box.style.background = th.bg;
+    box.classList.toggle('chat-dark', !!th.dark);
+  }
+  chatTheme = th.id;
+  try { localStorage.setItem('weshare_chat_theme', th.id); } catch(e){}
+}
+function chooseChatTheme(id) {
+  const th = CHAT_THEMES.find(x=>x.id===id);
+  if (!th) return;
+  if (th.premium) {
+    // Nền cao cấp: cần trả phí để mở khoá (thanh toán sẽ bổ sung sau)
+    document.getElementById('chatPanel').innerHTML = `
+      <div class="ct-locked">
+        <div style="font-size:22px">🔒</div>
+        <div style="font-weight:700;margin:4px 0">Nền "${th.name}" — ${th.price} kr</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:8px">Mở khoá để cá nhân hoá phòng chat của bạn.</div>
+        <div style="font-size:12.5px;color:var(--jade)">Thanh toán sẽ sớm ra mắt — liên hệ <b>weshare.sverige@gmail.com</b></div>
+      </div>`;
+    return;
+  }
+  applyChatTheme(id);
+  closeChatPanel();
+}
+
+let chatPanelOpen = '';
+function toggleChatPanel(which) {
+  const panel = document.getElementById('chatPanel');
+  if (!panel) return;
+  if (chatPanelOpen === which) { closeChatPanel(); return; }
+  chatPanelOpen = which;
+  if (which === 'emoji') {
+    panel.innerHTML = '<div class="emoji-grid">' + CHAT_EMOJIS.map(e=>`<button onclick="insertEmoji('${e}')">${e}</button>`).join('') + '</div>';
+  } else if (which === 'color') {
+    panel.innerHTML = '<div class="color-row">' + CHAT_COLORS.map((c,i)=>`<button class="cc-dot${i===chatMsgColor?' on':''}" style="background:${c||'#efe8dc'}" onclick="pickChatColor(${i})" title="${i===0?'Mặc định':''}">${i===0?'✕':''}</button>`).join('') + '</div>';
+  } else if (which === 'theme') {
+    panel.innerHTML = '<div class="theme-grid">' + CHAT_THEMES.map(th=>`
+      <button class="theme-cell${chatTheme===th.id?' on':''}" onclick="chooseChatTheme('${th.id}')">
+        <span class="theme-prev" style="background:${th.bg}"></span>
+        <span class="theme-name">${th.name}</span>
+        ${th.premium?`<span class="theme-lock">🔒 ${th.price}kr</span>`:''}
+      </button>`).join('') + '</div>';
+  }
+  panel.classList.add('on');
+}
+function closeChatPanel() { chatPanelOpen=''; const p=document.getElementById('chatPanel'); if(p){ p.classList.remove('on'); p.innerHTML=''; } }
+
 async function sendChatMsg() {
   if (!currentUser) { onAccountClick(); return; }
   const inp = document.getElementById('chatInput');
   const text = inp.value.trim();
   if (!text) return;
+  // gắn token màu chữ nếu người dùng đã chọn màu
+  const outText = (chatMsgColor > 0 ? ('\u00a7c'+chatMsgColor+'\u00a7') : '') + text;
   const btn = document.querySelector('.chat-send');
   if (btn) { btn.disabled = true; btn.textContent = '…'; }
   let sent = false;
   try {
-    const r = await callApi({ action:'sendChat', email: currentUser.email, ten: currentUser.ten||'', anh: currentUser.anh||'', noidung: text });
+    const r = await callApi({ action:'sendChat', email: currentUser.email, ten: currentUser.ten||'', anh: currentUser.anh||'', noidung: outText });
     if (r && r.ok && r.item) {
       sent = true;
       inp.value = '';
