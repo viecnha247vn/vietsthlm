@@ -41,9 +41,15 @@
 
   header { position: sticky; top: 0; z-index: 50; background: rgba(251,247,240,.92);
     backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
-  .bar { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 14px; padding: 12px 18px; }
-  .logo { font-weight: 800; font-size: 20px; letter-spacing: -.02em; color: var(--red); white-space: nowrap; }
+  .bar { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 12px; padding: 12px 18px; }
+  .logo { font-weight: 800; font-size: 20px; letter-spacing: -.02em; color: var(--red); white-space: nowrap; margin-right: 4px; }
   .logo span { color: var(--ink); } .logo .dot { color: var(--gold); }
+  /* Bộ lọc địa điểm nằm giữa thanh trên cùng, luôn hiển thị */
+  .bar-city { display: flex; align-items: center; gap: 6px; background: #fff; border: 1px solid var(--line);
+    border-radius: 999px; padding: 8px 14px; flex-shrink: 0; }
+  .bar-city svg { flex-shrink: 0; }
+  .bar-city select { border: none; outline: none; background: transparent; font-size: 14.5px; font-weight: 600;
+    color: var(--ink); font-family: inherit; cursor: pointer; max-width: 170px; }
   .search { flex: 1; display: flex; align-items: center; gap: 8px; background: #fff;
     border: 1px solid var(--line); border-radius: 999px; padding: 9px 16px; min-width: 0; }
   .search input { border: none; outline: none; flex: 1; font-size: 15px; background: transparent;
@@ -73,7 +79,6 @@
     .tab.on .tab-tx { color: #fff; }
     /* header content và nội dung trang đều chừa chỗ cho sidebar 210px */
     div[id^="view-"] { margin-left: 210px; }
-    .city-bar { padding-left: 226px !important; }
   }
 
   /* --- ĐIỆN THOẠI: thanh nút cố định dưới đáy (kiểu Facebook) --- */
@@ -92,11 +97,16 @@
     /* chừa chỗ dưới đáy để nội dung không bị thanh che */
     body { padding-bottom: 72px; }
     /* thanh trên cùng: giữ logo + cờ + đăng nhập; ô tìm kiếm thu gọn */
-    header .bar { gap: 9px; padding: 10px 14px; }
+    header .bar { gap: 8px; padding: 10px 12px; flex-wrap: nowrap; }
     header .bar .search { flex: 1; min-width: 0; }
     header .bar .acc-btn { flex-shrink: 0; }
-    header .bar .logo { flex-shrink: 0; }
+    header .bar .logo { flex-shrink: 0; font-size: 18px; }
     header .bar .country-badge { flex-shrink: 0; }
+    .bar-city { flex-shrink: 1; min-width: 0; padding: 8px 10px; }
+    .bar-city select { max-width: 110px; }
+    /* khi không có ô tìm kiếm (trang chủ), bộ lọc địa điểm nới rộng ra giữa */
+    header .bar:not(.has-search) .bar-city { flex: 1; }
+    header .bar:not(.has-search) .bar-city select { max-width: none; flex: 1; }
   }
 
   .hero { max-width: 1100px; margin: 0 auto; padding: 30px 18px 18px; }
@@ -516,6 +526,8 @@
   .foot-copy { font-size: 12px; color: var(--muted); margin-top: 18px; }
 
   /* auth */
+  .bar:not(.has-search) .country-badge, .bar:not(.has-search) #accBtn { margin-left: 0; }
+  .bar:not(.has-search) .bar-city { margin-right: auto; }
   .acc-btn { flex-shrink: 0; background: var(--ink); color: var(--paper); border: none;
     border-radius: 999px; padding: 9px 16px; font-size: 14px; font-weight: 700; cursor: pointer;
     font-family: inherit; white-space: nowrap; }
@@ -617,17 +629,17 @@
 <header>
   <div class="bar">
     <div class="logo" onclick="switchTab('home')" style="cursor:pointer">We<span>Share</span><span class="dot">.</span></div>
-    <button id="countryBadge" class="country-badge" onclick="reopenSplash()" title="Đổi quốc gia" style="display:none"></button>
-    <div class="search">
+    <div class="bar-city" id="barCity">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8442e" stroke-width="2.2"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+      <select id="citySel" onchange="onCityChange()"></select>
+    </div>
+    <div class="search" id="barSearch">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8a7d6b" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
       <input id="q" type="text" placeholder="Tìm phở, chợ Á, nail…" data-i18n-ph="search_places">
     </div>
+    <button id="countryBadge" class="country-badge" onclick="reopenSplash()" title="Đổi quốc gia" style="display:none"></button>
     <button id="accBtn" class="acc-btn" onclick="onAccountClick()" data-i18n="login">Đăng nhập</button>
-  </div>
-  <div class="city-bar">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8442e" stroke-width="2.2"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-    <select id="citySel" onchange="onCityChange()"></select>
-    <span class="city-hint" id="cityHint"></span>
+    <span class="city-hint" id="cityHint" style="display:none"></span>
   </div>
 </header>
 
@@ -912,7 +924,7 @@
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v10-nav</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v11-topbar</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -1775,8 +1787,11 @@ function switchTab(tab) {
   document.getElementById('view-articles').classList.toggle('hidden', tab!=='articles');
   document.getElementById('view-services').classList.toggle('hidden', tab!=='services');
   const noChrome = tab==='home' || tab==='services';
-  document.querySelector('.search').style.visibility = noChrome ? 'hidden' : 'visible';
-  document.querySelector('.city-bar').style.display = noChrome ? 'none' : '';
+  // Ô tìm kiếm chỉ hiện ở các trang cần tìm; bộ lọc địa điểm luôn hiển thị
+  const sb = document.getElementById('barSearch');
+  if (sb) sb.style.display = noChrome ? 'none' : '';
+  const barEl = document.querySelector('.bar');
+  if (barEl) barEl.classList.toggle('has-search', !noChrome);
   const ph = { places:t('search_places'), outings:t('search_area'), market:t('search_market'), friends:t('search_area'), translate:t('search_lang'), fun:t('search_area'), share:t('search_area'), articles:t('search_area') };
   if (ph[tab]) document.getElementById('q').placeholder = ph[tab];
   // chỉ hiện nút FAB của tab đang mở (tránh các nút chồng lên nhau chặn click)
