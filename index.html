@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <title>WeShare — Community for people far from home in Sweden</title>
 <style>
   :root {
@@ -22,7 +25,7 @@
   .splash-inner { max-width: 640px; width: 100%; padding: 44px 22px 50px; text-align: center; }
   .splash-logo { width: 96px; height: 96px; border-radius: 999px; object-fit: cover;
     box-shadow: 0 8px 26px rgba(40,30,20,.16); }
-  .splash-brand { font-size: 40px; font-weight: 800; letter-spacing: -.03em; color: var(--red); margin-top: 14px; }
+  .splash-brand { font-family: 'Poppins', -apple-system, sans-serif; font-size: 40px; font-weight: 600; letter-spacing: -.035em; color: var(--red); margin-top: 14px; }
   .splash-intro { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px;
     margin: 20px 0 8px; text-align: left; }
   .splash-intro p { font-size: 14.5px; line-height: 1.55; color: #4a4036; }
@@ -42,8 +45,9 @@
   header { position: sticky; top: 0; z-index: 50; background: rgba(251,247,240,.92);
     backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
   .bar { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 12px; padding: 12px 18px; }
-  .logo { font-weight: 800; font-size: 20px; letter-spacing: -.02em; color: var(--red); white-space: nowrap; margin-right: 4px; }
-  .logo span { color: var(--ink); } .logo .dot { color: var(--gold); }
+  .logo { font-family: 'Poppins', -apple-system, sans-serif; font-weight: 600; font-size: 21px;
+    letter-spacing: -.035em; color: var(--red); white-space: nowrap; margin-right: 4px; }
+  .logo span { color: var(--ink); font-weight: 500; } .logo .dot { display: none; }
   /* Bộ lọc địa điểm nằm giữa thanh trên cùng, luôn hiển thị */
   .bar-city { display: flex; align-items: center; gap: 6px; background: #fff; border: 1px solid var(--line);
     border-radius: 999px; padding: 8px 14px; flex-shrink: 0; }
@@ -522,8 +526,8 @@
     box-shadow: 0 4px 14px rgba(40,30,20,.14); margin-bottom: 12px; }
   .site-footer { text-align: center; padding: 40px 20px 34px; border-top: 1px solid var(--line);
     background: var(--paper-2); margin-top: 10px; }
-  .foot-brand { font-weight: 800; font-size: 22px; color: var(--red); letter-spacing: -.02em; }
-  .foot-brand span { color: var(--ink); } .foot-brand .dot { color: var(--gold); }
+  .foot-brand { font-family: 'Poppins', -apple-system, sans-serif; font-weight: 600; font-size: 22px; color: var(--red); letter-spacing: -.035em; }
+  .foot-brand span { color: var(--ink); font-weight: 500; } .foot-brand .dot { display: none; }
   .foot-tag { color: var(--muted); font-size: 13.5px; margin-top: 4px; }
   .foot-by { font-size: 14px; margin-top: 14px; color: var(--ink); }
   .foot-by b { color: var(--jade); }
@@ -943,7 +947,7 @@
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v20-icons</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v21-logo</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
