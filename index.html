@@ -531,8 +531,14 @@
   .acc-btn { flex-shrink: 0; background: var(--ink); color: var(--paper); border: none;
     border-radius: 999px; padding: 9px 16px; font-size: 14px; font-weight: 700; cursor: pointer;
     font-family: inherit; white-space: nowrap; }
-  .acc-btn.in { background: var(--jade); }
+  .acc-btn.in { background: transparent; padding: 0; }
+  .acc-btn .acc-ava { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px;
+    border-radius: 999px; background-size: cover; background-position: center; color: #fff; font-weight: 700;
+    font-size: 15px; border: 2px solid #fff; box-shadow: 0 1px 5px rgba(0,0,0,.15); transition: transform .12s ease; }
+  .acc-btn.in:hover .acc-ava { transform: scale(1.06); }
   .auth-note { font-size: 13px; color: var(--muted); margin: 4px 0 16px; }
+  .prof-sync { font-size: 12.5px; color: var(--jade); background: #e6f2ed; border-radius: 8px;
+    padding: 8px 11px; margin-bottom: 14px; font-weight: 600; }
   .auth-switch { text-align: center; font-size: 14px; color: var(--muted); margin-top: 16px; }
   .auth-switch a { color: var(--red); font-weight: 700; cursor: pointer; text-decoration: none; }
   .auth-msg { padding: 10px 13px; border-radius: 10px; font-size: 13.5px; margin-bottom: 14px; display: none; }
@@ -646,7 +652,7 @@
 <nav class="tabs">
   <div class="tab" data-tab="home" onclick="switchTab('home')"><span class="tab-ic">🏠</span><span class="tab-tx" data-i18n="tab_home">Trang chủ</span></div>
   <div class="tab on" data-tab="places" onclick="switchTab('places')"><span class="tab-ic">📍</span><span class="tab-tx" data-i18n="tab_places">Check-in</span></div>
-  <div class="tab" data-tab="fun" onclick="switchTab('fun')"><span class="tab-ic">🎤</span><span class="tab-tx" data-i18n="tab_fun">Giải trí</span></div>
+  <div class="tab" data-tab="fun" onclick="switchTab('fun')"><span class="tab-ic">🎤</span><span class="tab-tx" data-i18n="tab_fun">Live</span></div>
   <div class="tab" data-tab="share" onclick="switchTab('share')"><span class="tab-ic">📣</span><span class="tab-tx" data-i18n="tab_share">Chia sẻ</span></div>
   <div class="tab" data-tab="articles" onclick="switchTab('articles')"><span class="tab-ic">📚</span><span class="tab-tx" data-i18n="tab_articles">Cẩm nang</span></div>
   <div class="tab" data-tab="friends" onclick="switchTab('friends')"><span class="tab-ic">💗</span><span class="tab-tx" data-i18n="tab_friends">Kết bạn</span></div>
@@ -924,7 +930,7 @@
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v11-topbar</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v14-autofill</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -1084,7 +1090,7 @@ const I18N = {
     about_badge:'About WeShare', about_title:'Built for every community far from home', about_p:'WeShare is a community platform for everyone living far from home in Sweden — whatever country you come from. WeShare exists so those moments of feeling lost are no longer lonely.', about_brand_pre:'Built by', about_brand_post:'— a technology company connecting communities abroad.', about_free:'Safe · Welcoming · In your own language',
     foot_tag:'Community for people far from home in Sweden', foot_by:'A product of',
     right_in:'in', items_in:'items in', nothing_in:'No content in',
-    c_open:'Open', c_call:'Call', c_map:'View map', c_contact:'Contact', c_area:'Area', c_phone:'Phone', c_addr:'Address', c_poster:'Posted by', c_get_help:'Get help', c_skip:'Skip', c_like:'💗 Like', c_report:'⚑ Report', c_featured:'★ Featured', c_certified:'✓ Certified', photo_choose:'📷 Choose photo', photo_err:'Could not process the image. Please try another.', photo_avatar:'Profile photo', photo_img:'Photo', photo_save:'Save photo', post_delete:'Delete', post_del_confirm:'Delete this post? This cannot be undone.', post_edit:'Edit', post_save:'Save changes', tab_fun:'Live & Fun', hc_fun_d:'Karaoke nights, DJ sets, heart-to-heart talks, games — anyone can host a live event on any topic.', hc_fun_go:'Explore Live →',
+    c_open:'Open', c_call:'Call', c_map:'View map', c_contact:'Contact', c_area:'Area', c_phone:'Phone', c_addr:'Address', c_poster:'Posted by', c_get_help:'Get help', c_skip:'Skip', c_like:'💗 Like', c_report:'⚑ Report', c_featured:'★ Featured', c_certified:'✓ Certified', photo_choose:'📷 Choose photo', photo_err:'Could not process the image. Please try another.', photo_avatar:'Profile photo', photo_img:'Photo', photo_save:'Save photo', prof_title:'My profile', prof_sub:'This info can appear on your public profile.', prof_displayname:'Display name', prof_fullname:'Full name', prof_dob:'Date of birth', prof_gender:'Gender', prof_g_m:'Male', prof_g_f:'Female', prof_g_o:'Other', prof_area:'Area (län)', prof_job:'Occupation', prof_bio:'About me', prof_bio_ph:'A few lines about yourself…', prof_phone:'Phone', prof_save:'Save profile', prof_saved:'Profile saved.', pf_from_account:'Auto-filled from your profile — edit anytime.', post_delete:'Delete', post_del_confirm:'Delete this post? This cannot be undone.', post_edit:'Edit', post_save:'Save changes', tab_fun:'Live', hc_fun_d:'Karaoke nights, DJ sets, heart-to-heart talks, games — anyone can host a live event on any topic.', hc_fun_go:'Explore Live →',
     ev_hero_1:'Live & Fun —', ev_hero_2:'host or join events', ev_hero_sub:'Karaoke nights, DJ sets, heart-to-heart talks, games and more — created by the community.',
     ev_note_b:'How it works:', ev_note:'events happen on your chosen platform (Zoom, Meet, TikTok, Facebook…). Add the link so people can join.',
     fab_event:'＋ Create event', ev_create:'Create an event', ev_edit:'Edit event',
@@ -1165,7 +1171,7 @@ const I18N = {
     foot_tag:'Gemenskap för människor långt hemifrån i Sverige', foot_by:'En produkt av',
     right_in:'i', items_in:'objekt i', nothing_in:'Inget innehåll i',
     c_open:'Öppet', c_call:'Ring', c_map:'Visa karta', c_contact:'Kontakt', c_area:'Område', c_phone:'Telefon', c_addr:'Adress', c_poster:'Publicerad av', c_get_help:'Få hjälp', c_skip:'Hoppa över', c_like:'💗 Gilla', c_report:'⚑ Rapportera', c_featured:'★ Utvald', c_certified:'✓ Certifierad',
-    photo_choose:'📷 Välj foto', photo_err:'Kunde inte bearbeta bilden. Prova en annan.', photo_avatar:'Profilbild', photo_img:'Foto', photo_save:'Spara foto', post_delete:'Radera', post_del_confirm:'Radera detta inlägg? Detta kan inte ångras.', post_edit:'Redigera', post_save:'Spara ändringar', tab_fun:'Live & Nöje', hc_fun_d:'Karaokekvällar, DJ-set, hjärtliga samtal, spel — vem som helst kan skapa ett liveevent.', hc_fun_go:'Utforska Live →',
+    photo_choose:'📷 Välj foto', photo_err:'Kunde inte bearbeta bilden. Prova en annan.', photo_avatar:'Profilbild', photo_img:'Foto', photo_save:'Spara foto', prof_title:'Min profil', prof_sub:'Denna info kan visas på din offentliga profil.', prof_displayname:'Visningsnamn', prof_fullname:'Fullständigt namn', prof_dob:'Födelsedatum', prof_gender:'Kön', prof_g_m:'Man', prof_g_f:'Kvinna', prof_g_o:'Annat', prof_area:'Område (län)', prof_job:'Yrke', prof_bio:'Om mig', prof_bio_ph:'Några rader om dig…', prof_phone:'Telefon', prof_save:'Spara profil', prof_saved:'Profil sparad.', pf_from_account:'Ifylld automatiskt från din profil — ändra när som helst.', post_delete:'Radera', post_del_confirm:'Radera detta inlägg? Detta kan inte ångras.', post_edit:'Redigera', post_save:'Spara ändringar', tab_fun:'Live', hc_fun_d:'Karaokekvällar, DJ-set, hjärtliga samtal, spel — vem som helst kan skapa ett liveevent.', hc_fun_go:'Utforska Live →',
     ev_hero_1:'Live & Nöje —', ev_hero_2:'skapa eller delta i event', ev_hero_sub:'Karaokekvällar, DJ-set, hjärtliga samtal, spel och mer — skapat av gemenskapen.',
     ev_note_b:'Så funkar det:', ev_note:'event sker på din valda plattform (Zoom, Meet, TikTok, Facebook…). Lägg till länken så folk kan delta.',
     fab_event:'＋ Skapa event', ev_create:'Skapa ett event', ev_edit:'Redigera event',
@@ -1271,7 +1277,7 @@ const I18N = {
     foot_tag:'스웨덴에서 고향을 떠나온 사람들을 위한 커뮤니티', foot_by:'제품 제공',
     right_in:'지역:', items_in:'개 항목 —', nothing_in:'콘텐츠가 없습니다 —',
     c_open:'영업', c_call:'전화', c_map:'지도 보기', c_contact:'연락처', c_area:'지역', c_phone:'전화', c_addr:'주소', c_poster:'게시자', c_get_help:'도움 받기', c_skip:'건너뛰기', c_like:'💗 좋아요', c_report:'⚑ 신고', c_featured:'★ 추천', c_certified:'✓ 인증됨',
-    photo_choose:'📷 사진 선택', photo_err:'이미지를 처리할 수 없습니다. 다른 사진을 시도하세요.', photo_avatar:'프로필 사진', photo_img:'사진', photo_save:'사진 저장', post_delete:'삭제', post_del_confirm:'이 게시물을 삭제할까요? 되돌릴 수 없습니다.', post_edit:'수정', post_save:'변경사항 저장', tab_fun:'라이브 & 즐길거리', hc_fun_d:'노래방, DJ 셋, 속마음 나누기, 게임 — 누구나 원하는 주제로 라이브를 열 수 있어요.', hc_fun_go:'라이브 보기 →',
+    photo_choose:'📷 사진 선택', photo_err:'이미지를 처리할 수 없습니다. 다른 사진을 시도하세요.', photo_avatar:'프로필 사진', photo_img:'사진', photo_save:'사진 저장', prof_title:'내 프로필', prof_sub:'이 정보는 공개 프로필에 표시될 수 있습니다.', prof_displayname:'표시 이름', prof_fullname:'전체 이름', prof_dob:'생년월일', prof_gender:'성별', prof_g_m:'남성', prof_g_f:'여성', prof_g_o:'기타', prof_area:'지역 (län)', prof_job:'직업', prof_bio:'자기소개', prof_bio_ph:'자신에 대한 몇 줄…', prof_phone:'전화', prof_save:'프로필 저장', prof_saved:'프로필이 저장되었습니다.', pf_from_account:'프로필에서 자동으로 채워짐 — 언제든 수정 가능.', post_delete:'삭제', post_del_confirm:'이 게시물을 삭제할까요? 되돌릴 수 없습니다.', post_edit:'수정', post_save:'변경사항 저장', tab_fun:'라이브', hc_fun_d:'노래방, DJ 셋, 속마음 나누기, 게임 — 누구나 원하는 주제로 라이브를 열 수 있어요.', hc_fun_go:'라이브 보기 →',
     ev_hero_1:'라이브 & 즐길거리 —', ev_hero_2:'이벤트 열거나 참여하기', ev_hero_sub:'노래방, DJ 셋, 속마음 나누기, 게임 등 — 커뮤니티가 만듭니다.',
     ev_note_b:'이용 방법:', ev_note:'이벤트는 선택한 플랫폼(Zoom, Meet, TikTok, Facebook…)에서 진행됩니다. 링크를 추가해 참여하게 하세요.',
     fab_event:'＋ 이벤트 만들기', ev_create:'이벤트 만들기', ev_edit:'이벤트 수정',
@@ -1377,7 +1383,7 @@ const I18N = {
     foot_tag:'Komunidad para sa mga taong malayo sa tahanan sa Sweden', foot_by:'Isang produkto ng',
     right_in:'sa', items_in:'item sa', nothing_in:'Walang nilalaman sa',
     c_open:'Bukas', c_call:'Tumawag', c_map:'Tingnan ang mapa', c_contact:'Contact', c_area:'Lugar', c_phone:'Telepono', c_addr:'Address', c_poster:'Nag-post', c_get_help:'Humingi ng tulong', c_skip:'Laktawan', c_like:'💗 Like', c_report:'⚑ I-report', c_featured:'★ Tampok', c_certified:'✓ Sertipikado',
-    photo_choose:'📷 Pumili ng larawan', photo_err:'Hindi ma-process ang larawan. Subukan ang iba.', photo_avatar:'Larawan ng profile', photo_img:'Larawan', photo_save:'I-save ang larawan', post_delete:'Burahin', post_del_confirm:'Burahin ang post na ito? Hindi na ito maibabalik.', post_edit:'I-edit', post_save:'I-save ang pagbabago', tab_fun:'Live & Saya', hc_fun_d:'Karaoke, DJ set, tapatan ng usap, laro — kahit sino ay puwedeng mag-host ng live event.', hc_fun_go:'Tuklasin ang Live →',
+    photo_choose:'📷 Pumili ng larawan', photo_err:'Hindi ma-process ang larawan. Subukan ang iba.', photo_avatar:'Larawan ng profile', photo_img:'Larawan', photo_save:'I-save ang larawan', prof_title:'Aking profile', prof_sub:'Maaaring lumabas ang impormasyong ito sa iyong pampublikong profile.', prof_displayname:'Display name', prof_fullname:'Buong pangalan', prof_dob:'Petsa ng kapanganakan', prof_gender:'Kasarian', prof_g_m:'Lalaki', prof_g_f:'Babae', prof_g_o:'Iba pa', prof_area:'Lugar (län)', prof_job:'Trabaho', prof_bio:'Tungkol sa akin', prof_bio_ph:'Ilang linya tungkol sa iyo…', prof_phone:'Telepono', prof_save:'I-save ang profile', prof_saved:'Na-save ang profile.', pf_from_account:'Awtomatikong napunan mula sa iyong profile — i-edit anumang oras.', post_delete:'Burahin', post_del_confirm:'Burahin ang post na ito? Hindi na ito maibabalik.', post_edit:'I-edit', post_save:'I-save ang pagbabago', tab_fun:'Live', hc_fun_d:'Karaoke, DJ set, tapatan ng usap, laro — kahit sino ay puwedeng mag-host ng live event.', hc_fun_go:'Tuklasin ang Live →',
     ev_hero_1:'Live & Saya —', ev_hero_2:'mag-host o sumali sa event', ev_hero_sub:'Karaoke night, DJ set, tapatan ng usap, laro at iba pa — likha ng komunidad.',
     ev_note_b:'Paano ito gumagana:', ev_note:'nagaganap ang event sa napili mong platform (Zoom, Meet, TikTok, Facebook…). Idagdag ang link para makasali ang iba.',
     fab_event:'＋ Gumawa ng event', ev_create:'Gumawa ng event', ev_edit:'I-edit ang event',
@@ -1507,7 +1513,7 @@ const I18N = {
     about_badge:'Về WeShare', about_title:'Xây dựng cho mọi cộng đồng xa quê', about_p:'WeShare là nền tảng cộng đồng dành cho tất cả những người xa quê đang sinh sống tại Thụy Điển — dù bạn đến từ đất nước nào. WeShare ra đời để những khoảnh khắc lạc lõng ấy không còn đơn độc.', about_brand_pre:'Phát triển bởi', about_brand_post:'— công ty công nghệ gắn kết cộng đồng nơi xứ người.', about_free:'An toàn · Gần gũi · Bằng ngôn ngữ của bạn',
     foot_tag:'Cộng đồng cho mọi người xa quê tại Thụy Điển', foot_by:'Một sản phẩm của',
     right_in:'tại', items_in:'mục ở', nothing_in:'Chưa có nội dung ở',
-    c_open:'Giờ mở', c_call:'Gọi', c_map:'Xem bản đồ', c_contact:'Liên hệ', c_area:'Khu vực', c_phone:'Điện thoại', c_addr:'Địa chỉ', c_poster:'Người đăng', c_get_help:'Nhận giúp', c_skip:'Bỏ qua', c_like:'💗 Thích', c_report:'⚑ Báo cáo', c_featured:'★ Nổi bật', c_certified:'✓ Được cấp phép', photo_choose:'📷 Chọn ảnh', photo_err:'Không xử lý được ảnh. Hãy thử ảnh khác.', photo_avatar:'Ảnh đại diện', photo_img:'Hình ảnh', photo_save:'Lưu ảnh', post_delete:'Xoá', post_del_confirm:'Xoá tin này? Không thể hoàn tác.', post_edit:'Sửa', post_save:'Lưu thay đổi', tab_fun:'Giải trí', hc_fun_d:'Đêm karaoke, quẩy nhạc DJ, tâm sự, chơi game — mọi người tự tạo sự kiện live theo chủ đề mình thích.', hc_fun_go:'Vào giải trí →',
+    c_open:'Giờ mở', c_call:'Gọi', c_map:'Xem bản đồ', c_contact:'Liên hệ', c_area:'Khu vực', c_phone:'Điện thoại', c_addr:'Địa chỉ', c_poster:'Người đăng', c_get_help:'Nhận giúp', c_skip:'Bỏ qua', c_like:'💗 Thích', c_report:'⚑ Báo cáo', c_featured:'★ Nổi bật', c_certified:'✓ Được cấp phép', photo_choose:'📷 Chọn ảnh', photo_err:'Không xử lý được ảnh. Hãy thử ảnh khác.', photo_avatar:'Ảnh đại diện', photo_img:'Hình ảnh', photo_save:'Lưu ảnh', prof_title:'Hồ sơ của tôi', prof_sub:'Thông tin này có thể hiển thị trên hồ sơ công khai của bạn.', prof_displayname:'Tên hiển thị', prof_fullname:'Họ và tên', prof_dob:'Ngày sinh', prof_gender:'Giới tính', prof_g_m:'Nam', prof_g_f:'Nữ', prof_g_o:'Khác', prof_area:'Khu vực (län)', prof_job:'Nghề nghiệp', prof_bio:'Giới thiệu bản thân', prof_bio_ph:'Vài dòng về bạn…', prof_phone:'Số điện thoại', prof_save:'Lưu hồ sơ', prof_saved:'Đã lưu hồ sơ.', pf_from_account:'Tự động lấy từ hồ sơ cá nhân — sửa lại bất cứ lúc nào.', post_delete:'Xoá', post_del_confirm:'Xoá tin này? Không thể hoàn tác.', post_edit:'Sửa', post_save:'Lưu thay đổi', tab_fun:'Live', hc_fun_d:'Đêm karaoke, quẩy nhạc DJ, tâm sự, chơi game — mọi người tự tạo sự kiện live theo chủ đề mình thích.', hc_fun_go:'Vào giải trí →',
     ev_hero_1:'Giải trí —', ev_hero_2:'tạo hoặc tham gia sự kiện', ev_hero_sub:'Đêm karaoke, quẩy nhạc DJ, tâm sự sẻ chia, chơi game và nhiều hơn nữa — do chính cộng đồng tạo ra.',
     ev_note_b:'Cách hoạt động:', ev_note:'sự kiện diễn ra trên nền tảng bạn chọn (Zoom, Meet, TikTok, Facebook…). Thêm link để mọi người vào tham gia.',
     fab_event:'＋ Tạo sự kiện', ev_create:'Tạo sự kiện', ev_edit:'Sửa sự kiện',
@@ -1612,7 +1618,7 @@ const I18N = {
     about_badge:'เกี่ยวกับ WeShare', about_title:'สร้างเพื่อทุกชุมชนที่อยู่ไกลบ้าน', about_p:'WeShare เป็นแพลตฟอร์มชุมชนสำหรับทุกคนที่อยู่ไกลบ้านในสวีเดน ไม่ว่าคุณจะมาจากประเทศใด WeShare เกิดขึ้นเพื่อให้ช่วงเวลาที่รู้สึกเคว้งคว้างไม่โดดเดี่ยวอีกต่อไป', about_brand_pre:'พัฒนาโดย', about_brand_post:'— บริษัทเทคโนโลยีที่เชื่อมชุมชนในต่างแดน', about_free:'ปลอดภัย · อบอุ่น · ในภาษาของคุณ',
     foot_tag:'ชุมชนสำหรับผู้อยู่ไกลบ้านในสวีเดน', foot_by:'ผลิตภัณฑ์ของ',
     right_in:'ที่', items_in:'รายการใน', nothing_in:'ยังไม่มีเนื้อหาใน',
-    c_open:'เวลาเปิด', c_call:'โทร', c_map:'ดูแผนที่', c_contact:'ติดต่อ', c_area:'พื้นที่', c_phone:'โทรศัพท์', c_addr:'ที่อยู่', c_poster:'โพสต์โดย', c_get_help:'ขอความช่วยเหลือ', c_skip:'ข้าม', c_like:'💗 ถูกใจ', c_report:'⚑ รายงาน', c_featured:'★ แนะนำ', c_certified:'✓ ได้รับการรับรอง', photo_choose:'📷 เลือกรูป', photo_err:'ประมวลผลรูปไม่ได้ ลองรูปอื่น', photo_avatar:'รูปโปรไฟล์', photo_img:'รูปภาพ', photo_save:'บันทึกรูป', post_delete:'ลบ', post_del_confirm:'ลบโพสต์นี้? ไม่สามารถย้อนกลับได้', post_edit:'แก้ไข', post_save:'บันทึกการเปลี่ยนแปลง', tab_fun:'ไลฟ์ & บันเทิง', hc_fun_d:'คาราโอเกะ ดีเจเซ็ต พูดคุยจากใจ เกม — ใครก็สร้างอีเวนต์ไลฟ์ได้ทุกหัวข้อ', hc_fun_go:'สำรวจไลฟ์ →',
+    c_open:'เวลาเปิด', c_call:'โทร', c_map:'ดูแผนที่', c_contact:'ติดต่อ', c_area:'พื้นที่', c_phone:'โทรศัพท์', c_addr:'ที่อยู่', c_poster:'โพสต์โดย', c_get_help:'ขอความช่วยเหลือ', c_skip:'ข้าม', c_like:'💗 ถูกใจ', c_report:'⚑ รายงาน', c_featured:'★ แนะนำ', c_certified:'✓ ได้รับการรับรอง', photo_choose:'📷 เลือกรูป', photo_err:'ประมวลผลรูปไม่ได้ ลองรูปอื่น', photo_avatar:'รูปโปรไฟล์', photo_img:'รูปภาพ', photo_save:'บันทึกรูป', prof_title:'โปรไฟล์ของฉัน', prof_sub:'ข้อมูลนี้อาจแสดงบนโปรไฟล์สาธารณะของคุณ', prof_displayname:'ชื่อที่แสดง', prof_fullname:'ชื่อเต็ม', prof_dob:'วันเกิด', prof_gender:'เพศ', prof_g_m:'ชาย', prof_g_f:'หญิง', prof_g_o:'อื่นๆ', prof_area:'พื้นที่ (län)', prof_job:'อาชีพ', prof_bio:'เกี่ยวกับฉัน', prof_bio_ph:'สองสามบรรทัดเกี่ยวกับคุณ…', prof_phone:'โทรศัพท์', prof_save:'บันทึกโปรไฟล์', prof_saved:'บันทึกโปรไฟล์แล้ว', pf_from_account:'กรอกอัตโนมัติจากโปรไฟล์ของคุณ — แก้ไขได้ทุกเมื่อ', post_delete:'ลบ', post_del_confirm:'ลบโพสต์นี้? ไม่สามารถย้อนกลับได้', post_edit:'แก้ไข', post_save:'บันทึกการเปลี่ยนแปลง', tab_fun:'ไลฟ์', hc_fun_d:'คาราโอเกะ ดีเจเซ็ต พูดคุยจากใจ เกม — ใครก็สร้างอีเวนต์ไลฟ์ได้ทุกหัวข้อ', hc_fun_go:'สำรวจไลฟ์ →',
     ev_hero_1:'ไลฟ์ & บันเทิง —', ev_hero_2:'สร้างหรือเข้าร่วมอีเวนต์', ev_hero_sub:'คืนคาราโอเกะ ดีเจเซ็ต พูดคุยจากใจ เกม และอื่นๆ — สร้างโดยชุมชน',
     ev_note_b:'วิธีใช้งาน:', ev_note:'อีเวนต์จัดบนแพลตฟอร์มที่คุณเลือก (Zoom, Meet, TikTok, Facebook…) เพิ่มลิงก์เพื่อให้คนเข้าร่วม',
     fab_event:'＋ สร้างอีเวนต์', ev_create:'สร้างอีเวนต์', ev_edit:'แก้ไขอีเวนต์',
@@ -1973,9 +1979,9 @@ function openCreate(editItem) {
       <h2>${isEdit?t('post_edit'):t('of_title')}</h2>
       <div class="sub" style="margin-bottom:18px;">${t('of_sub')}</div>
       ${photoFieldHTML(t('photo_img'), 'f-anh-prev', 'f-anh', e.anh||'', false)}
-      <div class="field"><label>${t('of_yourname')}</label><input id="f-host" value="${e.host||(currentUser?(currentUser.ten||''):'')}" placeholder=""></div>
+      <div class="field"><label>${t('of_yourname')}</label><input id="f-host" value="${esc(e.host||pdName())}" placeholder=""></div>
       <div class="field"><label>${t('of_place')}</label><input id="f-place" value="${e.diadiem||''}" placeholder=""></div>
-      <div class="field"><label>${t('of_area')}</label><input id="f-area" value="${e.khuvuc||''}" placeholder=""></div>
+      <div class="field"><label>${t('of_area')}</label><input id="f-area" value="${esc(e.khuvuc||pdArea())}" placeholder=""></div>
       <div class="row2">
         <div class="field"><label>${t('of_day')}</label><input id="f-day" value="${e.ngay||''}" placeholder=""></div>
         <div class="field"><label>${t('of_time')}</label><input id="f-time" value="${e.gio||''}" placeholder=""></div>
@@ -2156,9 +2162,9 @@ function openPost(editItem) {
           </select>
         </div>
       </div>
-      <div class="field"><label>${t('mk_name')}</label><input id="m-who" value="${(e.who||(currentUser?(currentUser.ten||''):'')).replace(/"/g,'&quot;')}" placeholder=""></div>
-      <div class="field"><label>${t('mk_area')}</label><input id="m-area" value="${(e.khuvuc||'').replace(/"/g,'&quot;')}" placeholder=""></div>
-      <div class="field"><label>${t('mk_phone')}</label><input id="m-sdt" value="${(e.sdt||'').replace(/"/g,'&quot;')}" placeholder=""></div>
+      <div class="field"><label>${t('mk_name')}</label><input id="m-who" value="${esc(e.who||pdName())}" placeholder=""></div>
+      <div class="field"><label>${t('mk_area')}</label><input id="m-area" value="${esc(e.khuvuc||pdArea())}" placeholder=""></div>
+      <div class="field"><label>${t('mk_phone')}</label><input id="m-sdt" value="${esc(e.sdt||pdPhone())}" placeholder=""></div>
       <div class="field"><label>${t('mk_desc')}</label><textarea id="m-desc" placeholder="${t('mk_desc_ph')}">${e.desc||''}</textarea></div>
       <button class="submit" onclick="submitItem('${isEdit?e.id:''}')">${isEdit?t('post_save'):t('mk_post_btn')}</button>
     </div>`;
@@ -2321,25 +2327,52 @@ function reportUser(ten) {
   if (reason) alert(t('report_thanks'));
 }
 
+// Lấy sẵn thông tin từ hồ sơ cá nhân để tự điền vào các form (một nơi nhập, dùng chung)
+function pdName(){ return (currentUser && (currentUser.ten || currentUser.ho_ten)) || ''; }
+function pdArea(){ return (currentUser && currentUser.khu_vuc) || ''; }
+function pdPhone(){ return (currentUser && currentUser.sdt) || ''; }
+function pdBio(){ return (currentUser && currentUser.gioi_thieu) || ''; }
+function pdAnh(){ return (currentUser && currentUser.anh) || ''; }
+function esc(s){ return String(s||'').replace(/"/g,'&quot;'); }
+
+function ageFromDob(dob) {
+  if (!dob) return '';
+  const d = new Date(dob); if (isNaN(d)) return '';
+  const now = new Date();
+  let a = now.getFullYear() - d.getFullYear();
+  const m = now.getMonth() - d.getMonth();
+  if (m < 0 || (m === 0 && now.getDate() < d.getDate())) a--;
+  return (a > 0 && a < 120) ? a : '';
+}
 function openProfileForm() {
   requireLogin(() => {
     const p = myProfile || {};
+    const u = currentUser || {};
+    // Tự động lấy từ hồ sơ cá nhân (một nguồn dùng chung)
+    const ten   = p.ten    || u.ten || u.ho_ten || '';
+    const tuoi  = p.tuoi   || ageFromDob(u.ngay_sinh) || '';
+    const khuvuc= p.khuvuc || u.khu_vuc || activeCity || '';
+    const nghe  = p.nghe   || u.nghe || '';
+    const bio   = p.bio    || u.gioi_thieu || '';
+    const sdt   = p.sdt    || u.sdt || '';
+    const anh   = p.anh    || u.anh || '';
     document.getElementById('sheet').innerHTML = `
       <button class="close-x" onclick="closeModal()">✕</button>
       <div class="sheet-body">
         <h2>${t('pf_title')}</h2>
         <div class="auth-note">${t('pf_sub')}</div>
-        ${photoFieldHTML(t('photo_avatar'), 'p-anh-prev', 'p-anh', p.anh, true)}
-        <div class="field"><label>${t('pf_name')}</label><input id="p-ten" value="${p.ten||currentUser.ten||''}" placeholder=""></div>
+        <div class="prof-sync">↻ ${t('pf_from_account')}</div>
+        ${photoFieldHTML(t('photo_avatar'), 'p-anh-prev', 'p-anh', anh, true)}
+        <div class="field"><label>${t('pf_name')}</label><input id="p-ten" value="${String(ten).replace(/"/g,'&quot;')}" placeholder=""></div>
         <div class="row2">
-          <div class="field"><label>${t('pf_age')}</label><input id="p-tuoi" type="number" value="${p.tuoi||''}" placeholder=""></div>
-          <div class="field"><label>${t('pf_area')}</label><input id="p-khuvuc" value="${p.khuvuc||''}" placeholder=""></div>
+          <div class="field"><label>${t('pf_age')}</label><input id="p-tuoi" type="number" value="${tuoi}" placeholder=""></div>
+          <div class="field"><label>${t('pf_area')}</label><input id="p-khuvuc" value="${String(khuvuc).replace(/"/g,'&quot;')}" placeholder=""></div>
         </div>
-        <div class="field"><label>${t('pf_job')}</label><input id="p-nghe" value="${p.nghe||''}" placeholder=""></div>
-        <div class="field"><label>${t('pf_looking')}</label><input id="p-tim" value="${p.tim||''}" placeholder=""></div>
-        <div class="field"><label>${t('pf_bio')}</label><textarea id="p-bio" placeholder="${t('pf_bio_ph')}">${p.bio||''}</textarea></div>
+        <div class="field"><label>${t('pf_job')}</label><input id="p-nghe" value="${String(nghe).replace(/"/g,'&quot;')}" placeholder=""></div>
+        <div class="field"><label>${t('pf_looking')}</label><input id="p-tim" value="${(p.tim||'').replace(/"/g,'&quot;')}" placeholder=""></div>
+        <div class="field"><label>${t('pf_bio')}</label><textarea id="p-bio" placeholder="${t('pf_bio_ph')}">${bio}</textarea></div>
         <div class="field"><label>${t('pf_interests')}</label><input id="p-sothich" value="${p.so_thich?p.so_thich.join(', '):''}" placeholder=""></div>
-        <div class="field"><label>${t('pf_phone')}</label><input id="p-sdt" value="${p.sdt||''}" placeholder="070-123 4567"></div>
+        <div class="field"><label>${t('pf_phone')}</label><input id="p-sdt" value="${String(sdt).replace(/"/g,'&quot;')}" placeholder="070-123 4567"></div>
         <button class="submit" onclick="saveProfile()">${t('pf_save')}</button>
         ${myProfile ? '<button class="submit" style="background:var(--paper-2);color:#a8331f;border:1px solid var(--line);margin-top:8px" onclick="deleteProfile()">'+t('pf_delete')+'</button>' : ''}
       </div>`;
@@ -2350,11 +2383,16 @@ function saveProfile() {
   const v = id => document.getElementById(id).value.trim();
   const ten = v('p-ten');
   if (!ten) { alert(t('pf_need_name')); return; }
-  const anh = v('p-anh') || (myProfile && myProfile.anh) || '';
+  const anh = v('p-anh') || (myProfile && myProfile.anh) || (currentUser && currentUser.anh) || '';
   myProfile = { ten, tuoi:v('p-tuoi'), khuvuc:v('p-khuvuc'), nghe:v('p-nghe'), tim:v('p-tim'),
     bio:v('p-bio'), so_thich:v('p-sothich').split(',').map(s=>s.trim()).filter(Boolean), sdt:v('p-sdt'), anh, tp:activeCity };
   closeModal(); renderFriends();
   callApi({ action:'saveSingle', ...myProfile, email: currentUser.email }).catch(()=>{});
+  // đồng bộ ngược lại hồ sơ cá nhân những trường dùng chung (để một nơi cập nhật, mọi nơi đồng bộ)
+  const syncBack = { ten, khu_vuc:v('p-khuvuc'), nghe:v('p-nghe'), gioi_thieu:v('p-bio'), sdt:v('p-sdt'), anh };
+  Object.assign(currentUser, syncBack);
+  localStorage.setItem('vietsthlm_user', JSON.stringify(currentUser)); refreshAccBtn();
+  callApi({ action:'saveProfile', email: currentUser.email, ...syncBack }).catch(()=>{});
 }
 function deleteProfile() {
   if (confirm(t('pf_del_confirm'))) {
@@ -2447,15 +2485,15 @@ function openTrProfileForm(editItem) {
       <div class="sheet-body">
         <h2>${isEdit?t('post_edit'):t('tr_reg_title')}</h2>
         <div class="auth-note">${t('tr_reg_sub')}</div>
-        ${photoFieldHTML(t('photo_avatar'), 't-anh-prev', 't-anh', e.anh||'', true)}
-        <div class="field"><label>${t('tr_name')}</label><input id="t-ten" value="${(e.ten||currentUser.ten||'').replace(/"/g,'&quot;')}" placeholder=""></div>
-        <div class="field"><label>${t('tr_area')}</label><input id="t-khuvuc" value="${(e.khuvuc||'').replace(/"/g,'&quot;')}" placeholder=""></div>
+        ${photoFieldHTML(t('photo_avatar'), 't-anh-prev', 't-anh', e.anh||pdAnh(), true)}
+        <div class="field"><label>${t('tr_name')}</label><input id="t-ten" value="${esc(e.ten||pdName())}" placeholder=""></div>
+        <div class="field"><label>${t('tr_area')}</label><input id="t-khuvuc" value="${esc(e.khuvuc||pdArea())}" placeholder=""></div>
         <div class="field"><label>${t('tr_langs')}</label><input id="t-langs" value="${langs.replace(/"/g,'&quot;')}" placeholder=""></div>
         <div class="field"><label>${t('tr_fields')}</label><input id="t-fields" value="${flds.replace(/"/g,'&quot;')}" placeholder=""></div>
         <div class="field"><label>${t('tr_exp')}</label><input id="t-kn" value="${(e.kn||'').replace(/"/g,'&quot;')}" placeholder=""></div>
         <div class="field"><label style="display:flex;gap:8px;align-items:center;font-weight:600"><input type="checkbox" id="t-auth" style="width:auto" ${e.auth?'checked':''}> ${t('tr_auth')}</label></div>
-        <div class="field"><label>${t('tr_bio')}</label><textarea id="t-bio" placeholder="${t('tr_bio_ph')}">${e.bio||''}</textarea></div>
-        <div class="field"><label>${t('tr_phone')}</label><input id="t-sdt" value="${(e.sdt||'').replace(/"/g,'&quot;')}" placeholder="070-123 4567"></div>
+        <div class="field"><label>${t('tr_bio')}</label><textarea id="t-bio" placeholder="${t('tr_bio_ph')}">${e.bio||pdBio()}</textarea></div>
+        <div class="field"><label>${t('tr_phone')}</label><input id="t-sdt" value="${esc(e.sdt||pdPhone())}" placeholder="070-123 4567"></div>
         <button class="submit" onclick="submitTranslator('${isEdit?e.id:''}')">${isEdit?t('post_save'):t('tr_post')}</button>
       </div>`;
     openModalEl();
@@ -2492,8 +2530,8 @@ function openTrRequestForm(editItem) {
       <div class="sheet-body">
         <h2>${isEdit?t('post_edit'):t('trq_title')}</h2>
         <div class="auth-note">${t('trq_sub')}</div>
-        <div class="field"><label>${t('trq_name')}</label><input id="tr-who" value="${(e.who||currentUser.ten||'').replace(/"/g,'&quot;')}" placeholder=""></div>
-        <div class="field"><label>${t('trq_area')}</label><input id="tr-area" value="${(e.khuvuc||'').replace(/"/g,'&quot;')}" placeholder=""></div>
+        <div class="field"><label>${t('trq_name')}</label><input id="tr-who" value="${esc(e.who||pdName())}" placeholder=""></div>
+        <div class="field"><label>${t('trq_area')}</label><input id="tr-area" value="${esc(e.khuvuc||pdArea())}" placeholder=""></div>
         <div class="field"><label>${t('trq_field')}</label>
           <select id="tr-field">
             <option value="Y tế"${sel('Y tế')}>${t('trf_medical')}</option><option value="Giấy tờ/Hành chính"${sel('Giấy tờ/Hành chính')}>${t('trf_admin')}</option><option value="Pháp lý"${sel('Pháp lý')}>${t('trf_legal')}</option>
@@ -2502,7 +2540,7 @@ function openTrRequestForm(editItem) {
         </div>
         <div class="field"><label>${t('trq_when')}</label><input id="tr-khi" value="${(e.khi||'').replace(/"/g,'&quot;')}" placeholder=""></div>
         <div class="field"><label>${t('trq_desc')}</label><textarea id="tr-note" placeholder="">${e.note||''}</textarea></div>
-        <div class="field"><label>${t('trq_phone')}</label><input id="tr-sdt" value="${(e.sdt||'').replace(/"/g,'&quot;')}" placeholder="070-123 4567"></div>
+        <div class="field"><label>${t('trq_phone')}</label><input id="tr-sdt" value="${esc(e.sdt||pdPhone())}" placeholder="070-123 4567"></div>
         <button class="submit" onclick="submitTrRequest('${isEdit?e.id:''}')">${isEdit?t('post_save'):t('trq_post')}</button>
       </div>`;
     openModalEl();
@@ -2640,7 +2678,7 @@ function openEventForm(editItem) {
         <h2>${isEdit?t('ev_edit'):t('ev_create')}</h2>
         <div class="auth-note">${t('ev_note')}</div>
         ${photoFieldHTML(t('photo_img'), 'e-anh-prev', 'e-anh', e.anh||'', false)}
-        <div class="field"><label>${t('ev_host')}</label><input id="e-host" value="${(e.host||currentUser.ten||'').replace(/"/g,'&quot;')}" placeholder=""></div>
+        <div class="field"><label>${t('ev_host')}</label><input id="e-host" value="${esc(e.host||pdName())}" placeholder=""></div>
         <div class="field"><label>${t('ev_topic')}</label><select id="e-chude">${opts}</select></div>
         <div class="field"><label>${t('ev_title')}</label><input id="e-title" value="${(e.title||'').replace(/"/g,'&quot;')}" placeholder=""></div>
         <div class="row2">
@@ -3033,8 +3071,8 @@ function openLeadForm(dichVu) {
       <h2>${t('ld_title')}</h2>
       <div class="auth-note">${t('ld_sub')} <b>${dichVu}</b>${t('ld_after')}</div>
       <div id="lead-msg" class="auth-msg"></div>
-      <div class="field"><label>${t('ld_name')}</label><input id="ld-ten" placeholder=""></div>
-      <div class="field"><label>${t('ld_phone')}</label><input id="ld-sdt" placeholder="070-123 4567"></div>
+      <div class="field"><label>${t('ld_name')}</label><input id="ld-ten" value="${esc(pdName())}" placeholder=""></div>
+      <div class="field"><label>${t('ld_phone')}</label><input id="ld-sdt" value="${esc(pdPhone())}" placeholder="070-123 4567"></div>
       <div class="field"><label>${t('ld_email')}</label><input id="ld-email" type="email" value="${currentUser?currentUser.email:''}" placeholder="ban@email.com"></div>
       <div class="row2">
         <div class="field"><label>${t('ld_lan')}</label><input id="ld-tp" value="${activeCity}" placeholder=""></div>
@@ -3089,26 +3127,71 @@ try {
 
 function refreshAccBtn() {
   const btn = document.getElementById('accBtn');
-  if (currentUser) { btn.textContent = currentUser.ten || currentUser.email.split('@')[0]; btn.classList.add('in'); }
-  else { btn.textContent = t('login'); btn.classList.remove('in'); }
+  if (currentUser) {
+    const name = currentUser.ten || currentUser.email.split('@')[0];
+    btn.classList.add('in');
+    btn.innerHTML = currentUser.anh
+      ? `<span class="acc-ava" style="background-image:url('${currentUser.anh}')"></span>`
+      : `<span class="acc-ava" style="background:${AV[avColor(currentUser.email||name)]}">${initials(name)}</span>`;
+    btn.title = name;
+  } else {
+    btn.textContent = t('login'); btn.classList.remove('in'); btn.title = '';
+  }
 }
 refreshAccBtn();
 
 function onAccountClick() {
   if (currentUser) {
+    const u = currentUser;
+    const sel = (v,cur)=> v===cur?' selected':'';
     document.getElementById('sheet').innerHTML = `
       <button class="close-x" onclick="closeModal()">✕</button>
       <div class="sheet-body">
-        <h2>${t('au_hello')}, ${currentUser.ten || currentUser.email}</h2>
-        <div class="auth-note">${currentUser.email}</div>
-        ${photoFieldHTML(t('photo_avatar'), 'acc-anh-prev', 'acc-anh', currentUser.anh||'', true)}
-        <button class="submit" onclick="saveAccountAvatar()">${t('photo_save')}</button>
+        <h2>${t('prof_title')}</h2>
+        <div class="auth-note">${u.email}</div>
+        ${photoFieldHTML(t('photo_avatar'), 'acc-anh-prev', 'acc-anh', u.anh||'', true)}
+        <div class="field"><label>${t('prof_displayname')}</label><input id="pf-ten" value="${(u.ten||'').replace(/"/g,'&quot;')}" placeholder=""></div>
+        <div class="field"><label>${t('prof_fullname')}</label><input id="pf-hoten" value="${(u.ho_ten||'').replace(/"/g,'&quot;')}" placeholder=""></div>
+        <div class="row2">
+          <div class="field"><label>${t('prof_dob')}</label><input id="pf-dob" type="date" value="${u.ngay_sinh||''}"></div>
+          <div class="field"><label>${t('prof_gender')}</label>
+            <select id="pf-gender">
+              <option value=""></option>
+              <option value="nam"${sel('nam',u.gioi_tinh)}>${t('prof_g_m')}</option>
+              <option value="nu"${sel('nu',u.gioi_tinh)}>${t('prof_g_f')}</option>
+              <option value="khac"${sel('khac',u.gioi_tinh)}>${t('prof_g_o')}</option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><label>${t('prof_area')}</label><input id="pf-area" value="${(u.khu_vuc||'').replace(/"/g,'&quot;')}" placeholder=""></div>
+        <div class="field"><label>${t('prof_job')}</label><input id="pf-job" value="${(u.nghe||'').replace(/"/g,'&quot;')}" placeholder=""></div>
+        <div class="field"><label>${t('prof_phone')}</label><input id="pf-phone" value="${(u.sdt||'').replace(/"/g,'&quot;')}" placeholder=""></div>
+        <div class="field"><label>${t('prof_bio')}</label><textarea id="pf-bio" rows="3" placeholder="${t('prof_bio_ph')}">${u.gioi_thieu||''}</textarea></div>
+        <button class="submit" onclick="saveMyProfile()">${t('prof_save')}</button>
         <button class="submit" style="background:var(--paper-2);color:var(--ink);border:1px solid var(--line);margin-top:8px" onclick="logout()">${t('logout')}</button>
       </div>`;
     openModalEl();
   } else {
     openAuth('login');
   }
+}
+async function saveMyProfile() {
+  const v = id => { const el=document.getElementById(id); return el?el.value.trim():''; };
+  const data = {
+    ten: v('pf-ten'), ho_ten: v('pf-hoten'), ngay_sinh: v('pf-dob'),
+    gioi_tinh: document.getElementById('pf-gender').value,
+    khu_vuc: v('pf-area'), nghe: v('pf-job'), sdt: v('pf-phone'),
+    gioi_thieu: document.getElementById('pf-bio').value.trim(),
+    anh: v('acc-anh') || currentUser.anh || ''
+  };
+  // cập nhật cục bộ ngay
+  Object.assign(currentUser, data);
+  localStorage.setItem('vietsthlm_user', JSON.stringify(currentUser));
+  refreshAccBtn(); closeModal();
+  try {
+    const r = await callApi({ action:'saveProfile', email: currentUser.email, ...data });
+    if (r && r.ok && r.user) { Object.assign(currentUser, r.user); localStorage.setItem('vietsthlm_user', JSON.stringify(currentUser)); refreshAccBtn(); }
+  } catch(e) {}
 }
 
 function logout() {
