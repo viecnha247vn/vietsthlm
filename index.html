@@ -500,6 +500,29 @@
   .chat-messages.chat-dark .cmsg-text { color: #f0ece5; }
   .chat-messages.chat-dark .cmsg-name { color: #ffd9b0; }
   .chat-messages.chat-dark .cmsg-time { color: #b0a89c; }
+  /* ví credit + quà tặng */
+  .credit-chip { background: linear-gradient(135deg,#fff3d6,#ffe6a8) !important; border-color: #e6c976 !important;
+    font-weight: 700 !important; color: #8a6d2f !important; }
+  .gift-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; background: #fff;
+    border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+  .gift-grid button { border: 1px solid var(--line); background: var(--paper); border-radius: 12px; cursor: pointer;
+    padding: 10px 4px; display: flex; flex-direction: column; align-items: center; gap: 3px; font-family: inherit;
+    transition: transform .12s ease, background .15s ease; }
+  .gift-grid button:hover { background: #fff; transform: translateY(-2px); }
+  .gg-emoji { font-size: 24px; }
+  .gg-label { font-size: 11px; color: var(--ink); font-weight: 600; }
+  .gg-cost { font-size: 10.5px; color: #8a6d2f; font-weight: 700; }
+  .gift-cmsg { justify-content: flex-start; }
+  .gift-card { display: flex; align-items: center; gap: 10px; background: linear-gradient(135deg,#fff6ea,#ffe9d6);
+    border: 1px solid #f0d9b8; border-radius: 14px; padding: 10px 14px; }
+  .gift-emoji { font-size: 28px; animation: giftPop .5s ease; display: inline-block; }
+  @keyframes giftPop { 0%{transform:scale(0) rotate(-20deg)} 60%{transform:scale(1.3)} 100%{transform:scale(1)} }
+  .gift-text { font-size: 14px; color: #6a4e26; }
+  .credit-packs { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin: 14px 0 4px; }
+  .credit-pack { border: 1px solid var(--line); border-radius: 14px; padding: 16px 8px; text-align: center;
+    background: linear-gradient(180deg,#fffdf9,#f9f2e6); }
+  .cp-amount { font-size: 18px; font-weight: 800; color: #8a6d2f; }
+  .cp-price { font-size: 14px; color: var(--muted); margin-top: 4px; font-weight: 600; }
   .chat-input-row input { flex: 1; font-family: inherit; font-size: 15px; padding: 11px 15px;
     border: 1px solid var(--line); border-radius: 999px; outline: none; background: #fff; }
   .chat-input-row input:focus { border-color: var(--jade); }
@@ -734,7 +757,9 @@
           <button onclick="fmtItalic()" title="In nghiêng"><i>I</i></button>
           <button onclick="toggleChatPanel('color')" title="Màu chữ">🎨</button>
           <button onclick="toggleChatPanel('emoji')" title="Biểu cảm">😊</button>
-          <button onclick="toggleChatPanel('theme')" title="Nền phòng chat" class="tb-theme">🖼️ Nền</button>
+          <button onclick="toggleChatPanel('gift')" title="Tặng quà">🎁</button>
+          <button class="credit-chip" id="creditChip" onclick="openBuyCredit()" title="Nạp credit">💎 0</button>
+          <button onclick="toggleChatPanel('theme')" title="Nền phòng chat" class="tb-theme">🖼️</button>
         </div>
         <div class="chat-input-row" id="chatInputRow">
           <input id="chatInput" type="text" maxlength="500" placeholder="Nhập tin nhắn…" data-i18n-ph="chat_placeholder" onkeydown="if(event.key==='Enter')sendChatMsg()">
@@ -987,7 +1012,7 @@
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v22-chatstyle</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v23-credit</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -2935,6 +2960,7 @@ function initChatUI() {
   const tb = document.getElementById('chatToolbar');
   if (tb) tb.classList.toggle('on', canPost);
   applyChatTheme(chatTheme);  // áp nền đã lưu
+  refreshCreditChip(); syncCredit();
 }
 
 async function loadChat(initial) {
@@ -2974,6 +3000,20 @@ function renderChatMsg(m) {
   const tm = m.ngay_tao ? new Date(m.ngay_tao) : new Date(Number(m.id));
   const hh = isNaN(tm) ? '' : ('0'+tm.getHours()).slice(-2)+':'+('0'+tm.getMinutes()).slice(-2);
   const name = m.ten || (m.email||'?').split('@')[0];
+  // Tin quà tặng (token §g:type§) → hiển thị dạng thẻ quà
+  const gm = String(m.noidung||'').match(/^\u00a7g:(\w+)\u00a7/);
+  if (gm && GIFTS[gm[1]]) {
+    const g = GIFTS[gm[1]];
+    el.className = 'cmsg gift-cmsg';
+    el.innerHTML = `
+      <div class="av" style="background:${AV[avColor(m.email||name)]}${m.anh?`;background-image:url('${m.anh}');background-size:cover;background-position:center`:''}">${m.anh?'':initials(name)}</div>
+      <div class="gift-card">
+        <span class="gift-emoji">${g.emoji}</span>
+        <span class="gift-text"><b>${escapeHtml(name)}</b> đã gửi ${g.label}</span>
+        <span class="cmsg-time">${hh}</span>
+      </div>`;
+    return el;
+  }
   const fmt = formatChatText(m.noidung||'');
   el.innerHTML = `
     <div class="av" style="background:${AV[avColor(m.email||name)]}${m.anh?`;background-image:url('${m.anh}');background-size:cover;background-position:center`:''}">${m.anh?'':initials(name)}</div>
@@ -3123,6 +3163,11 @@ function toggleChatPanel(which) {
     panel.innerHTML = '<div class="emoji-grid">' + CHAT_EMOJIS.map(e=>`<button onclick="insertEmoji('${e}')">${e}</button>`).join('') + '</div>';
   } else if (which === 'color') {
     panel.innerHTML = '<div class="color-row">' + CHAT_COLORS.map((c,i)=>`<button class="cc-dot${i===chatMsgColor?' on':''}" style="background:${c||'#efe8dc'}" onclick="pickChatColor(${i})" title="${i===0?'Mặc định':''}">${i===0?'✕':''}</button>`).join('') + '</div>';
+  } else if (which === 'gift') {
+    panel.innerHTML = '<div class="gift-grid">' +
+      Object.keys(GIFTS).map(k=>`<button onclick="sendGift('${k}')"><span class="gg-emoji">${GIFTS[k].emoji}</span><span class="gg-label">${GIFTS[k].label}</span><span class="gg-cost">${GIFTS[k].cost}💎</span></button>`).join('') +
+      `<button class="gg-video" onclick="videoGiftInfo()"><span class="gg-emoji">🎥</span><span class="gg-label">Video chào</span><span class="gg-cost">5💎</span></button>` +
+      '</div>';
   } else if (which === 'theme') {
     panel.innerHTML = '<div class="theme-grid">' + CHAT_THEMES.map(th=>`
       <button class="theme-cell${chatTheme===th.id?' on':''}" onclick="chooseChatTheme('${th.id}')">
@@ -3134,6 +3179,101 @@ function toggleChatPanel(which) {
   panel.classList.add('on');
 }
 function closeChatPanel() { chatPanelOpen=''; const p=document.getElementById('chatPanel'); if(p){ p.classList.remove('on'); p.innerHTML=''; } }
+
+// ============================================================
+// ===== VÍ CREDIT + QUÀ TẶNG ẢO trong chat =====
+// ============================================================
+const CREDIT_PACKS = [
+  { credit:50,  price:49 },
+  { credit:120, price:99 },
+  { credit:300, price:199 },
+];
+const GIFTS = {
+  flower: { emoji:'🌸', label:'Hoa',      cost:1 },
+  clap:   { emoji:'👏', label:'Vỗ tay',   cost:1 },
+  hello:  { emoji:'👋', label:'Xin chào', cost:1 },
+};
+function myCredit(){ return (currentUser && Number(currentUser.credit))||0; }
+
+function refreshCreditChip() {
+  const chip = document.getElementById('creditChip');
+  if (chip) chip.textContent = '💎 ' + myCredit();
+}
+async function syncCredit() {
+  if (!currentUser) return;
+  try {
+    const r = await callApi({ action:'getCredit', email: currentUser.email });
+    if (r && r.ok) { currentUser.credit = r.credit; localStorage.setItem('vietsthlm_user', JSON.stringify(currentUser)); refreshCreditChip(); }
+  } catch(e){}
+}
+
+// Gửi quà: trừ credit ở máy chủ trước, thành công mới gửi tin quà
+async function sendGift(type) {
+  if (!currentUser) { onAccountClick(); return; }
+  const g = GIFTS[type]; if (!g) return;
+  if (myCredit() < g.cost) { openBuyCredit(); return; }
+  try {
+    const r = await callApi({ action:'spendCredit', email: currentUser.email, amount: g.cost });
+    if (!r || !r.ok) { alert(r && r.msg ? r.msg : 'Không gửi được quà.'); if (r && typeof r.credit==='number'){ currentUser.credit=r.credit; refreshCreditChip(); } return; }
+    currentUser.credit = r.credit; localStorage.setItem('vietsthlm_user', JSON.stringify(currentUser)); refreshCreditChip();
+    // gửi tin quà (token §g:type§)
+    const noidung = '\u00a7g:'+type+'\u00a7';
+    const sr = await callApi({ action:'sendChat', email: currentUser.email, ten: currentUser.ten||'', anh: currentUser.anh||'', noidung });
+    if (sr && sr.ok && sr.item) {
+      const box = document.getElementById('chatMessages');
+      const em = box.querySelector('.chat-empty'); if (em) em.remove();
+      if (!chatSeen.has(String(sr.item.id))) { chatSeen.add(String(sr.item.id)); box.appendChild(renderChatMsg(sr.item)); box.scrollTop = box.scrollHeight; }
+    }
+    closeChatPanel();
+  } catch(e) { alert('Có lỗi khi gửi quà.'); }
+}
+
+function openBuyCredit() {
+  const isAdm = isAdminUser();
+  document.getElementById('sheet').innerHTML = `
+    <button class="close-x" onclick="closeModal()">✕</button>
+    <div class="sheet-body">
+      <h2>💎 Nạp Credit</h2>
+      <div class="auth-note">Số dư hiện tại: <b>${myCredit()} credit</b></div>
+      <div class="credit-packs">
+        ${CREDIT_PACKS.map(p=>`
+          <div class="credit-pack">
+            <div class="cp-amount">${p.credit} 💎</div>
+            <div class="cp-price">${p.price} kr</div>
+          </div>`).join('')}
+      </div>
+      <div class="pw-soon" style="text-align:center;margin-top:6px">Thanh toán sẽ sớm ra mắt — liên hệ <a href="mailto:weshare.sverige@gmail.com">weshare.sverige@gmail.com</a></div>
+      <div style="font-size:12.5px;color:var(--muted);margin-top:14px;line-height:1.5">
+        <b>Dùng credit để:</b><br>🌸 Tặng hoa / 👏 vỗ tay / 👋 chào — 1 credit<br>🎥 Video chào hỏi 5-8 giây — 5 credit
+      </div>
+      ${isAdm ? `<div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line)">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:6px">Quản trị: cấp credit (thử nghiệm)</div>
+        <div style="display:flex;gap:8px">
+          <input id="adm-cr-email" placeholder="email" value="${currentUser.email}" style="flex:1;padding:9px;border:1px solid var(--line);border-radius:8px">
+          <input id="adm-cr-amt" type="number" value="50" style="width:70px;padding:9px;border:1px solid var(--line);border-radius:8px">
+          <button onclick="adminGrantCredit()" style="background:var(--jade);color:#fff;border:none;border-radius:8px;padding:9px 14px;cursor:pointer">Cấp</button>
+        </div>
+      </div>` : ''}
+    </div>`;
+  openModalEl();
+}
+async function adminGrantCredit() {
+  const email = document.getElementById('adm-cr-email').value.trim();
+  const amt = Number(document.getElementById('adm-cr-amt').value)||0;
+  try {
+    const r = await callApi({ action:'addCredit', email, amount: amt, adminEmail: currentUser.email });
+    if (r && r.ok) { alert('Đã cấp. Số dư mới: '+r.credit); if (email===currentUser.email){ currentUser.credit=r.credit; refreshCreditChip(); } }
+    else alert(r && r.msg ? r.msg : 'Không cấp được.');
+  } catch(e){ alert('Lỗi.'); }
+}
+function videoGiftInfo() {
+  const panel = document.getElementById('chatPanel');
+  if (panel) panel.innerHTML = `<div class="ct-locked">
+    <div style="font-size:22px">🎥</div>
+    <div style="font-weight:700;margin:4px 0">Video chào hỏi 5-8 giây — 5 credit</div>
+    <div style="font-size:13px;color:var(--muted)">Tính năng đang được hoàn thiện (cần dịch vụ lưu trữ video). Sẽ sớm mở!</div>
+  </div>`;
+}
 
 async function sendChatMsg() {
   if (!currentUser) { onAccountClick(); return; }
