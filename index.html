@@ -525,12 +525,13 @@
   .credit-pack.on { border-color: #e6b800; box-shadow: 0 0 0 2px rgba(217,155,43,.35); }
   .cp-amount { font-size: 18px; font-weight: 800; color: #8a6d2f; }
   .cp-price { font-size: 14px; color: var(--muted); margin-top: 4px; font-weight: 600; }
-  .swish-box { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 16px; margin-top: 8px; }
-  .swish-title { font-weight: 700; font-size: 14px; margin-bottom: 10px; color: var(--ink); }
-  .swish-qr { width: 180px; max-width: 70%; height: auto; border-radius: 10px; }
-  .swish-num { font-size: 14px; font-weight: 700; color: var(--ink); margin-top: 6px; }
+  .swish-box { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 18px 16px; margin-top: 8px;
+    display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .swish-title { font-weight: 700; font-size: 14px; margin-bottom: 12px; color: var(--ink); }
+  .swish-qr { width: 200px; max-width: 78%; height: auto; border-radius: 12px; display: block; margin: 0 auto; }
+  .swish-num { font-size: 14px; font-weight: 700; color: var(--ink); margin-top: 8px; }
   .swish-steps { text-align: left; font-size: 12.5px; color: var(--muted); line-height: 1.6; margin-top: 12px;
-    background: var(--paper-2); border-radius: 10px; padding: 11px 13px; }
+    background: var(--paper-2); border-radius: 10px; padding: 11px 13px; width: 100%; }
   .swish-steps b { color: var(--ink); }
   .chat-input-row input { flex: 1; font-family: inherit; font-size: 15px; padding: 11px 15px;
     border: 1px solid var(--line); border-radius: 999px; outline: none; background: #fff; }
@@ -1021,7 +1022,7 @@
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v25-swish3</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v26-qrcenter</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
