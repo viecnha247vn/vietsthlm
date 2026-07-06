@@ -652,7 +652,12 @@
     border-radius: 999px; background-size: cover; background-position: center; color: #fff; font-weight: 700;
     font-size: 15px; border: 2px solid #fff; box-shadow: 0 1px 5px rgba(0,0,0,.15); transition: transform .12s ease; }
   .acc-btn.in:hover .acc-ava { transform: scale(1.06); }
+  .acc-ava.acc-vip { border-color: #f5c451; box-shadow: 0 0 0 2px #f5c451, 0 1px 5px rgba(0,0,0,.15); }
   .auth-note { font-size: 13px; color: var(--muted); margin: 4px 0 16px; }
+  .vip-badge { font-size: 13px; margin-left: 3px; vertical-align: middle;
+    filter: drop-shadow(0 1px 1px rgba(180,130,20,.4)); }
+  .vip-badge-big { display: inline-block; background: linear-gradient(135deg,#ffe9a8,#f5c451); color: #7a5a10;
+    font-size: 12px; font-weight: 800; padding: 3px 11px; border-radius: 999px; margin-left: 8px; vertical-align: middle; }
   .prof-sync { font-size: 12.5px; color: var(--jade); background: #e6f2ed; border-radius: 8px;
     padding: 8px 11px; margin-bottom: 14px; font-weight: 600; }
   .auth-switch { text-align: center; font-size: 14px; color: var(--muted); margin-top: 16px; }
@@ -1117,7 +1122,7 @@
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v29-vip</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v30-vipbadge</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -3125,7 +3130,7 @@ function renderChatMsg(m) {
     <div class="av" style="background:${AV[avColor(m.email||name)]}${m.anh?`;background-image:url('${m.anh}');background-size:cover;background-position:center`:''}">${m.anh?'':initials(name)}</div>
     <div class="cmsg-body">
       <div class="cmsg-top">
-        <span class="cmsg-name">${escapeHtml(name)}</span>
+        <span class="cmsg-name">${escapeHtml(name)}</span>${m.vip?'<span class="vip-badge" title="Thành viên VIP">👑</span>':''}
         <span class="cmsg-time">${hh}</span>
         <button class="cmsg-report" title="Báo cáo" onclick="reportChatMsg('${m.id}')">⚑</button>
       </div>
@@ -3630,8 +3635,8 @@ function refreshAccBtn() {
     const name = currentUser.ten || currentUser.email.split('@')[0];
     btn.classList.add('in');
     btn.innerHTML = currentUser.anh
-      ? `<span class="acc-ava" style="background-image:url('${currentUser.anh}')"></span>`
-      : `<span class="acc-ava" style="background:${AV[avColor(currentUser.email||name)]}">${initials(name)}</span>`;
+      ? `<span class="acc-ava${currentUser.is_member?' acc-vip':''}" style="background-image:url('${currentUser.anh}')"></span>`
+      : `<span class="acc-ava${currentUser.is_member?' acc-vip':''}" style="background:${AV[avColor(currentUser.email||name)]}">${initials(name)}</span>`;
     btn.title = name;
   } else {
     btn.textContent = t('login'); btn.classList.remove('in'); btn.title = '';
@@ -3646,7 +3651,7 @@ function onAccountClick() {
     document.getElementById('sheet').innerHTML = `
       <button class="close-x" onclick="closeModal()">✕</button>
       <div class="sheet-body">
-        <h2>${t('prof_title')}</h2>
+        <h2>${t('prof_title')}${(currentUser.is_member)?'<span class="vip-badge-big">👑 VIP</span>':''}</h2>
         <div class="auth-note">${u.email}</div>
         ${photoFieldHTML(t('photo_avatar'), 'acc-anh-prev', 'acc-anh', u.anh||'', true)}
         <div class="field"><label>${t('prof_displayname')}</label><input id="pf-ten" value="${(u.ten||'').replace(/"/g,'&quot;')}" placeholder=""></div>
