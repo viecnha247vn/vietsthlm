@@ -795,6 +795,17 @@
     .tabs .tab.on .tab-tx { color: #3a2600 !important; }
     .tabs .tab.on .tab-ic { color: #5a3800 !important; }
   }
+  /* Thanh dưới (điện thoại): tab đang chọn = gương vàng, đồng bộ desktop */
+  @media (max-width: 899px){
+    .tabs .tab.on {
+      background: linear-gradient(177deg, #ffe08a 0%, #f2ba44 42%, #d98f1e 100%) !important;
+      color: #3a2600 !important;
+      border: 1px solid rgba(255,238,190,.6);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 2px 10px rgba(224,137,30,.45);
+    }
+    .tabs .tab.on .tab-tx { color: #3a2600 !important; }
+    .tabs .tab.on .tab-ic { color: #5a3800 !important; }
+  }
 </style>
 </head>
 <body>
@@ -1183,7 +1194,7 @@
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v48-nav-glass</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v49-nav-glass-mobile</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
