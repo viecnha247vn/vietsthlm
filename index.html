@@ -772,6 +772,29 @@
     transform: translateY(-1px);
   }
   .submit:active, .join:active, .cta-map:active, .home-cta:active, .chat-send:active, .svc-btn:active, .tr-contact:active { transform: translateY(0) scale(.99); }
+  /* Thanh điều hướng trái (desktop): nút kính, tab chọn = gương vàng */
+  @media (min-width: 900px){
+    .tabs .tab {
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.015)) !important;
+      border: 1px solid rgba(255,255,255,.07);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+      transition: background .15s ease, border-color .15s ease, box-shadow .15s ease;
+    }
+    .tabs .tab:hover {
+      background: linear-gradient(180deg, rgba(230,176,74,.18), rgba(230,176,74,.06)) !important;
+      border-color: rgba(230,176,74,.4);
+      color: var(--ink) !important;
+    }
+    .tabs .tab.on {
+      background: linear-gradient(177deg, #ffe08a 0%, #f2ba44 42%, #d98f1e 100%) !important;
+      color: #3a2600 !important;
+      border: 1px solid rgba(255,238,190,.7);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.65), inset 0 11px 14px -8px rgba(255,255,255,.6), 0 4px 14px rgba(224,137,30,.4), 0 1px 3px rgba(0,0,0,.4);
+    }
+    .tabs .tab.on:hover { background: linear-gradient(177deg, #ffe6a0 0%, #f5c04e 42%, #e0961f 100%) !important; }
+    .tabs .tab.on .tab-tx { color: #3a2600 !important; }
+    .tabs .tab.on .tab-ic { color: #5a3800 !important; }
+  }
 </style>
 </head>
 <body>
@@ -1160,7 +1183,7 @@
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v47-chat-text</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v48-nav-glass</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
