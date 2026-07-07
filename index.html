@@ -758,21 +758,20 @@
   .tab[data-tab="translate"] .tab-ic{color:#1f9e8f} .tab[data-tab="services"] .tab-ic{color:#6b6f8a}
   .tab[data-tab="member"] .tab-ic{color:#d99b2b} .tab[data-tab="about"] .tab-ic{color:#9a8b76}
   @media(min-width:900px){.tab.on .tab-ic{color:#fff !important}}
-  /* Nút trang con (desktop): hiệu ứng gương vàng bóng */
-  @media (min-width: 900px){
-    .chip.on, .join, .cta-map, .ev-chip.on, .ev-chip.on:hover, .ev-join, .home-cta, .chat-send, .chat-login-btn, .svc-btn, .tr-contact {
-      background: linear-gradient(177deg, #ffe08a 0%, #f2ba44 42%, #d98f1e 100%) !important;
-      color: #3a2600 !important;
-      border: 1px solid rgba(255,238,190,.75) !important;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.65), inset 0 11px 14px -8px rgba(255,255,255,.6), 0 5px 16px rgba(224,137,30,.45), 0 1px 3px rgba(0,0,0,.4) !important;
-      text-shadow: 0 1px 0 rgba(255,255,255,.3);
-      transition: box-shadow .18s ease, transform .12s ease;
-    }
-    .chip.on:hover, .join:hover, .cta-map:hover, .ev-join:hover, .home-cta:hover, .chat-send:hover, .chat-login-btn:hover, .svc-btn:hover, .tr-contact:hover {
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.8), inset 0 11px 14px -8px rgba(255,255,255,.7), 0 9px 24px rgba(230,176,74,.6), 0 1px 3px rgba(0,0,0,.4) !important;
-      transform: translateY(-1px);
-    }
+  /* NÚT CHÍNH — kính gương vàng, đồng bộ desktop + điện thoại */
+  .submit, .chip.on, .join, .cta-map, .ev-chip.on, .ev-chip.on:hover, .ev-join, .home-cta, .chat-send, .chat-login-btn, .svc-btn, .tr-contact, .gg-video {
+    background: linear-gradient(177deg, #ffe08a 0%, #f2ba44 42%, #d98f1e 100%) !important;
+    color: #3a2600 !important;
+    border: 1px solid rgba(255,238,190,.7) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.65), inset 0 11px 14px -8px rgba(255,255,255,.6), 0 4px 14px rgba(224,137,30,.38), 0 1px 3px rgba(0,0,0,.4) !important;
+    text-shadow: 0 1px 0 rgba(255,255,255,.3) !important;
+    transition: box-shadow .18s ease, transform .12s ease;
   }
+  .submit:hover, .chip.on:hover, .join:hover, .cta-map:hover, .ev-join:hover, .home-cta:hover, .chat-send:hover, .chat-login-btn:hover, .svc-btn:hover, .tr-contact:hover, .gg-video:hover {
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.8), inset 0 11px 14px -8px rgba(255,255,255,.7), 0 8px 22px rgba(230,176,74,.55), 0 1px 3px rgba(0,0,0,.4) !important;
+    transform: translateY(-1px);
+  }
+  .submit:active, .join:active, .cta-map:active, .home-cta:active, .chat-send:active, .svc-btn:active, .tr-contact:active { transform: translateY(0) scale(.99); }
 </style>
 </head>
 <body>
@@ -1161,7 +1160,7 @@
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v45-glass-btn</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v46-glass-all</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
