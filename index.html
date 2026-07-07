@@ -462,12 +462,12 @@
     display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
   .cmsg-body { flex: 1; min-width: 0; }
   .cmsg-top { display: flex; align-items: baseline; gap: 8px; }
-  .cmsg-name { font-weight: 700; font-size: 13.5px; }
-  .cmsg-time { font-size: 11px; color: var(--muted); }
+  .cmsg-name { font-weight: 700; font-size: 13.5px; color: #1f1a14; }
+  .cmsg-time { font-size: 11px; color: #8a7d6b; }
   .cmsg-report { margin-left: auto; background: none; border: none; color: var(--muted); cursor: pointer;
     font-size: 13px; opacity: .5; }
   .cmsg-report:hover { opacity: 1; color: var(--alert); }
-  .cmsg-text { font-size: 14.5px; color: #e8dcc8; margin-top: 2px; word-wrap: break-word; overflow-wrap: anywhere; }
+  .cmsg-text { font-size: 14.5px; color: #2a201a; margin-top: 2px; word-wrap: break-word; overflow-wrap: anywhere; }
   .cmsg-trans { display: none; font-size: 14px; color: var(--jade); margin-top: 5px; padding-top: 5px;
     border-top: 1px dashed var(--line); word-wrap: break-word; overflow-wrap: anywhere; font-style: italic; }
   .cmsg-tr-btn { background: none; border: none; color: var(--muted); font-size: 12px; font-weight: 600;
@@ -1160,7 +1160,7 @@
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v46-glass-all</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v47-chat-text</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -3272,7 +3272,7 @@ const CHAT_THEMES = [
   { id:'cream',   name:'Kem ấm',   bg:'linear-gradient(160deg,#fdf6ec,#f7ede0)', free:true },
   { id:'mint',    name:'Bạc hà',   bg:'linear-gradient(160deg,#eef7f2,#e2f0ea)', free:true },
   { id:'sky',     name:'Trời xanh',bg:'linear-gradient(160deg,#eef4fb,#e3edf7)', free:true },
-  { id:'sunset',  name:'Hoàng hôn',bg:'linear-gradient(160deg,#fff0e6,#ffe0e6,#241519)', premium:true, price:19 },
+  { id:'sunset',  name:'Hoàng hôn',bg:'linear-gradient(160deg,#fff0e6,#ffe0e6,#ffe9d6)', premium:true, price:19 },
   { id:'sakura',  name:'Hoa anh đào', bg:'linear-gradient(160deg,#fdeef4,#f7e0ec,#fce8f0)', premium:true, price:19 },
   { id:'ocean',   name:'Đại dương', bg:'linear-gradient(160deg,#e6f2f7,#d6eaf2,#e0f0f5)', premium:true, price:29 },
   { id:'night',   name:'Đêm sao',  bg:'linear-gradient(160deg,#2a2438,#3a3450)', premium:true, price:29, dark:true },
