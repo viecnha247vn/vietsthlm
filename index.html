@@ -11,7 +11,7 @@
 <style>
   :root {
     --ink: #1a1410; --paper: #fbf7f0; --paper-2: #f3ece0;
-    --red: #2e6e5e; --gold: #d99b2b; --jade: #2e6e5e; --alert: #c8442e;
+    --red: #9a6f14; --gold: #d99b2b; --jade: #9a6f14; --alert: #c8442e;
     --line: #e0d6c5; --muted: #8a7d6b;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -81,11 +81,13 @@
   /* --- MÁY TÍNH: thanh dọc cố định bên trái --- */
   @media (min-width: 900px) {
     header { z-index: 70; }
+    .bar { max-width: none; padding-left: 20px; }
+    .qlogo-h { height: 40px; width: 70px; }
     .tabs { position: fixed; top: 64px; left: 0; bottom: 0; width: 210px; z-index: 55;
       flex-direction: column; gap: 4px; padding: 16px 12px 20px; overflow-y: auto;
       background: #fff; border-right: 1px solid var(--line); }
     .tab { padding: 12px 14px; border-radius: 12px; }
-    .tab:hover { color: var(--red); background: rgba(46,110,94,.07); }
+    .tab:hover { color: var(--red); background: rgba(154,111,20,.07); }
     .tab:active { transform: scale(.97); }
     .tab.on { color: #fff; background: var(--red); }
     .tab.on:hover { background: var(--red); }
@@ -104,7 +106,7 @@
       min-width: 68px; flex: 1 0 auto; padding: 6px 4px; border-radius: 12px; }
     .tab-ic { font-size: 21px; }
     .tab-tx { font-size: 10.5px; font-weight: 600; }
-    .tab:active { transform: scale(.9); background: rgba(46,110,94,.10); }
+    .tab:active { transform: scale(.9); background: rgba(154,111,20,.10); }
     .tab.on { color: var(--red); }
     .tab.on .tab-ic { transform: scale(1.12); }
     /* chừa chỗ dưới đáy để nội dung không bị thanh che */
@@ -212,11 +214,11 @@
 
   .fab { position: fixed; bottom: 22px; right: 22px; z-index: 40; background: var(--red); color: #fff;
     border: none; border-radius: 999px; padding: 15px 22px; font-weight: 700; font-size: 15px;
-    cursor: pointer; box-shadow: 0 8px 22px rgba(46,110,94,.4); font-family: inherit;
+    cursor: pointer; box-shadow: 0 8px 22px rgba(154,111,20,.4); font-family: inherit;
     display: flex; align-items: center; gap: 7px;
     transition: transform .16s ease, box-shadow .2s ease, filter .18s ease; }
-  .fab:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 12px 30px rgba(46,110,94,.5); filter: brightness(1.05); }
-  .fab:active { transform: translateY(-1px) scale(1); box-shadow: 0 6px 16px rgba(46,110,94,.42); }
+  .fab:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 12px 30px rgba(154,111,20,.5); filter: brightness(1.05); }
+  .fab:active { transform: translateY(-1px) scale(1); box-shadow: 0 6px 16px rgba(154,111,20,.42); }
   @media (max-width: 899px) { .fab { bottom: calc(80px + env(safe-area-inset-bottom)); } }
   @media (min-width: 900px) { .fab { left: auto; } }
 
@@ -266,8 +268,8 @@
   .ev-join { background: var(--red); color: #fff; text-decoration: none; font-weight: 700; font-size: 14px;
     padding: 10px 18px; border-radius: 12px; display: inline-block;
     transition: transform .14s ease, box-shadow .18s ease, filter .18s ease; }
-  .ev-join:hover { filter: brightness(1.07); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(46,110,94,.32); }
-  .ev-join:active { transform: translateY(0); box-shadow: 0 2px 6px rgba(46,110,94,.25); }
+  .ev-join:hover { filter: brightness(1.07); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(154,111,20,.32); }
+  .ev-join:active { transform: translateY(0); box-shadow: 0 2px 6px rgba(154,111,20,.25); }
   .ev-join-off { background: var(--paper-2); color: var(--muted); cursor: default; }
   .ev-join-off:hover { filter: none; transform: none; box-shadow: none; }
   .ev-count { margin-bottom: 4px; }
@@ -390,7 +392,7 @@
     box-shadow: 0 8px 26px rgba(40,30,20,.14); margin-bottom: 20px; }
   .home-cta { margin-top: 24px; background: var(--red); color: #fff; border: none; border-radius: 999px;
     padding: 14px 30px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit;
-    box-shadow: 0 8px 22px rgba(46,110,94,.32); }
+    box-shadow: 0 8px 22px rgba(154,111,20,.32); }
   .home-cta:hover { filter: brightness(1.06); }
   .home-section-label { text-align: center; font-size: 13px; font-weight: 700; letter-spacing: .08em;
     text-transform: uppercase; color: var(--muted); margin: 34px 0 18px; }
@@ -619,7 +621,7 @@
   .mb-plan { position: relative; border: 2px solid var(--line); border-radius: 16px; padding: 18px 8px 14px;
     background: #fff; cursor: pointer; font-family: inherit; text-align: center; transition: transform .12s ease, border-color .15s ease, box-shadow .15s ease; }
   .mb-plan:hover { transform: translateY(-3px); }
-  .mb-plan.sel { border-color: var(--red); box-shadow: 0 0 0 2px rgba(46,110,94,.18); }
+  .mb-plan.sel { border-color: var(--red); box-shadow: 0 0 0 2px rgba(154,111,20,.18); }
   .mb-plan-pop { border-color: #e6b800; }
   .mb-p-name { font-size: 13px; color: var(--muted); font-weight: 600; }
   .mb-p-price { font-size: 26px; font-weight: 800; color: var(--ink); margin-top: 4px; }
@@ -766,7 +768,7 @@
   <div class="bar">
     <div class="logo" onclick="switchTab('home')" style="cursor:pointer"><span class="qlogo qlogo-h" role="img" aria-label="QiQa"></span></div>
     <div class="bar-city" id="barCity">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2e6e5e" stroke-width="2.2"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9a6f14" stroke-width="2.2"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
       <select id="citySel" onchange="onCityChange()"></select>
     </div>
     <div class="search" id="barSearch">
@@ -1131,7 +1133,7 @@
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v38-qiqa-logo</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v39-gold</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
