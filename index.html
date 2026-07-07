@@ -750,6 +750,14 @@
   .home-cta, .chat-send, .chat-login-btn, .svc-btn, .tr-contact {
     background: #d99b2b !important; color: #1a1410 !important; border-color: #d99b2b !important;
   }
+  /* Icon điều hướng nhiều màu */
+  .tab[data-tab="home"] .tab-ic{color:#e0891e} .tab[data-tab="places"] .tab-ic{color:#2f83b0}
+  .tab[data-tab="fun"] .tab-ic{color:#d1477a} .tab[data-tab="share"] .tab-ic{color:#7d5fb0}
+  .tab[data-tab="articles"] .tab-ic{color:#2e8b6f} .tab[data-tab="friends"] .tab-ic{color:#e0607e}
+  .tab[data-tab="market"] .tab-ic{color:#d4791f} .tab[data-tab="outings"] .tab-ic{color:#5aa02c}
+  .tab[data-tab="translate"] .tab-ic{color:#1f9e8f} .tab[data-tab="services"] .tab-ic{color:#6b6f8a}
+  .tab[data-tab="member"] .tab-ic{color:#d99b2b} .tab[data-tab="about"] .tab-ic{color:#9a8b76}
+  @media(min-width:900px){.tab.on .tab-ic{color:#fff !important}}
 </style>
 </head>
 <body>
@@ -825,13 +833,13 @@
         </div>
         <div class="chat-panel" id="chatPanel"></div>
         <div class="chat-toolbar" id="chatToolbar">
-          <button onclick="fmtBold()" title="In đậm"><b>B</b></button>
-          <button onclick="fmtItalic()" title="In nghiêng"><i>I</i></button>
-          <button onclick="toggleChatPanel('color')" title="Màu chữ">🎨</button>
-          <button onclick="toggleChatPanel('emoji')" title="Biểu cảm">😊</button>
-          <button onclick="toggleChatPanel('gift')" title="Tặng quà">🎁</button>
-          <button class="credit-chip" id="creditChip" onclick="openBuyCredit()" title="Nạp credit">💎 0</button>
-          <button onclick="toggleChatPanel('theme')" title="Nền phòng chat" class="tb-theme">🖼️</button>
+          <button onclick="fmtBold()" title="In đậm" data-i18n-title="tt_bold"><b>B</b></button>
+          <button onclick="fmtItalic()" title="In nghiêng" data-i18n-title="tt_italic"><i>I</i></button>
+          <button onclick="toggleChatPanel('color')" title="Màu chữ" data-i18n-title="tt_color">🎨</button>
+          <button onclick="toggleChatPanel('emoji')" title="Biểu cảm" data-i18n-title="tt_emoji">😊</button>
+          <button onclick="toggleChatPanel('gift')" title="Tặng quà" data-i18n-title="tt_gift">🎁</button>
+          <button class="credit-chip" id="creditChip" onclick="openBuyCredit()" title="Nạp credit" data-i18n-title="tt_credit">💎 0</button>
+          <button onclick="toggleChatPanel('theme')" title="Nền phòng chat" data-i18n-title="tt_theme" class="tb-theme">🖼️</button>
         </div>
         <div class="chat-input-row" id="chatInputRow">
           <input id="chatInput" type="text" maxlength="500" placeholder="Nhập tin nhắn…" data-i18n-ph="chat_placeholder" onkeydown="if(event.key==='Enter')sendChatMsg()">
@@ -1138,7 +1146,7 @@
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v41-gold-btn</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v42-i18n-icons</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -1215,7 +1223,7 @@ const COUNTRY_LANG = { se:'sv', vn:'vi', th:'th', kr:'ko', ph:'tl' };
 const I18N = {
   en: {
     tab_home:'Home', tab_places:'Check-in', tab_outings:'Outings with kids', tab_market:'Marketplace',
-    tab_friends:'Make friends', tab_translate:'Interpreter', tab_services:'QTT Services', tab_about:'About us', tab_member:'VIP', mb_hero_1:'Become a', mb_hero_2:'QiQa VIP', mb_intro:'QiQa is a shared home for our community far from home. To keep this place safe, clean and ad-free for everyone, we need your support.', mb_free_t:'Just browsing (free)', mb_free_d:'You can see promotional bulletins and public notices only.', mb_mem_t:'Member — full access', mb_b1:'Read all Guides (law, procedures, updates)', mb_b2:'Member badge on your profile', mb_b3:'Support a healthy community', mb_pick:'Choose your plan', mb_month:'1 month', mb_6month:'6 months', mb_year:'1 year', mb_popular:'Popular', mb_best:'Best value', mb_pledge:'Your contribution helps us keep QiQa running for everyone — together we build a healthy community.', mb_pay_t:'Pay with Swish to join', mb_pay_step:'Swish the amount to 072-567 11 11, and write "Member [plan] + your email" in the message. Your membership will be activated shortly.', mb_you_member:'You are a member 💚', mb_until:'Valid until', cr_use_t:'Use credit for:', cr_use_1:'🌸 Send flowers / 👏 clap / 👋 wave — 1 credit', cr_use_5:'🎥 5–8s greeting video — 5 credits', cr_swish_t:'Scan the Swish code — {n} credit pack ({price} kr)', cr_amt:'The {price} kr amount is pre-filled when you scan.', cr_s1:'Scan the code → confirm the {price} kr transfer', cr_s2:'In the "Meddelande" (message) field, write your login email', cr_s3:'Credits will be added to your account shortly',
+    tab_friends:'Make friends', tab_translate:'Interpreter', tab_services:'QTT Services', tab_about:'About us', tab_member:'VIP', mb_hero_1:'Become a', mb_hero_2:'QiQa VIP', mb_intro:'QiQa is a shared home for our community far from home. To keep this place safe, clean and ad-free for everyone, we need your support.', mb_free_t:'Just browsing (free)', mb_free_d:'You can see promotional bulletins and public notices only.', mb_mem_t:'Member — full access', mb_b1:'Read all Guides (law, procedures, updates)', mb_b2:'Member badge on your profile', mb_b3:'Support a healthy community', mb_pick:'Choose your plan', mb_month:'1 month', mb_6month:'6 months', mb_year:'1 year', mb_popular:'Popular', mb_best:'Best value', mb_pledge:'Your contribution helps us keep QiQa running for everyone — together we build a healthy community.', mb_pay_t:'Pay with Swish to join', mb_pay_step:'Swish the amount to 072-567 11 11, and write "Member [plan] + your email" in the message. Your membership will be activated shortly.', mb_you_member:'You are a member 💚', mb_until:'Valid until', cr_use_t:'Use credit for:', cr_use_1:'🌸 Send flowers / 👏 clap / 👋 wave — 1 credit', cr_use_5:'🎥 5–8s greeting video — 5 credits', cr_swish_t:'Scan the Swish code — {n} credit pack ({price} kr)', cr_amt:'The {price} kr amount is pre-filled when you scan.', cr_s1:'Scan the code → confirm the {price} kr transfer', cr_s2:'In the "Meddelande" (message) field, write your login email', cr_s3:'Credits will be added to your account shortly', cat_all:'All', cat_food:'Food & drink', cat_shop:'Shopping', cat_service:'Services', cat_community:'Community', cat_kids:'For kids', cat_vietfood:'Vietnamese food', cat_home:'Household', cat_carry:'Hand-carry', cat_free:'Free giveaway', cat_health:'Healthcare', cat_admin:'Documents/Admin', cat_legal:'Legal', cat_escort:'Accompaniment', cat_doctrans:'Document translation', ty_give:'Give', ty_swap:'Swap', ty_free:'Free', ty_carry:'Hand-carry', lbl_places:'places', lbl_you:'You', lbl_joined:'✓ Joined', lbl_join:'Join', lbl_match_cnt:'potential matches', lbl_report:'Report', lbl_registered:'✓ Registered', lbl_register:'Register', lbl_be_interp:'Be an interpreter', lbl_post_req:'Post a request', lbl_vip_member:'VIP member', tt_bold:'Bold', tt_italic:'Italic', tt_color:'Text color', tt_emoji:'Emoji', tt_gift:'Send gift', tt_credit:'Top up credit', tt_theme:'Chat background',
     login:'Log in', logout:'Log out',
     search_places:'Search food, Asian store, nails…', search_area:'Search by area…',
     search_market:'Search kids items, food…', search_lang:'Search by language, field…',
@@ -1320,7 +1328,7 @@ const I18N = {
   },
   sv: {
     tab_home:'Hem', tab_places:'Check-in', tab_outings:'Utflykter med barn', tab_market:'Marknad',
-    tab_friends:'Hitta vänner', tab_translate:'Tolk', tab_services:'QTT-tjänster', tab_about:'Om oss', tab_member:'VIP', mb_hero_1:'Bli', mb_hero_2:'QiQa VIP', mb_intro:'QiQa är ett gemensamt hem för vår gemenskap långt hemifrån. För att hålla platsen trygg, ren och reklamfri för alla behöver vi ditt stöd.', mb_free_t:'Bara tittar (gratis)', mb_free_d:'Du ser endast reklaminlägg och offentliga meddelanden.', mb_mem_t:'Medlem — full åtkomst', mb_b1:'Läs alla guider (lagar, rutiner, uppdateringar)', mb_b2:'Medlemsmärke på din profil', mb_b3:'Stöd en sund gemenskap', mb_pick:'Välj din plan', mb_month:'1 månad', mb_6month:'6 månader', mb_year:'1 år', mb_popular:'Populär', mb_best:'Bäst värde', mb_pledge:'Ditt bidrag hjälper oss att hålla QiQa igång för alla — tillsammans bygger vi en sund gemenskap.', mb_pay_t:'Betala med Swish för att gå med', mb_pay_step:'Swisha beloppet till 072-567 11 11 och skriv "Medlem [plan] + din e-post" i meddelandet. Ditt medlemskap aktiveras snart.', mb_you_member:'Du är medlem 💚', mb_until:'Giltig till', cr_use_t:'Använd credit till:', cr_use_1:'🌸 Skicka blommor / 👏 applåd / 👋 vinka — 1 credit', cr_use_5:'🎥 Hälsningsvideo 5–8 sek — 5 credit', cr_swish_t:'Skanna Swish-koden — paket {n} credit ({price} kr)', cr_amt:'Beloppet {price} kr fylls i automatiskt när du skannar.', cr_s1:'Skanna koden → bekräfta överföringen på {price} kr', cr_s2:'I fältet "Meddelande" skriver du din inloggnings-e-post', cr_s3:'Dina credits läggs till på ditt konto inom kort',
+    tab_friends:'Hitta vänner', tab_translate:'Tolk', tab_services:'QTT-tjänster', tab_about:'Om oss', tab_member:'VIP', mb_hero_1:'Bli', mb_hero_2:'QiQa VIP', mb_intro:'QiQa är ett gemensamt hem för vår gemenskap långt hemifrån. För att hålla platsen trygg, ren och reklamfri för alla behöver vi ditt stöd.', mb_free_t:'Bara tittar (gratis)', mb_free_d:'Du ser endast reklaminlägg och offentliga meddelanden.', mb_mem_t:'Medlem — full åtkomst', mb_b1:'Läs alla guider (lagar, rutiner, uppdateringar)', mb_b2:'Medlemsmärke på din profil', mb_b3:'Stöd en sund gemenskap', mb_pick:'Välj din plan', mb_month:'1 månad', mb_6month:'6 månader', mb_year:'1 år', mb_popular:'Populär', mb_best:'Bäst värde', mb_pledge:'Ditt bidrag hjälper oss att hålla QiQa igång för alla — tillsammans bygger vi en sund gemenskap.', mb_pay_t:'Betala med Swish för att gå med', mb_pay_step:'Swisha beloppet till 072-567 11 11 och skriv "Medlem [plan] + din e-post" i meddelandet. Ditt medlemskap aktiveras snart.', mb_you_member:'Du är medlem 💚', mb_until:'Giltig till', cr_use_t:'Använd credit till:', cr_use_1:'🌸 Skicka blommor / 👏 applåd / 👋 vinka — 1 credit', cr_use_5:'🎥 Hälsningsvideo 5–8 sek — 5 credit', cr_swish_t:'Skanna Swish-koden — paket {n} credit ({price} kr)', cr_amt:'Beloppet {price} kr fylls i automatiskt när du skannar.', cr_s1:'Skanna koden → bekräfta överföringen på {price} kr', cr_s2:'I fältet "Meddelande" skriver du din inloggnings-e-post', cr_s3:'Dina credits läggs till på ditt konto inom kort', cat_all:'Alla', cat_food:'Mat & dryck', cat_shop:'Shopping', cat_service:'Tjänster', cat_community:'Gemenskap', cat_kids:'Barnsaker', cat_vietfood:'Vietnamesisk mat', cat_home:'Hushåll', cat_carry:'Handbagage', cat_free:'Ge bort gratis', cat_health:'Sjukvård', cat_admin:'Dokument/Myndighet', cat_legal:'Juridik', cat_escort:'Följe', cat_doctrans:'Dokumentöversättning', ty_give:'Ge', ty_swap:'Byta', ty_free:'Gratis', ty_carry:'Handbagage', lbl_places:'platser', lbl_you:'Du', lbl_joined:'✓ Med', lbl_join:'Gå med', lbl_match_cnt:'möjliga matchningar', lbl_report:'Rapportera', lbl_registered:'✓ Anmäld', lbl_register:'Anmäl', lbl_be_interp:'Bli tolk', lbl_post_req:'Lägg upp förfrågan', lbl_vip_member:'VIP-medlem', tt_bold:'Fet', tt_italic:'Kursiv', tt_color:'Textfärg', tt_emoji:'Emoji', tt_gift:'Skicka gåva', tt_credit:'Fyll på credit', tt_theme:'Chattbakgrund',
     login:'Logga in', logout:'Logga ut',
     search_places:'Sök mat, asiatisk butik, naglar…', search_area:'Sök efter område…',
     search_market:'Sök barnsaker, mat…', search_lang:'Sök efter språk, område…',
@@ -1426,7 +1434,7 @@ const I18N = {
   },
   ko: {
     tab_home:'홈', tab_places:'체크인', tab_outings:'아이와 나들이', tab_market:'마켓',
-    tab_friends:'친구 찾기', tab_translate:'통역', tab_services:'QTT 서비스', tab_about:'회사 소개', tab_member:'VIP', mb_hero_1:'QiQa', mb_hero_2:'VIP가 되기', mb_intro:'QiQa는 고향을 떠난 우리 커뮤니티의 공동의 집입니다. 이곳을 모두에게 안전하고 깨끗하며 광고 없이 유지하려면 여러분의 지원이 필요합니다.', mb_free_t:'둘러보기 (무료)', mb_free_d:'홍보 게시물과 공개 공지만 볼 수 있습니다.', mb_mem_t:'회원 — 전체 이용', mb_b1:'모든 가이드 읽기 (법률, 절차, 업데이트)', mb_b2:'프로필에 회원 배지', mb_b3:'건강한 커뮤니티 지원', mb_pick:'플랜 선택', mb_month:'1개월', mb_6month:'6개월', mb_year:'1년', mb_popular:'인기', mb_best:'최고의 가치', mb_pledge:'여러분의 기여는 모두를 위해 QiQa를 유지하는 데 도움이 됩니다 — 함께 건강한 커뮤니티를 만들어요.', mb_pay_t:'Swish로 결제하고 가입', mb_pay_step:'072-567 11 11로 금액을 Swish하고 메시지에 "회원 [플랜] + 이메일"을 적어주세요. 곧 활성화됩니다.', mb_you_member:'회원이십니다 💚', mb_until:'유효 기간', cr_use_t:'크레딧 사용처:', cr_use_1:'🌸 꽃 보내기 / 👏 박수 / 👋 인사 — 1 크레딧', cr_use_5:'🎥 5~8초 인사 영상 — 5 크레딧', cr_swish_t:'Swish 코드 스캔 — {n} 크레딧 패키지 ({price} kr)', cr_amt:'스캔하면 {price} kr 금액이 자동 입력됩니다.', cr_s1:'코드 스캔 → {price} kr 송금 확인', cr_s2:'"Meddelande"(메시지) 칸에 로그인 이메일을 적어주세요', cr_s3:'크레딧이 곧 계정에 추가됩니다',
+    tab_friends:'친구 찾기', tab_translate:'통역', tab_services:'QTT 서비스', tab_about:'회사 소개', tab_member:'VIP', mb_hero_1:'QiQa', mb_hero_2:'VIP가 되기', mb_intro:'QiQa는 고향을 떠난 우리 커뮤니티의 공동의 집입니다. 이곳을 모두에게 안전하고 깨끗하며 광고 없이 유지하려면 여러분의 지원이 필요합니다.', mb_free_t:'둘러보기 (무료)', mb_free_d:'홍보 게시물과 공개 공지만 볼 수 있습니다.', mb_mem_t:'회원 — 전체 이용', mb_b1:'모든 가이드 읽기 (법률, 절차, 업데이트)', mb_b2:'프로필에 회원 배지', mb_b3:'건강한 커뮤니티 지원', mb_pick:'플랜 선택', mb_month:'1개월', mb_6month:'6개월', mb_year:'1년', mb_popular:'인기', mb_best:'최고의 가치', mb_pledge:'여러분의 기여는 모두를 위해 QiQa를 유지하는 데 도움이 됩니다 — 함께 건강한 커뮤니티를 만들어요.', mb_pay_t:'Swish로 결제하고 가입', mb_pay_step:'072-567 11 11로 금액을 Swish하고 메시지에 "회원 [플랜] + 이메일"을 적어주세요. 곧 활성화됩니다.', mb_you_member:'회원이십니다 💚', mb_until:'유효 기간', cr_use_t:'크레딧 사용처:', cr_use_1:'🌸 꽃 보내기 / 👏 박수 / 👋 인사 — 1 크레딧', cr_use_5:'🎥 5~8초 인사 영상 — 5 크레딧', cr_swish_t:'Swish 코드 스캔 — {n} 크레딧 패키지 ({price} kr)', cr_amt:'스캔하면 {price} kr 금액이 자동 입력됩니다.', cr_s1:'코드 스캔 → {price} kr 송금 확인', cr_s2:'"Meddelande"(메시지) 칸에 로그인 이메일을 적어주세요', cr_s3:'크레딧이 곧 계정에 추가됩니다', cat_all:'전체', cat_food:'음식', cat_shop:'쇼핑', cat_service:'서비스', cat_community:'커뮤니티', cat_kids:'아동용품', cat_vietfood:'베트남 음식', cat_home:'생활용품', cat_carry:'대리 구매', cat_free:'무료 나눔', cat_health:'의료', cat_admin:'서류/행정', cat_legal:'법률', cat_escort:'동행', cat_doctrans:'문서 번역', ty_give:'나눔', ty_swap:'교환', ty_free:'무료', ty_carry:'대리구매', lbl_places:'곳', lbl_you:'나', lbl_joined:'✓ 참여함', lbl_join:'참여', lbl_match_cnt:'명의 잠재적 매칭', lbl_report:'신고', lbl_registered:'✓ 등록됨', lbl_register:'등록', lbl_be_interp:'통역하기', lbl_post_req:'요청 올리기', lbl_vip_member:'VIP 회원', tt_bold:'굵게', tt_italic:'기울임', tt_color:'글자 색', tt_emoji:'이모지', tt_gift:'선물 보내기', tt_credit:'크레딧 충전', tt_theme:'채팅 배경',
     login:'로그인', logout:'로그아웃',
     search_places:'음식, 아시아 마트, 네일 검색…', search_area:'지역으로 검색…',
     search_market:'아동용품, 음식 검색…', search_lang:'언어, 분야로 검색…',
@@ -1532,7 +1540,7 @@ const I18N = {
   },
   tl: {
     tab_home:'Home', tab_places:'Check-in', tab_outings:'Lakad kasama ang mga bata', tab_market:'Palengke',
-    tab_friends:'Maghanap ng kaibigan', tab_translate:'Interpreter', tab_services:'QTT Services', tab_about:'Tungkol sa amin', tab_member:'VIP', mb_hero_1:'Maging', mb_hero_2:'QiQa VIP', mb_intro:'Ang QiQa ay tahanan ng ating komunidad na malayo sa bayan. Para panatilihing ligtas, malinis at walang ad para sa lahat, kailangan namin ang suporta mo.', mb_free_t:'Nagba-browse lang (libre)', mb_free_d:'Nakikita mo lang ang mga promotional bulletin at pampublikong abiso.', mb_mem_t:'Miyembro — buong access', mb_b1:'Basahin lahat ng Gabay (batas, proseso, update)', mb_b2:'Member badge sa profile mo', mb_b3:'Suportahan ang malusog na komunidad', mb_pick:'Piliin ang plano', mb_month:'1 buwan', mb_6month:'6 na buwan', mb_year:'1 taon', mb_popular:'Popular', mb_best:'Pinakasulit', mb_pledge:'Ang kontribusyon mo ay tumutulong na mapanatili ang QiQa para sa lahat — sama-sama tayong bumuo ng malusog na komunidad.', mb_pay_t:'Magbayad gamit ang Swish para sumali', mb_pay_step:'I-Swish ang halaga sa 072-567 11 11, at isulat ang "Miyembro [plano] + email mo" sa mensahe. Ma-aaktibo agad.', mb_you_member:'Miyembro ka na 💚', mb_until:'Valid hanggang', cr_use_t:'Gamitin ang credit para sa:', cr_use_1:'🌸 Magpadala ng bulaklak / 👏 palakpak / 👋 kumaway — 1 credit', cr_use_5:'🎥 5–8s na greeting video — 5 credits', cr_swish_t:'I-scan ang Swish code — {n} credit pack ({price} kr)', cr_amt:'Ang halagang {price} kr ay awtomatikong nakalagay kapag nag-scan.', cr_s1:'I-scan ang code → kumpirmahin ang {price} kr na paglilipat', cr_s2:'Sa "Meddelande" (mensahe), isulat ang iyong login email', cr_s3:'Idaragdag agad ang credits sa iyong account',
+    tab_friends:'Maghanap ng kaibigan', tab_translate:'Interpreter', tab_services:'QTT Services', tab_about:'Tungkol sa amin', tab_member:'VIP', mb_hero_1:'Maging', mb_hero_2:'QiQa VIP', mb_intro:'Ang QiQa ay tahanan ng ating komunidad na malayo sa bayan. Para panatilihing ligtas, malinis at walang ad para sa lahat, kailangan namin ang suporta mo.', mb_free_t:'Nagba-browse lang (libre)', mb_free_d:'Nakikita mo lang ang mga promotional bulletin at pampublikong abiso.', mb_mem_t:'Miyembro — buong access', mb_b1:'Basahin lahat ng Gabay (batas, proseso, update)', mb_b2:'Member badge sa profile mo', mb_b3:'Suportahan ang malusog na komunidad', mb_pick:'Piliin ang plano', mb_month:'1 buwan', mb_6month:'6 na buwan', mb_year:'1 taon', mb_popular:'Popular', mb_best:'Pinakasulit', mb_pledge:'Ang kontribusyon mo ay tumutulong na mapanatili ang QiQa para sa lahat — sama-sama tayong bumuo ng malusog na komunidad.', mb_pay_t:'Magbayad gamit ang Swish para sumali', mb_pay_step:'I-Swish ang halaga sa 072-567 11 11, at isulat ang "Miyembro [plano] + email mo" sa mensahe. Ma-aaktibo agad.', mb_you_member:'Miyembro ka na 💚', mb_until:'Valid hanggang', cr_use_t:'Gamitin ang credit para sa:', cr_use_1:'🌸 Magpadala ng bulaklak / 👏 palakpak / 👋 kumaway — 1 credit', cr_use_5:'🎥 5–8s na greeting video — 5 credits', cr_swish_t:'I-scan ang Swish code — {n} credit pack ({price} kr)', cr_amt:'Ang halagang {price} kr ay awtomatikong nakalagay kapag nag-scan.', cr_s1:'I-scan ang code → kumpirmahin ang {price} kr na paglilipat', cr_s2:'Sa "Meddelande" (mensahe), isulat ang iyong login email', cr_s3:'Idaragdag agad ang credits sa iyong account', cat_all:'Lahat', cat_food:'Pagkain', cat_shop:'Shopping', cat_service:'Serbisyo', cat_community:'Komunidad', cat_kids:'Gamit ng bata', cat_vietfood:'Pagkaing Vietnamese', cat_home:'Gamit sa bahay', cat_carry:'Pakidala', cat_free:'Libreng bigay', cat_health:'Kalusugan', cat_admin:'Dokumento/Admin', cat_legal:'Legal', cat_escort:'Pagsama', cat_doctrans:'Pagsasalin ng dokumento', ty_give:'Bigay', ty_swap:'Palit', ty_free:'Libre', ty_carry:'Pakidala', lbl_places:'lugar', lbl_you:'Ikaw', lbl_joined:'✓ Sumali na', lbl_join:'Sumali', lbl_match_cnt:'posibleng match', lbl_report:'I-report', lbl_registered:'✓ Nakarehistro', lbl_register:'Magrehistro', lbl_be_interp:'Maging interpreter', lbl_post_req:'Mag-post ng request', lbl_vip_member:'VIP member', tt_bold:'Bold', tt_italic:'Italic', tt_color:'Kulay ng teksto', tt_emoji:'Emoji', tt_gift:'Magpadala ng regalo', tt_credit:'Mag-top up ng credit', tt_theme:'Background ng chat',
     login:'Mag-log in', logout:'Mag-log out',
     search_places:'Maghanap ng pagkain, Asian store, kuko…', search_area:'Maghanap ayon sa lugar…',
     search_market:'Maghanap ng gamit ng bata, pagkain…', search_lang:'Maghanap ayon sa wika, larangan…',
@@ -1638,7 +1646,7 @@ const I18N = {
   },
   vi: {
     tab_home:'Trang chủ', tab_places:'Check-in', tab_outings:'Đi chơi cùng con', tab_market:'Chợ cộng đồng',
-    tab_friends:'Kết bạn', tab_translate:'Phiên dịch', tab_services:'Dịch vụ QTT', tab_about:'Về chúng tôi', tab_member:'VIP', mb_hero_1:'Trở thành', mb_hero_2:'VIP QiQa', mb_intro:'QiQa là mái nhà chung của cộng đồng xa quê. Để giữ nơi này luôn an toàn, sạch sẽ và không quảng cáo cho mọi người, chúng tôi cần sự chung tay của bạn.', mb_free_t:'Chỉ ghé xem (miễn phí)', mb_free_d:'Bạn chỉ xem được các bản tin quảng cáo và thông báo công khai.', mb_mem_t:'Thành viên — xem toàn bộ', mb_b1:'Đọc toàn bộ Cẩm nang (luật, thủ tục, tin mới)', mb_b2:'Huy hiệu thành viên trên hồ sơ', mb_b3:'Ủng hộ một cộng đồng lành mạnh', mb_pick:'Chọn gói của bạn', mb_month:'1 tháng', mb_6month:'6 tháng', mb_year:'1 năm', mb_popular:'Phổ biến', mb_best:'Tiết kiệm nhất', mb_pledge:'Khoản đóng góp của bạn giúp chúng tôi duy trì QiQa cho mọi người — cùng nhau xây một cộng đồng lành mạnh.', mb_pay_t:'Thanh toán Swish để tham gia', mb_pay_step:'Swish số tiền tới 072-567 11 11, và ghi "Thành viên [gói] + email của bạn" trong lời nhắn. Tư cách thành viên sẽ được kích hoạt sớm nhất.', mb_you_member:'Bạn là thành viên 💚', mb_until:'Có hiệu lực đến', cr_use_t:'Dùng credit để:', cr_use_1:'🌸 Tặng hoa / 👏 vỗ tay / 👋 chào — 1 credit', cr_use_5:'🎥 Video chào hỏi 5-8 giây — 5 credit', cr_swish_t:'Quét mã Swish — gói {n} credit ({price} kr)', cr_amt:'Số tiền {price} kr đã điền sẵn khi quét.', cr_s1:'Quét mã → xác nhận chuyển {price} kr', cr_s2:'Trong ô "Meddelande" (lời nhắn), ghi email đăng nhập của bạn', cr_s3:'Credit sẽ được cộng vào tài khoản sớm nhất',
+    tab_friends:'Kết bạn', tab_translate:'Phiên dịch', tab_services:'Dịch vụ QTT', tab_about:'Về chúng tôi', tab_member:'VIP', mb_hero_1:'Trở thành', mb_hero_2:'VIP QiQa', mb_intro:'QiQa là mái nhà chung của cộng đồng xa quê. Để giữ nơi này luôn an toàn, sạch sẽ và không quảng cáo cho mọi người, chúng tôi cần sự chung tay của bạn.', mb_free_t:'Chỉ ghé xem (miễn phí)', mb_free_d:'Bạn chỉ xem được các bản tin quảng cáo và thông báo công khai.', mb_mem_t:'Thành viên — xem toàn bộ', mb_b1:'Đọc toàn bộ Cẩm nang (luật, thủ tục, tin mới)', mb_b2:'Huy hiệu thành viên trên hồ sơ', mb_b3:'Ủng hộ một cộng đồng lành mạnh', mb_pick:'Chọn gói của bạn', mb_month:'1 tháng', mb_6month:'6 tháng', mb_year:'1 năm', mb_popular:'Phổ biến', mb_best:'Tiết kiệm nhất', mb_pledge:'Khoản đóng góp của bạn giúp chúng tôi duy trì QiQa cho mọi người — cùng nhau xây một cộng đồng lành mạnh.', mb_pay_t:'Thanh toán Swish để tham gia', mb_pay_step:'Swish số tiền tới 072-567 11 11, và ghi "Thành viên [gói] + email của bạn" trong lời nhắn. Tư cách thành viên sẽ được kích hoạt sớm nhất.', mb_you_member:'Bạn là thành viên 💚', mb_until:'Có hiệu lực đến', cr_use_t:'Dùng credit để:', cr_use_1:'🌸 Tặng hoa / 👏 vỗ tay / 👋 chào — 1 credit', cr_use_5:'🎥 Video chào hỏi 5-8 giây — 5 credit', cr_swish_t:'Quét mã Swish — gói {n} credit ({price} kr)', cr_amt:'Số tiền {price} kr đã điền sẵn khi quét.', cr_s1:'Quét mã → xác nhận chuyển {price} kr', cr_s2:'Trong ô "Meddelande" (lời nhắn), ghi email đăng nhập của bạn', cr_s3:'Credit sẽ được cộng vào tài khoản sớm nhất', cat_all:'Tất cả', cat_food:'Ăn uống', cat_shop:'Mua sắm', cat_service:'Dịch vụ', cat_community:'Cộng đồng', cat_kids:'Đồ trẻ em', cat_vietfood:'Đồ ăn Việt', cat_home:'Đồ gia đình', cat_carry:'Nhờ xách tay', cat_free:'Cho tặng miễn phí', cat_health:'Y tế', cat_admin:'Giấy tờ/Hành chính', cat_legal:'Pháp lý', cat_escort:'Đi cùng thường', cat_doctrans:'Dịch văn bản', ty_give:'Tặng', ty_swap:'Đổi', ty_free:'Miễn phí', ty_carry:'Xách tay', lbl_places:'địa điểm', lbl_you:'Bạn', lbl_joined:'✓ Đã tham gia', lbl_join:'Tham gia', lbl_match_cnt:'người có thể hợp gu', lbl_report:'Báo cáo', lbl_registered:'✓ Đã đăng ký', lbl_register:'Đăng ký', lbl_be_interp:'Làm phiên dịch', lbl_post_req:'Đăng yêu cầu', lbl_vip_member:'Thành viên VIP', tt_bold:'In đậm', tt_italic:'In nghiêng', tt_color:'Màu chữ', tt_emoji:'Biểu cảm', tt_gift:'Tặng quà', tt_credit:'Nạp credit', tt_theme:'Nền phòng chat',
     login:'Đăng nhập', logout:'Đăng xuất',
     search_places:'Tìm phở, chợ Á, nail…', search_area:'Tìm theo khu vực…',
     search_market:'Tìm đồ trẻ em, đồ ăn…', search_lang:'Tìm theo ngôn ngữ, lĩnh vực…',
@@ -1743,7 +1751,7 @@ const I18N = {
   },
   th: {
     tab_home:'หน้าแรก', tab_places:'เช็คอิน', tab_outings:'พาลูกไปเที่ยว', tab_market:'ตลาดชุมชน',
-    tab_friends:'หาเพื่อน', tab_translate:'ล่าม', tab_services:'บริการ QTT', tab_about:'เกี่ยวกับเรา', tab_member:'VIP', mb_hero_1:'มาเป็น', mb_hero_2:'VIP QiQa', mb_intro:'QiQa คือบ้านของชุมชนที่อยู่ไกลบ้าน เพื่อรักษาที่นี่ให้ปลอดภัย สะอาด และไม่มีโฆษณาสำหรับทุกคน เราต้องการการสนับสนุนจากคุณ', mb_free_t:'แค่ดูผ่านๆ (ฟรี)', mb_free_d:'คุณเห็นเฉพาะประกาศโฆษณาและประกาศสาธารณะเท่านั้น', mb_mem_t:'สมาชิก — เข้าถึงทั้งหมด', mb_b1:'อ่านคู่มือทั้งหมด (กฎหมาย ขั้นตอน อัปเดต)', mb_b2:'ตราสมาชิกบนโปรไฟล์', mb_b3:'สนับสนุนชุมชนที่ดี', mb_pick:'เลือกแพ็กเกจ', mb_month:'1 เดือน', mb_6month:'6 เดือน', mb_year:'1 ปี', mb_popular:'ยอดนิยม', mb_best:'คุ้มที่สุด', mb_pledge:'การสนับสนุนของคุณช่วยให้เรารักษา QiQa ไว้เพื่อทุกคน — มาสร้างชุมชนที่ดีไปด้วยกัน', mb_pay_t:'ชำระด้วย Swish เพื่อเข้าร่วม', mb_pay_step:'Swish จำนวนเงินไปที่ 072-567 11 11 และเขียน "สมาชิก [แพ็กเกจ] + อีเมล" ในข้อความ จะเปิดใช้งานเร็วๆ นี้', mb_you_member:'คุณเป็นสมาชิกแล้ว 💚', mb_until:'ใช้ได้ถึง', cr_use_t:'ใช้เครดิตสำหรับ:', cr_use_1:'🌸 ส่งดอกไม้ / 👏 ปรบมือ / 👋 ทักทาย — 1 เครดิต', cr_use_5:'🎥 วิดีโอทักทาย 5-8 วินาที — 5 เครดิต', cr_swish_t:'สแกนโค้ด Swish — แพ็กเกจ {n} เครดิต ({price} kr)', cr_amt:'ยอดเงิน {price} kr จะถูกกรอกอัตโนมัติเมื่อสแกน', cr_s1:'สแกนโค้ด → ยืนยันการโอน {price} kr', cr_s2:'ในช่อง "Meddelande" (ข้อความ) ให้เขียนอีเมลที่ใช้เข้าสู่ระบบ', cr_s3:'เครดิตจะถูกเพิ่มเข้าบัญชีของคุณเร็วๆ นี้',
+    tab_friends:'หาเพื่อน', tab_translate:'ล่าม', tab_services:'บริการ QTT', tab_about:'เกี่ยวกับเรา', tab_member:'VIP', mb_hero_1:'มาเป็น', mb_hero_2:'VIP QiQa', mb_intro:'QiQa คือบ้านของชุมชนที่อยู่ไกลบ้าน เพื่อรักษาที่นี่ให้ปลอดภัย สะอาด และไม่มีโฆษณาสำหรับทุกคน เราต้องการการสนับสนุนจากคุณ', mb_free_t:'แค่ดูผ่านๆ (ฟรี)', mb_free_d:'คุณเห็นเฉพาะประกาศโฆษณาและประกาศสาธารณะเท่านั้น', mb_mem_t:'สมาชิก — เข้าถึงทั้งหมด', mb_b1:'อ่านคู่มือทั้งหมด (กฎหมาย ขั้นตอน อัปเดต)', mb_b2:'ตราสมาชิกบนโปรไฟล์', mb_b3:'สนับสนุนชุมชนที่ดี', mb_pick:'เลือกแพ็กเกจ', mb_month:'1 เดือน', mb_6month:'6 เดือน', mb_year:'1 ปี', mb_popular:'ยอดนิยม', mb_best:'คุ้มที่สุด', mb_pledge:'การสนับสนุนของคุณช่วยให้เรารักษา QiQa ไว้เพื่อทุกคน — มาสร้างชุมชนที่ดีไปด้วยกัน', mb_pay_t:'ชำระด้วย Swish เพื่อเข้าร่วม', mb_pay_step:'Swish จำนวนเงินไปที่ 072-567 11 11 และเขียน "สมาชิก [แพ็กเกจ] + อีเมล" ในข้อความ จะเปิดใช้งานเร็วๆ นี้', mb_you_member:'คุณเป็นสมาชิกแล้ว 💚', mb_until:'ใช้ได้ถึง', cr_use_t:'ใช้เครดิตสำหรับ:', cr_use_1:'🌸 ส่งดอกไม้ / 👏 ปรบมือ / 👋 ทักทาย — 1 เครดิต', cr_use_5:'🎥 วิดีโอทักทาย 5-8 วินาที — 5 เครดิต', cr_swish_t:'สแกนโค้ด Swish — แพ็กเกจ {n} เครดิต ({price} kr)', cr_amt:'ยอดเงิน {price} kr จะถูกกรอกอัตโนมัติเมื่อสแกน', cr_s1:'สแกนโค้ด → ยืนยันการโอน {price} kr', cr_s2:'ในช่อง "Meddelande" (ข้อความ) ให้เขียนอีเมลที่ใช้เข้าสู่ระบบ', cr_s3:'เครดิตจะถูกเพิ่มเข้าบัญชีของคุณเร็วๆ นี้', cat_all:'ทั้งหมด', cat_food:'อาหาร', cat_shop:'ช้อปปิ้ง', cat_service:'บริการ', cat_community:'ชุมชน', cat_kids:'ของเด็ก', cat_vietfood:'อาหารเวียดนาม', cat_home:'ของใช้ในบ้าน', cat_carry:'ฝากหิ้ว', cat_free:'ให้ฟรี', cat_health:'สุขภาพ', cat_admin:'เอกสาร/ราชการ', cat_legal:'กฎหมาย', cat_escort:'พาไปด้วย', cat_doctrans:'แปลเอกสาร', ty_give:'ให้', ty_swap:'แลก', ty_free:'ฟรี', ty_carry:'หิ้ว', lbl_places:'สถานที่', lbl_you:'คุณ', lbl_joined:'✓ เข้าร่วมแล้ว', lbl_join:'เข้าร่วม', lbl_match_cnt:'คนที่อาจเข้ากันได้', lbl_report:'รายงาน', lbl_registered:'✓ ลงทะเบียนแล้ว', lbl_register:'ลงทะเบียน', lbl_be_interp:'เป็นล่าม', lbl_post_req:'โพสต์คำขอ', lbl_vip_member:'สมาชิก VIP', tt_bold:'ตัวหนา', tt_italic:'ตัวเอียง', tt_color:'สีตัวอักษร', tt_emoji:'อิโมจิ', tt_gift:'ส่งของขวัญ', tt_credit:'เติมเครดิต', tt_theme:'พื้นหลังแชท',
     login:'เข้าสู่ระบบ', logout:'ออกจากระบบ',
     search_places:'ค้นหาร้านอาหาร ร้านเอเชีย ทำเล็บ…', search_area:'ค้นหาตามพื้นที่…',
     search_market:'ค้นหาของเด็ก อาหาร…', search_lang:'ค้นหาตามภาษา สาขา…',
@@ -1858,6 +1866,8 @@ function applyLang() {
   document.querySelectorAll('[data-i18n-ph]').forEach(el => {
     el.setAttribute('placeholder', t(el.getAttribute('data-i18n-ph')));
   });
+  document.querySelectorAll('[data-i18n-title]').forEach(el => { el.setAttribute('title', t(el.getAttribute('data-i18n-title'))); });
+  document.querySelectorAll('.chip[data-cat]').forEach(b => { b.textContent = tcat(b.dataset.cat); });
   // cập nhật các phần render động
   if (typeof renderFeed==='function') renderFeed();
   if (typeof renderPlaces==='function') renderPlaces();
@@ -1888,6 +1898,10 @@ let OUTINGS = [];
 // type: tang | doi | free | xach
 const MKT_CATS = ["Tất cả","Đồ trẻ em","Đồ ăn Việt","Đồ gia đình","Nhờ xách tay","Cho tặng miễn phí"];
 const TYPE_LABEL = { tang:"Tặng", doi:"Đổi", free:"Miễn phí", xach:"Xách tay" };
+const CAT_I18N = {"Tất cả":"cat_all","Ăn uống":"cat_food","Mua sắm":"cat_shop","Dịch vụ":"cat_service","Cộng đồng":"cat_community","Đồ trẻ em":"cat_kids","Đồ ăn Việt":"cat_vietfood","Đồ gia đình":"cat_home","Nhờ xách tay":"cat_carry","Cho tặng miễn phí":"cat_free","Y tế":"cat_health","Giấy tờ/Hành chính":"cat_admin","Pháp lý":"cat_legal","Đi cùng thường":"cat_escort","Dịch văn bản":"cat_doctrans"};
+const TYPE_I18N = {tang:"ty_give",doi:"ty_swap",free:"ty_free",xach:"ty_carry"};
+function tcat(x){ return CAT_I18N[x] ? t(CAT_I18N[x]) : x; }
+function ttype(k){ return TYPE_I18N[k] ? t(TYPE_I18N[k]) : (TYPE_LABEL[k]||k); }
 const TYPE_CLASS = { tang:"t-tang", doi:"t-doi", free:"t-free", xach:"t-xach" };
 
 let MARKET = [];
@@ -1988,21 +2002,21 @@ let activeCat = "Tất cả", query = "", mktCat = "Tất cả";
 const chipsEl = document.getElementById('chips');
 CATS.forEach(c => {
   const b = document.createElement('button');
-  b.className = 'chip' + (c==="Tất cả"?' on':''); b.textContent = c;
+  b.className = 'chip' + (c==="Tất cả"?' on':''); b.dataset.cat = c; b.textContent = tcat(c);
   b.onclick = () => { activeCat=c; chipsEl.querySelectorAll('.chip').forEach(x=>x.classList.remove('on')); b.classList.add('on'); renderPlaces(); };
   chipsEl.appendChild(b);
 });
 const mktChipsEl = document.getElementById('mkt-chips');
 MKT_CATS.forEach(c => {
   const b = document.createElement('button');
-  b.className = 'chip' + (c==="Tất cả"?' on':''); b.textContent = c;
+  b.className = 'chip' + (c==="Tất cả"?' on':''); b.dataset.cat = c; b.textContent = tcat(c);
   b.onclick = () => { mktCat=c; mktChipsEl.querySelectorAll('.chip').forEach(x=>x.classList.remove('on')); b.classList.add('on'); renderMarket(); };
   mktChipsEl.appendChild(b);
 });
 const trChipsEl = document.getElementById('tr-chips');
 TR_FIELDS.forEach(c => {
   const b = document.createElement('button');
-  b.className = 'chip' + (c==="Tất cả"?' on':''); b.textContent = c;
+  b.className = 'chip' + (c==="Tất cả"?' on':''); b.dataset.cat = c; b.textContent = tcat(c);
   b.onclick = () => { trField=c; trChipsEl.querySelectorAll('.chip').forEach(x=>x.classList.remove('on')); b.classList.add('on'); renderTranslate(); };
   trChipsEl.appendChild(b);
 });
@@ -2017,7 +2031,7 @@ function renderPlaces() {
     return okCity && okCat && okQ;
   }).sort((a,b)=>(b.noibat-a.noibat)||(b.diem-a.diem));
   const grid = document.getElementById('grid'), empty = document.getElementById('empty');
-  document.getElementById('count').textContent = `${list.length} địa điểm`;
+  document.getElementById('count').textContent = `${list.length} ${t('lbl_places')}`;
   if (!list.length) { grid.innerHTML=''; empty.classList.remove('hidden'); return; }
   empty.classList.add('hidden');
   grid.innerHTML = list.map(p => `
@@ -2095,7 +2109,7 @@ function renderFeed() {
   const list = OUTINGS.filter(o => o.tp===activeCity && (!query || [o.host,o.khuvuc,o.diadiem,o.note,o.tuoi].some(s=>String(s||'').toLowerCase().includes(query))));
   const feed = document.getElementById('feed');
   if (!list.length) { feed.innerHTML = '<div class="empty">'+t('empty_outings')+'</div>'; return; }
-  const me = currentUser ? (currentUser.ten||'Bạn') : null;
+  const me = currentUser ? (currentUser.ten||t('lbl_you')) : null;
   feed.innerHTML = list.map((o,idx) => {
     const col = (o.color!==undefined && o.color!=='') ? Number(o.color) : (idx % AV.length);
     const going = Array.isArray(o.going) ? o.going : [];
@@ -2121,7 +2135,7 @@ function renderFeed() {
         <div style="display:flex;gap:6px;align-items:center">
           ${ownsPost(o)?`<button class="edit-post" title="${t('post_edit')}" onclick="openCreate(OUTINGS.find(x=>String(x.id)==='${o.id}'))">✎</button>`:''}
           ${ownsPost(o)?delBtnHTML('outing', o.id):''}
-          <button class="join ${joined?'joined':''}" onclick="toggleJoin('${o.id}')">${joined?'✓ Đã tham gia':'Tham gia'}</button>
+          <button class="join ${joined?'joined':''}" onclick="toggleJoin('${o.id}')">${joined?t('lbl_joined'):t('lbl_join')}</button>
         </div>
       </div>
     </article>`;
@@ -2263,7 +2277,7 @@ function renderMarket() {
   grid.innerHTML = list.map(m => `
     <article class="item">
       <div class="item-img" onclick="openItem('${m.id}')" style="background-image:url('${m.anh}')">
-        <span class="tag-type ${TYPE_CLASS[m.type]}">${TYPE_LABEL[m.type]}</span>
+        <span class="tag-type ${TYPE_CLASS[m.type]}">${ttype(m.type)}</span>
         <span class="tag-cat">${m.cat}</span>
       </div>
       <div class="item-body">
@@ -2287,7 +2301,7 @@ function openItem(id) {
     <div class="sheet-img" style="background-image:url('${m.anh}')"></div>
     <div class="sheet-body">
       <h2>${m.title}</h2>
-      <div class="sub"><span class="tag-type ${TYPE_CLASS[m.type]}" style="position:static;display:inline-block">${TYPE_LABEL[m.type]}</span> · ${m.cat} · ${m.khuvuc}</div>
+      <div class="sub"><span class="tag-type ${TYPE_CLASS[m.type]}" style="position:static;display:inline-block">${ttype(m.type)}</span> · ${m.cat} · ${m.khuvuc}</div>
       <p style="margin:14px 0;font-size:15px;">${m.desc}</p>
       <div class="info-row"><b>${t('c_poster')}</b><span>${m.who}</span></div>
       <div class="info-row"><b>Khu vực</b><span>${m.khuvuc}</span></div>
@@ -2384,13 +2398,13 @@ function renderDiscover() {
     p.tp===activeCity && !myMatches.map(String).includes(String(p.id)) && !mySkips.map(String).includes(String(p.id)) &&
     (!query || [p.ten,p.khuvuc,p.nghe,p.bio].some(s=>s.toLowerCase().includes(query)))
   );
-  document.getElementById('fr-count').textContent = `${list.length} người có thể hợp gu`;
+  document.getElementById('fr-count').textContent = `${list.length} ${t('lbl_match_cnt')}`;
   const grid = document.getElementById('fr-grid');
   if (!list.length) { grid.innerHTML = '<div class="empty">'+t('empty_discover')+'</div>'; return; }
   grid.innerHTML = list.map(p => `
     <article class="pcard">
       <div class="pcard-img" style="background-image:url('${p.anh}')">
-        <button class="btn-report" onclick="reportUser('${p.ten}')" title="Báo cáo">⚑</button>
+        <button class="btn-report" onclick="reportUser('${p.ten}')" title="${t('lbl_report')}">⚑</button>
         <div class="pcard-grad"></div>
         <div class="pcard-info">
           <div class="pcard-name">${p.ten} <span class="age">${p.tuoi}</span></div>
@@ -2477,7 +2491,7 @@ function renderSgEvents() {
       <div class="o-info"><span class="pill place">📍 ${o.dia_addr}</span></div>
       <div class="o-foot">
         <span class="going-n">${o.going.length} người tham gia</span>
-        <button class="join ${o.joined?'joined':''}" onclick="joinSgEvent(${o.id})">${o.joined?'✓ Đã đăng ký':'Đăng ký'}</button>
+        <button class="join ${o.joined?'joined':''}" onclick="joinSgEvent(${o.id})">${o.joined?t('lbl_registered'):t('lbl_register')}</button>
       </div>
     </article>`).join('');
 }
@@ -2485,7 +2499,7 @@ function joinSgEvent(id) {
   requireLogin(() => {
     const o = SG_EVENTS.find(x=>String(x.id)===String(id));
     o.joined = !o.joined;
-    if (o.joined) o.going.push(currentUser.ten||'Bạn'); else o.going = o.going.filter(g=>g!==(currentUser.ten||'Bạn'));
+    if (o.joined) o.going.push(currentUser.ten||t('lbl_you')); else o.going = o.going.filter(g=>g!==(currentUser.ten||t('lbl_you')));
     renderSgEvents();
   });
 }
@@ -2575,7 +2589,7 @@ function deleteProfile() {
 function switchTrSub(s) {
   trSub = s;
   document.querySelectorAll('#tr-subtabs .sub-tab').forEach(x=>x.classList.toggle('on', x.dataset.sub===s));
-  document.getElementById('tr-fab').textContent = s==='find' ? '＋ Làm phiên dịch' : '＋ Đăng yêu cầu';
+  document.getElementById('tr-fab').textContent = s==='find' ? '＋ '+t('lbl_be_interp') : '＋ '+t('lbl_post_req');
   renderTranslate();
 }
 function onTrFab() { trSub==='find' ? openTrProfileForm() : openTrRequestForm(); }
@@ -3146,9 +3160,9 @@ function renderChatMsg(m) {
     <div class="av" style="background:${AV[avColor(m.email||name)]}${m.anh?`;background-image:url('${m.anh}');background-size:cover;background-position:center`:''}">${m.anh?'':initials(name)}</div>
     <div class="cmsg-body">
       <div class="cmsg-top">
-        <span class="cmsg-name">${escapeHtml(name)}</span>${m.vip?'<span class="vip-badge" title="Thành viên VIP">👑</span>':''}
+        <span class="cmsg-name">${escapeHtml(name)}</span>${m.vip?'<span class="vip-badge" title="'+t('lbl_vip_member')+'">👑</span>':''}
         <span class="cmsg-time">${hh}</span>
-        <button class="cmsg-report" title="Báo cáo" onclick="reportChatMsg('${m.id}')">⚑</button>
+        <button class="cmsg-report" title="${t('lbl_report')}" onclick="reportChatMsg('${m.id}')">⚑</button>
       </div>
       <div class="cmsg-text" id="cmsg-text-${m.id}"${fmt.color?` style="color:${fmt.color}"`:''} data-plain="${escapeHtml(plainChatText(m.noidung||''))}">${fmt.html}</div>
       <div class="cmsg-trans" id="cmsg-trans-${m.id}"></div>
