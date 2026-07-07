@@ -1128,7 +1128,7 @@
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v35-i18n-pay</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v36-i18n-auth</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -1237,7 +1237,7 @@ const I18N = {
     au_resend:'Resend', au_forgot_title:'Forgot password', au_forgot_sub:'Enter your email; we\'ll send a reset code.',
     au_send:'Send code', au_back_login:'← Back to log in', au_reset_title:'Set new password',
     au_reset_sub:'Enter the code sent to', au_code6:'6-digit code', au_new_pass:'New password',
-    au_reset_btn:'Reset password', au_hello:'Hello', au_min6:'Min 6 characters',
+    au_reset_btn:'Reset password', au_need_email_pass:'Please enter your email and password.', au_need_6:'Enter all 6 digits.', au_resending:'Resending code…', au_need_email:'Please enter your email.', au_need_code_pass:'Enter the code and a new password.', au_hello:'Hello', au_min6:'Min 6 characters',
     au_need_ep:'Please enter email and password.', au_need_6:'Enter all 6 digits.',
     err_generic:'Something went wrong.',
     of_title:'Create outing', of_sub:'Invite other families to take the kids out together.',
@@ -1342,7 +1342,7 @@ const I18N = {
     au_resend:'Skicka igen', au_forgot_title:'Glömt lösenord', au_forgot_sub:'Ange din e-post; vi skickar en återställningskod.',
     au_send:'Skicka kod', au_back_login:'← Tillbaka till inloggning', au_reset_title:'Ange nytt lösenord',
     au_reset_sub:'Ange koden som skickades till', au_code6:'6-siffrig kod', au_new_pass:'Nytt lösenord',
-    au_reset_btn:'Återställ lösenord', au_hello:'Hej', au_min6:'Minst 6 tecken',
+    au_reset_btn:'Återställ lösenord', au_need_email_pass:'Ange din e-post och ditt lösenord.', au_need_6:'Ange alla 6 siffror.', au_resending:'Skickar koden igen…', au_need_email:'Ange din e-post.', au_need_code_pass:'Ange koden och ett nytt lösenord.', au_hello:'Hej', au_min6:'Minst 6 tecken',
     au_need_ep:'Ange e-post och lösenord.', au_need_6:'Ange alla 6 siffror.',
     err_generic:'Något gick fel.',
     of_title:'Skapa utflykt', of_sub:'Bjud in andra familjer att ta med barnen ut tillsammans.',
@@ -1448,7 +1448,7 @@ const I18N = {
     au_resend:'다시 보내기', au_forgot_title:'비밀번호 찾기', au_forgot_sub:'이메일을 입력하시면 재설정 코드를 보내드립니다.',
     au_send:'코드 보내기', au_back_login:'← 로그인으로 돌아가기', au_reset_title:'새 비밀번호 설정',
     au_reset_sub:'전송된 코드를 입력한 주소', au_code6:'6자리 코드', au_new_pass:'새 비밀번호',
-    au_reset_btn:'비밀번호 재설정', au_hello:'안녕하세요', au_min6:'최소 6자',
+    au_reset_btn:'비밀번호 재설정', au_need_email_pass:'이메일과 비밀번호를 입력해주세요.', au_need_6:'6자리를 모두 입력해주세요.', au_resending:'코드를 다시 보내는 중…', au_need_email:'이메일을 입력해주세요.', au_need_code_pass:'코드와 새 비밀번호를 입력해주세요.', au_hello:'안녕하세요', au_min6:'최소 6자',
     au_need_ep:'이메일과 비밀번호를 입력하세요.', au_need_6:'6자리를 모두 입력하세요.',
     err_generic:'문제가 발생했습니다.',
     of_title:'나들이 만들기', of_sub:'다른 가족들을 초대해 함께 아이들과 나가보세요.',
@@ -1554,7 +1554,7 @@ const I18N = {
     au_resend:'Ipadala ulit', au_forgot_title:'Nakalimutan ang password', au_forgot_sub:'Ilagay ang email; magpapadala kami ng reset code.',
     au_send:'Ipadala ang code', au_back_login:'← Bumalik sa log in', au_reset_title:'Magtakda ng bagong password',
     au_reset_sub:'Ilagay ang code na ipinadala sa', au_code6:'6-digit na code', au_new_pass:'Bagong password',
-    au_reset_btn:'I-reset ang password', au_hello:'Kumusta', au_min6:'Hindi bababa sa 6 na karakter',
+    au_reset_btn:'I-reset ang password', au_need_email_pass:'Pakilagay ang iyong email at password.', au_need_6:'Ilagay ang lahat ng 6 na numero.', au_resending:'Ipinapadala muli ang code…', au_need_email:'Pakilagay ang iyong email.', au_need_code_pass:'Ilagay ang code at bagong password.', au_hello:'Kumusta', au_min6:'Hindi bababa sa 6 na karakter',
     au_need_ep:'Pakilagay ang email at password.', au_need_6:'Ilagay lahat ng 6 na digit.',
     err_generic:'May nangyaring mali.',
     of_title:'Gumawa ng lakad', of_sub:'Mag-imbita ng ibang pamilya na isama ang mga bata.',
@@ -1660,7 +1660,7 @@ const I18N = {
     au_resend:'Gửi lại', au_forgot_title:'Quên mật khẩu', au_forgot_sub:'Nhập email, chúng tôi sẽ gửi mã đặt lại mật khẩu.',
     au_send:'Gửi mã', au_back_login:'← Quay lại đăng nhập', au_reset_title:'Đặt mật khẩu mới',
     au_reset_sub:'Nhập mã đã gửi tới', au_code6:'Mã 6 số', au_new_pass:'Mật khẩu mới',
-    au_reset_btn:'Đặt lại mật khẩu', au_hello:'Xin chào', au_min6:'Tối thiểu 6 ký tự',
+    au_reset_btn:'Đặt lại mật khẩu', au_need_email_pass:'Vui lòng nhập email và mật khẩu.', au_need_6:'Nhập đủ 6 số.', au_resending:'Đang gửi lại mã…', au_need_email:'Vui lòng nhập email.', au_need_code_pass:'Nhập mã và mật khẩu mới.', au_hello:'Xin chào', au_min6:'Tối thiểu 6 ký tự',
     au_need_ep:'Vui lòng nhập email và mật khẩu.', au_need_6:'Nhập đủ 6 số.',
     err_generic:'Đã có lỗi xảy ra.',
     of_title:'Tạo buổi đi chơi', of_sub:'Rủ các gia đình khác cùng đưa con đi chơi.',
@@ -1765,7 +1765,7 @@ const I18N = {
     au_resend:'ส่งใหม่', au_forgot_title:'ลืมรหัสผ่าน', au_forgot_sub:'กรอกอีเมล เราจะส่งรหัสรีเซ็ตให้',
     au_send:'ส่งรหัส', au_back_login:'← กลับไปเข้าสู่ระบบ', au_reset_title:'ตั้งรหัสผ่านใหม่',
     au_reset_sub:'กรอกรหัสที่ส่งไปที่', au_code6:'รหัส 6 หลัก', au_new_pass:'รหัสผ่านใหม่',
-    au_reset_btn:'รีเซ็ตรหัสผ่าน', au_hello:'สวัสดี', au_min6:'อย่างน้อย 6 ตัวอักษร',
+    au_reset_btn:'รีเซ็ตรหัสผ่าน', au_need_email_pass:'กรุณากรอกอีเมลและรหัสผ่าน', au_need_6:'กรอกให้ครบ 6 หลัก', au_resending:'กำลังส่งรหัสอีกครั้ง…', au_need_email:'กรุณากรอกอีเมล', au_need_code_pass:'กรอกรหัสและรหัสผ่านใหม่', au_hello:'สวัสดี', au_min6:'อย่างน้อย 6 ตัวอักษร',
     au_need_ep:'กรุณากรอกอีเมลและรหัสผ่าน', au_need_6:'กรอกครบ 6 หลัก',
     err_generic:'เกิดข้อผิดพลาด',
     of_title:'สร้างทริป', of_sub:'ชวนครอบครัวอื่นพาลูกไปเที่ยวด้วยกัน',
@@ -3882,54 +3882,54 @@ async function doRegister() {
   const ten = document.getElementById('a-ten').value.trim();
   const email = document.getElementById('a-email').value.trim();
   const pass = document.getElementById('a-pass').value;
-  if (!email || !pass) return authMsg('Vui lòng nhập email và mật khẩu.', 'err');
+  if (!email || !pass) return authMsg(t('au_need_email_pass'), 'err');
   btnLoad('a-btn', true);
   const r = await callApi({ action:'register', email, pass, ten });
-  btnLoad('a-btn', false, 'Gửi mã xác thực');
+  btnLoad('a-btn', false, t('au_send_code'));
   if (r.ok) openAuth('otp', email);
   else authMsg(r.msg, 'err');
 }
 async function doVerify(email) {
   const ma = readOtp();
-  if (ma.length !== 6) return authMsg('Nhập đủ 6 số.', 'err');
+  if (ma.length !== 6) return authMsg(t('au_need_6'), 'err');
   btnLoad('a-btn', true);
   const r = await callApi({ action:'verifyOtp', email, ma });
-  btnLoad('a-btn', false, 'Xác thực');
+  btnLoad('a-btn', false, t('au_verify'));
   if (r.ok) { loginDone(r.user); closeModal(); }
   else authMsg(r.msg, 'err');
 }
 async function doResend(email) {
-  authMsg('Đang gửi lại mã…', 'ok');
+  authMsg(t('au_resending'), 'ok');
   const r = await callApi({ action:'resendOtp', email });
   authMsg(r.msg, r.ok ? 'ok' : 'err');
 }
 async function doLogin() {
   const email = document.getElementById('a-email').value.trim();
   const pass = document.getElementById('a-pass').value;
-  if (!email || !pass) return authMsg('Vui lòng nhập email và mật khẩu.', 'err');
+  if (!email || !pass) return authMsg(t('au_need_email_pass'), 'err');
   btnLoad('a-btn', true);
   const r = await callApi({ action:'login', email, pass });
-  btnLoad('a-btn', false, 'Đăng nhập');
+  btnLoad('a-btn', false, t('au_login'));
   if (r.ok) { loginDone(r.user); closeModal(); if (pendingAction) { const a=pendingAction; pendingAction=null; a(); } }
   else if (r.needVerify) { authMsg(r.msg, 'err'); setTimeout(()=>openAuth('otp', email), 900); }
   else authMsg(r.msg, 'err');
 }
 async function doForgot() {
   const email = document.getElementById('a-email').value.trim();
-  if (!email) return authMsg('Vui lòng nhập email.', 'err');
+  if (!email) return authMsg(t('au_need_email'), 'err');
   btnLoad('a-btn', true);
   const r = await callApi({ action:'forgotPassword', email });
-  btnLoad('a-btn', false, 'Gửi mã');
+  btnLoad('a-btn', false, t('au_send'));
   if (r.ok) openAuth('reset', email);
   else authMsg(r.msg, 'err');
 }
 async function doReset(email) {
   const ma = document.getElementById('a-ma').value.trim();
   const pass = document.getElementById('a-pass').value;
-  if (!ma || !pass) return authMsg('Nhập mã và mật khẩu mới.', 'err');
+  if (!ma || !pass) return authMsg(t('au_need_code_pass'), 'err');
   btnLoad('a-btn', true);
   const r = await callApi({ action:'resetPassword', email, ma, pass });
-  btnLoad('a-btn', false, 'Đặt lại mật khẩu');
+  btnLoad('a-btn', false, t('au_reset_btn'));
   if (r.ok) { authMsg(r.msg, 'ok'); setTimeout(()=>openAuth('login', email), 1200); }
   else authMsg(r.msg, 'err');
 }
