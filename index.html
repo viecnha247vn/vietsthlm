@@ -836,6 +836,13 @@
   .pn-end{ color:var(--muted); font-size:13.5px; margin-bottom:14px; }
   .pn-btn{ background:linear-gradient(177deg, var(--btn-a) 0%, var(--btn-b) 42%, var(--btn-c) 100%); color:var(--btn-text); border:1px solid rgba(255,238,190,.5); border-radius:999px; padding:12px 26px; font-weight:700; font-size:15px; cursor:pointer; font-family:inherit; box-shadow:inset 0 1px 0 rgba(255,255,255,.55), 0 4px 14px rgba(224,137,30,.35); transition:transform .12s ease, box-shadow .18s ease; }
   .pn-btn:hover{ transform:translateY(-1px); box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 8px 22px rgba(230,176,74,.5); }
+  /* ===== 6 THEME MÀU MỚI ===== */
+  body[data-theme="ruby"]{ --paper:#160a0d;--paper-2:#241318;--surface:#221016;--red:#e34b6a;--jade:#e34b6a;--gold:#ff8aa0;--line:#42202a;--muted:#b8909a;--btn-a:#ffc0cf;--btn-b:#f0607f;--btn-c:#d43a5c;--btn-text:#3a0812; }
+  body[data-theme="sunset"]{ --paper:#160d09;--paper-2:#241610;--surface:#22140d;--red:#f0663a;--jade:#f0663a;--gold:#ff9a5f;--line:#3e2416;--muted:#b8988a;--btn-a:#ffc4a0;--btn-b:#f5783f;--btn-c:#dd5620;--btn-text:#3a1200; }
+  body[data-theme="teal"]{ --paper:#08181a;--paper-2:#0f2226;--surface:#0e2024;--red:#22c1c9;--jade:#22c1c9;--gold:#5fe8e0;--line:#1a3a3e;--muted:#8fb2b4;--btn-a:#aef0f0;--btn-b:#3fd4d4;--btn-c:#1f9ea6;--btn-text:#04262a; }
+  body[data-theme="indigo"]{ --paper:#0c0d1a;--paper-2:#161829;--surface:#141628;--red:#7a7ff5;--jade:#7a7ff5;--gold:#a8acff;--line:#282a4a;--muted:#9a9db8;--btn-a:#c8caff;--btn-b:#7a7ff5;--btn-c:#5a5fd8;--btn-text:#12143a; }
+  body[data-theme="slate"]{ --paper:#101214;--paper-2:#1a1d20;--surface:#181b1e;--red:#8ba6c4;--jade:#8ba6c4;--gold:#b8c8d8;--line:#2e343a;--muted:#98a0a8;--btn-a:#d4dee8;--btn-b:#9aafc4;--btn-c:#7488a0;--btn-text:#141c24; }
+  body[data-theme="cream"]{ --paper:#f6f0e6;--paper-2:#efe6d6;--surface:#fffdf8;--ink:#2a1f16;--text-2:#5a4a38;--muted:#8a7a64;--link:#8a5a2a;--red:#a06a2a;--jade:#a06a2a;--gold:#c8922a;--gold-text:#8a5a14;--alert:#c8442e;--line:#e2d6c2;--tint-green:#e6f2ed;--tint-blue:#e8eef5;--tint-amber:#faf0dc;--tint-rose:#fbeae6;--tint-green-bd:#bcd9cf;--tint-amber-bd:#f0dcb0;--tint-rose-bd:#e6b3a8;--header-bg:rgba(246,240,230,.92);--splash-1:#f6f0e6;--splash-2:#e8dcc6;--btn-a:#e8c07a;--btn-b:#cc9038;--btn-c:#a86e1c;--btn-text:#2a1600; }
 </style>
 </head>
 <body>
@@ -1226,7 +1233,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v53-footer-nav</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v54-themes12</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -4162,6 +4169,12 @@ const APP_THEMES=[
  {id:'purple',name:'Tím hoàng hôn',c1:'#0f0a16',c2:'#ac68e6'},
  {id:'rose',name:'Hồng ánh kim',c1:'#160a10',c2:'#e56a94'},
  {id:'light',name:'Sáng',c1:'#fbf7f0',c2:'#9a6f14'},
+ {id:'ruby',name:'Đỏ ngọc',c1:'#160a0d',c2:'#e34b6a'},
+ {id:'sunset',name:'Cam nắng',c1:'#160d09',c2:'#f0663a'},
+ {id:'teal',name:'Mòng két',c1:'#08181a',c2:'#22c1c9'},
+ {id:'indigo',name:'Chàm',c1:'#0c0d1a',c2:'#7a7ff5'},
+ {id:'slate',name:'Than chì',c1:'#101214',c2:'#8ba6c4'},
+ {id:'cream',name:'Kem sáng',c1:'#f6f0e6',c2:'#a06a2a'},
 ];
 function applyTheme(id){ document.body.dataset.theme=id; try{ localStorage.setItem('qiqa_theme',id); }catch(e){} }
 function chooseAppTheme(id){ applyTheme(id); openThemePicker(); }
