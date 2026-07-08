@@ -860,6 +860,12 @@
   .w-lang.on{ border-color:#d99b2b; background:#fdf6e9; }
   .welcome-start{ width:100%; margin-top:22px; padding:14px; border:none; border-radius:14px; background:linear-gradient(177deg,#ffe08a,#f2ba44 42%,#d98f1e); color:#3a2600; font-weight:800; font-size:16px; cursor:pointer; font-family:inherit; box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 5px 16px rgba(224,137,30,.35); }
   .welcome-start:hover{ filter:brightness(1.04); }
+  /* Chọn tông màu trên splash */
+  .splash-themes{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:20px; }
+  .sp-sw{ border:2px solid var(--line); border-radius:10px; padding:0; cursor:pointer; background:none; width:40px; height:40px; overflow:hidden; transition:transform .1s, border-color .15s; }
+  .sp-sw:hover{ transform:translateY(-2px); }
+  .sp-sw.on{ border-color:var(--red); box-shadow:0 0 0 2px rgba(224,137,30,.3); }
+  .sp-sw-c{ display:block; width:100%; height:100%; box-shadow:inset 0 0 0 1px rgba(0,0,0,.08); }
 </style>
 </head>
 <body>
@@ -873,6 +879,8 @@
       <p class="lang-sv"><b>Välkommen!</b> QiQa är en gemenskapsplattform som förenar människor långt hemifrån — så att du kan känna dig trygg och hemma i ditt nya hemland. Hitta restauranger, vänner, hjälp och stöd på ditt eget språk.</p>
       <p class="lang-en"><b>Welcome!</b> QiQa is a community platform connecting people far from home — so you can feel confident and at home in your new country. Find places, friends, help and support in your own language.</p>
     </div>
+    <div class="splash-pick">Välj färgton · Choose your color</div>
+    <div class="splash-themes" id="splashThemes"></div>
     <div class="splash-pick">Välj ditt land · Choose your country</div>
     <div class="flag-grid" id="flagGrid"></div>
   </div>
@@ -1244,26 +1252,13 @@
   </main>
 </div>
 
-<div id="welcome" class="welcome-ov" style="display:none">
-  <div class="welcome-card">
-    <span class="qlogo welcome-logo" role="img" aria-label="QiQa"></span>
-    <h2 class="welcome-title" data-i18n="w_title">Chào mừng đến QiQa</h2>
-    <p class="welcome-sub" data-i18n="w_sub">Chọn tông màu và ngôn ngữ của bạn</p>
-    <div class="welcome-sec-t" data-i18n="w_theme">Tông màu</div>
-    <div id="wThemes" class="welcome-themes"></div>
-    <div class="welcome-sec-t" data-i18n="w_lang">Ngôn ngữ</div>
-    <div id="wLangs" class="welcome-langs"></div>
-    <button class="welcome-start" onclick="finishWelcome()" data-i18n="w_start">Bắt đầu →</button>
-  </div>
-</div>
-
 <div id="pageNext" class="page-next" style="display:none"></div>
 
 <footer class="site-footer">
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v55-welcome</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v56-splash-theme</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -1330,7 +1325,7 @@ function showSplash() {
   if (activeCountry) { sp.classList.add('hide'); applyCountry(); }
   else sp.classList.remove('hide');
 }
-function reopenSplash(){ document.getElementById('splash').classList.remove('hide'); window.scrollTo(0,0); }
+function reopenSplash(){ document.getElementById('splash').classList.remove('hide'); if(typeof renderSplashThemes==='function') renderSplashThemes(); window.scrollTo(0,0); }
 
 // ============================================================
 // ===== I18N — HỆ THỐNG ĐA NGÔN NGỮ (EN nền, VI, TH) =====
@@ -4207,6 +4202,12 @@ const APP_THEMES=[
  {id:'cream',name:'Kem sáng',c1:'#f6f0e6',c2:'#a06a2a'},
 ];
 function applyTheme(id){ document.body.dataset.theme=id; try{ localStorage.setItem('qiqa_theme',id); }catch(e){} }
+function renderSplashThemes(){
+  var el=document.getElementById('splashThemes'); if(!el || typeof APP_THEMES==='undefined') return;
+  var cur=document.body.dataset.theme||'light';
+  el.innerHTML=APP_THEMES.map(function(x){return '<button class="sp-sw'+(cur===x.id?' on':'')+'" onclick="pickSplashTheme(\''+x.id+'\')" title="'+x.name+'"><span class="sp-sw-c" style="background:linear-gradient(135deg,'+x.c1+' 48%,'+x.c2+' 52%)"></span></button>';}).join('');
+}
+function pickSplashTheme(id){ applyTheme(id); renderSplashThemes(); }
 const WELCOME_LANGS=[{code:'vi',flag:'🇻🇳',name:'Tiếng Việt'},{code:'en',flag:'🇬🇧',name:'English'},{code:'sv',flag:'🇸🇪',name:'Svenska'},{code:'ko',flag:'🇰🇷',name:'한국어'},{code:'th',flag:'🇹🇭',name:'ไทย'},{code:'tl',flag:'🇵🇭',name:'Filipino'}];
 function openWelcome(){
   var curTh=document.body.dataset.theme||'light';
@@ -4227,16 +4228,11 @@ function openThemePicker(){
   openModalEl();
 }
 (function(){
-  var th='gold', lang=null, welcomed=false;
-  try{ th=localStorage.getItem('qiqa_theme')||'gold'; lang=localStorage.getItem('qiqa_lang'); welcomed=localStorage.getItem('qiqa_welcomed')==='1'; }catch(e){}
+  var th=null, lang=null;
+  try{ th=localStorage.getItem('qiqa_theme'); lang=localStorage.getItem('qiqa_lang'); }catch(e){}
   if(lang){ LANG=lang; applyLang(); }
-  if(!welcomed){
-    document.body.dataset.theme='light';
-    try{ localStorage.setItem('qiqa_theme','light'); }catch(e){}
-    setTimeout(openWelcome, 250);
-  } else {
-    document.body.dataset.theme=th;
-  }
+  document.body.dataset.theme = th || 'light';
+  if(typeof renderSplashThemes==='function') renderSplashThemes();
 })();
 
 </script>
