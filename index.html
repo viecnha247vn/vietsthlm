@@ -1285,7 +1285,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v74-logo-tight</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v75-add-translator</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -4867,6 +4867,19 @@ let frSub = 'discover';
 // ===== PHIÊN DỊCH DATA =====
 const TR_FIELDS = ["Tất cả","Y tế","Giấy tờ/Hành chính","Pháp lý","Đi cùng thường","Dịch văn bản"];
 let TRANSLATORS = [];
+// ===== NGƯỜI PHIÊN DỊCH NHÚNG SẴN (hiện ở mọi tỉnh) =====
+const TRANSLATOR_SEED = [{
+  id:'queenie-nguyen', seed:1, tp:'Stockholms län', ten:'Queenie Nguyen',
+  khuvuc:'Hela Sverige', langs:['Tiếng Việt','Svenska'],
+  fields:['Y tế','Giấy tờ/Hành chính','Đi cùng thường','Dịch văn bản'],
+  auth:0, kn:'7 năm kinh nghiệm',
+  bio:'Phiên dịch Việt–Thụy Điển tại cơ quan, bệnh viện, trường học và trong đời sống hằng ngày. Qua điện thoại 160 kr/giờ; tại chỗ 220 kr/giờ + phí đi lại; phí đặt lịch +25 kr (không hoàn lại sau khi đã chọn phiên dịch, không hoàn nếu huỷ sau 24 giờ). Đặt lịch nhanh qua qiqa.se.',
+  anh:'', web:'https://qiqa.se', ngay_tao:'2026-07-08T18:30:00'
+}];
+function mergeTranslators(){
+  TRANSLATOR_SEED.forEach(s => { if (!TRANSLATORS.some(x=>String(x.id)===String(s.id))) TRANSLATORS.push(s); });
+}
+mergeTranslators();
 let TR_REQUESTS = [];
 let trSub = 'find', trField = 'Tất cả';
 
@@ -5643,7 +5656,7 @@ function renderTranslate() {
 
 function renderTrFind() {
   const list = TRANSLATORS.filter(t => {
-    const okCity = t.tp===activeCity;
+    const okCity = t.seed || t.tp===activeCity;
     const okField = trField==='Tất cả' || t.fields.includes(trField);
     const okQ = !query || [t.ten,t.khuvuc,t.kn,t.bio,...t.langs,...t.fields].some(s=>s.toLowerCase().includes(query));
     return okCity && okField && okQ;
@@ -5666,7 +5679,7 @@ function renderTrFind() {
         <div style="display:flex;gap:6px;align-items:center">
           ${ownsPost(tr)?`<button class="edit-post" title="${t('post_edit')}" onclick="openTrProfileForm(TRANSLATORS.find(x=>String(x.id)==='${tr.id}'))">✎</button>`:''}
           ${ownsPost(tr)?delBtnHTML('translator', tr.id):''}
-          <a class="tr-contact" href="tel:${tr.sdt.replace(/\s/g,'')}">${t('c_contact')}</a>
+          <a class="tr-contact" href="${tr.web ? tr.web : 'tel:'+((tr.sdt||'').replace(/\s/g,''))}"${tr.web?' target="_blank"':''}>${t('c_contact')}</a>
         </div>
       </div>
     </article>`).join('');
@@ -6842,6 +6855,7 @@ async function loadData() {
     if (Array.isArray(r.market))      MARKET = r.market;
     if (Array.isArray(r.singles))     SINGLES = r.singles.map(normNums);
     if (Array.isArray(r.translators)) TRANSLATORS = r.translators;
+    mergeTranslators();
     if (Array.isArray(r.transreq))    TR_REQUESTS = r.transreq;
     if (Array.isArray(r.events))      EVENTS = r.events;
     if (Array.isArray(r.posts))       POSTS = r.posts;
