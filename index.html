@@ -1260,7 +1260,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v66-chat-height</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v67-translate-retry</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -5180,19 +5180,39 @@ async function translateChatMsg(id, btn) {
     return;
   }
   btn.textContent = t('tr_loading'); btn.disabled = true;
+  const text = (src.dataset.plain||src.textContent);
+  // lỗi tạm thời của Gemini → thử lại tự động
+  const isTransient = (m) => /high demand|overload|temporar|try again|rate|quota|429|500|502|503|504|unavailable|busy/i.test(String(m||''));
+  const sleep = (ms) => new Promise(res=>setTimeout(res, ms));
+  const MAX = 3;               // tổng số lần thử
+  const WAITS = [1200, 2500];  // chờ trước lần thử 2, 3
+  let lastMsg = '';
   try {
-    const r = await callApi({ action:'translate', text: (src.dataset.plain||src.textContent), target: LANG });
-    if (r && r.ok && r.text) {
-      box.textContent = r.text;
-      box.dataset.done = '1';
-      box.style.display = 'block';
-      btn.textContent = t('tr_hide');
-    } else {
-      btn.textContent = t('tr_fail');
-      if (r && r.msg) { box.textContent = '⚠ ' + r.msg; box.style.display = 'block'; box.style.color = '#c8442e'; }
+    for (let attempt = 1; attempt <= MAX; attempt++) {
+      let r = null;
+      try {
+        r = await callApi({ action:'translate', text, target: LANG });
+      } catch(e) { r = { ok:false, msg:'network' }; }
+      if (r && r.ok && r.text) {
+        box.textContent = r.text;
+        box.dataset.done = '1';
+        box.style.display = 'block';
+        box.style.color = '';
+        btn.textContent = t('tr_hide');
+        return;
+      }
+      lastMsg = (r && r.msg) || '';
+      // còn lượt & lỗi tạm thời (hoặc network) → chờ rồi thử lại
+      if (attempt < MAX && (isTransient(lastMsg) || lastMsg === 'network' || !lastMsg)) {
+        btn.textContent = t('tr_loading') + ' (' + (attempt+1) + '/' + MAX + ')';
+        await sleep(WAITS[attempt-1] || 2500);
+        continue;
+      }
+      break; // lỗi không phải tạm thời → dừng
     }
-  } catch(e) {
+    // thất bại sau khi thử hết
     btn.textContent = t('tr_fail');
+    if (lastMsg && lastMsg !== 'network') { box.textContent = '⚠ ' + lastMsg; box.style.display = 'block'; box.style.color = '#c8442e'; }
   } finally {
     btn.disabled = false;
   }
