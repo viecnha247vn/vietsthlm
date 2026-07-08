@@ -1284,7 +1284,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v70-home-feed</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v71-one-next-btn</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -5293,16 +5293,12 @@ function renderHomeFeed() {
     </article>`;
   }).join('');
 
-  // Nút cuối feed: Xem thêm (nếu còn) + chuyển sang mục con kế tiếp
+  // Nút cuối feed: chỉ giữ "Xem thêm" (việc chuyển sang mục kế do thanh điều hướng chung #pageNext lo)
   const hasMore = items.length > homeShown;
-  const ci = TAB_ORDER.indexOf('home');
-  const nextTab = TAB_ORDER[(ci+1) % TAB_ORDER.length] || 'places';
-  const nextName = t('tab_' + nextTab);
-  const footer = `
+  const footer = hasMore ? `
     <div class="feed-foot">
-      ${hasMore ? `<button class="feed-more" onclick="homeShowMore()">${t('feed_more')} ↓</button>` : ''}
-      <button class="feed-next" onclick="switchTab('${nextTab}')">${t('pn_next')}: ${nextName} →</button>
-    </div>`;
+      <button class="feed-more" onclick="homeShowMore()">${t('feed_more')} ↓</button>
+    </div>` : '';
   box.innerHTML = cards + footer;
 }
 
