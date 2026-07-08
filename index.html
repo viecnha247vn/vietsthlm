@@ -936,7 +936,7 @@
             <div class="chat-title" data-i18n="chat_title">💬 Phòng giao lưu</div>
             <div class="chat-sub" data-i18n="chat_sub">Kết nối với mọi người khắp Thụy Điển</div>
           </div>
-          <span class="chat-live" id="chatLive"><span class="live-dot"></span>trực tuyến</span>
+          <span class="chat-live" id="chatLive"><span class="live-dot"></span></span>
         </div>
         <div class="chat-safety" data-i18n="chat_safety">Hãy lịch sự và tôn trọng nhau. Đừng chia sẻ thông tin nhạy cảm (địa chỉ nhà, số tài khoản). Bấm ⚑ để báo cáo tin xấu.</div>
         <div class="chat-messages" id="chatMessages">
@@ -1258,7 +1258,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v60-persian</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v61-chat-bg</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -5253,10 +5253,20 @@ const CHAT_THEMES = [
   { id:'cream',   name:'Kem ấm',   bg:'linear-gradient(160deg,#fdf6ec,#f7ede0)', free:true },
   { id:'mint',    name:'Bạc hà',   bg:'linear-gradient(160deg,#eef7f2,#e2f0ea)', free:true },
   { id:'sky',     name:'Trời xanh',bg:'linear-gradient(160deg,#eef4fb,#e3edf7)', free:true },
-  { id:'sunset',  name:'Hoàng hôn',bg:'linear-gradient(160deg,#fff0e6,#ffe0e6,#ffe9d6)', premium:true, price:19 },
-  { id:'sakura',  name:'Hoa anh đào', bg:'linear-gradient(160deg,#fdeef4,#f7e0ec,#fce8f0)', premium:true, price:19 },
-  { id:'ocean',   name:'Đại dương', bg:'linear-gradient(160deg,#e6f2f7,#d6eaf2,#e0f0f5)', premium:true, price:29 },
-  { id:'night',   name:'Đêm sao',  bg:'linear-gradient(160deg,#2a2438,#3a3450)', premium:true, price:29, dark:true },
+  { id:'sunset',  name:'Hoàng hôn',bg:'linear-gradient(160deg,#fff0e6,#ffe0e6,#ffe9d6)', free:true },
+  { id:'sakura',  name:'Hoa anh đào', bg:'linear-gradient(160deg,#fdeef4,#f7e0ec,#fce8f0)', free:true },
+  { id:'ocean',   name:'Đại dương', bg:'linear-gradient(160deg,#e6f2f7,#d6eaf2,#e0f0f5)', free:true },
+  { id:'night',   name:'Đêm sao',  bg:'linear-gradient(160deg,#2a2438,#3a3450)', free:true, dark:true },
+  { id:'lavender', name:'Oải hương', bg:'linear-gradient(160deg,#f3edfb,#eae0f5)', free:true },
+  { id:'peach',    name:'Đào chín',  bg:'linear-gradient(160deg,#fff0ea,#ffe3d6)', free:true },
+  { id:'lemon',    name:'Chanh tươi', bg:'linear-gradient(160deg,#fdfbe8,#f6f2d4)', free:true },
+  { id:'rose',     name:'Hồng phấn', bg:'linear-gradient(160deg,#fdecef,#f9dbe2)', free:true },
+  { id:'forest',   name:'Rừng xanh', bg:'linear-gradient(160deg,#e8f3ea,#d6ead9)', free:true },
+  { id:'aqua',     name:'Ngọc bích', bg:'linear-gradient(160deg,#e6f6f4,#d3ece8)', free:true },
+  { id:'sand',     name:'Cát vàng',  bg:'linear-gradient(160deg,#f7f1e6,#eee2cf)', free:true },
+  { id:'grape',    name:'Nho tím',   bg:'linear-gradient(160deg,#221a2e,#382a4a)', free:true, dark:true },
+  { id:'coffee',   name:'Cà phê',    bg:'linear-gradient(160deg,#2a2018,#3d2e22)', free:true, dark:true },
+  { id:'slate',    name:'Đêm xám',   bg:'linear-gradient(160deg,#1f2430,#2c3444)', free:true, dark:true },
 ];
 let chatTheme = 'default';
 try { chatTheme = localStorage.getItem('weshare_chat_theme') || 'default'; } catch(e){}
@@ -5274,17 +5284,6 @@ function applyChatTheme(id) {
 function chooseChatTheme(id) {
   const th = CHAT_THEMES.find(x=>x.id===id);
   if (!th) return;
-  if (th.premium) {
-    // Nền cao cấp: cần trả phí để mở khoá (thanh toán sẽ bổ sung sau)
-    document.getElementById('chatPanel').innerHTML = `
-      <div class="ct-locked">
-        <div style="font-size:22px">🔒</div>
-        <div style="font-weight:700;margin:4px 0">Nền "${th.name}" — ${th.price} kr</div>
-        <div style="font-size:13px;color:var(--muted);margin-bottom:8px">Mở khoá để cá nhân hoá phòng chat của bạn.</div>
-        <div style="font-size:12.5px;color:var(--jade)">Thanh toán sẽ sớm ra mắt — liên hệ <b>weshare.sverige@gmail.com</b></div>
-      </div>`;
-    return;
-  }
   applyChatTheme(id);
   closeChatPanel();
 }
@@ -5309,7 +5308,7 @@ function toggleChatPanel(which) {
       <button class="theme-cell${chatTheme===th.id?' on':''}" onclick="chooseChatTheme('${th.id}')">
         <span class="theme-prev" style="background:${th.bg}"></span>
         <span class="theme-name">${th.name}</span>
-        ${th.premium?`<span class="theme-lock">🔒 ${th.price}kr</span>`:''}
+        
       </button>`).join('') + '</div>';
   }
   panel.classList.add('on');
