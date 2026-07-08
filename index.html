@@ -884,6 +884,15 @@
   .ci-code { font-size: 15px; color: #234; margin-bottom: 6px; }
   .ci-code b { font-size: 17px; letter-spacing: 1px; color: #1c7a4d; }
   .ci-hint { font-size: 12px; color: #567; line-height: 1.4; }
+  .feed-foot { display: flex; flex-direction: column; gap: 10px; max-width: 640px; margin: 8px auto 4px; }
+  .feed-more, .feed-next { width: 100%; padding: 13px; border-radius: 14px; font-size: 14.5px; font-weight: 700; cursor: pointer; }
+  .feed-more { border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+  .feed-more:hover { background: var(--tint-amber); }
+  .feed-next { border: none; color: var(--btn-text);
+    background: linear-gradient(177deg, var(--btn-a) 0%, var(--btn-b) 42%, var(--btn-c) 100%);
+    box-shadow: 0 3px 10px rgba(200,150,30,.3), inset 0 1px 0 rgba(255,255,255,.5); transition: transform .1s; }
+  .feed-next:hover { transform: translateY(-1px); }
+  .feed-next:active { transform: scale(.98); }
 </style>
 </head>
 <body>
@@ -1275,7 +1284,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v69-checkin</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v70-home-feed</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -1816,7 +1825,7 @@ const I18N = {
     tr_show:'Turjun',
     tr_hide:'Muuji asalka',
     tr_loading:'Turjumaya…',
-    tr_fail:'Turjumaad way fashilantay',
+    tr_fail:'Turjumaad way fashilantay', feed_more:'Muuji wax dheeraad ah',
   },
   tr: {
     tab_home:'Ana sayfa',
@@ -2283,7 +2292,7 @@ const I18N = {
     tr_show:'Çevir',
     tr_hide:'Orijinali göster',
     tr_loading:'Çevriliyor…',
-    tr_fail:'Çeviri başarısız',
+    tr_fail:'Çeviri başarısız', feed_more:'Daha fazla gör',
   },
   fa: {
     tab_home:'خانه',
@@ -2750,7 +2759,7 @@ const I18N = {
     tr_show:'ترجمه',
     tr_hide:'نمایش اصل',
     tr_loading:'در حال ترجمه…',
-    tr_fail:'ترجمه ناموفق بود',
+    tr_fail:'ترجمه ناموفق بود', feed_more:'نمایش بیشتر',
   },
   ar: {
     tab_home:'الرئيسية',
@@ -3217,7 +3226,7 @@ const I18N = {
     tr_show:'ترجمة',
     tr_hide:'عرض الأصل',
     tr_loading:'جارٍ الترجمة…',
-    tr_fail:'فشلت الترجمة',
+    tr_fail:'فشلت الترجمة', feed_more:'عرض المزيد',
   },
   pl: {
     tab_home:'Główna',
@@ -3684,7 +3693,7 @@ const I18N = {
     tr_show:'Przetłumacz',
     tr_hide:'Pokaż oryginał',
     tr_loading:'Tłumaczenie…',
-    tr_fail:'Tłumaczenie nie powiodło się',
+    tr_fail:'Tłumaczenie nie powiodło się', feed_more:'Pokaż więcej',
   },
   fi: {
     tab_home:'Etusivu',
@@ -4151,7 +4160,7 @@ const I18N = {
     tr_show:'Käännä',
     tr_hide:'Näytä alkuperäinen',
     tr_loading:'Käännetään…',
-    tr_fail:'Käännös epäonnistui',
+    tr_fail:'Käännös epäonnistui', feed_more:'Näytä lisää',
   },
   en: {
     tab_home:'Home', tab_places:'Check-in', tab_outings:'Outings with kids', tab_market:'Marketplace',
@@ -4256,7 +4265,7 @@ const I18N = {
     sh_media_ph:'Paste a YouTube / image / TikTok link…', sh_post:'Post', sh_need:'Please write something to share.',
     sh_empty:'No posts yet. Be the first to share something!', sh_expires:'left', sh_expired:'expiring soon',
     sh_hr:'h', sh_min_short:'m', ev_empty:'No events yet. Be the first to host one!',
-    topic_karaoke:'🎤 Karaoke', topic_dj:'🎧 DJ / Music', topic_talk:'💬 Heart-to-heart', topic_swedish:'🇸🇪 Learn Swedish', topic_game:'🎮 Games', topic_study:'📚 Study together', topic_sport:'⚽ Sports', topic_other:'✨ Other', tr_show:'Translate', tr_hide:'Show original', tr_loading:'Translating…', tr_fail:'Translation failed',
+    topic_karaoke:'🎤 Karaoke', topic_dj:'🎧 DJ / Music', topic_talk:'💬 Heart-to-heart', topic_swedish:'🇸🇪 Learn Swedish', topic_game:'🎮 Games', topic_study:'📚 Study together', topic_sport:'⚽ Sports', topic_other:'✨ Other', tr_show:'Translate', tr_hide:'Show original', tr_loading:'Translating…', tr_fail:'Translation failed', feed_more:'See more',
   },
   sv: {
     tab_home:'Hem', tab_places:'Check-in', tab_outings:'Utflykter med barn', tab_market:'Marknad',
@@ -4337,7 +4346,7 @@ const I18N = {
     sh_media_ph:'Klistra in en YouTube / bild / TikTok-länk…', sh_post:'Publicera', sh_need:'Skriv något att dela.',
     sh_empty:'Inga inlägg än. Bli först med att dela något!', sh_expires:'kvar', sh_expired:'försvinner snart',
     sh_hr:'h', sh_min_short:'m', ev_empty:'Inga event än. Bli först med att skapa ett!',
-    topic_karaoke:'🎤 Karaoke', topic_dj:'🎧 DJ / Musik', topic_talk:'💬 Hjärtligt samtal', topic_swedish:'🇸🇪 Lär dig svenska', topic_game:'🎮 Spel', topic_study:'📚 Plugga ihop', topic_sport:'⚽ Sport', topic_other:'✨ Annat', tr_show:'Översätt', tr_hide:'Visa original', tr_loading:'Översätter…', tr_fail:'Översättning misslyckades',
+    topic_karaoke:'🎤 Karaoke', topic_dj:'🎧 DJ / Musik', topic_talk:'💬 Hjärtligt samtal', topic_swedish:'🇸🇪 Lär dig svenska', topic_game:'🎮 Spel', topic_study:'📚 Plugga ihop', topic_sport:'⚽ Sport', topic_other:'✨ Annat', tr_show:'Översätt', tr_hide:'Visa original', tr_loading:'Översätter…', tr_fail:'Översättning misslyckades', feed_more:'Visa mer',
     trf_medical:'Sjukvård', trf_admin:'Dokument/Myndighet', trf_legal:'Juridik', trf_accompany:'Allmänt sällskap', trf_doc:'Dokumentöversättning',
     pf_title:'Min singelprofil', pf_sub:'Detta visas för andra användare. Du kan radera det när som helst.',
     pf_name:'Visningsnamn', pf_age:'Ålder', pf_area:'Område', pf_job:'Yrke', pf_looking:'Söker',
@@ -4443,7 +4452,7 @@ const I18N = {
     sh_media_ph:'YouTube / 이미지 / TikTok 링크 붙여넣기…', sh_post:'게시', sh_need:'공유할 내용을 작성하세요.',
     sh_empty:'아직 게시물이 없습니다. 첫 게시물을 공유해보세요!', sh_expires:'남음', sh_expired:'곧 사라짐',
     sh_hr:'시간', sh_min_short:'분', ev_empty:'아직 이벤트가 없습니다. 첫 이벤트를 열어보세요!',
-    topic_karaoke:'🎤 노래방', topic_dj:'🎧 DJ / 음악', topic_talk:'💬 속마음 나누기', topic_swedish:'🇸🇪 스웨덴어 배우기', topic_game:'🎮 게임', topic_study:'📚 함께 공부', topic_sport:'⚽ 스포츠', topic_other:'✨ 기타', tr_show:'번역', tr_hide:'원문 보기', tr_loading:'번역 중…', tr_fail:'번역 실패',
+    topic_karaoke:'🎤 노래방', topic_dj:'🎧 DJ / 음악', topic_talk:'💬 속마음 나누기', topic_swedish:'🇸🇪 스웨덴어 배우기', topic_game:'🎮 게임', topic_study:'📚 함께 공부', topic_sport:'⚽ 스포츠', topic_other:'✨ 기타', tr_show:'번역', tr_hide:'원문 보기', tr_loading:'번역 중…', tr_fail:'번역 실패', feed_more:'더 보기',
     trf_medical:'의료', trf_admin:'서류/행정', trf_legal:'법률', trf_accompany:'일반 동행', trf_doc:'문서 번역',
     pf_title:'내 싱글 프로필', pf_sub:'다른 사용자에게 표시됩니다. 언제든 삭제할 수 있습니다.',
     pf_name:'표시 이름', pf_age:'나이', pf_area:'지역', pf_job:'직업', pf_looking:'찾는 대상',
@@ -4549,7 +4558,7 @@ const I18N = {
     sh_media_ph:'Mag-paste ng YouTube / larawan / TikTok link…', sh_post:'I-post', sh_need:'Magsulat ng ibabahagi.',
     sh_empty:'Wala pang post. Ikaw ang mauna!', sh_expires:'natitira', sh_expired:'malapit nang mawala',
     sh_hr:'o', sh_min_short:'m', ev_empty:'Wala pang event. Ikaw ang mauna!',
-    topic_karaoke:'🎤 Karaoke', topic_dj:'🎧 DJ / Musika', topic_talk:'💬 Tapatan ng usap', topic_swedish:'🇸🇪 Matuto ng Swedish', topic_game:'🎮 Mga laro', topic_study:'📚 Sabay mag-aral', topic_sport:'⚽ Isports', topic_other:'✨ Iba pa', tr_show:'Isalin', tr_hide:'Ipakita ang orihinal', tr_loading:'Isinasalin…', tr_fail:'Nabigo ang pagsasalin',
+    topic_karaoke:'🎤 Karaoke', topic_dj:'🎧 DJ / Musika', topic_talk:'💬 Tapatan ng usap', topic_swedish:'🇸🇪 Matuto ng Swedish', topic_game:'🎮 Mga laro', topic_study:'📚 Sabay mag-aral', topic_sport:'⚽ Isports', topic_other:'✨ Iba pa', tr_show:'Isalin', tr_hide:'Ipakita ang orihinal', tr_loading:'Isinasalin…', tr_fail:'Nabigo ang pagsasalin', feed_more:'Tingnan pa',
     trf_medical:'Medikal', trf_admin:'Dokumento/Administratibo', trf_legal:'Legal', trf_accompany:'Pangkalahatang pagsama', trf_doc:'Pagsasalin ng dokumento',
     pf_title:'Aking singles profile', pf_sub:'Ipinapakita ito sa ibang user. Puwede mong burahin anumang oras.',
     pf_name:'Display name', pf_age:'Edad', pf_area:'Lugar', pf_job:'Trabaho', pf_looking:'Hinahanap',
@@ -4679,7 +4688,7 @@ const I18N = {
     sh_media_ph:'Dán link YouTube / ảnh / TikTok…', sh_post:'Đăng', sh_need:'Vui lòng viết nội dung chia sẻ.',
     sh_empty:'Chưa có bài nào. Hãy là người đầu tiên chia sẻ nhé!', sh_expires:'còn lại', sh_expired:'sắp hết hạn',
     sh_hr:'giờ', sh_min_short:'phút', ev_empty:'Chưa có sự kiện nào. Hãy là người đầu tiên tạo nhé!',
-    topic_karaoke:'🎤 Karaoke', topic_dj:'🎧 DJ / Nghe nhạc', topic_talk:'💬 Tâm sự', topic_swedish:'🇸🇪 Học tiếng Thụy Điển', topic_game:'🎮 Game', topic_study:'📚 Học chung', topic_sport:'⚽ Thể thao', topic_other:'✨ Khác', tr_show:'Dịch', tr_hide:'Xem bản gốc', tr_loading:'Đang dịch…', tr_fail:'Dịch không thành công',
+    topic_karaoke:'🎤 Karaoke', topic_dj:'🎧 DJ / Nghe nhạc', topic_talk:'💬 Tâm sự', topic_swedish:'🇸🇪 Học tiếng Thụy Điển', topic_game:'🎮 Game', topic_study:'📚 Học chung', topic_sport:'⚽ Thể thao', topic_other:'✨ Khác', tr_show:'Dịch', tr_hide:'Xem bản gốc', tr_loading:'Đang dịch…', tr_fail:'Dịch không thành công', feed_more:'Xem thêm',
   },
   th: {
     tab_home:'หน้าแรก', tab_places:'เช็คอิน', tab_outings:'พาลูกไปเที่ยว', tab_market:'ตลาดชุมชน',
@@ -4784,7 +4793,7 @@ const I18N = {
     sh_media_ph:'วางลิงก์ YouTube / รูป / TikTok…', sh_post:'โพสต์', sh_need:'กรุณาเขียนเนื้อหาที่จะแชร์',
     sh_empty:'ยังไม่มีโพสต์ มาเป็นคนแรกกันเถอะ!', sh_expires:'เหลือ', sh_expired:'กำลังจะหมดอายุ',
     sh_hr:'ชม.', sh_min_short:'นาที', ev_empty:'ยังไม่มีอีเวนต์ มาเป็นคนแรกกันเถอะ!',
-    topic_karaoke:'🎤 คาราโอเกะ', topic_dj:'🎧 ดีเจ / เพลง', topic_talk:'💬 พูดคุยจากใจ', topic_swedish:'🇸🇪 เรียนภาษาสวีเดน', topic_game:'🎮 เกม', topic_study:'📚 เรียนด้วยกัน', topic_sport:'⚽ กีฬา', topic_other:'✨ อื่นๆ', tr_show:'แปล', tr_hide:'ดูต้นฉบับ', tr_loading:'กำลังแปล…', tr_fail:'แปลไม่สำเร็จ',
+    topic_karaoke:'🎤 คาราโอเกะ', topic_dj:'🎧 ดีเจ / เพลง', topic_talk:'💬 พูดคุยจากใจ', topic_swedish:'🇸🇪 เรียนภาษาสวีเดน', topic_game:'🎮 เกม', topic_study:'📚 เรียนด้วยกัน', topic_sport:'⚽ กีฬา', topic_other:'✨ อื่นๆ', tr_show:'แปล', tr_hide:'ดูต้นฉบับ', tr_loading:'กำลังแปล…', tr_fail:'แปลไม่สำเร็จ', feed_more:'ดูเพิ่มเติม',
   }
 };
 let LANG = 'en';
@@ -4886,6 +4895,7 @@ function updateCityHint() {
 }
 function onCityChange() {
   activeCity = document.getElementById('citySel').value;
+  homeShown = 20;
   try { localStorage.setItem('vietsthlm_lan', activeCity); } catch(e){}
   updateCityHint();
   renderPlaces(); renderFeed(); renderMarket(); renderFriends(); renderTranslate(); renderEvents(); renderShare(); renderArticles(); renderHomeFeed();
@@ -4939,7 +4949,7 @@ function switchTab(tab) {
   if (tab==='share') renderShare();
   if (tab==='articles') renderArticles();
   if (tab==='member') renderMemberPage();
-  if (tab==='home') renderHomeFeed();
+  if (tab==='home') { homeShown = 20; renderHomeFeed(); }
   window.scrollTo(0,0);
 }
 
@@ -4954,7 +4964,7 @@ const CHECKIN_PLACES = [{
   diem:4.8, rev:141, noibat:1,
   anh:'https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=900&q=80',
   map:'https://www.google.com/maps/search/?api=1&query=56.1609068,13.607644&query_place_id=ChIJb5oE4PzjU0YRNuS0AMVPN-M',
-  checkin:{ percent:10 }
+  checkin:{ percent:10 }, ngay_tao:'2026-07-08T18:00:00'
 }];
 const CHECKIN_OFFERS = {};
 CHECKIN_PLACES.forEach(p => { if (p.checkin) CHECKIN_OFFERS[String(p.id)] = p.checkin; });
@@ -5217,10 +5227,13 @@ function feedTimeAgo(ms){
   if (m >= 1) return m + t('feed_ago_m');
   return t('feed_ago_now');
 }
+let homeShown = 20;  // số tin đang hiện trên trang chủ
+function homeShowMore(){ homeShown += 20; renderHomeFeed(); }
 function renderHomeFeed() {
   const box = document.getElementById('home-feed');
   if (!box) return;
   const BADGE = {
+    place:    { tab:'places',   label:'tab_places',      color:'#b07d12', bg:'var(--tint-amber)' },
     market:   { tab:'market',   label:'feed_market',     color:'#c8442e', bg:'var(--tint-amber)' },
     outing:   { tab:'outings',  label:'feed_outing',     color:'#2f8f6b', bg:'var(--tint-green)' },
     event:    { tab:'fun',      label:'feed_event',      color:'#8b5cf6', bg:'#f3e9fb' },
@@ -5228,6 +5241,11 @@ function renderHomeFeed() {
     treq:     { tab:'translate',label:'feed_treq',       color:'#3b7fa6', bg:'var(--tint-blue)' },
   };
   const items = [];
+  // Địa điểm / Check-in (địa điểm có ưu đãi hiện ở mọi tỉnh; địa điểm thường theo tỉnh)
+  PLACES.filter(p => (p.checkin || CHECKIN_OFFERS[String(p.id)]) || p.tp===activeCity).forEach(p=> items.push({
+    type:'place', id:p.id, ms:feedTimeMs(p), who:p.ten||'', anh:p.anh, open:'place',
+    text:(p.loai?('['+p.loai+'] '):'') + (p.mota||''), thumb:(p.anh && p.anh.indexOf('http')===0)?p.anh:'',
+    tag:(p.checkin||CHECKIN_OFFERS[String(p.id)])?('🎁 -'+((p.checkin&&p.checkin.percent)||CHECKIN_OFFERS[String(p.id)].percent)+'%'):'' }));
   // Chợ
   MARKET.filter(m=>m.tp===activeCity).forEach(m=> items.push({
     type:'market', id:m.id, ms:feedTimeMs(m), who:m.who||'', anh:m.anh,
@@ -5250,22 +5268,23 @@ function renderHomeFeed() {
     text:(r.field?('['+r.field+'] '):'') + (r.note||''), thumb:'' }));
 
   items.sort((a,b)=> b.ms - a.ms);
-  const top = items.slice(0, 20);
-  if (!top.length) { box.innerHTML = '<div class="feed-empty">'+t('feed_empty')+'</div>'; return; }
-  box.innerHTML = top.map(it => {
+  if (!items.length) { box.innerHTML = '<div class="feed-empty">'+t('feed_empty')+'</div>'; return; }
+  const top = items.slice(0, homeShown);
+  const cards = top.map(it => {
     const b = BADGE[it.type];
     const name = it.who || '—';
     const ava = it.anh && it.anh.indexOf('http')===0
       ? `background-image:url('${it.anh}')`
       : `background:${AV[avColor(name)]}`;
     const avaTxt = (it.anh && it.anh.indexOf('http')===0) ? '' : initials(name);
+    const click = it.open==='place' ? `openPlace('${it.id}')` : `switchTab('${b.tab}')`;
     return `
-    <article class="feed-card" onclick="switchTab('${b.tab}')">
+    <article class="feed-card" onclick="${click}">
       <div class="feed-top">
         <div class="feed-ava" style="${ava}">${avaTxt}</div>
         <div class="feed-who">
           <div class="feed-name">${escapeHtml(name)}</div>
-          <div class="feed-sub"><span class="feed-badge" style="color:${b.color};background:${b.bg}">${t(b.label)}</span><span>· ${feedTimeAgo(it.ms)}</span></div>
+          <div class="feed-sub"><span class="feed-badge" style="color:${b.color};background:${b.bg}">${t(b.label)}</span>${it.tag?`<span class="feed-badge" style="color:#1c7a4d;background:var(--tint-green)">${it.tag}</span>`:''}<span>· ${feedTimeAgo(it.ms)}</span></div>
         </div>
         <span class="feed-arrow">›</span>
       </div>
@@ -5273,6 +5292,18 @@ function renderHomeFeed() {
       ${it.thumb?`<div class="feed-media" style="background-image:url('${it.thumb}')"></div>`:''}
     </article>`;
   }).join('');
+
+  // Nút cuối feed: Xem thêm (nếu còn) + chuyển sang mục con kế tiếp
+  const hasMore = items.length > homeShown;
+  const ci = TAB_ORDER.indexOf('home');
+  const nextTab = TAB_ORDER[(ci+1) % TAB_ORDER.length] || 'places';
+  const nextName = t('tab_' + nextTab);
+  const footer = `
+    <div class="feed-foot">
+      ${hasMore ? `<button class="feed-more" onclick="homeShowMore()">${t('feed_more')} ↓</button>` : ''}
+      <button class="feed-next" onclick="switchTab('${nextTab}')">${t('pn_next')}: ${nextName} →</button>
+    </div>`;
+  box.innerHTML = cards + footer;
 }
 
 // ===== MARKET =====
