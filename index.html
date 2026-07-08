@@ -446,6 +446,9 @@
   .chat-head { display: flex; align-items: center; gap: 12px; padding: 18px 20px 14px; border-bottom: 1px solid var(--line); }
   .chat-title { font-size: 18px; font-weight: 800; letter-spacing: -.01em; }
   .chat-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .chat-head-center { display: flex; align-items: center; gap: 10px; text-align: center; position: relative; }
+  .chat-head-center .chat-live { margin-left: 0; position: absolute; left: 20px; }
+  .chat-head-center .chat-head-mid { flex: 1; }
   .chat-live { margin-left: auto; font-size: 12px; font-weight: 700; color: var(--jade); white-space: nowrap;
     display: inline-flex; align-items: center; gap: 6px; }
   .live-dot { width: 8px; height: 8px; border-radius: 999px; background: #22c55e; flex-shrink: 0;
@@ -931,14 +934,13 @@
     </div>
     <div class="hs-right">
       <section class="chat-box">
-        <div class="chat-head">
-          <div>
+        <div class="chat-head chat-head-center">
+          <span class="chat-live" id="chatLive"><span class="live-dot"></span></span>
+          <div class="chat-head-mid">
             <div class="chat-title" data-i18n="chat_title">💬 Phòng giao lưu</div>
             <div class="chat-sub" data-i18n="chat_sub">Kết nối với mọi người khắp Thụy Điển</div>
           </div>
-          <span class="chat-live" id="chatLive"><span class="live-dot"></span></span>
         </div>
-        <div class="chat-safety" data-i18n="chat_safety">Hãy lịch sự và tôn trọng nhau. Đừng chia sẻ thông tin nhạy cảm (địa chỉ nhà, số tài khoản). Bấm ⚑ để báo cáo tin xấu.</div>
         <div class="chat-messages" id="chatMessages">
           <div class="chat-empty">…</div>
         </div>
@@ -1258,7 +1260,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v61-chat-bg</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v62-chat-head</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
