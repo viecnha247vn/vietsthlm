@@ -1219,7 +1219,7 @@
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v51-light-theme</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v52-avatar-fix</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -3719,9 +3719,11 @@ async function syncProfile() {
     const r = await callApi({ action:'getProfile', email: currentUser.email });
     if (r && r.ok && r.user) {
       const localAnh = currentUser.anh;
+      const srvAnh = (r.user.anh || '').toString().trim();
+      const srvOk = /^(data:image|https?:\/\/)/.test(srvAnh) && srvAnh.length > 200;
       Object.assign(currentUser, r.user);
-      // nếu máy chủ chưa có ảnh mà máy đang có ảnh tốt → giữ ảnh local, và lưu lên máy chủ
-      if ((!r.user.anh || !String(r.user.anh).trim()) && localAnh) {
+      // Chỉ nhận ảnh từ server nếu nó hợp lệ; nếu không, GIỮ ảnh tốt ở máy (và lưu lại lên server)
+      if (!srvOk && localAnh && /^data:image/.test(String(localAnh))) {
         currentUser.anh = localAnh;
         callApi({ action:'saveProfile', email: currentUser.email, anh: localAnh }).catch(()=>{});
       }
@@ -4086,10 +4088,19 @@ async function onPickPhoto(ev, previewId, storeId, isAvatar) {
   prev.classList.add('loading');
   try {
     // Ảnh đại diện chỉ cần nhỏ (hiển thị 40px) → nén mạnh để chắc chắn lưu được lên Sheet
-    const dataUrl = isAvatar ? await compressImage(file, 160, 0.6) : await compressImage(file, 400, 0.7);
+    let dataUrl;
+    if (isAvatar) {
+      // Nén avatar đảm bảo NHỎ HƠN giới hạn ô Google Sheet (~50k ký tự) để không bị cắt/mất ảnh
+      let px = 128, q = 0.55;
+      dataUrl = await compressImage(file, px, q);
+      while (dataUrl.length > 44000 && q > 0.32) { q -= 0.1; dataUrl = await compressImage(file, px, q); }
+      while (dataUrl.length > 44000 && px > 72) { px -= 20; dataUrl = await compressImage(file, px, 0.4); }
+    } else {
+      dataUrl = await compressImage(file, 400, 0.7);
+    }
     prev.style.backgroundImage = `url('${dataUrl}')`;
     document.getElementById(storeId).value = dataUrl;
-    if (dataUrl.length > 48000) { alert('Ảnh hơi lớn, hãy thử ảnh nhẹ hơn.'); }
+    if (dataUrl.length > 46000) { alert(t('photo_err')); }
   } catch(e) {
     alert(t('photo_err'));
   } finally {
