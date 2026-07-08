@@ -13,6 +13,7 @@
     --ink: #f0e7d8; --paper: #12100b; --paper-2: #1e1913;
     --red: #e0891e; --gold: #e6b04a; --jade: #e0891e; --alert: #e0574a;
     --line: #352d20; --muted: #a7987f;
+    --surface: #1c1712; --btn-a: #ffe08a; --btn-b: #f2ba44; --btn-c: #d98f1e; --btn-text: #3a2600;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -27,20 +28,20 @@
   .splash-logo { width: 96px; height: 96px; border-radius: 999px; object-fit: cover;
     box-shadow: 0 8px 26px rgba(40,30,20,.16); }
   .splash-brand { font-family: 'Poppins', -apple-system, sans-serif; font-size: 40px; font-weight: 600; letter-spacing: -.035em; color: var(--red); margin-top: 14px; }
-  .splash-intro { background: #1c1712; border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px;
+  .splash-intro { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px;
     margin: 20px 0 8px; text-align: left; }
   .splash-intro p { font-size: 14.5px; line-height: 1.55; color: #cdbfa8; }
   .splash-intro .lang-en { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); color: var(--muted); }
   .splash-pick { font-size: 13px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
     color: var(--muted); margin: 24px 0 14px; }
   .flag-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 12px; }
-  .flag-btn { background: #1c1712; border: 1px solid var(--line); border-radius: 14px; padding: 14px 8px;
+  .flag-btn { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 8px;
     cursor: pointer; transition: .15s; font-family: inherit; display: flex; flex-direction: column;
     align-items: center; gap: 7px; }
   .flag-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(40,30,20,.12); border-color: #352d20; }
   .flag-btn .fl { font-size: 34px; line-height: 1; }
   .flag-btn .nm { font-size: 12.5px; font-weight: 600; color: var(--ink); }
-  .country-badge { flex-shrink: 0; background: #1c1712; border: 1px solid var(--line); border-radius: 999px;
+  .country-badge { flex-shrink: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 999px;
     width: 38px; height: 38px; font-size: 20px; cursor: pointer; line-height: 1; padding: 0; }
 
   header { position: sticky; top: 0; z-index: 50; background: rgba(16,12,8,.92);
@@ -56,12 +57,12 @@
   .logo-mark { height: 24px; width: auto; flex: none; margin-right: 5px; }
   .splash-mark { height: 68px; width: auto; display: block; margin: 0 auto 2px; }
   /* Bộ lọc địa điểm nằm giữa thanh trên cùng, luôn hiển thị */
-  .bar-city { display: flex; align-items: center; gap: 6px; background: #1c1712; border: 1px solid var(--line);
+  .bar-city { display: flex; align-items: center; gap: 6px; background: var(--surface); border: 1px solid var(--line);
     border-radius: 999px; padding: 8px 14px; flex-shrink: 0; }
   .bar-city svg { flex-shrink: 0; }
   .bar-city select { border: none; outline: none; background: transparent; font-size: 14.5px; font-weight: 600;
     color: var(--ink); font-family: inherit; cursor: pointer; max-width: 170px; }
-  .search { flex: 1; display: flex; align-items: center; gap: 8px; background: #1c1712;
+  .search { flex: 1; display: flex; align-items: center; gap: 8px; background: var(--surface);
     border: 1px solid var(--line); border-radius: 999px; padding: 9px 16px; min-width: 0; }
   .search input { border: none; outline: none; flex: 1; font-size: 15px; background: transparent;
     color: var(--ink); min-width: 0; font-family: inherit; }
@@ -85,7 +86,7 @@
     .qlogo-h { height: 40px; width: 70px; }
     .tabs { position: fixed; top: 64px; left: 0; bottom: 0; width: 210px; z-index: 55;
       flex-direction: column; gap: 4px; padding: 16px 12px 20px; overflow-y: auto;
-      background: #1c1712; border-right: 1px solid var(--line); }
+      background: var(--surface); border-right: 1px solid var(--line); }
     .tab { padding: 12px 14px; border-radius: 12px; }
     .tab:hover { color: var(--red); background: rgba(154,111,20,.07); }
     .tab:active { transform: scale(.97); }
@@ -100,7 +101,7 @@
   @media (max-width: 899px) {
     .tabs { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
       flex-direction: row; gap: 0; padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
-      background: #1c1712; border-top: 1px solid var(--line); overflow-x: auto;
+      background: var(--surface); border-top: 1px solid var(--line); overflow-x: auto;
       box-shadow: 0 -4px 16px rgba(40,30,20,.06); }
     .tab { flex-direction: column; gap: 3px; align-items: center; justify-content: center;
       min-width: 68px; flex: 1 0 auto; padding: 6px 4px; border-radius: 12px; }
@@ -132,7 +133,7 @@
   .chips { max-width: 1100px; margin: 0 auto; padding: 4px 18px 6px; display: flex; gap: 9px;
     overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .chips::-webkit-scrollbar { display: none; }
-  .chip { flex-shrink: 0; border: 1px solid var(--line); background: #1c1712; border-radius: 999px;
+  .chip { flex-shrink: 0; border: 1px solid var(--line); background: var(--surface); border-radius: 999px;
     padding: 8px 16px; font-size: 14px; font-weight: 600; color: var(--ink); cursor: pointer;
     transition: .15s; font-family: inherit; }
   .chip:hover { border-color: var(--ink); }
@@ -142,7 +143,7 @@
   .count { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
 
   .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
-  .card { background: #1c1712; border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
     cursor: pointer; transition: .18s; display: flex; flex-direction: column; }
   .card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(40,30,20,.10); }
   .thumb { height: 158px; background-size: cover; background-position: center; position: relative; }
@@ -160,7 +161,7 @@
 
   /* outings */
   .feed { display: flex; flex-direction: column; gap: 14px; max-width: 640px; }
-  .outing { background: #1c1712; border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
+  .outing { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
   .o-head { display: flex; align-items: center; gap: 11px; }
   .avatar { width: 42px; height: 42px; border-radius: 999px; flex-shrink: 0; display: flex;
     align-items: center; justify-content: center; font-weight: 800; color: #fff; font-size: 16px; }
@@ -196,7 +197,7 @@
 
   /* marketplace */
   .mkt { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
-  .item { background: #1c1712; border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
+  .item { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
     cursor: pointer; transition: .18s; display: flex; flex-direction: column; }
   .item:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(40,30,20,.10); }
   .item-img { height: 150px; background-size: cover; background-position: center; position: relative; }
@@ -241,7 +242,7 @@
   .cta-row a, .cta-row button { flex: 1; text-align: center; text-decoration: none; font-weight: 600;
     padding: 12px; border-radius: 12px; font-size: 15px; border: none; cursor: pointer; font-family: inherit; }
   .cta-map { background: var(--jade); color: #fff; }
-  .cta-call { background: #1c1712; color: var(--ink); border: 1px solid var(--line); }
+  .cta-call { background: var(--surface); color: var(--ink); border: 1px solid var(--line); }
 
   .field { margin-bottom: 14px; }
   .ev-chips { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 10px; -webkit-overflow-scrolling: touch; }
@@ -253,7 +254,7 @@
   .ev-chip.on { background: var(--jade); color: #fff; border-color: var(--jade); }
   .ev-chip.on:hover { background: var(--jade); filter: brightness(1.08); }
   #ev-grid { display: grid; gap: 14px; }
-  .ev-card { background: #1c1712; border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
+  .ev-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
     transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
   .ev-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,.10); border-color: #352d20; }
   .ev-img { height: 150px; background-size: cover; background-position: center; transition: transform .35s ease; }
@@ -283,7 +284,7 @@
   .ev-past { opacity: .72; }
   .ev-count-host { font-size: 12.5px; color: var(--jade); font-weight: 700; }
   #sh-feed { display: grid; gap: 14px; }
-  .sh-card { background: #1c1712; border: 1px solid var(--line); border-radius: 16px; padding: 15px 16px; }
+  .sh-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 15px 16px; }
   .sh-top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
   .sh-top .avatar { width: 42px; height: 42px; background-size: cover; background-position: center; }
   .sh-who { flex: 1; }
@@ -299,7 +300,7 @@
   .sh-link:hover { background: #17241e; }
   /* Cẩm nang */
   #art-grid { display: grid; gap: 14px; max-width: 720px; margin: 0 auto; }
-  .art-card { background: #1c1712; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; cursor: pointer;
+  .art-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; cursor: pointer;
     transition: transform .16s ease, box-shadow .18s ease, border-color .18s ease; }
   .art-card:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(40,30,20,.10); border-color: #352d20; }
   .art-img { height: 160px; background-size: cover; background-position: center; }
@@ -316,12 +317,12 @@
     border-radius: 10px; font-size: 12.5px; color: #e0b45a; }
   .pw-loading { text-align: center; color: var(--muted); padding: 20px; font-size: 20px; }
   .paywall { margin-top: 18px; border: 2px dashed #352d20; border-radius: 16px; padding: 22px 18px;
-    text-align: center; background: linear-gradient(180deg,#1c1712,#1e1913); }
+    text-align: center; background: linear-gradient(180deg,var(--surface),#1e1913); }
   .pw-lock { font-size: 30px; }
   .pw-title { font-size: 17px; font-weight: 800; margin: 6px 0 4px; }
   .pw-sub { font-size: 14px; color: var(--muted); margin-bottom: 16px; }
   .pw-tiers { display: grid; grid-template-columns: repeat(3,1fr); gap: 9px; margin-bottom: 14px; }
-  .pw-tier { border: 1px solid var(--line); border-radius: 12px; padding: 13px 6px; background: #1c1712; }
+  .pw-tier { border: 1px solid var(--line); border-radius: 12px; padding: 13px 6px; background: var(--surface); }
   .pw-tier-name { font-size: 12.5px; color: var(--muted); font-weight: 600; margin-bottom: 5px; }
   .pw-price { font-size: 17px; font-weight: 800; color: var(--ink); line-height: 1.15; }
   .pw-price span { display: block; font-size: 11px; font-weight: 600; color: var(--muted); }
@@ -362,7 +363,7 @@
   .photo-btn:hover { background: #221c13; }
   .field label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
   .field input, .field textarea, .field select { width: 100%; font-family: inherit; font-size: 15px;
-    padding: 11px 13px; border: 1px solid var(--line); border-radius: 11px; background: #1c1712;
+    padding: 11px 13px; border: 1px solid var(--line); border-radius: 11px; background: var(--surface);
     color: var(--ink); outline: none; }
   .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--jade); }
   .field textarea { resize: vertical; min-height: 70px; }
@@ -398,7 +399,7 @@
     text-transform: uppercase; color: var(--muted); margin: 34px 0 18px; }
   /* thẻ điều hướng nhỏ gọn: 5 thẻ/hàng máy tính, 3 thẻ/hàng điện thoại */
   .home-grid { display: grid; gap: 12px; grid-template-columns: repeat(5, 1fr); }
-  .home-card { background: #1c1712; border: 1px solid var(--line); border-radius: 16px; padding: 16px 12px;
+  .home-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px 12px;
     cursor: pointer; transition: transform .16s ease, box-shadow .18s ease, border-color .18s ease;
     display: flex; flex-direction: column; align-items: center; text-align: center; }
   .home-card:hover { transform: translateY(-4px); box-shadow: 0 12px 26px rgba(40,30,20,.10); border-color: #352d20; }
@@ -419,7 +420,7 @@
   /* bảng tin trang chủ (tổng hợp bài mới từ trang con) */
   .home-feed-head { display: flex; align-items: center; justify-content: center; }
   .home-feed { display: grid; gap: 12px; max-width: 640px; margin: 0 auto; }
-  .feed-card { background: #1c1712; border: 1px solid var(--line); border-radius: 16px; padding: 15px 16px;
+  .feed-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 15px 16px;
     cursor: pointer; transition: transform .16s ease, box-shadow .18s ease, border-color .18s ease; }
   .feed-card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(40,30,20,.09); border-color: #352d20; }
   .feed-top { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; }
@@ -438,7 +439,7 @@
   .feed-empty { text-align: center; color: var(--muted); padding: 30px 16px; font-size: 14px; }
 
   /* community chat */
-  .chat-box { width: 100%; margin: 0; background: #1c1712; border: 1px solid var(--line);
+  .chat-box { width: 100%; margin: 0; background: var(--surface); border: 1px solid var(--line);
     border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(40,30,20,.08); }
   .chat-head { display: flex; align-items: center; gap: 12px; padding: 18px 20px 14px; border-bottom: 1px solid var(--line); }
   .chat-title { font-size: 18px; font-weight: 800; letter-spacing: -.01em; }
@@ -480,22 +481,22 @@
   /* thanh công cụ định dạng */
   .chat-toolbar { display: none; gap: 4px; padding: 6px 16px 0; align-items: center; }
   .chat-toolbar.on { display: flex; }
-  .chat-toolbar button { border: 1px solid var(--line); background: #1c1712; border-radius: 8px; cursor: pointer;
+  .chat-toolbar button { border: 1px solid var(--line); background: var(--surface); border-radius: 8px; cursor: pointer;
     font-size: 14px; padding: 5px 9px; color: var(--ink); font-family: inherit; transition: background .15s ease, border-color .15s ease; }
   .chat-toolbar button:hover { background: var(--paper-2); border-color: #352d20; }
   .chat-toolbar .tb-theme { margin-left: auto; font-size: 12.5px; font-weight: 600; color: var(--jade); }
   /* bảng chọn (emoji / màu / nền) */
   .chat-panel { display: none; padding: 0 16px; }
   .chat-panel.on { display: block; padding: 10px 16px 0; }
-  .emoji-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 3px; background: #1c1712;
+  .emoji-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 3px; background: var(--surface);
     border: 1px solid var(--line); border-radius: 12px; padding: 8px; max-height: 150px; overflow-y: auto; }
   .emoji-grid button { border: none; background: none; cursor: pointer; font-size: 20px; padding: 5px; border-radius: 8px; }
   .emoji-grid button:hover { background: var(--paper-2); }
-  .color-row { display: flex; gap: 8px; background: #1c1712; border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+  .color-row { display: flex; gap: 8px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
   .cc-dot { width: 28px; height: 28px; border-radius: 999px; border: 2px solid #352d20; box-shadow: 0 0 0 1px var(--line);
     cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 13px; }
   .cc-dot.on { box-shadow: 0 0 0 2px var(--ink); transform: scale(1.1); }
-  .theme-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; background: #1c1712;
+  .theme-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; background: var(--surface);
     border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
   .theme-cell { border: 2px solid transparent; border-radius: 10px; background: none; cursor: pointer; padding: 4px;
     display: flex; flex-direction: column; align-items: center; gap: 4px; position: relative; font-family: inherit; }
@@ -504,7 +505,7 @@
   .theme-name { font-size: 11px; color: var(--ink); font-weight: 600; }
   .theme-lock { position: absolute; top: 6px; right: 6px; font-size: 9.5px; background: rgba(0,0,0,.6); color: #fff;
     padding: 1px 5px; border-radius: 999px; }
-  .ct-locked { text-align: center; background: linear-gradient(180deg,#1c1712,#1e1913); border: 1px dashed #352d20;
+  .ct-locked { text-align: center; background: linear-gradient(180deg,var(--surface),#1e1913); border: 1px dashed #352d20;
     border-radius: 12px; padding: 16px; }
   .chat-messages.chat-dark .cmsg-text { color: #f0ece5; }
   .chat-messages.chat-dark .cmsg-name { color: #ffd9b0; }
@@ -512,12 +513,12 @@
   /* ví credit + quà tặng */
   .credit-chip { background: linear-gradient(135deg,#241b11,#463818) !important; border-color: #463818 !important;
     font-weight: 700 !important; color: #e0b45a !important; }
-  .gift-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; background: #1c1712;
+  .gift-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; background: var(--surface);
     border: 1px solid var(--line); border-radius: 12px; padding: 10px; max-height: 240px; overflow-y: auto; }
   .gift-grid button { border: 1px solid var(--line); background: var(--paper); border-radius: 14px; cursor: pointer;
     padding: 10px 4px 8px; display: flex; flex-direction: column; align-items: center; gap: 3px; font-family: inherit;
     transition: transform .12s ease, background .15s ease, box-shadow .15s ease; }
-  .gift-grid button:hover { background: #1c1712; transform: translateY(-3px) scale(1.04); box-shadow: 0 6px 14px rgba(0,0,0,.10); }
+  .gift-grid button:hover { background: var(--surface); transform: translateY(-3px) scale(1.04); box-shadow: 0 6px 14px rgba(0,0,0,.10); }
   .gg-ic { width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; }
   .gg-ic svg { width: 46px; height: 46px; display: block; }
   .gg-ic .big-emoji { font-size: 38px; line-height: 1; }
@@ -534,12 +535,12 @@
   .gift-text { font-size: 14px; color: #cbae7e; }
   .credit-packs { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin: 14px 0 4px; }
   .credit-pack { border: 1px solid var(--line); border-radius: 14px; padding: 16px 8px; text-align: center;
-    background: linear-gradient(180deg,#1c1712,#1e1913); cursor: pointer; font-family: inherit; transition: transform .12s ease, border-color .15s ease, box-shadow .15s ease; }
+    background: linear-gradient(180deg,var(--surface),#1e1913); cursor: pointer; font-family: inherit; transition: transform .12s ease, border-color .15s ease, box-shadow .15s ease; }
   .credit-pack:hover { transform: translateY(-2px); }
   .credit-pack.on { border-color: #e6b800; box-shadow: 0 0 0 2px rgba(217,155,43,.35); }
   .cp-amount { font-size: 18px; font-weight: 800; color: #e0b45a; }
   .cp-price { font-size: 14px; color: var(--muted); margin-top: 4px; font-weight: 600; }
-  .swish-box { background: #1c1712; border: 1px solid var(--line); border-radius: 16px; padding: 18px 16px; margin-top: 8px;
+  .swish-box { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 16px; margin-top: 8px;
     display: flex; flex-direction: column; align-items: center; text-align: center; }
   .swish-title { font-weight: 700; font-size: 14px; margin-bottom: 12px; color: var(--ink); }
   .swish-qr { width: 200px; max-width: 78%; height: auto; border-radius: 12px; display: block; margin: 0 auto; }
@@ -548,7 +549,7 @@
     background: var(--paper-2); border-radius: 10px; padding: 11px 13px; width: 100%; }
   .swish-steps b { color: var(--ink); }
   .chat-input-row input { flex: 1; font-family: inherit; font-size: 15px; padding: 11px 15px;
-    border: 1px solid var(--line); border-radius: 999px; outline: none; background: #1c1712; }
+    border: 1px solid var(--line); border-radius: 999px; outline: none; background: var(--surface); }
   .chat-input-row input:focus { border-color: var(--jade); }
   .chat-send { background: var(--jade); color: #fff; border: none; border-radius: 999px; padding: 11px 22px;
     font-weight: 700; font-size: 15px; cursor: pointer; font-family: inherit; }
@@ -559,7 +560,7 @@
 
   /* services (Dịch vụ QTT) */
   .svc-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
-  .svc-card { background: #1c1712; border: 1px solid var(--line); border-radius: 18px; padding: 24px;
+  .svc-card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 24px;
     display: flex; flex-direction: column; }
   .svc-icon { width: 56px; height: 56px; border-radius: 15px; display: flex; align-items: center;
     justify-content: center; font-size: 28px; margin-bottom: 14px; }
@@ -572,7 +573,7 @@
   .svc-btn { background: var(--jade); color: #fff; border: none; border-radius: 12px; padding: 13px;
     font-weight: 700; font-size: 15px; cursor: pointer; font-family: inherit; }
   .svc-btn:hover { filter: brightness(1.07); }
-  .svc-note { background: #1c1712; border: 1px solid var(--line); border-radius: 16px; padding: 20px;
+  .svc-note { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 20px;
     margin-top: 20px; font-size: 14.5px; color: #cdbfa8; line-height: 1.55; }
   .svc-note b { color: var(--ink); }
   .svc-contact { margin-top: 10px; font-weight: 600; }
@@ -581,7 +582,7 @@
   /* about section */
   .about-logo { width: 96px; height: 96px; border-radius: 999px; object-fit: cover;
     box-shadow: 0 6px 20px rgba(40,30,20,.12); margin-bottom: 14px; }
-  .about { max-width: 820px; margin: 40px auto 10px; background: #1c1712; border: 1px solid var(--line);
+  .about { max-width: 820px; margin: 40px auto 10px; background: var(--surface); border: 1px solid var(--line);
     border-radius: 20px; padding: 32px 26px; text-align: center; }
   .about-badge { display: inline-block; background: var(--paper-2); color: var(--jade); font-size: 12.5px;
     font-weight: 700; padding: 5px 14px; border-radius: 999px; letter-spacing: .03em; margin-bottom: 14px; }
@@ -619,7 +620,7 @@
   .mb-plans-t { text-align: center; font-weight: 800; font-size: 17px; margin: 8px 0 14px; }
   .mb-plans { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
   .mb-plan { position: relative; border: 2px solid var(--line); border-radius: 16px; padding: 18px 8px 14px;
-    background: #1c1712; cursor: pointer; font-family: inherit; text-align: center; transition: transform .12s ease, border-color .15s ease, box-shadow .15s ease; }
+    background: var(--surface); cursor: pointer; font-family: inherit; text-align: center; transition: transform .12s ease, border-color .15s ease, box-shadow .15s ease; }
   .mb-plan:hover { transform: translateY(-3px); }
   .mb-plan.sel { border-color: var(--red); box-shadow: 0 0 0 2px rgba(154,111,20,.18); }
   .mb-plan-pop { border-color: #e6b800; }
@@ -647,7 +648,7 @@
   .foot-by { font-size: 14px; margin-top: 14px; color: var(--ink); }
   .foot-by b { color: var(--jade); }
   .foot-mail { display: inline-block; margin-top: 10px; color: var(--jade); font-weight: 700;
-    text-decoration: none; font-size: 14.5px; background: #1c1712; border: 1px solid var(--line);
+    text-decoration: none; font-size: 14.5px; background: var(--surface); border: 1px solid var(--line);
     padding: 9px 18px; border-radius: 999px; }
   .foot-copy { font-size: 12px; color: var(--muted); margin-top: 18px; }
 
@@ -688,7 +689,7 @@
   /* friends */
   .safety.pink { background: #241519; border: 1px solid #4a2e2e; color: #a8336a; }
   .safety.blue { background: #15202c; border: 1px solid #b8d2e4; color: #7fb4d6; }
-  .tr-card { background:#1c1712; border:1px solid var(--line); border-radius:16px; padding:16px; display:flex; flex-direction:column; }
+  .tr-card { background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px; display:flex; flex-direction:column; }
   .tr-top { display:flex; align-items:center; gap:11px; }
   .tr-badge { position:absolute; top:12px; right:12px; background:var(--jade); color:#fff; font-size:10.5px; font-weight:800; padding:3px 8px; border-radius:999px; }
   .tr-name { font-weight:800; font-size:16px; }
@@ -705,7 +706,7 @@
     overflow-x: auto; }
   .sub-tabs::-webkit-scrollbar { display: none; }
   .sub-tab { flex-shrink: 0; padding: 8px 16px; border-radius: 999px; font-size: 14px; font-weight: 600;
-    background: #1c1712; border: 1px solid var(--line); color: var(--ink); cursor: pointer; white-space: nowrap; }
+    background: var(--surface); border: 1px solid var(--line); color: var(--ink); cursor: pointer; white-space: nowrap; }
   .sub-tab.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 
   /* city selector */
@@ -715,14 +716,14 @@
     background: transparent; border: none; outline: none; cursor: pointer; padding: 2px 4px; }
   .city-hint { font-size: 12.5px; color: var(--muted); margin-left: auto; }
 
-  .profile-cta { text-align: center; background: #1c1712; border: 1px solid var(--line);
+  .profile-cta { text-align: center; background: var(--surface); border: 1px solid var(--line);
     border-radius: 18px; padding: 34px 24px; max-width: 480px; margin: 0 auto; }
   .profile-cta .pc-emoji { font-size: 48px; }
   .profile-cta h3 { font-size: 21px; margin: 10px 0 6px; }
   .profile-cta p { color: var(--muted); font-size: 14.5px; margin-bottom: 20px; }
 
   .cards-swipe { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
-  .pcard { background: #1c1712; border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
+  .pcard { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
     display: flex; flex-direction: column; }
   .pcard-img { height: 300px; background-size: cover; background-position: center; position: relative; }
   .pcard-grad { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,20,16,.82) 0%, transparent 45%); }
@@ -760,8 +761,8 @@
   @media(min-width:900px){.tab.on .tab-ic{color:#fff !important}}
   /* NÚT CHÍNH — kính gương vàng, đồng bộ desktop + điện thoại */
   .submit, .chip.on, .join, .cta-map, .ev-chip.on, .ev-chip.on:hover, .ev-join, .home-cta, .chat-send, .chat-login-btn, .svc-btn, .tr-contact, .gg-video {
-    background: linear-gradient(177deg, #ffe08a 0%, #f2ba44 42%, #d98f1e 100%) !important;
-    color: #3a2600 !important;
+    background: linear-gradient(177deg, var(--btn-a) 0%, var(--btn-b) 42%, var(--btn-c) 100%) !important;
+    color: var(--btn-text) !important;
     border: 1px solid rgba(255,238,190,.7) !important;
     box-shadow: inset 0 1px 0 rgba(255,255,255,.65), inset 0 11px 14px -8px rgba(255,255,255,.6), 0 4px 14px rgba(224,137,30,.38), 0 1px 3px rgba(0,0,0,.4) !important;
     text-shadow: 0 1px 0 rgba(255,255,255,.3) !important;
@@ -786,26 +787,40 @@
       color: var(--ink) !important;
     }
     .tabs .tab.on {
-      background: linear-gradient(177deg, #ffe08a 0%, #f2ba44 42%, #d98f1e 100%) !important;
-      color: #3a2600 !important;
+      background: linear-gradient(177deg, var(--btn-a) 0%, var(--btn-b) 42%, var(--btn-c) 100%) !important;
+      color: var(--btn-text) !important;
       border: 1px solid rgba(255,238,190,.7);
       box-shadow: inset 0 1px 0 rgba(255,255,255,.65), inset 0 11px 14px -8px rgba(255,255,255,.6), 0 4px 14px rgba(224,137,30,.4), 0 1px 3px rgba(0,0,0,.4);
     }
-    .tabs .tab.on:hover { background: linear-gradient(177deg, #ffe6a0 0%, #f5c04e 42%, #e0961f 100%) !important; }
-    .tabs .tab.on .tab-tx { color: #3a2600 !important; }
-    .tabs .tab.on .tab-ic { color: #5a3800 !important; }
+    .tabs .tab.on:hover { background: linear-gradient(177deg, var(--btn-a) 0%, var(--btn-b) 42%, var(--btn-c) 100%) !important; }
+    .tabs .tab.on .tab-tx { color: var(--btn-text) !important; }
+    .tabs .tab.on .tab-ic { color: var(--btn-text) !important; }
   }
   /* Thanh dưới (điện thoại): tab đang chọn = gương vàng, đồng bộ desktop */
   @media (max-width: 899px){
     .tabs .tab.on {
-      background: linear-gradient(177deg, #ffe08a 0%, #f2ba44 42%, #d98f1e 100%) !important;
-      color: #3a2600 !important;
+      background: linear-gradient(177deg, var(--btn-a) 0%, var(--btn-b) 42%, var(--btn-c) 100%) !important;
+      color: var(--btn-text) !important;
       border: 1px solid rgba(255,238,190,.6);
       box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 2px 10px rgba(224,137,30,.45);
     }
-    .tabs .tab.on .tab-tx { color: #3a2600 !important; }
-    .tabs .tab.on .tab-ic { color: #5a3800 !important; }
+    .tabs .tab.on .tab-tx { color: var(--btn-text) !important; }
+    .tabs .tab.on .tab-ic { color: var(--btn-text) !important; }
   }
+  /* ===== CÁC THEME MÀU (giữ nền tối, đổi tông nhấn) ===== */
+  body[data-theme="emerald"]{ --paper:#0a1512;--paper-2:#122019;--surface:#111e18;--red:#22b982;--jade:#22b982;--gold:#5fe0a8;--line:#1e3a2e;--muted:#8fb0a2;--btn-a:#aef0cd;--btn-b:#3fcf94;--btn-c:#1f9e6a;--btn-text:#06251a; }
+  body[data-theme="blue"]{ --paper:#0a0f16;--paper-2:#121a26;--surface:#111826;--red:#4a95e8;--jade:#4a95e8;--gold:#7fbcff;--line:#1e2e42;--muted:#8fa0b6;--btn-a:#b0dcff;--btn-b:#4a9ee8;--btn-c:#2a7ad9;--btn-text:#05203a; }
+  body[data-theme="purple"]{ --paper:#0f0a16;--paper-2:#1a1226;--surface:#181126;--red:#ac68e6;--jade:#ac68e6;--gold:#cf9fff;--line:#2e1e42;--muted:#a290b6;--btn-a:#e6c8ff;--btn-b:#ac68e6;--btn-c:#8a4fd0;--btn-text:#2a1240; }
+  body[data-theme="rose"]{ --paper:#160a10;--paper-2:#26121c;--surface:#241119;--red:#e56a94;--jade:#e56a94;--gold:#ff9ab8;--line:#421e2e;--muted:#b690a0;--btn-a:#ffc4da;--btn-b:#e85f8e;--btn-c:#d94f7a;--btn-text:#3a0a1e; }
+  /* nút 🎨 header + bảng chọn */
+  .theme-pick-btn{ flex-shrink:0; width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .15s; }
+  .theme-pick-btn:hover{ border-color:var(--red); }
+  .app-theme-grid{ display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:8px; }
+  @media(min-width:520px){ .app-theme-grid{ grid-template-columns:repeat(3,1fr); } }
+  .app-theme-cell{ display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 8px;border-radius:14px;border:2px solid var(--line);background:var(--surface);cursor:pointer;font-family:inherit; }
+  .app-theme-cell.on{ border-color:var(--red); box-shadow:0 0 0 2px rgba(224,137,30,.22); }
+  .app-theme-swatch{ width:100%;height:46px;border-radius:10px;box-shadow:inset 0 1px 0 rgba(255,255,255,.18), inset 0 0 0 1px rgba(255,255,255,.06); }
+  .app-theme-nm{ font-size:13px;font-weight:600;color:var(--ink); }
 </style>
 </head>
 <body>
@@ -837,6 +852,7 @@
       <input id="q" type="text" placeholder="Tìm phở, chợ Á, nail…" data-i18n-ph="search_places">
     </div>
     <button id="countryBadge" class="country-badge" onclick="reopenSplash()" title="Đổi quốc gia" style="display:none"></button>
+    <button class="theme-pick-btn" onclick="openThemePicker()" title="Giao diện" aria-label="Giao diện">🎨</button>
     <button id="accBtn" class="acc-btn" onclick="onAccountClick()" data-i18n="login">Đăng nhập</button>
     <span class="city-hint" id="cityHint" style="display:none"></span>
   </div>
@@ -1194,7 +1210,7 @@
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <p class="foot-by"><span data-i18n="foot_by">Một sản phẩm của</span> <b>QTT Solutions</b></p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v49-nav-glass-mobile</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions · Made with 💙 for every community far from home <span style="opacity:.5">· v50-themes</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -1271,7 +1287,7 @@ const COUNTRY_LANG = { se:'sv', vn:'vi', th:'th', kr:'ko', ph:'tl' };
 const I18N = {
   en: {
     tab_home:'Home', tab_places:'Check-in', tab_outings:'Outings with kids', tab_market:'Marketplace',
-    tab_friends:'Make friends', tab_translate:'Interpreter', tab_services:'QTT Services', tab_about:'About us', tab_member:'VIP', mb_hero_1:'Become a', mb_hero_2:'QiQa VIP', mb_intro:'QiQa is a shared home for our community far from home. To keep this place safe, clean and ad-free for everyone, we need your support.', mb_free_t:'Just browsing (free)', mb_free_d:'You can see promotional bulletins and public notices only.', mb_mem_t:'Member — full access', mb_b1:'Read all Guides (law, procedures, updates)', mb_b2:'Member badge on your profile', mb_b3:'Support a healthy community', mb_pick:'Choose your plan', mb_month:'1 month', mb_6month:'6 months', mb_year:'1 year', mb_popular:'Popular', mb_best:'Best value', mb_pledge:'Your contribution helps us keep QiQa running for everyone — together we build a healthy community.', mb_pay_t:'Pay with Swish to join', mb_pay_step:'Swish the amount to 072-567 11 11, and write "Member [plan] + your email" in the message. Your membership will be activated shortly.', mb_you_member:'You are a member 💚', mb_until:'Valid until', cr_use_t:'Use credit for:', cr_use_1:'🌸 Send flowers / 👏 clap / 👋 wave — 1 credit', cr_use_5:'🎥 5–8s greeting video — 5 credits', cr_swish_t:'Scan the Swish code — {n} credit pack ({price} kr)', cr_amt:'The {price} kr amount is pre-filled when you scan.', cr_s1:'Scan the code → confirm the {price} kr transfer', cr_s2:'In the "Meddelande" (message) field, write your login email', cr_s3:'Credits will be added to your account shortly', cat_all:'All', cat_food:'Food & drink', cat_shop:'Shopping', cat_service:'Services', cat_community:'Community', cat_kids:'For kids', cat_vietfood:'Vietnamese food', cat_home:'Household', cat_carry:'Hand-carry', cat_free:'Free giveaway', cat_health:'Healthcare', cat_admin:'Documents/Admin', cat_legal:'Legal', cat_escort:'Accompaniment', cat_doctrans:'Document translation', ty_give:'Give', ty_swap:'Swap', ty_free:'Free', ty_carry:'Hand-carry', lbl_places:'places', lbl_you:'You', lbl_joined:'✓ Joined', lbl_join:'Join', lbl_match_cnt:'potential matches', lbl_report:'Report', lbl_registered:'✓ Registered', lbl_register:'Register', lbl_be_interp:'Be an interpreter', lbl_post_req:'Post a request', lbl_vip_member:'VIP member', tt_bold:'Bold', tt_italic:'Italic', tt_color:'Text color', tt_emoji:'Emoji', tt_gift:'Send gift', tt_credit:'Top up credit', tt_theme:'Chat background',
+    tab_friends:'Make friends', tab_translate:'Interpreter', tab_services:'QTT Services', tab_about:'About us', tab_member:'VIP', mb_hero_1:'Become a', mb_hero_2:'QiQa VIP', mb_intro:'QiQa is a shared home for our community far from home. To keep this place safe, clean and ad-free for everyone, we need your support.', mb_free_t:'Just browsing (free)', mb_free_d:'You can see promotional bulletins and public notices only.', mb_mem_t:'Member — full access', mb_b1:'Read all Guides (law, procedures, updates)', mb_b2:'Member badge on your profile', mb_b3:'Support a healthy community', mb_pick:'Choose your plan', mb_month:'1 month', mb_6month:'6 months', mb_year:'1 year', mb_popular:'Popular', mb_best:'Best value', mb_pledge:'Your contribution helps us keep QiQa running for everyone — together we build a healthy community.', mb_pay_t:'Pay with Swish to join', mb_pay_step:'Swish the amount to 072-567 11 11, and write "Member [plan] + your email" in the message. Your membership will be activated shortly.', mb_you_member:'You are a member 💚', mb_until:'Valid until', cr_use_t:'Use credit for:', cr_use_1:'🌸 Send flowers / 👏 clap / 👋 wave — 1 credit', cr_use_5:'🎥 5–8s greeting video — 5 credits', cr_swish_t:'Scan the Swish code — {n} credit pack ({price} kr)', cr_amt:'The {price} kr amount is pre-filled when you scan.', cr_s1:'Scan the code → confirm the {price} kr transfer', cr_s2:'In the "Meddelande" (message) field, write your login email', cr_s3:'Credits will be added to your account shortly', theme_title:'Appearance', theme_sub:'Pick the color tone you like.', cat_all:'All', cat_food:'Food & drink', cat_shop:'Shopping', cat_service:'Services', cat_community:'Community', cat_kids:'For kids', cat_vietfood:'Vietnamese food', cat_home:'Household', cat_carry:'Hand-carry', cat_free:'Free giveaway', cat_health:'Healthcare', cat_admin:'Documents/Admin', cat_legal:'Legal', cat_escort:'Accompaniment', cat_doctrans:'Document translation', ty_give:'Give', ty_swap:'Swap', ty_free:'Free', ty_carry:'Hand-carry', lbl_places:'places', lbl_you:'You', lbl_joined:'✓ Joined', lbl_join:'Join', lbl_match_cnt:'potential matches', lbl_report:'Report', lbl_registered:'✓ Registered', lbl_register:'Register', lbl_be_interp:'Be an interpreter', lbl_post_req:'Post a request', lbl_vip_member:'VIP member', tt_bold:'Bold', tt_italic:'Italic', tt_color:'Text color', tt_emoji:'Emoji', tt_gift:'Send gift', tt_credit:'Top up credit', tt_theme:'Chat background',
     login:'Log in', logout:'Log out',
     search_places:'Search food, Asian store, nails…', search_area:'Search by area…',
     search_market:'Search kids items, food…', search_lang:'Search by language, field…',
@@ -1376,7 +1392,7 @@ const I18N = {
   },
   sv: {
     tab_home:'Hem', tab_places:'Check-in', tab_outings:'Utflykter med barn', tab_market:'Marknad',
-    tab_friends:'Hitta vänner', tab_translate:'Tolk', tab_services:'QTT-tjänster', tab_about:'Om oss', tab_member:'VIP', mb_hero_1:'Bli', mb_hero_2:'QiQa VIP', mb_intro:'QiQa är ett gemensamt hem för vår gemenskap långt hemifrån. För att hålla platsen trygg, ren och reklamfri för alla behöver vi ditt stöd.', mb_free_t:'Bara tittar (gratis)', mb_free_d:'Du ser endast reklaminlägg och offentliga meddelanden.', mb_mem_t:'Medlem — full åtkomst', mb_b1:'Läs alla guider (lagar, rutiner, uppdateringar)', mb_b2:'Medlemsmärke på din profil', mb_b3:'Stöd en sund gemenskap', mb_pick:'Välj din plan', mb_month:'1 månad', mb_6month:'6 månader', mb_year:'1 år', mb_popular:'Populär', mb_best:'Bäst värde', mb_pledge:'Ditt bidrag hjälper oss att hålla QiQa igång för alla — tillsammans bygger vi en sund gemenskap.', mb_pay_t:'Betala med Swish för att gå med', mb_pay_step:'Swisha beloppet till 072-567 11 11 och skriv "Medlem [plan] + din e-post" i meddelandet. Ditt medlemskap aktiveras snart.', mb_you_member:'Du är medlem 💚', mb_until:'Giltig till', cr_use_t:'Använd credit till:', cr_use_1:'🌸 Skicka blommor / 👏 applåd / 👋 vinka — 1 credit', cr_use_5:'🎥 Hälsningsvideo 5–8 sek — 5 credit', cr_swish_t:'Skanna Swish-koden — paket {n} credit ({price} kr)', cr_amt:'Beloppet {price} kr fylls i automatiskt när du skannar.', cr_s1:'Skanna koden → bekräfta överföringen på {price} kr', cr_s2:'I fältet "Meddelande" skriver du din inloggnings-e-post', cr_s3:'Dina credits läggs till på ditt konto inom kort', cat_all:'Alla', cat_food:'Mat & dryck', cat_shop:'Shopping', cat_service:'Tjänster', cat_community:'Gemenskap', cat_kids:'Barnsaker', cat_vietfood:'Vietnamesisk mat', cat_home:'Hushåll', cat_carry:'Handbagage', cat_free:'Ge bort gratis', cat_health:'Sjukvård', cat_admin:'Dokument/Myndighet', cat_legal:'Juridik', cat_escort:'Följe', cat_doctrans:'Dokumentöversättning', ty_give:'Ge', ty_swap:'Byta', ty_free:'Gratis', ty_carry:'Handbagage', lbl_places:'platser', lbl_you:'Du', lbl_joined:'✓ Med', lbl_join:'Gå med', lbl_match_cnt:'möjliga matchningar', lbl_report:'Rapportera', lbl_registered:'✓ Anmäld', lbl_register:'Anmäl', lbl_be_interp:'Bli tolk', lbl_post_req:'Lägg upp förfrågan', lbl_vip_member:'VIP-medlem', tt_bold:'Fet', tt_italic:'Kursiv', tt_color:'Textfärg', tt_emoji:'Emoji', tt_gift:'Skicka gåva', tt_credit:'Fyll på credit', tt_theme:'Chattbakgrund',
+    tab_friends:'Hitta vänner', tab_translate:'Tolk', tab_services:'QTT-tjänster', tab_about:'Om oss', tab_member:'VIP', mb_hero_1:'Bli', mb_hero_2:'QiQa VIP', mb_intro:'QiQa är ett gemensamt hem för vår gemenskap långt hemifrån. För att hålla platsen trygg, ren och reklamfri för alla behöver vi ditt stöd.', mb_free_t:'Bara tittar (gratis)', mb_free_d:'Du ser endast reklaminlägg och offentliga meddelanden.', mb_mem_t:'Medlem — full åtkomst', mb_b1:'Läs alla guider (lagar, rutiner, uppdateringar)', mb_b2:'Medlemsmärke på din profil', mb_b3:'Stöd en sund gemenskap', mb_pick:'Välj din plan', mb_month:'1 månad', mb_6month:'6 månader', mb_year:'1 år', mb_popular:'Populär', mb_best:'Bäst värde', mb_pledge:'Ditt bidrag hjälper oss att hålla QiQa igång för alla — tillsammans bygger vi en sund gemenskap.', mb_pay_t:'Betala med Swish för att gå med', mb_pay_step:'Swisha beloppet till 072-567 11 11 och skriv "Medlem [plan] + din e-post" i meddelandet. Ditt medlemskap aktiveras snart.', mb_you_member:'Du är medlem 💚', mb_until:'Giltig till', cr_use_t:'Använd credit till:', cr_use_1:'🌸 Skicka blommor / 👏 applåd / 👋 vinka — 1 credit', cr_use_5:'🎥 Hälsningsvideo 5–8 sek — 5 credit', cr_swish_t:'Skanna Swish-koden — paket {n} credit ({price} kr)', cr_amt:'Beloppet {price} kr fylls i automatiskt när du skannar.', cr_s1:'Skanna koden → bekräfta överföringen på {price} kr', cr_s2:'I fältet "Meddelande" skriver du din inloggnings-e-post', cr_s3:'Dina credits läggs till på ditt konto inom kort', theme_title:'Utseende', theme_sub:'Välj den färgton du gillar.', cat_all:'Alla', cat_food:'Mat & dryck', cat_shop:'Shopping', cat_service:'Tjänster', cat_community:'Gemenskap', cat_kids:'Barnsaker', cat_vietfood:'Vietnamesisk mat', cat_home:'Hushåll', cat_carry:'Handbagage', cat_free:'Ge bort gratis', cat_health:'Sjukvård', cat_admin:'Dokument/Myndighet', cat_legal:'Juridik', cat_escort:'Följe', cat_doctrans:'Dokumentöversättning', ty_give:'Ge', ty_swap:'Byta', ty_free:'Gratis', ty_carry:'Handbagage', lbl_places:'platser', lbl_you:'Du', lbl_joined:'✓ Med', lbl_join:'Gå med', lbl_match_cnt:'möjliga matchningar', lbl_report:'Rapportera', lbl_registered:'✓ Anmäld', lbl_register:'Anmäl', lbl_be_interp:'Bli tolk', lbl_post_req:'Lägg upp förfrågan', lbl_vip_member:'VIP-medlem', tt_bold:'Fet', tt_italic:'Kursiv', tt_color:'Textfärg', tt_emoji:'Emoji', tt_gift:'Skicka gåva', tt_credit:'Fyll på credit', tt_theme:'Chattbakgrund',
     login:'Logga in', logout:'Logga ut',
     search_places:'Sök mat, asiatisk butik, naglar…', search_area:'Sök efter område…',
     search_market:'Sök barnsaker, mat…', search_lang:'Sök efter språk, område…',
@@ -1482,7 +1498,7 @@ const I18N = {
   },
   ko: {
     tab_home:'홈', tab_places:'체크인', tab_outings:'아이와 나들이', tab_market:'마켓',
-    tab_friends:'친구 찾기', tab_translate:'통역', tab_services:'QTT 서비스', tab_about:'회사 소개', tab_member:'VIP', mb_hero_1:'QiQa', mb_hero_2:'VIP가 되기', mb_intro:'QiQa는 고향을 떠난 우리 커뮤니티의 공동의 집입니다. 이곳을 모두에게 안전하고 깨끗하며 광고 없이 유지하려면 여러분의 지원이 필요합니다.', mb_free_t:'둘러보기 (무료)', mb_free_d:'홍보 게시물과 공개 공지만 볼 수 있습니다.', mb_mem_t:'회원 — 전체 이용', mb_b1:'모든 가이드 읽기 (법률, 절차, 업데이트)', mb_b2:'프로필에 회원 배지', mb_b3:'건강한 커뮤니티 지원', mb_pick:'플랜 선택', mb_month:'1개월', mb_6month:'6개월', mb_year:'1년', mb_popular:'인기', mb_best:'최고의 가치', mb_pledge:'여러분의 기여는 모두를 위해 QiQa를 유지하는 데 도움이 됩니다 — 함께 건강한 커뮤니티를 만들어요.', mb_pay_t:'Swish로 결제하고 가입', mb_pay_step:'072-567 11 11로 금액을 Swish하고 메시지에 "회원 [플랜] + 이메일"을 적어주세요. 곧 활성화됩니다.', mb_you_member:'회원이십니다 💚', mb_until:'유효 기간', cr_use_t:'크레딧 사용처:', cr_use_1:'🌸 꽃 보내기 / 👏 박수 / 👋 인사 — 1 크레딧', cr_use_5:'🎥 5~8초 인사 영상 — 5 크레딧', cr_swish_t:'Swish 코드 스캔 — {n} 크레딧 패키지 ({price} kr)', cr_amt:'스캔하면 {price} kr 금액이 자동 입력됩니다.', cr_s1:'코드 스캔 → {price} kr 송금 확인', cr_s2:'"Meddelande"(메시지) 칸에 로그인 이메일을 적어주세요', cr_s3:'크레딧이 곧 계정에 추가됩니다', cat_all:'전체', cat_food:'음식', cat_shop:'쇼핑', cat_service:'서비스', cat_community:'커뮤니티', cat_kids:'아동용품', cat_vietfood:'베트남 음식', cat_home:'생활용품', cat_carry:'대리 구매', cat_free:'무료 나눔', cat_health:'의료', cat_admin:'서류/행정', cat_legal:'법률', cat_escort:'동행', cat_doctrans:'문서 번역', ty_give:'나눔', ty_swap:'교환', ty_free:'무료', ty_carry:'대리구매', lbl_places:'곳', lbl_you:'나', lbl_joined:'✓ 참여함', lbl_join:'참여', lbl_match_cnt:'명의 잠재적 매칭', lbl_report:'신고', lbl_registered:'✓ 등록됨', lbl_register:'등록', lbl_be_interp:'통역하기', lbl_post_req:'요청 올리기', lbl_vip_member:'VIP 회원', tt_bold:'굵게', tt_italic:'기울임', tt_color:'글자 색', tt_emoji:'이모지', tt_gift:'선물 보내기', tt_credit:'크레딧 충전', tt_theme:'채팅 배경',
+    tab_friends:'친구 찾기', tab_translate:'통역', tab_services:'QTT 서비스', tab_about:'회사 소개', tab_member:'VIP', mb_hero_1:'QiQa', mb_hero_2:'VIP가 되기', mb_intro:'QiQa는 고향을 떠난 우리 커뮤니티의 공동의 집입니다. 이곳을 모두에게 안전하고 깨끗하며 광고 없이 유지하려면 여러분의 지원이 필요합니다.', mb_free_t:'둘러보기 (무료)', mb_free_d:'홍보 게시물과 공개 공지만 볼 수 있습니다.', mb_mem_t:'회원 — 전체 이용', mb_b1:'모든 가이드 읽기 (법률, 절차, 업데이트)', mb_b2:'프로필에 회원 배지', mb_b3:'건강한 커뮤니티 지원', mb_pick:'플랜 선택', mb_month:'1개월', mb_6month:'6개월', mb_year:'1년', mb_popular:'인기', mb_best:'최고의 가치', mb_pledge:'여러분의 기여는 모두를 위해 QiQa를 유지하는 데 도움이 됩니다 — 함께 건강한 커뮤니티를 만들어요.', mb_pay_t:'Swish로 결제하고 가입', mb_pay_step:'072-567 11 11로 금액을 Swish하고 메시지에 "회원 [플랜] + 이메일"을 적어주세요. 곧 활성화됩니다.', mb_you_member:'회원이십니다 💚', mb_until:'유효 기간', cr_use_t:'크레딧 사용처:', cr_use_1:'🌸 꽃 보내기 / 👏 박수 / 👋 인사 — 1 크레딧', cr_use_5:'🎥 5~8초 인사 영상 — 5 크레딧', cr_swish_t:'Swish 코드 스캔 — {n} 크레딧 패키지 ({price} kr)', cr_amt:'스캔하면 {price} kr 금액이 자동 입력됩니다.', cr_s1:'코드 스캔 → {price} kr 송금 확인', cr_s2:'"Meddelande"(메시지) 칸에 로그인 이메일을 적어주세요', cr_s3:'크레딧이 곧 계정에 추가됩니다', theme_title:'테마', theme_sub:'원하는 색상 톤을 선택하세요.', cat_all:'전체', cat_food:'음식', cat_shop:'쇼핑', cat_service:'서비스', cat_community:'커뮤니티', cat_kids:'아동용품', cat_vietfood:'베트남 음식', cat_home:'생활용품', cat_carry:'대리 구매', cat_free:'무료 나눔', cat_health:'의료', cat_admin:'서류/행정', cat_legal:'법률', cat_escort:'동행', cat_doctrans:'문서 번역', ty_give:'나눔', ty_swap:'교환', ty_free:'무료', ty_carry:'대리구매', lbl_places:'곳', lbl_you:'나', lbl_joined:'✓ 참여함', lbl_join:'참여', lbl_match_cnt:'명의 잠재적 매칭', lbl_report:'신고', lbl_registered:'✓ 등록됨', lbl_register:'등록', lbl_be_interp:'통역하기', lbl_post_req:'요청 올리기', lbl_vip_member:'VIP 회원', tt_bold:'굵게', tt_italic:'기울임', tt_color:'글자 색', tt_emoji:'이모지', tt_gift:'선물 보내기', tt_credit:'크레딧 충전', tt_theme:'채팅 배경',
     login:'로그인', logout:'로그아웃',
     search_places:'음식, 아시아 마트, 네일 검색…', search_area:'지역으로 검색…',
     search_market:'아동용품, 음식 검색…', search_lang:'언어, 분야로 검색…',
@@ -1588,7 +1604,7 @@ const I18N = {
   },
   tl: {
     tab_home:'Home', tab_places:'Check-in', tab_outings:'Lakad kasama ang mga bata', tab_market:'Palengke',
-    tab_friends:'Maghanap ng kaibigan', tab_translate:'Interpreter', tab_services:'QTT Services', tab_about:'Tungkol sa amin', tab_member:'VIP', mb_hero_1:'Maging', mb_hero_2:'QiQa VIP', mb_intro:'Ang QiQa ay tahanan ng ating komunidad na malayo sa bayan. Para panatilihing ligtas, malinis at walang ad para sa lahat, kailangan namin ang suporta mo.', mb_free_t:'Nagba-browse lang (libre)', mb_free_d:'Nakikita mo lang ang mga promotional bulletin at pampublikong abiso.', mb_mem_t:'Miyembro — buong access', mb_b1:'Basahin lahat ng Gabay (batas, proseso, update)', mb_b2:'Member badge sa profile mo', mb_b3:'Suportahan ang malusog na komunidad', mb_pick:'Piliin ang plano', mb_month:'1 buwan', mb_6month:'6 na buwan', mb_year:'1 taon', mb_popular:'Popular', mb_best:'Pinakasulit', mb_pledge:'Ang kontribusyon mo ay tumutulong na mapanatili ang QiQa para sa lahat — sama-sama tayong bumuo ng malusog na komunidad.', mb_pay_t:'Magbayad gamit ang Swish para sumali', mb_pay_step:'I-Swish ang halaga sa 072-567 11 11, at isulat ang "Miyembro [plano] + email mo" sa mensahe. Ma-aaktibo agad.', mb_you_member:'Miyembro ka na 💚', mb_until:'Valid hanggang', cr_use_t:'Gamitin ang credit para sa:', cr_use_1:'🌸 Magpadala ng bulaklak / 👏 palakpak / 👋 kumaway — 1 credit', cr_use_5:'🎥 5–8s na greeting video — 5 credits', cr_swish_t:'I-scan ang Swish code — {n} credit pack ({price} kr)', cr_amt:'Ang halagang {price} kr ay awtomatikong nakalagay kapag nag-scan.', cr_s1:'I-scan ang code → kumpirmahin ang {price} kr na paglilipat', cr_s2:'Sa "Meddelande" (mensahe), isulat ang iyong login email', cr_s3:'Idaragdag agad ang credits sa iyong account', cat_all:'Lahat', cat_food:'Pagkain', cat_shop:'Shopping', cat_service:'Serbisyo', cat_community:'Komunidad', cat_kids:'Gamit ng bata', cat_vietfood:'Pagkaing Vietnamese', cat_home:'Gamit sa bahay', cat_carry:'Pakidala', cat_free:'Libreng bigay', cat_health:'Kalusugan', cat_admin:'Dokumento/Admin', cat_legal:'Legal', cat_escort:'Pagsama', cat_doctrans:'Pagsasalin ng dokumento', ty_give:'Bigay', ty_swap:'Palit', ty_free:'Libre', ty_carry:'Pakidala', lbl_places:'lugar', lbl_you:'Ikaw', lbl_joined:'✓ Sumali na', lbl_join:'Sumali', lbl_match_cnt:'posibleng match', lbl_report:'I-report', lbl_registered:'✓ Nakarehistro', lbl_register:'Magrehistro', lbl_be_interp:'Maging interpreter', lbl_post_req:'Mag-post ng request', lbl_vip_member:'VIP member', tt_bold:'Bold', tt_italic:'Italic', tt_color:'Kulay ng teksto', tt_emoji:'Emoji', tt_gift:'Magpadala ng regalo', tt_credit:'Mag-top up ng credit', tt_theme:'Background ng chat',
+    tab_friends:'Maghanap ng kaibigan', tab_translate:'Interpreter', tab_services:'QTT Services', tab_about:'Tungkol sa amin', tab_member:'VIP', mb_hero_1:'Maging', mb_hero_2:'QiQa VIP', mb_intro:'Ang QiQa ay tahanan ng ating komunidad na malayo sa bayan. Para panatilihing ligtas, malinis at walang ad para sa lahat, kailangan namin ang suporta mo.', mb_free_t:'Nagba-browse lang (libre)', mb_free_d:'Nakikita mo lang ang mga promotional bulletin at pampublikong abiso.', mb_mem_t:'Miyembro — buong access', mb_b1:'Basahin lahat ng Gabay (batas, proseso, update)', mb_b2:'Member badge sa profile mo', mb_b3:'Suportahan ang malusog na komunidad', mb_pick:'Piliin ang plano', mb_month:'1 buwan', mb_6month:'6 na buwan', mb_year:'1 taon', mb_popular:'Popular', mb_best:'Pinakasulit', mb_pledge:'Ang kontribusyon mo ay tumutulong na mapanatili ang QiQa para sa lahat — sama-sama tayong bumuo ng malusog na komunidad.', mb_pay_t:'Magbayad gamit ang Swish para sumali', mb_pay_step:'I-Swish ang halaga sa 072-567 11 11, at isulat ang "Miyembro [plano] + email mo" sa mensahe. Ma-aaktibo agad.', mb_you_member:'Miyembro ka na 💚', mb_until:'Valid hanggang', cr_use_t:'Gamitin ang credit para sa:', cr_use_1:'🌸 Magpadala ng bulaklak / 👏 palakpak / 👋 kumaway — 1 credit', cr_use_5:'🎥 5–8s na greeting video — 5 credits', cr_swish_t:'I-scan ang Swish code — {n} credit pack ({price} kr)', cr_amt:'Ang halagang {price} kr ay awtomatikong nakalagay kapag nag-scan.', cr_s1:'I-scan ang code → kumpirmahin ang {price} kr na paglilipat', cr_s2:'Sa "Meddelande" (mensahe), isulat ang iyong login email', cr_s3:'Idaragdag agad ang credits sa iyong account', theme_title:'Hitsura', theme_sub:'Piliin ang kulay na gusto mo.', cat_all:'Lahat', cat_food:'Pagkain', cat_shop:'Shopping', cat_service:'Serbisyo', cat_community:'Komunidad', cat_kids:'Gamit ng bata', cat_vietfood:'Pagkaing Vietnamese', cat_home:'Gamit sa bahay', cat_carry:'Pakidala', cat_free:'Libreng bigay', cat_health:'Kalusugan', cat_admin:'Dokumento/Admin', cat_legal:'Legal', cat_escort:'Pagsama', cat_doctrans:'Pagsasalin ng dokumento', ty_give:'Bigay', ty_swap:'Palit', ty_free:'Libre', ty_carry:'Pakidala', lbl_places:'lugar', lbl_you:'Ikaw', lbl_joined:'✓ Sumali na', lbl_join:'Sumali', lbl_match_cnt:'posibleng match', lbl_report:'I-report', lbl_registered:'✓ Nakarehistro', lbl_register:'Magrehistro', lbl_be_interp:'Maging interpreter', lbl_post_req:'Mag-post ng request', lbl_vip_member:'VIP member', tt_bold:'Bold', tt_italic:'Italic', tt_color:'Kulay ng teksto', tt_emoji:'Emoji', tt_gift:'Magpadala ng regalo', tt_credit:'Mag-top up ng credit', tt_theme:'Background ng chat',
     login:'Mag-log in', logout:'Mag-log out',
     search_places:'Maghanap ng pagkain, Asian store, kuko…', search_area:'Maghanap ayon sa lugar…',
     search_market:'Maghanap ng gamit ng bata, pagkain…', search_lang:'Maghanap ayon sa wika, larangan…',
@@ -1694,7 +1710,7 @@ const I18N = {
   },
   vi: {
     tab_home:'Trang chủ', tab_places:'Check-in', tab_outings:'Đi chơi cùng con', tab_market:'Chợ cộng đồng',
-    tab_friends:'Kết bạn', tab_translate:'Phiên dịch', tab_services:'Dịch vụ QTT', tab_about:'Về chúng tôi', tab_member:'VIP', mb_hero_1:'Trở thành', mb_hero_2:'VIP QiQa', mb_intro:'QiQa là mái nhà chung của cộng đồng xa quê. Để giữ nơi này luôn an toàn, sạch sẽ và không quảng cáo cho mọi người, chúng tôi cần sự chung tay của bạn.', mb_free_t:'Chỉ ghé xem (miễn phí)', mb_free_d:'Bạn chỉ xem được các bản tin quảng cáo và thông báo công khai.', mb_mem_t:'Thành viên — xem toàn bộ', mb_b1:'Đọc toàn bộ Cẩm nang (luật, thủ tục, tin mới)', mb_b2:'Huy hiệu thành viên trên hồ sơ', mb_b3:'Ủng hộ một cộng đồng lành mạnh', mb_pick:'Chọn gói của bạn', mb_month:'1 tháng', mb_6month:'6 tháng', mb_year:'1 năm', mb_popular:'Phổ biến', mb_best:'Tiết kiệm nhất', mb_pledge:'Khoản đóng góp của bạn giúp chúng tôi duy trì QiQa cho mọi người — cùng nhau xây một cộng đồng lành mạnh.', mb_pay_t:'Thanh toán Swish để tham gia', mb_pay_step:'Swish số tiền tới 072-567 11 11, và ghi "Thành viên [gói] + email của bạn" trong lời nhắn. Tư cách thành viên sẽ được kích hoạt sớm nhất.', mb_you_member:'Bạn là thành viên 💚', mb_until:'Có hiệu lực đến', cr_use_t:'Dùng credit để:', cr_use_1:'🌸 Tặng hoa / 👏 vỗ tay / 👋 chào — 1 credit', cr_use_5:'🎥 Video chào hỏi 5-8 giây — 5 credit', cr_swish_t:'Quét mã Swish — gói {n} credit ({price} kr)', cr_amt:'Số tiền {price} kr đã điền sẵn khi quét.', cr_s1:'Quét mã → xác nhận chuyển {price} kr', cr_s2:'Trong ô "Meddelande" (lời nhắn), ghi email đăng nhập của bạn', cr_s3:'Credit sẽ được cộng vào tài khoản sớm nhất', cat_all:'Tất cả', cat_food:'Ăn uống', cat_shop:'Mua sắm', cat_service:'Dịch vụ', cat_community:'Cộng đồng', cat_kids:'Đồ trẻ em', cat_vietfood:'Đồ ăn Việt', cat_home:'Đồ gia đình', cat_carry:'Nhờ xách tay', cat_free:'Cho tặng miễn phí', cat_health:'Y tế', cat_admin:'Giấy tờ/Hành chính', cat_legal:'Pháp lý', cat_escort:'Đi cùng thường', cat_doctrans:'Dịch văn bản', ty_give:'Tặng', ty_swap:'Đổi', ty_free:'Miễn phí', ty_carry:'Xách tay', lbl_places:'địa điểm', lbl_you:'Bạn', lbl_joined:'✓ Đã tham gia', lbl_join:'Tham gia', lbl_match_cnt:'người có thể hợp gu', lbl_report:'Báo cáo', lbl_registered:'✓ Đã đăng ký', lbl_register:'Đăng ký', lbl_be_interp:'Làm phiên dịch', lbl_post_req:'Đăng yêu cầu', lbl_vip_member:'Thành viên VIP', tt_bold:'In đậm', tt_italic:'In nghiêng', tt_color:'Màu chữ', tt_emoji:'Biểu cảm', tt_gift:'Tặng quà', tt_credit:'Nạp credit', tt_theme:'Nền phòng chat',
+    tab_friends:'Kết bạn', tab_translate:'Phiên dịch', tab_services:'Dịch vụ QTT', tab_about:'Về chúng tôi', tab_member:'VIP', mb_hero_1:'Trở thành', mb_hero_2:'VIP QiQa', mb_intro:'QiQa là mái nhà chung của cộng đồng xa quê. Để giữ nơi này luôn an toàn, sạch sẽ và không quảng cáo cho mọi người, chúng tôi cần sự chung tay của bạn.', mb_free_t:'Chỉ ghé xem (miễn phí)', mb_free_d:'Bạn chỉ xem được các bản tin quảng cáo và thông báo công khai.', mb_mem_t:'Thành viên — xem toàn bộ', mb_b1:'Đọc toàn bộ Cẩm nang (luật, thủ tục, tin mới)', mb_b2:'Huy hiệu thành viên trên hồ sơ', mb_b3:'Ủng hộ một cộng đồng lành mạnh', mb_pick:'Chọn gói của bạn', mb_month:'1 tháng', mb_6month:'6 tháng', mb_year:'1 năm', mb_popular:'Phổ biến', mb_best:'Tiết kiệm nhất', mb_pledge:'Khoản đóng góp của bạn giúp chúng tôi duy trì QiQa cho mọi người — cùng nhau xây một cộng đồng lành mạnh.', mb_pay_t:'Thanh toán Swish để tham gia', mb_pay_step:'Swish số tiền tới 072-567 11 11, và ghi "Thành viên [gói] + email của bạn" trong lời nhắn. Tư cách thành viên sẽ được kích hoạt sớm nhất.', mb_you_member:'Bạn là thành viên 💚', mb_until:'Có hiệu lực đến', cr_use_t:'Dùng credit để:', cr_use_1:'🌸 Tặng hoa / 👏 vỗ tay / 👋 chào — 1 credit', cr_use_5:'🎥 Video chào hỏi 5-8 giây — 5 credit', cr_swish_t:'Quét mã Swish — gói {n} credit ({price} kr)', cr_amt:'Số tiền {price} kr đã điền sẵn khi quét.', cr_s1:'Quét mã → xác nhận chuyển {price} kr', cr_s2:'Trong ô "Meddelande" (lời nhắn), ghi email đăng nhập của bạn', cr_s3:'Credit sẽ được cộng vào tài khoản sớm nhất', theme_title:'Giao diện', theme_sub:'Chọn tông màu bạn thích.', cat_all:'Tất cả', cat_food:'Ăn uống', cat_shop:'Mua sắm', cat_service:'Dịch vụ', cat_community:'Cộng đồng', cat_kids:'Đồ trẻ em', cat_vietfood:'Đồ ăn Việt', cat_home:'Đồ gia đình', cat_carry:'Nhờ xách tay', cat_free:'Cho tặng miễn phí', cat_health:'Y tế', cat_admin:'Giấy tờ/Hành chính', cat_legal:'Pháp lý', cat_escort:'Đi cùng thường', cat_doctrans:'Dịch văn bản', ty_give:'Tặng', ty_swap:'Đổi', ty_free:'Miễn phí', ty_carry:'Xách tay', lbl_places:'địa điểm', lbl_you:'Bạn', lbl_joined:'✓ Đã tham gia', lbl_join:'Tham gia', lbl_match_cnt:'người có thể hợp gu', lbl_report:'Báo cáo', lbl_registered:'✓ Đã đăng ký', lbl_register:'Đăng ký', lbl_be_interp:'Làm phiên dịch', lbl_post_req:'Đăng yêu cầu', lbl_vip_member:'Thành viên VIP', tt_bold:'In đậm', tt_italic:'In nghiêng', tt_color:'Màu chữ', tt_emoji:'Biểu cảm', tt_gift:'Tặng quà', tt_credit:'Nạp credit', tt_theme:'Nền phòng chat',
     login:'Đăng nhập', logout:'Đăng xuất',
     search_places:'Tìm phở, chợ Á, nail…', search_area:'Tìm theo khu vực…',
     search_market:'Tìm đồ trẻ em, đồ ăn…', search_lang:'Tìm theo ngôn ngữ, lĩnh vực…',
@@ -1799,7 +1815,7 @@ const I18N = {
   },
   th: {
     tab_home:'หน้าแรก', tab_places:'เช็คอิน', tab_outings:'พาลูกไปเที่ยว', tab_market:'ตลาดชุมชน',
-    tab_friends:'หาเพื่อน', tab_translate:'ล่าม', tab_services:'บริการ QTT', tab_about:'เกี่ยวกับเรา', tab_member:'VIP', mb_hero_1:'มาเป็น', mb_hero_2:'VIP QiQa', mb_intro:'QiQa คือบ้านของชุมชนที่อยู่ไกลบ้าน เพื่อรักษาที่นี่ให้ปลอดภัย สะอาด และไม่มีโฆษณาสำหรับทุกคน เราต้องการการสนับสนุนจากคุณ', mb_free_t:'แค่ดูผ่านๆ (ฟรี)', mb_free_d:'คุณเห็นเฉพาะประกาศโฆษณาและประกาศสาธารณะเท่านั้น', mb_mem_t:'สมาชิก — เข้าถึงทั้งหมด', mb_b1:'อ่านคู่มือทั้งหมด (กฎหมาย ขั้นตอน อัปเดต)', mb_b2:'ตราสมาชิกบนโปรไฟล์', mb_b3:'สนับสนุนชุมชนที่ดี', mb_pick:'เลือกแพ็กเกจ', mb_month:'1 เดือน', mb_6month:'6 เดือน', mb_year:'1 ปี', mb_popular:'ยอดนิยม', mb_best:'คุ้มที่สุด', mb_pledge:'การสนับสนุนของคุณช่วยให้เรารักษา QiQa ไว้เพื่อทุกคน — มาสร้างชุมชนที่ดีไปด้วยกัน', mb_pay_t:'ชำระด้วย Swish เพื่อเข้าร่วม', mb_pay_step:'Swish จำนวนเงินไปที่ 072-567 11 11 และเขียน "สมาชิก [แพ็กเกจ] + อีเมล" ในข้อความ จะเปิดใช้งานเร็วๆ นี้', mb_you_member:'คุณเป็นสมาชิกแล้ว 💚', mb_until:'ใช้ได้ถึง', cr_use_t:'ใช้เครดิตสำหรับ:', cr_use_1:'🌸 ส่งดอกไม้ / 👏 ปรบมือ / 👋 ทักทาย — 1 เครดิต', cr_use_5:'🎥 วิดีโอทักทาย 5-8 วินาที — 5 เครดิต', cr_swish_t:'สแกนโค้ด Swish — แพ็กเกจ {n} เครดิต ({price} kr)', cr_amt:'ยอดเงิน {price} kr จะถูกกรอกอัตโนมัติเมื่อสแกน', cr_s1:'สแกนโค้ด → ยืนยันการโอน {price} kr', cr_s2:'ในช่อง "Meddelande" (ข้อความ) ให้เขียนอีเมลที่ใช้เข้าสู่ระบบ', cr_s3:'เครดิตจะถูกเพิ่มเข้าบัญชีของคุณเร็วๆ นี้', cat_all:'ทั้งหมด', cat_food:'อาหาร', cat_shop:'ช้อปปิ้ง', cat_service:'บริการ', cat_community:'ชุมชน', cat_kids:'ของเด็ก', cat_vietfood:'อาหารเวียดนาม', cat_home:'ของใช้ในบ้าน', cat_carry:'ฝากหิ้ว', cat_free:'ให้ฟรี', cat_health:'สุขภาพ', cat_admin:'เอกสาร/ราชการ', cat_legal:'กฎหมาย', cat_escort:'พาไปด้วย', cat_doctrans:'แปลเอกสาร', ty_give:'ให้', ty_swap:'แลก', ty_free:'ฟรี', ty_carry:'หิ้ว', lbl_places:'สถานที่', lbl_you:'คุณ', lbl_joined:'✓ เข้าร่วมแล้ว', lbl_join:'เข้าร่วม', lbl_match_cnt:'คนที่อาจเข้ากันได้', lbl_report:'รายงาน', lbl_registered:'✓ ลงทะเบียนแล้ว', lbl_register:'ลงทะเบียน', lbl_be_interp:'เป็นล่าม', lbl_post_req:'โพสต์คำขอ', lbl_vip_member:'สมาชิก VIP', tt_bold:'ตัวหนา', tt_italic:'ตัวเอียง', tt_color:'สีตัวอักษร', tt_emoji:'อิโมจิ', tt_gift:'ส่งของขวัญ', tt_credit:'เติมเครดิต', tt_theme:'พื้นหลังแชท',
+    tab_friends:'หาเพื่อน', tab_translate:'ล่าม', tab_services:'บริการ QTT', tab_about:'เกี่ยวกับเรา', tab_member:'VIP', mb_hero_1:'มาเป็น', mb_hero_2:'VIP QiQa', mb_intro:'QiQa คือบ้านของชุมชนที่อยู่ไกลบ้าน เพื่อรักษาที่นี่ให้ปลอดภัย สะอาด และไม่มีโฆษณาสำหรับทุกคน เราต้องการการสนับสนุนจากคุณ', mb_free_t:'แค่ดูผ่านๆ (ฟรี)', mb_free_d:'คุณเห็นเฉพาะประกาศโฆษณาและประกาศสาธารณะเท่านั้น', mb_mem_t:'สมาชิก — เข้าถึงทั้งหมด', mb_b1:'อ่านคู่มือทั้งหมด (กฎหมาย ขั้นตอน อัปเดต)', mb_b2:'ตราสมาชิกบนโปรไฟล์', mb_b3:'สนับสนุนชุมชนที่ดี', mb_pick:'เลือกแพ็กเกจ', mb_month:'1 เดือน', mb_6month:'6 เดือน', mb_year:'1 ปี', mb_popular:'ยอดนิยม', mb_best:'คุ้มที่สุด', mb_pledge:'การสนับสนุนของคุณช่วยให้เรารักษา QiQa ไว้เพื่อทุกคน — มาสร้างชุมชนที่ดีไปด้วยกัน', mb_pay_t:'ชำระด้วย Swish เพื่อเข้าร่วม', mb_pay_step:'Swish จำนวนเงินไปที่ 072-567 11 11 และเขียน "สมาชิก [แพ็กเกจ] + อีเมล" ในข้อความ จะเปิดใช้งานเร็วๆ นี้', mb_you_member:'คุณเป็นสมาชิกแล้ว 💚', mb_until:'ใช้ได้ถึง', cr_use_t:'ใช้เครดิตสำหรับ:', cr_use_1:'🌸 ส่งดอกไม้ / 👏 ปรบมือ / 👋 ทักทาย — 1 เครดิต', cr_use_5:'🎥 วิดีโอทักทาย 5-8 วินาที — 5 เครดิต', cr_swish_t:'สแกนโค้ด Swish — แพ็กเกจ {n} เครดิต ({price} kr)', cr_amt:'ยอดเงิน {price} kr จะถูกกรอกอัตโนมัติเมื่อสแกน', cr_s1:'สแกนโค้ด → ยืนยันการโอน {price} kr', cr_s2:'ในช่อง "Meddelande" (ข้อความ) ให้เขียนอีเมลที่ใช้เข้าสู่ระบบ', cr_s3:'เครดิตจะถูกเพิ่มเข้าบัญชีของคุณเร็วๆ นี้', theme_title:'ธีม', theme_sub:'เลือกโทนสีที่คุณชอบ', cat_all:'ทั้งหมด', cat_food:'อาหาร', cat_shop:'ช้อปปิ้ง', cat_service:'บริการ', cat_community:'ชุมชน', cat_kids:'ของเด็ก', cat_vietfood:'อาหารเวียดนาม', cat_home:'ของใช้ในบ้าน', cat_carry:'ฝากหิ้ว', cat_free:'ให้ฟรี', cat_health:'สุขภาพ', cat_admin:'เอกสาร/ราชการ', cat_legal:'กฎหมาย', cat_escort:'พาไปด้วย', cat_doctrans:'แปลเอกสาร', ty_give:'ให้', ty_swap:'แลก', ty_free:'ฟรี', ty_carry:'หิ้ว', lbl_places:'สถานที่', lbl_you:'คุณ', lbl_joined:'✓ เข้าร่วมแล้ว', lbl_join:'เข้าร่วม', lbl_match_cnt:'คนที่อาจเข้ากันได้', lbl_report:'รายงาน', lbl_registered:'✓ ลงทะเบียนแล้ว', lbl_register:'ลงทะเบียน', lbl_be_interp:'เป็นล่าม', lbl_post_req:'โพสต์คำขอ', lbl_vip_member:'สมาชิก VIP', tt_bold:'ตัวหนา', tt_italic:'ตัวเอียง', tt_color:'สีตัวอักษร', tt_emoji:'อิโมจิ', tt_gift:'ส่งของขวัญ', tt_credit:'เติมเครดิต', tt_theme:'พื้นหลังแชท',
     login:'เข้าสู่ระบบ', logout:'ออกจากระบบ',
     search_places:'ค้นหาร้านอาหาร ร้านเอเชีย ทำเล็บ…', search_area:'ค้นหาตามพื้นที่…',
     search_market:'ค้นหาของเด็ก อาหาร…', search_lang:'ค้นหาตามภาษา สาขา…',
@@ -4096,6 +4112,27 @@ loadData();
 startChat();
 showSplash();
 applyLang();
+
+// ===== Giao diện màu tuỳ chỉnh =====
+const APP_THEMES=[
+ {id:'gold',name:'Vàng gương',c1:'#12100b',c2:'#e0891e'},
+ {id:'emerald',name:'Ngọc lục bảo',c1:'#0a1512',c2:'#22b982'},
+ {id:'blue',name:'Xanh dương đêm',c1:'#0a0f16',c2:'#4a95e8'},
+ {id:'purple',name:'Tím hoàng hôn',c1:'#0f0a16',c2:'#ac68e6'},
+ {id:'rose',name:'Hồng ánh kim',c1:'#160a10',c2:'#e56a94'},
+];
+function applyTheme(id){ document.body.dataset.theme=id; try{ localStorage.setItem('qiqa_theme',id); }catch(e){} }
+function chooseAppTheme(id){ applyTheme(id); openThemePicker(); }
+function openThemePicker(){
+  const cur=document.body.dataset.theme||'gold';
+  document.getElementById('sheet').innerHTML='<button class="close-x" onclick="closeModal()">✕</button>'+
+    '<div class="sheet-body"><h2>🎨 '+t('theme_title')+'</h2>'+
+    '<p style="color:var(--muted);margin:6px 0 4px;font-size:14px;">'+t('theme_sub')+'</p>'+
+    '<div class="app-theme-grid">'+APP_THEMES.map(function(x){return '<button class="app-theme-cell'+(cur===x.id?' on':'')+'" onclick="chooseAppTheme(\''+x.id+'\')"><span class="app-theme-swatch" style="background:linear-gradient(135deg,'+x.c1+' 48%,'+x.c2+' 52%)"></span><span class="app-theme-nm">'+x.name+'</span></button>';}).join('')+'</div></div>';
+  openModalEl();
+}
+(function(){ var th='gold'; try{ th=localStorage.getItem('qiqa_theme')||'gold'; }catch(e){} document.body.dataset.theme=th; })();
+
 </script>
 </body>
 </html>
