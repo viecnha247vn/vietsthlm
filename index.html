@@ -1304,7 +1304,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v77-translator-photo-i18n</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v78-avatar-fix</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -5693,7 +5693,7 @@ function renderTrFind() {
     <article class="tr-card" style="position:relative">
       ${tr.auth?'<span class="tr-badge">'+t('c_certified')+'</span>':''}
       <div class="tr-top" onclick="openTranslator('${tr.id}')" style="cursor:pointer">
-        <div class="avatar" style="background:${AV[avColor(tr.id)]}${tr.anh?`;background-image:url('${tr.anh}');background-size:cover`:''}">${tr.anh?'':initials(tr.ten)}</div>
+        <div class="avatar" style="background:${AV[avColor(tr.id)]}${tr.anh?`;background-image:url('${tr.anh}');background-size:cover;background-position:center`:''}">${tr.anh?'':initials(tr.ten)}</div>
         <div><div class="tr-name">${tr.ten}</div><div class="tr-role">${tr.knI18n?(tr.knI18n[LANG]||tr.knI18n.en):tr.kn}</div></div>
       </div>
       <div class="tr-langs">${tr.langs.map(l=>`<span class="lg">${l}</span>`).join('')}</div>
