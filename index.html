@@ -894,6 +894,25 @@
     box-shadow: 0 3px 10px rgba(200,150,30,.3), inset 0 1px 0 rgba(255,255,255,.5); transition: transform .1s; }
   .feed-next:hover { transform: translateY(-1px); }
   .feed-next:active { transform: scale(.98); }
+  .trp-top{background:linear-gradient(135deg,#12A594,#0E8578);color:#fff;padding:30px 28px 26px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;border-radius:20px 20px 0 0;}
+  .trp-ava{width:92px;height:92px;border-radius:50%;background-size:cover;background-position:center;border:3px solid rgba(255,255,255,.7);box-shadow:0 6px 18px rgba(0,0,0,.25);flex-shrink:0;}
+  .trp-ava-i{display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:800;color:#0E8578;background:#eafaf5;}
+  .trp-eyebrow{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;opacity:.92;}
+  .trp-name{font-size:24px;font-weight:800;letter-spacing:-.02em;margin-top:5px;color:#fff;}
+  .trp-lang{margin-top:9px;font-size:13px;font-weight:600;display:inline-flex;gap:6px;align-items:center;background:rgba(255,255,255,.18);padding:6px 12px;border-radius:999px;}
+  .trp-body{padding:24px 26px 28px;}
+  .trp-intro{color:var(--ink);opacity:.9;margin-bottom:18px;font-size:15px;line-height:1.6;}
+  .trp-facts{list-style:none;display:grid;gap:2px;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:0 0 20px;padding:0;}
+  .trp-facts li{display:flex;justify-content:space-between;gap:16px;padding:13px 16px;background:var(--surface);}
+  .trp-facts li:nth-child(even){background:var(--bg);}
+  .trp-facts .k{color:var(--muted);font-size:14px;}
+  .trp-facts .v{font-weight:700;text-align:right;}
+  .trp-note{font-size:13.5px;color:var(--muted);background:#FFF7EC;border:1px solid #F6E2BD;border-radius:12px;padding:14px 16px;margin-bottom:22px;}
+  .trp-note b{color:#8a5a08;}
+  .trp-note ul{margin:8px 0 0;padding-left:18px;display:grid;gap:5px;}
+  .trp-cta{display:block;text-align:center;background:#12A594;color:#fff;text-decoration:none;font-weight:700;font-size:16px;padding:15px 20px;border-radius:14px;transition:background .15s;}
+  .trp-cta:hover{background:#0E8578;}
+  .trp-sub{text-align:center;font-size:12.5px;color:var(--muted);margin-top:11px;}
 </style>
 </head>
 <body>
@@ -1285,7 +1304,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v75-add-translator</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v76-translator-card</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -5667,13 +5686,13 @@ function renderTrFind() {
   grid.innerHTML = list.map(tr => `
     <article class="tr-card" style="position:relative">
       ${tr.auth?'<span class="tr-badge">'+t('c_certified')+'</span>':''}
-      <div class="tr-top">
+      <div class="tr-top" onclick="openTranslator('${tr.id}')" style="cursor:pointer">
         <div class="avatar" style="background:${AV[avColor(tr.id)]}${tr.anh?`;background-image:url('${tr.anh}');background-size:cover`:''}">${tr.anh?'':initials(tr.ten)}</div>
         <div><div class="tr-name">${tr.ten}</div><div class="tr-role">${tr.kn}</div></div>
       </div>
       <div class="tr-langs">${tr.langs.map(l=>`<span class="lg">${l}</span>`).join('')}</div>
       <div class="tr-fields">${tr.fields.map(f=>`<span class="f">${f}</span>`).join('')}</div>
-      <div class="tr-bio">${tr.bio}</div>
+      <div class="tr-bio" onclick="openTranslator('${tr.id}')" style="cursor:pointer">${tr.bio}</div>
       <div class="tr-foot">
         <span class="tr-where">📍 ${tr.khuvuc}</span>
         <div style="display:flex;gap:6px;align-items:center">
@@ -5683,6 +5702,57 @@ function renderTrFind() {
         </div>
       </div>
     </article>`).join('');
+}
+
+// ===== Trang chi tiết phiên dịch (kiểu card) =====
+const TRP = {
+  vi:{ eyebrow:'Phiên dịch · QiQa', langtag:'🗣️ Tiếng Việt & Svenska',
+    intro:'Cần hỗ trợ phiên dịch giữa tiếng Việt và tiếng Thụy Điển? Queenie Nguyen giúp bạn tại cơ quan, bệnh viện, trường học hay trong đời sống hằng ngày. Với 7 năm kinh nghiệm, bạn có được sự giao tiếp rõ ràng, tin cậy trên cả hai ngôn ngữ. Đặt lịch dễ dàng qua qiqa.se.',
+    facts:[['Ngôn ngữ','Tiếng Việt & Svenska'],['Kinh nghiệm','7 năm kinh nghiệm'],['Giá – qua điện thoại','160 kr/giờ'],['Giá – tại chỗ','220 kr/giờ + đi lại'],['Phí đặt lịch','+ 25 kr'],['Đặt lịch','qua qiqa.se']],
+    noteTitle:'Quy định huỷ:',
+    cancel:['Phí đặt lịch (25 kr) không hoàn lại sau khi bạn đã chọn đặt phiên dịch.','Huỷ sau 24 giờ sẽ không được hoàn tiền.','Phiên dịch tại chỗ sẽ tính thêm chi phí đi lại.'],
+    cta:'Đặt lịch trên qiqa.se', sub:'Đặt lịch nhanh · Trả lời bằng tiếng Việt và tiếng Thụy Điển' },
+  sv:{ eyebrow:'Tolktjänst · QiQa', langtag:'🗣️ Vietnamesiska & Svenska',
+    intro:'Behöver du hjälp med tolkning mellan vietnamesiska och svenska? Queenie Nguyen hjälper dig – hos myndigheter, vården, skolan eller i vardagen. Med 7 års erfarenhet får du trygg och tydlig kommunikation på båda språken. Boka enkelt din tid direkt via qiqa.se.',
+    facts:[['Språk','Vietnamesiska & svenska'],['Erfarenhet','7 års erfarenhet'],['Pris – via telefon','160 kr/timme'],['Pris – på plats','220 kr/timme + resa'],['Administrationsavgift','+ 25 kr'],['Bokning','via qiqa.se']],
+    noteTitle:'Avbokningsregler:',
+    cancel:['Administrationsavgiften (25 kr) återbetalas ej efter att du har valt att boka tolken.','Vid avbokning efter 24 timmar sker ingen återbetalning.','Vid tolkning på plats tillkommer resekostnad.'],
+    cta:'Boka tid på qiqa.se', sub:'Snabb bokning · Svar på vietnamesiska och svenska' },
+  en:{ eyebrow:'Interpreter · QiQa', langtag:'🗣️ Vietnamese & Swedish',
+    intro:'Need help interpreting between Vietnamese and Swedish? Queenie Nguyen helps you – at authorities, healthcare, school or in everyday life. With 7 years of experience, you get clear, reliable communication in both languages. Book easily via qiqa.se.',
+    facts:[['Language','Vietnamese & Swedish'],['Experience','7 years of experience'],['Price – by phone','160 kr/hour'],['Price – on site','220 kr/hour + travel'],['Booking fee','+ 25 kr'],['Booking','via qiqa.se']],
+    noteTitle:'Cancellation policy:',
+    cancel:['The booking fee (25 kr) is non-refundable once you have chosen to book the interpreter.','No refund for cancellations after 24 hours.','Travel cost is added for on-site interpreting.'],
+    cta:'Book on qiqa.se', sub:'Fast booking · Replies in Vietnamese and Swedish' }
+};
+function openTranslator(id){
+  const tr = TRANSLATORS.find(x=>String(x.id)===String(id));
+  if (!tr) return;
+  const d = TRP[LANG] || TRP.en;
+  const ava = tr.anh
+    ? `<div class="trp-ava" style="background-image:url('${tr.anh}')"></div>`
+    : `<div class="trp-ava trp-ava-i">${initials(tr.ten)}</div>`;
+  const factsHtml = d.facts.map(f=>`<li><span class="k">${f[0]}</span><span class="v">${f[1]}</span></li>`).join('');
+  const cancelHtml = d.cancel.map(c=>`<li>${c}</li>`).join('');
+  const link = tr.web || 'https://qiqa.se';
+  document.getElementById('sheet').innerHTML = `
+    <button class="close-x" onclick="closeModal()">✕</button>
+    <div class="trp-top">
+      ${ava}
+      <div class="trp-who">
+        <div class="trp-eyebrow">${d.eyebrow}</div>
+        <h2 class="trp-name">${tr.ten}</h2>
+        <span class="trp-lang">${d.langtag}</span>
+      </div>
+    </div>
+    <div class="trp-body">
+      <p class="trp-intro">${d.intro}</p>
+      <ul class="trp-facts">${factsHtml}</ul>
+      <div class="trp-note"><b>${d.noteTitle}</b><ul>${cancelHtml}</ul></div>
+      <a class="trp-cta" href="${link}" target="_blank">${d.cta}</a>
+      <div class="trp-sub">${d.sub}</div>
+    </div>`;
+  openModalEl();
 }
 
 function renderTrRequests() {
