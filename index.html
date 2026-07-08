@@ -869,6 +869,21 @@
   .sp-sw:hover{ transform:translateY(-2px); }
   .sp-sw.on{ border-color:var(--red); box-shadow:0 0 0 2px rgba(224,137,30,.3); }
   .sp-sw-c{ display:block; width:100%; height:100%; box-shadow:inset 0 0 0 1px rgba(0,0,0,.08); }
+  .checkin-box { margin: 14px 0 4px; padding: 14px 16px; border-radius: 16px;
+    background: linear-gradient(160deg,#fff6e6,#ffe9c7); border: 1px solid #f0d59a; }
+  .checkin-box.done { background: linear-gradient(160deg,#eafaf0,#d7f2e2); border-color: #a7dcc0; }
+  .ci-head { font-size: 13.5px; font-weight: 800; color: #8a5a12; margin-bottom: 8px; }
+  .checkin-box.done .ci-head { color: #1c7a4d; }
+  .ci-btn { width: 100%; border: none; cursor: pointer; padding: 12px; border-radius: 12px;
+    font-size: 15px; font-weight: 800; color: #4a2e00; letter-spacing: .2px;
+    background: linear-gradient(177deg,#ffe08a 0%,#f2ba44 42%,#d98f1e 100%);
+    box-shadow: 0 3px 10px rgba(200,150,30,.35), inset 0 1px 0 rgba(255,255,255,.6); transition: transform .1s; }
+  .ci-btn:hover { transform: translateY(-1px); }
+  .ci-btn:active { transform: scale(.98); }
+  .ci-voucher { font-size: 16px; font-weight: 800; color: #1c7a4d; margin: 2px 0 6px; }
+  .ci-code { font-size: 15px; color: #234; margin-bottom: 6px; }
+  .ci-code b { font-size: 17px; letter-spacing: 1px; color: #1c7a4d; }
+  .ci-hint { font-size: 12px; color: #567; line-height: 1.4; }
 </style>
 </head>
 <body>
@@ -1260,7 +1275,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v68-somali-turkish</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v69-checkin</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -4928,6 +4943,71 @@ function switchTab(tab) {
   window.scrollTo(0,0);
 }
 
+// ===== ĐỊA ĐIỂM CÓ CHECK-IN (ưu đãi voucher) =====
+// Nhúng thẳng vào app, không cần thêm vào Google Sheet. Muốn thêm quán check-in khác thì thêm object vào mảng này.
+const CHECKIN_PLACES = [{
+  id:'asian-fusion-tyringe', tp:'Skåne län', ten:'Asian Fusion', nhom:'Ăn uống',
+  loai:'Sushi · Nhật · Thái · Việt · Trung · Hàn', khuvuc:'Tyringe',
+  diachi:'Stenbocksgatan, 282 35 Tyringe, Sweden', sdt:'+46 70 033 33 69',
+  gio:'T2–T7: 11:00–21:00 · CN: 14:00–20:00',
+  mota:'Ghé qua Tyringe mà chưa dừng chân ở Asian Fusion thì thật là thiếu sót! Một quán nhỏ ấm cúng nhưng đồ ăn thì "chuẩn vị" — sushi tươi rói, món Thái đậm đà, và nhiều lựa chọn châu Á khác được chế biến từ nguyên liệu chất lượng. Trên đường bạn đi qua, hãy ghé thăm và thưởng thức nhé! 😋',
+  diem:4.8, rev:141, noibat:1,
+  anh:'https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=900&q=80',
+  map:'https://www.google.com/maps/search/?api=1&query=56.1609068,13.607644&query_place_id=ChIJb5oE4PzjU0YRNuS0AMVPN-M',
+  checkin:{ percent:10 }
+}];
+const CHECKIN_OFFERS = {};
+CHECKIN_PLACES.forEach(p => { if (p.checkin) CHECKIN_OFFERS[String(p.id)] = p.checkin; });
+function mergeCheckinPlaces(){
+  CHECKIN_PLACES.forEach(cp => { if (!PLACES.some(p => String(p.id)===String(cp.id))) PLACES.push(cp); });
+}
+// Song ngữ cho khối check-in (thiếu ngôn ngữ nào tự lùi về tiếng Anh)
+const CI_T = {
+  vi:{title:'🎁 Ưu đãi thành viên QiQa', btn:'📍 CHECK-IN nhận voucher', off:'Giảm', bill:'giá trị hoá đơn', done:'Đã check-in hôm nay', code:'Mã voucher', hint:'Đưa mã này cho nhân viên khi thanh toán. Mã có giá trị trong hôm nay.'},
+  en:{title:'🎁 QiQa member offer', btn:'📍 CHECK-IN to get voucher', off:'Save', bill:'off your bill', done:'Checked in today', code:'Voucher code', hint:'Show this code to staff when paying. Valid today.'},
+  sv:{title:'🎁 QiQa-medlemserbjudande', btn:'📍 CHECK-IN för voucher', off:'Spara', bill:'på notan', done:'Incheckad idag', code:'Vouchernkod', hint:'Visa koden för personalen vid betalning. Gäller idag.'},
+};
+function cit(k){ return (CI_T[LANG]||CI_T.en)[k] || CI_T.en[k]; }
+function checkinKey(id){ return 'qiqa_checkin_' + id; }
+function todayStr(){ const d=new Date(); return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate(); }
+function getCheckin(id){
+  try { const v=JSON.parse(localStorage.getItem(checkinKey(id))||'null'); if(v && v.day===todayStr()) return v; } catch(e){}
+  return null;
+}
+function makeVoucher(){
+  const s='ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; let a='',b='';
+  for(let i=0;i<4;i++) a+=s[Math.floor(Math.random()*s.length)];
+  for(let i=0;i<4;i++) b+=s[Math.floor(Math.random()*s.length)];
+  return 'QIQA-'+a+'-'+b;
+}
+function renderCheckin(p){
+  const off = CHECKIN_OFFERS[String(p.id)] || (p.checkin);
+  if (!off) return '';
+  const pct = off.percent || 10;
+  const done = getCheckin(p.id);
+  if (done){
+    return `<div class="checkin-box done">
+      <div class="ci-head">${cit('title')}</div>
+      <div class="ci-voucher">🎟️ ${cit('off')} ${pct}% ${cit('bill')}</div>
+      <div class="ci-code">${cit('code')}: <b>${done.code}</b></div>
+      <div class="ci-hint">${cit('hint')}</div>
+    </div>`;
+  }
+  return `<div class="checkin-box">
+    <div class="ci-head">${cit('title')} — ${cit('off')} ${pct}% ${cit('bill')}</div>
+    <button class="ci-btn" onclick="doCheckin('${p.id}', this)">${cit('btn')} ${pct}%</button>
+  </div>`;
+}
+function doCheckin(id, btn){
+  let v = getCheckin(id);
+  if (!v){ v = { code: makeVoucher(), day: todayStr(), ts: Date.now() };
+    try { localStorage.setItem(checkinKey(id), JSON.stringify(v)); } catch(e){}
+  }
+  const box = btn && btn.closest('.checkin-box');
+  const p = PLACES.find(x=>String(x.id)===String(id));
+  if (box && p) box.outerHTML = renderCheckin(p);
+}
+
 // ===== PLACES =====
 const CATS = ["Tất cả","Ăn uống","Mua sắm","Dịch vụ","Cộng đồng"];
 let activeCat = "Tất cả", query = "", mktCat = "Tất cả";
@@ -4995,6 +5075,7 @@ function openPlace(id) {
       <div class="info-row"><b>${t('c_addr')}</b><span>${p.diachi}</span></div>
       <div class="info-row"><b>${t('c_open')}</b><span>${p.gio}</span></div>
       <div class="info-row"><b>${t('c_phone')}</b><span>${p.sdt}</span></div>
+      ${renderCheckin(p)}
       <div class="cta-row">
         <a class="cta-map" href="${p.map}" target="_blank">${t('c_map')}</a>
         <a class="cta-call" href="tel:${p.sdt.replace(/\s/g,'')}">${t('c_call')}</a>
@@ -6728,6 +6809,7 @@ async function loadData() {
     const r = await callApi({ action:'getAll', email: currentUser ? currentUser.email : '' });
     if (!r || !r.ok) return;
     if (Array.isArray(r.places))      PLACES = r.places.map(normNums);
+    mergeCheckinPlaces();
     if (Array.isArray(r.outings))     OUTINGS = r.outings;
     if (Array.isArray(r.market))      MARKET = r.market;
     if (Array.isArray(r.singles))     SINGLES = r.singles.map(normNums);
