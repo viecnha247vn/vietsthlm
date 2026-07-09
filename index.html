@@ -122,7 +122,8 @@
     header .bar .search { flex: 1; min-width: 0; }
     header .bar .acc-btn { flex-shrink: 0; }
     header .bar .logo { flex-shrink: 0; font-size: 18px; }
-    header .bar .country-badge, header .bar .theme-pick-btn { display: none; }
+    header .bar .theme-pick-btn { display: none; }
+    header .bar .country-badge { flex-shrink: 0; }
     .bar-city { flex-shrink: 1; min-width: 0; padding: 8px 10px; }
     .bar-city select { max-width: 110px; }
     /* khi không có ô tìm kiếm (trang chủ), bộ lọc địa điểm nới rộng ra giữa */
@@ -1310,7 +1311,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v85-region-ui</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v86-region-ui</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -5874,11 +5875,11 @@ const ALL_SE = "__ALL_SE__";
 let activeCity = ALL_SE;   // mặc định: Tất cả Thuỵ Điển
 try { const c = localStorage.getItem('vietsthlm_lan'); if (c && (c===ALL_SE || CITIES.includes(c))) activeCity = c; } catch(e){}
 function cityMatch(tp){ return activeCity === ALL_SE || tp === activeCity; }
-function cityLabel(){ return activeCity === ALL_SE ? t('all_sweden') : activeCity; }
+function cityLabel(){ return activeCity === ALL_SE ? 'Hela Sverige' : activeCity; }
 
 function initCitySelector() {
   const sel = document.getElementById('citySel');
-  sel.innerHTML = `<option value="${ALL_SE}"${activeCity===ALL_SE?' selected':''}>${t('all_sweden')}</option>` + CITIES.map(c=>`<option value="${c}"${c===activeCity?' selected':''}>${c}</option>`).join('');
+  sel.innerHTML = `<option value="${ALL_SE}"${activeCity===ALL_SE?' selected':''}>Hela Sverige</option>` + CITIES.map(c=>`<option value="${c}"${c===activeCity?' selected':''}>${c}</option>`).join('');
   updateCityHint();
 }
 function updateCityHint() {
