@@ -6170,8 +6170,28 @@ const LM_PHOTO = {
   "lm-linkopingdk": "https://commons.wikimedia.org/wiki/Special:FilePath/LinDom-stitched.jpg?width=1000",
   "lm-gbgdk": "https://commons.wikimedia.org/wiki/Special:FilePath/G%C3%B6teborgs_domkyrka%2C_2019_%2801%29.jpg?width=1000",
   "lm-nordstan": "https://commons.wikimedia.org/wiki/Special:FilePath/Entrance_to_Nordstan_from_Brunnsparken_in_Gothenburg.jpg?width=1000",
+  "lm-varberg": "https://commons.wikimedia.org/wiki/Special:FilePath/Varberg_Fortress%2C_Halland%2C_Sweden_%2810974928675%29.jpg?width=1000",
+  "lm-borgholm": "https://commons.wikimedia.org/wiki/Special:FilePath/Borgholm_castle_ruin%2C_%C3%96land%2C_Sweden.jpg?width=1000",
+  "lm-gamlauppsala": "https://commons.wikimedia.org/wiki/Special:FilePath/Royal_Mounds_of_Gamla_Uppsala_(by_Pudelek).JPG?width=1000",
+  "lm-malmohus": "https://commons.wikimedia.org/wiki/Special:FilePath/Malm%C3%B6hus_slott_2022.jpg?width=1000",
+  "lm-feske": "https://commons.wikimedia.org/wiki/Special:FilePath/Feskek%C3%B6rka_01.JPG?width=1000",
+  "lm-tylosand": "https://commons.wikimedia.org/wiki/Special:FilePath/Tylosand_beach.JPG?width=1000",
+  "lm-siljan": "https://commons.wikimedia.org/wiki/Special:FilePath/Siljan_August_2015_03.jpg?width=1000",
+  "lm-gavlebock": "https://commons.wikimedia.org/wiki/Special:FilePath/Yule_goat_Gefle_Sweden_2009.jpg?width=1000",
+  "lm-karlstaddk": "https://commons.wikimedia.org/wiki/Special:FilePath/Karlstad_Cathedral.JPG?width=1000",
+  "lm-strangnasdk": "https://commons.wikimedia.org/wiki/Special:FilePath/Str%C3%A4ngn%C3%A4s_cathedral_Sweden_001.JPG?width=1000",
+  "lm-vasterasdk": "https://commons.wikimedia.org/wiki/Special:FilePath/V%C3%A4ster%C3%A5s_domkyrka1001.jpg?width=1000",
+  "lm-universeum": "https://commons.wikimedia.org/wiki/Special:FilePath/Universeum2.JPG?width=1000",
+  "lm-visbydk": "https://commons.wikimedia.org/wiki/Special:FilePath/Visby-domkyrka.jpg?width=1000",
+  "lm-granna": "https://commons.wikimedia.org/wiki/Special:FilePath/View_of_Gr%C3%A4nna.jpg?width=1000",
+  "lm-marbacka": "https://commons.wikimedia.org/wiki/Special:FilePath/Selma_Lagerlofs_Marbacka_at_Sunne.jpg?width=1000",
+  "lm-umea": "https://commons.wikimedia.org/wiki/Special:FilePath/Gammlia%2C_midsommarfirande_04.jpg?width=1000",
+  "lm-mos": "https://commons.wikimedia.org/wiki/Special:FilePath/Mall_of_Scandinavia_November_2015_01.jpg?width=1000",
+  "lm-a6": "https://commons.wikimedia.org/wiki/Special:FilePath/A6_2015_Entre_gr%C3%B6n.jpg?width=1000",
+  "lm-granby": "https://commons.wikimedia.org/wiki/Special:FilePath/Gr%C3%A4nby_Centrum.jpg?width=1000",
 };
-LANDMARK_PLACES.forEach(p=>{ if(LM_PHOTO[p.id]) p.anh = LM_PHOTO[p.id]; });
+// Giữ ảnh vẽ mặc định (SVG) làm ảnh dự phòng: nếu link ảnh thật lỗi, tự hiện lại ảnh cũ — không bao giờ vỡ ảnh.
+LANDMARK_PLACES.forEach(p=>{ if(LM_PHOTO[p.id]){ p.anhFallback = p.anh; p.anh = LM_PHOTO[p.id]; } });
 function mergeCheckinPlaces(){
   CHECKIN_PLACES.forEach(cp => { if (!PLACES.some(p => String(p.id)===String(cp.id))) PLACES.push(cp); });
 }
@@ -6252,6 +6272,12 @@ const trChipsEl = document.getElementById('tr-chips');
 document.getElementById('q').addEventListener('input', e => { query = e.target.value.trim().toLowerCase(); renderPlaces(); renderFeed(); renderMarket(); renderTranslate(); renderEvents(); renderShare(); renderHomeFeed(); renderShop(); });
 const stars = n => "★".repeat(Math.round(n)) + "☆".repeat(5-Math.round(n));
 
+// Ảnh nền có dự phòng: ảnh thật nằm trên, ảnh vẽ mặc định (SVG) nằm dưới. Link lỗi -> tự hiện ảnh cũ.
+function bgImg(p){
+  const main = `url('${p.anh}')`;
+  return p.anhFallback ? `${main},url('${p.anhFallback}')` : main;
+}
+
 function renderPlaces() {
   const list = PLACES.filter(p => {
     const okCity = cityMatch(p.tp);
@@ -6265,7 +6291,7 @@ function renderPlaces() {
   empty.classList.add('hidden');
   grid.innerHTML = list.map(p => `
     <article class="card" onclick="openPlace('${p.id}')">
-      <div class="thumb" style="background-image:url('${p.anh}')">
+      <div class="thumb" style="background-image:${bgImg(p)}">
         ${p.noibat?'<span class="badge">'+t('c_featured')+'</span>':''}
         <span class="cat-tag">${p.loai}</span>
       </div>
@@ -6284,7 +6310,7 @@ function openPlace(id) {
   const p = PLACES.find(x=>String(x.id)===String(id));
   document.getElementById('sheet').innerHTML = `
     <button class="close-x" onclick="closeModal()">✕</button>
-    <div class="sheet-img" style="background-image:url('${p.anh}')"></div>
+    <div class="sheet-img" style="background-image:${bgImg(p)}"></div>
     <div class="sheet-body">
       <h2>${p.ten}</h2>
       <div class="sub">${p.loai} · ${p.khuvuc} · ${p.diem.toFixed(1)} ${stars(p.diem)} (${p.rev})</div>
