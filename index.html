@@ -1304,7 +1304,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v83-fast-translate</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v84-fix-articles</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -6229,7 +6229,10 @@ function submitArticle(editId) {
   const item = { chude:fields.chude, title, teaser, anh:fields.anh, co_noidung:!!fields.body, nguoi_dang:currentUser.email, email:currentUser.email, ngay_tao:new Date().toISOString() };
   ARTICLES.unshift(item);
   closeModal(); renderArticles();
-  callApi({ action:'addArticle', ...fields, email:currentUser.email }).catch(()=>{});
+  callApi({ action:'addArticle', ...fields, email:currentUser.email }).then(r=>{
+    if (r && r.ok && r.item && r.item.id){ item.id = r.item.id; }
+    renderArticles(); renderHomeFeed();
+  }).catch(()=>{});
 }
 
 let chatTimer = null;
@@ -6955,7 +6958,7 @@ async function loadData() {
     }
     dataLoaded = true;
     initCitySelector();
-    renderPlaces(); renderFeed(); renderMarket(); renderTranslate(); renderEvents(); renderShare(); renderHomeFeed();
+    renderPlaces(); renderFeed(); renderMarket(); renderTranslate(); renderEvents(); renderShare(); renderArticles(); renderHomeFeed();
     if (!document.getElementById('view-friends').classList.contains('hidden')) renderFriends();
   } catch (e) {
     // nếu lỗi mạng thì giữ dữ liệu mẫu sẵn có, app vẫn xem được
