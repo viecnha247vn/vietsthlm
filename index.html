@@ -6518,7 +6518,7 @@ function renderHomeFeed() {
     text:(p.loai?('['+p.loai+'] '):'') + (p.mota||''), thumb:(p.anh && p.anh.indexOf('http')===0)?p.anh:'',
     tag:(p.checkin||CHECKIN_OFFERS[String(p.id)])?('🎁 -'+((p.checkin&&p.checkin.percent)||CHECKIN_OFFERS[String(p.id)].percent)+'%'):'' }));
   // Chợ
-  MARKET.filter(m=>cityMatch(m.tp) && m.type!=='job').forEach(m=> items.push({
+  MARKET.filter(m=>cityMatch(m.tp) && m.type!=='job' && m.type!=='jobapply').forEach(m=> items.push({
     type:'market', id:m.id, ms:feedTimeMs(m), who:m.who||'', anh:m.anh,
     text:(m.title||'') + (m.desc?(' — '+m.desc):''), thumb:(m.anh && m.anh.indexOf('http')===0)?m.anh:'' }));
   // Đi chơi
@@ -6579,7 +6579,7 @@ function renderMarket() {
     const okCity = cityMatch(m.tp);
     const okCat = mktCat==="Tất cả" || m.cat===mktCat;
     const okQ = !query || [m.title,m.cat,m.khuvuc,m.desc,m.who].some(s=>s.toLowerCase().includes(query));
-    return okCity && okCat && okQ && m.type!=='shop' && m.type!=='job';
+    return okCity && okCat && okQ && m.type!=='shop' && m.type!=='job' && m.type!=='jobapply';
   });
   const grid = document.getElementById('mkt-grid'), empty = document.getElementById('mkt-empty');
   document.getElementById('mkt-count').textContent = `${list.length} tin`;
@@ -6607,6 +6607,7 @@ function renderMarket() {
 }
 function openItem(id) {
   const m = MARKET.find(x=>String(x.id)===String(id));
+  if (m && m.type==='job') return openJob(m);
   document.getElementById('sheet').innerHTML = `
     <button class="close-x" onclick="closeModal()">✕</button>
     <div class="sheet-img" style="background-image:url('${m.anh}')"></div>
@@ -6776,6 +6777,140 @@ function submitJob(editId) {
   MARKET.unshift(item);
   closeModal(); renderJobs();
   callApi({ action:'addMarket', ...item }).catch(()=>{});
+}
+
+// ===== NHẬN VIỆC + KẾT NỐI 25kr (lưu chung MARKET type='jobapply') =====
+const JOB_FEE = 25;                    // kr chủ trả để mở liên hệ 1 thợ
+const JOB_SWISH_NUM = '072-567 11 11'; // số Swish nền tảng
+
+Object.assign(I18N.vi, {
+  job_appl_title:'Thợ đã nhận việc:', job_appl_cnt:'người', job_no_appl:'Chưa có thợ nào nhận việc này.',
+  job_applied_note:'Bạn đã nhận việc này. Chủ sẽ liên hệ nếu chọn bạn.', job_accept_btn:'Nhận việc này',
+  job_accept_hint:'Nhận việc miễn phí. Chủ sẽ trả phí kết nối để liên hệ với bạn.', lbl_login_apply:'Đăng nhập để nhận việc',
+  job_worker:'Thợ', job_pay_connect:'Trả {fee}kr để kết nối', job_accept_title:'Nhận việc', job_phone_ph:'Số để chủ liên hệ với bạn',
+  job_accept_priv:'Số điện thoại của bạn chỉ hiển thị cho chủ sau khi họ trả phí kết nối.', job_accept_send:'Gửi nhận việc',
+  job_accept_need:'Vui lòng nhập tên và số điện thoại.', job_accept_done_t:'Đã nhận việc!',
+  job_accept_done_d:'Chủ tuyển sẽ thấy bạn trong danh sách thợ đã nhận. Nếu chọn bạn, họ trả phí kết nối để lấy liên hệ.',
+  job_connect_title:'Kết nối với thợ', job_connect_sub:'Trả {fee}kr cho nền tảng để mở số liên hệ của thợ này.',
+  job_connect_swish_t:'Chuyển {fee}kr qua Swish', job_connect_s1:'Swish {fee}kr tới {num}', job_connect_s2:'Ghi lời nhắn:',
+  job_connect_s3:'Bấm nút bên dưới để mở liên hệ.', job_connect_paid:'Tôi đã chuyển — mở liên hệ', c_ok:'OK', c_back:'Quay lại'
+});
+Object.assign(I18N.en, {
+  job_appl_title:'Workers who accepted:', job_appl_cnt:'people', job_no_appl:'No worker has accepted this job yet.',
+  job_applied_note:'You accepted this job. The employer will contact you if chosen.', job_accept_btn:'Accept this job',
+  job_accept_hint:'Accepting is free. The employer pays a connection fee to contact you.', lbl_login_apply:'Log in to accept',
+  job_worker:'Worker', job_pay_connect:'Pay {fee}kr to connect', job_accept_title:'Accept job', job_phone_ph:'Number for the employer to reach you',
+  job_accept_priv:'Your phone number is only shown to the employer after they pay the connection fee.', job_accept_send:'Send acceptance',
+  job_accept_need:'Please enter your name and phone number.', job_accept_done_t:'Accepted!',
+  job_accept_done_d:'The employer will see you in their list of accepted workers. If chosen, they pay a connection fee to get your contact.',
+  job_connect_title:'Connect with worker', job_connect_sub:'Pay {fee}kr to the platform to unlock this worker\'s contact.',
+  job_connect_swish_t:'Send {fee}kr via Swish', job_connect_s1:'Swish {fee}kr to {num}', job_connect_s2:'Add the message:',
+  job_connect_s3:'Tap the button below to unlock the contact.', job_connect_paid:'I have paid — unlock contact', c_ok:'OK', c_back:'Back'
+});
+
+function jobApplies(jobId){ return MARKET.filter(x=>x.type==='jobapply' && String(x.cat)===String(jobId)); }
+function iApplied(jobId){ return !!(currentUser && MARKET.some(x=>x.type==='jobapply' && String(x.cat)===String(jobId) && String(x.email||'').toLowerCase()===currentUser.email.toLowerCase())); }
+function jobUnlockedIds(){ try{ return JSON.parse(localStorage.getItem('qiqa_job_unlocked')||'[]'); }catch(e){ return []; } }
+function jobIsUnlocked(id){ return jobUnlockedIds().map(String).includes(String(id)); }
+function jobUnlock(id){ const a=jobUnlockedIds(); if(!a.map(String).includes(String(id))){ a.push(String(id)); try{localStorage.setItem('qiqa_job_unlocked',JSON.stringify(a));}catch(e){} } }
+
+function openJob(m){
+  const applies = jobApplies(m.id), owner = ownsPost(m), applied = iApplied(m.id);
+  document.getElementById('sheet').innerHTML = `
+    <button class="close-x" onclick="closeModal()">✕</button>
+    <div class="sheet-img" style="background-image:url('${m.anh}')"></div>
+    <div class="sheet-body">
+      <h2>${m.title||''}</h2>
+      <div class="sub"><span class="tag-type t-job" style="position:static;display:inline-block">${ttype('job')}</span> · ${m.cat||''} · ${m.khuvuc||''}</div>
+      <p style="margin:14px 0;font-size:15px;white-space:pre-line;">${m.desc||''}</p>
+      <div class="info-row"><b>${t('job_company')}</b><span>${m.who||''}</span></div>
+      <div class="info-row"><b>${t('job_area')}</b><span>${m.khuvuc||''}</span></div>
+      ${ owner ? `
+        <div class="safety gold" style="margin-top:14px"><span>💼</span><div><b>${t('job_appl_title')}</b> ${applies.length} ${t('job_appl_cnt')}</div></div>
+        ${ applies.length ? applies.map(a=>jobApplicantRow(a,m)).join('') : `<div class="empty">${t('job_no_appl')}</div>` }`
+      : (currentUser ? (
+          applied
+            ? `<div class="safety gold" style="margin-top:14px"><span>✅</span><div>${t('job_applied_note')}</div></div>`
+            : `<button class="submit" style="margin-top:16px" onclick="acceptJob('${m.id}')">✋ ${t('job_accept_btn')}</button>
+               <div class="sub" style="margin-top:10px">${t('job_accept_hint')}</div>`)
+          : `<button class="submit" style="margin-top:16px" onclick="requireLogin(()=>{closeModal();openItem('${m.id}');})">🔑 ${t('lbl_login_apply')}</button>`)
+      }
+      ${owner?`<button class="del-post-full" style="margin-top:14px" onclick="closeModal();deletePost('market','${m.id}')">🗑 ${t('post_delete')}</button>
+      <button class="edit-post-full" onclick="closeModal();openJobForm(MARKET.find(x=>String(x.id)==='${m.id}'))">✎ ${t('post_edit')}</button>`:''}
+    </div>`;
+  openModalEl();
+}
+
+function jobApplicantRow(a, job){
+  const unlocked = jobIsUnlocked(a.id);
+  return `<div class="info-row" style="align-items:center">
+    <b>${a.who||t('job_worker')}</b>
+    <span style="text-align:right">${ unlocked
+      ? `📞 <a href="tel:${String(a.sdt||'').replace(/\s/g,'')}">${a.sdt||''}</a>`
+      : `<button class="edit-post" onclick="openJobUnlock('${a.id}','${job.id}')">🔓 ${t('job_pay_connect').replace('{fee}',JOB_FEE)}</button>` }</span>
+  </div>`;
+}
+
+function acceptJob(jobId){
+  requireLogin(()=>{
+    const job = MARKET.find(x=>String(x.id)===String(jobId)); if(!job) return;
+    document.getElementById('sheet').innerHTML = `
+      <button class="close-x" onclick="closeModal()">✕</button>
+      <div class="sheet-body">
+        <h2>✋ ${t('job_accept_title')}</h2>
+        <div class="sub" style="margin-bottom:16px">${job.title||''} — ${job.who||''}</div>
+        <div class="field"><label>${t('mk_name')}</label><input id="ja-who" value="${esc(pdName())}"></div>
+        <div class="field"><label>${t('job_phone')}</label><input id="ja-sdt" value="${esc(pdPhone())}" placeholder="${t('job_phone_ph')}"></div>
+        <div class="sub" style="margin-bottom:14px">${t('job_accept_priv')}</div>
+        <button class="submit" onclick="submitJobApply('${jobId}')">✅ ${t('job_accept_send')}</button>
+      </div>`;
+    openModalEl();
+  });
+}
+
+function submitJobApply(jobId){
+  const job = MARKET.find(x=>String(x.id)===String(jobId)); if(!job) return;
+  const who=(document.getElementById('ja-who').value||'').trim();
+  const sdt=(document.getElementById('ja-sdt').value||'').trim();
+  if(!who || !sdt){ alert(t('job_accept_need')); return; }
+  const item = { tp:job.tp||activeCity, type:'jobapply', cat:String(jobId), title:job.title||'', who, sdt, desc:'', khuvuc:job.khuvuc||'', anh:'', email: currentUser?currentUser.email:'' };
+  MARKET.unshift(item);
+  callApi({ action:'addMarket', ...item }).catch(()=>{});
+  document.getElementById('sheet').innerHTML = `
+    <button class="close-x" onclick="closeModal()">✕</button>
+    <div class="sheet-body" style="text-align:center;padding:30px 18px">
+      <div style="font-size:44px">✅</div>
+      <h2>${t('job_accept_done_t')}</h2>
+      <p class="sub" style="margin-top:10px">${t('job_accept_done_d')}</p>
+      <button class="submit" style="margin-top:18px" onclick="closeModal()">${t('c_ok')}</button>
+    </div>`;
+}
+
+function openJobUnlock(applyId, jobId){
+  const msg = `QiQa Job ${jobId} + ${currentUser?currentUser.email:''}`;
+  document.getElementById('sheet').innerHTML = `
+    <button class="close-x" onclick="closeModal()">✕</button>
+    <div class="sheet-body">
+      <h2>🔓 ${t('job_connect_title')}</h2>
+      <div class="sub" style="margin-bottom:14px">${t('job_connect_sub').replace('{fee}',JOB_FEE)}</div>
+      <div class="swish-box">
+        <div class="swish-title">${t('job_connect_swish_t').replace('{fee}',JOB_FEE)}</div>
+        <div class="swish-num">Swish: <b>${JOB_SWISH_NUM}</b></div>
+        <div class="swish-steps">
+          <b>1.</b> ${t('job_connect_s1').replace('{fee}',JOB_FEE).replace('{num}',JOB_SWISH_NUM)}<br>
+          <b>2.</b> ${t('job_connect_s2')} <b>${msg}</b><br>
+          <b>3.</b> ${t('job_connect_s3')}
+        </div>
+      </div>
+      <button class="submit" style="margin-top:16px" onclick="confirmJobUnlock('${applyId}','${jobId}')">✅ ${t('job_connect_paid')}</button>
+      <button class="edit-post-full" onclick="openJob(MARKET.find(x=>String(x.id)==='${jobId}'))">← ${t('c_back')}</button>
+    </div>`;
+  openModalEl();
+}
+
+function confirmJobUnlock(applyId, jobId){
+  jobUnlock(applyId);
+  openJob(MARKET.find(x=>String(x.id)===String(jobId)));
 }
 
 // ============================================================
