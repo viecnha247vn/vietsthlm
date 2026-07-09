@@ -79,6 +79,10 @@
   body.home-mode nav.tabs { display: none !important; }
   body.home-mode #view-home .home-split,
   body.home-mode #view-home > main.wrap { display: none !important; }
+  /* Đã đăng nhập: ẩn phần mồi, hiện nội dung đầy đủ */
+  body:not(.home-mode) #view-home .home-top,
+  body:not(.home-mode) #view-home .home-hero,
+  body:not(.home-mode) #view-home #homeTeasers { display: none !important; }
   .tab { display: flex; align-items: center; gap: 11px; cursor: pointer; font-weight: 700;
     color: var(--muted); white-space: nowrap; user-select: none;
     transition: color .15s ease, background .15s ease, transform .1s ease; }
@@ -6100,9 +6104,8 @@ function updatePageNav(tab){
   if(tab==='about'){ if(footer)footer.style.display=''; if(pn)pn.style.display='none'; return; }
   if(footer)footer.style.display='none';
   if(!pn) return;
-  const i=TAB_ORDER.indexOf(tab); const next=(i>=0&&i<TAB_ORDER.length-1)?TAB_ORDER[i+1]:'about';
-  const txEl=document.querySelector('.tab[data-tab="'+next+'"] .tab-tx'); const nm=txEl?txEl.textContent.trim():'';
-  pn.innerHTML='<div class="pn-inner"><div class="pn-end">'+t('pn_end')+'</div><button class="pn-btn" onclick="switchTab(\''+next+'\')">'+t('pn_next')+': '+nm+' →</button></div>';
+  if(tab==='home'){ pn.style.display='none'; return; }
+  pn.innerHTML='<div class="pn-inner"><div class="pn-end">'+t('pn_end')+'</div></div>';
   pn.style.display='';
 }
 function switchTab(tab) {
@@ -6143,8 +6146,8 @@ function switchTab(tab) {
   if (tab==='member') renderMemberPage();
   if (tab==='services') renderShop();
   if (tab==='jobs') renderJobs();
-  if (tab==='home') { renderTeasers(); updateHomeFlag(); }
-  document.body.classList.toggle('home-mode', tab==='home');
+  if (tab==='home') { renderTeasers(); updateHomeFlag(); if (currentUser) { homeShown = 20; renderHomeFeed(); } }
+  document.body.classList.toggle('home-mode', tab==='home' && !currentUser);
   window.scrollTo(0,0);
 }
 
@@ -8943,6 +8946,7 @@ function logout() {
   localStorage.removeItem('vietsthlm_user');
   refreshAccBtn(); closeModal();
   if (typeof initChatUI === 'function') initChatUI();
+  switchTab('home');
 }
 
 function loginDone(user) {
@@ -8951,6 +8955,7 @@ function loginDone(user) {
   refreshAccBtn();
   loadData();
   if (typeof initChatUI === 'function') initChatUI();
+  switchTab('home');
 }
 
 // gọi API
