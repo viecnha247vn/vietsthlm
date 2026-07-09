@@ -569,6 +569,10 @@
   .tz-ttl{font-weight:700;font-size:15px;margin-bottom:4px;color:var(--ink);}
   .tz-snip{font-size:12.5px;color:var(--muted);line-height:1.45;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
   .tz-lock{position:absolute;top:10px;right:10px;font-size:13px;opacity:.5;}
+  .tz-feat{grid-column:1 / -1;background:linear-gradient(135deg,var(--surface),color-mix(in srgb,var(--accent,#c65b3a) 8%,var(--surface)));border-color:var(--accent,#c65b3a);padding:20px 18px;}
+  .tz-feat .tz-ic{font-size:30px;}
+  .tz-feat .tz-ttl{font-size:19px;}
+  .tz-feat .tz-snip{-webkit-line-clamp:2;font-size:13.5px;}
   .swish-box { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 16px; margin-top: 8px;
     display: flex; flex-direction: column; align-items: center; text-align: center; }
   .swish-title { font-weight: 700; font-size: 14px; margin-bottom: 12px; color: var(--ink); }
@@ -6130,9 +6134,15 @@ function switchTab(tab) {
   if (tab==='member') renderMemberPage();
   if (tab==='services') renderShop();
   if (tab==='jobs') renderJobs();
-  if (tab==='home') { homeShown = 20; renderHomeFeed(); renderTeasers(); updateHomeFlag(); }
+  if (tab==='home') { renderTeasers(); updateHomeFlag(); }
   const hdrEl = document.querySelector('header');
   if (hdrEl) hdrEl.style.display = (tab==='home') ? 'none' : '';
+  const navEl = document.querySelector('nav.tabs');
+  if (navEl) navEl.style.display = (tab==='home') ? 'none' : '';
+  const hsEl = document.querySelector('#view-home .home-split');
+  if (hsEl) hsEl.style.display = 'none';
+  const hfEl = document.querySelector('#view-home > main.wrap');
+  if (hfEl) hfEl.style.display = 'none';
   window.scrollTo(0,0);
 }
 
@@ -6199,16 +6209,21 @@ function updateHomeFlag(){
   const f = document.getElementById('homeFlag');
   if (f) f.textContent = (activeCountry && activeCountry.fl) ? activeCountry.fl : '🌐';
 }
+function tzRotation(){ let n=0; try{ n=parseInt(localStorage.getItem('qiqa_tz_rot')||'0',10)||0; }catch(e){} return n; }
+function bumpTzRotation(){ try{ localStorage.setItem('qiqa_tz_rot', String(tzRotation()+1)); }catch(e){} }
 function renderTeasers(){
   const el = document.getElementById('homeTeasers'); if (!el) return;
   const locked = !isMemberUser();
-  el.innerHTML = TEASERS.map(z => `
-    <div class="tz-card" onclick="openTeaser('${z.tab}')">
+  const off = ((tzRotation() % TEASERS.length) + TEASERS.length) % TEASERS.length;
+  const list = TEASERS.slice(off).concat(TEASERS.slice(0, off));
+  el.innerHTML = list.map((z,idx) => `
+    <div class="tz-card${idx===0?' tz-feat':''}" onclick="openTeaser('${z.tab}')">
       ${locked?'<span class="tz-lock">🔒</span>':''}
       <div class="tz-ic">${z.ic}</div>
       <div class="tz-ttl">${t(z.tk)}</div>
       <div class="tz-snip">${t(z.sk)}</div>
     </div>`).join('');
+  bumpTzRotation();
 }
 function openTeaser(tab){
   if (isMemberUser()) { switchTab(tab); return; }
