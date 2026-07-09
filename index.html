@@ -6145,6 +6145,14 @@ const LANDMARK_PLACES = [
   { id:"lm-gavlebock", tp:"Gävleborgs län", ten:"Gävle & Bomlyckan", nhom:"Du lịch", loai:"Điểm du lịch", khuvuc:"Gävle", diachi:"Gävle, Sweden", sdt:"", gio:"Xem trên Google Maps", mota:"Thành phố nổi tiếng với 'Dê Giáng sinh' khổng lồ mỗi mùa đông.", diem:4.4, rev:800, noibat:0, map:"https://www.google.com/maps/search/?api=1&query=G%C3%A4vle%20%26%20Bomlyckan%20G%C3%A4vle%20Sweden", ngay_tao:"2026-07-09T09:00:00", anh:_LM_IMG.tour },
 ];
 CHECKIN_PLACES.push(...LANDMARK_PLACES);
+const LM_PHOTO = {
+  "lm-gamlastan": "https://commons.wikimedia.org/wiki/Special:FilePath/V%C3%A4sterl%C3%A5nggatan%2C_Gamla_stan%2C_Stockholm.jpg?width=1000",
+  "lm-vasa": "https://commons.wikimedia.org/wiki/Special:FilePath/Swedish_warship_Vasa%2C_sank_1628%2C_Vasamuseet%2C_Stockholm_%283%29_%2836225544146%29.jpg?width=1000",
+  "lm-liseberg": "https://commons.wikimedia.org/wiki/Special:FilePath/Liseberg%2C_20221223.jpg?width=1000",
+  "lm-oresund": "https://commons.wikimedia.org/wiki/Special:FilePath/Oeresund_Bridge.jpg?width=1000",
+  "lm-visby": "https://commons.wikimedia.org/wiki/Special:FilePath/Ringmuren_i_solnedg%C3%A5ng_1_%2819318908995%29.jpg?width=1000",
+};
+LANDMARK_PLACES.forEach(p=>{ if(LM_PHOTO[p.id]) p.anh = LM_PHOTO[p.id]; });
 function mergeCheckinPlaces(){
   CHECKIN_PLACES.forEach(cp => { if (!PLACES.some(p => String(p.id)===String(cp.id))) PLACES.push(cp); });
 }
