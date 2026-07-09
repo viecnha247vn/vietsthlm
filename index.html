@@ -1304,7 +1304,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v82-auto-translate</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v83-fast-translate</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -6135,26 +6135,7 @@ function renderArticles() {
     </article>`).join('');
 }
 
-// Ngôn ngữ gốc khi admin đăng bài Luật & Xã hội (bài thường soạn bằng tiếng Việt)
-const ART_BASE_LANG = 'vi';
-// Tự dịch tiêu đề + teaser + thân bài sang ngôn ngữ người đọc đang chọn (dùng Gemini qua backend action:translate)
-async function autoTranslateArticle(a){
-  try {
-    if (!a || LANG === ART_BASE_LANG) return;   // đã đúng ngôn ngữ gốc → khỏi dịch
-    const badge = document.getElementById('art-tr-badge');
-    if (badge){ badge.style.display='inline-flex'; badge.textContent='🌐 ' + (t('art_translating')||'Đang dịch…'); }
-    const titleEl  = document.getElementById('art-title-slot');
-    const teaserEl = document.getElementById('art-teaser-slot');
-    const bodyEl   = document.getElementById('art-body-full');
-    const tr = (txt)=> callApi({ action:'translate', text:String(txt||''), target:LANG }).then(x=> (x&&x.ok&&x.text)?x.text:null).catch(()=>null);
-    const jobs = [];
-    if (titleEl && a.title)   jobs.push(tr(a.title ).then(v=>{ if(v) titleEl.textContent=v; }));
-    if (teaserEl && a.teaser) jobs.push(tr(a.teaser).then(v=>{ if(v) teaserEl.textContent=v; }));
-    if (bodyEl && bodyEl.dataset.orig) jobs.push(tr(bodyEl.dataset.orig).then(v=>{ if(v) bodyEl.innerHTML=escapeHtml(v).replace(/\n/g,'<br>'); }));
-    await Promise.all(jobs);
-    if (badge){ badge.textContent='🌐 ' + (t('art_translated')||'Đã dịch tự động'); }
-  } catch(e){ const b=document.getElementById('art-tr-badge'); if(b) b.style.display='none'; }
-}
+const ART_BASE_LANG = 'vi'; // ngôn ngữ gốc khi soạn bài (khớp với backend)
 async function openArticle(id) {
   const a = ARTICLES.find(x=>String(x.id)===String(id));
   if (!a) return;
@@ -6182,15 +6163,22 @@ async function openArticle(id) {
     </div>`;
   openModalEl();
   // lấy phần thân bài từ server (chỉ quản trị / người đã mua mới nhận được)
+  // hiện nhãn "đang dịch" ngay nếu người đọc chọn ngôn ngữ khác bản gốc
+  if (LANG !== ART_BASE_LANG){ const _b=document.getElementById('art-tr-badge'); if(_b){ _b.style.display='inline-flex'; _b.textContent='🌐 '+(t('art_translating')||'Đang dịch…'); } }
   try {
-    const r = await callApi({ action:'readArticle', id:a.id, email: currentUser?currentUser.email:'' });
+    // 1 lượt gọi duy nhất: server trả nội dung ĐÃ DỊCH sẵn (cache vĩnh viễn) theo ngôn ngữ người đọc
+    const r = await callApi({ action:'readArticle', id:a.id, email: currentUser?currentUser.email:'', lang: LANG });
     const slot = document.getElementById('art-body-slot');
+    if (r && r.ok){
+      const _t=document.getElementById('art-title-slot'); if(_t && r.title) _t.textContent=r.title;
+      const _te=document.getElementById('art-teaser-slot'); if(_te && r.teaser) _te.textContent=r.teaser;
+      const _b=document.getElementById('art-tr-badge');
+      if(_b){ if(LANG!==ART_BASE_LANG){ _b.style.display='inline-flex'; _b.textContent='🌐 '+(t('art_translated')||'Đã dịch tự động'); } else { _b.style.display='none'; } }
+    }
     if (!slot) return;
     if (r && r.ok && r.unlocked && r.body) {
       slot.innerHTML = `<div id="art-body-full" class="art-full">${escapeHtml(r.body).replace(/\n/g,'<br>')}</div>
         <div class="art-disclaimer">⚖️ ${t('art_disclaimer')}</div>`;
-      const bf = document.getElementById('art-body-full'); if (bf) bf.dataset.orig = r.body;
-      autoTranslateArticle(a);
     } else {
       slot.innerHTML = priceCard;
     }
