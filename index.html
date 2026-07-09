@@ -6763,37 +6763,43 @@ function unlockTranslator(id){
   const a = trUnlockedIds();
   if (a.indexOf(String(id)) === -1){ a.push(String(id)); localStorage.setItem(trUnlockKey(), JSON.stringify(a)); }
 }
-// Chính chủ hồ sơ và admin luôn xem được, không cần trả phí
+// Chỉ người đã trả phí 25 kr mới xem được (không tự mở cho admin/chính chủ, để test đúng luồng khách)
 function trIsUnlocked(tr){
-  return trUnlocked(tr.id) || ownsPost(tr) || (typeof isAdminUser==='function' && isAdminUser());
+  return trUnlocked(tr.id);
+}
+// Thẻ thanh toán Swish 25 kr: QR + số + lời nhắn + nút "đã thanh toán"
+function trPayCardHTML(tr){
+  const d = trbk();
+  const email = (currentUser && currentUser.email) || '';
+  const msg = ('PD ' + tr.ten + (email ? (' + ' + email) : '')).slice(0,50);
+  const qrImg = SWISH_QR_25 ? `<img src="${SWISH_QR_25}" alt="Swish QR 25 kr" class="swish-qr">` : '';
+  return `
+    <div class="swish-box">
+      <div class="swish-title">${d.pay_fee}: 25 kr</div>
+      ${qrImg}
+      <div class="swish-num">072-567 11 11 · QiQa</div>
+      <div class="swish-steps">
+        1. ${d.step1}<br>
+        2. ${d.step2.replace('{msg}', '<b>'+esc(msg)+'</b>')}<br>
+        3. ${d.step3}
+      </div>
+    </div>
+    <button class="submit" onclick="confirmTrBooking('${tr.id}')">${d.paid_btn}</button>
+    <div class="trp-sub" style="margin-top:8px">${d.honor}</div>`;
 }
 function openTrBooking(id){
   const tr = TRANSLATORS.find(x=>String(x.id)===String(id));
   if (!tr) return;
   const d = trbk();
   const dp = TRP[LANG] || TRP.en;
-  const email = (currentUser && currentUser.email) || '';
-  const msg = ('PD ' + tr.ten + (email ? (' + ' + email) : '')).slice(0,50);
   const cancelHtml = dp.cancel.map(c=>`<li>${c}</li>`).join('');
-  const qrImg = SWISH_QR_25 ? `<img src="${SWISH_QR_25}" alt="Swish QR 25 kr" class="swish-qr">` : '';
   document.getElementById('sheet').innerHTML = `
     <button class="close-x" onclick="closeModal()">✕</button>
     <div class="sheet-body">
       <h2>${d.pay_title}</h2>
       <div class="auth-note">${d.pay_for} <b>${esc(tr.ten)}</b></div>
-      <div class="swish-box">
-        <div class="swish-title">${d.pay_fee}: 25 kr</div>
-        ${qrImg}
-        <div class="swish-num">072-567 11 11 · QiQa</div>
-        <div class="swish-steps">
-          1. ${d.step1}<br>
-          2. ${d.step2.replace('{msg}', '<b>'+esc(msg)+'</b>')}<br>
-          3. ${d.step3}
-        </div>
-      </div>
-      <div class="trp-note"><b>${dp.noteTitle}</b><ul>${cancelHtml}</ul></div>
-      <button class="submit" onclick="confirmTrBooking('${tr.id}')">${d.paid_btn}</button>
-      <div class="trp-sub" style="margin-top:8px">${d.honor}</div>
+      ${trPayCardHTML(tr)}
+      <div class="trp-note" style="margin-top:14px"><b>${dp.noteTitle}</b><ul>${cancelHtml}</ul></div>
     </div>`;
   openModalEl();
 }
@@ -6808,8 +6814,9 @@ function trContactBlock(tr){
   const sdt = (tr.sdt || '').trim();
   const tel = sdt.replace(/\s/g,'');
   if (!trIsUnlocked(tr)){
-    return `<div class="trp-note"><b>🔒 ${d.contact_title}</b><div style="margin-top:6px">${d.contact_locked}</div></div>
-      <button class="trp-cta" onclick="openTrBooking('${tr.id}')">${d.lock_cta}</button>`;
+    // Chưa trả phí → hiện thẳng mã Swish 25 kr trong trang chi tiết
+    return `<div class="trp-note" style="background:var(--tint-amber);border-color:var(--tint-amber-bd)"><b>🔒 ${d.contact_title}</b><div style="margin-top:6px">${d.contact_locked}</div></div>
+      ${trPayCardHTML(tr)}`;
   }
   const web = tr.web ? `<li><span class="k">Web</span><span class="v"><a href="${tr.web}" target="_blank">${esc(tr.web)}</a></span></li>` : '';
   const phoneLi = sdt ? `<li><span class="k">${d.phone}</span><span class="v"><a href="tel:${tel}">${esc(sdt)}</a></span></li>` : '';
