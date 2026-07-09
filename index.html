@@ -122,8 +122,7 @@
     header .bar .search { flex: 1; min-width: 0; }
     header .bar .acc-btn { flex-shrink: 0; }
     header .bar .logo { flex-shrink: 0; font-size: 18px; }
-    header .bar .theme-pick-btn { display: none; }
-    header .bar .country-badge { flex-shrink: 0; }
+    header .bar .country-badge, header .bar .theme-pick-btn { display: none; }
     .bar-city { flex-shrink: 1; min-width: 0; padding: 8px 10px; }
     .bar-city select { max-width: 110px; }
     /* khi không có ô tìm kiếm (trang chủ), bộ lọc địa điểm nới rộng ra giữa */
@@ -1311,7 +1310,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v86-region-ui</span></p>
+  <p class="foot-copy">© 2026 QTT Solutions <span style="opacity:.5">· v87-clean-demo</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -5830,10 +5829,7 @@ let MARKET = [];
 // ===== FRIENDS / SINGLES DATA =====
 let SINGLES = [];
 
-let SG_EVENTS = [
-  { id:1, host:"Nhóm Việt Sthlm", tp:"Stockholms län", diadiem:"Fika giao lưu độc thân", dia_addr:"Café Pascal, Vasastan", ngay:"T7 19/7", gio:"15:00", note:"Buổi fika thân mật cho người độc thân làm quen tự nhiên. Không áp lực, chỉ trò chuyện. Đăng ký trước để giữ chỗ.", going:["Mai","Hùng","Linh"], joined:false, color:0 },
-  { id:2, host:"Nhóm Việt Sthlm", tp:"Stockholms län", diadiem:"Đi bộ & picnic mùa hè", dia_addr:"Đảo Djurgården", ngay:"CN 27/7", gio:"12:00", note:"Cùng đi bộ vòng quanh Djurgården rồi picnic. Cách hay để gặp gỡ khi vận động ngoài trời. Mang theo ít đồ ăn góp vui.", going:["Nam","Linh"], joined:false, color:2 },
-];
+let SG_EVENTS = [];
 
 let myLikes = [];   // id mình đã thích
 let myMatches = []; // id đã match
