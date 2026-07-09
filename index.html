@@ -556,7 +556,8 @@
   .cp-amount { font-size: 18px; font-weight: 800; color: var(--gold-text); }
   .cp-price { font-size: 14px; color: var(--muted); margin-top: 4px; font-weight: 600; }
   /* ===== TRANG MỒI (landing) ===== */
-  .home-top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 4px 8px;}
+  .home-top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:18px 16px 8px;}
+  .home-top,.home-hero,.home-teasers{max-width:900px;margin-left:auto;margin-right:auto;}
   .home-top-l{display:flex;align-items:center;gap:8px;}
   .home-top-l .qlogo-h{width:96px;height:34px;cursor:pointer;}
   .ht-icon,.ht-flag{border:1px solid var(--line);background:var(--surface);border-radius:999px;height:34px;min-width:34px;padding:0 8px;font-size:16px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;}
@@ -5827,6 +5828,8 @@ function applyLang() {
   if (typeof renderArticles==='function' && !document.getElementById('view-articles').classList.contains('hidden')) renderArticles();
   if (typeof renderShop==='function' && !document.getElementById('view-services').classList.contains('hidden')) renderShop();
   if (typeof renderHomeFeed==='function') renderHomeFeed();
+  if (typeof renderTeasers==='function') renderTeasers();
+  if (typeof updateHomeFlag==='function') updateHomeFlag();
   if (typeof initCitySelector==='function') initCitySelector();
 }
 function setLangFromCountry(c) {
@@ -6202,6 +6205,258 @@ Object.assign(I18N.en, {
   gate_or:'No account yet?', gate_reg:'Register / Log in',
   gate_paid:'I have joined', gate_done_t:'Thank you 💚',
   gate_done_d:'Your membership will be activated shortly. You can keep exploring.'
+});
+Object.assign(I18N.sv, {
+  ht_title:'Ett gemensamt hem', ht_title2:'för dig långt hemifrån',
+  ht_sub:'Platser, vänner, jobb, tjänster och hjälp — allt på ditt eget språk. Tryck på ett kort för att titta.',
+  tz_places:'Restauranger, asiatiska butiker, nagelsalonger… med incheckningserbjudanden nära dig.',
+  tz_fun:'Livesändningar, aktiviteter och de senaste nyheterna från gemenskapen.',
+  tz_share:'Dela erfarenheter, tips och berättelser med andra.',
+  tz_articles:'Lagar, rutiner och dina rättigheter i Sverige — förklarat enkelt.',
+  tz_friends:'Hitta likasinnade att bli vän med och prata på ditt eget språk.',
+  tz_market:'Köp, sälj, byt och ge bort saker inom gemenskapen.',
+  tz_outings:'Trygga, roliga platser och helgutflykter med barnen.',
+  tz_translate:'Tolkning, följe till läkare och dokumentöversättning när du behöver.',
+  tz_jobs:'Jobbannonser: restaurang, naglar, städ, lager… nära dig.',
+  tz_services:'En marknad av tjänster och produkter från gemenskapen.',
+  gate_title:'Bli medlem i QiQa', gate_price:'49 kr/år',
+  gate_sub:'Bli medlem för att läsa vidare och delta fullt ut i gemenskapen.',
+  gate_swish_t:'Skicka {fee} kr/år via Swish', gate_s1:'Swisha {fee} kr till {num}',
+  gate_s2:'Skriv meddelandet:', gate_s3:'Logga in och tryck sedan på knappen nedan för att fortsätta.',
+  gate_or:'Inget konto än?', gate_reg:'Anmäl / Logga in',
+  gate_paid:'Jag har gått med', gate_done_t:'Tack 💚',
+  gate_done_d:'Ditt medlemskap aktiveras snart. Du kan fortsätta utforska.'
+});
+Object.assign(I18N.zh, {
+  ht_title:'共同的家', ht_title2:'给远离家乡的你',
+  ht_sub:'地点、朋友、工作、服务和帮助——全部用你自己的语言。点一张卡片看看。',
+  tz_places:'合口味的餐馆、亚洲超市、美甲店…你身边的签到优惠。',
+  tz_fun:'社区的直播、活动和最新公告。',
+  tz_share:'与大家分享经验、生活窍门和故事。',
+  tz_articles:'瑞典的法律、手续和你的权益——通俗易懂。',
+  tz_friends:'找到志同道合的人交朋友，用母语聊天。',
+  tz_market:'在同乡社区里买卖、交换、赠送物品。',
+  tz_outings:'安全又好玩的地点和周末亲子出游。',
+  tz_translate:'需要时提供口译、陪同就医、文件翻译。',
+  tz_jobs:'招聘信息：餐馆、美甲、清洁、仓库…就在你附近。',
+  tz_services:'来自社区成员的服务与产品集市。',
+  gate_title:'成为 QiQa 会员', gate_price:'49 克朗/年',
+  gate_sub:'成为会员即可继续阅读并全面参与社区。',
+  gate_swish_t:'通过 Swish 支付 {fee} 克朗/年', gate_s1:'用 Swish 向 {num} 转 {fee} 克朗',
+  gate_s2:'请填写留言：', gate_s3:'登录后点击下方按钮继续。',
+  gate_or:'还没有账号？', gate_reg:'注册 / 登录',
+  gate_paid:'我已加入', gate_done_t:'谢谢你 💚',
+  gate_done_d:'你的会员资格将很快激活。你可以继续探索。'
+});
+Object.assign(I18N.uk, {
+  ht_title:'Спільний дім', ht_title2:'для тих, хто далеко від дому',
+  ht_sub:'Місця, друзі, робота, послуги та допомога — усе вашою мовою. Торкніться картки, щоб переглянути.',
+  tz_places:'Ресторани, азійські магазини, манікюрні салони… з акціями за чек-ін поруч.',
+  tz_fun:'Прямі трансляції, події та останні оголошення спільноти.',
+  tz_share:'Діліться досвідом, порадами та історіями з іншими.',
+  tz_articles:'Закони, процедури та ваші права у Швеції — просто пояснено.',
+  tz_friends:'Знайдіть однодумців, щоб потоваришувати й спілкуватися рідною мовою.',
+  tz_market:'Купуйте, продавайте, обмінюйте й віддавайте речі в спільноті.',
+  tz_outings:'Безпечні цікаві місця та вихідні з дітьми.',
+  tz_translate:'Переклад, супровід до лікаря та переклад документів, коли потрібно.',
+  tz_jobs:'Вакансії: ресторани, манікюр, прибирання, склад… поруч із вами.',
+  tz_services:'Маркет послуг і товарів від учасників спільноти.',
+  gate_title:'Стати учасником QiQa', gate_price:'49 крон/рік',
+  gate_sub:'Приєднуйтесь, щоб читати далі й повноцінно брати участь у спільноті.',
+  gate_swish_t:'Сплатіть {fee} крон/рік через Swish', gate_s1:'Надішліть {fee} крон на {num} через Swish',
+  gate_s2:'Додайте повідомлення:', gate_s3:'Увійдіть і натисніть кнопку нижче, щоб продовжити.',
+  gate_or:'Ще немає акаунта?', gate_reg:'Реєстрація / Вхід',
+  gate_paid:'Я приєднався', gate_done_t:'Дякуємо 💚',
+  gate_done_d:'Ваше членство скоро активують. Ви можете продовжувати огляд.'
+});
+Object.assign(I18N.so, {
+  ht_title:'Guri wadaag ah', ht_title2:'dadka ka fog guriga',
+  ht_sub:'Goobo, saaxiibo, shaqooyin, adeegyo iyo caawimaad — dhammaan luqaddaada. Taabo kaadhka si aad u aragto.',
+  tz_places:'Maqaayado, dukaamada Aasiya, saloonada ciddiyaha… oo leh dalacsiin check-in agtaada ah.',
+  tz_fun:'Warbaahin toos ah, dhaqdhaqaaqyo iyo ogeysiisyada ugu dambeeyay ee bulshada.',
+  tz_share:'La wadaag khibrado, talooyin iyo sheekooyin dadka kale.',
+  tz_articles:'Sharciyada, hababka iyo xuquuqdaada Iswidhan — si fudud loo sharraxay.',
+  tz_friends:'Hel dad kula fikir ah oo aad saaxiibtid kulana sheekaysato luqaddaada.',
+  tz_market:'Iibso, iibi, is-weydaarso oo ku deeq alaab bulshada dhexdeeda.',
+  tz_outings:'Goobo ammaan ah oo xiiso leh iyo maalmo la baxo carruurta.',
+  tz_translate:'Turjumaad, la-socod dhakhtar iyo turjumaad dukumeenti markaad u baahato.',
+  tz_jobs:'Shaqooyin: maqaayad, ciddiyo, nadaafad, bakhaar… agtaada.',
+  tz_services:'Suuq adeegyo iyo badeecooyin ka yimid xubnaha bulshada.',
+  gate_title:'Noqo xubin QiQa', gate_price:'49 kr/sannad',
+  gate_sub:'Ku biir si aad u sii akhrido oo aad si buuxda uga qaybqaadato bulshada.',
+  gate_swish_t:'Bixi {fee} kr/sannad Swish', gate_s1:'Swish {fee} kr u dir {num}',
+  gate_s2:'Ku qor fariinta:', gate_s3:'Gal, ka dibna riix badhanka hoose si aad u sii waddo.',
+  gate_or:'Ma lihid akoon?', gate_reg:'Diiwaangeli / Gal',
+  gate_paid:'Waan biiray', gate_done_t:'Mahadsanid 💚',
+  gate_done_d:'Xubinnimadaada dhawaan ayaa la firfircoonayn doonaa. Waad sii baari kartaa.'
+});
+Object.assign(I18N.tr, {
+  ht_title:'Ortak bir yuva', ht_title2:'evinden uzaktakiler için',
+  ht_sub:'Mekanlar, arkadaşlar, işler, hizmetler ve yardım — hepsi kendi dilinde. Bakmak için bir karta dokun.',
+  tz_places:'Damak tadına uygun restoranlar, Asya marketleri, tırnak salonları… yakınında check-in fırsatları.',
+  tz_fun:'Canlı yayınlar, etkinlikler ve topluluğun en yeni duyuruları.',
+  tz_share:'Deneyimlerini, ipuçlarını ve hikayelerini herkesle paylaş.',
+  tz_articles:'İsveç’teki yasalar, işlemler ve hakların — anlaşılır şekilde.',
+  tz_friends:'Arkadaş olacak, kendi dilinde sohbet edecek benzer kişiler bul.',
+  tz_market:'Toplulukta eşya al, sat, takas et ve bağışla.',
+  tz_outings:'Çocuklarla güvenli, keyifli mekanlar ve hafta sonu gezileri.',
+  tz_translate:'İhtiyaç olduğunda tercüme, doktora eşlik ve belge çevirisi.',
+  tz_jobs:'İş ilanları: restoran, tırnak, temizlik, depo… yakınında.',
+  tz_services:'Topluluk üyelerinden hizmet ve ürün pazarı.',
+  gate_title:'QiQa üyesi ol', gate_price:'49 kr/yıl',
+  gate_sub:'Okumaya devam etmek ve topluluğa tam katılmak için üye ol.',
+  gate_swish_t:'Swish ile {fee} kr/yıl öde', gate_s1:'{num} numarasına {fee} kr Swish gönder',
+  gate_s2:'Mesaja yaz:', gate_s3:'Giriş yap, sonra devam etmek için aşağıdaki düğmeye dokun.',
+  gate_or:'Hesabın yok mu?', gate_reg:'Kaydol / Giriş yap',
+  gate_paid:'Katıldım', gate_done_t:'Teşekkürler 💚',
+  gate_done_d:'Üyeliğin kısa sürede etkinleştirilecek. Keşfetmeye devam edebilirsin.'
+});
+Object.assign(I18N.fa, {
+  ht_title:'خانه‌ای مشترک', ht_title2:'برای دور از وطن‌ها',
+  ht_sub:'مکان‌ها، دوستان، کار، خدمات و کمک — همه به زبان خودتان. برای دیدن روی یک کارت بزنید.',
+  tz_places:'رستوران‌ها، فروشگاه‌های آسیایی، سالن‌های ناخن… با تخفیف چک‌این نزدیک شما.',
+  tz_fun:'پخش زنده، رویدادها و آخرین اطلاعیه‌های جامعه.',
+  tz_share:'تجربه‌ها، نکته‌ها و داستان‌ها را با دیگران در میان بگذارید.',
+  tz_articles:'قوانین، مراحل اداری و حقوق شما در سوئد — به زبان ساده.',
+  tz_friends:'افراد هم‌فکر برای دوستی و گفت‌وگو به زبان خودتان پیدا کنید.',
+  tz_market:'خرید، فروش، مبادله و بخشش وسایل در جامعه.',
+  tz_outings:'مکان‌های امن و سرگرم‌کننده و گردش‌های آخر هفته با بچه‌ها.',
+  tz_translate:'ترجمه، همراهی در مراجعه به پزشک و ترجمه مدارک هر وقت لازم شد.',
+  tz_jobs:'آگهی‌های شغلی: رستوران، ناخن، نظافت، انبار… نزدیک شما.',
+  tz_services:'بازاری از خدمات و محصولات اعضای جامعه.',
+  gate_title:'عضو QiQa شوید', gate_price:'۴۹ کرون/سال',
+  gate_sub:'برای ادامه مطالعه و مشارکت کامل در جامعه عضو شوید.',
+  gate_swish_t:'پرداخت {fee} کرون/سال با Swish', gate_s1:'{fee} کرون به {num} با Swish بفرستید',
+  gate_s2:'در پیام بنویسید:', gate_s3:'وارد شوید و سپس دکمه پایین را برای ادامه بزنید.',
+  gate_or:'هنوز حساب ندارید؟', gate_reg:'ثبت‌نام / ورود',
+  gate_paid:'عضو شدم', gate_done_t:'ممنون 💚',
+  gate_done_d:'عضویت شما به‌زودی فعال می‌شود. می‌توانید به گشت‌وگذار ادامه دهید.'
+});
+Object.assign(I18N.ar, {
+  ht_title:'بيت مشترك', ht_title2:'لمن هم بعيدون عن الوطن',
+  ht_sub:'أماكن وأصدقاء ووظائف وخدمات ومساعدة — كل ذلك بلغتك. المس بطاقة لتلقي نظرة.',
+  tz_places:'مطاعم ومتاجر آسيوية وصالونات أظافر… مع عروض تسجيل الوصول بالقرب منك.',
+  tz_fun:'بث مباشر وأنشطة وأحدث إعلانات المجتمع.',
+  tz_share:'شارك التجارب والنصائح والقصص مع الجميع.',
+  tz_articles:'القوانين والإجراءات وحقوقك في السويد — مشروحة ببساطة.',
+  tz_friends:'اعثر على أشخاص يشبهونك لتصادقهم وتتحدث بلغتك.',
+  tz_market:'بيع وشراء ومقايضة وإهداء الأغراض داخل المجتمع.',
+  tz_outings:'أماكن آمنة وممتعة ونزهات نهاية الأسبوع مع الأطفال.',
+  tz_translate:'ترجمة ومرافقة للطبيب وترجمة مستندات عند الحاجة.',
+  tz_jobs:'إعلانات وظائف: مطاعم، أظافر، تنظيف، مستودعات… بالقرب منك.',
+  tz_services:'سوق من الخدمات والمنتجات من أعضاء المجتمع.',
+  gate_title:'كن عضواً في QiQa', gate_price:'49 كرونة/سنة',
+  gate_sub:'انضم لتتابع القراءة وتشارك بالكامل في المجتمع.',
+  gate_swish_t:'ادفع {fee} كرونة/سنة عبر Swish', gate_s1:'أرسل {fee} كرونة إلى {num} عبر Swish',
+  gate_s2:'اكتب في الرسالة:', gate_s3:'سجّل الدخول ثم اضغط الزر بالأسفل للمتابعة.',
+  gate_or:'ليس لديك حساب؟', gate_reg:'تسجيل / دخول',
+  gate_paid:'لقد انضممت', gate_done_t:'شكراً لك 💚',
+  gate_done_d:'سيتم تفعيل عضويتك قريباً. يمكنك متابعة الاستكشاف.'
+});
+Object.assign(I18N.pl, {
+  ht_title:'Wspólny dom', ht_title2:'dla tych z dala od domu',
+  ht_sub:'Miejsca, przyjaciele, praca, usługi i pomoc — wszystko w Twoim języku. Dotknij karty, aby zobaczyć.',
+  tz_places:'Restauracje, sklepy azjatyckie, salony paznokci… z ofertami za zameldowanie w pobliżu.',
+  tz_fun:'Relacje na żywo, wydarzenia i najnowsze ogłoszenia społeczności.',
+  tz_share:'Dziel się doświadczeniami, poradami i historiami z innymi.',
+  tz_articles:'Prawo, procedury i Twoje prawa w Szwecji — wyjaśnione prosto.',
+  tz_friends:'Znajdź podobnych ludzi, by się zaprzyjaźnić i rozmawiać w swoim języku.',
+  tz_market:'Kupuj, sprzedawaj, wymieniaj i oddawaj rzeczy w społeczności.',
+  tz_outings:'Bezpieczne, ciekawe miejsca i weekendowe wyjścia z dziećmi.',
+  tz_translate:'Tłumaczenia, asysta u lekarza i tłumaczenie dokumentów, gdy potrzebujesz.',
+  tz_jobs:'Ogłoszenia o pracę: restauracje, paznokcie, sprzątanie, magazyn… blisko Ciebie.',
+  tz_services:'Rynek usług i produktów od członków społeczności.',
+  gate_title:'Zostań członkiem QiQa', gate_price:'49 kr/rok',
+  gate_sub:'Dołącz, aby czytać dalej i w pełni uczestniczyć w społeczności.',
+  gate_swish_t:'Zapłać {fee} kr/rok przez Swish', gate_s1:'Wyślij {fee} kr na {num} przez Swish',
+  gate_s2:'Wpisz w wiadomości:', gate_s3:'Zaloguj się, a potem kliknij przycisk poniżej, aby kontynuować.',
+  gate_or:'Nie masz konta?', gate_reg:'Zarejestruj / Zaloguj',
+  gate_paid:'Dołączyłem', gate_done_t:'Dziękujemy 💚',
+  gate_done_d:'Twoje członkostwo zostanie wkrótce aktywowane. Możesz dalej przeglądać.'
+});
+Object.assign(I18N.fi, {
+  ht_title:'Yhteinen koti', ht_title2:'kaukana kotoa oleville',
+  ht_sub:'Paikat, ystävät, työt, palvelut ja apu — kaikki omalla kielelläsi. Napauta korttia katsoaksesi.',
+  tz_places:'Ravintolat, aasialaiset kaupat, kynsihoitolat… sisäänkirjautumisetuja lähelläsi.',
+  tz_fun:'Livelähetykset, tapahtumat ja yhteisön uusimmat ilmoitukset.',
+  tz_share:'Jaa kokemuksia, vinkkejä ja tarinoita muiden kanssa.',
+  tz_articles:'Ruotsin lait, menettelyt ja oikeutesi — helposti selitettynä.',
+  tz_friends:'Löydä samanhenkisiä ystäviksi ja juttele omalla kielelläsi.',
+  tz_market:'Osta, myy, vaihda ja lahjoita tavaroita yhteisössä.',
+  tz_outings:'Turvallisia, mukavia paikkoja ja viikonloppuretkiä lasten kanssa.',
+  tz_translate:'Tulkkaus, saattoapu lääkäriin ja asiakirjojen käännös tarvittaessa.',
+  tz_jobs:'Työpaikkailmoitukset: ravintola, kynnet, siivous, varasto… lähelläsi.',
+  tz_services:'Yhteisön jäsenten palvelujen ja tuotteiden tori.',
+  gate_title:'Liity QiQan jäseneksi', gate_price:'49 kr/vuosi',
+  gate_sub:'Liity jäseneksi lukeaksesi lisää ja osallistuaksesi täysin yhteisöön.',
+  gate_swish_t:'Maksa {fee} kr/vuosi Swishillä', gate_s1:'Swishaa {fee} kr numeroon {num}',
+  gate_s2:'Kirjoita viestiin:', gate_s3:'Kirjaudu sisään ja napauta sitten alla olevaa painiketta jatkaaksesi.',
+  gate_or:'Eikö sinulla ole tiliä?', gate_reg:'Rekisteröidy / Kirjaudu',
+  gate_paid:'Olen liittynyt', gate_done_t:'Kiitos 💚',
+  gate_done_d:'Jäsenyytesi aktivoituu pian. Voit jatkaa tutkimista.'
+});
+Object.assign(I18N.ko, {
+  ht_title:'함께하는 보금자리', ht_title2:'고향을 떠난 이들을 위한',
+  ht_sub:'장소, 친구, 일자리, 서비스, 도움 — 모두 당신의 언어로. 카드를 눌러 살펴보세요.',
+  tz_places:'입맛에 맞는 식당, 아시아 마트, 네일샵… 주변 체크인 혜택.',
+  tz_fun:'커뮤니티의 라이브 방송, 활동, 최신 공지.',
+  tz_share:'경험과 팁, 이야기를 모두와 나눠보세요.',
+  tz_articles:'스웨덴의 법률, 절차, 당신의 권리 — 쉽게 설명.',
+  tz_friends:'마음 맞는 사람을 찾아 친구가 되고 모국어로 대화하세요.',
+  tz_market:'커뮤니티 안에서 사고팔고 교환하고 나눔하세요.',
+  tz_outings:'아이와 함께하는 안전하고 즐거운 장소와 주말 나들이.',
+  tz_translate:'필요할 때 통역, 병원 동행, 서류 번역.',
+  tz_jobs:'구인 정보: 식당, 네일, 청소, 물류… 주변에서.',
+  tz_services:'커뮤니티 구성원이 제공하는 서비스와 상품 마켓.',
+  gate_title:'QiQa 회원 되기', gate_price:'연 49kr',
+  gate_sub:'회원이 되어 계속 읽고 커뮤니티에 온전히 참여하세요.',
+  gate_swish_t:'Swish로 연 {fee}kr 결제', gate_s1:'{num}으로 {fee}kr Swish 송금',
+  gate_s2:'메시지에 적어주세요:', gate_s3:'로그인 후 아래 버튼을 눌러 계속하세요.',
+  gate_or:'계정이 없으신가요?', gate_reg:'가입 / 로그인',
+  gate_paid:'참여했습니다', gate_done_t:'감사합니다 💚',
+  gate_done_d:'회원 자격이 곧 활성화됩니다. 계속 둘러보셔도 됩니다.'
+});
+Object.assign(I18N.tl, {
+  ht_title:'Isang tahanang sama-sama', ht_title2:'para sa malayo sa bayan',
+  ht_sub:'Mga lugar, kaibigan, trabaho, serbisyo at tulong — lahat sa sarili mong wika. Pindutin ang card para tingnan.',
+  tz_places:'Mga kainan, Asian store, nail salon… may check-in deals malapit sa iyo.',
+  tz_fun:'Live na balita, aktibidad at pinakabagong anunsyo ng komunidad.',
+  tz_share:'Ibahagi ang karanasan, tips at kwento sa iba.',
+  tz_articles:'Mga batas, proseso at karapatan mo sa Sweden — ipinaliwanag nang simple.',
+  tz_friends:'Maghanap ng kapareho para maging kaibigan at mag-usap sa sariling wika.',
+  tz_market:'Bumili, magbenta, magpalit at magbigay ng gamit sa komunidad.',
+  tz_outings:'Ligtas at masayang lugar at weekend outings kasama ang mga anak.',
+  tz_translate:'Interpreting, pagsama sa doktor at pagsasalin ng dokumento kapag kailangan.',
+  tz_jobs:'Mga job post: restaurant, nail, linis, bodega… malapit sa iyo.',
+  tz_services:'Palengke ng serbisyo at produkto mula sa mga miyembro ng komunidad.',
+  gate_title:'Maging miyembro ng QiQa', gate_price:'49 kr/taon',
+  gate_sub:'Sumali para makapagbasa pa at lubos na makilahok sa komunidad.',
+  gate_swish_t:'Magbayad ng {fee} kr/taon via Swish', gate_s1:'I-Swish ang {fee} kr sa {num}',
+  gate_s2:'Isulat sa mensahe:', gate_s3:'Mag-log in, tapos pindutin ang button sa ibaba para magpatuloy.',
+  gate_or:'Wala pang account?', gate_reg:'Magrehistro / Mag-log in',
+  gate_paid:'Sumali na ako', gate_done_t:'Salamat 💚',
+  gate_done_d:'Ma-aaktibo agad ang iyong membership. Puwede ka pang mag-explore.'
+});
+Object.assign(I18N.th, {
+  ht_title:'บ้านหลังเดียวกัน', ht_title2:'สำหรับคนไกลบ้าน',
+  ht_sub:'สถานที่ เพื่อน งาน บริการ และความช่วยเหลือ — ทั้งหมดในภาษาของคุณ แตะการ์ดเพื่อดู',
+  tz_places:'ร้านอาหารถูกปาก ร้านเอเชีย ร้านทำเล็บ… พร้อมดีลเช็คอินใกล้คุณ',
+  tz_fun:'ถ่ายทอดสด กิจกรรม และประกาศล่าสุดของชุมชน',
+  tz_share:'แบ่งปันประสบการณ์ เคล็ดลับ และเรื่องราวกับทุกคน',
+  tz_articles:'กฎหมาย ขั้นตอน และสิทธิของคุณในสวีเดน — อธิบายเข้าใจง่าย',
+  tz_friends:'หาคนที่เข้ากันได้เพื่อเป็นเพื่อนและคุยด้วยภาษาของคุณ',
+  tz_market:'ซื้อ ขาย แลกเปลี่ยน และให้สิ่งของในชุมชน',
+  tz_outings:'สถานที่ปลอดภัยสนุก ๆ และทริปสุดสัปดาห์กับลูก',
+  tz_translate:'ล่าม พาไปหาหมอ และแปลเอกสารเมื่อคุณต้องการ',
+  tz_jobs:'ประกาศงาน: ร้านอาหาร ทำเล็บ ทำความสะอาด คลังสินค้า… ใกล้คุณ',
+  tz_services:'ตลาดบริการและสินค้าจากสมาชิกในชุมชน',
+  gate_title:'เป็นสมาชิก QiQa', gate_price:'49 kr/ปี',
+  gate_sub:'เข้าร่วมเป็นสมาชิกเพื่ออ่านต่อและร่วมกิจกรรมชุมชนอย่างเต็มที่',
+  gate_swish_t:'จ่าย {fee} kr/ปี ผ่าน Swish', gate_s1:'Swish {fee} kr ไปที่ {num}',
+  gate_s2:'เขียนในข้อความว่า:', gate_s3:'เข้าสู่ระบบ แล้วแตะปุ่มด้านล่างเพื่อไปต่อ',
+  gate_or:'ยังไม่มีบัญชี?', gate_reg:'ลงทะเบียน / เข้าสู่ระบบ',
+  gate_paid:'ฉันเข้าร่วมแล้ว', gate_done_t:'ขอบคุณ 💚',
+  gate_done_d:'สถานะสมาชิกจะเปิดใช้งานเร็ว ๆ นี้ คุณสำรวจต่อได้เลย'
 });
 
 function updateHomeFlag(){
