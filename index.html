@@ -210,6 +210,7 @@
     padding: 4px 10px; border-radius: 999px; color: #fff; letter-spacing: .02em; }
   .t-tang { background: var(--jade); } .t-doi { background: #7b5ea7; }
   .t-free { background: var(--alert); } .t-xach { background: #3a7ca5; }
+  .t-job { background: #c65b3a; }
   .tag-cat { position: absolute; bottom: 10px; left: 10px; background: rgba(26,20,16,.82); color: #fff;
     font-size: 11.5px; font-weight: 600; padding: 4px 10px; border-radius: 999px; }
   .item-body { padding: 13px; flex: 1; display: flex; flex-direction: column; }
@@ -765,6 +766,7 @@
   .tab[data-tab="articles"] .tab-ic{color:#2e8b6f} .tab[data-tab="friends"] .tab-ic{color:#e0607e}
   .tab[data-tab="market"] .tab-ic{color:#d4791f} .tab[data-tab="outings"] .tab-ic{color:#5aa02c}
   .tab[data-tab="translate"] .tab-ic{color:#1f9e8f} .tab[data-tab="services"] .tab-ic{color:#6b6f8a}
+  .tab[data-tab="jobs"] .tab-ic{color:#c65b3a}
   .tab[data-tab="member"] .tab-ic{color:#d99b2b} .tab[data-tab="about"] .tab-ic{color:#9a8b76}
   @media(min-width:900px){.tab.on .tab-ic{color:#fff !important}}
   /* NÚT CHÍNH — kính gương vàng, đồng bộ desktop + điện thoại */
@@ -968,6 +970,7 @@
   <div class="tab" data-tab="market" onclick="switchTab('market')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M6.5 8h11l-1 11.5h-9z'/><path d='M9.2 8V6.4a2.8 2.8 0 0 1 5.6 0V8'/></svg></span><span class="tab-tx" data-i18n="tab_market">Chợ cộng đồng</span></div>
   <div class="tab" data-tab="outings" onclick="switchTab('outings')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='8' cy='7' r='2.4'/><path d='M4 20v-3.5a4 4 0 0 1 8 0V20'/><circle cx='16.5' cy='9' r='1.8'/><path d='M14 20v-3a3 3 0 0 1 6 0v3'/></svg></span><span class="tab-tx" data-i18n="tab_outings">Đi chơi cùng con</span></div>
   <div class="tab" data-tab="translate" onclick="switchTab('translate')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='8.2'/><path d='M3.8 9.5h16.4M3.8 14.5h16.4'/><path d='M12 3.8c2.6 2.6 2.6 13.8 0 16.4M12 3.8c-2.6 2.6-2.6 13.8 0 16.4'/></svg></span><span class="tab-tx" data-i18n="tab_translate">Cung cấp dịch vụ</span></div>
+  <div class="tab" data-tab="jobs" onclick="switchTab('jobs')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><rect x='3.5' y='7.5' width='17' height='12' rx='1.8'/><path d='M8.5 7.5V6a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v1.5'/><path d='M3.5 12.5h17'/></svg></span><span class="tab-tx" data-i18n="tab_jobs">Tuyển dụng</span></div>
   <div class="tab" data-tab="services" onclick="switchTab('services')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><rect x='3.5' y='5' width='17' height='11' rx='1.6'/><path d='M2 19.5h20'/></svg></span><span class="tab-tx" data-i18n="tab_services">Shoping</span></div>
   <div class="tab" data-tab="member" onclick="switchTab('member')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M12 4l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L5.2 9.7l5.4-.8z'/></svg></span><span class="tab-tx" data-i18n="tab_member">VIP</span></div>
   <div class="tab" data-tab="about" onclick="switchTab('about')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='8.2'/><path d='M12 11.2v4.6'/><circle cx='12' cy='8.2' r='.4' fill='currentColor'/></svg></span><span class="tab-tx" data-i18n="tab_about">Về chúng tôi</span></div>
@@ -1071,6 +1074,25 @@
     <div class="empty hidden" id="mkt-empty" data-i18n="empty_market">Chưa có tin nào khớp.</div>
   </main>
   <button class="fab" data-for="market" onclick="openPost()" data-i18n="fab_post">＋ Đăng tin</button>
+</div>
+
+<!-- TUYỂN DỤNG / JOBS -->
+<div id="view-jobs" class="hidden">
+  <section class="hero">
+    <h1><span data-i18n="hero_job_1">Tuyển dụng —</span> <span class="em" data-i18n="hero_job_2">tìm việc theo ngành nghề</span></h1>
+    <p data-i18n="hero_job_sub">Nhà hàng, nail, bán hàng, xây dựng, dọn dẹp, giúp việc… tin tuyển dụng cộng đồng.</p>
+  </section>
+  <div class="chips" id="job-chips"></div>
+  <main class="wrap">
+    <div class="safety gold">
+      <span>💼</span>
+      <div><b data-i18n="hero_job_note_b">Cần người / cần việc:</b> <span data-i18n="hero_job_note">nhà tuyển dụng đăng tin, người tìm việc xem theo ngành nghề và liên hệ trực tiếp.</span></div>
+    </div>
+    <div class="count" id="job-count"></div>
+    <div class="mkt" id="job-grid"></div>
+    <div class="empty hidden" id="job-empty" data-i18n="empty_jobs">Chưa có tin tuyển dụng nào khớp.</div>
+  </main>
+  <button class="fab" data-for="jobs" onclick="openJobForm()" data-i18n="fab_job">＋ Đăng tuyển dụng</button>
 </div>
 
 <!-- FRIENDS / KẾT BẠN -->
@@ -5778,12 +5800,12 @@ let OUTINGS = [];
 // ===== MARKET DATA =====
 // type: tang | doi | free | xach
 const MKT_CATS = ["Tất cả","Đồ trẻ em","Đồ ăn Việt","Đồ gia đình","Nhờ xách tay","Cho tặng miễn phí"];
-const TYPE_LABEL = { tang:"Tặng", doi:"Đổi", free:"Miễn phí", xach:"Xách tay" };
+const TYPE_LABEL = { tang:"Tặng", doi:"Đổi", free:"Miễn phí", xach:"Xách tay", job:"Tuyển dụng" };
 const CAT_I18N = {"Tất cả":"cat_all","Ăn uống":"cat_food","Mua sắm":"cat_shop","Dịch vụ":"cat_service","Cộng đồng":"cat_community","Đồ trẻ em":"cat_kids","Đồ ăn Việt":"cat_vietfood","Đồ gia đình":"cat_home","Nhờ xách tay":"cat_carry","Cho tặng miễn phí":"cat_free","Y tế":"cat_health","Giấy tờ/Hành chính":"cat_admin","Pháp lý":"cat_legal","Đi cùng thường":"cat_escort","Dịch văn bản":"cat_doctrans"};
 const TYPE_I18N = {tang:"ty_give",doi:"ty_swap",free:"ty_free",xach:"ty_carry"};
 function tcat(x){ return CAT_I18N[x] ? t(CAT_I18N[x]) : x; }
 function ttype(k){ return TYPE_I18N[k] ? t(TYPE_I18N[k]) : (TYPE_LABEL[k]||k); }
-const TYPE_CLASS = { tang:"t-tang", doi:"t-doi", free:"t-free", xach:"t-xach" };
+const TYPE_CLASS = { tang:"t-tang", doi:"t-doi", free:"t-free", xach:"t-xach", job:"t-job" };
 
 let MARKET = [];
 
@@ -6046,6 +6068,7 @@ function switchTab(tab) {
   document.getElementById('view-share').classList.toggle('hidden', tab!=='share');
   document.getElementById('view-articles').classList.toggle('hidden', tab!=='articles');
   document.getElementById('view-services').classList.toggle('hidden', tab!=='services');
+  document.getElementById('view-jobs').classList.toggle('hidden', tab!=='jobs');
   document.getElementById('view-about').classList.toggle('hidden', tab!=='about');
   document.getElementById('view-member').classList.toggle('hidden', tab!=='member');
   updatePageNav(tab);
@@ -6055,7 +6078,7 @@ function switchTab(tab) {
   if (sb) sb.style.display = noChrome ? 'none' : '';
   const barEl = document.querySelector('.bar');
   if (barEl) barEl.classList.toggle('has-search', !noChrome);
-  const ph = { places:t('search_places'), outings:t('search_area'), market:t('search_market'), friends:t('search_area'), translate:t('search_lang'), fun:t('search_area'), share:t('search_area'), articles:t('search_area'), services:t('search_market') };
+  const ph = { places:t('search_places'), outings:t('search_area'), market:t('search_market'), friends:t('search_area'), translate:t('search_lang'), fun:t('search_area'), share:t('search_area'), articles:t('search_area'), services:t('search_market'), jobs:t('search_jobs') };
   if (ph[tab]) document.getElementById('q').placeholder = ph[tab];
   // chỉ hiện nút FAB của tab đang mở (tránh các nút chồng lên nhau chặn click)
   document.querySelectorAll('.fab').forEach(f => {
@@ -6069,6 +6092,7 @@ function switchTab(tab) {
   if (tab==='articles') renderArticles();
   if (tab==='member') renderMemberPage();
   if (tab==='services') renderShop();
+  if (tab==='jobs') renderJobs();
   if (tab==='home') { homeShown = 20; renderHomeFeed(); }
   window.scrollTo(0,0);
 }
@@ -6189,6 +6213,10 @@ const LM_PHOTO = {
   "lm-mos": "https://commons.wikimedia.org/wiki/Special:FilePath/Mall_of_Scandinavia_November_2015_01.jpg?width=1000",
   "lm-a6": "https://commons.wikimedia.org/wiki/Special:FilePath/A6_2015_Entre_gr%C3%B6n.jpg?width=1000",
   "lm-granby": "https://commons.wikimedia.org/wiki/Special:FilePath/Gr%C3%A4nby_Centrum.jpg?width=1000",
+  "lm-emporia": "https://commons.wikimedia.org/wiki/Special:FilePath/Emporia_fr%C3%A5n_v%C3%A4ster.jpg?width=1000",
+  "lm-thaipav": "https://commons.wikimedia.org/wiki/Special:FilePath/20080719ChulalongkornPavilionIMG_6713.jpg?width=1000",
+  "lm-ingelsta": "https://commons.wikimedia.org/wiki/Special:FilePath/Industrilandskapet_February_2017_04.jpg?width=1000",
+  "lm-marieberg": "https://commons.wikimedia.org/wiki/Special:FilePath/%C3%96rebro%2C_Stortorget.jpg?width=1000",
 };
 // Giữ ảnh vẽ mặc định (SVG) làm ảnh dự phòng: nếu link ảnh thật lỗi, tự hiện lại ảnh cũ — không bao giờ vỡ ảnh.
 LANDMARK_PLACES.forEach(p=>{ if(LM_PHOTO[p.id]){ p.anhFallback = p.anh; p.anh = LM_PHOTO[p.id]; } });
@@ -6260,6 +6288,16 @@ MKT_CATS.forEach(c => {
   b.className = 'chip' + (c==="Tất cả"?' on':''); b.dataset.cat = c; b.textContent = tcat(c);
   b.onclick = () => { mktCat=c; mktChipsEl.querySelectorAll('.chip').forEach(x=>x.classList.remove('on')); b.classList.add('on'); renderMarket(); };
   mktChipsEl.appendChild(b);
+});
+// ===== TUYỂN DỤNG: ngành nghề + chips =====
+const JOB_CATS = ["Tất cả","Nhà hàng/Quán ăn","Nail/Tóc/Spa","Bán hàng/Thu ngân","Vệ sinh/Dọn dẹp","Xây dựng/Sửa chữa","Kho/Vận chuyển","Chăm sóc/Giúp việc","Nông nghiệp/Đóng gói","Văn phòng","IT/Kỹ thuật","Phiên dịch","Khác"];
+let jobCat = "Tất cả";
+const jobChipsEl = document.getElementById('job-chips');
+if (jobChipsEl) JOB_CATS.forEach(c => {
+  const b = document.createElement('button');
+  b.className = 'chip' + (c==="Tất cả"?' on':''); b.dataset.cat = c; b.textContent = (c==="Tất cả"?t('cat_all'):c);
+  b.onclick = () => { jobCat=c; jobChipsEl.querySelectorAll('.chip').forEach(x=>x.classList.remove('on')); b.classList.add('on'); renderJobs(); };
+  jobChipsEl.appendChild(b);
 });
 const trChipsEl = document.getElementById('tr-chips');
 ['Tất cả', ...SERVICE_TYPES.map(s=>s.key)].forEach(c => {
@@ -6480,7 +6518,7 @@ function renderHomeFeed() {
     text:(p.loai?('['+p.loai+'] '):'') + (p.mota||''), thumb:(p.anh && p.anh.indexOf('http')===0)?p.anh:'',
     tag:(p.checkin||CHECKIN_OFFERS[String(p.id)])?('🎁 -'+((p.checkin&&p.checkin.percent)||CHECKIN_OFFERS[String(p.id)].percent)+'%'):'' }));
   // Chợ
-  MARKET.filter(m=>cityMatch(m.tp)).forEach(m=> items.push({
+  MARKET.filter(m=>cityMatch(m.tp) && m.type!=='job').forEach(m=> items.push({
     type:'market', id:m.id, ms:feedTimeMs(m), who:m.who||'', anh:m.anh,
     text:(m.title||'') + (m.desc?(' — '+m.desc):''), thumb:(m.anh && m.anh.indexOf('http')===0)?m.anh:'' }));
   // Đi chơi
@@ -6541,7 +6579,7 @@ function renderMarket() {
     const okCity = cityMatch(m.tp);
     const okCat = mktCat==="Tất cả" || m.cat===mktCat;
     const okQ = !query || [m.title,m.cat,m.khuvuc,m.desc,m.who].some(s=>s.toLowerCase().includes(query));
-    return okCity && okCat && okQ && m.type!=='shop';
+    return okCity && okCat && okQ && m.type!=='shop' && m.type!=='job';
   });
   const grid = document.getElementById('mkt-grid'), empty = document.getElementById('mkt-empty');
   document.getElementById('mkt-count').textContent = `${list.length} tin`;
@@ -6582,7 +6620,7 @@ function openItem(id) {
         <a class="cta-map" href="tel:${m.sdt.replace(/\s/g,'')}">Liên hệ ${m.who}</a>
       </div>
       ${ownsPost(m)?`<button class="del-post-full" onclick="closeModal();deletePost('market','${m.id}')">🗑 ${t('post_delete')}</button>`:''}
-      ${ownsPost(m)?`<button class="edit-post-full" onclick="closeModal();openPost(MARKET.find(x=>String(x.id)==='${m.id}'))">✎ ${t('post_edit')}</button>`:''}
+      ${ownsPost(m)?`<button class="edit-post-full" onclick="closeModal();${m.type==='job'?'openJobForm':'openPost'}(MARKET.find(x=>String(x.id)==='${m.id}'))">✎ ${t('post_edit')}</button>`:''}
     </div>`;
   openModalEl();
 }
@@ -6641,6 +6679,102 @@ function submitItem(editId) {
   const item = { tp:activeCity, ...fields, email: currentUser?currentUser.email:'' };
   MARKET.unshift(item);
   closeModal(); renderMarket();
+  callApi({ action:'addMarket', ...item }).catch(()=>{});
+}
+
+// ============================================================
+// ===== TUYỂN DỤNG / JOBS (dùng chung kho MARKET, type='job') =====
+// ============================================================
+Object.assign(I18N.vi, {
+  tab_jobs:'Tuyển dụng', search_jobs:'Tìm việc, ngành nghề, khu vực…', lbl_jobs:'tin', empty_jobs:'Chưa có tin tuyển dụng nào khớp.', fab_job:'＋ Đăng tuyển dụng',
+  hero_job_1:'Tuyển dụng —', hero_job_2:'tìm việc theo ngành nghề', hero_job_sub:'Nhà hàng, nail, bán hàng, xây dựng, dọn dẹp, giúp việc… tin tuyển dụng cộng đồng.',
+  hero_job_note_b:'Cần người / cần việc:', hero_job_note:'nhà tuyển dụng đăng tin, người tìm việc xem theo ngành nghề và liên hệ trực tiếp.',
+  job_post:'Đăng tin tuyển dụng', job_sub:'Điền thông tin để người tìm việc liên hệ với bạn.', job_title:'Vị trí cần tuyển', job_title_ph:'VD: Phụ bếp nhà hàng, Thợ nail, Nhân viên bán hàng…',
+  job_cat:'Ngành nghề', job_area:'Khu vực làm việc', job_company:'Tên công ty / người tuyển', job_phone:'Số điện thoại liên hệ',
+  job_desc:'Mô tả', job_desc_ph:'Mô tả công việc, mức lương, giờ làm, yêu cầu, quyền lợi…', job_post_btn:'Đăng tuyển dụng', job_need:'Vui lòng nhập vị trí cần tuyển và tên công ty/người tuyển.', job_contact:'Liên hệ'
+});
+Object.assign(I18N.en, {
+  tab_jobs:'Jobs', search_jobs:'Search jobs, industry, area…', lbl_jobs:'posts', empty_jobs:'No matching job posts yet.', fab_job:'＋ Post a job',
+  hero_job_1:'Jobs —', hero_job_2:'find work by industry', hero_job_sub:'Restaurants, nails, retail, construction, cleaning, care… community job posts.',
+  hero_job_note_b:'Hiring / job seeking:', hero_job_note:'employers post openings, job seekers browse by industry and contact directly.',
+  job_post:'Post a job', job_sub:'Fill in the details so job seekers can reach you.', job_title:'Position', job_title_ph:'e.g. Kitchen helper, Nail tech, Sales assistant…',
+  job_cat:'Industry', job_area:'Work area', job_company:'Company / recruiter', job_phone:'Contact phone',
+  job_desc:'Description', job_desc_ph:'Job description, pay, hours, requirements, benefits…', job_post_btn:'Post job', job_need:'Please enter the position and company/recruiter name.', job_contact:'Contact'
+});
+
+function renderJobs() {
+  const list = MARKET.filter(m => {
+    if (m.type!=='job') return false;
+    const okCity = cityMatch(m.tp);
+    const okCat = jobCat==="Tất cả" || m.cat===jobCat;
+    const okQ = !query || [m.title,m.cat,m.khuvuc,m.desc,m.who].some(s=>(s||'').toLowerCase().includes(query));
+    return okCity && okCat && okQ;
+  });
+  const grid = document.getElementById('job-grid'), empty = document.getElementById('job-empty');
+  document.getElementById('job-count').textContent = `${list.length} ${t('lbl_jobs')}`;
+  if (!list.length) { grid.innerHTML=''; empty.classList.remove('hidden'); return; }
+  empty.classList.add('hidden');
+  grid.innerHTML = list.map(m => `
+    <article class="item">
+      <div class="item-img" onclick="openItem('${m.id}')" style="background-image:url('${m.anh}')">
+        <span class="tag-type t-job">${ttype('job')}</span>
+        <span class="tag-cat">${m.cat||''}</span>
+      </div>
+      <div class="item-body">
+        <div class="item-title" onclick="openItem('${m.id}')">${m.title||''}</div>
+        <div class="item-desc" onclick="openItem('${m.id}')">${m.desc||''}</div>
+        <div class="item-meta">
+          <span class="who">${m.who||''}</span>
+          <span class="where">${m.khuvuc||''}</span>
+        </div>
+        ${m.sdt?`<a class="cta-call" style="display:inline-block;margin-top:8px;text-decoration:none" href="tel:${String(m.sdt).replace(/\s/g,'')}">📞 ${t('job_contact')}</a>`:''}
+        ${ownsPost(m)?`<div class="item-actions">
+          <button class="edit-post" title="${t('post_edit')}" onclick="event.stopPropagation();openJobForm(MARKET.find(x=>String(x.id)==='${m.id}'))">✎ ${t('post_edit')}</button>
+          <button class="del-post" title="${t('post_delete')}" onclick="event.stopPropagation();deletePost('market','${m.id}')">🗑 ${t('post_delete')}</button>
+        </div>`:''}
+      </div>
+    </article>`).join('');
+}
+
+function openJobForm(editItem) {
+  requireLogin(() => {
+    const e = editItem || {};
+    const isEdit = !!editItem;
+    const opts = JOB_CATS.filter(c=>c!=="Tất cả").map(c=>`<option value="${c}"${e.cat===c?' selected':''}>${c}</option>`).join('');
+    document.getElementById('sheet').innerHTML = `
+      <button class="close-x" onclick="closeModal()">✕</button>
+      <div class="sheet-body">
+        <h2>${isEdit?t('post_edit'):t('job_post')}</h2>
+        <div class="sub" style="margin-bottom:18px;">${t('job_sub')}</div>
+        <div class="field"><label>${t('job_title')}</label><input id="j-title" value="${esc(e.title||'')}" placeholder="${t('job_title_ph')}"></div>
+        <div class="row2">
+          <div class="field"><label>${t('job_cat')}</label><select id="j-cat">${opts}</select></div>
+          <div class="field"><label>${t('job_area')}</label><input id="j-area" value="${esc(e.khuvuc||pdArea())}"></div>
+        </div>
+        <div class="field"><label>${t('job_company')}</label><input id="j-who" value="${esc(e.who||pdName())}"></div>
+        <div class="field"><label>${t('job_phone')}</label><input id="j-sdt" value="${esc(e.sdt||pdPhone())}"></div>
+        <div class="field"><label>${t('job_desc')}</label><textarea id="j-desc" placeholder="${t('job_desc_ph')}">${e.desc||''}</textarea></div>
+        <button class="submit" onclick="submitJob('${isEdit?e.id:''}')">${isEdit?t('post_save'):t('job_post_btn')}</button>
+      </div>`;
+    openModalEl();
+  });
+}
+
+function submitJob(editId) {
+  const v = id => (document.getElementById(id).value||'').trim();
+  const title=v('j-title'), who=v('j-who');
+  if (!title || !who) { alert(t('job_need')); return; }
+  const fields = { type:'job', cat:v('j-cat'), title, who, khuvuc:v('j-area')||activeCity, sdt:v('j-sdt')||'', desc:v('j-desc')||'', anh:'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&q=70' };
+  if (editId) {
+    const m = MARKET.find(x=>String(x.id)===String(editId));
+    if (m) Object.assign(m, fields);
+    closeModal(); renderJobs();
+    callApi({ action:'editPost', postType:'market', id:editId, email:currentUser.email, data:fields }).catch(()=>{});
+    return;
+  }
+  const item = { tp:activeCity, ...fields, email: currentUser?currentUser.email:'' };
+  MARKET.unshift(item);
+  closeModal(); renderJobs();
   callApi({ action:'addMarket', ...item }).catch(()=>{});
 }
 
@@ -8313,7 +8447,7 @@ async function loadData() {
     }
     dataLoaded = true;
     initCitySelector();
-    renderPlaces(); renderFeed(); renderMarket(); renderTranslate(); renderEvents(); renderShare(); renderArticles(); renderHomeFeed();
+    renderPlaces(); renderFeed(); renderMarket(); renderJobs(); renderTranslate(); renderEvents(); renderShare(); renderArticles(); renderHomeFeed();
     if (!document.getElementById('view-friends').classList.contains('hidden')) renderFriends();
   } catch (e) {
     // nếu lỗi mạng thì giữ dữ liệu mẫu sẵn có, app vẫn xem được
