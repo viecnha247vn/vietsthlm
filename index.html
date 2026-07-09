@@ -549,6 +549,26 @@
   .credit-pack.on { border-color: #e6b800; box-shadow: 0 0 0 2px rgba(217,155,43,.35); }
   .cp-amount { font-size: 18px; font-weight: 800; color: var(--gold-text); }
   .cp-price { font-size: 14px; color: var(--muted); margin-top: 4px; font-weight: 600; }
+  /* ===== TRANG MỒI (landing) ===== */
+  .home-top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 4px 8px;}
+  .home-top-l{display:flex;align-items:center;gap:8px;}
+  .home-top-l .qlogo-h{width:96px;height:34px;cursor:pointer;}
+  .ht-icon,.ht-flag{border:1px solid var(--line);background:var(--surface);border-radius:999px;height:34px;min-width:34px;padding:0 8px;font-size:16px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;}
+  .home-top-r{display:flex;align-items:center;gap:8px;}
+  .ht-reg,.ht-login{border-radius:999px;height:36px;padding:0 16px;font-size:14px;font-weight:700;cursor:pointer;border:1px solid var(--line);}
+  .ht-reg{background:var(--accent,#c65b3a);color:#fff;border-color:transparent;}
+  .ht-login{background:var(--surface);color:var(--ink);}
+  .home-hero{text-align:center;padding:26px 14px 18px;}
+  .home-hero h1{font-size:26px;line-height:1.25;margin:0 0 10px;}
+  .home-hero h1 .em{background:linear-gradient(90deg,#5f8f3a,#7a4a24);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .home-hero p{color:var(--muted);font-size:15px;max-width:560px;margin:0 auto;}
+  .home-teasers{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:6px 4px 30px;}
+  .tz-card{border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:14px 13px;cursor:pointer;text-align:left;transition:transform .12s,box-shadow .12s;position:relative;overflow:hidden;}
+  .tz-card:active{transform:scale(.98);}
+  .tz-ic{font-size:22px;margin-bottom:6px;}
+  .tz-ttl{font-weight:700;font-size:15px;margin-bottom:4px;color:var(--ink);}
+  .tz-snip{font-size:12.5px;color:var(--muted);line-height:1.45;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+  .tz-lock{position:absolute;top:10px;right:10px;font-size:13px;opacity:.5;}
   .swish-box { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 16px; margin-top: 8px;
     display: flex; flex-direction: column; align-items: center; text-align: center; }
   .swish-title { font-weight: 700; font-size: 14px; margin-bottom: 12px; color: var(--ink); }
@@ -979,6 +999,23 @@
 
 <!-- HOME / TRANG CHỦ -->
 <div id="view-home" class="hidden">
+  <div class="home-top">
+    <div class="home-top-l">
+      <span class="qlogo qlogo-h" role="img" aria-label="QiQa" onclick="reopenSplash()"></span>
+      <button class="ht-icon" onclick="openThemePicker()" title="Giao diện" aria-label="Giao diện">🎨</button>
+      <button class="ht-flag" id="homeFlag" onclick="reopenSplash()" title="Đổi quốc gia">🌐</button>
+    </div>
+    <div class="home-top-r">
+      <button class="ht-reg" onclick="onAccHeaderClick()" data-i18n="lbl_register">Đăng ký</button>
+      <button class="ht-login" onclick="onAccHeaderClick()" data-i18n="login">Đăng nhập</button>
+    </div>
+  </div>
+  <section class="home-hero">
+    <h1><span data-i18n="ht_title">Một mái nhà chung</span> <span class="em" data-i18n="ht_title2">cho người xa quê</span></h1>
+    <p data-i18n="ht_sub">Địa điểm, bạn bè, việc làm, dịch vụ và sự giúp đỡ — tất cả bằng ngôn ngữ của bạn. Chạm vào một mục để xem thử.</p>
+  </section>
+  <div class="home-teasers" id="homeTeasers"></div>
+
   <section class="home-split">
     <div class="hs-left">
       <h1><span data-i18n="home_title_1">Người Việt mình ở Thụy Điển —</span><br><span class="em" data-i18n="home_title_2">giờ có một mái nhà chung</span></h1>
@@ -6093,8 +6130,124 @@ function switchTab(tab) {
   if (tab==='member') renderMemberPage();
   if (tab==='services') renderShop();
   if (tab==='jobs') renderJobs();
-  if (tab==='home') { homeShown = 20; renderHomeFeed(); }
+  if (tab==='home') { homeShown = 20; renderHomeFeed(); renderTeasers(); updateHomeFlag(); }
+  const hdrEl = document.querySelector('header');
+  if (hdrEl) hdrEl.style.display = (tab==='home') ? 'none' : '';
   window.scrollTo(0,0);
+}
+
+// ===== TRANG MỒI: teaser + cổng thành viên 49kr/năm =====
+const MEMBER_FEE = 49; // kr/năm
+const MEMBER_SWISH_NUM = '072-567 11 11';
+const TEASERS = [
+  { tab:'places',    ic:'📍', tk:'tab_places',    sk:'tz_places' },
+  { tab:'fun',       ic:'📡', tk:'tab_fun',       sk:'tz_fun' },
+  { tab:'share',     ic:'🔗', tk:'tab_share',     sk:'tz_share' },
+  { tab:'articles',  ic:'📖', tk:'tab_articles',  sk:'tz_articles' },
+  { tab:'friends',   ic:'💗', tk:'tab_friends',   sk:'tz_friends' },
+  { tab:'market',    ic:'🛍️', tk:'tab_market',    sk:'tz_market' },
+  { tab:'outings',   ic:'🧸', tk:'tab_outings',   sk:'tz_outings' },
+  { tab:'translate', ic:'🌐', tk:'tab_translate', sk:'tz_translate' },
+  { tab:'jobs',      ic:'💼', tk:'tab_jobs',      sk:'tz_jobs' },
+  { tab:'services',  ic:'🏬', tk:'tab_services',  sk:'tz_services' },
+];
+
+Object.assign(I18N.vi, {
+  ht_title:'Một mái nhà chung', ht_title2:'cho người xa quê',
+  ht_sub:'Địa điểm, bạn bè, việc làm, dịch vụ và sự giúp đỡ — tất cả bằng ngôn ngữ của bạn. Chạm vào một mục để xem thử.',
+  tz_places:'Quán ăn hợp khẩu vị, chợ Á, tiệm nail… có ưu đãi check-in quanh bạn.',
+  tz_fun:'Bản tin trực tiếp, hoạt động và thông báo mới nhất của cộng đồng.',
+  tz_share:'Chia sẻ kinh nghiệm, mẹo sống và câu chuyện với mọi người.',
+  tz_articles:'Luật pháp, thủ tục, quyền lợi ở Thụy Điển — giải thích dễ hiểu.',
+  tz_friends:'Tìm người hợp gu để kết bạn, đi cà phê, tâm sự bằng tiếng mẹ đẻ.',
+  tz_market:'Mua bán, trao đổi, cho tặng đồ trong cộng đồng người xa quê.',
+  tz_outings:'Địa điểm và buổi đưa con đi chơi cuối tuần an toàn, vui vẻ.',
+  tz_translate:'Phiên dịch, đi cùng khám bệnh, dịch giấy tờ khi bạn cần.',
+  tz_jobs:'Tin tuyển dụng: nhà hàng, nail, dọn dẹp, kho vận… quanh bạn.',
+  tz_services:'Gian hàng dịch vụ và sản phẩm do chính người trong cộng đồng cung cấp.',
+  gate_title:'Trở thành thành viên QiQa', gate_price:'49kr/năm',
+  gate_sub:'Đăng ký thành viên để đọc tiếp và tham gia đầy đủ mọi hoạt động của cộng đồng.',
+  gate_swish_t:'Chuyển {fee}kr/năm qua Swish', gate_s1:'Swish {fee}kr tới {num}',
+  gate_s2:'Ghi lời nhắn:', gate_s3:'Đăng nhập rồi bấm nút bên dưới để xem tiếp.',
+  gate_or:'Chưa có tài khoản?', gate_reg:'Đăng ký / Đăng nhập',
+  gate_paid:'Tôi đã tham gia', gate_done_t:'Cảm ơn bạn 💚',
+  gate_done_d:'Tư cách thành viên sẽ được kích hoạt sớm nhất. Bạn có thể tiếp tục khám phá.'
+});
+Object.assign(I18N.en, {
+  ht_title:'A shared home', ht_title2:'for people far from home',
+  ht_sub:'Places, friends, jobs, services and help — all in your own language. Tap a card to take a look.',
+  tz_places:'Restaurants, Asian shops, nail salons… with check-in deals near you.',
+  tz_fun:'Live bulletins, activities and the latest community announcements.',
+  tz_share:'Share experiences, tips and stories with everyone.',
+  tz_articles:'Laws, procedures and your rights in Sweden — explained simply.',
+  tz_friends:'Find like-minded people to befriend and chat in your own language.',
+  tz_market:'Buy, sell, swap and give away things within the community.',
+  tz_outings:'Safe, fun places and weekend outings with your kids.',
+  tz_translate:'Interpreting, medical accompaniment and document translation when you need it.',
+  tz_jobs:'Job posts: restaurants, nails, cleaning, warehouse… near you.',
+  tz_services:'A marketplace of services and products from within the community.',
+  gate_title:'Become a QiQa member', gate_price:'49kr/year',
+  gate_sub:'Join as a member to keep reading and take full part in the community.',
+  gate_swish_t:'Send {fee}kr/year via Swish', gate_s1:'Swish {fee}kr to {num}',
+  gate_s2:'Add the message:', gate_s3:'Log in, then tap the button below to continue.',
+  gate_or:'No account yet?', gate_reg:'Register / Log in',
+  gate_paid:'I have joined', gate_done_t:'Thank you 💚',
+  gate_done_d:'Your membership will be activated shortly. You can keep exploring.'
+});
+
+function updateHomeFlag(){
+  const f = document.getElementById('homeFlag');
+  if (f) f.textContent = (activeCountry && activeCountry.fl) ? activeCountry.fl : '🌐';
+}
+function renderTeasers(){
+  const el = document.getElementById('homeTeasers'); if (!el) return;
+  const locked = !isMemberUser();
+  el.innerHTML = TEASERS.map(z => `
+    <div class="tz-card" onclick="openTeaser('${z.tab}')">
+      ${locked?'<span class="tz-lock">🔒</span>':''}
+      <div class="tz-ic">${z.ic}</div>
+      <div class="tz-ttl">${t(z.tk)}</div>
+      <div class="tz-snip">${t(z.sk)}</div>
+    </div>`).join('');
+}
+function openTeaser(tab){
+  if (isMemberUser()) { switchTab(tab); return; }
+  openMemberGate(tab);
+}
+function openMemberGate(tab){
+  const email = currentUser ? currentUser.email : '';
+  const msg = `QiQa Member ${MEMBER_FEE}kr + ${email}`;
+  document.getElementById('sheet').innerHTML = `
+    <button class="close-x" onclick="closeModal()">✕</button>
+    <div class="sheet-body">
+      <div style="text-align:center;font-size:40px">💚</div>
+      <h2 style="text-align:center">${t('gate_title')}</h2>
+      <div class="sub" style="text-align:center;margin:6px 0 4px"><b style="font-size:18px;color:var(--ink)">${t('gate_price')}</b></div>
+      <p class="sub" style="text-align:center;margin-bottom:14px">${t('gate_sub')}</p>
+      <div class="swish-box">
+        <div class="swish-title">${t('gate_swish_t').replace('{fee}',MEMBER_FEE)}</div>
+        <div class="swish-num">Swish: <b>${MEMBER_SWISH_NUM}</b></div>
+        <div class="swish-steps">
+          <b>1.</b> ${t('gate_s1').replace('{fee}',MEMBER_FEE).replace('{num}',MEMBER_SWISH_NUM)}<br>
+          <b>2.</b> ${t('gate_s2')} <b>${msg}</b><br>
+          <b>3.</b> ${t('gate_s3')}
+        </div>
+      </div>
+      ${ currentUser ? '' : `<div class="sub" style="text-align:center;margin-top:12px">${t('gate_or')}</div>
+      <button class="submit" style="margin-top:8px" onclick="closeModal();onAccHeaderClick()">🔑 ${t('gate_reg')}</button>` }
+      <button class="${currentUser?'submit':'edit-post-full'}" style="margin-top:${currentUser?'16px':'10px'}" onclick="memberGateDone()">✅ ${t('gate_paid')}</button>
+    </div>`;
+  openModalEl();
+}
+function memberGateDone(){
+  document.getElementById('sheet').innerHTML = `
+    <button class="close-x" onclick="closeModal()">✕</button>
+    <div class="sheet-body" style="text-align:center;padding:30px 18px">
+      <div style="font-size:44px">💚</div>
+      <h2>${t('gate_done_t')}</h2>
+      <p class="sub" style="margin-top:10px">${t('gate_done_d')}</p>
+      <button class="submit" style="margin-top:18px" onclick="closeModal()">${t('c_ok')||'OK'}</button>
+    </div>`;
 }
 
 // ===== ĐỊA ĐIỂM CÓ CHECK-IN (ưu đãi voucher) =====
