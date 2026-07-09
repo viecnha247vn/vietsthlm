@@ -5840,12 +5840,40 @@ function shopInfo(k){ return SHOP_CATS.find(x=>x.key===k); }
 function shopLabel(k){ if(k==='Tất cả') return t('cat_all'); const s=shopInfo(k); return s ? (s[LANG]||s.en||s.vi) : k; }
 function shopEmoji(k){ const s=shopInfo(k); return s&&s.emoji ? s.emoji+' ' : ''; }
 const SHOP_T = {
-  vi:{ h1:'Shoping —', h2:'chợ dịch vụ cộng đồng', sub:'Nơi mọi người đăng bán dịch vụ: thiết kế web, in ấn, viết phần mềm, marketing… Tìm hoặc đăng ngay.', empty:'Chưa có dịch vụ nào ở khu này. Hãy là người đầu tiên đăng!', fab:'＋ Đăng dịch vụ', count:'tin', ftitle:'Đăng dịch vụ bán', fsub:'Đăng dịch vụ của bạn để mọi người liên hệ trực tiếp.', name:'Tên / Cửa hàng', cat:'Loại dịch vụ', title:'Tiêu đề dịch vụ', titleph:'VD: Thiết kế website nhà hàng trọn gói', area:'Khu vực', phone:'Số điện thoại / liên hệ', desc:'Mô tả & giá', descph:'Mô tả dịch vụ, bảng giá, thời gian làm…', photo:'Ảnh (không bắt buộc)', post:'Đăng dịch vụ', save:'Lưu', contact:'Liên hệ', needTitle:'Nhập tiêu đề và tên nhé.' },
-  en:{ h1:'Shoping —', h2:'community service market', sub:'Where anyone can sell services: web design, printing, software, marketing… Browse or post now.', empty:'No services here yet. Be the first to post!', fab:'＋ Post a service', count:'posts', ftitle:'Post a service', fsub:'List your service so people can contact you directly.', name:'Name / Shop', cat:'Service type', title:'Service title', titleph:'e.g. Full restaurant website design', area:'Area', phone:'Phone / contact', desc:'Description & price', descph:'Describe the service, price, turnaround…', photo:'Photo (optional)', post:'Post service', save:'Save', contact:'Contact', needTitle:'Please enter a title and name.' },
-  sv:{ h1:'Shoping —', h2:'tjänstmarknad', sub:'Där vem som helst kan sälja tjänster: webbdesign, tryck, mjukvara, marknadsföring… Bläddra eller lägg upp nu.', empty:'Inga tjänster här ännu. Bli först att lägga upp!', fab:'＋ Lägg upp tjänst', count:'annonser', ftitle:'Lägg upp en tjänst', fsub:'Lägg upp din tjänst så att folk kan kontakta dig direkt.', name:'Namn / Företag', cat:'Typ av tjänst', title:'Tjänstens titel', titleph:'t.ex. Komplett webbdesign för restaurang', area:'Område', phone:'Telefon / kontakt', desc:'Beskrivning & pris', descph:'Beskriv tjänsten, pris, leveranstid…', photo:'Foto (valfritt)', post:'Publicera tjänst', save:'Spara', contact:'Kontakt', needTitle:'Ange titel och namn.' }
+  vi:{ h1:'Shoping —', h2:'chợ dịch vụ cộng đồng', sub:'Nơi mọi người đăng bán dịch vụ: thiết kế web, in ấn, viết phần mềm, marketing… Tìm hoặc đăng ngay.', empty:'Chưa có dịch vụ nào ở khu này. Hãy là người đầu tiên đăng!', fab:'＋ Đăng dịch vụ', count:'tin', ftitle:'Đăng dịch vụ bán', fsub:'Đăng dịch vụ của bạn để mọi người liên hệ trực tiếp.', name:'Tên / Cửa hàng', cat:'Loại dịch vụ', title:'Tiêu đề dịch vụ', titleph:'VD: Thiết kế website nhà hàng trọn gói', area:'Khu vực', phone:'Số điện thoại / liên hệ', desc:'Mô tả & giá', descph:'Mô tả dịch vụ, bảng giá, thời gian làm…', photo:'Ảnh (không bắt buộc)', post:'Đăng dịch vụ', save:'Lưu', contact:'Liên hệ', needTitle:'Nhập tiêu đề và tên nhé.', quote:'Yêu cầu tư vấn / báo giá' },
+  en:{ h1:'Shoping —', h2:'community service market', sub:'Where anyone can sell services: web design, printing, software, marketing… Browse or post now.', empty:'No services here yet. Be the first to post!', fab:'＋ Post a service', count:'posts', ftitle:'Post a service', fsub:'List your service so people can contact you directly.', name:'Name / Shop', cat:'Service type', title:'Service title', titleph:'e.g. Full restaurant website design', area:'Area', phone:'Phone / contact', desc:'Description & price', descph:'Describe the service, price, turnaround…', photo:'Photo (optional)', post:'Post service', save:'Save', contact:'Contact', needTitle:'Please enter a title and name.', quote:'Request a quote' },
+  sv:{ h1:'Shoping —', h2:'tjänstmarknad', sub:'Där vem som helst kan sälja tjänster: webbdesign, tryck, mjukvara, marknadsföring… Bläddra eller lägg upp nu.', empty:'Inga tjänster här ännu. Bli först att lägga upp!', fab:'＋ Lägg upp tjänst', count:'annonser', ftitle:'Lägg upp en tjänst', fsub:'Lägg upp din tjänst så att folk kan kontakta dig direkt.', name:'Namn / Företag', cat:'Typ av tjänst', title:'Tjänstens titel', titleph:'t.ex. Komplett webbdesign för restaurang', area:'Område', phone:'Telefon / kontakt', desc:'Beskrivning & pris', descph:'Beskriv tjänsten, pris, leveranstid…', photo:'Foto (valfritt)', post:'Publicera tjänst', save:'Spara', contact:'Kontakt', needTitle:'Ange titel och namn.', quote:'Begär offert' }
 };
 function shopT(){ return SHOP_T[LANG] || SHOP_T.en; }
 let shopCat = 'Tất cả';
+// ===== 3 DỊCH VỤ MT ONE / QiQa (nhúng sẵn, luôn hiện ở mọi khu) =====
+const SHOP_SEED = [
+  { id:'svc-website', seed:1, lead:1, tp:'Hela Sverige', type:'shop', cat:'Thiết kế web', who:'QiQa', khuvuc:'Hela Sverige', sdt:'', anh:'',
+    title:'Thiết kế Website',
+    descI18n:{
+      vi:'Website đẹp, chuẩn mobile cho nhà hàng · tiệm nail · dịch vụ. • Giao diện riêng theo thương hiệu • Tối ưu điện thoại & tốc độ tải • Tích hợp bản đồ, đặt lịch, mạng xã hội.',
+      en:'Beautiful, mobile-ready websites for restaurants · nail salons · services. • Custom brand design • Optimised for phone & speed • Maps, booking & social integration.',
+      sv:'Snygga, mobilanpassade webbplatser för restauranger · nagelsalonger · tjänster. • Egen varumärkesdesign • Optimerad för mobil & hastighet • Kartor, bokning & sociala medier.'
+    } },
+  { id:'svc-emenu', seed:1, lead:1, tp:'Hela Sverige', type:'shop', cat:'Viết phần mềm', who:'QiQa', khuvuc:'Hela Sverige', sdt:'', anh:'',
+    title:'E-Menu (Menu QR)',
+    descI18n:{
+      vi:'Khách quét mã QR tại bàn để xem thực đơn và gọi món, bếp nhận đơn ngay. • Menu QR đa ngôn ngữ, ảnh món đẹp • Khách tự gọi món • Cập nhật giá & món ngay, không in lại.',
+      en:'Guests scan a QR at the table to view the menu and order; the kitchen gets it instantly. • Multilingual QR menu with photos • Self-ordering • Update prices instantly, no reprinting.',
+      sv:'Gäster skannar en QR vid bordet för att se menyn och beställa; köket får den direkt. • Flerspråkig QR-meny med bilder • Självbeställning • Uppdatera priser direkt, ingen omtryckning.'
+    } },
+  { id:'svc-inventory', seed:1, lead:1, tp:'Hela Sverige', type:'shop', cat:'Viết phần mềm', who:'QiQa', khuvuc:'Hela Sverige', sdt:'', anh:'',
+    title:'App Quản lý Kho',
+    descI18n:{
+      vi:'Quản lý xuất–nhập hàng hoá, theo dõi tồn kho, cảnh báo hết hàng và báo cáo chi phí. • Ghi nhận nhập & xuất kho • Cảnh báo tồn kho thấp, hạn dùng • Báo cáo chi phí & doanh thu.',
+      en:'Manage stock in/out, track inventory, low-stock alerts and cost reports. • Log purchases & withdrawals • Low-stock & expiry alerts • Cost & revenue reports.',
+      sv:'Hantera lager in/ut, spåra lagersaldo, varningar för lågt lager och kostnadsrapporter. • Logga inköp & uttag • Varningar för lågt lager & utgångsdatum • Kostnads- & intäktsrapporter.'
+    } }
+];
+function mergeShopSeed(){
+  SHOP_SEED.forEach(s => { if (!MARKET.some(x=>String(x.id)===String(s.id))) MARKET.push(s); });
+}
+mergeShopSeed();
 function renderShop(){
   const d = shopT();
   const set=(id,tx)=>{ const el=document.getElementById(id); if(el) el.textContent=tx; };
@@ -5862,32 +5890,38 @@ function renderShop(){
   } else if(chipsEl){
     chipsEl.querySelectorAll('.chip').forEach(b=>{ const c=b.dataset.shop; b.textContent=(c==='Tất cả'?'':shopEmoji(c))+shopLabel(c); });
   }
-  const list = MARKET.filter(m => m.type==='shop' && cityMatch(m.tp) &&
+  const list = MARKET.filter(m => m.type==='shop' && (m.seed || cityMatch(m.tp)) &&
     (shopCat==='Tất cả' || m.cat===shopCat) &&
-    (!query || [m.title,m.cat,m.khuvuc,m.desc,m.who].some(s=>(s||'').toLowerCase().includes(query))));
+    (!query || [shopItemTitle(m),m.cat,m.khuvuc,shopItemDesc(m),m.who].some(s=>(s||'').toLowerCase().includes(query))));
   const cnt=document.getElementById('shop-count'); if(cnt) cnt.textContent = list.length+' '+d.count;
   const emptyEl=document.getElementById('shop-empty'); if(emptyEl) emptyEl.classList.toggle('hidden', list.length>0);
   const grid=document.getElementById('shop-grid'); if(!grid) return;
   grid.innerHTML = list.map(m=>{
     const tel=(m.sdt||'').replace(/\s/g,'');
+    const title=shopItemTitle(m), desc=shopItemDesc(m);
     const catTag=`<span class="tag-cat">${shopEmoji(m.cat)}${shopLabel(m.cat)}</span>`;
     const img = m.anh
       ? `<div class="item-img" style="background-image:url('${m.anh}')">${catTag}</div>`
       : `<div class="item-img" style="background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:40px">${(shopInfo(m.cat)&&shopInfo(m.cat).emoji)||'✨'}${catTag}</div>`;
+    const contact = m.lead
+      ? `<button class="tr-contact" style="margin-left:0;border:none;cursor:pointer;font-family:inherit" onclick="openLeadForm('${esc(title)}')">📝 ${d.quote}</button>`
+      : (tel?`<a class="tr-contact" style="margin-left:0" href="tel:${tel}">📞 ${d.contact}</a>`:'');
     return `<article class="item">
       ${img}
       <div class="item-body">
-        <div class="item-title">${esc(m.title||'')}</div>
-        <div class="item-desc">${esc(m.desc||'')}</div>
+        <div class="item-title">${esc(title)}</div>
+        <div class="item-desc">${esc(desc)}</div>
         <div class="item-meta"><span class="who">${esc(m.who||'')}</span><span class="where">📍 ${esc(m.khuvuc||'')}</span></div>
         <div style="display:flex;gap:6px;align-items:center;margin-top:10px">
-          ${tel?`<a class="tr-contact" style="margin-left:0" href="tel:${tel}">📞 ${d.contact}</a>`:''}
+          ${contact}
           ${ownsPost(m)?`<button class="edit-post" title="${t('post_edit')}" onclick="openShopForm(MARKET.find(x=>String(x.id)==='${m.id}'))">✎</button><button class="del-post" title="${t('post_delete')}" onclick="deletePost('market','${m.id}')">🗑</button>`:''}
         </div>
       </div>
     </article>`;
   }).join('');
 }
+function shopItemTitle(m){ return (m.titleI18n&&(m.titleI18n[LANG]||m.titleI18n.en))||m.title||''; }
+function shopItemDesc(m){ return (m.descI18n&&(m.descI18n[LANG]||m.descI18n.en))||m.desc||''; }
 function openShopForm(editItem){
   requireLogin(()=>{
     const e=editItem||{}; const isEdit=!!editItem; const d=shopT();
@@ -8153,6 +8187,7 @@ async function loadData() {
     mergeCheckinPlaces();
     if (Array.isArray(r.outings))     OUTINGS = r.outings;
     if (Array.isArray(r.market))      MARKET = r.market;
+    mergeShopSeed();
     if (Array.isArray(r.singles))     SINGLES = r.singles.map(normNums);
     if (Array.isArray(r.translators)) TRANSLATORS = r.translators;
     mergeTranslators();
