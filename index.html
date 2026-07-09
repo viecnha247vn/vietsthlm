@@ -6663,7 +6663,9 @@ function renderTrFind() {
         <div style="display:flex;gap:6px;align-items:center">
           ${ownsPost(tr)?`<button class="edit-post" title="${t('post_edit')}" onclick="openTrProfileForm(TRANSLATORS.find(x=>String(x.id)==='${tr.id}'))">✎</button>`:''}
           ${ownsPost(tr)?delBtnHTML('translator', tr.id):''}
-          <a class="tr-contact" href="${tr.web ? tr.web : 'tel:'+((tr.sdt||'').replace(/\s/g,''))}"${tr.web?' target="_blank"':''}>${t('c_contact')}</a>
+          ${trIsUnlocked(tr)
+            ? `<a class="tr-contact" href="tel:${(tr.sdt||'').replace(/\s/g,'')}">📞 ${t('c_contact')}</a>`
+            : `<button class="tr-contact" onclick="openTrBooking('${tr.id}')" style="border:none;cursor:pointer;font-family:inherit">🔒 25 kr</button>`}
         </div>
       </div>
     </article>`).join('');
@@ -6702,6 +6704,120 @@ const TRP = {
     cancel:['The booking fee (25 kr) is non-refundable once you have chosen to book the interpreter.','No refund for cancellations after 24 hours.','Travel cost is added for on-site interpreting.'],
     cta:'Book on qiqa.se', sub:'Fast booking · Replies in Vietnamese and Swedish' }
 };
+// ===== Đặt lịch phiên dịch có phí 25 kr → mở khóa thông tin liên hệ =====
+// Dán mã QR Swish 25 kr (base64) vào đây nếu muốn hiện QR; để trống thì dùng số + lời nhắn.
+var SWISH_QR_25 = '';
+const TR_FEE = 25;
+const TRBK = {
+  vi:{ pay_title:'Đặt lịch phiên dịch', pay_for:'Đặt lịch với', pay_fee:'Phí đặt lịch',
+    step1:'Mở app Swish, chuyển 25 kr tới số bên trên.',
+    step2:'Trong ô “Meddelande” (lời nhắn) ghi: {msg}',
+    step3:'Swish xong, bấm nút bên dưới để mở thông tin liên hệ.',
+    paid_btn:'Tôi đã Swish 25 kr → Mở thông tin',
+    honor:'Phí đặt lịch (25 kr) không hoàn lại sau khi đã mở thông tin.',
+    contact_title:'Thông tin liên hệ',
+    contact_locked:'Thông tin liên hệ của phiên dịch sẽ hiện đầy đủ sau khi bạn đặt lịch (25 kr).',
+    lock_cta:'🔒 Đặt lịch (25 kr)', phone:'Số điện thoại', call:'Gọi ngay' },
+  en:{ pay_title:'Book an interpreter', pay_for:'Booking with', pay_fee:'Booking fee',
+    step1:'Open the Swish app and send 25 kr to the number above.',
+    step2:'In the “Meddelande” (message) field, write: {msg}',
+    step3:'After you have paid, tap the button below to unlock the contact details.',
+    paid_btn:'I have paid 25 kr with Swish → Unlock',
+    honor:'The booking fee (25 kr) is non-refundable once the details are unlocked.',
+    contact_title:'Contact details',
+    contact_locked:'The interpreter’s full contact details appear after you book (25 kr).',
+    lock_cta:'🔒 Book (25 kr)', phone:'Phone', call:'Call now' },
+  sv:{ pay_title:'Boka tolk', pay_for:'Bokning med', pay_fee:'Bokningsavgift',
+    step1:'Öppna Swish-appen och skicka 25 kr till numret ovan.',
+    step2:'I fältet “Meddelande” skriver du: {msg}',
+    step3:'När du har betalat, tryck på knappen nedan för att låsa upp kontaktuppgifterna.',
+    paid_btn:'Jag har swishat 25 kr → Lås upp',
+    honor:'Bokningsavgiften (25 kr) återbetalas ej när uppgifterna har låsts upp.',
+    contact_title:'Kontaktuppgifter',
+    contact_locked:'Tolkens fullständiga kontaktuppgifter visas efter att du bokat (25 kr).',
+    lock_cta:'🔒 Boka (25 kr)', phone:'Telefon', call:'Ring nu' },
+  zh:{ pay_title:'预约口译员', pay_for:'预约对象：', pay_fee:'预约费',
+    step1:'打开 Swish 应用，向上方号码转账 25 kr。',
+    step2:'在“Meddelande”（留言）栏填写：{msg}',
+    step3:'付款后，点击下方按钮解锁联系方式。',
+    paid_btn:'我已用 Swish 支付 25 kr → 解锁',
+    honor:'预约费（25 kr）一经解锁不予退还。',
+    contact_title:'联系方式',
+    contact_locked:'预约（25 kr）后将显示口译员的完整联系方式。',
+    lock_cta:'🔒 预约（25 kr）', phone:'电话', call:'立即拨打' },
+  uk:{ pay_title:'Забронювати перекладача', pay_for:'Бронювання з', pay_fee:'Плата за бронювання',
+    step1:'Відкрийте застосунок Swish і надішліть 25 kr на номер вище.',
+    step2:'У полі “Meddelande” (повідомлення) напишіть: {msg}',
+    step3:'Після оплати натисніть кнопку нижче, щоб відкрити контактні дані.',
+    paid_btn:'Я сплатив 25 kr через Swish → Відкрити',
+    honor:'Плата за бронювання (25 kr) не повертається після відкриття даних.',
+    contact_title:'Контактні дані',
+    contact_locked:'Повні контактні дані перекладача зʼявляться після бронювання (25 kr).',
+    lock_cta:'🔒 Забронювати (25 kr)', phone:'Телефон', call:'Зателефонувати' }
+};
+function trbk(){ return TRBK[LANG] || TRBK.en; }
+function trUnlockKey(){ return 'qiqa_tr_unlocked_' + ((currentUser && currentUser.email) || 'guest'); }
+function trUnlockedIds(){ try { return JSON.parse(localStorage.getItem(trUnlockKey()) || '[]'); } catch(e){ return []; } }
+function trUnlocked(id){ return trUnlockedIds().indexOf(String(id)) !== -1; }
+function unlockTranslator(id){
+  const a = trUnlockedIds();
+  if (a.indexOf(String(id)) === -1){ a.push(String(id)); localStorage.setItem(trUnlockKey(), JSON.stringify(a)); }
+}
+// Chính chủ hồ sơ và admin luôn xem được, không cần trả phí
+function trIsUnlocked(tr){
+  return trUnlocked(tr.id) || ownsPost(tr) || (typeof isAdminUser==='function' && isAdminUser());
+}
+function openTrBooking(id){
+  const tr = TRANSLATORS.find(x=>String(x.id)===String(id));
+  if (!tr) return;
+  const d = trbk();
+  const dp = TRP[LANG] || TRP.en;
+  const email = (currentUser && currentUser.email) || '';
+  const msg = ('PD ' + tr.ten + (email ? (' + ' + email) : '')).slice(0,50);
+  const cancelHtml = dp.cancel.map(c=>`<li>${c}</li>`).join('');
+  const qrImg = SWISH_QR_25 ? `<img src="${SWISH_QR_25}" alt="Swish QR 25 kr" class="swish-qr">` : '';
+  document.getElementById('sheet').innerHTML = `
+    <button class="close-x" onclick="closeModal()">✕</button>
+    <div class="sheet-body">
+      <h2>${d.pay_title}</h2>
+      <div class="auth-note">${d.pay_for} <b>${esc(tr.ten)}</b></div>
+      <div class="swish-box">
+        <div class="swish-title">${d.pay_fee}: 25 kr</div>
+        ${qrImg}
+        <div class="swish-num">072-567 11 11 · QiQa</div>
+        <div class="swish-steps">
+          1. ${d.step1}<br>
+          2. ${d.step2.replace('{msg}', '<b>'+esc(msg)+'</b>')}<br>
+          3. ${d.step3}
+        </div>
+      </div>
+      <div class="trp-note"><b>${dp.noteTitle}</b><ul>${cancelHtml}</ul></div>
+      <button class="submit" onclick="confirmTrBooking('${tr.id}')">${d.paid_btn}</button>
+      <div class="trp-sub" style="margin-top:8px">${d.honor}</div>
+    </div>`;
+  openModalEl();
+}
+function confirmTrBooking(id){
+  unlockTranslator(id);
+  closeModal();
+  if (typeof renderTranslate==='function') renderTranslate();
+  openTranslator(id);
+}
+function trContactBlock(tr){
+  const d = trbk();
+  const sdt = (tr.sdt || '').trim();
+  const tel = sdt.replace(/\s/g,'');
+  if (!trIsUnlocked(tr)){
+    return `<div class="trp-note"><b>🔒 ${d.contact_title}</b><div style="margin-top:6px">${d.contact_locked}</div></div>
+      <button class="trp-cta" onclick="openTrBooking('${tr.id}')">${d.lock_cta}</button>`;
+  }
+  const web = tr.web ? `<li><span class="k">Web</span><span class="v"><a href="${tr.web}" target="_blank">${esc(tr.web)}</a></span></li>` : '';
+  const phoneLi = sdt ? `<li><span class="k">${d.phone}</span><span class="v"><a href="tel:${tel}">${esc(sdt)}</a></span></li>` : '';
+  return `<div class="trp-note"><b>✓ ${d.contact_title}</b>
+      <ul class="trp-facts" style="margin-top:8px">${phoneLi}${web}</ul></div>
+      ${sdt ? `<a class="trp-cta" href="tel:${tel}">📞 ${d.call}</a>` : ''}`;
+}
+
 function openTranslator(id){
   const tr = TRANSLATORS.find(x=>String(x.id)===String(id));
   if (!tr) return;
@@ -6726,7 +6842,7 @@ function openTranslator(id){
       <p class="trp-intro">${d.intro}</p>
       <ul class="trp-facts">${factsHtml}</ul>
       <div class="trp-note"><b>${d.noteTitle}</b><ul>${cancelHtml}</ul></div>
-      <a class="trp-cta" href="${link}" target="_blank">${d.cta}</a>
+      ${trContactBlock(tr)}
       <div class="trp-sub">${d.sub}</div>
     </div>`;
   openModalEl();
