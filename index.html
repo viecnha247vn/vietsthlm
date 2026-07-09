@@ -74,6 +74,11 @@
   /* ============ ĐIỀU HƯỚNG: sidebar dọc (máy tính) / thanh đáy (điện thoại) ============ */
   .tabs { display: flex; }
   .tabs::-webkit-scrollbar { display: none; }
+  /* Trang chủ mồi: bỏ hết thanh dọc, header, chat & feed */
+  body.home-mode header,
+  body.home-mode nav.tabs { display: none !important; }
+  body.home-mode #view-home .home-split,
+  body.home-mode #view-home > main.wrap { display: none !important; }
   .tab { display: flex; align-items: center; gap: 11px; cursor: pointer; font-weight: 700;
     color: var(--muted); white-space: nowrap; user-select: none;
     transition: color .15s ease, background .15s ease, transform .1s ease; }
@@ -100,6 +105,7 @@
     .tab-tx { font-size: 12.5px; letter-spacing: -.01em; line-height: 1.2; }
     /* header content và nội dung trang đều chừa chỗ cho sidebar 210px */
     div[id^="view-"] { margin-left: 210px; }
+    body.home-mode #view-home { margin-left: 0 !important; }
   }
 
   /* --- ĐIỆN THOẠI: thanh nút cố định dưới đáy (kiểu Facebook) --- */
@@ -6135,14 +6141,7 @@ function switchTab(tab) {
   if (tab==='services') renderShop();
   if (tab==='jobs') renderJobs();
   if (tab==='home') { renderTeasers(); updateHomeFlag(); }
-  const hdrEl = document.querySelector('header');
-  if (hdrEl) hdrEl.style.display = (tab==='home') ? 'none' : '';
-  const navEl = document.querySelector('nav.tabs');
-  if (navEl) navEl.style.display = (tab==='home') ? 'none' : '';
-  const hsEl = document.querySelector('#view-home .home-split');
-  if (hsEl) hsEl.style.display = 'none';
-  const hfEl = document.querySelector('#view-home > main.wrap');
-  if (hfEl) hfEl.style.display = 'none';
+  document.body.classList.toggle('home-mode', tab==='home');
   window.scrollTo(0,0);
 }
 
