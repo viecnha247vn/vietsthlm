@@ -615,8 +615,8 @@
   .svc-spot-tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
   .svc-spot-tags>span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:12.5px;font-weight:700;color:var(--ink);}
   /* Câu chào mừng đầu trang */
-  .home-welcome{max-width:760px;margin:8px auto 0;padding:10px 16px 0;text-align:center;}
-  .home-welcome p{margin:0 0 8px;line-height:1.55;}
+  .home-welcome{max-width:880px;margin:8px auto 0;padding:10px 16px 0;text-align:center;}
+  .home-welcome p{margin:0 0 8px;line-height:1.55;text-wrap:balance;}
   .hw-sv{font-size:14.5px;color:var(--ink);font-weight:600;}
   .hw-en{font-size:13.5px;color:var(--muted);}
   /* Hiệu ứng "bay bay" khi chạm/di chuột */
@@ -1048,10 +1048,10 @@
   <div class="tab" data-tab="fun" onclick="switchTab('fun')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='2'/><path d='M8.6 8.6a5 5 0 0 0 0 6.8'/><path d='M15.4 8.6a5 5 0 0 1 0 6.8'/><path d='M6.2 6.2a9 9 0 0 0 0 11.6'/><path d='M17.8 6.2a9 9 0 0 1 0 11.6'/></svg></span><span class="tab-tx" data-i18n="tab_fun">Live</span></div>
   <div class="tab" data-tab="share" onclick="switchTab('share')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='6' cy='12' r='2.2'/><circle cx='17.5' cy='6' r='2.2'/><circle cx='17.5' cy='18' r='2.2'/><path d='m8 11 7.5-3.8M8 13l7.5 3.8'/></svg></span><span class="tab-tx" data-i18n="tab_share">Chia sẻ</span></div>
   <div class="tab" data-tab="articles" onclick="switchTab('articles')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M12 6.5C10.4 5.4 8 5 5.5 5v12c2.5 0 4.9.4 6.5 1.5 1.6-1.1 4-1.5 6.5-1.5V5c-2.5 0-4.9.4-6.5 1.5z'/><path d='M12 6.5v12'/></svg></span><span class="tab-tx" data-i18n="tab_articles">Luật & Xã hội</span></div>
+  <div class="tab" data-tab="translate" onclick="switchTab('translate')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='8.2'/><path d='M3.8 9.5h16.4M3.8 14.5h16.4'/><path d='M12 3.8c2.6 2.6 2.6 13.8 0 16.4M12 3.8c-2.6 2.6-2.6 13.8 0 16.4'/></svg></span><span class="tab-tx" data-i18n="tab_translate">Cung cấp dịch vụ</span></div>
   <div class="tab" data-tab="friends" onclick="switchTab('friends')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M12 20s-6.5-4.2-6.5-9A3.4 3.4 0 0 1 12 9.2 3.4 3.4 0 0 1 18.5 11c0 4.8-6.5 9-6.5 9z'/></svg></span><span class="tab-tx" data-i18n="tab_friends">Kết bạn</span></div>
   <div class="tab" data-tab="market" onclick="switchTab('market')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M6.5 8h11l-1 11.5h-9z'/><path d='M9.2 8V6.4a2.8 2.8 0 0 1 5.6 0V8'/></svg></span><span class="tab-tx" data-i18n="tab_market">Chợ cộng đồng</span></div>
   <div class="tab" data-tab="outings" onclick="switchTab('outings')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='8' cy='7' r='2.4'/><path d='M4 20v-3.5a4 4 0 0 1 8 0V20'/><circle cx='16.5' cy='9' r='1.8'/><path d='M14 20v-3a3 3 0 0 1 6 0v3'/></svg></span><span class="tab-tx" data-i18n="tab_outings">Đi chơi cùng con</span></div>
-  <div class="tab" data-tab="translate" onclick="switchTab('translate')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='8.2'/><path d='M3.8 9.5h16.4M3.8 14.5h16.4'/><path d='M12 3.8c2.6 2.6 2.6 13.8 0 16.4M12 3.8c-2.6 2.6-2.6 13.8 0 16.4'/></svg></span><span class="tab-tx" data-i18n="tab_translate">Cung cấp dịch vụ</span></div>
   <div class="tab" data-tab="services" onclick="switchTab('services')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><rect x='3.5' y='5' width='17' height='11' rx='1.6'/><path d='M2 19.5h20'/></svg></span><span class="tab-tx" data-i18n="tab_services">Shoping</span></div>
   <div class="tab" data-tab="member" onclick="switchTab('member')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M12 4l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L5.2 9.7l5.4-.8z'/></svg></span><span class="tab-tx" data-i18n="tab_member">VIP</span></div>
   <div class="tab" data-tab="about" onclick="switchTab('about')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='8.2'/><path d='M12 11.2v4.6'/><circle cx='12' cy='8.2' r='.4' fill='currentColor'/></svg></span><span class="tab-tx" data-i18n="tab_about">Về chúng tôi</span></div>
@@ -1401,7 +1401,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v102-jobs-i18n</span></p>
+  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v104-nav-order</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -6159,7 +6159,7 @@ function onCityChange() {
 }
 
 // ===== TABS =====
-const TAB_ORDER=['home','places','fun','share','articles','friends','market','outings','translate','services','member','about'];
+const TAB_ORDER=['home','places','fun','share','articles','translate','friends','market','outings','services','member','about'];
 function updatePageNav(tab){
   const footer=document.querySelector('.site-footer'); const pn=document.getElementById('pageNext');
   if(tab==='about'){ if(footer)footer.style.display=''; if(pn)pn.style.display='none'; return; }
