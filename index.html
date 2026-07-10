@@ -599,6 +599,7 @@
   .hp-card{display:flex;align-items:center;gap:11px;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:12px 13px;margin:0 4px 8px;cursor:pointer;position:relative;}
   .hp-card:active{transform:scale(.99);}
   .hp-ic{font-size:20px;flex:none;}
+  .hp-thumb{width:48px;height:48px;flex:none;border-radius:10px;background-size:cover;background-position:center;background-repeat:no-repeat;border:1px solid var(--line);}
   .hp-body{flex:1;min-width:0;}
   .hp-txt{font-size:13.5px;color:var(--ink);line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
   .hp-meta{font-size:11.5px;color:var(--muted);margin-top:3px;}
@@ -1395,7 +1396,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v96-cta-fix</span></p>
+  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v98-posts-thumb</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -6662,20 +6663,29 @@ function renderLandingPosts(){
   const el = document.getElementById('homePosts'); if (!el) return;
   let items = [];
   try { items = buildFeedItems(); } catch(e){ items = []; }
-  items = items.filter(it => it.text && it.text.trim()).slice(0, 6);
+  items = items.filter(it => (it.who && it.who.trim()) || (it.text && it.text.trim())).slice(0, 6);
   if (!items.length) { el.innerHTML=''; return; }
   const ICON = { place:'📍', market:'🛍️', outing:'🧸', event:'📡', share:'🔗', treq:'🌐' };
-  const TABMAP = { place:'places', market:'market', outing:'outings', event:'fun', share:'share', treq:'translate' };
-  const snip = s => { s=(s||'').replace(/\s+/g,' ').trim(); return s.length>95 ? s.slice(0,95)+'…' : s; };
-  el.innerHTML = `<div class="hp-head">${t('hp_head')}</div>` + items.map(it => `
-    <div class="hp-card" onclick="openTeaser('${TABMAP[it.type]||'home'}')">
-      <span class="hp-ic">${ICON[it.type]||'📝'}</span>
+  const TAB  = { place:'places', market:'market', outing:'outings', event:'fun', share:'share', treq:'translate' };
+  const LBL  = { place:'tab_places', market:'tab_market', outing:'tab_outings', event:'tab_fun', share:'tab_share', treq:'tab_translate' };
+  el.innerHTML = `<div class="hp-head">${t('hp_head')}</div>` + items.map(it => {
+    const w = (it.who||'').replace(/\s+/g,' ').trim();
+    const label = t(LBL[it.type]||'') || '';
+    const stripCat = (it.text||'').replace(/^\[[^\]]*\]\s*/,'').replace(/\s+/g,' ').trim();
+    let main = w || stripCat;
+    if (main.length>60) main = main.slice(0,60)+'…';
+    const sub = w ? label : '';
+    const img = (it.anh && /^(https?:|data:image\/)/i.test(it.anh)) ? it.anh : (it.thumb||'');
+    return `
+    <div class="hp-card" onclick="openTeaser('${TAB[it.type]||'home'}')">
+      ${img ? `<div class="hp-thumb" style="background-image:url('${img}')"></div>` : `<span class="hp-ic">${ICON[it.type]||'📝'}</span>`}
       <div class="hp-body">
-        <div class="hp-txt">${escapeHtml(snip(it.text))}</div>
-        ${it.who?`<div class="hp-meta">${escapeHtml(it.who)}</div>`:''}
+        <div class="hp-txt">${escapeHtml(main)}</div>
+        ${sub?`<div class="hp-meta">${escapeHtml(sub)}</div>`:''}
       </div>
       <span class="hp-lock">🔒</span>
-    </div>`).join('') + `<div class="hp-more" onclick="openMemberGate('home')">${t('hp_more')}</div>`;
+    </div>`;
+  }).join('') + `<div class="hp-more" onclick="openMemberGate('home')">${t('hp_more')}</div>`;
 }
 
 // ===== ĐỊA ĐIỂM CÓ CHECK-IN (ưu đãi voucher) =====
