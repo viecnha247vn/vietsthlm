@@ -1342,7 +1342,7 @@
       <div class="about-badge" data-i18n="about_badge">Về chúng tôi</div>
       <h2 data-i18n="about_title">Xây dựng cho mọi cộng đồng xa quê</h2>
       <p data-i18n="about_p">QiQa là nền tảng cộng đồng dành cho tất cả những người xa quê đang sinh sống tại Thụy Điển — dù bạn đến từ đất nước nào. Xa quê hương, ai cũng từng có lúc lạc lõng, bối rối trước một lá thư từ cơ quan hay thiếu một người đồng hương để trò chuyện. QiQa ra đời để những khoảnh khắc ấy không còn đơn độc.</p>
-      <p class="about-brand"><span data-i18n="about_brand_pre">Phát triển bởi</span> <b>QiQa Shop</b> <span data-i18n="about_brand_post">— công ty công nghệ, dùng công nghệ để gắn kết cộng đồng nơi xứ người.</span></p>
+      <p class="about-brand"><span data-i18n="about_brand_pre">Phát triển bởi</span> <b>QTT Solutions</b> <span data-i18n="about_brand_post">— công ty công nghệ, dùng công nghệ để gắn kết cộng đồng nơi xứ người.</span></p>
       <p class="about-free"><b data-i18n="about_free">An toàn · Gần gũi · Bằng ngôn ngữ của bạn</b></p>
       <div class="about-contact"><span data-i18n="svc_contact">Liên hệ trực tiếp:</span> <a href="mailto:weshare.sverige@gmail.com">weshare.sverige@gmail.com</a></div>
     </section>
@@ -1409,7 +1409,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v107-20x20</span></p>
+  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v108-login-top</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -9115,9 +9115,9 @@ function openAccountMenu(){
     '<button class="close-x" onclick="closeModal()">✕</button>'+
     '<div class="sheet-body"><h2>'+head+'</h2>'+
     '<div class="acc-menu">'+
+      '<button class="acc-menu-item" onclick="onAccountClick()"><span>👤</span><span>'+(loggedIn?t('prof_title'):t('login'))+'</span></button>'+
       '<button class="acc-menu-item" onclick="closeModal();reopenSplash()"><span>🌐</span><span>'+t('w_lang')+'</span></button>'+
       '<button class="acc-menu-item" onclick="openThemePicker()"><span>🎨</span><span>'+t('theme_title')+'</span></button>'+
-      '<button class="acc-menu-item" onclick="onAccountClick()"><span>👤</span><span>'+(loggedIn?t('prof_title'):t('login'))+'</span></button>'+
     '</div></div>';
   openModalEl();
 }
