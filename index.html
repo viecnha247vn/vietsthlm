@@ -1052,7 +1052,6 @@
   <div class="tab" data-tab="market" onclick="switchTab('market')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M6.5 8h11l-1 11.5h-9z'/><path d='M9.2 8V6.4a2.8 2.8 0 0 1 5.6 0V8'/></svg></span><span class="tab-tx" data-i18n="tab_market">Chợ cộng đồng</span></div>
   <div class="tab" data-tab="outings" onclick="switchTab('outings')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='8' cy='7' r='2.4'/><path d='M4 20v-3.5a4 4 0 0 1 8 0V20'/><circle cx='16.5' cy='9' r='1.8'/><path d='M14 20v-3a3 3 0 0 1 6 0v3'/></svg></span><span class="tab-tx" data-i18n="tab_outings">Đi chơi cùng con</span></div>
   <div class="tab" data-tab="translate" onclick="switchTab('translate')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='8.2'/><path d='M3.8 9.5h16.4M3.8 14.5h16.4'/><path d='M12 3.8c2.6 2.6 2.6 13.8 0 16.4M12 3.8c-2.6 2.6-2.6 13.8 0 16.4'/></svg></span><span class="tab-tx" data-i18n="tab_translate">Cung cấp dịch vụ</span></div>
-  <div class="tab" data-tab="jobs" onclick="switchTab('jobs')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><rect x='3.5' y='7.5' width='17' height='12' rx='1.8'/><path d='M8.5 7.5V6a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v1.5'/><path d='M3.5 12.5h17'/></svg></span><span class="tab-tx" data-i18n="tab_jobs">Tuyển dụng</span></div>
   <div class="tab" data-tab="services" onclick="switchTab('services')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><rect x='3.5' y='5' width='17' height='11' rx='1.6'/><path d='M2 19.5h20'/></svg></span><span class="tab-tx" data-i18n="tab_services">Shoping</span></div>
   <div class="tab" data-tab="member" onclick="switchTab('member')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M12 4l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L5.2 9.7l5.4-.8z'/></svg></span><span class="tab-tx" data-i18n="tab_member">VIP</span></div>
   <div class="tab" data-tab="about" onclick="switchTab('about')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='8.2'/><path d='M12 11.2v4.6'/><circle cx='12' cy='8.2' r='.4' fill='currentColor'/></svg></span><span class="tab-tx" data-i18n="tab_about">Về chúng tôi</span></div>
@@ -1189,25 +1188,6 @@
   <button class="fab" data-for="market" onclick="openPost()" data-i18n="fab_post">＋ Đăng tin</button>
 </div>
 
-<!-- TUYỂN DỤNG / JOBS -->
-<div id="view-jobs" class="hidden">
-  <section class="hero">
-    <h1><span data-i18n="hero_job_1">Tuyển dụng —</span> <span class="em" data-i18n="hero_job_2">tìm việc theo ngành nghề</span></h1>
-    <p data-i18n="hero_job_sub">Nhà hàng, nail, bán hàng, xây dựng, dọn dẹp, giúp việc… tin tuyển dụng cộng đồng.</p>
-  </section>
-  <div class="chips" id="job-chips"></div>
-  <main class="wrap">
-    <div class="safety gold">
-      <span>💼</span>
-      <div><b data-i18n="hero_job_note_b">Cần người / cần việc:</b> <span data-i18n="hero_job_note">nhà tuyển dụng đăng tin, người tìm việc xem theo ngành nghề và liên hệ trực tiếp.</span></div>
-    </div>
-    <div class="count" id="job-count"></div>
-    <div class="mkt" id="job-grid"></div>
-    <div class="empty hidden" id="job-empty" data-i18n="empty_jobs">Chưa có tin tuyển dụng nào khớp.</div>
-  </main>
-  <button class="fab" data-for="jobs" onclick="openJobForm()" data-i18n="fab_job">＋ Đăng tuyển dụng</button>
-</div>
-
 <!-- FRIENDS / KẾT BẠN -->
 <div id="view-friends" class="hidden">
   <section class="hero">
@@ -1302,6 +1282,7 @@
   <div class="sub-tabs" id="tr-subtabs">
     <div class="sub-tab on" data-sub="find" onclick="switchTrSub('find')" data-i18n="sub_find">Tìm dịch vụ</div>
     <div class="sub-tab" data-sub="requests" onclick="switchTrSub('requests')" data-i18n="sub_req">Cần dịch vụ</div>
+    <div class="sub-tab" data-sub="jobs" onclick="switchTrSub('jobs')" data-i18n="tab_jobs">Tuyển dụng</div>
   </div>
   <div class="chips" id="tr-chips"></div>
   <main class="wrap">
@@ -1321,6 +1302,12 @@
       <div class="grid" id="tr-grid"></div>
     </div>
     <div id="tr-requests" class="hidden"><div class="feed" id="tr-req-list"></div></div>
+    <div id="tr-jobs" class="hidden">
+      <div class="chips" id="job-chips"></div>
+      <div class="count" id="job-count"></div>
+      <div class="mkt" id="job-grid"></div>
+      <div class="empty hidden" id="job-empty" data-i18n="empty_jobs">Chưa có tin tuyển dụng nào khớp.</div>
+    </div>
   </main>
   <button class="fab" id="tr-fab" onclick="onTrFab()" data-i18n="fab_post">＋ Đăng</button>
 </div>
@@ -1414,7 +1401,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v100-services</span></p>
+  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v102-jobs-i18n</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -5904,6 +5891,7 @@ function applyLang() {
   if (typeof renderHomeFeed==='function') renderHomeFeed();
   if (typeof renderTeasers==='function') renderTeasers();
   if (typeof renderLandingPosts==='function') renderLandingPosts();
+  if (typeof renderJobChips==='function') renderJobChips();
   if (typeof updateHomeFlag==='function') updateHomeFlag();
   if (typeof initCitySelector==='function') initCitySelector();
 }
@@ -5950,17 +5938,17 @@ const TR_FIELDS = ["Tất cả","Y tế","Giấy tờ/Hành chính","Pháp lý",
 // ===== LOẠI DỊCH VỤ (trang Cung cấp dịch vụ) =====
 const SERVICE_TYPES = [
   { key:'Phiên dịch',         emoji:'🗣️', vi:'Phiên dịch',          en:'Interpreter',        sv:'Tolk' },
-  { key:'Spa / Massage',      emoji:'💆', vi:'Spa / Massage',       en:'Spa / Massage',      sv:'Spa / Massage' },
-  { key:'Sửa chữa',           emoji:'🔧', vi:'Sửa chữa',            en:'Repairs',            sv:'Reparation' },
-  { key:'Xây dựng',           emoji:'🔨', vi:'Xây dựng',            en:'Construction',       sv:'Bygg' },
-  { key:'Chuyển nhà',         emoji:'📦', vi:'Chuyển nhà',          en:'Moving help',        sv:'Flytthjälp' },
-  { key:'Thuê xe',            emoji:'🚗', vi:'Thuê xe',             en:'Car rental',         sv:'Biluthyrning' },
-  { key:'Dọn dẹp',            emoji:'🧹', vi:'Dọn dẹp',             en:'Cleaning',           sv:'Städning' },
-  { key:'Dạy lái xe',         emoji:'🚘', vi:'Dạy lái xe',          en:'Driving lessons',    sv:'Körlektioner' },
-  { key:'Cho thuê / Bán nhà', emoji:'🏠', vi:'Cho thuê / Bán nhà',  en:'Housing rent/sale',  sv:'Uthyrning / Försäljning' },
+  { key:'Dịch vụ lãnh sự',    emoji:'🛂', vi:'Dịch vụ lãnh sự',     en:'Consular services',  sv:'Konsulära tjänster' },
   { key:'Làm giấy tờ',        emoji:'📄', vi:'Làm giấy tờ',         en:'Paperwork help',     sv:'Dokumenthjälp' },
   { key:'Đưa đón sân bay',    emoji:'🚕', vi:'Đưa đón sân bay',     en:'Airport pickup',     sv:'Flygplatshämtning' },
-  { key:'Dịch vụ lãnh sự',    emoji:'🛂', vi:'Dịch vụ lãnh sự',     en:'Consular services',  sv:'Konsulära tjänster' }
+  { key:'Dạy lái xe',         emoji:'🚘', vi:'Dạy lái xe',          en:'Driving lessons',    sv:'Körlektioner' },
+  { key:'Thuê xe',            emoji:'🚗', vi:'Thuê xe',             en:'Car rental',         sv:'Biluthyrning' },
+  { key:'Chuyển nhà',         emoji:'📦', vi:'Chuyển nhà',          en:'Moving help',        sv:'Flytthjälp' },
+  { key:'Sửa chữa',           emoji:'🔧', vi:'Sửa chữa',            en:'Repairs',            sv:'Reparation' },
+  { key:'Xây dựng',           emoji:'🔨', vi:'Xây dựng',            en:'Construction',       sv:'Bygg' },
+  { key:'Dọn dẹp',            emoji:'🧹', vi:'Dọn dẹp',             en:'Cleaning',           sv:'Städning' },
+  { key:'Spa / Massage',      emoji:'💆', vi:'Spa / Massage',       en:'Spa / Massage',      sv:'Spa / Massage' },
+  { key:'Cho thuê / Bán nhà', emoji:'🏠', vi:'Cho thuê / Bán nhà',  en:'Housing rent/sale',  sv:'Uthyrning / Försäljning' }
 ];
 function svcInfo(key){ return SERVICE_TYPES.find(x=>x.key===key); }
 function svcLabel(key){ if(key==='Tất cả') return t('cat_all'); const s=svcInfo(key); return s ? (s[LANG]||s.en||s.vi) : key; }
@@ -6194,7 +6182,6 @@ function switchTab(tab) {
   document.getElementById('view-share').classList.toggle('hidden', tab!=='share');
   document.getElementById('view-articles').classList.toggle('hidden', tab!=='articles');
   document.getElementById('view-services').classList.toggle('hidden', tab!=='services');
-  document.getElementById('view-jobs').classList.toggle('hidden', tab!=='jobs');
   document.getElementById('view-about').classList.toggle('hidden', tab!=='about');
   document.getElementById('view-member').classList.toggle('hidden', tab!=='member');
   updatePageNav(tab);
@@ -6218,7 +6205,6 @@ function switchTab(tab) {
   if (tab==='articles') renderArticles();
   if (tab==='member') renderMemberPage();
   if (tab==='services') renderShop();
-  if (tab==='jobs') renderJobs();
   if (tab==='home') { renderTeasers(); renderLandingPosts(); updateHomeFlag(); if (currentUser) { homeShown = 20; renderHomeFeed(); } }
   document.body.classList.toggle('home-mode', tab==='home' && !currentUser);
   window.scrollTo(0,0);
@@ -6236,7 +6222,6 @@ const TEASERS = [
   { tab:'market',    ic:'🛍️', tk:'tab_market',    sk:'tz_market' },
   { tab:'outings',   ic:'🧸', tk:'tab_outings',   sk:'tz_outings' },
   { tab:'translate', ic:'🌐', tk:'tab_translate', sk:'tz_translate' },
-  { tab:'jobs',      ic:'💼', tk:'tab_jobs',      sk:'tz_jobs' },
   { tab:'services',  ic:'🏬', tk:'tab_services',  sk:'tz_services' },
 ];
 
@@ -6636,6 +6621,20 @@ Object.assign(I18N.sv, {
   sp_pickup_d:'En anhörig som flyger hit hemifrån, men du är upptagen, osäker på vägen eller vintervägarna är svåra? Att hitta någon som hämtar är krångligt. QiQa kopplar dig till en pålitlig förare — möter dem vid ankomsten, i tid, en bekväm bil, talar ditt språk och kör dem tryggt hem. Så att din familj möts av ett bekant ansikte direkt när de landar i ett nytt land.',
   sp_tag_pickup:'Flygplatshämtning', sp_tag_consular:'Konsulära tjänster'
 });
+Object.assign(I18N.vi, {jc_all:'Tất cả',jc_restaurant:'Nhà hàng/Quán ăn',jc_nail:'Nail/Tóc/Spa',jc_sales:'Bán hàng/Thu ngân',jc_cleaning:'Vệ sinh/Dọn dẹp',jc_construction:'Xây dựng/Sửa chữa',jc_warehouse:'Kho/Vận chuyển',jc_care:'Chăm sóc/Giúp việc',jc_farm:'Nông nghiệp/Đóng gói',jc_office:'Văn phòng',jc_it:'IT/Kỹ thuật',jc_interpret:'Phiên dịch',jc_other:'Khác'});
+Object.assign(I18N.en, {jc_all:'All',jc_restaurant:'Restaurant/Food',jc_nail:'Nail/Hair/Spa',jc_sales:'Sales/Cashier',jc_cleaning:'Cleaning',jc_construction:'Construction/Repair',jc_warehouse:'Warehouse/Logistics',jc_care:'Care/Housekeeping',jc_farm:'Farm/Packing',jc_office:'Office',jc_it:'IT/Tech',jc_interpret:'Interpreter',jc_other:'Other'});
+Object.assign(I18N.sv, {jc_all:'Alla',jc_restaurant:'Restaurang/Mat',jc_nail:'Nagel/Hår/Spa',jc_sales:'Försäljning/Kassa',jc_cleaning:'Städning',jc_construction:'Bygg/Reparation',jc_warehouse:'Lager/Logistik',jc_care:'Omsorg/Hushåll',jc_farm:'Jordbruk/Packning',jc_office:'Kontor',jc_it:'IT/Teknik',jc_interpret:'Tolk',jc_other:'Övrigt'});
+Object.assign(I18N.zh, {jc_all:'全部',jc_restaurant:'餐馆/饮食',jc_nail:'美甲/美发/水疗',jc_sales:'销售/收银',jc_cleaning:'清洁',jc_construction:'建筑/维修',jc_warehouse:'仓库/物流',jc_care:'护理/家政',jc_farm:'农业/包装',jc_office:'办公室',jc_it:'IT/技术',jc_interpret:'口译',jc_other:'其他'});
+Object.assign(I18N.uk, {jc_all:'Усі',jc_restaurant:'Ресторан/Їжа',jc_nail:'Нігті/Волосся/Спа',jc_sales:'Продажі/Каса',jc_cleaning:'Прибирання',jc_construction:'Будівництво/Ремонт',jc_warehouse:'Склад/Логістика',jc_care:'Догляд/Домогосподарство',jc_farm:'Сільське госп./Пакування',jc_office:'Офіс',jc_it:'IT/Техніка',jc_interpret:'Переклад',jc_other:'Інше'});
+Object.assign(I18N.so, {jc_all:'Dhammaan',jc_restaurant:'Maqaayad/Cunto',jc_nail:'Ciddiyo/Timo/Spa',jc_sales:'Iibin/Lacag-qaade',jc_cleaning:'Nadaafad',jc_construction:'Dhismo/Dayactir',jc_warehouse:'Bakhaar/Gaadiid',jc_care:'Daryeel/Guri-dhaqan',jc_farm:'Beeraha/Baakin',jc_office:'Xafiis',jc_it:'IT/Farsamo',jc_interpret:'Turjumaad',jc_other:'Kale'});
+Object.assign(I18N.tr, {jc_all:'Tümü',jc_restaurant:'Restoran/Yemek',jc_nail:'Tırnak/Saç/Spa',jc_sales:'Satış/Kasa',jc_cleaning:'Temizlik',jc_construction:'İnşaat/Tamir',jc_warehouse:'Depo/Lojistik',jc_care:'Bakım/Ev işi',jc_farm:'Tarım/Paketleme',jc_office:'Ofis',jc_it:'BT/Teknik',jc_interpret:'Tercüme',jc_other:'Diğer'});
+Object.assign(I18N.fa, {jc_all:'همه',jc_restaurant:'رستوران/غذا',jc_nail:'ناخن/مو/اسپا',jc_sales:'فروش/صندوق',jc_cleaning:'نظافت',jc_construction:'ساخت‌وساز/تعمیر',jc_warehouse:'انبار/حمل‌ونقل',jc_care:'مراقبت/خانه‌داری',jc_farm:'کشاورزی/بسته‌بندی',jc_office:'اداری',jc_it:'فناوری اطلاعات',jc_interpret:'مترجم',jc_other:'سایر'});
+Object.assign(I18N.ar, {jc_all:'الكل',jc_restaurant:'مطعم/طعام',jc_nail:'أظافر/شعر/سبا',jc_sales:'مبيعات/كاشير',jc_cleaning:'تنظيف',jc_construction:'بناء/إصلاح',jc_warehouse:'مستودع/لوجستيات',jc_care:'رعاية/أعمال منزلية',jc_farm:'زراعة/تغليف',jc_office:'مكتب',jc_it:'تقنية معلومات',jc_interpret:'ترجمة فورية',jc_other:'أخرى'});
+Object.assign(I18N.pl, {jc_all:'Wszystkie',jc_restaurant:'Restauracja/Jedzenie',jc_nail:'Paznokcie/Włosy/Spa',jc_sales:'Sprzedaż/Kasa',jc_cleaning:'Sprzątanie',jc_construction:'Budowa/Naprawy',jc_warehouse:'Magazyn/Logistyka',jc_care:'Opieka/Sprzątanie',jc_farm:'Rolnictwo/Pakowanie',jc_office:'Biuro',jc_it:'IT/Technika',jc_interpret:'Tłumacz',jc_other:'Inne'});
+Object.assign(I18N.fi, {jc_all:'Kaikki',jc_restaurant:'Ravintola/Ruoka',jc_nail:'Kynnet/Hiukset/Spa',jc_sales:'Myynti/Kassa',jc_cleaning:'Siivous',jc_construction:'Rakennus/Korjaus',jc_warehouse:'Varasto/Logistiikka',jc_care:'Hoiva/Kotityö',jc_farm:'Maatalous/Pakkaus',jc_office:'Toimisto',jc_it:'IT/Tekniikka',jc_interpret:'Tulkki',jc_other:'Muu'});
+Object.assign(I18N.ko, {jc_all:'전체',jc_restaurant:'식당/요식',jc_nail:'네일/헤어/스파',jc_sales:'판매/계산',jc_cleaning:'청소',jc_construction:'건설/수리',jc_warehouse:'창고/물류',jc_care:'돌봄/가사',jc_farm:'농업/포장',jc_office:'사무',jc_it:'IT/기술',jc_interpret:'통역',jc_other:'기타'});
+Object.assign(I18N.tl, {jc_all:'Lahat',jc_restaurant:'Restawran/Pagkain',jc_nail:'Nail/Buhok/Spa',jc_sales:'Benta/Kahera',jc_cleaning:'Paglilinis',jc_construction:'Konstruksyon/Pag-aayos',jc_warehouse:'Bodega/Logistics',jc_care:'Pag-aalaga/Gawaing bahay',jc_farm:'Sakahan/Packing',jc_office:'Opisina',jc_it:'IT/Teknikal',jc_interpret:'Interpreter',jc_other:'Iba pa'});
+Object.assign(I18N.th, {jc_all:'ทั้งหมด',jc_restaurant:'ร้านอาหาร/อาหาร',jc_nail:'เล็บ/ผม/สปา',jc_sales:'ขาย/แคชเชียร์',jc_cleaning:'ทำความสะอาด',jc_construction:'ก่อสร้าง/ซ่อม',jc_warehouse:'คลังสินค้า/ขนส่ง',jc_care:'ดูแล/งานบ้าน',jc_farm:'เกษตร/แพ็ก',jc_office:'สำนักงาน',jc_it:'ไอที/เทคนิค',jc_interpret:'ล่าม',jc_other:'อื่นๆ'});
 
 function updateHomeFlag(){
   const f = document.getElementById('homeFlag');
@@ -6926,14 +6925,20 @@ MKT_CATS.forEach(c => {
 });
 // ===== TUYỂN DỤNG: ngành nghề + chips =====
 const JOB_CATS = ["Tất cả","Nhà hàng/Quán ăn","Nail/Tóc/Spa","Bán hàng/Thu ngân","Vệ sinh/Dọn dẹp","Xây dựng/Sửa chữa","Kho/Vận chuyển","Chăm sóc/Giúp việc","Nông nghiệp/Đóng gói","Văn phòng","IT/Kỹ thuật","Phiên dịch","Khác"];
+const JC_MAP = {"Tất cả":"jc_all","Nhà hàng/Quán ăn":"jc_restaurant","Nail/Tóc/Spa":"jc_nail","Bán hàng/Thu ngân":"jc_sales","Vệ sinh/Dọn dẹp":"jc_cleaning","Xây dựng/Sửa chữa":"jc_construction","Kho/Vận chuyển":"jc_warehouse","Chăm sóc/Giúp việc":"jc_care","Nông nghiệp/Đóng gói":"jc_farm","Văn phòng":"jc_office","IT/Kỹ thuật":"jc_it","Phiên dịch":"jc_interpret","Khác":"jc_other"};
+function jobCatLabel(c){ return t(JC_MAP[c]||'') || c; }
 let jobCat = "Tất cả";
-const jobChipsEl = document.getElementById('job-chips');
-if (jobChipsEl) JOB_CATS.forEach(c => {
-  const b = document.createElement('button');
-  b.className = 'chip' + (c==="Tất cả"?' on':''); b.dataset.cat = c; b.textContent = (c==="Tất cả"?t('cat_all'):c);
-  b.onclick = () => { jobCat=c; jobChipsEl.querySelectorAll('.chip').forEach(x=>x.classList.remove('on')); b.classList.add('on'); renderJobs(); };
-  jobChipsEl.appendChild(b);
-});
+function renderJobChips(){
+  const el = document.getElementById('job-chips'); if (!el) return;
+  el.innerHTML = '';
+  JOB_CATS.forEach(c => {
+    const b = document.createElement('button');
+    b.className = 'chip' + (c===jobCat?' on':''); b.dataset.cat = c; b.textContent = jobCatLabel(c);
+    b.onclick = () => { jobCat=c; el.querySelectorAll('.chip').forEach(x=>x.classList.remove('on')); b.classList.add('on'); renderJobs(); };
+    el.appendChild(b);
+  });
+}
+renderJobChips();
 const trChipsEl = document.getElementById('tr-chips');
 ['Tất cả', ...SERVICE_TYPES.map(s=>s.key)].forEach(c => {
   const b = document.createElement('button');
@@ -7358,7 +7363,7 @@ function renderJobs() {
     <article class="item">
       <div class="item-img" onclick="openItem('${m.id}')" style="background-image:url('${m.anh}')">
         <span class="tag-type t-job">${ttype('job')}</span>
-        <span class="tag-cat">${m.cat||''}</span>
+        <span class="tag-cat">${jobCatLabel(m.cat)||''}</span>
       </div>
       <div class="item-body">
         <div class="item-title" onclick="openItem('${m.id}')">${m.title||''}</div>
@@ -7380,7 +7385,7 @@ function openJobForm(editItem) {
   requireLogin(() => {
     const e = editItem || {};
     const isEdit = !!editItem;
-    const opts = JOB_CATS.filter(c=>c!=="Tất cả").map(c=>`<option value="${c}"${e.cat===c?' selected':''}>${c}</option>`).join('');
+    const opts = JOB_CATS.filter(c=>c!=="Tất cả").map(c=>`<option value="${c}"${e.cat===c?' selected':''}>${jobCatLabel(c)}</option>`).join('');
     document.getElementById('sheet').innerHTML = `
       <button class="close-x" onclick="closeModal()">✕</button>
       <div class="sheet-body">
@@ -7770,15 +7775,20 @@ function deleteProfile() {
 function switchTrSub(s) {
   trSub = s;
   document.querySelectorAll('#tr-subtabs .sub-tab').forEach(x=>x.classList.toggle('on', x.dataset.sub===s));
-  document.getElementById('tr-fab').textContent = s==='find' ? '＋ '+t('lbl_be_interp') : '＋ '+t('lbl_post_req');
+  const fab = document.getElementById('tr-fab');
+  fab.textContent = s==='jobs' ? t('fab_job') : (s==='find' ? '＋ '+t('lbl_be_interp') : '＋ '+t('lbl_post_req'));
   renderTranslate();
 }
-function onTrFab() { trSub==='find' ? openTrProfileForm() : openTrRequestForm(); }
+function onTrFab() { trSub==='jobs' ? openJobForm() : (trSub==='find' ? openTrProfileForm() : openTrRequestForm()); }
 
 function renderTranslate() {
   document.getElementById('tr-find').classList.toggle('hidden', trSub!=='find');
   document.getElementById('tr-requests').classList.toggle('hidden', trSub!=='requests');
-  if (trSub==='find') renderTrFind(); else renderTrRequests();
+  document.getElementById('tr-jobs').classList.toggle('hidden', trSub!=='jobs');
+  const chips = document.getElementById('tr-chips'); if (chips) chips.classList.toggle('hidden', trSub!=='find');
+  if (trSub==='find') renderTrFind();
+  else if (trSub==='requests') renderTrRequests();
+  else renderJobs();
 }
 
 function renderTrFind() {
