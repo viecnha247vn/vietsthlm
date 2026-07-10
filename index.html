@@ -602,9 +602,18 @@
   .hp-thumb{width:48px;height:48px;flex:none;border-radius:10px;background-size:cover;background-position:center;background-repeat:no-repeat;border:1px solid var(--line);}
   .hp-body{flex:1;min-width:0;}
   .hp-txt{font-size:13.5px;color:var(--ink);line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
-  .hp-meta{font-size:11.5px;color:var(--muted);margin-top:3px;}
+  .hp-hook{font-size:12.5px;color:var(--muted);line-height:1.4;margin-top:2px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
+  .hp-meta{font-size:11px;color:var(--accent,#c65b3a);font-weight:700;margin-top:4px;text-transform:uppercase;letter-spacing:.02em;}
   .hp-lock{font-size:13px;opacity:.45;flex:none;}
   .hp-more{text-align:center;font-size:13.5px;font-weight:700;color:var(--accent,#c65b3a);padding:10px;cursor:pointer;}
+  /* Khối giới thiệu dịch vụ mới */
+  .svc-spot{border:1px solid var(--accent,#c65b3a);background:linear-gradient(135deg,color-mix(in srgb,var(--accent,#c65b3a) 12%,var(--surface)),var(--surface));border-radius:18px;padding:20px 18px;margin:0 0 16px;text-align:center;position:relative;}
+  .svc-spot-badge{position:absolute;top:12px;right:14px;background:var(--accent,#c65b3a);color:#fff;font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px;letter-spacing:.05em;}
+  .svc-spot-ic{font-size:30px;margin-bottom:6px;}
+  .svc-spot-ttl{font-size:17px;font-weight:800;color:var(--ink);margin-bottom:8px;line-height:1.35;}
+  .svc-spot-d{font-size:13.5px;color:var(--muted);line-height:1.55;max-width:620px;margin:0 auto 12px;}
+  .svc-spot-tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+  .svc-spot-tags>span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:12.5px;font-weight:700;color:var(--ink);}
   /* Câu chào mừng đầu trang */
   .home-welcome{max-width:760px;margin:8px auto 0;padding:10px 16px 0;text-align:center;}
   .home-welcome p{margin:0 0 8px;line-height:1.55;}
@@ -1301,7 +1310,16 @@
       <div><b data-i18n="hero_tr_note_b">Dịch vụ cộng đồng:</b> <span data-i18n="hero_tr_note">hãy tự thoả thuận giá và kiểm tra kỹ trước khi giao dịch.</span></div>
     </div>
     <div class="count" id="tr-count"></div>
-    <div id="tr-find"><div class="grid" id="tr-grid"></div></div>
+    <div id="tr-find">
+      <div class="svc-spot">
+        <div class="svc-spot-badge" data-i18n="sp_new">MỚI</div>
+        <div class="svc-spot-ic">🚕✈️</div>
+        <div class="svc-spot-ttl" data-i18n="sp_pickup_t">Đưa đón sân bay — đón người thân từ quê nhà</div>
+        <div class="svc-spot-d" data-i18n="sp_pickup_d">Người thân từ quê bay sang Thụy Điển, nhưng bạn bận việc, chưa rành đường, hay trời tuyết lạnh không ra sân bay đón được? Nhờ người đón cũng khó và ngại. QiQa kết nối bạn với người đón tin cậy — đón tận cửa đến, đúng giờ, xe rộng rãi, nói tiếng mình, đưa về tận nhà an toàn. Để người thân vừa đặt chân đến nơi xa lạ đã thấy ngay một gương mặt thân quen.</div>
+        <div class="svc-spot-tags"><span>🚕 <span data-i18n="sp_tag_pickup">Đưa đón sân bay</span></span><span>🛂 <span data-i18n="sp_tag_consular">Dịch vụ lãnh sự</span></span></div>
+      </div>
+      <div class="grid" id="tr-grid"></div>
+    </div>
     <div id="tr-requests" class="hidden"><div class="feed" id="tr-req-list"></div></div>
   </main>
   <button class="fab" id="tr-fab" onclick="onTrFab()" data-i18n="fab_post">＋ Đăng</button>
@@ -1396,7 +1414,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v98-posts-thumb</span></p>
+  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v100-services</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -5940,7 +5958,9 @@ const SERVICE_TYPES = [
   { key:'Dọn dẹp',            emoji:'🧹', vi:'Dọn dẹp',             en:'Cleaning',           sv:'Städning' },
   { key:'Dạy lái xe',         emoji:'🚘', vi:'Dạy lái xe',          en:'Driving lessons',    sv:'Körlektioner' },
   { key:'Cho thuê / Bán nhà', emoji:'🏠', vi:'Cho thuê / Bán nhà',  en:'Housing rent/sale',  sv:'Uthyrning / Försäljning' },
-  { key:'Làm giấy tờ',        emoji:'📄', vi:'Làm giấy tờ',         en:'Paperwork help',     sv:'Dokumenthjälp' }
+  { key:'Làm giấy tờ',        emoji:'📄', vi:'Làm giấy tờ',         en:'Paperwork help',     sv:'Dokumenthjälp' },
+  { key:'Đưa đón sân bay',    emoji:'🚕', vi:'Đưa đón sân bay',     en:'Airport pickup',     sv:'Flygplatshämtning' },
+  { key:'Dịch vụ lãnh sự',    emoji:'🛂', vi:'Dịch vụ lãnh sự',     en:'Consular services',  sv:'Konsulära tjänster' }
 ];
 function svcInfo(key){ return SERVICE_TYPES.find(x=>x.key===key); }
 function svcLabel(key){ if(key==='Tất cả') return t('cat_all'); const s=svcInfo(key); return s ? (s[LANG]||s.en||s.vi) : key; }
@@ -6598,6 +6618,24 @@ Object.assign(I18N.th, {
   cta_build_btn:'💚 สมัครสมาชิกเลย',
   hp_head:'กำลังเกิดขึ้นในชุมชน', hp_more:'สมัครเพื่ออ่านทั้งหมด →'
 });
+Object.assign(I18N.vi, {
+  sp_new:'MỚI',
+  sp_pickup_t:'Đưa đón sân bay — đón người thân từ quê nhà',
+  sp_pickup_d:'Người thân từ quê bay sang Thụy Điển, nhưng bạn bận việc, chưa rành đường, hay trời tuyết lạnh không ra sân bay đón được? Nhờ người đón cũng khó và ngại. QiQa kết nối bạn với người đón tin cậy — đón tận cửa đến, đúng giờ, xe rộng rãi, nói tiếng mình, đưa về tận nhà an toàn. Để người thân vừa đặt chân đến nơi xa lạ đã thấy ngay một gương mặt thân quen.',
+  sp_tag_pickup:'Đưa đón sân bay', sp_tag_consular:'Dịch vụ lãnh sự'
+});
+Object.assign(I18N.en, {
+  sp_new:'NEW',
+  sp_pickup_t:'Airport pickup — welcome your family from home',
+  sp_pickup_d:'A loved one flying in from home, but you’re busy, unsure of the way, or the winter roads are tough? Finding someone to pick them up is hard. QiQa connects you with a trusted driver — meeting them right at arrivals, on time, a comfortable car, speaking your language, and bringing them safely home. So your family sees a familiar face the moment they land in a new country.',
+  sp_tag_pickup:'Airport pickup', sp_tag_consular:'Consular services'
+});
+Object.assign(I18N.sv, {
+  sp_new:'NYTT',
+  sp_pickup_t:'Flygplatshämtning — möt din familj hemifrån',
+  sp_pickup_d:'En anhörig som flyger hit hemifrån, men du är upptagen, osäker på vägen eller vintervägarna är svåra? Att hitta någon som hämtar är krångligt. QiQa kopplar dig till en pålitlig förare — möter dem vid ankomsten, i tid, en bekväm bil, talar ditt språk och kör dem tryggt hem. Så att din familj möts av ett bekant ansikte direkt när de landar i ett nytt land.',
+  sp_tag_pickup:'Flygplatshämtning', sp_tag_consular:'Konsulära tjänster'
+});
 
 function updateHomeFlag(){
   const f = document.getElementById('homeFlag');
@@ -6663,25 +6701,31 @@ function renderLandingPosts(){
   const el = document.getElementById('homePosts'); if (!el) return;
   let items = [];
   try { items = buildFeedItems(); } catch(e){ items = []; }
-  items = items.filter(it => (it.who && it.who.trim()) || (it.text && it.text.trim())).slice(0, 6);
+  items = items.filter(it => (it.who && it.who.trim()) || (it.text && it.text.trim()));
   if (!items.length) { el.innerHTML=''; return; }
+  // ưu tiên đa dạng loại để câu mồi không lặp
+  const seen={}, head=[], tail=[];
+  items.forEach(it=>{ if(!seen[it.type]){seen[it.type]=1; head.push(it);} else tail.push(it); });
+  items = head.concat(tail).slice(0,6);
   const ICON = { place:'📍', market:'🛍️', outing:'🧸', event:'📡', share:'🔗', treq:'🌐' };
   const TAB  = { place:'places', market:'market', outing:'outings', event:'fun', share:'share', treq:'translate' };
   const LBL  = { place:'tab_places', market:'tab_market', outing:'tab_outings', event:'tab_fun', share:'tab_share', treq:'tab_translate' };
+  const HOOK = { place:'tz_places', market:'tz_market', outing:'tz_outings', event:'tz_fun', share:'tz_share', treq:'tz_translate' };
+  const cut = (s,n)=>{ s=(s||'').replace(/\s+/g,' ').trim(); return s.length>n ? s.slice(0,n)+'…' : s; };
   el.innerHTML = `<div class="hp-head">${t('hp_head')}</div>` + items.map(it => {
     const w = (it.who||'').replace(/\s+/g,' ').trim();
-    const label = t(LBL[it.type]||'') || '';
     const stripCat = (it.text||'').replace(/^\[[^\]]*\]\s*/,'').replace(/\s+/g,' ').trim();
-    let main = w || stripCat;
-    if (main.length>60) main = main.slice(0,60)+'…';
-    const sub = w ? label : '';
+    const main = cut(w || stripCat || t(LBL[it.type]||''), 55);
+    const hook = cut(t(HOOK[it.type]||'')||'', 80);
+    const cat  = t(LBL[it.type]||'')||'';
     const img = (it.anh && /^(https?:|data:image\/)/i.test(it.anh)) ? it.anh : (it.thumb||'');
     return `
     <div class="hp-card" onclick="openTeaser('${TAB[it.type]||'home'}')">
       ${img ? `<div class="hp-thumb" style="background-image:url('${img}')"></div>` : `<span class="hp-ic">${ICON[it.type]||'📝'}</span>`}
       <div class="hp-body">
         <div class="hp-txt">${escapeHtml(main)}</div>
-        ${sub?`<div class="hp-meta">${escapeHtml(sub)}</div>`:''}
+        ${hook?`<div class="hp-hook">${escapeHtml(hook)}</div>`:''}
+        ${cat?`<div class="hp-meta">${escapeHtml(cat)}</div>`:''}
       </div>
       <span class="hp-lock">🔒</span>
     </div>`;
