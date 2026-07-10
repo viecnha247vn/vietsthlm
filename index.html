@@ -84,6 +84,8 @@
   /* Đã đăng nhập: ẩn phần mồi, hiện nội dung đầy đủ */
   body:not(.home-mode) #view-home .home-top,
   body:not(.home-mode) #view-home .home-hero,
+  body:not(.home-mode) #view-home .home-cta,
+  body:not(.home-mode) #view-home #homePosts,
   body:not(.home-mode) #view-home #homeTeasers { display: none !important; }
   .tab { display: flex; align-items: center; gap: 11px; cursor: pointer; font-weight: 700;
     color: var(--muted); white-space: nowrap; user-select: none;
@@ -586,6 +588,21 @@
   .tz-feat .tz-ic{font-size:30px;}
   .tz-feat .tz-ttl{font-size:19px;}
   .tz-feat .tz-snip{-webkit-line-clamp:2;font-size:13.5px;}
+  .home-cta,.home-posts{max-width:900px;margin:8px auto 0;}
+  .home-cta-in{border:1px solid var(--accent,#c65b3a);background:linear-gradient(135deg,color-mix(in srgb,var(--accent,#c65b3a) 14%,var(--surface)),var(--surface));border-radius:18px;padding:22px 18px;text-align:center;margin:6px 4px;}
+  .home-cta-ttl{font-size:18px;font-weight:800;color:var(--ink);margin-bottom:8px;line-height:1.35;}
+  .home-cta-sub{font-size:14px;color:var(--muted);line-height:1.55;max-width:640px;margin:0 auto 15px;}
+  .home-cta-btn{border:none;background:var(--accent,#c65b3a);color:#fff;font-weight:800;font-size:15px;border-radius:999px;padding:12px 24px;cursor:pointer;}
+  .home-cta-btn:active{transform:scale(.97);}
+  .hp-head{font-size:15px;font-weight:800;color:var(--ink);margin:20px 4px 10px;}
+  .hp-card{display:flex;align-items:center;gap:11px;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:12px 13px;margin:0 4px 8px;cursor:pointer;position:relative;}
+  .hp-card:active{transform:scale(.99);}
+  .hp-ic{font-size:20px;flex:none;}
+  .hp-body{flex:1;min-width:0;}
+  .hp-txt{font-size:13.5px;color:var(--ink);line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
+  .hp-meta{font-size:11.5px;color:var(--muted);margin-top:3px;}
+  .hp-lock{font-size:13px;opacity:.45;flex:none;}
+  .hp-more{text-align:center;font-size:13.5px;font-weight:700;color:var(--accent,#c65b3a);padding:10px;cursor:pointer;}
   .swish-box { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 16px; margin-top: 8px;
     display: flex; flex-direction: column; align-items: center; text-align: center; }
   .swish-title { font-weight: 700; font-size: 14px; margin-bottom: 12px; color: var(--ink); }
@@ -1033,6 +1050,16 @@
   </section>
   <div class="home-teasers" id="homeTeasers"></div>
 
+  <section class="home-cta">
+    <div class="home-cta-in">
+      <div class="home-cta-ttl" data-i18n="cta_build_t">Chung tay xây dựng cộng đồng vững mạnh nơi xứ người</div>
+      <div class="home-cta-sub" data-i18n="cta_build_d">Mỗi thành viên là một viên gạch. Chỉ với 49kr/năm — chưa bằng một ly cà phê — bạn góp phần giữ cho QiQa mãi là nơi người xa quê tìm được việc làm, bạn bè, chỗ dựa và một tiếng nói chung. Đăng ký hôm nay, để ngày mai cộng đồng của chúng ta lớn mạnh hơn.</div>
+      <button class="home-cta-btn" onclick="openMemberGate('home')" data-i18n="cta_build_btn">💚 Đăng ký thành viên ngay</button>
+    </div>
+  </section>
+
+  <div class="home-posts" id="homePosts"></div>
+
   <section class="home-split">
     <div class="hs-left">
       <h1><span data-i18n="home_title_1">Người Việt mình ở Thụy Điển —</span><br><span class="em" data-i18n="home_title_2">giờ có một mái nhà chung</span></h1>
@@ -1346,7 +1373,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v90-footer-clean</span></p>
+  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v91-landing-posts</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -5835,6 +5862,7 @@ function applyLang() {
   if (typeof renderShop==='function' && !document.getElementById('view-services').classList.contains('hidden')) renderShop();
   if (typeof renderHomeFeed==='function') renderHomeFeed();
   if (typeof renderTeasers==='function') renderTeasers();
+  if (typeof renderLandingPosts==='function') renderLandingPosts();
   if (typeof updateHomeFlag==='function') updateHomeFlag();
   if (typeof initCitySelector==='function') initCitySelector();
 }
@@ -6148,7 +6176,7 @@ function switchTab(tab) {
   if (tab==='member') renderMemberPage();
   if (tab==='services') renderShop();
   if (tab==='jobs') renderJobs();
-  if (tab==='home') { renderTeasers(); updateHomeFlag(); if (currentUser) { homeShown = 20; renderHomeFeed(); } }
+  if (tab==='home') { renderTeasers(); renderLandingPosts(); updateHomeFlag(); if (currentUser) { homeShown = 20; renderHomeFeed(); } }
   document.body.classList.toggle('home-mode', tab==='home' && !currentUser);
   window.scrollTo(0,0);
 }
@@ -6463,6 +6491,90 @@ Object.assign(I18N.th, {
   gate_paid:'ฉันเข้าร่วมแล้ว', gate_done_t:'ขอบคุณ 💚',
   gate_done_d:'สถานะสมาชิกจะเปิดใช้งานเร็ว ๆ นี้ คุณสำรวจต่อได้เลย'
 });
+Object.assign(I18N.vi, {
+  cta_build_t:'Chung tay xây dựng cộng đồng vững mạnh nơi xứ người',
+  cta_build_d:'Mỗi thành viên là một viên gạch. Chỉ với 49kr/năm — chưa bằng một ly cà phê — bạn góp phần giữ cho QiQa mãi là nơi người xa quê tìm được việc làm, bạn bè, chỗ dựa và một tiếng nói chung. Đăng ký hôm nay, để ngày mai cộng đồng của chúng ta lớn mạnh hơn.',
+  cta_build_btn:'💚 Đăng ký thành viên ngay',
+  hp_head:'Đang diễn ra trong cộng đồng', hp_more:'Đăng ký để đọc tất cả →'
+});
+Object.assign(I18N.en, {
+  cta_build_t:'Let’s build a strong community, far from home',
+  cta_build_d:'Every member is a building block. For just 49kr/year — less than a cup of coffee — you help keep QiQa a place where people far from home find work, friends, support and a shared voice. Join today, so tomorrow our community grows stronger.',
+  cta_build_btn:'💚 Become a member now',
+  hp_head:'Happening in the community', hp_more:'Join to read everything →'
+});
+Object.assign(I18N.sv, {
+  cta_build_t:'Låt oss bygga en stark gemenskap, långt hemifrån',
+  cta_build_d:'Varje medlem är en byggsten. För bara 49 kr/år — mindre än en kopp kaffe — hjälper du QiQa att förbli en plats där de som är långt hemifrån hittar jobb, vänner, stöd och en gemensam röst. Gå med idag, så växer vår gemenskap sig starkare imorgon.',
+  cta_build_btn:'💚 Bli medlem nu',
+  hp_head:'Just nu i gemenskapen', hp_more:'Gå med för att läsa allt →'
+});
+Object.assign(I18N.zh, {
+  cta_build_t:'携手共建异乡的坚强社区',
+  cta_build_d:'每一位会员都是一块砖。每年仅需49克朗——不到一杯咖啡的钱——你就能让 QiQa 一直是远离家乡的人找到工作、朋友、依靠和共同声音的地方。今天就加入，让我们的社区明天更强大。',
+  cta_build_btn:'💚 立即成为会员',
+  hp_head:'社区正在发生', hp_more:'加入以阅读全部 →'
+});
+Object.assign(I18N.uk, {
+  cta_build_t:'Разом збудуймо міцну громаду далеко від дому',
+  cta_build_d:'Кожен учасник — це цеглинка. Лише за 49 крон/рік — менше, ніж чашка кави — ви допомагаєте QiQa залишатися місцем, де ті, хто далеко від дому, знаходять роботу, друзів, підтримку й спільний голос. Приєднуйтесь сьогодні, щоб завтра наша громада стала сильнішою.',
+  cta_build_btn:'💚 Стати учасником зараз',
+  hp_head:'Зараз у громаді', hp_more:'Приєднайтесь, щоб читати все →'
+});
+Object.assign(I18N.so, {
+  cta_build_t:'Aan wada dhisno bulsho xoog leh oo ka fog guriga',
+  cta_build_d:'Xubin kastaa waa dhagax dhisme. Kaliya 49 kr/sannad — oo ka yar koob kafee — waxaad ka caawinaysaa QiQa inay ahaato meel dadka ka fog guriga ay ka helaan shaqo, saaxiibo, taageero iyo cod wadaag ah. Ku biir maanta, si bulshadeennu berri u xoogaysato.',
+  cta_build_btn:'💚 Hadda noqo xubin',
+  hp_head:'Waxa ka socda bulshada', hp_more:'Ku biir si aad wax walba u akhrido →'
+});
+Object.assign(I18N.tr, {
+  cta_build_t:'Evinden uzakta güçlü bir topluluk kuralım',
+  cta_build_d:'Her üye bir yapı taşıdır. Yılda sadece 49 kr — bir fincan kahveden bile az — ile QiQa’nın, evinden uzaktakilerin iş, arkadaş, destek ve ortak bir ses bulduğu bir yer olarak kalmasına yardım edersin. Bugün katıl, yarın topluluğumuz daha da güçlensin.',
+  cta_build_btn:'💚 Hemen üye ol',
+  hp_head:'Toplulukta olup bitenler', hp_more:'Hepsini okumak için katıl →'
+});
+Object.assign(I18N.fa, {
+  cta_build_t:'بیایید دور از وطن، جامعه‌ای نیرومند بسازیم',
+  cta_build_d:'هر عضو یک آجر است. تنها با ۴۹ کرون در سال — کمتر از یک فنجان قهوه — کمک می‌کنید QiQa جایی بماند که دورافتادگان از وطن، کار، دوست، پشتیبانی و صدایی مشترک بیابند. امروز عضو شوید تا فردا جامعهٔ ما قوی‌تر شود.',
+  cta_build_btn:'💚 همین حالا عضو شوید',
+  hp_head:'در حال رخ‌دادن در جامعه', hp_more:'برای خواندن همه عضو شوید →'
+});
+Object.assign(I18N.ar, {
+  cta_build_t:'لنبنِ معاً مجتمعاً قوياً بعيداً عن الوطن',
+  cta_build_d:'كل عضو هو لبنة. بـ 49 كرونة/سنة فقط — أقل من فنجان قهوة — تساعد QiQa على أن تبقى مكاناً يجد فيه المغتربون عملاً وأصدقاء ودعماً وصوتاً مشتركاً. انضم اليوم ليكبر مجتمعنا غداً.',
+  cta_build_btn:'💚 كن عضواً الآن',
+  hp_head:'يحدث الآن في المجتمع', hp_more:'انضم لقراءة كل شيء →'
+});
+Object.assign(I18N.pl, {
+  cta_build_t:'Zbudujmy razem silną społeczność z dala od domu',
+  cta_build_d:'Każdy członek to cegiełka. Za jedyne 49 kr/rok — mniej niż kawa — pomagasz, by QiQa pozostało miejscem, gdzie osoby z dala od domu znajdują pracę, przyjaciół, wsparcie i wspólny głos. Dołącz dziś, by jutro nasza społeczność była silniejsza.',
+  cta_build_btn:'💚 Zostań członkiem teraz',
+  hp_head:'Dzieje się w społeczności', hp_more:'Dołącz, aby czytać wszystko →'
+});
+Object.assign(I18N.fi, {
+  cta_build_t:'Rakennetaan yhdessä vahva yhteisö kaukana kotoa',
+  cta_build_d:'Jokainen jäsen on rakennuspalikka. Vain 49 kr/vuosi — vähemmän kuin kahvikupillinen — auttaa pitämään QiQan paikkana, josta kaukana kotoa olevat löytävät työtä, ystäviä, tukea ja yhteisen äänen. Liity tänään, niin yhteisömme kasvaa huomenna vahvemmaksi.',
+  cta_build_btn:'💚 Liity jäseneksi nyt',
+  hp_head:'Juuri nyt yhteisössä', hp_more:'Liity lukeaksesi kaiken →'
+});
+Object.assign(I18N.ko, {
+  cta_build_t:'고향을 떠나 함께 든든한 공동체를 만들어요',
+  cta_build_d:'회원 한 명 한 명이 벽돌입니다. 연 49kr — 커피 한 잔 값도 안 되는 금액으로 — QiQa가 고향을 떠난 이들이 일자리, 친구, 의지처, 그리고 하나의 목소리를 찾는 곳으로 남도록 도와주세요. 오늘 가입해 내일 더 큰 공동체를 만들어요.',
+  cta_build_btn:'💚 지금 회원 가입',
+  hp_head:'커뮤니티에서 지금', hp_more:'가입하고 전체 보기 →'
+});
+Object.assign(I18N.tl, {
+  cta_build_t:'Sama-samang magtayo ng matatag na komunidad, malayo sa bayan',
+  cta_build_d:'Bawat miyembro ay isang tisa. Sa 49 kr/taon lang — mas mura pa sa isang tasa ng kape — natutulungan mong panatilihin ang QiQa na lugar kung saan nakakahanap ng trabaho, kaibigan, suporta at iisang tinig ang mga malayo sa bayan. Sumali ngayon, para mas lumakas ang komunidad natin bukas.',
+  cta_build_btn:'💚 Maging miyembro na',
+  hp_head:'Nangyayari sa komunidad', hp_more:'Sumali para basahin lahat →'
+});
+Object.assign(I18N.th, {
+  cta_build_t:'มาร่วมสร้างชุมชนที่เข้มแข็งไกลบ้านด้วยกัน',
+  cta_build_d:'สมาชิกทุกคนคืออิฐก้อนหนึ่ง เพียง 49 kr/ปี — น้อยกว่ากาแฟหนึ่งแก้ว — คุณก็ช่วยให้ QiQa เป็นที่ที่คนไกลบ้านได้พบงาน เพื่อน ที่พึ่ง และเสียงร่วมกัน สมัครวันนี้ เพื่อพรุ่งนี้ชุมชนของเราจะเข้มแข็งยิ่งขึ้น',
+  cta_build_btn:'💚 สมัครสมาชิกเลย',
+  hp_head:'กำลังเกิดขึ้นในชุมชน', hp_more:'สมัครเพื่ออ่านทั้งหมด →'
+});
 
 function updateHomeFlag(){
   const f = document.getElementById('homeFlag');
@@ -6522,6 +6634,26 @@ function memberGateDone(){
       <p class="sub" style="margin-top:10px">${t('gate_done_d')}</p>
       <button class="submit" style="margin-top:18px" onclick="closeModal()">${t('c_ok')||'OK'}</button>
     </div>`;
+}
+
+function renderLandingPosts(){
+  const el = document.getElementById('homePosts'); if (!el) return;
+  let items = [];
+  try { items = buildFeedItems(); } catch(e){ items = []; }
+  items = items.filter(it => it.text && it.text.trim()).slice(0, 6);
+  if (!items.length) { el.innerHTML=''; return; }
+  const ICON = { place:'📍', market:'🛍️', outing:'🧸', event:'📡', share:'🔗', treq:'🌐' };
+  const TABMAP = { place:'places', market:'market', outing:'outings', event:'fun', share:'share', treq:'translate' };
+  const snip = s => { s=(s||'').replace(/\s+/g,' ').trim(); return s.length>95 ? s.slice(0,95)+'…' : s; };
+  el.innerHTML = `<div class="hp-head">${t('hp_head')}</div>` + items.map(it => `
+    <div class="hp-card" onclick="openTeaser('${TABMAP[it.type]||'home'}')">
+      <span class="hp-ic">${ICON[it.type]||'📝'}</span>
+      <div class="hp-body">
+        <div class="hp-txt">${escapeHtml(snip(it.text))}</div>
+        ${it.who?`<div class="hp-meta">${escapeHtml(it.who)}</div>`:''}
+      </div>
+      <span class="hp-lock">🔒</span>
+    </div>`).join('') + `<div class="hp-more" onclick="openMemberGate('home')">${t('hp_more')}</div>`;
 }
 
 // ===== ĐỊA ĐIỂM CÓ CHECK-IN (ưu đãi voucher) =====
@@ -6927,17 +7059,7 @@ function feedTimeAgo(ms){
 }
 let homeShown = 20;  // số tin đang hiện trên trang chủ
 function homeShowMore(){ homeShown += 20; renderHomeFeed(); }
-function renderHomeFeed() {
-  const box = document.getElementById('home-feed');
-  if (!box) return;
-  const BADGE = {
-    place:    { tab:'places',   label:'tab_places',      color:'#b07d12', bg:'var(--tint-amber)' },
-    market:   { tab:'market',   label:'feed_market',     color:'#c8442e', bg:'var(--tint-amber)' },
-    outing:   { tab:'outings',  label:'feed_outing',     color:'#2f8f6b', bg:'var(--tint-green)' },
-    event:    { tab:'fun',      label:'feed_event',      color:'#8b5cf6', bg:'#f3e9fb' },
-    share:    { tab:'share',    label:'feed_share',      color:'#2f8f6b', bg:'var(--tint-green)' },
-    treq:     { tab:'translate',label:'feed_treq',       color:'#3b7fa6', bg:'var(--tint-blue)' },
-  };
+function buildFeedItems() {
   const items = [];
   // Địa điểm / Check-in (địa điểm có ưu đãi hiện ở mọi tỉnh; địa điểm thường theo tỉnh)
   PLACES.filter(p => (p.checkin || CHECKIN_OFFERS[String(p.id)]) || cityMatch(p.tp)).forEach(p=> items.push({
@@ -6964,8 +7086,22 @@ function renderHomeFeed() {
   TR_REQUESTS.filter(r=>cityMatch(r.tp)).forEach(r=> items.push({
     type:'treq', id:r.id, ms:feedTimeMs(r), who:r.who||'', anh:'',
     text:(r.field?('['+r.field+'] '):'') + (r.note||''), thumb:'' }));
-
   items.sort((a,b)=> b.ms - a.ms);
+  return items;
+}
+
+function renderHomeFeed() {
+  const box = document.getElementById('home-feed');
+  if (!box) return;
+  const BADGE = {
+    place:    { tab:'places',   label:'tab_places',      color:'#b07d12', bg:'var(--tint-amber)' },
+    market:   { tab:'market',   label:'feed_market',     color:'#c8442e', bg:'var(--tint-amber)' },
+    outing:   { tab:'outings',  label:'feed_outing',     color:'#2f8f6b', bg:'var(--tint-green)' },
+    event:    { tab:'fun',      label:'feed_event',      color:'#8b5cf6', bg:'#f3e9fb' },
+    share:    { tab:'share',    label:'feed_share',      color:'#2f8f6b', bg:'var(--tint-green)' },
+    treq:     { tab:'translate',label:'feed_treq',       color:'#3b7fa6', bg:'var(--tint-blue)' },
+  };
+  const items = buildFeedItems();
   if (!items.length) { box.innerHTML = '<div class="feed-empty">'+t('feed_empty')+'</div>'; return; }
   const top = items.slice(0, homeShown);
   const cards = top.map(it => {
@@ -9011,7 +9147,7 @@ async function loadData() {
     }
     dataLoaded = true;
     initCitySelector();
-    renderPlaces(); renderFeed(); renderMarket(); renderJobs(); renderTranslate(); renderEvents(); renderShare(); renderArticles(); renderHomeFeed();
+    renderPlaces(); renderFeed(); renderMarket(); renderJobs(); renderTranslate(); renderEvents(); renderShare(); renderArticles(); renderHomeFeed(); renderLandingPosts();
     if (!document.getElementById('view-friends').classList.contains('hidden')) renderFriends();
   } catch (e) {
     // nếu lỗi mạng thì giữ dữ liệu mẫu sẵn có, app vẫn xem được
