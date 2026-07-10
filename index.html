@@ -83,6 +83,7 @@
   body.home-mode #view-home > main.wrap { display: none !important; }
   /* Đã đăng nhập: ẩn phần mồi, hiện nội dung đầy đủ */
   body:not(.home-mode) #view-home .home-top,
+  body:not(.home-mode) #view-home .home-welcome,
   body:not(.home-mode) #view-home .home-hero,
   body:not(.home-mode) #view-home .home-cta,
   body:not(.home-mode) #view-home #homePosts,
@@ -603,6 +604,27 @@
   .hp-meta{font-size:11.5px;color:var(--muted);margin-top:3px;}
   .hp-lock{font-size:13px;opacity:.45;flex:none;}
   .hp-more{text-align:center;font-size:13.5px;font-weight:700;color:var(--accent,#c65b3a);padding:10px;cursor:pointer;}
+  /* Câu chào mừng đầu trang */
+  .home-welcome{max-width:760px;margin:8px auto 0;padding:10px 16px 0;text-align:center;}
+  .home-welcome p{margin:0 0 8px;line-height:1.55;}
+  .hw-sv{font-size:14.5px;color:var(--ink);font-weight:600;}
+  .hw-en{font-size:13.5px;color:var(--muted);}
+  /* Hiệu ứng "bay bay" khi chạm/di chuột */
+  @keyframes floaty { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+  .ht-reg,.ht-login,.ht-icon,.ht-flag{transition:transform .18s ease, box-shadow .18s ease;}
+  .ht-reg:hover,.ht-login:hover,.ht-icon:hover,.ht-flag:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(0,0,0,.16);}
+  .ht-reg:active,.ht-login:active,.ht-icon:active,.ht-flag:active{transform:translateY(-1px) scale(.97);}
+  .tz-card{transition:transform .18s ease, box-shadow .18s ease;}
+  .tz-card:hover{transform:translateY(-5px);box-shadow:0 12px 24px rgba(0,0,0,.18);}
+  .tz-card:active{transform:translateY(-2px) scale(.98);}
+  .tz-feat{animation:floaty 3s ease-in-out infinite;}
+  .tz-feat:hover{animation-play-state:paused;}
+  .hp-card{transition:transform .18s ease, box-shadow .18s ease;}
+  .hp-card:hover{transform:translateY(-4px);box-shadow:0 10px 22px rgba(0,0,0,.15);}
+  .hp-card:active{transform:translateY(-1px) scale(.99);}
+  .home-cta-btn{animation:floaty 2.8s ease-in-out infinite;transition:transform .18s ease, box-shadow .18s ease;}
+  .home-cta-btn:hover{animation-play-state:paused;transform:translateY(-4px);box-shadow:0 12px 28px rgba(198,91,58,.42);}
+  .home-cta-btn:active{transform:translateY(-1px) scale(.97);}
   .swish-box { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 16px; margin-top: 8px;
     display: flex; flex-direction: column; align-items: center; text-align: center; }
   .swish-title { font-weight: 700; font-size: 14px; margin-bottom: 12px; color: var(--ink); }
@@ -1044,6 +1066,10 @@
       <button class="ht-login" onclick="onAccHeaderClick()" data-i18n="login">Đăng nhập</button>
     </div>
   </div>
+  <section class="home-welcome">
+    <p class="hw-sv">Välkommen! QiQa är en gemenskapsplattform som förenar människor långt hemifrån — så att du kan känna dig trygg och hemma i ditt nya hemland. Hitta restauranger, vänner, hjälp och stöd på ditt eget språk.</p>
+    <p class="hw-en">Welcome! QiQa is a community platform connecting people far from home — so you can feel confident and at home in your new country. Find places, friends, help and support in your own language.</p>
+  </section>
   <section class="home-hero">
     <h1><span data-i18n="ht_title">Một mái nhà chung</span> <span class="em" data-i18n="ht_title2">cho người xa quê</span></h1>
     <p data-i18n="ht_sub">Địa điểm, bạn bè, việc làm, dịch vụ và sự giúp đỡ — tất cả bằng ngôn ngữ của bạn. Chạm vào một mục để xem thử.</p>
@@ -1373,7 +1399,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v91-landing-posts</span></p>
+  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v92-welcome-float</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
