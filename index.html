@@ -945,6 +945,10 @@
   body[data-theme="coral"]{ --paper:#160c0a;--paper-2:#241512;--surface:#221310;--red:#ff7a6b;--jade:#ff7a6b;--gold:#ffa898;--line:#42221c;--muted:#b8968e;--btn-a:#ffc8bf;--btn-b:#ff8574;--btn-c:#e85a48;--btn-text:#3a0e08; }
   body[data-theme="forest"]{ --paper:#0a140c;--paper-2:#132015;--surface:#111e13;--red:#6fae5a;--jade:#6fae5a;--gold:#9ad080;--line:#20361f;--muted:#94aa8c;--btn-a:#c4e8b0;--btn-b:#7fbf62;--btn-c:#5a9440;--btn-text:#0a2510; }
   body[data-theme="sky"]{ --paper:#eef4fb;--paper-2:#e1ebf6;--surface:#ffffff;--ink:#12212e;--text-2:#334759;--muted:#647a8c;--link:#2f7fc9;--red:#2f7fc9;--jade:#2f7fc9;--gold:#2f9fd0;--gold-text:#1a6ba0;--alert:#c8442e;--line:#d3e1ee;--tint-green:#e6f2ed;--tint-blue:#e1ecf7;--tint-amber:#eef4fb;--tint-rose:#eef4fb;--tint-green-bd:#bcd9cf;--tint-amber-bd:#c6dcef;--tint-rose-bd:#bad3eb;--header-bg:rgba(238,244,251,.92);--splash-1:#eef4fb;--splash-2:#d7e5f3;--btn-a:#a8d0f0;--btn-b:#4a9ee0;--btn-c:#2f7fc9;--btn-text:#062038; }
+  body[data-theme="mint"]{ --paper:#eefaf5;--paper-2:#e1f4ec;--surface:#ffffff;--ink:#0f2a22;--text-2:#2f4a42;--muted:#5f7d73;--link:#1f9e80;--red:#1f9e80;--jade:#1f9e80;--gold:#2fc0a0;--gold-text:#178064;--alert:#c8442e;--line:#d0e8de;--tint-green:#e2f4ec;--tint-blue:#e6f2ed;--tint-amber:#eef8f3;--tint-rose:#eef8f3;--tint-green-bd:#bce0d2;--tint-amber-bd:#c8e6da;--tint-rose-bd:#c0e2d4;--header-bg:rgba(238,250,245,.92);--splash-1:#eefaf5;--splash-2:#d6efe6;--btn-a:#a8e6d2;--btn-b:#3fc4a0;--btn-c:#1f9e80;--btn-text:#04261e; }
+  body[data-theme="wine"]{ --paper:#160a0e;--paper-2:#241218;--surface:#221016;--red:#c85a76;--jade:#c85a76;--gold:#e88aa0;--line:#42202c;--muted:#b8909c;--btn-a:#f0b8c8;--btn-b:#cc5a78;--btn-c:#a83a5a;--btn-text:#3a0a18; }
+  body[data-theme="bronze"]{ --paper:#160f09;--paper-2:#241a10;--surface:#22180d;--red:#c9793d;--jade:#c9793d;--gold:#e8a468;--line:#3e2a18;--muted:#b89a80;--btn-a:#f0c8a0;--btn-b:#d4884a;--btn-c:#b0632a;--btn-text:#3a1e08; }
+  body[data-theme="lavender"]{ --paper:#f4f0fb;--paper-2:#ece4f6;--surface:#ffffff;--ink:#221a2e;--text-2:#443a54;--muted:#736a84;--link:#7a5fc0;--red:#7a5fc0;--jade:#7a5fc0;--gold:#9a7fd8;--gold-text:#5f47a0;--alert:#c8442e;--line:#e0d4ee;--tint-green:#e6f2ed;--tint-blue:#eae4f6;--tint-amber:#f2eefb;--tint-rose:#f4eefb;--tint-green-bd:#bcd9cf;--tint-amber-bd:#ddd0ef;--tint-rose-bd:#d8c8ec;--header-bg:rgba(244,240,251,.92);--splash-1:#f4f0fb;--splash-2:#e6ddf4;--btn-a:#d0bcf0;--btn-b:#9a7fd8;--btn-c:#7a5fc0;--btn-text:#241238; }
   /* ===== Màn hình chào mừng lần đầu ===== */
   .welcome-ov{ position:fixed; inset:0; z-index:200; background:#fbf7f0; display:flex; align-items:flex-start; justify-content:center; overflow-y:auto; padding:26px 16px; }
   .welcome-card{ width:100%; max-width:440px; background:#fff; border:1px solid #e8ddc9; border-radius:22px; padding:24px 22px; box-shadow:0 20px 60px rgba(60,40,10,.14); text-align:center; margin:auto; }
@@ -963,8 +967,8 @@
   .welcome-start{ width:100%; margin-top:22px; padding:14px; border:none; border-radius:14px; background:linear-gradient(177deg,#ffe08a,#f2ba44 42%,#d98f1e); color:#3a2600; font-weight:800; font-size:16px; cursor:pointer; font-family:inherit; box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 5px 16px rgba(224,137,30,.35); }
   .welcome-start:hover{ filter:brightness(1.04); }
   /* Chọn tông màu trên splash */
-  .splash-themes{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:20px; }
-  .sp-sw{ border:2px solid var(--line); border-radius:10px; padding:0; cursor:pointer; background:none; width:40px; height:40px; overflow:hidden; transition:transform .1s, border-color .15s; }
+  .splash-themes{ display:grid; grid-template-columns:repeat(10,1fr); gap:7px; max-width:470px; margin:0 auto 20px; }
+  .sp-sw{ border:2px solid var(--line); border-radius:10px; padding:0; cursor:pointer; background:none; width:100%; aspect-ratio:1/1; overflow:hidden; transition:transform .1s, border-color .15s; }
   .sp-sw:hover{ transform:translateY(-2px); }
   .sp-sw.on{ border-color:var(--red); box-shadow:0 0 0 2px rgba(224,137,30,.3); }
   .sp-sw-c{ display:block; width:100%; height:100%; box-shadow:inset 0 0 0 1px rgba(0,0,0,.08); }
@@ -1405,7 +1409,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v106-themes</span></p>
+  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v107-20x20</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -1435,6 +1439,7 @@ const COUNTRIES = [
   { code:'er', fl:'🇪🇷', name:'ኤርትራ' },
   { code:'ba', fl:'🇧🇦', name:'Bosna' },
   { code:'ua', fl:'🇺🇦', name:'Україна' },
+  { code:'et', fl:'🇪🇹', name:'ኢትዮጵያ' },
 ];
 const GREETINGS = {
   vn: 'Chào mừng! Nơi kết nối người Việt xa quê tại Thụy Điển — để bạn tự tin và ấm lòng nơi quê hương thứ hai.',
@@ -1445,6 +1450,7 @@ const GREETINGS = {
   so: 'Soo dhawoow! Meesha bulshadaada lagu xiro Iswiidhan.',
   tr: 'Hoş geldiniz! İsveçte topluluğunuzu birbirine bağlayan yer.',
   ua: 'Ласкаво просимо! Місце, що обєднує вашу спільноту у Швеції.',
+  et: 'እንኳን ደህና መጡ! QiQa በስዊድን ውስጥ ማህበረሰብዎን የሚያገናኝ ቦታ ነው።',
 };
 let activeCountry = null;
 try { activeCountry = JSON.parse(localStorage.getItem('weshare_country')||'null'); } catch(e){}
@@ -9522,6 +9528,10 @@ const APP_THEMES=[
  {id:'coral',name:'San hô',c1:'#160c0a',c2:'#ff7a6b'},
  {id:'forest',name:'Rừng thẳm',c1:'#0a140c',c2:'#6fae5a'},
  {id:'sky',name:'Thiên thanh',c1:'#eef4fb',c2:'#2f7fc9'},
+ {id:'mint',name:'Bạc hà',c1:'#eefaf5',c2:'#2fa887'},
+ {id:'wine',name:'Rượu vang',c1:'#160a0e',c2:'#c85a76'},
+ {id:'bronze',name:'Đồng cổ',c1:'#160f09',c2:'#c9793d'},
+ {id:'lavender',name:'Oải hương',c1:'#f4f0fb',c2:'#8a6fd0'},
 ];
 function applyTheme(id){ document.body.dataset.theme=id; try{ localStorage.setItem('qiqa_theme',id); }catch(e){} }
 function renderSplashThemes(){
