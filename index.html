@@ -391,14 +391,19 @@
   .sp-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px auto 4px;
     max-width: 1100px; padding: 0 18px; box-sizing: border-box; }
   @media (max-width: 760px) { .sp-wrap { grid-template-columns: 1fr; } }
-  .sp-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 14px 15px; }
-  .sp-head { font-size: 13px; font-weight: 800; color: var(--ink); margin-bottom: 10px; }
-  .sp-item { display: flex; align-items: center; gap: 9px; padding: 7px 0; cursor: pointer; border-radius: 10px; transition: .12s; }
+  .sp-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 12px 13px;
+    min-width: 0; overflow: hidden; }                 /* min-width:0 = cho phép co lại, KHÔNG đẩy trang rộng ra */
+  .sp-head { font-size: 12.5px; font-weight: 800; color: var(--ink); margin-bottom: 7px; }
+  .sp-item { display: flex; align-items: center; gap: 8px; padding: 5px 0; cursor: pointer; border-radius: 10px;
+    transition: .12s; min-width: 0; }
   .sp-item:hover { background: var(--paper-2); }
-  .sp-rank { font-size: 15px; min-width: 20px; text-align: center; }
-  .sp-b { flex: 1; min-width: 0; }
-  .sp-tx { font-size: 13.5px; font-weight: 700; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .sp-meta { font-size: 11.5px; color: var(--muted); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sp-rank { font-size: 14px; min-width: 18px; text-align: center; flex: 0 0 auto; }
+  .sp-b { flex: 1 1 auto; min-width: 0; overflow: hidden; }
+  .sp-tx { font-size: 13px; font-weight: 700; color: var(--ink); overflow: hidden; text-overflow: ellipsis;
+    white-space: nowrap; max-width: 100%; }
+  .sp-meta { font-size: 11px; color: var(--muted); margin-top: 1px; overflow: hidden; text-overflow: ellipsis;
+    white-space: nowrap; max-width: 100%; }
+  .sp-item .avatar.sm { flex: 0 0 auto; }
   .sh-views { font-size: 12px; color: var(--muted); margin-top: 10px; }
   .sh-acts { display: flex; gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); }
   .sh-act { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
@@ -1542,7 +1547,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v140-fix-blackedge</span></p>
+  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v142-pwa-btn</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -7081,7 +7086,7 @@ function renderSpotlight(){
     <div class="sp-item" onclick="switchTab('share')">
       <div class="sp-rank">${['🥇','🥈','🥉'][i]}</div>
       <div class="sp-b">
-        <div class="sp-tx">${escapeHtml(cut(p.noidung || t('feed_share'), 60))}</div>
+        <div class="sp-tx">${escapeHtml(cut(p.noidung || t('feed_share'), 42))}</div>
         <div class="sp-meta">${escapeHtml(p.host||'')}${rankBadge(p.nguoi_dang)} · 👁️ ${pViews(p)} · 💖 ${pLikes(p)} · 💬 ${pCmts(p).length}</div>
       </div>
     </div>`).join('');
@@ -10194,6 +10199,7 @@ function openAccountMenu(){
       '<button class="acc-menu-item" onclick="onAccountClick()"><span>👤</span><span>'+(loggedIn?t('prof_title'):t('login'))+'</span></button>'+
       '<button class="acc-menu-item" onclick="closeModal();reopenSplash()"><span>🌐</span><span>'+t('w_lang')+'</span></button>'+
       '<button class="acc-menu-item" onclick="openThemePicker()"><span>🎨</span><span>'+t('theme_title')+'</span></button>'+
+      (isStandalone() ? '' : '<button class="acc-menu-item" onclick="closeModal();installApp()"><span>📲</span><span>'+t('pwa_add')+'</span></button>')+
     '</div></div>';
   openModalEl();
 }
@@ -10623,6 +10629,7 @@ function hidePwaBtn(){
   const b = document.getElementById('pwaBtn'); if (b) b.remove();
 }
 async function installApp(){
+  localStorage.removeItem('qiqa_pwa_hide');   // gọi từ menu → bỏ trạng thái "đã tắt"
   if (deferredPrompt) {                       // Android/Chrome: cài trực tiếp
     deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
@@ -10671,10 +10678,11 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js').catch(()=>{});
   });
 }
-// iPhone không bắn sự kiện beforeinstallprompt → tự hiện nút sau 3 giây
+// Hiện nút cài trên MỌI thiết bị chưa cài (Chrome sẽ dùng hộp thoại cài đặt,
+// iPhone/trình duyệt khác sẽ mở hướng dẫn từng bước)
 setTimeout(() => {
-  if (isIOS() && !isStandalone() && !pwaDismissed()) showInstallBtn();
-}, 3000);
+  if (!isStandalone() && !pwaDismissed()) showInstallBtn();
+}, 2500);
 
 initCitySelector();
 switchTab('home');
