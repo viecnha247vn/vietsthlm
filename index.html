@@ -307,6 +307,11 @@
   #sh-feed { display: grid; gap: 14px; }
   .sh-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 15px 16px; }
   /* 💖 thích & 💬 bình luận */
+  /* danh sách người tham gia sự kiện */
+  .jn-list { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+  .jn-row { display: flex; align-items: center; gap: 10px; padding: 7px 10px; border-radius: 11px; background: var(--paper-2); }
+  .jn-n { font-size: 14px; font-weight: 600; color: var(--ink); }
+  .going-n:hover { text-decoration: underline; }
   /* 🔮 Tử vi */
   .hr-intro { font-size: 13.5px; color: var(--text-2); margin: 4px 0 12px; text-align: center; }
   .hr-picker { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
@@ -1504,7 +1509,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v131-horo-fix</span></p>
+  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v132-event-join</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -5370,7 +5375,7 @@ const I18N = {
     au_reset_btn:'Reset password', au_need_email_pass:'Please enter your email and password.', au_need_6:'Enter all 6 digits.', au_resending:'Resending code…', au_need_email:'Please enter your email.', au_need_code_pass:'Enter the code and a new password.', au_hello:'Hello', au_min6:'Min 6 characters',
     au_need_ep:'Please enter email and password.', au_need_6:'Enter all 6 digits.',
     err_generic:'Something went wrong.',
-    evc_all:'All', evc_meetup:'Meetup', evc_camping:'Camping', evc_trip:'Day trip', evc_kids:'With kids', evc_sport:'Sports', evc_food:'Food', evc_other:'Other', of_kind:'Event type', of_title:'Create event', of_sub:'Invite other families to take the kids out together.',
+    ev_join:'Join event', ev_leave:'✓ Joined', ev_joined_n:'{n} joining', ev_joiners:'Who\'s joining', ev_no_join:'No one yet. Be the first!', evc_all:'All', evc_meetup:'Meetup', evc_camping:'Camping', evc_trip:'Day trip', evc_kids:'With kids', evc_sport:'Sports', evc_food:'Food', evc_other:'Other', of_kind:'Event type', of_title:'Create event', of_sub:'Invite other families to take the kids out together.',
     of_yourname:'Your display name', of_place:'Place (public)', of_area:'Area',
     of_day:'Day', of_time:'Time', of_ages:'Children\'s ages', of_msg:'Message',
     of_msg_ph:'A few lines about the outing…', of_post:'Post outing', of_need:'Please enter at least a name and a place.',
@@ -5476,7 +5481,7 @@ const I18N = {
     au_reset_btn:'Återställ lösenord', au_need_email_pass:'Ange din e-post och ditt lösenord.', au_need_6:'Ange alla 6 siffror.', au_resending:'Skickar koden igen…', au_need_email:'Ange din e-post.', au_need_code_pass:'Ange koden och ett nytt lösenord.', au_hello:'Hej', au_min6:'Minst 6 tecken',
     au_need_ep:'Ange e-post och lösenord.', au_need_6:'Ange alla 6 siffror.',
     err_generic:'Något gick fel.',
-    evc_all:'Alla', evc_meetup:'Träff', evc_camping:'Camping', evc_trip:'Utflykt', evc_kids:'Med barn', evc_sport:'Sport', evc_food:'Mat', evc_other:'Övrigt', of_kind:'Typ av evenemang', of_title:'Skapa evenemang', of_sub:'Bjud in andra familjer att ta med barnen ut tillsammans.',
+    ev_join:'Anmäl dig', ev_leave:'✓ Anmäld', ev_joined_n:'{n} deltar', ev_joiners:'Vilka deltar', ev_no_join:'Ingen ännu. Bli först!', evc_all:'Alla', evc_meetup:'Träff', evc_camping:'Camping', evc_trip:'Utflykt', evc_kids:'Med barn', evc_sport:'Sport', evc_food:'Mat', evc_other:'Övrigt', of_kind:'Typ av evenemang', of_title:'Skapa evenemang', of_sub:'Bjud in andra familjer att ta med barnen ut tillsammans.',
     of_yourname:'Ditt visningsnamn', of_place:'Plats (offentlig)', of_area:'Område',
     of_day:'Dag', of_time:'Tid', of_ages:'Barnens ålder', of_msg:'Meddelande',
     of_msg_ph:'Några rader om utflykten…', of_post:'Publicera utflykt', of_need:'Ange minst ett namn och en plats.',
@@ -5797,7 +5802,7 @@ const I18N = {
     au_reset_btn:'Đặt lại mật khẩu', au_need_email_pass:'Vui lòng nhập email và mật khẩu.', au_need_6:'Nhập đủ 6 số.', au_resending:'Đang gửi lại mã…', au_need_email:'Vui lòng nhập email.', au_need_code_pass:'Nhập mã và mật khẩu mới.', au_hello:'Xin chào', au_min6:'Tối thiểu 6 ký tự',
     au_need_ep:'Vui lòng nhập email và mật khẩu.', au_need_6:'Nhập đủ 6 số.',
     err_generic:'Đã có lỗi xảy ra.',
-    evc_all:'Tất cả', evc_meetup:'Hội họp', evc_camping:'Cắm trại', evc_trip:'Dã ngoại', evc_kids:'Đi chơi cùng con', evc_sport:'Thể thao', evc_food:'Ăn uống', evc_other:'Khác', of_kind:'Loại sự kiện', of_title:'Tạo sự kiện', of_sub:'Rủ các gia đình khác cùng đưa con đi chơi.',
+    ev_join:'Đăng ký tham gia', ev_leave:'✓ Đã đăng ký', ev_joined_n:'{n} người tham gia', ev_joiners:'Người đã đăng ký', ev_no_join:'Chưa có ai đăng ký. Hãy là người đầu tiên!', evc_all:'Tất cả', evc_meetup:'Hội họp', evc_camping:'Cắm trại', evc_trip:'Dã ngoại', evc_kids:'Đi chơi cùng con', evc_sport:'Thể thao', evc_food:'Ăn uống', evc_other:'Khác', of_kind:'Loại sự kiện', of_title:'Tạo sự kiện', of_sub:'Rủ các gia đình khác cùng đưa con đi chơi.',
     of_yourname:'Tên hiển thị của bạn', of_place:'Địa điểm (công cộng)', of_area:'Khu vực',
     of_day:'Ngày', of_time:'Giờ', of_ages:'Độ tuổi các bé', of_msg:'Lời nhắn',
     of_msg_ph:'Vài dòng giới thiệu buổi đi chơi…', of_post:'Đăng buổi đi chơi', of_need:'Vui lòng nhập ít nhất tên và địa điểm.',
@@ -7446,7 +7451,10 @@ function renderFeed() {
   feed.innerHTML = list.map((o,idx) => {
     const col = (o.color!==undefined && o.color!=='') ? Number(o.color) : (idx % AV.length);
     const going = Array.isArray(o.going) ? o.going : [];
-    const joined = me && going.includes(me);
+    const goingEm = Array.isArray(o.going_em) ? o.going_em : [];
+    const myEm = currentUser ? String(currentUser.email||'').toLowerCase() : '';
+    const joined = myEm ? goingEm.includes(myEm) : (me && going.includes(me));
+    const nJoin = Math.max(goingEm.length, going.length);
     return `
     <article class="outing">
       <div class="o-head">
@@ -7463,27 +7471,58 @@ function renderFeed() {
       <div class="o-foot">
         <div class="going">
           <div class="dots">${going.slice(0,4).map((g,i)=>`<span style="background:${AV[(col+i)%AV.length]}">${initials(g)}</span>`).join('')}</div>
-          <span class="going-n">${going.length} gia đình tham gia</span>
+          <span class="going-n" onclick="showJoiners('${o.id}')" style="cursor:pointer">${t('ev_joined_n').replace('{n}', nJoin)}</span>
         </div>
         <div style="display:flex;gap:6px;align-items:center">
           ${ownsPost(o)?`<button class="edit-post" title="${t('post_edit')}" onclick="openCreate(OUTINGS.find(x=>String(x.id)==='${o.id}'))">✎</button>`:''}
           ${ownsPost(o)?delBtnHTML('outing', o.id):''}
-          <button class="join ${joined?'joined':''}" onclick="toggleJoin('${o.id}')">${joined?t('lbl_joined'):t('lbl_join')}</button>
+          <button class="join ${joined?'joined':''}" onclick="toggleJoin('${o.id}')">${joined?t('ev_leave'):t('ev_join')}</button>
         </div>
       </div>
     </article>`;
   }).join('');
 }
 function toggleJoin(id) {
-  requireLogin(() => {
+  requireLogin(async () => {
     const o = OUTINGS.find(x=>String(x.id)===String(id));
-    const me = currentUser.ten || "Bạn";
+    if (!o) return;
+    const em = String(currentUser.email||'').toLowerCase();
+    const me = currentUser.ten || currentUser.email.split('@')[0];
     if (!Array.isArray(o.going)) o.going = [];
-    if (o.going.includes(me)) { o.going = o.going.filter(g=>g!==me); o.joined=false; }
-    else { o.going.push(me); o.joined=true; callApi({ action:'joinOuting', id:o.id, ten:me }).catch(()=>{}); }
+    if (!Array.isArray(o.going_em)) o.going_em = [];
+    const at = o.going_em.indexOf(em);
+    if (at === -1) { o.going_em.push(em); o.going.push(me); o.joined = true; }     // đăng ký
+    else { o.going_em.splice(at,1); if (o.going.length > at) o.going.splice(at,1); o.joined = false; }  // huỷ
     renderFeed();
+    try {
+      const r = await callApi({ action:'joinOuting', id:o.id, email:em, ten:me });
+      if (r && r.ok) { o.going = r.going || o.going; o.going_em = r.going_em || o.going_em; renderFeed(); }
+    } catch(e) {}
   });
 }
+// Xem ai đã đăng ký tham gia
+function showJoiners(id) {
+  const o = OUTINGS.find(x=>String(x.id)===String(id));
+  if (!o) return;
+  const names = Array.isArray(o.going) ? o.going : [];
+  const ems   = Array.isArray(o.going_em) ? o.going_em : [];
+  const rows = names.length
+    ? names.map((n,i) => `
+        <div class="jn-row">
+          <div class="avatar sm" style="background:${AV[avColor(ems[i]||n)]}">${initials(n)}</div>
+          <div class="jn-n">${escapeHtml(n)}${rankBadge(ems[i])}</div>
+        </div>`).join('')
+    : `<div class="cmt-empty">${t('ev_no_join')}</div>`;
+  document.getElementById('sheet').innerHTML = `
+    <button class="close-x" onclick="closeModal()">✕</button>
+    <div class="sheet-body">
+      <h2>${t('ev_joiners')}</h2>
+      <div class="auth-note">${escapeHtml(o.diadiem||'')} · ${t('ev_joined_n').replace('{n}', Math.max(ems.length, names.length))}</div>
+      <div class="jn-list">${rows}</div>
+    </div>`;
+  openModalEl();
+}
+
 function openCreate(editItem) {
   requireLogin(() => {
   const e = editItem || {};
@@ -7525,7 +7564,8 @@ function submitOuting(editId) {
     callApi({ action:'editPost', postType:'outing', id:editId, email:currentUser.email, data:fields }).catch(()=>{});
     return;
   }
-  const item = { tp:activeCity, ...fields, going:[host], joined:false, email: currentUser?currentUser.email:'' };
+  const myEm = currentUser ? String(currentUser.email||'').toLowerCase() : '';
+  const item = { tp:activeCity, ...fields, going:[host], going_em: myEm?[myEm]:[], joined:true, email: currentUser?currentUser.email:'' };
   OUTINGS.unshift(item);
   closeModal(); renderFeed();
   callApi({ action:'addOuting', ...item }).catch(()=>{});
