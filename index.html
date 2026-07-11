@@ -753,7 +753,11 @@
   .rk-newname { font-size: 22px; font-weight: 800; color: var(--gold-text); }
   .rk-gift { display: inline-block; margin-top: 4px; padding: 7px 16px; border-radius: 99px; font-weight: 800; font-size: 15px;
     background: var(--tint-amber); border: 1px solid var(--tint-amber-bd); color: var(--gold-text); }
-  .acc-rank { font-size: 11px; }
+  .acc-rank { position: absolute; right: -3px; bottom: -3px; width: 19px; height: 19px;
+    display: flex; align-items: center; justify-content: center; font-size: 12px; line-height: 1;
+    border-radius: 999px; background: var(--paper); border: 1.5px solid var(--tint-amber-bd);
+    box-shadow: 0 1px 4px rgba(0,0,0,.25); pointer-events: none; }
+  .acc-btn.has-rank { position: relative; }
   .mb-benefits { list-style: none; display: flex; flex-direction: column; gap: 8px; }
   .mb-benefits li { font-size: 13.5px; color: var(--text-2); line-height: 1.4; }
   .mb-plans-t { text-align: center; font-weight: 800; font-size: 17px; margin: 8px 0 14px; }
@@ -1455,7 +1459,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v121-rank-tiers</span></p>
+  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v122-rank-badge</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -9551,9 +9555,14 @@ function refreshAccBtn() {
       ? `<span class="acc-ava${currentUser.is_member?' acc-vip':''}" style="background-image:url('${currentUser.anh}')"></span>`
       : `<span class="acc-ava${currentUser.is_member?' acc-vip':''}" style="background:${AV[avColor(currentUser.email||name)]}">${initials(name)}</span>`;
     btn.title = name;
-    // huy hiệu hạng đóng góp cạnh avatar
-    const lv = Number(currentUser.hang) || 0;
-    if (lv > 0) btn.innerHTML += `<span class="acc-rank" title="${escapeHtml(rankName(lv))}">${rankIcon(lv)}</span>`;
+    // huy hiệu hạng đóng góp — nổi ở góc ảnh đại diện
+    const lv = Number(currentUser.hang) || (myRank && Number(myRank.hang)) || 0;
+    if (lv > 0) {
+      btn.classList.add('has-rank');
+      btn.innerHTML += `<span class="acc-rank" title="${escapeHtml(rankName(lv))}">${rankIcon(lv)}</span>`;
+    } else {
+      btn.classList.remove('has-rank');
+    }
   } else {
     btn.textContent = t('login'); btn.classList.remove('in'); btn.title = '';
   }
