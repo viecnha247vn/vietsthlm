@@ -1439,7 +1439,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v116-forum-icon</span></p>
+  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v117-en-fr</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -1451,6 +1451,8 @@
 // ===== 16 QUOC GIA (cong dong nhap cu lon o Thuy Dien) =====
 const COUNTRIES = [
   { code:'se', fl:'🇸🇪', name:'Sverige' },
+  { code:'gb', fl:'🇬🇧', name:'English' },
+  { code:'fr', fl:'🇫🇷', name:'France' },
   { code:'vn', fl:'🇻🇳', name:'Việt Nam' },
   { code:'kr', fl:'🇰🇷', name:'한국' },
   { code:'ph', fl:'🇵🇭', name:'Pilipinas' },
@@ -1472,6 +1474,8 @@ const COUNTRIES = [
   { code:'et', fl:'🇪🇹', name:'ኢትዮጵያ' },
 ];
 const GREETINGS = {
+  gb: 'Welcome! A place that connects your community in Sweden — so you feel confident and at home.',
+  fr: 'Bienvenue ! Un lieu qui relie votre communauté en Suède — pour vous sentir en confiance et comme chez vous.',
   vn: 'Chào mừng! Nơi kết nối người Việt xa quê tại Thụy Điển — để bạn tự tin và ấm lòng nơi quê hương thứ hai.',
   th: 'ยินดีต้อนรับ! พื้นที่เชื่อมโยงชุมชนของคุณในสวีเดน',
   cn: '欢迎！在瑞典连接您的社区，让您在第二故乡安心生活。',
@@ -1515,7 +1519,7 @@ function reopenSplash(){ document.getElementById('splash').classList.remove('hid
 // ===== I18N — HỆ THỐNG ĐA NGÔN NGỮ (EN nền, VI, TH) =====
 // ============================================================
 // map mã nước -> ngôn ngữ. Nước chưa có bản dịch dùng 'en'.
-const COUNTRY_LANG = { se:'sv', vn:'vi', th:'th', kr:'ko', ph:'tl', fi:'fi', pl:'pl', sy:'ar', iq:'ar', ir:'fa', af:'fa', so:'so', tr:'tr', cn:'zh', ua:'uk', in:'hi', ba:'bs' };
+const COUNTRY_LANG = { gb:'en', fr:'fr', se:'sv', vn:'vi', th:'th', kr:'ko', ph:'tl', fi:'fi', pl:'pl', sy:'ar', iq:'ar', ir:'fa', af:'fa', so:'so', tr:'tr', cn:'zh', ua:'uk', in:'hi', ba:'bs' };
 const I18N = {
   zh: {
     all_sweden:'全瑞典',
@@ -6050,6 +6054,114 @@ Object.assign(I18N, {
     sh_hero_1:'Oglasna ploča zajednice —', sh_hero_2:'podijeli vijesti, fotografije i video', sh_hero_sub:'Objavite bilo šta korisno za zajednicu. Objave se automatski brišu nakon 7 dana da sve ostane svježe.', sh_note_b:'Napomena:', sh_note:'svaka objava nestaje automatski nakon 7 dana.', fab_share:'＋ Nova objava', sh_create:'Kreiraj objavu', sh_content:'Šta želite podijeliti?', sh_content_ph:'Napišite nešto, zalijepite link, podijelite vijest…', sh_media:'Link slike ili videa (opcionalno)', sh_media_ph:'Zalijepite YouTube / sliku / TikTok link…', sh_post:'Objavi', sh_need:'Molimo napišite nešto za podijeliti.', sh_empty:'Još nema objava. Budite prvi koji nešto podijeli!', sh_expires:'preostalo', sh_expired:'uskoro ističe', sh_hr:'h', sh_min_short:'min',
     ev_empty:'Još nema događaja. Budite prvi domaćin!', topic_karaoke:'🎤 Karaoke', topic_dj:'🎧 DJ / Muzika', topic_talk:'💬 Od srca', topic_swedish:'🇸🇪 Uči švedski', topic_game:'🎮 Igre', topic_study:'📚 Učimo zajedno', topic_sport:'⚽ Sport', topic_other:'✨ Ostalo',
     tr_show:'Prevedi', tr_hide:'Prikaži original', tr_loading:'Prevodim…', tr_fail:'Prijevod nije uspio', feed_more:'Vidi više'
+  }
+});
+
+Object.assign(I18N, {
+  fr: {
+    all_sweden:'Toute la Suède',
+    tab_home:'Accueil', tab_places:'Check-in', tab_outings:'Sorties avec les enfants', tab_market:'Marché',
+    tab_friends:'Rencontres', tab_translate:'Services', tab_services:'Boutique', tab_about:'À propos', tab_member:'VIP', mb_hero_1:'Devenez', mb_hero_2:'membre VIP QiQa', mb_intro:'QiQa est une maison commune pour notre communauté loin de chez elle. Pour que cet endroit reste sûr, propre et sans publicité pour tous, nous avons besoin de votre soutien.', mb_free_t:'Simple visite (gratuit)', mb_free_d:'Vous ne voyez que les annonces promotionnelles et les avis publics.', mb_mem_t:'Membre — accès complet', mb_b1:'Lire tous les guides (droit, démarches, actualités)', mb_b2:'Badge de membre sur votre profil', mb_b3:'Soutenir une communauté saine', mb_b_credit:'100 crédits offerts en cadeau de bienvenue — à échanger contre des services payants', svc_use_credit:'💎 Utiliser {n} crédits (solde : {bal})', svc_buy_credit:'💎 Crédits insuffisants — Recharger', svc_or_swish:'Ou payez directement avec Swish :', mb_pick:'Choisissez votre formule', mb_month:'1 mois', mb_6month:'6 mois', mb_year:'1 an', mb_popular:'Populaire', mb_best:'Meilleur prix', mb_pledge:'Votre contribution nous aide à faire vivre QiQa pour tous — ensemble, construisons une communauté saine.', mb_pay_t:'Payez avec Swish pour adhérer', mb_pay_step:'Envoyez le montant par Swish au 072-567 11 11 et écrivez « Membre [formule] + votre e-mail » dans le message. Votre adhésion sera activée sous peu.', mb_you_member:'Vous êtes membre 💚', mb_until:'Valable jusqu\'au', cr_use_t:'Utiliser les crédits pour :', cr_use_1:'🌸 Envoyer des fleurs / 👏 applaudir / 👋 saluer — 1 crédit', cr_use_5:'🎥 Vidéo de salutation 5–8 s — 5 crédits', cr_swish_t:'Scannez le code Swish — pack de {n} crédits ({price} kr)', cr_amt:'Le montant de {price} kr est prérempli lors du scan.', cr_s1:'Scannez le code → confirmez le virement de {price} kr', cr_s2:'Dans le champ « Meddelande » (message), indiquez votre e-mail de connexion', cr_s3:'Les crédits seront ajoutés à votre compte sous peu', w_title:'Bienvenue sur QiQa', w_sub:'Choisissez votre couleur et votre langue', w_theme:'Thème de couleur', w_lang:'Langue', w_start:'Commencer →', pn_end:'Rien de plus ici.', pn_next:'À découvrir ensuite', theme_title:'Apparence', theme_sub:'Choisissez la teinte qui vous plaît.', cat_all:'Tout', cat_food:'Manger & boire', cat_shop:'Shopping', cat_service:'Services', cat_community:'Communauté', cat_kids:'Pour enfants', cat_vietfood:'Cuisine vietnamienne', cat_home:'Maison', cat_carry:'Transport de colis', cat_free:'À donner', cat_health:'Santé', cat_admin:'Documents/Démarches', cat_legal:'Juridique', cat_escort:'Accompagnement', cat_doctrans:'Traduction de documents', ty_give:'Donner', ty_swap:'Échanger', ty_free:'Gratuit', ty_carry:'Transporter', lbl_places:'lieux', lbl_you:'Vous', lbl_joined:'✓ Inscrit', lbl_join:'Participer', lbl_match_cnt:'affinités possibles', lbl_report:'Signaler', lbl_registered:'✓ Enregistré', lbl_register:'S\'enregistrer', lbl_be_interp:'Devenir interprète', lbl_post_req:'Publier une demande', lbl_vip_member:'Membre VIP', tt_bold:'Gras', tt_italic:'Italique', tt_color:'Couleur du texte', tt_emoji:'Émoji', tt_gift:'Envoyer un cadeau', tt_credit:'Recharger des crédits', tt_theme:'Fond du chat',
+    login:'Se connecter', logout:'Se déconnecter',
+    search_places:'Chercher restaurants, épicerie asiatique, ongles…', search_area:'Chercher par zone…',
+    search_market:'Chercher articles enfants, nourriture…', search_lang:'Chercher par langue, domaine…',
+    home_title_1:'Les personnes loin de chez elles en Suède —', home_title_2:'ont désormais une maison commune',
+    home_greeting:'D\'un restaurant préféré à une sortie du week-end avec les enfants, en passant par un bon ami ou un interprète quand vous en avez besoin — tout au même endroit, dans votre langue.',
+    cta_explore:'Explorer →', section_have:'Ce que votre communauté propose',
+    hc_places_d:'Restaurants, épiceries, salons et services près de chez vous — avec de vrais avis de la communauté.',
+    hc_outings_d:'Rencontrez des familles dans la même situation, retrouvez-vous au parc : les enfants se font des amis et les parents aussi.',
+    hc_market_d:'Donnez, offrez ou échangez vêtements d\'enfants, articles de maison, plats du pays — ou demandez à quelqu\'un de rapporter un goût de chez vous.',
+    hc_friends_d:'Là où les célibataires trouvent quelqu\'un de compatible, même culture, même langue — en toute sécurité et bienveillance.',
+    hc_translate_d:'Quand vous avez besoin de quelqu\'un qui parle la langue pour vous accompagner chez le médecin ou dans vos démarches.',
+    hc_services_d:'Vous tenez un restaurant ou un salon d\'ongles ? QiQa Shop crée sites web, E-Menu QR et applis de stock pour vous.',
+    hc_join:'Rejoindre la communauté', hc_join_d:'Créez un compte pour publier, participer aux activités et rencontrer des gens partout en Suède.',
+    hc_login_go:'Se connecter / S\'inscrire →',
+    chat_title:'💬 Salon de la communauté', chat_sub:'Rencontrez des membres de toutes les communautés de Suède',
+    chat_safety:'Merci de rester bienveillant et respectueux. Ne partagez pas d\'informations sensibles (adresse, coordonnées bancaires). Appuyez sur ⚑ pour signaler.',
+    chat_placeholder:'Écrivez un message…', chat_send:'Envoyer', chat_login:'Connectez-vous pour rejoindre le chat',
+    chat_empty:'Aucun message. Soyez le premier à saluer la communauté !',
+    fab_outing:'＋ Créer une sortie', fab_post:'＋ Publier', fab_profile:'✎ Mon profil',
+    join:'Participer', joined:'✓ Inscrit', contact:'Contact', view_map:'Voir la carte', call:'Appeler',
+    add_place:'+ Ajouter un lieu',
+    au_login:'Se connecter', au_login_sub:'Connectez-vous pour publier et participer aux activités.',
+    au_register:'Créer un compte', au_register_sub:'Nous enverrons un code à 6 chiffres à votre e-mail.',
+    au_email:'E-mail', au_pass:'Mot de passe', au_pass6:'Mot de passe (6 caractères min.)',
+    au_forgot:'Mot de passe oublié ?', au_no_acc:'Pas de compte ?', au_have_acc:'Vous avez déjà un compte ?',
+    au_signup:'S\'inscrire', au_send_code:'Envoyer le code de vérification', au_display_name:'Nom affiché',
+    au_otp_title:'Saisissez le code de vérification', au_otp_sub:'Un code à 6 chiffres a été envoyé à',
+    au_otp_check:'Vérifiez aussi vos spams.', au_verify:'Vérifier', au_no_code:'Pas reçu le code ?',
+    au_resend:'Renvoyer', au_forgot_title:'Mot de passe oublié', au_forgot_sub:'Saisissez votre e-mail ; nous enverrons un code de réinitialisation.',
+    au_send:'Envoyer le code', au_back_login:'← Retour à la connexion', au_reset_title:'Nouveau mot de passe',
+    au_reset_sub:'Saisissez le code envoyé à', au_code6:'Code à 6 chiffres', au_new_pass:'Nouveau mot de passe',
+    au_reset_btn:'Réinitialiser le mot de passe', au_need_email_pass:'Veuillez saisir votre e-mail et votre mot de passe.', au_need_6:'Saisissez les 6 chiffres.', au_resending:'Renvoi du code…', au_need_email:'Veuillez saisir votre e-mail.', au_need_code_pass:'Saisissez le code et un nouveau mot de passe.', au_hello:'Bonjour', au_min6:'6 caractères min.',
+    au_need_ep:'Veuillez saisir l\'e-mail et le mot de passe.',
+    err_generic:'Une erreur est survenue.',
+    of_title:'Créer une sortie', of_sub:'Invitez d\'autres familles à sortir avec les enfants.',
+    of_yourname:'Votre nom affiché', of_place:'Lieu (public)', of_area:'Zone',
+    of_day:'Jour', of_time:'Heure', of_ages:'Âge des enfants', of_msg:'Message',
+    of_msg_ph:'Quelques lignes sur la sortie…', of_post:'Publier la sortie', of_need:'Veuillez indiquer au moins un nom et un lieu.',
+    mk_post:'Publier', mk_sub:'Donner – offrir – échanger ou demander un transport. Pas de vente payante.',
+    mk_title:'Titre', mk_type:'Type', mk_cat:'Catégorie', mk_name:'Nom affiché',
+    mk_area:'Zone', mk_phone:'Numéro de contact', mk_desc:'Description', mk_desc_ph:'Décrivez l\'article, son état…',
+    mk_post_btn:'Publier', mk_need:'Veuillez indiquer au moins un titre et un nom.',
+    type_give:'Donner', type_swap:'Échanger', type_free:'Gratuit', type_carry:'Transporter',
+    pf_title:'Mon profil rencontres', pf_sub:'Visible par les autres membres. Vous pouvez le supprimer à tout moment.',
+    pf_name:'Nom affiché', pf_age:'Âge', pf_area:'Zone', pf_job:'Profession', pf_looking:'Je recherche',
+    pf_bio:'À propos de vous', pf_bio_ph:'Quelques lignes sur vous, vos centres d\'intérêt, ce que vous cherchez…',
+    pf_interests:'Centres d\'intérêt (séparés par des virgules)', pf_phone:'Numéro de contact (visible seulement après une affinité)',
+    pf_save:'Enregistrer le profil', pf_delete:'Supprimer le profil', pf_need_name:'Veuillez saisir un nom.',
+    pf_del_confirm:'Supprimer votre profil rencontres ? Les autres ne vous verront plus.',
+    match_title:'Vous êtes connectés !', match_both:'Vous et', match_both2:'vous êtes plu mutuellement.',
+    match_first:'Vous pouvez maintenant vous contacter. Pensez à vous rencontrer d\'abord dans un lieu public.',
+    match_view:'Voir mes connexions', like_need_profile:'Veuillez créer votre profil avant de vous connecter.',
+    report_reason:'Pour quel motif signalez-vous cet utilisateur ? (ex. faux profil, harcèlement, arnaque…)\\nLe signalement sera envoyé aux administrateurs.',
+    report_thanks:'Merci pour votre signalement. Les administrateurs vont l\'examiner.', report_confirm:'Signaler et masquer ce message ?',
+    tr_reg_title:'Devenir interprète', tr_reg_sub:'Aidez les nouveaux arrivants à franchir la barrière de la langue. Les tarifs se conviennent entre vous et le demandeur.',
+    tr_name:'Nom affiché', tr_area:'Zone', tr_langs:'Langues (séparées par des virgules)',
+    tr_fields:'Domaines dans lesquels vous pouvez aider', tr_exp:'Expérience (une ligne)',
+    tr_auth:'J\'ai un certificat officiel d\'interprète (auktoriserad tolk)', tr_bio:'Présentation',
+    tr_bio_ph:'Quelques lignes sur vous, vos disponibilités…', tr_phone:'Numéro de contact', tr_post:'Publier le profil',
+    trq_title:'Publier une demande d\'interprète', trq_sub:'Décrivez votre besoin. Les interprètes vous contacteront.',
+    trq_name:'Nom affiché', trq_area:'Zone', trq_field:'Domaine', trq_when:'Quand',
+    trq_desc:'Décrivez votre besoin', trq_phone:'Numéro de contact', trq_post:'Publier la demande',
+    ld_title:'Demander un conseil', ld_sub:'Service :', ld_after:'. QiQa Shop vous contactera bientôt.',
+    ld_name:'Votre nom / entreprise', ld_phone:'Numéro de téléphone', ld_email:'E-mail', ld_lan:'Län / Zone',
+    ld_type:'Type', ld_note:'Note (facultatif)', ld_note_ph:'Décrivez vos besoins…', ld_send:'Envoyer la demande',
+    ld_need:'Veuillez indiquer un nom et au moins un téléphone ou un e-mail.', ld_ok:'Demande envoyée ! QiQa Shop vous contactera bientôt. Ouverture de votre e-mail…',
+    biz_rest:'Restaurant', biz_cafe:'Snack / Café', biz_nail:'Salon d\'ongles', biz_other:'Autre',
+    trf_medical:'Médical', trf_admin:'Documents/Démarches', trf_legal:'Juridique', trf_accompany:'Accompagnement général', trf_doc:'Traduction de documents',
+    empty_outings:'Aucune sortie ne correspond. Pourquoi ne pas en créer une ?', empty_matches:'Aucune connexion pour l\'instant. Allez dans Suggestions et envoyez un like à quelqu\'un qui vous plaît.', empty_translators:'Aucun interprète ici pour l\'instant. Vous parlez la langue ? Inscrivez-vous pour aider la communauté.', empty_sgevents:'Aucun événement célibataires ici. Revenez plus tard.', empty_treq:'Aucune demande ici. Besoin d\'un interprète ? Appuyez sur « Publier une demande ».', empty_discover:'Plus de suggestions. Revenez plus tard, la communauté grandit chaque jour.', empty_market:'Aucune annonce ne correspond. Publiez la première !', empty_places:'Aucun lieu ne correspond. Essayez d\'enlever des filtres.',
+    hero_places_1:'Bonne cuisine, commerces locaux, services communautaires —', hero_places_city:'près de chez vous', hero_places_sub:'Là où la communauté trouve les adresses à son goût. De vrais avis, dans votre langue.',
+    hero_out_1:'Sortez avec les enfants,', hero_out_2:'liez-vous entre parents', hero_out_sub:'Des parents qui s\'invitent à emmener les enfants dans des lieux publics en Suède.', hero_out_safe_b:'La sécurité d\'abord :', hero_out_safe:'chaque sortie a lieu en public. Retrouvez-vous dans des espaces ouverts et fréquentés.',
+    hero_mk_1:'Marché communautaire —', hero_mk_2:'donner, offrir, échanger', hero_mk_sub:'Vêtements d\'enfants, plats du pays, articles de maison, coup de main pour transporter.', hero_mk_note_b:'Un marché de la bienveillance, pas du profit :', hero_mk_note:'uniquement donner – offrir – échanger et aider à transporter.',
+    hero_fr_1:'Rencontres —', hero_fr_2:'trouvez quelqu\'un de compatible', hero_fr_sub:'Pour les célibataires en Suède à la recherche d\'une âme sœur.', hero_fr_safe_b:'Rencontres en sécurité :', hero_fr_safe:'le contact n\'apparaît que si vous vous plaisez tous les deux. Rencontrez-vous la première fois en public.',
+    sub_discover:'Suggestions', sub_matches:'Connexions', sub_events:'Événements célibataires', fr_create_title:'Créez un profil pour commencer', fr_create_sub:'Parlez un peu de vous pour que les autres puissent vous trouver.', fr_create_btn:'Créer mon profil rencontres',
+    hero_tr_1:'Services communautaires —', hero_tr_2:'entraide entre voisins', hero_tr_sub:'Besoin d\'un interprète, de ménage, d\'un déménagement, de réparations… ? Trouvez des prestataires près de chez vous.', sub_find:'Trouver un service', sub_req:'Demandes', hero_tr_note_b:'Services communautaires :', hero_tr_note:'convenez du prix entre vous et vérifiez bien avant tout accord.',
+    svc_hero_1:'Services technologiques pour', svc_hero_2:'restaurants & salons d\'ongles', svc_hero_sub:'QiQa Shop aide les petites entreprises de Suède à se moderniser.',
+    svc_web:'Création de site web', svc_web_for:'Restaurant · Salon d\'ongles · Services', svc_web_d:'Un beau site adapté au mobile qui présente votre menu, vos horaires, l\'itinéraire et la réservation.', svc_web_1:'Design sur mesure pour votre marque', svc_web_2:'Optimisé pour le mobile et la rapidité', svc_web_3:'Cartes, réservation et réseaux sociaux intégrés',
+    svc_menu:'E-Menu (menu QR)', svc_menu_for:'Restaurant · Snack · Café', svc_menu_d:'Les clients scannent un QR code à table pour voir le menu et commander.', svc_menu_1:'Menu QR multilingue avec photos', svc_menu_2:'Les clients commandent seuls, la cuisine reçoit aussitôt', svc_menu_3:'Modifiez prix et plats instantanément',
+    svc_inv:'Appli de stock', svc_inv_for:'Restaurant · Entreprises avec stock', svc_inv_d:'Gérez les entrées et sorties, suivez le stock, soyez alerté et suivez les coûts.', svc_inv_1:'Enregistrez entrées et sorties de stock', svc_inv_2:'Alertes de stock faible et de péremption', svc_inv_3:'Rapports de coûts et de recettes',
+    svc_quote:'Demander un conseil / devis', svc_why:'Pourquoi choisir QiQa Shop ?', svc_why_d:'Nous comprenons le fonctionnement des petits restaurants et salons en Suède, et nous vous accompagnons dans votre langue.', svc_contact:'Contact direct :',
+    about_badge:'À propos', about_title:'Conçu pour toutes les communautés loin de chez elles', about_p:'QiQa est une plateforme communautaire pour toutes les personnes vivant loin de chez elles en Suède — quel que soit votre pays d\'origine. QiQa existe pour que ces moments de désarroi ne soient plus solitaires.', about_brand_pre:'Créé par', about_brand_post:'— une entreprise technologique qui relie les communautés à l\'étranger.', about_free:'Sûr · Accueillant · Dans votre langue',
+    foot_tag:'La communauté des personnes loin de chez elles en Suède', foot_by:'Un produit de',
+    right_in:'à', items_in:'annonces à', nothing_in:'Aucun contenu à',
+    c_open:'Ouvrir', c_call:'Appeler', c_map:'Voir la carte', c_contact:'Contact', c_area:'Zone', c_phone:'Téléphone', c_addr:'Adresse', c_poster:'Publié par', c_get_help:'Obtenir de l\'aide', c_skip:'Passer', c_like:'💗 J\'aime', c_report:'⚑ Signaler', c_featured:'★ En vedette', c_certified:'✓ Certifié', photo_choose:'📷 Choisir une photo', photo_err:'Impossible de traiter l\'image. Essayez-en une autre.', photo_avatar:'Photo de profil', photo_img:'Photo', photo_save:'Enregistrer la photo', prof_title:'Mon profil', prof_sub:'Ces informations peuvent apparaître sur votre profil public.', prof_displayname:'Nom affiché', prof_fullname:'Nom complet', prof_dob:'Date de naissance', prof_gender:'Genre', prof_g_m:'Homme', prof_g_f:'Femme', prof_g_o:'Autre', prof_area:'Zone (län)', prof_job:'Profession', prof_bio:'À propos de moi', prof_bio_ph:'Quelques lignes sur vous…', prof_phone:'Téléphone', prof_save:'Enregistrer le profil', prof_saved:'Profil enregistré.', pf_from_account:'Prérempli depuis votre profil — modifiable à tout moment.', post_delete:'Supprimer', post_del_confirm:'Supprimer cette publication ? C\'est irréversible.', post_edit:'Modifier', post_save:'Enregistrer les modifications', tab_fun:'Live', hc_fun_d:'Karaoké, sets DJ, discussions à cœur ouvert, jeux — chacun peut organiser un live sur le sujet de son choix.', hc_fun_go:'Découvrir les lives →',
+    ev_hero_1:'Live & Fun —', ev_hero_2:'organisez ou rejoignez un événement', ev_hero_sub:'Karaoké, sets DJ, discussions à cœur ouvert, jeux et plus encore — créés par la communauté.',
+    ev_note_b:'Comment ça marche :', ev_note:'les événements se déroulent sur la plateforme de votre choix (Zoom, Meet, TikTok, Facebook…). Ajoutez le lien pour que les gens puissent vous rejoindre.',
+    fab_event:'＋ Créer un événement', ev_create:'Créer un événement', ev_edit:'Modifier l\'événement',
+    ev_host:'Votre nom affiché', ev_topic:'Thème', ev_title:'Titre de l\'événement', ev_when:'Quand (date & heure)',
+    ev_link:'Lien du live (Zoom, Meet, TikTok…)', ev_desc:'Description', ev_desc_ph:'Quelques mots sur votre événement…',
+    ev_post:'Publier l\'événement', ev_need:'Veuillez indiquer un titre et un lien de live.', ev_join:'Rejoindre le live', ev_live:'EN DIRECT', ev_soon:'Bientôt', ev_ended:'Terminé', ev_hosted:'organisés', ev_start:'Début (date & heure)', ev_dur:'Durée', ev_min:'min', ev_need_time:'Veuillez choisir une date et une heure de début.', tab_share:'Forum', feed_label:'Activité récente', feed_empty:'Aucune activité. Soyez le premier à publier !', feed_market:'Marché', feed_outing:'Sortie', feed_event:'Live', feed_share:'Forum', feed_translator:'Interprète', feed_treq:'Demande d\'interprète', feed_ago_now:'à l\'instant', feed_ago_m:'min', feed_ago_h:'h', feed_ago_d:'j', tab_articles:'Droit & Société', art_hero_1:'Guides & savoir-faire —', art_hero_2:'le droit suédois simplifié', art_hero_sub:'Des guides approfondis sur le droit et les règles en Suède, écrits pour notre communauté. Intro gratuite ; guide complet pour les membres.',
+    fab_article:'＋ Nouveau guide', art_create:'Créer un guide', art_edit:'Modifier le guide', art_cat:'Thème', art_title:'Titre', art_teaser:'Intro gratuite (accrochez le lecteur)', art_teaser_ph:'Quelques lignes qui montrent l\'intérêt et donnent envie de lire la suite…', art_body:'Contenu complet (verrouillé)', art_body_ph:'Le guide complet — seuls les membres peuvent lire cette partie…', art_post:'Publier le guide', art_need:'Veuillez saisir un titre et une intro.', art_empty:'Aucun guide pour l\'instant.',
+    art_read:'Lire la suite', art_locked_title:'Ce guide est réservé aux membres', art_locked_sub:'Débloquez le guide complet pour continuer.', art_buy_single:'Guide à l\'unité', art_buy_month:'Mensuel', art_buy_year:'Annuel', art_per_month:'/mois', art_per_year:'/an', art_soon:'Paiement bientôt disponible. Pour acheter maintenant, contactez :', art_disclaimer:'À titre indicatif — ne remplace pas un conseil juridique officiel.',
+    sh_hero_1:'Forum de la communauté —', sh_hero_2:'partagez actus, photos & vidéos', sh_hero_sub:'Publiez, aimez 💖 et commentez avec les autres. Les publications s\'effacent après 7 jours pour rester fraîches.',
+    sh_note_b:'Remarque :', sh_note:'chaque publication disparaît automatiquement après 7 jours.', sh_edit:'Modifier la publication', sh_save:'Enregistrer les modifications', sh_day_short:'j', sh_like:'J\'aime', sh_cmt:'Commenter', cmt_ph:'Écrire un commentaire…', cmt_send:'Envoyer', cmt_login:'Connectez-vous pour commenter', cmt_empty:'Aucun commentaire. Soyez le premier !', cmt_del_ask:'Supprimer ce commentaire ?',
+    fab_share:'＋ Nouvelle publication', sh_create:'Créer une publication', sh_content:'Que voulez-vous partager ?',
+    sh_content_ph:'Écrivez un message, collez un lien, partagez une actu…', sh_media:'Lien image ou vidéo (facultatif)',
+    sh_media_ph:'Collez un lien YouTube / image / TikTok…', sh_post:'Publier', sh_need:'Veuillez écrire quelque chose à partager.',
+    sh_empty:'Aucune publication. Soyez le premier à partager !', sh_expires:'restant', sh_expired:'expire bientôt',
+    sh_hr:'h', sh_min_short:'min', ev_empty:'Aucun événement. Organisez le premier !',
+    topic_karaoke:'🎤 Karaoké', topic_dj:'🎧 DJ / Musique', topic_talk:'💬 À cœur ouvert', topic_swedish:'🇸🇪 Apprendre le suédois', topic_game:'🎮 Jeux', topic_study:'📚 Réviser ensemble', topic_sport:'⚽ Sport', topic_other:'✨ Autre', tr_show:'Traduire', tr_hide:'Voir l\'original', tr_loading:'Traduction…', tr_fail:'Échec de la traduction', feed_more:'Voir plus',
   }
 });
 
