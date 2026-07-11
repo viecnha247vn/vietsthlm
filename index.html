@@ -1504,7 +1504,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v130-events-horoscope</span></p>
+  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v131-horo-fix</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -8023,7 +8023,13 @@ const HORO_LOVE = [
   'Hôm nay hợp để chủ động. Nếu có ai đó bạn vẫn nghĩ tới, hãy nhắn trước — bạn sẽ không thiệt gì đâu.',
   'Một mối quan hệ cũ có thể gợn lên trong tâm trí. Hãy trân trọng ký ức, nhưng đừng quay đầu lại.',
   'Sự chân thành là vũ khí mạnh nhất của bạn lúc này. Cứ là chính mình, người phù hợp sẽ ở lại.',
-  'Có người đang âm thầm để ý đến bạn. Hãy để ý những cử chỉ nhỏ thay vì chờ lời tỏ bày lớn lao.'
+  'Có người đang âm thầm để ý đến bạn. Hãy để ý những cử chỉ nhỏ thay vì chờ lời tỏ bày lớn lao.',
+  'Đừng ngại thể hiện sự quan tâm. Một tin nhắn hỏi han đúng lúc đáng giá hơn ngàn lời hoa mỹ.',
+  'Nếu đang độc thân, hãy cứ tận hưởng. Tình cảm đẹp thường đến khi bạn thôi cố tìm kiếm nó.',
+  'Một hiểu lầm nhỏ có thể được hoá giải hôm nay nếu bạn chịu nói ra trước.',
+  'Người ở xa quê như bạn cần một chỗ dựa tinh thần. Đừng ngại mở lòng với người thật lòng quan tâm.',
+  'Hôm nay hợp cho những cuộc hẹn nhẹ nhàng: một quán cà phê, một buổi đi dạo cũng đủ ấm áp.',
+  'Đừng vì cô đơn mà vội vàng. Bạn xứng đáng với người thật sự trân trọng mình.'
 ];
 const HORO_WORK = [
   'Công việc trôi chảy nếu bạn chịu khó sắp xếp lại thứ tự ưu tiên ngay từ sáng.',
@@ -8031,7 +8037,13 @@ const HORO_WORK = [
   'Hôm nay nên lắng nghe nhiều hơn nói. Thông tin quý giá thường đến từ người bạn ít ngờ nhất.',
   'Đừng ôm đồm. Biết từ chối đúng lúc cũng là một loại năng lực.',
   'Sự kiên nhẫn hôm nay sẽ được đền đáp. Việc bạn theo đuổi bấy lâu đang gần đích hơn bạn tưởng.',
-  'Hãy hoàn tất việc còn dang dở trước khi bắt đầu điều mới — bạn sẽ nhẹ lòng hẳn.'
+  'Hãy hoàn tất việc còn dang dở trước khi bắt đầu điều mới — bạn sẽ nhẹ lòng hẳn.',
+  'Rào cản ngôn ngữ không phải là giới hạn của bạn. Hôm nay hợp để học thêm một chút tiếng Thụy Điển.',
+  'Một người đồng nghiệp có thể giúp bạn nhiều hơn bạn nghĩ. Đừng ngại nhờ vả.',
+  'Đừng để lời chê bai làm bạn chùn bước. Người giỏi nào cũng từng bị đánh giá thấp.',
+  'Hôm nay thích hợp để lên kế hoạch dài hạn thay vì lao vào việc vặt.',
+  'Tiền bạc cần được cân nhắc kỹ. Hãy hoãn những khoản chi lớn chưa cấp thiết.',
+  'Một lời giới thiệu bất ngờ có thể mang đến cơ hội mới. Hãy giữ liên lạc với mọi người.'
 ];
 const HORO_LIFE = [
   'Dành chút thời gian cho bản thân. Một buổi đi dạo ngắn cũng đủ làm đầu óc sáng ra.',
@@ -8039,7 +8051,13 @@ const HORO_LIFE = [
   'Cơ thể đang nhắc bạn nghỉ ngơi. Đừng đợi đến lúc kiệt sức mới chịu dừng lại.',
   'Một cuộc gặp gỡ tình cờ hôm nay có thể mang lại niềm vui bất ngờ.',
   'Hãy dọn dẹp một góc nhỏ trong nhà — không gian gọn gàng sẽ kéo theo tâm trí nhẹ nhõm.',
-  'Đừng so sánh mình với người khác. Hành trình của bạn có nhịp riêng của nó.'
+  'Đừng so sánh mình với người khác. Hành trình của bạn có nhịp riêng của nó.',
+  'Nấu một món ăn quê hương hôm nay. Hương vị quen thuộc là liều thuốc tinh thần tuyệt vời.',
+  'Hãy ra ngoài hít thở không khí. Thiên nhiên Thụy Điển luôn sẵn sàng chữa lành cho bạn.',
+  'Một người bạn cũ có thể đang nhớ đến bạn. Chủ động nhắn tin trước xem sao.',
+  'Ngủ sớm hơn thường lệ. Giấc ngủ ngon là món quà rẻ nhất mà hiệu quả nhất.',
+  'Hãy tử tế với chính mình. Bạn đã cố gắng nhiều hơn bạn tự ghi nhận đấy.',
+  'Thử một điều mới mẻ hôm nay — dù nhỏ thôi — để ngày thường bớt đơn điệu.'
 ];
 const HORO_COLORS = ['Đỏ san hô','Xanh ngọc','Vàng hổ phách','Trắng ngà','Xanh lá','Tím oải hương','Cam đất','Xanh biển'];
 
@@ -8078,11 +8096,11 @@ function renderHoroscope(){
   }
   const sd = horoSeed(z.id);
   const love = HORO_LOVE[sd % HORO_LOVE.length];
-  const work = HORO_WORK[(sd>>3) % HORO_WORK.length];
-  const life = HORO_LIFE[(sd>>6) % HORO_LIFE.length];
-  const star = 3 + (sd % 3);                       // 3–5 sao
-  const num  = 1 + (sd >> 9) % 9;
-  const color = HORO_COLORS[(sd>>12) % HORO_COLORS.length];
+  const work = HORO_WORK[Math.floor(sd / 7) % HORO_WORK.length];
+  const life = HORO_LIFE[Math.floor(sd / 53) % HORO_LIFE.length];
+  const star = 3 + Math.floor(sd / 211) % 3;                       // 3–5 sao
+  const num  = 1 + Math.floor(sd / 1013) % 9;                      // 1–9
+  const color = HORO_COLORS[Math.floor(sd / 7919) % HORO_COLORS.length];
   const hop = z.hop.map(id => ZODIAC.find(x=>x.id===id)).filter(Boolean);
   const today = new Date().toLocaleDateString('vi-VN');
 
