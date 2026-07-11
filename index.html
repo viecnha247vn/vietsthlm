@@ -1439,7 +1439,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v117-en-fr</span></p>
+  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v118-avatar-sync</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -9456,6 +9456,8 @@ async function syncProfile() {
   } catch(e) {}
 }
 setTimeout(syncProfile, 400);
+// đồng bộ lại khi mở lại app (đổi thiết bị / mở lại tab) để ảnh đại diện luôn mới nhất
+document.addEventListener('visibilitychange', () => { if (!document.hidden) syncProfile(); });
 
 function refreshAccBtn() {
   const btn = document.getElementById('accBtn');
