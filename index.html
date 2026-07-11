@@ -1459,7 +1459,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v122-rank-badge</span></p>
+  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v123-rank-diag</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -9285,6 +9285,7 @@ const RANKS_UI = [
   { ten:'Đại sứ',         icon:'💎', min:2000 }
 ];
 let myRank = null;
+let rankErr = '';
 function rankIcon(lv){ return (RANKS_UI[lv]||RANKS_UI[0]).icon; }
 function rankName(lv){ return (RANKS_UI[lv]||RANKS_UI[0]).ten; }
 
@@ -9293,7 +9294,12 @@ async function refreshRank(celebrate) {
   if (!currentUser || !currentUser.email) return;
   try {
     const r = await callApi({ action:'checkRank', email: currentUser.email });
-    if (!r || !r.ok) return;
+    if (!r || !r.ok) {                       // máy chủ chưa có tính năng hạng → báo rõ
+      rankErr = (r && r.msg) ? r.msg : 'Không kết nối được máy chủ.';
+      renderRankCard();
+      return;
+    }
+    rankErr = '';
     myRank = r;
     currentUser.diem = r.diem; currentUser.hang = r.hang;
     if (typeof r.credit === 'number') currentUser.credit = r.credit;
@@ -9322,7 +9328,16 @@ function renderRankCard() {
   if (!box) return;
   if (!currentUser) { box.innerHTML = ''; return; }
   const r = myRank;
-  if (!r) { box.innerHTML = ''; return; }
+  if (!r) {
+    box.innerHTML = rankErr
+      ? `<div class="rk-card" style="border-color:var(--tint-rose-bd);background:var(--tint-rose)">
+           <div class="rk-name">⚠️ Chưa bật hệ thống hạng</div>
+           <div class="rk-next">Máy chủ báo: "${escapeHtml(rankErr)}".<br>
+           Hãy vào Google Apps Script → <b>Deploy → Manage deployments → Edit (bút chì) → Version: New version → Deploy</b>, rồi tải lại trang.</div>
+         </div>`
+      : '';
+    return;
+  }
   const pct = r.next_min ? Math.min(100, Math.round(r.diem / r.next_min * 100)) : 100;
   const nextLine = r.next_min
     ? `<div class="rk-next">${t('rk_next').replace('{n}', r.con_thieu).replace('{r}', escapeHtml(r.next_ten)).replace('{c}', r.next_thuong)}</div>`
