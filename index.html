@@ -27,10 +27,14 @@
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  html { background: var(--paper); }
+  /* KHÔNG đặt background cho html: để nền của body tự lan ra toàn màn hình theo đúng giao diện
+     người dùng chọn (đặt ở html sẽ lấy nhầm màu tối mặc định của :root → lộ viền đen) */
+  html { overflow-x: hidden; }
   body { font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: var(--paper); color: var(--ink); -webkit-font-smoothing: antialiased; line-height: 1.5;
-    overscroll-behavior-y: none; }        /* chạy dạng app: không kéo nảy lộ nền trắng */
+    overscroll-behavior-y: none;
+    overflow-x: hidden;                  /* chặn tràn ngang gây kéo lệch */
+    min-height: 100vh; width: 100%; max-width: 100%; }
 
   /* splash / country picker */
   .splash { position: fixed; inset: 0; z-index: 2000; background: linear-gradient(165deg, var(--splash-1), var(--splash-2));
@@ -384,7 +388,8 @@
     background: var(--tint-rose); border: 1px solid var(--tint-rose-bd); color: var(--ink); }
   .hr-note { margin-top: 12px; font-size: 11.5px; color: var(--muted); text-align: center; }
   /* 🔥 Nổi bật cộng đồng (trang chủ) */
-  .sp-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0 4px; }
+  .sp-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px auto 4px;
+    max-width: 1100px; padding: 0 18px; box-sizing: border-box; }
   @media (max-width: 760px) { .sp-wrap { grid-template-columns: 1fr; } }
   .sp-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 14px 15px; }
   .sp-head { font-size: 13px; font-weight: 800; color: var(--ink); margin-bottom: 10px; }
@@ -1537,7 +1542,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v139-pwa-safearea</span></p>
+  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v140-fix-blackedge</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
