@@ -306,6 +306,35 @@
   .ev-count-host { font-size: 12.5px; color: var(--jade); font-weight: 700; }
   #sh-feed { display: grid; gap: 14px; }
   .sh-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 15px 16px; }
+  /* 💖 thích & 💬 bình luận */
+  .sh-acts { display: flex; gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); }
+  .sh-act { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
+    padding: 8px 10px; border-radius: 11px; border: 1px solid var(--line); background: transparent;
+    color: var(--muted); font-size: 13.5px; font-weight: 600; cursor: pointer; transition: .15s; }
+  .sh-act:hover { background: var(--paper-2); }
+  .sh-act .sh-ic { font-size: 15px; filter: grayscale(1); opacity: .55; transition: .15s; }
+  .sh-act.on { color: #e06a90; border-color: var(--tint-rose-bd); background: var(--tint-rose); }
+  .sh-act.on .sh-ic { filter: none; opacity: 1; transform: scale(1.12); }
+  .sh-act.on2 { color: var(--ink); border-color: var(--line); background: var(--paper-2); }
+  .sh-act.on2 .sh-ic { filter: none; opacity: .9; }
+  .sh-cmts { margin-top: 10px; border-top: 1px dashed var(--line); padding-top: 10px; display: flex; flex-direction: column; gap: 10px; }
+  .cmt { display: flex; gap: 8px; }
+  .avatar.sm { width: 30px; height: 30px; min-width: 30px; font-size: 12px; }
+  .cmt-b { flex: 1; background: var(--paper-2); border-radius: 12px; padding: 7px 10px; }
+  .cmt-h { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--muted); }
+  .cmt-h b { color: var(--ink); font-size: 12.5px; }
+  .cmt-x { margin-left: auto; border: none; background: transparent; color: var(--muted); cursor: pointer; font-size: 11px; padding: 0 2px; }
+  .cmt-x:hover { color: var(--alert); }
+  .cmt-t { font-size: 13.5px; color: var(--ink); line-height: 1.45; margin-top: 2px; white-space: pre-wrap; word-wrap: break-word; overflow-wrap: anywhere; }
+  .cmt-empty { font-size: 12.5px; color: var(--muted); text-align: center; padding: 4px 0; }
+  .cmt-in { display: flex; gap: 7px; }
+  .cmt-in input { flex: 1; border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+    border-radius: 11px; padding: 9px 12px; font-size: 13.5px; font-family: inherit; }
+  .cmt-in input:focus { outline: none; border-color: var(--gold); }
+  .cmt-in button { border: none; border-radius: 11px; padding: 9px 15px; font-size: 13px; font-weight: 700;
+    background: linear-gradient(135deg, var(--btn-b), var(--btn-c)); color: var(--btn-text); cursor: pointer; }
+  .cmt-login { width: 100%; background: transparent !important; border: 1px dashed var(--line) !important;
+    color: var(--muted) !important; font-weight: 600 !important; }
   .sh-top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
   .sh-top .avatar { width: 42px; height: 42px; background-size: cover; background-position: center; }
   .sh-who { flex: 1; }
@@ -1054,7 +1083,7 @@
   <div class="tab" data-tab="home" onclick="switchTab('home')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M4 11.5 12 5l8 6.5'/><path d='M6 10.5V19h12v-8.5'/><path d='M10 19v-4.5h4V19'/></svg></span><span class="tab-tx" data-i18n="tab_home">Trang chủ</span></div>
   <div class="tab on" data-tab="places" onclick="switchTab('places')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M12 21c3.5-3.6 6-6.8 6-10a6 6 0 1 0-12 0c0 3.2 2.5 6.4 6 10z'/><circle cx='12' cy='11' r='2.2'/></svg></span><span class="tab-tx" data-i18n="tab_places">Check-in</span></div>
   <div class="tab" data-tab="fun" onclick="switchTab('fun')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='2'/><path d='M8.6 8.6a5 5 0 0 0 0 6.8'/><path d='M15.4 8.6a5 5 0 0 1 0 6.8'/><path d='M6.2 6.2a9 9 0 0 0 0 11.6'/><path d='M17.8 6.2a9 9 0 0 1 0 11.6'/></svg></span><span class="tab-tx" data-i18n="tab_fun">Live</span></div>
-  <div class="tab" data-tab="share" onclick="switchTab('share')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='6' cy='12' r='2.2'/><circle cx='17.5' cy='6' r='2.2'/><circle cx='17.5' cy='18' r='2.2'/><path d='m8 11 7.5-3.8M8 13l7.5 3.8'/></svg></span><span class="tab-tx" data-i18n="tab_share">Chia sẻ</span></div>
+  <div class="tab" data-tab="share" onclick="switchTab('share')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='6' cy='12' r='2.2'/><circle cx='17.5' cy='6' r='2.2'/><circle cx='17.5' cy='18' r='2.2'/><path d='m8 11 7.5-3.8M8 13l7.5 3.8'/></svg></span><span class="tab-tx" data-i18n="tab_share">Diễn đàn</span></div>
   <div class="tab" data-tab="articles" onclick="switchTab('articles')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M12 6.5C10.4 5.4 8 5 5.5 5v12c2.5 0 4.9.4 6.5 1.5 1.6-1.1 4-1.5 6.5-1.5V5c-2.5 0-4.9.4-6.5 1.5z'/><path d='M12 6.5v12'/></svg></span><span class="tab-tx" data-i18n="tab_articles">Luật & Xã hội</span></div>
   <div class="tab" data-tab="translate" onclick="switchTab('translate')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='8.2'/><path d='M3.8 9.5h16.4M3.8 14.5h16.4'/><path d='M12 3.8c2.6 2.6 2.6 13.8 0 16.4M12 3.8c-2.6 2.6-2.6 13.8 0 16.4'/></svg></span><span class="tab-tx" data-i18n="tab_translate">Cung cấp dịch vụ</span></div>
   <div class="tab" data-tab="friends" onclick="switchTab('friends')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M12 20s-6.5-4.2-6.5-9A3.4 3.4 0 0 1 12 9.2 3.4 3.4 0 0 1 18.5 11c0 4.8-6.5 9-6.5 9z'/></svg></span><span class="tab-tx" data-i18n="tab_friends">Kết bạn</span></div>
@@ -1260,9 +1289,9 @@
 <div id="view-share" class="hidden">
   <main class="wrap">
     <section class="hero">
-      <h1><span data-i18n="sh_hero_1">Bảng tin cộng đồng —</span> <span class="em" data-i18n="sh_hero_2">chia sẻ tin tức, ảnh & video</span></h1>
-      <p data-i18n="sh_hero_sub">Đăng bất cứ điều gì hữu ích cho cộng đồng. Bài tự xoá sau 72 giờ để bảng tin luôn mới.</p>
-      <div class="safe-note"><b data-i18n="sh_note_b">Lưu ý:</b> <span data-i18n="sh_note">mỗi bài sẽ tự động biến mất sau 72 giờ.</span></div>
+      <h1><span data-i18n="sh_hero_1">Diễn đàn cộng đồng —</span> <span class="em" data-i18n="sh_hero_2">chia sẻ tin tức, ảnh & video</span></h1>
+      <p data-i18n="sh_hero_sub">Đăng bài, thả 💖 và bình luận cùng mọi người. Bài tự xoá sau 7 ngày để bảng tin luôn mới.</p>
+      <div class="safe-note"><b data-i18n="sh_note_b">Lưu ý:</b> <span data-i18n="sh_note">mỗi bài sẽ tự động biến mất sau 7 ngày.</span></div>
     </section>
     <div id="sh-feed"></div>
   </main>
@@ -1410,7 +1439,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v112-checkin-intro</span></p>
+  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v114-forum-name</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -1885,13 +1914,13 @@ const I18N = {
     ev_dur:'时长',
     ev_min:'分钟',
     ev_need_time:'请选择开始日期和时间。',
-    tab_share:'分享',
+    tab_share:'论坛',
     feed_label:'最新动态',
     feed_empty:'还没有动态。来发第一条吧！',
     feed_market:'跳蚤市场',
     feed_outing:'出游',
     feed_event:'直播活动',
-    feed_share:'分享',
+    feed_share:'论坛',
     feed_translator:'口译员',
     feed_treq:'口译请求',
     feed_ago_now:'刚刚',
@@ -1926,9 +1955,9 @@ const I18N = {
     art_disclaimer:'仅供参考 — 不能替代官方法律意见。',
     sh_hero_1:'社区留言板 —',
     sh_hero_2:'分享资讯、照片与视频',
-    sh_hero_sub:'发布任何对社区有用的内容。帖子在 72 小时后自动删除，保持内容新鲜。',
+    sh_hero_sub:'发布任何对社区有用的内容。帖子在 7 天后自动删除，保持内容新鲜。',
     sh_note_b:'注意：',
-    sh_note:'每条帖子会在 72 小时后自动消失。',
+    sh_note:'每条帖子会在 7 天后自动消失。',
     fab_share:'＋ 新帖',
     sh_create:'创建帖子',
     sh_content:'您想分享什么？',
@@ -2354,7 +2383,7 @@ const I18N = {
     ev_dur:'Тривалість',
     ev_min:'хв',
     ev_need_time:'Оберіть дату й час початку.',
-    tab_share:'Поділитись',
+    tab_share:'Форум',
     feed_label:'Остання активність',
     feed_empty:'Активності ще немає. Будьте першим, хто щось опублікує!',
     feed_market:'Барахолка',
@@ -2395,9 +2424,9 @@ const I18N = {
     art_disclaimer:'Лише для довідки — не замінює офіційної юридичної консультації.',
     sh_hero_1:'Дошка громади —',
     sh_hero_2:'діліться новинами, фото та відео',
-    sh_hero_sub:'Публікуйте все корисне для громади. Дописи автоматично видаляються через 72 години, щоб стрічка була свіжою.',
+    sh_hero_sub:'Публікуйте все корисне для громади. Дописи автоматично видаляються через 7 днів, щоб стрічка була свіжою.',
     sh_note_b:'Зверніть увагу:',
-    sh_note:'кожен допис зникає автоматично через 72 години.',
+    sh_note:'кожен допис зникає автоматично через 7 днів.',
     fab_share:'＋ Новий допис',
     sh_create:'Створити допис',
     sh_content:'Чим хочете поділитись?',
@@ -2823,7 +2852,7 @@ const I18N = {
     ev_dur:'Muddo',
     ev_min:'daqiiqad',
     ev_need_time:'Fadlan dooro taariikh iyo saacad bilow.',
-    tab_share:'Wadaag',
+    tab_share:'Fagaare',
     feed_label:'Dhaqdhaqaaq ugu dambeeyay',
     feed_empty:'Weli dhaqdhaqaaq ma jiro. Noqo kii ugu horreeya ee wax dhiga!',
     feed_market:'Suuq',
@@ -2864,9 +2893,9 @@ const I18N = {
     art_disclaimer:'Kaliya hagid — kama beddesho la-talinta sharci rasmi ah.',
     sh_hero_1:'Boodhka bulshada —',
     sh_hero_2:'wadaag warar, sawirro iyo muuqaallo',
-    sh_hero_sub:'Dhig wax kasta oo bulshada waxtar u leh. Qoraalladu si toos ah ayey u tirtirmaan 72 saac kadib si ay cusub u ahaadaan.',
+    sh_hero_sub:'Dhig wax kasta oo bulshada waxtar u leh. Qoraalladu si toos ah ayey u tirtirmaan 7 maalmood kadib si ay cusub u ahaadaan.',
     sh_note_b:'Fiiro gaar ah:',
-    sh_note:'Qoraal kastaa si toos ah ayuu u baaba\'aa 72 saac kadib.',
+    sh_note:'Qoraal kastaa si toos ah ayuu u baaba\'aa 7 maalmood kadib.',
     fab_share:'＋ Qoraal cusub',
     sh_create:'Abuur qoraal',
     sh_content:'Maxaad rabtaa inaad wadaagto?',
@@ -3291,7 +3320,7 @@ const I18N = {
     ev_dur:'Süre',
     ev_min:'dakika',
     ev_need_time:'Lütfen başlangıç tarihi ve saati seçin.',
-    tab_share:'Paylaş',
+    tab_share:'Forum',
     feed_label:'Son etkinlikler',
     feed_empty:'Henüz etkinlik yok. İlk paylaşan siz olun!',
     feed_market:'Pazar',
@@ -3332,9 +3361,9 @@ const I18N = {
     art_disclaimer:'Yalnızca bilgilendirme amaçlıdır — resmi hukuki danışmanlığın yerine geçmez.',
     sh_hero_1:'Topluluk panosu —',
     sh_hero_2:'haber, fotoğraf ve video paylaş',
-    sh_hero_sub:'Topluluk için faydalı her şeyi paylaşın. Gönderiler taze kalması için 72 saat sonra otomatik silinir.',
+    sh_hero_sub:'Topluluk için faydalı her şeyi paylaşın. Gönderiler taze kalması için 7 gün sonra otomatik silinir.',
     sh_note_b:'Not:',
-    sh_note:'Her gönderi 72 saat sonra otomatik olarak kaybolur.',
+    sh_note:'Her gönderi 7 gün sonra otomatik olarak kaybolur.',
     fab_share:'＋ Yeni gönderi',
     sh_create:'Gönderi oluştur',
     sh_content:'Ne paylaşmak istersiniz?',
@@ -3759,7 +3788,7 @@ const I18N = {
     ev_dur:'مدت',
     ev_min:'دقیقه',
     ev_need_time:'لطفاً تاریخ و ساعت آغاز را انتخاب کنید.',
-    tab_share:'اشتراک',
+    tab_share:'انجمن',
     feed_label:'آخرین فعالیت',
     feed_empty:'هنوز فعالیتی نیست. اولین نفری باشید که چیزی می‌گذارد!',
     feed_market:'بازار',
@@ -3800,9 +3829,9 @@ const I18N = {
     art_disclaimer:'فقط جهت اطلاع — جایگزین مشاوره‌ی حقوقی رسمی نیست.',
     sh_hero_1:'تابلوی جامعه —',
     sh_hero_2:'خبر، عکس و ویدیو به اشتراک بگذارید',
-    sh_hero_sub:'هر چیز مفید برای جامعه را بگذارید. مطالب پس از ۷۲ ساعت خودکار حذف می‌شوند تا تازه بمانند.',
+    sh_hero_sub:'هر چیز مفید برای جامعه را بگذارید. مطالب پس از ۷ روز خودکار حذف می‌شوند تا تازه بمانند.',
     sh_note_b:'توجه:',
-    sh_note:'هر مطلب پس از ۷۲ ساعت خودکار ناپدید می‌شود.',
+    sh_note:'هر مطلب پس از ۷ روز خودکار ناپدید می‌شود.',
     fab_share:'＋ مطلب جدید',
     sh_create:'ایجاد مطلب',
     sh_content:'چه چیزی می‌خواهید به اشتراک بگذارید؟',
@@ -4227,7 +4256,7 @@ const I18N = {
     ev_dur:'المدة',
     ev_min:'دقيقة',
     ev_need_time:'يرجى اختيار تاريخ ووقت البدء.',
-    tab_share:'مشاركة',
+    tab_share:'منتدى',
     feed_label:'أحدث الأنشطة',
     feed_empty:'لا نشاط بعد. كن أول من ينشر شيئاً!',
     feed_market:'السوق',
@@ -4268,9 +4297,9 @@ const I18N = {
     art_disclaimer:'للإرشاد فقط — لا يغني عن الاستشارة القانونية الرسمية.',
     sh_hero_1:'لوحة المجتمع —',
     sh_hero_2:'شارك الأخبار والصور والفيديوهات',
-    sh_hero_sub:'انشر أي شيء مفيد للمجتمع. تُحذف المنشورات تلقائياً بعد 72 ساعة لتبقى حديثة.',
+    sh_hero_sub:'انشر أي شيء مفيد للمجتمع. تُحذف المنشورات تلقائياً بعد 7 أيام لتبقى حديثة.',
     sh_note_b:'ملاحظة:',
-    sh_note:'يختفي كل منشور تلقائياً بعد 72 ساعة.',
+    sh_note:'يختفي كل منشور تلقائياً بعد 7 أيام.',
     fab_share:'＋ منشور جديد',
     sh_create:'إنشاء منشور',
     sh_content:'ماذا تريد أن تشارك؟',
@@ -4695,7 +4724,7 @@ const I18N = {
     ev_dur:'Czas trwania',
     ev_min:'min',
     ev_need_time:'Wybierz datę i godzinę rozpoczęcia.',
-    tab_share:'Udostępnij',
+    tab_share:'Forum',
     feed_label:'Najnowsza aktywność',
     feed_empty:'Brak aktywności. Bądź pierwszym, który coś opublikuje!',
     feed_market:'Targ',
@@ -4736,9 +4765,9 @@ const I18N = {
     art_disclaimer:'Tylko orientacyjnie — nie zastępuje oficjalnej porady prawnej.',
     sh_hero_1:'Tablica społeczności —',
     sh_hero_2:'dziel się newsami, zdjęciami i filmami',
-    sh_hero_sub:'Publikuj wszystko przydatne dla społeczności. Wpisy usuwają się automatycznie po 72 godzinach, by były świeże.',
+    sh_hero_sub:'Publikuj wszystko przydatne dla społeczności. Wpisy usuwają się automatycznie po 7 dniach, by były świeże.',
     sh_note_b:'Uwaga:',
-    sh_note:'każdy wpis znika automatycznie po 72 godzinach.',
+    sh_note:'każdy wpis znika automatycznie po 7 dniach.',
     fab_share:'＋ Nowy wpis',
     sh_create:'Utwórz wpis',
     sh_content:'Czym chcesz się podzielić?',
@@ -5163,7 +5192,7 @@ const I18N = {
     ev_dur:'Kesto',
     ev_min:'min',
     ev_need_time:'Valitse aloituspäivä ja -aika.',
-    tab_share:'Jaa',
+    tab_share:'Foorumi',
     feed_label:'Uusin toiminta',
     feed_empty:'Ei vielä toimintaa. Ole ensimmäinen joka julkaisee jotain!',
     feed_market:'Kirpputori',
@@ -5204,9 +5233,9 @@ const I18N = {
     art_disclaimer:'Vain viitteeksi — ei korvaa virallista oikeudellista neuvontaa.',
     sh_hero_1:'Yhteisön ilmoitustaulu —',
     sh_hero_2:'jaa uutisia, kuvia & videoita',
-    sh_hero_sub:'Julkaise mitä tahansa yhteisölle hyödyllistä. Julkaisut poistuvat automaattisesti 72 tunnin jälkeen pysyäkseen tuoreina.',
+    sh_hero_sub:'Julkaise mitä tahansa yhteisölle hyödyllistä. Julkaisut poistuvat automaattisesti 7 päivän jälkeen pysyäkseen tuoreina.',
     sh_note_b:'Huomaa:',
-    sh_note:'jokainen julkaisu katoaa automaattisesti 72 tunnin jälkeen.',
+    sh_note:'jokainen julkaisu katoaa automaattisesti 7 päivän jälkeen.',
     fab_share:'＋ Uusi julkaisu',
     sh_create:'Luo julkaisu',
     sh_content:'Mitä haluat jakaa?',
@@ -5328,11 +5357,11 @@ const I18N = {
     fab_event:'＋ Create event', ev_create:'Create an event', ev_edit:'Edit event',
     ev_host:'Your display name', ev_topic:'Topic', ev_title:'Event title', ev_when:'When (date & time)',
     ev_link:'Live link (Zoom, Meet, TikTok…)', ev_desc:'Description', ev_desc_ph:'A few words about your event…',
-    ev_post:'Post event', ev_need:'Please enter a title and a live link.', ev_join:'Join live', ev_live:'LIVE NOW', ev_soon:'Starting soon', ev_ended:'Ended', ev_hosted:'hosted', ev_start:'Start (date & time)', ev_dur:'Duration', ev_min:'min', ev_need_time:'Please choose a start date and time.', tab_share:'Share', feed_label:'Latest activity', feed_empty:'No activity yet. Be the first to post something!', feed_market:'Marketplace', feed_outing:'Outing', feed_event:'Live event', feed_share:'Share', feed_translator:'Interpreter', feed_treq:'Interpreter request', feed_ago_now:'just now', feed_ago_m:'m ago', feed_ago_h:'h ago', feed_ago_d:'d ago', tab_articles:'Law & Society', art_hero_1:'Guides & know-how —', art_hero_2:'Swedish law made simple', art_hero_sub:'In-depth guides on Swedish law and rules, written for our community. Free intro; full guide for members.',
+    ev_post:'Post event', ev_need:'Please enter a title and a live link.', ev_join:'Join live', ev_live:'LIVE NOW', ev_soon:'Starting soon', ev_ended:'Ended', ev_hosted:'hosted', ev_start:'Start (date & time)', ev_dur:'Duration', ev_min:'min', ev_need_time:'Please choose a start date and time.', tab_share:'Forum', feed_label:'Latest activity', feed_empty:'No activity yet. Be the first to post something!', feed_market:'Marketplace', feed_outing:'Outing', feed_event:'Live event', feed_share:'Forum', feed_translator:'Interpreter', feed_treq:'Interpreter request', feed_ago_now:'just now', feed_ago_m:'m ago', feed_ago_h:'h ago', feed_ago_d:'d ago', tab_articles:'Law & Society', art_hero_1:'Guides & know-how —', art_hero_2:'Swedish law made simple', art_hero_sub:'In-depth guides on Swedish law and rules, written for our community. Free intro; full guide for members.',
     fab_article:'＋ New guide', art_create:'Create a guide', art_edit:'Edit guide', art_cat:'Topic', art_title:'Title', art_teaser:'Free intro (hook readers)', art_teaser_ph:'A few lines that show the value and make people want to read on…', art_body:'Full content (locked)', art_body_ph:'The full guide — only members can read this part…', art_post:'Publish guide', art_need:'Please enter a title and intro.', art_empty:'No guides yet.',
     art_read:'Read more', art_locked_title:'This guide is for members', art_locked_sub:'Unlock the full guide to keep reading.', art_buy_single:'Single guide', art_buy_month:'Monthly', art_buy_year:'Yearly', art_per_month:'/month', art_per_year:'/year', art_soon:'Payment coming soon. To buy now, contact:', art_disclaimer:'For reference only — not a substitute for official legal advice.',
-    sh_hero_1:'Community board —', sh_hero_2:'share news, photos & videos', sh_hero_sub:'Post anything useful for the community. Posts auto-delete after 72 hours to keep things fresh.',
-    sh_note_b:'Note:', sh_note:'every post disappears automatically after 72 hours.',
+    sh_hero_1:'Community forum —', sh_hero_2:'share news, photos & videos', sh_hero_sub:'Post, like 💖 and comment with others. Posts auto-delete after 7 days to keep things fresh.',
+    sh_note_b:'Note:', sh_note:'every post disappears automatically after 7 days.', sh_day_short:'d', sh_like:'Like', sh_cmt:'Comment', cmt_ph:'Write a comment…', cmt_send:'Send', cmt_login:'Log in to comment', cmt_empty:'No comments yet. Be the first!', cmt_del_ask:'Delete this comment?',
     fab_share:'＋ New post', sh_create:'Create a post', sh_content:'What do you want to share?',
     sh_content_ph:'Write something, paste a link, share news…', sh_media:'Image or video link (optional)',
     sh_media_ph:'Paste a YouTube / image / TikTok link…', sh_post:'Post', sh_need:'Please write something to share.',
@@ -5410,11 +5439,11 @@ const I18N = {
     fab_event:'＋ Skapa event', ev_create:'Skapa ett event', ev_edit:'Redigera event',
     ev_host:'Ditt visningsnamn', ev_topic:'Ämne', ev_title:'Eventtitel', ev_when:'När (datum & tid)',
     ev_link:'Livelänk (Zoom, Meet, TikTok…)', ev_desc:'Beskrivning', ev_desc_ph:'Några ord om ditt event…',
-    ev_post:'Publicera event', ev_need:'Ange en titel och en livelänk.', ev_join:'Delta live', ev_live:'LIVE NU', ev_soon:'Börjar snart', ev_ended:'Avslutat', ev_hosted:'genomförda', ev_start:'Start (datum & tid)', ev_dur:'Längd', ev_min:'min', ev_need_time:'Välj startdatum och tid.', tab_share:'Dela', feed_label:'Senaste aktivitet', feed_empty:'Ingen aktivitet än. Bli först med att publicera något!', feed_market:'Marknad', feed_outing:'Utflykt', feed_event:'Liveevent', feed_share:'Dela', feed_translator:'Tolk', feed_treq:'Tolkförfrågan', feed_ago_now:'nyss', feed_ago_m:'m sedan', feed_ago_h:'h sedan', feed_ago_d:'d sedan', tab_articles:'Lag & samhälle', art_hero_1:'Guider & kunskap —', art_hero_2:'svensk lag enkelt förklarad', art_hero_sub:'Fördjupade guider om svensk lag och regler, skrivna för vår gemenskap. Gratis intro; hela guiden för medlemmar.',
+    ev_post:'Publicera event', ev_need:'Ange en titel och en livelänk.', ev_join:'Delta live', ev_live:'LIVE NU', ev_soon:'Börjar snart', ev_ended:'Avslutat', ev_hosted:'genomförda', ev_start:'Start (datum & tid)', ev_dur:'Längd', ev_min:'min', ev_need_time:'Välj startdatum och tid.', tab_share:'Forum', feed_label:'Senaste aktivitet', feed_empty:'Ingen aktivitet än. Bli först med att publicera något!', feed_market:'Marknad', feed_outing:'Utflykt', feed_event:'Liveevent', feed_share:'Forum', feed_translator:'Tolk', feed_treq:'Tolkförfrågan', feed_ago_now:'nyss', feed_ago_m:'m sedan', feed_ago_h:'h sedan', feed_ago_d:'d sedan', tab_articles:'Lag & samhälle', art_hero_1:'Guider & kunskap —', art_hero_2:'svensk lag enkelt förklarad', art_hero_sub:'Fördjupade guider om svensk lag och regler, skrivna för vår gemenskap. Gratis intro; hela guiden för medlemmar.',
     fab_article:'＋ Ny guide', art_create:'Skapa en guide', art_edit:'Redigera guide', art_cat:'Ämne', art_title:'Titel', art_teaser:'Gratis intro (fånga läsaren)', art_teaser_ph:'Några rader som visar värdet och får folk att vilja läsa vidare…', art_body:'Hela innehållet (låst)', art_body_ph:'Hela guiden — bara medlemmar kan läsa denna del…', art_post:'Publicera guide', art_need:'Ange en titel och intro.', art_empty:'Inga guider än.',
     art_read:'Läs mer', art_locked_title:'Denna guide är för medlemmar', art_locked_sub:'Lås upp hela guiden för att läsa vidare.', art_buy_single:'Enskild guide', art_buy_month:'Månad', art_buy_year:'År', art_per_month:'/mån', art_per_year:'/år', art_soon:'Betalning kommer snart. För att köpa nu, kontakta:', art_disclaimer:'Endast för referens — ersätter inte officiell juridisk rådgivning.',
-    sh_hero_1:'Anslagstavla —', sh_hero_2:'dela nyheter, foton & videor', sh_hero_sub:'Publicera allt som är användbart för gemenskapen. Inlägg raderas automatiskt efter 72 timmar.',
-    sh_note_b:'Obs:', sh_note:'varje inlägg försvinner automatiskt efter 72 timmar.',
+    sh_hero_1:'Forum —', sh_hero_2:'dela nyheter, foton & videor', sh_hero_sub:'Publicera, gilla 💖 och kommentera med andra. Inlägg raderas automatiskt efter 7 dagar.',
+    sh_note_b:'Obs:', sh_note:'varje inlägg försvinner automatiskt efter 7 dagar.', sh_day_short:'d', sh_like:'Gilla', sh_cmt:'Kommentar', cmt_ph:'Skriv en kommentar…', cmt_send:'Skicka', cmt_login:'Logga in för att kommentera', cmt_empty:'Inga kommentarer än. Bli först!', cmt_del_ask:'Radera denna kommentar?',
     fab_share:'＋ Nytt inlägg', sh_create:'Skapa ett inlägg', sh_content:'Vad vill du dela?',
     sh_content_ph:'Skriv något, klistra in en länk, dela nyheter…', sh_media:'Bild- eller videolänk (valfritt)',
     sh_media_ph:'Klistra in en YouTube / bild / TikTok-länk…', sh_post:'Publicera', sh_need:'Skriv något att dela.',
@@ -5517,11 +5546,11 @@ const I18N = {
     fab_event:'＋ 이벤트 만들기', ev_create:'이벤트 만들기', ev_edit:'이벤트 수정',
     ev_host:'표시 이름', ev_topic:'주제', ev_title:'이벤트 제목', ev_when:'언제 (날짜 & 시간)',
     ev_link:'라이브 링크 (Zoom, Meet, TikTok…)', ev_desc:'설명', ev_desc_ph:'이벤트에 대한 몇 마디…',
-    ev_post:'이벤트 올리기', ev_need:'제목과 라이브 링크를 입력하세요.', ev_join:'라이브 참여', ev_live:'라이브 중', ev_soon:'곧 시작', ev_ended:'종료됨', ev_hosted:'회 진행', ev_start:'시작 (날짜 & 시간)', ev_dur:'길이', ev_min:'분', ev_need_time:'시작 날짜와 시간을 선택하세요.', tab_share:'공유', feed_label:'최근 활동', feed_empty:'아직 활동이 없습니다. 첫 게시물을 올려보세요!', feed_market:'마켓', feed_outing:'나들이', feed_event:'라이브', feed_share:'공유', feed_translator:'통역', feed_treq:'통역 요청', feed_ago_now:'방금', feed_ago_m:'분 전', feed_ago_h:'시간 전', feed_ago_d:'일 전', tab_articles:'법률과 사회', art_hero_1:'가이드 & 노하우 —', art_hero_2:'쉽게 풀어쓴 스웨덴 법', art_hero_sub:'스웨덴 법과 규정에 대한 심층 가이드, 우리 커뮤니티를 위해 작성. 무료 소개; 전체 내용은 회원용.',
+    ev_post:'이벤트 올리기', ev_need:'제목과 라이브 링크를 입력하세요.', ev_join:'라이브 참여', ev_live:'라이브 중', ev_soon:'곧 시작', ev_ended:'종료됨', ev_hosted:'회 진행', ev_start:'시작 (날짜 & 시간)', ev_dur:'길이', ev_min:'분', ev_need_time:'시작 날짜와 시간을 선택하세요.', tab_share:'포럼', feed_label:'최근 활동', feed_empty:'아직 활동이 없습니다. 첫 게시물을 올려보세요!', feed_market:'마켓', feed_outing:'나들이', feed_event:'라이브', feed_share:'포럼', feed_translator:'통역', feed_treq:'통역 요청', feed_ago_now:'방금', feed_ago_m:'분 전', feed_ago_h:'시간 전', feed_ago_d:'일 전', tab_articles:'법률과 사회', art_hero_1:'가이드 & 노하우 —', art_hero_2:'쉽게 풀어쓴 스웨덴 법', art_hero_sub:'스웨덴 법과 규정에 대한 심층 가이드, 우리 커뮤니티를 위해 작성. 무료 소개; 전체 내용은 회원용.',
     fab_article:'＋ 새 가이드', art_create:'가이드 작성', art_edit:'가이드 수정', art_cat:'주제', art_title:'제목', art_teaser:'무료 소개 (독자 유인)', art_teaser_ph:'가치를 보여주고 더 읽고 싶게 만드는 몇 줄…', art_body:'전체 내용 (잠김)', art_body_ph:'전체 가이드 — 회원만 읽을 수 있는 부분…', art_post:'가이드 게시', art_need:'제목과 소개를 입력하세요.', art_empty:'아직 가이드가 없습니다.',
     art_read:'더 읽기', art_locked_title:'이 가이드는 회원 전용입니다', art_locked_sub:'전체 가이드를 열어 계속 읽으세요.', art_buy_single:'개별 가이드', art_buy_month:'월간', art_buy_year:'연간', art_per_month:'/월', art_per_year:'/년', art_soon:'결제 곧 제공 예정. 지금 구매하려면 문의:', art_disclaimer:'참고용일 뿐 — 공식 법률 자문을 대체하지 않습니다.',
-    sh_hero_1:'커뮤니티 게시판 —', sh_hero_2:'뉴스, 사진, 영상 공유', sh_hero_sub:'커뮤니티에 유용한 것을 올려보세요. 게시물은 72시간 후 자동 삭제됩니다.',
-    sh_note_b:'참고:', sh_note:'모든 게시물은 72시간 후 자동으로 사라집니다.',
+    sh_hero_1:'커뮤니티 게시판 —', sh_hero_2:'뉴스, 사진, 영상 공유', sh_hero_sub:'커뮤니티에 유용한 것을 올려보세요. 게시물은 7일 후 자동 삭제됩니다.',
+    sh_note_b:'참고:', sh_note:'모든 게시물은 7일 후 자동으로 사라집니다.',
     fab_share:'＋ 새 게시물', sh_create:'게시물 작성', sh_content:'무엇을 공유하시겠어요?',
     sh_content_ph:'글을 쓰거나 링크를 붙여넣거나 뉴스를 공유하세요…', sh_media:'이미지 또는 영상 링크 (선택)',
     sh_media_ph:'YouTube / 이미지 / TikTok 링크 붙여넣기…', sh_post:'게시', sh_need:'공유할 내용을 작성하세요.',
@@ -5624,11 +5653,11 @@ const I18N = {
     fab_event:'＋ Gumawa ng event', ev_create:'Gumawa ng event', ev_edit:'I-edit ang event',
     ev_host:'Iyong display name', ev_topic:'Paksa', ev_title:'Pamagat ng event', ev_when:'Kailan (petsa at oras)',
     ev_link:'Live link (Zoom, Meet, TikTok…)', ev_desc:'Paglalarawan', ev_desc_ph:'Ilang salita tungkol sa event mo…',
-    ev_post:'I-post ang event', ev_need:'Pakilagay ang pamagat at live link.', ev_join:'Sumali sa live', ev_live:'LIVE NGAYON', ev_soon:'Malapit nang magsimula', ev_ended:'Tapos na', ev_hosted:'na-host', ev_start:'Simula (petsa at oras)', ev_dur:'Tagal', ev_min:'min', ev_need_time:'Pumili ng petsa at oras ng simula.', tab_share:'Ibahagi', feed_label:'Pinakabagong aktibidad', feed_empty:'Wala pang aktibidad. Ikaw ang mauna!', feed_market:'Palengke', feed_outing:'Lakad', feed_event:'Live event', feed_share:'Ibahagi', feed_translator:'Interpreter', feed_treq:'Kahilingan sa interpreter', feed_ago_now:'ngayon lang', feed_ago_m:'m nakaraan', feed_ago_h:'h nakaraan', feed_ago_d:'d nakaraan', tab_articles:'Batas at Lipunan', art_hero_1:'Gabay & kaalaman —', art_hero_2:'batas ng Sweden na pinadali', art_hero_sub:'Malalim na gabay tungkol sa batas at patakaran ng Sweden, para sa ating komunidad. Libreng intro; buong gabay para sa miyembro.',
+    ev_post:'I-post ang event', ev_need:'Pakilagay ang pamagat at live link.', ev_join:'Sumali sa live', ev_live:'LIVE NGAYON', ev_soon:'Malapit nang magsimula', ev_ended:'Tapos na', ev_hosted:'na-host', ev_start:'Simula (petsa at oras)', ev_dur:'Tagal', ev_min:'min', ev_need_time:'Pumili ng petsa at oras ng simula.', tab_share:'Forum', feed_label:'Pinakabagong aktibidad', feed_empty:'Wala pang aktibidad. Ikaw ang mauna!', feed_market:'Palengke', feed_outing:'Lakad', feed_event:'Live event', feed_share:'Forum', feed_translator:'Interpreter', feed_treq:'Kahilingan sa interpreter', feed_ago_now:'ngayon lang', feed_ago_m:'m nakaraan', feed_ago_h:'h nakaraan', feed_ago_d:'d nakaraan', tab_articles:'Batas at Lipunan', art_hero_1:'Gabay & kaalaman —', art_hero_2:'batas ng Sweden na pinadali', art_hero_sub:'Malalim na gabay tungkol sa batas at patakaran ng Sweden, para sa ating komunidad. Libreng intro; buong gabay para sa miyembro.',
     fab_article:'＋ Bagong gabay', art_create:'Gumawa ng gabay', art_edit:'I-edit ang gabay', art_cat:'Paksa', art_title:'Pamagat', art_teaser:'Libreng intro (pang-akit)', art_teaser_ph:'Ilang linya na nagpapakita ng halaga at nakaka-engganyong magbasa pa…', art_body:'Buong nilalaman (naka-lock)', art_body_ph:'Ang buong gabay — miyembro lang ang makakabasa nito…', art_post:'I-publish ang gabay', art_need:'Pakilagay ang pamagat at intro.', art_empty:'Wala pang gabay.',
     art_read:'Basahin pa', art_locked_title:'Ang gabay na ito ay para sa miyembro', art_locked_sub:'I-unlock ang buong gabay para magpatuloy.', art_buy_single:'Isang gabay', art_buy_month:'Buwanan', art_buy_year:'Taunan', art_per_month:'/buwan', art_per_year:'/taon', art_soon:'Malapit nang dumating ang bayad. Para bumili ngayon, makipag-ugnayan:', art_disclaimer:'Para sa sanggunian lamang — hindi kapalit ng opisyal na legal na payo.',
-    sh_hero_1:'Community board —', sh_hero_2:'ibahagi ang balita, larawan & video', sh_hero_sub:'Mag-post ng anumang kapaki-pakinabang. Awtomatikong nabubura ang post pagkatapos ng 72 oras.',
-    sh_note_b:'Tandaan:', sh_note:'lahat ng post ay awtomatikong mawawala pagkatapos ng 72 oras.',
+    sh_hero_1:'Community forum —', sh_hero_2:'ibahagi ang balita, larawan & video', sh_hero_sub:'Mag-post ng anumang kapaki-pakinabang. Awtomatikong nabubura ang post pagkatapos ng 7 araw.',
+    sh_note_b:'Tandaan:', sh_note:'lahat ng post ay awtomatikong mawawala pagkatapos ng 7 araw.',
     fab_share:'＋ Bagong post', sh_create:'Gumawa ng post', sh_content:'Ano ang gusto mong ibahagi?',
     sh_content_ph:'Magsulat, mag-paste ng link, magbahagi ng balita…', sh_media:'Link ng larawan o video (opsyonal)',
     sh_media_ph:'Mag-paste ng YouTube / larawan / TikTok link…', sh_post:'I-post', sh_need:'Magsulat ng ibabahagi.',
@@ -5755,11 +5784,11 @@ const I18N = {
     fab_event:'＋ Tạo sự kiện', ev_create:'Tạo sự kiện', ev_edit:'Sửa sự kiện',
     ev_host:'Tên hiển thị của bạn', ev_topic:'Chủ đề', ev_title:'Tên sự kiện', ev_when:'Khi nào (ngày & giờ)',
     ev_link:'Link live (Zoom, Meet, TikTok…)', ev_desc:'Mô tả', ev_desc_ph:'Vài dòng về sự kiện của bạn…',
-    ev_post:'Đăng sự kiện', ev_need:'Vui lòng nhập tên sự kiện và link live.', ev_join:'Vào live', ev_live:'ĐANG LIVE', ev_soon:'Sắp diễn ra', ev_ended:'Đã kết thúc', ev_hosted:'buổi đã tổ chức', ev_start:'Bắt đầu (ngày & giờ)', ev_dur:'Thời lượng', ev_min:'phút', ev_need_time:'Vui lòng chọn ngày giờ bắt đầu.', tab_share:'Chia sẻ', feed_label:'Hoạt động mới nhất', feed_empty:'Chưa có hoạt động nào. Hãy là người đầu tiên đăng nhé!', feed_market:'Chợ', feed_outing:'Đi chơi', feed_event:'Sự kiện live', feed_share:'Chia sẻ', feed_translator:'Phiên dịch', feed_treq:'Cần phiên dịch', feed_ago_now:'vừa xong', feed_ago_m:'phút trước', feed_ago_h:'giờ trước', feed_ago_d:'ngày trước', tab_articles:'Luật & Xã hội', art_hero_1:'Kiến thức & kinh nghiệm —', art_hero_2:'luật Thụy Điển dễ hiểu', art_hero_sub:'Bài chuyên sâu về luật và quy định Thụy Điển, viết cho cộng đồng mình. Phần mở đầu miễn phí; toàn bài dành cho thành viên.',
+    ev_post:'Đăng sự kiện', ev_need:'Vui lòng nhập tên sự kiện và link live.', ev_join:'Vào live', ev_live:'ĐANG LIVE', ev_soon:'Sắp diễn ra', ev_ended:'Đã kết thúc', ev_hosted:'buổi đã tổ chức', ev_start:'Bắt đầu (ngày & giờ)', ev_dur:'Thời lượng', ev_min:'phút', ev_need_time:'Vui lòng chọn ngày giờ bắt đầu.', tab_share:'Diễn đàn', feed_label:'Hoạt động mới nhất', feed_empty:'Chưa có hoạt động nào. Hãy là người đầu tiên đăng nhé!', feed_market:'Chợ', feed_outing:'Đi chơi', feed_event:'Sự kiện live', feed_share:'Diễn đàn', feed_translator:'Phiên dịch', feed_treq:'Cần phiên dịch', feed_ago_now:'vừa xong', feed_ago_m:'phút trước', feed_ago_h:'giờ trước', feed_ago_d:'ngày trước', tab_articles:'Luật & Xã hội', art_hero_1:'Kiến thức & kinh nghiệm —', art_hero_2:'luật Thụy Điển dễ hiểu', art_hero_sub:'Bài chuyên sâu về luật và quy định Thụy Điển, viết cho cộng đồng mình. Phần mở đầu miễn phí; toàn bài dành cho thành viên.',
     fab_article:'＋ Viết bài mới', art_create:'Viết bài cẩm nang', art_edit:'Sửa bài', art_cat:'Chủ đề', art_title:'Tiêu đề', art_teaser:'Phần mở đầu miễn phí (thu hút người đọc)', art_teaser_ph:'Vài dòng cho thấy giá trị và khiến người ta muốn đọc tiếp…', art_body:'Nội dung đầy đủ (khoá lại)', art_body_ph:'Toàn bộ bài viết — chỉ thành viên mới đọc được phần này…', art_post:'Đăng bài', art_need:'Vui lòng nhập tiêu đề và phần mở đầu.', art_empty:'Chưa có bài nào.',
     art_read:'Đọc tiếp', art_locked_title:'Nội dung này dành cho thành viên', art_locked_sub:'Mở khoá để đọc toàn bộ bài viết.', art_buy_single:'Mua lẻ bài này', art_buy_month:'Gói tháng', art_buy_year:'Gói năm', art_per_month:'/tháng', art_per_year:'/năm', art_soon:'Thanh toán sẽ sớm ra mắt. Để mua ngay, liên hệ:', art_disclaimer:'Chỉ mang tính tham khảo — không thay thế tư vấn pháp lý chính thức.',
-    sh_hero_1:'Bảng tin cộng đồng —', sh_hero_2:'chia sẻ tin tức, ảnh & video', sh_hero_sub:'Đăng bất cứ điều gì hữu ích cho cộng đồng. Bài tự xoá sau 72 giờ để bảng tin luôn mới.',
-    sh_note_b:'Lưu ý:', sh_note:'mỗi bài sẽ tự động biến mất sau 72 giờ.',
+    sh_hero_1:'Diễn đàn cộng đồng —', sh_hero_2:'chia sẻ tin tức, ảnh & video', sh_hero_sub:'Đăng bài, thả 💖 và bình luận cùng mọi người. Bài tự xoá sau 7 ngày để bảng tin luôn mới.',
+    sh_note_b:'Lưu ý:', sh_note:'mỗi bài sẽ tự động biến mất sau 7 ngày.', sh_day_short:'ngày', sh_like:'Thích', sh_cmt:'Bình luận', cmt_ph:'Viết bình luận…', cmt_send:'Gửi', cmt_login:'Đăng nhập để bình luận', cmt_empty:'Chưa có bình luận. Hãy là người đầu tiên!', cmt_del_ask:'Xoá bình luận này?',
     fab_share:'＋ Đăng bài', sh_create:'Đăng bài chia sẻ', sh_content:'Bạn muốn chia sẻ điều gì?',
     sh_content_ph:'Viết gì đó, dán link, chia sẻ tin tức…', sh_media:'Link ảnh hoặc video (tuỳ chọn)',
     sh_media_ph:'Dán link YouTube / ảnh / TikTok…', sh_post:'Đăng', sh_need:'Vui lòng viết nội dung chia sẻ.',
@@ -5861,11 +5890,11 @@ const I18N = {
     fab_event:'＋ สร้างอีเวนต์', ev_create:'สร้างอีเวนต์', ev_edit:'แก้ไขอีเวนต์',
     ev_host:'ชื่อที่แสดงของคุณ', ev_topic:'หัวข้อ', ev_title:'ชื่ออีเวนต์', ev_when:'เมื่อไหร่ (วันและเวลา)',
     ev_link:'ลิงก์ไลฟ์ (Zoom, Meet, TikTok…)', ev_desc:'รายละเอียด', ev_desc_ph:'สองสามคำเกี่ยวกับอีเวนต์ของคุณ…',
-    ev_post:'โพสต์อีเวนต์', ev_need:'กรุณากรอกชื่ออีเวนต์และลิงก์ไลฟ์', ev_join:'เข้าร่วมไลฟ์', ev_live:'กำลังไลฟ์', ev_soon:'กำลังจะเริ่ม', ev_ended:'จบแล้ว', ev_hosted:'ครั้งที่จัด', ev_start:'เริ่ม (วันและเวลา)', ev_dur:'ระยะเวลา', ev_min:'นาที', ev_need_time:'กรุณาเลือกวันและเวลาเริ่ม', tab_share:'แชร์', feed_label:'กิจกรรมล่าสุด', feed_empty:'ยังไม่มีกิจกรรม มาเป็นคนแรกกันเถอะ!', feed_market:'ตลาด', feed_outing:'ทริป', feed_event:'ไลฟ์', feed_share:'แชร์', feed_translator:'ล่าม', feed_treq:'คำขอล่าม', feed_ago_now:'เมื่อกี้', feed_ago_m:'น. ที่แล้ว', feed_ago_h:'ชม. ที่แล้ว', feed_ago_d:'วันที่แล้ว', tab_articles:'กฎหมายและสังคม', art_hero_1:'คู่มือ & ความรู้ —', art_hero_2:'กฎหมายสวีเดนเข้าใจง่าย', art_hero_sub:'คู่มือเชิงลึกเกี่ยวกับกฎหมายและระเบียบสวีเดน เขียนเพื่อชุมชนของเรา บทนำฟรี; เนื้อหาเต็มสำหรับสมาชิก',
+    ev_post:'โพสต์อีเวนต์', ev_need:'กรุณากรอกชื่ออีเวนต์และลิงก์ไลฟ์', ev_join:'เข้าร่วมไลฟ์', ev_live:'กำลังไลฟ์', ev_soon:'กำลังจะเริ่ม', ev_ended:'จบแล้ว', ev_hosted:'ครั้งที่จัด', ev_start:'เริ่ม (วันและเวลา)', ev_dur:'ระยะเวลา', ev_min:'นาที', ev_need_time:'กรุณาเลือกวันและเวลาเริ่ม', tab_share:'ฟอรัม', feed_label:'กิจกรรมล่าสุด', feed_empty:'ยังไม่มีกิจกรรม มาเป็นคนแรกกันเถอะ!', feed_market:'ตลาด', feed_outing:'ทริป', feed_event:'ไลฟ์', feed_share:'ฟอรัม', feed_translator:'ล่าม', feed_treq:'คำขอล่าม', feed_ago_now:'เมื่อกี้', feed_ago_m:'น. ที่แล้ว', feed_ago_h:'ชม. ที่แล้ว', feed_ago_d:'วันที่แล้ว', tab_articles:'กฎหมายและสังคม', art_hero_1:'คู่มือ & ความรู้ —', art_hero_2:'กฎหมายสวีเดนเข้าใจง่าย', art_hero_sub:'คู่มือเชิงลึกเกี่ยวกับกฎหมายและระเบียบสวีเดน เขียนเพื่อชุมชนของเรา บทนำฟรี; เนื้อหาเต็มสำหรับสมาชิก',
     fab_article:'＋ คู่มือใหม่', art_create:'สร้างคู่มือ', art_edit:'แก้ไขคู่มือ', art_cat:'หัวข้อ', art_title:'ชื่อเรื่อง', art_teaser:'บทนำฟรี (ดึงดูดผู้อ่าน)', art_teaser_ph:'สองสามบรรทัดที่แสดงคุณค่าและทำให้อยากอ่านต่อ…', art_body:'เนื้อหาเต็ม (ล็อก)', art_body_ph:'คู่มือฉบับเต็ม — เฉพาะสมาชิกเท่านั้นที่อ่านได้…', art_post:'เผยแพร่คู่มือ', art_need:'กรุณากรอกชื่อเรื่องและบทนำ', art_empty:'ยังไม่มีคู่มือ',
     art_read:'อ่านต่อ', art_locked_title:'คู่มือนี้สำหรับสมาชิก', art_locked_sub:'ปลดล็อกคู่มือฉบับเต็มเพื่ออ่านต่อ', art_buy_single:'คู่มือเดี่ยว', art_buy_month:'รายเดือน', art_buy_year:'รายปี', art_per_month:'/เดือน', art_per_year:'/ปี', art_soon:'ระบบชำระเงินกำลังจะมา ต้องการซื้อตอนนี้ ติดต่อ:', art_disclaimer:'เพื่อการอ้างอิงเท่านั้น — ไม่ใช่การทดแทนคำแนะนำทางกฎหมายอย่างเป็นทางการ',
-    sh_hero_1:'บอร์ดชุมชน —', sh_hero_2:'แชร์ข่าว รูปภาพ & วิดีโอ', sh_hero_sub:'โพสต์สิ่งที่มีประโยชน์ต่อชุมชน โพสต์จะถูกลบอัตโนมัติหลัง 72 ชั่วโมง',
-    sh_note_b:'หมายเหตุ:', sh_note:'ทุกโพสต์จะหายไปอัตโนมัติหลัง 72 ชั่วโมง',
+    sh_hero_1:'บอร์ดชุมชน —', sh_hero_2:'แชร์ข่าว รูปภาพ & วิดีโอ', sh_hero_sub:'โพสต์สิ่งที่มีประโยชน์ต่อชุมชน โพสต์จะถูกลบอัตโนมัติหลัง 7 วัน',
+    sh_note_b:'หมายเหตุ:', sh_note:'ทุกโพสต์จะหายไปอัตโนมัติหลัง 7 วัน',
     fab_share:'＋ โพสต์ใหม่', sh_create:'สร้างโพสต์', sh_content:'คุณอยากแชร์อะไร?',
     sh_content_ph:'เขียนอะไรสักอย่าง วางลิงก์ แชร์ข่าว…', sh_media:'ลิงก์รูปหรือวิดีโอ (ไม่บังคับ)',
     sh_media_ph:'วางลิงก์ YouTube / รูป / TikTok…', sh_post:'โพสต์', sh_need:'กรุณาเขียนเนื้อหาที่จะแชร์',
@@ -5968,9 +5997,9 @@ Object.assign(I18N, {
     post_delete:'हटाएँ', post_del_confirm:'यह पोस्ट हटाएँ? यह वापस नहीं होगा।', post_edit:'संपादित करें', post_save:'बदलाव सहेजें',
     tab_fun:'लाइव', hc_fun_d:'कराओके रातें, DJ सेट, दिल की बातें, खेल — कोई भी किसी भी विषय पर लाइव इवेंट होस्ट कर सकता है।', hc_fun_go:'लाइव देखें →',
     ev_hero_1:'लाइव और मस्ती —', ev_hero_2:'इवेंट होस्ट करें या शामिल हों', ev_hero_sub:'कराओके रातें, DJ सेट, दिल की बातें, खेल और बहुत कुछ — समुदाय द्वारा बनाया गया।', ev_note_b:'यह कैसे काम करता है:', ev_note:'इवेंट आपके चुने प्लेटफ़ॉर्म (Zoom, Meet, TikTok, Facebook…) पर होते हैं। लिंक जोड़ें ताकि लोग शामिल हो सकें।', fab_event:'＋ इवेंट बनाएँ', ev_create:'एक इवेंट बनाएँ', ev_edit:'इवेंट संपादित करें', ev_host:'आपका प्रदर्शित नाम', ev_topic:'विषय', ev_title:'इवेंट शीर्षक', ev_when:'कब (तिथि और समय)', ev_link:'लाइव लिंक (Zoom, Meet, TikTok…)', ev_desc:'विवरण', ev_desc_ph:'अपने इवेंट के बारे में कुछ शब्द…', ev_post:'इवेंट पोस्ट करें', ev_need:'कृपया एक शीर्षक और लाइव लिंक दर्ज करें।', ev_join:'लाइव में शामिल हों', ev_live:'अभी लाइव', ev_soon:'जल्द शुरू', ev_ended:'समाप्त', ev_hosted:'होस्ट किया', ev_start:'शुरू (तिथि और समय)', ev_dur:'अवधि', ev_min:'मिनट', ev_need_time:'कृपया शुरू करने की तिथि और समय चुनें।',
-    tab_share:'साझा करें', feed_label:'नवीनतम गतिविधि', feed_empty:'अभी कोई गतिविधि नहीं। कुछ पोस्ट करने वाले पहले बनें!', feed_market:'बाज़ार', feed_outing:'सैर', feed_event:'लाइव इवेंट', feed_share:'साझा', feed_translator:'दुभाषिया', feed_treq:'दुभाषिया अनुरोध', feed_ago_now:'अभी', feed_ago_m:'मिनट पहले', feed_ago_h:'घंटे पहले', feed_ago_d:'दिन पहले',
+    tab_share:'फ़ोरम', feed_label:'नवीनतम गतिविधि', feed_empty:'अभी कोई गतिविधि नहीं। कुछ पोस्ट करने वाले पहले बनें!', feed_market:'बाज़ार', feed_outing:'सैर', feed_event:'लाइव इवेंट', feed_share:'फ़ोरम', feed_translator:'दुभाषिया', feed_treq:'दुभाषिया अनुरोध', feed_ago_now:'अभी', feed_ago_m:'मिनट पहले', feed_ago_h:'घंटे पहले', feed_ago_d:'दिन पहले',
     tab_articles:'कानून और समाज', art_hero_1:'गाइड और जानकारी —', art_hero_2:'स्वीडिश कानून आसान भाषा में', art_hero_sub:'स्वीडिश कानून और नियमों पर विस्तृत गाइड, हमारे समुदाय के लिए लिखे गए। मुफ़्त परिचय; पूरा गाइड सदस्यों के लिए।', fab_article:'＋ नया गाइड', art_create:'गाइड बनाएँ', art_edit:'गाइड संपादित करें', art_cat:'विषय', art_title:'शीर्षक', art_teaser:'मुफ़्त परिचय (पाठकों को आकर्षित करें)', art_teaser_ph:'कुछ पंक्तियाँ जो मूल्य दिखाएँ और आगे पढ़ने को प्रेरित करें…', art_body:'पूरी सामग्री (लॉक)', art_body_ph:'पूरा गाइड — केवल सदस्य यह भाग पढ़ सकते हैं…', art_post:'गाइड प्रकाशित करें', art_need:'कृपया एक शीर्षक और परिचय दर्ज करें।', art_empty:'अभी कोई गाइड नहीं।', art_read:'और पढ़ें', art_locked_title:'यह गाइड सदस्यों के लिए है', art_locked_sub:'पढ़ना जारी रखने के लिए पूरा गाइड अनलॉक करें।', art_buy_single:'एकल गाइड', art_buy_month:'मासिक', art_buy_year:'वार्षिक', art_per_month:'/महीना', art_per_year:'/साल', art_soon:'भुगतान जल्द आ रहा है। अभी खरीदने के लिए संपर्क करें:', art_disclaimer:'केवल संदर्भ के लिए — आधिकारिक कानूनी सलाह का विकल्प नहीं।',
-    sh_hero_1:'समुदाय बोर्ड —', sh_hero_2:'खबर, फ़ोटो और वीडियो साझा करें', sh_hero_sub:'समुदाय के लिए उपयोगी कुछ भी पोस्ट करें। पोस्ट 72 घंटे बाद अपने आप हट जाती हैं ताकि सब ताज़ा रहे।', sh_note_b:'ध्यान दें:', sh_note:'हर पोस्ट 72 घंटे बाद अपने आप गायब हो जाती है।', fab_share:'＋ नई पोस्ट', sh_create:'एक पोस्ट बनाएँ', sh_content:'आप क्या साझा करना चाहते हैं?', sh_content_ph:'कुछ लिखें, लिंक चिपकाएँ, खबर साझा करें…', sh_media:'छवि या वीडियो लिंक (वैकल्पिक)', sh_media_ph:'YouTube / छवि / TikTok लिंक चिपकाएँ…', sh_post:'पोस्ट', sh_need:'कृपया साझा करने के लिए कुछ लिखें।', sh_empty:'अभी कोई पोस्ट नहीं। कुछ साझा करने वाले पहले बनें!', sh_expires:'बचा', sh_expired:'जल्द समाप्त', sh_hr:'घं', sh_min_short:'मि',
+    sh_hero_1:'समुदाय बोर्ड —', sh_hero_2:'खबर, फ़ोटो और वीडियो साझा करें', sh_hero_sub:'समुदाय के लिए उपयोगी कुछ भी पोस्ट करें। पोस्ट 7 दिन बाद अपने आप हट जाती हैं ताकि सब ताज़ा रहे।', sh_note_b:'ध्यान दें:', sh_note:'हर पोस्ट 7 दिन बाद अपने आप गायब हो जाती है।', fab_share:'＋ नई पोस्ट', sh_create:'एक पोस्ट बनाएँ', sh_content:'आप क्या साझा करना चाहते हैं?', sh_content_ph:'कुछ लिखें, लिंक चिपकाएँ, खबर साझा करें…', sh_media:'छवि या वीडियो लिंक (वैकल्पिक)', sh_media_ph:'YouTube / छवि / TikTok लिंक चिपकाएँ…', sh_post:'पोस्ट', sh_need:'कृपया साझा करने के लिए कुछ लिखें।', sh_empty:'अभी कोई पोस्ट नहीं। कुछ साझा करने वाले पहले बनें!', sh_expires:'बचा', sh_expired:'जल्द समाप्त', sh_hr:'घं', sh_min_short:'मि',
     ev_empty:'अभी कोई इवेंट नहीं। पहला होस्ट करने वाले बनें!', topic_karaoke:'🎤 कराओके', topic_dj:'🎧 DJ / संगीत', topic_talk:'💬 दिल की बात', topic_swedish:'🇸🇪 स्वीडिश सीखें', topic_game:'🎮 खेल', topic_study:'📚 साथ पढ़ें', topic_sport:'⚽ खेलकूद', topic_other:'✨ अन्य',
     tr_show:'अनुवाद', tr_hide:'मूल दिखाएँ', tr_loading:'अनुवाद हो रहा है…', tr_fail:'अनुवाद विफल', feed_more:'और देखें'
   },
@@ -6016,9 +6045,9 @@ Object.assign(I18N, {
     post_delete:'Obriši', post_del_confirm:'Obrisati ovu objavu? Ovo se ne može poništiti.', post_edit:'Uredi', post_save:'Sačuvaj izmjene',
     tab_fun:'Uživo', hc_fun_d:'Karaoke večeri, DJ setovi, razgovori od srca, igre — svako može voditi događaj uživo na bilo koju temu.', hc_fun_go:'Istraži Uživo →',
     ev_hero_1:'Uživo i zabava —', ev_hero_2:'vodite ili se pridružite događajima', ev_hero_sub:'Karaoke večeri, DJ setovi, razgovori od srca, igre i još — kreirano od zajednice.', ev_note_b:'Kako funkcioniše:', ev_note:'događaji se održavaju na platformi po vašem izboru (Zoom, Meet, TikTok, Facebook…). Dodajte link da se ljudi mogu pridružiti.', fab_event:'＋ Kreiraj događaj', ev_create:'Kreiraj događaj', ev_edit:'Uredi događaj', ev_host:'Vaše prikazano ime', ev_topic:'Tema', ev_title:'Naslov događaja', ev_when:'Kada (datum i vrijeme)', ev_link:'Link uživo (Zoom, Meet, TikTok…)', ev_desc:'Opis', ev_desc_ph:'Nekoliko riječi o vašem događaju…', ev_post:'Objavi događaj', ev_need:'Molimo unesite naslov i link uživo.', ev_join:'Pridruži se uživo', ev_live:'UŽIVO SADA', ev_soon:'Počinje uskoro', ev_ended:'Završeno', ev_hosted:'vodi', ev_start:'Početak (datum i vrijeme)', ev_dur:'Trajanje', ev_min:'min', ev_need_time:'Molimo odaberite datum i vrijeme početka.',
-    tab_share:'Podijeli', feed_label:'Najnovije aktivnosti', feed_empty:'Još nema aktivnosti. Budite prvi koji nešto objavi!', feed_market:'Tržnica', feed_outing:'Izlazak', feed_event:'Događaj uživo', feed_share:'Podijeljeno', feed_translator:'Prevodilac', feed_treq:'Zahtjev za prevodioca', feed_ago_now:'upravo sad', feed_ago_m:'min prije', feed_ago_h:'h prije', feed_ago_d:'d prije',
+    tab_share:'Forum', feed_label:'Najnovije aktivnosti', feed_empty:'Još nema aktivnosti. Budite prvi koji nešto objavi!', feed_market:'Tržnica', feed_outing:'Izlazak', feed_event:'Događaj uživo', feed_share:'Forum', feed_translator:'Prevodilac', feed_treq:'Zahtjev za prevodioca', feed_ago_now:'upravo sad', feed_ago_m:'min prije', feed_ago_h:'h prije', feed_ago_d:'d prije',
     tab_articles:'Zakon i društvo', art_hero_1:'Vodiči i znanje —', art_hero_2:'švedski zakon jednostavno objašnjen', art_hero_sub:'Detaljni vodiči o švedskom zakonu i pravilima, napisani za našu zajednicu. Besplatan uvod; pun vodič za članove.', fab_article:'＋ Novi vodič', art_create:'Kreiraj vodič', art_edit:'Uredi vodič', art_cat:'Tema', art_title:'Naslov', art_teaser:'Besplatan uvod (privucite čitaoce)', art_teaser_ph:'Nekoliko redova koji pokazuju vrijednost i mame na dalje čitanje…', art_body:'Puni sadržaj (zaključan)', art_body_ph:'Pun vodič — samo članovi mogu čitati ovaj dio…', art_post:'Objavi vodič', art_need:'Molimo unesite naslov i uvod.', art_empty:'Još nema vodiča.', art_read:'Pročitaj više', art_locked_title:'Ovaj vodič je za članove', art_locked_sub:'Otključajte pun vodič da nastavite čitati.', art_buy_single:'Pojedinačni vodič', art_buy_month:'Mjesečno', art_buy_year:'Godišnje', art_per_month:'/mjesec', art_per_year:'/godina', art_soon:'Plaćanje uskoro dolazi. Za kupovinu sada, kontaktirajte:', art_disclaimer:'Samo informativno — nije zamjena za zvaničan pravni savjet.',
-    sh_hero_1:'Oglasna ploča zajednice —', sh_hero_2:'podijeli vijesti, fotografije i video', sh_hero_sub:'Objavite bilo šta korisno za zajednicu. Objave se automatski brišu nakon 72 sata da sve ostane svježe.', sh_note_b:'Napomena:', sh_note:'svaka objava nestaje automatski nakon 72 sata.', fab_share:'＋ Nova objava', sh_create:'Kreiraj objavu', sh_content:'Šta želite podijeliti?', sh_content_ph:'Napišite nešto, zalijepite link, podijelite vijest…', sh_media:'Link slike ili videa (opcionalno)', sh_media_ph:'Zalijepite YouTube / sliku / TikTok link…', sh_post:'Objavi', sh_need:'Molimo napišite nešto za podijeliti.', sh_empty:'Još nema objava. Budite prvi koji nešto podijeli!', sh_expires:'preostalo', sh_expired:'uskoro ističe', sh_hr:'h', sh_min_short:'min',
+    sh_hero_1:'Oglasna ploča zajednice —', sh_hero_2:'podijeli vijesti, fotografije i video', sh_hero_sub:'Objavite bilo šta korisno za zajednicu. Objave se automatski brišu nakon 7 dana da sve ostane svježe.', sh_note_b:'Napomena:', sh_note:'svaka objava nestaje automatski nakon 7 dana.', fab_share:'＋ Nova objava', sh_create:'Kreiraj objavu', sh_content:'Šta želite podijeliti?', sh_content_ph:'Napišite nešto, zalijepite link, podijelite vijest…', sh_media:'Link slike ili videa (opcionalno)', sh_media_ph:'Zalijepite YouTube / sliku / TikTok link…', sh_post:'Objavi', sh_need:'Molimo napišite nešto za podijeliti.', sh_empty:'Još nema objava. Budite prvi koji nešto podijeli!', sh_expires:'preostalo', sh_expired:'uskoro ističe', sh_hr:'h', sh_min_short:'min',
     ev_empty:'Još nema događaja. Budite prvi domaćin!', topic_karaoke:'🎤 Karaoke', topic_dj:'🎧 DJ / Muzika', topic_talk:'💬 Od srca', topic_swedish:'🇸🇪 Uči švedski', topic_game:'🎮 Igre', topic_study:'📚 Učimo zajedno', topic_sport:'⚽ Sport', topic_other:'✨ Ostalo',
     tr_show:'Prevedi', tr_hide:'Prikaži original', tr_loading:'Prevodim…', tr_fail:'Prijevod nije uspio', feed_more:'Vidi više'
   }
@@ -8421,16 +8450,18 @@ function submitEvent(editId) {
 }
 
 // ============================================================
-// ===== CHIA SẺ / BẢNG TIN (tự xoá sau 72h) =====
+// ===== CHIA SẺ / DIỄN ĐÀN (tự xoá sau 7 ngày) =====
 // ============================================================
-const SHARE_TTL = 72*3600000; // 72 giờ
+const SHARE_TTL = 7*24*3600000; // 7 ngày
 let POSTS = [];
 function fmtTimeLeft(iso) {
   const created = new Date(iso).getTime();
   const left = SHARE_TTL - (Date.now() - created);
   if (left <= 0) return null;
+  const days = Math.floor(left/86400000);
   const hrs = Math.floor(left/3600000);
   const mins = Math.floor((left%3600000)/60000);
+  if (days >= 1) return `${days}${t('sh_day_short')} ${t('sh_expires')}`;
   if (hrs >= 1) return `${hrs}${t('sh_hr')} ${t('sh_expires')}`;
   return `${mins}${t('sh_min_short')} ${t('sh_expires')}`;
 }
@@ -8453,6 +8484,71 @@ function mediaHTML(url) {
   // link khác: hiện nút mở
   return `<a class="sh-link" href="${u}" target="_blank" rel="noopener">🔗 ${u.replace(/^https?:\/\//,'').slice(0,50)}…</a>`;
 }
+// ===== 💖 THÍCH & 💬 BÌNH LUẬN =====
+let openCmt = {};   // id bài đang mở khung bình luận
+function pLikes(p){ return Number(p.likes||0); }
+function pLiked(p){ return !!p.liked; }
+function pCmts(p){ return Array.isArray(p.comments) ? p.comments : []; }
+function ownsCmt(c){ return currentUser && String(c.email||'').toLowerCase() === String(currentUser.email||'').toLowerCase(); }
+
+async function toggleLikePost(id){
+  requireLogin(async () => {
+    const p = POSTS.find(x=>String(x.id)===String(id)); if (!p) return;
+    p.liked = !p.liked;                                   // cập nhật ngay cho mượt
+    p.likes = Math.max(0, pLikes(p) + (p.liked ? 1 : -1));
+    renderShare();
+    try {
+      const r = await callApi({ action:'likePost', post_id:id, email:currentUser.email });
+      if (r && r.ok) { p.likes = Number(r.likes)||0; p.liked = !!r.liked; renderShare(); }
+    } catch(e) {}
+  });
+}
+function toggleCmt(id){ openCmt[id] = !openCmt[id]; renderShare(); }
+async function submitCmt(id){
+  const box = document.getElementById('cmt-in-'+id); if (!box) return;
+  const noidung = box.value.trim(); if (!noidung) return;
+  requireLogin(async () => {
+    const p = POSTS.find(x=>String(x.id)===String(id)); if (!p) return;
+    const c = { id:'tmp'+Date.now(), post_id:id, email:currentUser.email,
+      ten:(currentUser.ten||currentUser.email.split('@')[0]), anh_dd:(currentUser.anh||''),
+      noidung, ngay_tao:new Date().toISOString() };
+    p.comments = pCmts(p).concat([c]);
+    box.value=''; openCmt[id]=true; renderShare();
+    try {
+      const r = await callApi({ action:'addComment', post_id:id, email:currentUser.email,
+        ten:c.ten, anh_dd:c.anh_dd, noidung });
+      if (r && r.ok && r.comment) { c.id = r.comment.id; }
+    } catch(e) {}
+  });
+}
+async function delCmt(postId, cmtId){
+  if (!confirm(t('cmt_del_ask'))) return;
+  const p = POSTS.find(x=>String(x.id)===String(postId)); if (!p) return;
+  p.comments = pCmts(p).filter(c=>String(c.id)!==String(cmtId));
+  renderShare();
+  try { await callApi({ action:'deleteComment', id:cmtId, email:currentUser.email }); } catch(e) {}
+}
+function cmtHTML(p){
+  const list = pCmts(p).slice().sort((a,b)=> new Date(a.ngay_tao)-new Date(b.ngay_tao));
+  const items = list.map(c => `
+    <div class="cmt">
+      <div class="avatar sm" style="background:${AV[avColor(c.email||c.ten)]}${c.anh_dd?`;background-image:url('${c.anh_dd}');background-size:cover`:''}">${c.anh_dd?'':initials(c.ten)}</div>
+      <div class="cmt-b">
+        <div class="cmt-h"><b>${escapeHtml(c.ten||'')}</b><span>${timeAgo(c.ngay_tao)}</span>
+          ${ownsCmt(c)?`<button class="cmt-x" onclick="delCmt('${p.id}','${c.id}')" title="${t('post_delete')}">✕</button>`:''}
+        </div>
+        <div class="cmt-t">${escapeHtml(c.noidung||'')}</div>
+      </div>
+    </div>`).join('');
+  const input = currentUser
+    ? `<div class="cmt-in">
+         <input id="cmt-in-${p.id}" placeholder="${t('cmt_ph')}" onkeydown="if(event.key==='Enter')submitCmt('${p.id}')">
+         <button onclick="submitCmt('${p.id}')">${t('cmt_send')}</button>
+       </div>`
+    : `<div class="cmt-in"><button class="cmt-login" onclick="onAccountClick()">${t('cmt_login')}</button></div>`;
+  return `<div class="sh-cmts">${items || `<div class="cmt-empty">${t('cmt_empty')}</div>`}${input}</div>`;
+}
+
 function renderShare() {
   const feed = document.getElementById('sh-feed');
   const list = POSTS
@@ -8462,6 +8558,7 @@ function renderShare() {
   if (!list.length) { feed.innerHTML = '<div class="empty">'+t('sh_empty')+'</div>'; return; }
   feed.innerHTML = list.map(p => {
     const left = fmtTimeLeft(p.ngay_tao);
+    const nL = pLikes(p), nC = pCmts(p).length;
     return `
     <article class="sh-card">
       <div class="sh-top">
@@ -8471,6 +8568,15 @@ function renderShare() {
       </div>
       ${p.noidung?`<div class="sh-text">${escapeHtml(p.noidung)}</div>`:''}
       ${mediaHTML(p.media)}
+      <div class="sh-acts">
+        <button class="sh-act ${pLiked(p)?'on':''}" onclick="toggleLikePost('${p.id}')">
+          <span class="sh-ic">💖</span><span>${nL>0?nL:''} ${t('sh_like')}</span>
+        </button>
+        <button class="sh-act ${openCmt[p.id]?'on2':''}" onclick="toggleCmt('${p.id}')">
+          <span class="sh-ic">💬</span><span>${nC>0?nC:''} ${t('sh_cmt')}</span>
+        </button>
+      </div>
+      ${openCmt[p.id] ? cmtHTML(p) : ''}
     </article>`;
   }).join('');
 }
@@ -8496,7 +8602,8 @@ function submitShare() {
   // ưu tiên ảnh upload làm media nếu có
   const media = anhUp || mediaLink;
   const item = { tp:activeCity, host:(currentUser.ten||currentUser.email.split('@')[0]), anh_dd:(currentUser.anh||''),
-    noidung, media, loai: media?'media':'text', email:currentUser.email, ngay_tao:new Date().toISOString() };
+    noidung, media, loai: media?'media':'text', email:currentUser.email, ngay_tao:new Date().toISOString(),
+    likes:0, liked:false, comments:[] };
   POSTS.unshift(item);
   closeModal(); renderShare();
   callApi({ action:'addPost', ...item }).catch(()=>{});
