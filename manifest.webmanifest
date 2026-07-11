@@ -1,0 +1,18 @@
+{
+  "name": "QiQa — Cộng đồng người xa quê tại Thụy Điển",
+  "short_name": "QiQa",
+  "description": "Nơi kết nối cộng đồng xa quê tại Thụy Điển: dịch vụ, sự kiện, diễn đàn, chợ cộng đồng và kiến thức luật.",
+  "start_url": "/?src=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#faf5ec",
+  "theme_color": "#e2603f",
+  "lang": "vi",
+  "categories": ["social", "lifestyle"],
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
