@@ -307,6 +307,44 @@
   #sh-feed { display: grid; gap: 14px; }
   .sh-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 15px 16px; }
   /* 💖 thích & 💬 bình luận */
+  /* 🔮 Tử vi */
+  .hr-intro { font-size: 13.5px; color: var(--text-2); margin: 4px 0 12px; text-align: center; }
+  .hr-picker { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
+  .hr-chip { padding: 7px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface);
+    font-size: 12.5px; font-weight: 600; color: var(--text-2); cursor: pointer; transition: .12s; }
+  .hr-chip:hover { border-color: var(--gold); }
+  .hr-chip.on { background: var(--tint-amber); border-color: var(--tint-amber-bd); color: var(--gold-text); }
+  .hr-card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 18px; }
+  .hr-top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .hr-ic { width: 52px; height: 52px; min-width: 52px; border-radius: 16px; display: flex; align-items: center;
+    justify-content: center; font-size: 26px; background: var(--tint-amber); border: 1px solid var(--tint-amber-bd); }
+  .hr-name { font-size: 17px; font-weight: 800; color: var(--ink); }
+  .hr-date { font-size: 12px; color: var(--muted); }
+  .hr-stars { margin-left: auto; font-size: 15px; color: var(--gold-text); letter-spacing: 1px; }
+  .hr-row { padding: 10px 0; border-top: 1px solid var(--line); }
+  .hr-row b { font-size: 13px; color: var(--ink); display: block; margin-bottom: 3px; }
+  .hr-row p { font-size: 13.5px; color: var(--text-2); line-height: 1.55; }
+  .hr-lucky { display: flex; gap: 14px; flex-wrap: wrap; padding: 11px 0; border-top: 1px solid var(--line);
+    font-size: 12.5px; color: var(--text-2); }
+  .hr-lucky b { color: var(--gold-text); }
+  .hr-match { padding-top: 11px; border-top: 1px solid var(--line); }
+  .hr-match-t { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 7px; }
+  .hr-match-l { display: flex; flex-wrap: wrap; gap: 7px; }
+  .hr-m { padding: 6px 11px; border-radius: 999px; font-size: 12.5px; font-weight: 600;
+    background: var(--tint-rose); border: 1px solid var(--tint-rose-bd); color: var(--ink); }
+  .hr-note { margin-top: 12px; font-size: 11.5px; color: var(--muted); text-align: center; }
+  /* 🔥 Nổi bật cộng đồng (trang chủ) */
+  .sp-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0 4px; }
+  @media (max-width: 760px) { .sp-wrap { grid-template-columns: 1fr; } }
+  .sp-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 14px 15px; }
+  .sp-head { font-size: 13px; font-weight: 800; color: var(--ink); margin-bottom: 10px; }
+  .sp-item { display: flex; align-items: center; gap: 9px; padding: 7px 0; cursor: pointer; border-radius: 10px; transition: .12s; }
+  .sp-item:hover { background: var(--paper-2); }
+  .sp-rank { font-size: 15px; min-width: 20px; text-align: center; }
+  .sp-b { flex: 1; min-width: 0; }
+  .sp-tx { font-size: 13.5px; font-weight: 700; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sp-meta { font-size: 11.5px; color: var(--muted); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sh-views { font-size: 12px; color: var(--muted); margin-top: 10px; }
   .sh-acts { display: flex; gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); }
   .sh-act { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
     padding: 8px 10px; border-radius: 11px; border: 1px solid var(--line); background: transparent;
@@ -1110,7 +1148,7 @@
   <div class="tab" data-tab="translate" onclick="switchTab('translate')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='8.2'/><path d='M3.8 9.5h16.4M3.8 14.5h16.4'/><path d='M12 3.8c2.6 2.6 2.6 13.8 0 16.4M12 3.8c-2.6 2.6-2.6 13.8 0 16.4'/></svg></span><span class="tab-tx" data-i18n="tab_translate">Cung cấp dịch vụ</span></div>
   <div class="tab" data-tab="friends" onclick="switchTab('friends')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M12 20s-6.5-4.2-6.5-9A3.4 3.4 0 0 1 12 9.2 3.4 3.4 0 0 1 18.5 11c0 4.8-6.5 9-6.5 9z'/></svg></span><span class="tab-tx" data-i18n="tab_friends">Kết bạn</span></div>
   <div class="tab" data-tab="market" onclick="switchTab('market')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M6.5 8h11l-1 11.5h-9z'/><path d='M9.2 8V6.4a2.8 2.8 0 0 1 5.6 0V8'/></svg></span><span class="tab-tx" data-i18n="tab_market">Chợ cộng đồng</span></div>
-  <div class="tab" data-tab="outings" onclick="switchTab('outings')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='8' cy='7' r='2.4'/><path d='M4 20v-3.5a4 4 0 0 1 8 0V20'/><circle cx='16.5' cy='9' r='1.8'/><path d='M14 20v-3a3 3 0 0 1 6 0v3'/></svg></span><span class="tab-tx" data-i18n="tab_outings">Đi chơi cùng con</span></div>
+  <div class="tab" data-tab="outings" onclick="switchTab('outings')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='8' cy='7' r='2.4'/><path d='M4 20v-3.5a4 4 0 0 1 8 0V20'/><circle cx='16.5' cy='9' r='1.8'/><path d='M14 20v-3a3 3 0 0 1 6 0v3'/></svg></span><span class="tab-tx" data-i18n="tab_outings">Sự kiện</span></div>
   <div class="tab" data-tab="services" onclick="switchTab('services')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><rect x='3.5' y='5' width='17' height='11' rx='1.6'/><path d='M2 19.5h20'/></svg></span><span class="tab-tx" data-i18n="tab_services">Shoping</span></div>
   <div class="tab" data-tab="member" onclick="switchTab('member')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M12 4l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L5.2 9.7l5.4-.8z'/></svg></span><span class="tab-tx" data-i18n="tab_member">VIP</span></div>
   <div class="tab" data-tab="about" onclick="switchTab('about')"><span class="tab-ic"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='8.2'/><path d='M12 11.2v4.6'/><circle cx='12' cy='8.2' r='.4' fill='currentColor'/></svg></span><span class="tab-tx" data-i18n="tab_about">Về chúng tôi</span></div>
@@ -1148,6 +1186,7 @@
     </div>
   </section>
 
+  <div id="homeSpotlight"></div>
   <div class="home-posts" id="homePosts"></div>
 
   <section class="home-split">
@@ -1215,9 +1254,10 @@
 <!-- OUTINGS -->
 <div id="view-outings" class="hidden">
   <section class="hero">
-    <h1><span data-i18n="hero_out_1">Cùng con đi chơi,</span> <span class="em" data-i18n="hero_out_2">cùng bố mẹ kết bạn</span></h1>
-    <p data-i18n="hero_out_sub">Các bậc phụ huynh rủ nhau đưa con đi chơi ở những địa điểm công cộng tại Thụy Điển.</p>
+    <h1><span data-i18n="hero_out_1">Sự kiện cộng đồng —</span> <span class="em" data-i18n="hero_out_2">gặp gỡ, cắm trại, đi chơi</span></h1>
+    <p data-i18n="hero_out_sub">Tổ chức hoặc tham gia mọi hoạt động ngoài đời: hội họp, cắm trại, dã ngoại, đi chơi cùng con, thể thao…</p>
   </section>
+  <div class="chips" id="ev-chips"></div>
   <main class="wrap">
     <div class="safety green">
       <span>🛡️</span>
@@ -1225,7 +1265,7 @@
     </div>
     <div class="feed" id="feed"></div>
   </main>
-  <button class="fab" data-for="outings" onclick="openCreate()" data-i18n="fab_outing">＋ Tạo buổi đi chơi</button>
+  <button class="fab" data-for="outings" onclick="openCreate()" data-i18n="fab_outing">＋ Tạo sự kiện</button>
 </div>
 
 <!-- MARKET -->
@@ -1257,6 +1297,7 @@
     <div class="sub-tab on" data-sub="discover" onclick="switchFrSub('discover')" data-i18n="sub_discover">Gợi ý</div>
     <div class="sub-tab" data-sub="matches" onclick="switchFrSub('matches')" data-i18n="sub_matches">Đã kết nối</div>
     <div class="sub-tab" data-sub="events" onclick="switchFrSub('events')" data-i18n="sub_events">Sự kiện độc thân</div>
+    <div class="sub-tab" data-sub="horo" onclick="switchFrSub('horo')" data-i18n="sub_horo">🔮 Tử vi</div>
   </div>
   <main class="wrap">
     <div class="safety pink">
@@ -1286,6 +1327,7 @@
     </div>
 
     <!-- sự kiện -->
+    <div id="fr-horo" class="hidden"></div>
     <div id="fr-events" class="hidden">
       <div class="feed" id="fr-event-list"></div>
     </div>
@@ -1462,7 +1504,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v128-realtime-fix</span></p>
+  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v130-events-horoscope</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -1548,7 +1590,7 @@ const I18N = {
     all_sweden:'全瑞典',
     tab_home:'首页',
     tab_places:'签到',
-    tab_outings:'亲子出游',
+    tab_outings:'活动',
     tab_market:'跳蚤市场',
     tab_friends:'交朋友',
     tab_translate:'提供服务',
@@ -2017,7 +2059,7 @@ const I18N = {
     all_sweden:'Уся Швеція',
     tab_home:'Головна',
     tab_places:'Чек-ін',
-    tab_outings:'Прогулянки з дітьми',
+    tab_outings:'Події',
     tab_market:'Барахолка',
     tab_friends:'Знайомства',
     tab_translate:'Послуги',
@@ -3422,7 +3464,7 @@ const I18N = {
     all_sweden:'سراسر سوئد',
     tab_home:'خانه',
     tab_places:'مکان‌ها',
-    tab_outings:'گردش با کودکان',
+    tab_outings:'رویدادها',
     tab_market:'بازار',
     tab_friends:'دوستان',
     tab_translate:'خدمات',
@@ -3890,7 +3932,7 @@ const I18N = {
     all_sweden:'كل السويد',
     tab_home:'الرئيسية',
     tab_places:'الأماكن',
-    tab_outings:'نزهات مع الأطفال',
+    tab_outings:'فعاليات',
     tab_market:'السوق',
     tab_friends:'أصدقاء',
     tab_translate:'الخدمات',
@@ -4358,7 +4400,7 @@ const I18N = {
     all_sweden:'Cała Szwecja',
     tab_home:'Główna',
     tab_places:'Miejsca',
-    tab_outings:'Wyjścia z dziećmi',
+    tab_outings:'Wydarzenia',
     tab_market:'Targ',
     tab_friends:'Znajomi',
     tab_translate:'Usługi',
@@ -4826,7 +4868,7 @@ const I18N = {
     all_sweden:'Koko Ruotsi',
     tab_home:'Etusivu',
     tab_places:'Paikat',
-    tab_outings:'Retket lasten kanssa',
+    tab_outings:'Tapahtumat',
     tab_market:'Kirpputori',
     tab_friends:'Ystävät',
     tab_translate:'Palvelut',
@@ -5292,7 +5334,7 @@ const I18N = {
   },
   en: {
     all_sweden:'All Sweden',
-    tab_home:'Home', tab_places:'Check-in', tab_outings:'Outings with kids', tab_market:'Marketplace',
+    tab_home:'Home', tab_places:'Check-in', tab_outings:'Events', tab_market:'Marketplace',
     tab_friends:'Make friends', tab_translate:'Services', tab_services:'Shoping', tab_about:'About us', tab_member:'VIP', mb_hero_1:'Become a', mb_hero_2:'QiQa VIP', mb_intro:'QiQa is a shared home for our community far from home. To keep this place safe, clean and ad-free for everyone, we need your support.', mb_free_t:'Just browsing (free)', mb_free_d:'You can see promotional bulletins and public notices only.', mb_mem_t:'Member — full access', mb_b1:'Read all Guides (law, procedures, updates)', mb_b2:'Member badge on your profile', mb_b3:'Support a healthy community', mb_b_credit:'100 credits as a welcome gift — redeem them for paid services', svc_use_credit:'💎 Use {n} credits (balance: {bal})', svc_buy_credit:'💎 Not enough credits — Top up', svc_or_swish:'Or pay directly with Swish:', mb_pick:'Choose your plan', mb_month:'1 month', mb_6month:'6 months', mb_year:'1 year', mb_popular:'Popular', mb_best:'Best value', mb_pledge:'Your contribution helps us keep QiQa running for everyone — together we build a healthy community.', mb_pay_t:'Pay with Swish to join', mb_pay_step:'Swish the amount to 072-567 11 11, and write "Member [plan] + your email" in the message. Your membership will be activated shortly.', mb_you_member:'You are a member 💚', mb_forever:'Lifetime ♾️', mb_until:'Valid until', cr_use_t:'Use credit for:', cr_use_1:'🌸 Send flowers / 👏 clap / 👋 wave — 1 credit', cr_use_5:'🎥 5–8s greeting video — 5 credits', cr_swish_t:'Scan the Swish code — {n} credit pack ({price} kr)', cr_amt:'The {price} kr amount is pre-filled when you scan.', cr_s1:'Scan the code → confirm the {price} kr transfer', cr_s2:'In the "Meddelande" (message) field, write your login email', cr_s3:'Credits will be added to your account shortly', w_title:'Welcome to QiQa', w_sub:'Pick your color tone and language', w_theme:'Color theme', w_lang:'Language', w_start:'Get started →', pn_end:'Nothing more here.', pn_next:'Explore next', theme_title:'Appearance', theme_sub:'Pick the color tone you like.', cat_all:'All', cat_food:'Food & drink', cat_shop:'Shopping', cat_service:'Services', cat_community:'Community', cat_kids:'For kids', cat_vietfood:'Vietnamese food', cat_home:'Household', cat_carry:'Hand-carry', cat_free:'Free giveaway', cat_health:'Healthcare', cat_admin:'Documents/Admin', cat_legal:'Legal', cat_escort:'Accompaniment', cat_doctrans:'Document translation', ty_give:'Give', ty_swap:'Swap', ty_free:'Free', ty_carry:'Hand-carry', lbl_places:'places', lbl_you:'You', lbl_joined:'✓ Joined', lbl_join:'Join', lbl_match_cnt:'potential matches', lbl_report:'Report', lbl_registered:'✓ Registered', lbl_register:'Register', lbl_be_interp:'Be an interpreter', lbl_post_req:'Post a request', lbl_vip_member:'VIP member', tt_bold:'Bold', tt_italic:'Italic', tt_color:'Text color', tt_emoji:'Emoji', tt_gift:'Send gift', tt_credit:'Top up credit', tt_theme:'Chat background',
     login:'Log in', logout:'Log out',
     search_places:'Search food, Asian store, nails…', search_area:'Search by area…',
@@ -5312,7 +5354,7 @@ const I18N = {
     chat_safety:'Please be kind and respectful. Don\'t share sensitive info (home address, bank details). Tap ⚑ to report.',
     chat_placeholder:'Type a message…', chat_send:'Send', chat_login:'Log in to join the chat',
     chat_empty:'No messages yet. Be the first to greet the community!',
-    fab_outing:'＋ Create outing', fab_post:'＋ Post', fab_profile:'✎ My profile',
+    fab_outing:'＋ Create event', fab_post:'＋ Post', fab_profile:'✎ My profile',
     join:'Join', joined:'✓ Joined', contact:'Contact', view_map:'View map', call:'Call',
     add_place:'+ Add place',
     au_login:'Log in', au_login_sub:'Log in to post and join community activities.',
@@ -5328,7 +5370,7 @@ const I18N = {
     au_reset_btn:'Reset password', au_need_email_pass:'Please enter your email and password.', au_need_6:'Enter all 6 digits.', au_resending:'Resending code…', au_need_email:'Please enter your email.', au_need_code_pass:'Enter the code and a new password.', au_hello:'Hello', au_min6:'Min 6 characters',
     au_need_ep:'Please enter email and password.', au_need_6:'Enter all 6 digits.',
     err_generic:'Something went wrong.',
-    of_title:'Create outing', of_sub:'Invite other families to take the kids out together.',
+    evc_all:'All', evc_meetup:'Meetup', evc_camping:'Camping', evc_trip:'Day trip', evc_kids:'With kids', evc_sport:'Sports', evc_food:'Food', evc_other:'Other', of_kind:'Event type', of_title:'Create event', of_sub:'Invite other families to take the kids out together.',
     of_yourname:'Your display name', of_place:'Place (public)', of_area:'Area',
     of_day:'Day', of_time:'Time', of_ages:'Children\'s ages', of_msg:'Message',
     of_msg_ph:'A few lines about the outing…', of_post:'Post outing', of_need:'Please enter at least a name and a place.',
@@ -5365,10 +5407,10 @@ const I18N = {
     trf_medical:'Medical', trf_admin:'Documents/Admin', trf_legal:'Legal', trf_accompany:'General accompaniment', trf_doc:'Document translation',
     empty_outings:'No outings match. Why not create one?', empty_matches:'No connections yet. Go to Suggestions and send a like to someone you like.', empty_translators:'No interpreters here yet. Speak the language? Register to help the community.', empty_sgevents:'No singles events here yet. Check back later.', empty_treq:'No requests here yet. Need an interpreter? Tap "Post request".', empty_discover:'No more suggestions. Check back later, the community grows every day.', empty_market:'No posts match. Why not post the first one?', empty_places:'No places match. Try clearing some filters.',
     hero_places_1:'Great food, local stores, community services —', hero_places_city:'in your area', hero_places_sub:'Where the community finds spots that suit their taste. Real reviews, in your language.',
-    hero_out_1:'Take the kids out,', hero_out_2:'make friends as parents', hero_out_sub:'Parents inviting each other to take the kids to public places in Sweden.', hero_out_safe_b:'Safety first:', hero_out_safe:'every outing takes place in public. Meet in busy, open spaces.',
+    hero_out_1:'Community events —', hero_out_2:'meet, camp, explore', hero_out_sub:'Parents inviting each other to take the kids to public places in Sweden.', hero_out_safe_b:'Safety first:', hero_out_safe:'every outing takes place in public. Meet in busy, open spaces.',
     hero_mk_1:'Community market —', hero_mk_2:'give, gift, swap', hero_mk_sub:'Kids clothes, Vietnamese food, household items, courier help.', hero_mk_note_b:'A market of kindness, not for profit:', hero_mk_note:'only give – gift – swap and courier help.',
     hero_fr_1:'Make friends —', hero_fr_2:'find someone compatible', hero_fr_sub:'For single people in Sweden looking for a soulmate.', hero_fr_safe_b:'Safe dating:', hero_fr_safe:'contact is shown only when both like each other. Meet the first time in public.',
-    sub_discover:'Suggestions', sub_matches:'Connected', sub_events:'Singles events', fr_create_title:'Create a profile to start', fr_create_sub:'Tell others a bit about you so you can find each other.', fr_create_btn:'Create singles profile',
+    sub_discover:'Suggestions', sub_matches:'Connected', sub_events:'Singles events', sub_horo:'🔮 Horoscope', hr_pick:'Pick your zodiac sign to see today\'s horoscope 🔮', hr_love:'Love', hr_work:'Work', hr_life:'Life', hr_num:'Lucky number', hr_color:'Lucky colour', hr_match:'Best match', hr_fun:'Horoscopes are just for fun — trust yourself first 😊', fr_create_title:'Create a profile to start', fr_create_sub:'Tell others a bit about you so you can find each other.', fr_create_btn:'Create singles profile',
     hero_tr_1:'Community services —', hero_tr_2:'neighbours helping neighbours', hero_tr_sub:'Need interpreting, cleaning, moving, repairs…? Find local service providers near you.', sub_find:'Find services', sub_req:'Requests', hero_tr_note_b:'Community services:', hero_tr_note:'agree on the price yourselves and check carefully before any deal.',
     svc_hero_1:'Technology services for', svc_hero_2:'restaurants & nail salons', svc_hero_sub:'QiQa Shop helps small businesses in Sweden modernise.',
     svc_web:'Website Design', svc_web_for:'Restaurant · Nail salon · Services', svc_web_d:'A beautiful, mobile-ready website showing your menu, hours, directions and booking.', svc_web_1:'Custom design for your brand', svc_web_2:'Optimised for mobile & speed', svc_web_3:'Maps, booking, social media integrated',
@@ -5388,7 +5430,7 @@ const I18N = {
     fab_article:'＋ New guide', art_create:'Create a guide', art_edit:'Edit guide', art_cat:'Topic', art_title:'Title', art_teaser:'Free intro (hook readers)', art_teaser_ph:'A few lines that show the value and make people want to read on…', art_body:'Full content (locked)', art_body_ph:'The full guide — only members can read this part…', art_post:'Publish guide', art_need:'Please enter a title and intro.', art_empty:'No guides yet.',
     art_read:'Read more', art_locked_title:'This guide is for members', art_locked_sub:'Unlock the full guide to keep reading.', art_buy_single:'Single guide', art_buy_month:'Monthly', art_buy_year:'Yearly', art_per_month:'/month', art_per_year:'/year', art_soon:'Payment coming soon. To buy now, contact:', art_disclaimer:'For reference only — not a substitute for official legal advice.',
     sh_hero_1:'Community forum —', sh_hero_2:'share news, photos & videos', sh_hero_sub:'Post, like 💖 and comment with others. Posts auto-delete after 7 days to keep things fresh.',
-    sh_note_b:'Note:', sh_note:'every post disappears automatically after 7 days.', rk_pts:'contribution points', rk_next:'{n} points to reach {r} — {c} credits reward 🎁', rk_max:'You\'ve reached the top rank. Thank you for everything! 💎', rk_how:'Earn points: post (+5), comment (+2), each 💖 received (+1), add a place (+10), host an outing (+8), market post (+5), live event (+8), write a guide (+15), register a service (+10).', rk_up_t:'Congratulations — you levelled up!', rk_up_d:'Thank you for contributing to the community. You earned {n} credits.', rk_ok:'Awesome!', rk_title:'Contribution rank', sh_edit:'Edit post', sh_save:'Save changes', sh_day_short:'d', sh_like:'Like', sh_cmt:'Comment', cmt_ph:'Write a comment…', cmt_send:'Send', cmt_login:'Log in to comment', cmt_empty:'No comments yet. Be the first!', cmt_del_ask:'Delete this comment?',
+    sh_note_b:'Note:', sh_note:'every post disappears automatically after 7 days.', rk_pts:'contribution points', rk_next:'{n} points to reach {r} — {c} credits reward 🎁', rk_max:'You\'ve reached the top rank. Thank you for everything! 💎', rk_how:'Earn points: post (+5), comment (+2), each 💖 received (+1), add a place (+10), host an outing (+8), market post (+5), live event (+8), write a guide (+15), register a service (+10).', rk_up_t:'Congratulations — you levelled up!', rk_up_d:'Thank you for contributing to the community. You earned {n} credits.', rk_ok:'Awesome!', rk_title:'Contribution rank', sh_edit:'Edit post', sh_save:'Save changes', sh_day_short:'d', sp_hot:'Most viewed posts', sp_top:'Top contributors this week', sp_posts:'{n} posts', sh_views:'views', sh_like:'Like', sh_cmt:'Comment', cmt_ph:'Write a comment…', cmt_send:'Send', cmt_login:'Log in to comment', cmt_empty:'No comments yet. Be the first!', cmt_del_ask:'Delete this comment?',
     fab_share:'＋ New post', sh_create:'Create a post', sh_content:'What do you want to share?',
     sh_content_ph:'Write something, paste a link, share news…', sh_media:'Image or video link (optional)',
     sh_media_ph:'Paste a YouTube / image / TikTok link…', sh_post:'Post', sh_need:'Please write something to share.',
@@ -5398,7 +5440,7 @@ const I18N = {
   },
   sv: {
     all_sweden:'Hela Sverige',
-    tab_home:'Hem', tab_places:'Check-in', tab_outings:'Utflykter med barn', tab_market:'Marknad',
+    tab_home:'Hem', tab_places:'Check-in', tab_outings:'Evenemang', tab_market:'Marknad',
     tab_friends:'Hitta vänner', tab_translate:'Tjänster', tab_services:'Shoping', tab_about:'Om oss', tab_member:'VIP', mb_hero_1:'Bli', mb_hero_2:'QiQa VIP', mb_intro:'QiQa är ett gemensamt hem för vår gemenskap långt hemifrån. För att hålla platsen trygg, ren och reklamfri för alla behöver vi ditt stöd.', mb_free_t:'Bara tittar (gratis)', mb_free_d:'Du ser endast reklaminlägg och offentliga meddelanden.', mb_mem_t:'Medlem — full åtkomst', mb_b1:'Läs alla guider (lagar, rutiner, uppdateringar)', mb_b2:'Medlemsmärke på din profil', mb_b3:'Stöd en sund gemenskap', mb_b_credit:'100 credit i välkomstgåva — lös in dem för betaltjänster', svc_use_credit:'💎 Använd {n} credit (saldo: {bal})', svc_buy_credit:'💎 Inte tillräckligt — Fyll på', svc_or_swish:'Eller betala direkt med Swish:', mb_pick:'Välj din plan', mb_month:'1 månad', mb_6month:'6 månader', mb_year:'1 år', mb_popular:'Populär', mb_best:'Bäst värde', mb_pledge:'Ditt bidrag hjälper oss att hålla QiQa igång för alla — tillsammans bygger vi en sund gemenskap.', mb_pay_t:'Betala med Swish för att gå med', mb_pay_step:'Swisha beloppet till 072-567 11 11 och skriv "Medlem [plan] + din e-post" i meddelandet. Ditt medlemskap aktiveras snart.', mb_you_member:'Du är medlem 💚', mb_forever:'Livstid ♾️', mb_until:'Giltig till', cr_use_t:'Använd credit till:', cr_use_1:'🌸 Skicka blommor / 👏 applåd / 👋 vinka — 1 credit', cr_use_5:'🎥 Hälsningsvideo 5–8 sek — 5 credit', cr_swish_t:'Skanna Swish-koden — paket {n} credit ({price} kr)', cr_amt:'Beloppet {price} kr fylls i automatiskt när du skannar.', cr_s1:'Skanna koden → bekräfta överföringen på {price} kr', cr_s2:'I fältet "Meddelande" skriver du din inloggnings-e-post', cr_s3:'Dina credits läggs till på ditt konto inom kort', w_title:'Välkommen till QiQa', w_sub:'Välj färgton och språk', w_theme:'Färgtema', w_lang:'Språk', w_start:'Kom igång →', pn_end:'Inget mer här.', pn_next:'Utforska nästa', theme_title:'Utseende', theme_sub:'Välj den färgton du gillar.', cat_all:'Alla', cat_food:'Mat & dryck', cat_shop:'Shopping', cat_service:'Tjänster', cat_community:'Gemenskap', cat_kids:'Barnsaker', cat_vietfood:'Vietnamesisk mat', cat_home:'Hushåll', cat_carry:'Handbagage', cat_free:'Ge bort gratis', cat_health:'Sjukvård', cat_admin:'Dokument/Myndighet', cat_legal:'Juridik', cat_escort:'Följe', cat_doctrans:'Dokumentöversättning', ty_give:'Ge', ty_swap:'Byta', ty_free:'Gratis', ty_carry:'Handbagage', lbl_places:'platser', lbl_you:'Du', lbl_joined:'✓ Med', lbl_join:'Gå med', lbl_match_cnt:'möjliga matchningar', lbl_report:'Rapportera', lbl_registered:'✓ Anmäld', lbl_register:'Anmäl', lbl_be_interp:'Bli tolk', lbl_post_req:'Lägg upp förfrågan', lbl_vip_member:'VIP-medlem', tt_bold:'Fet', tt_italic:'Kursiv', tt_color:'Textfärg', tt_emoji:'Emoji', tt_gift:'Skicka gåva', tt_credit:'Fyll på credit', tt_theme:'Chattbakgrund',
     login:'Logga in', logout:'Logga ut',
     search_places:'Sök mat, asiatisk butik, naglar…', search_area:'Sök efter område…',
@@ -5418,7 +5460,7 @@ const I18N = {
     chat_safety:'Var snäll och respektfull. Dela inte känslig info (hemadress, bankuppgifter). Tryck ⚑ för att rapportera.',
     chat_placeholder:'Skriv ett meddelande…', chat_send:'Skicka', chat_login:'Logga in för att delta i chatten',
     chat_empty:'Inga meddelanden än. Bli först med att hälsa på gemenskapen!',
-    fab_outing:'＋ Skapa utflykt', fab_post:'＋ Publicera', fab_profile:'✎ Min profil',
+    fab_outing:'＋ Skapa evenemang', fab_post:'＋ Publicera', fab_profile:'✎ Min profil',
     join:'Gå med', joined:'✓ Med', contact:'Kontakt', view_map:'Visa karta', call:'Ring',
     add_place:'+ Lägg till plats',
     au_login:'Logga in', au_login_sub:'Logga in för att publicera och delta i gemenskapens aktiviteter.',
@@ -5434,7 +5476,7 @@ const I18N = {
     au_reset_btn:'Återställ lösenord', au_need_email_pass:'Ange din e-post och ditt lösenord.', au_need_6:'Ange alla 6 siffror.', au_resending:'Skickar koden igen…', au_need_email:'Ange din e-post.', au_need_code_pass:'Ange koden och ett nytt lösenord.', au_hello:'Hej', au_min6:'Minst 6 tecken',
     au_need_ep:'Ange e-post och lösenord.', au_need_6:'Ange alla 6 siffror.',
     err_generic:'Något gick fel.',
-    of_title:'Skapa utflykt', of_sub:'Bjud in andra familjer att ta med barnen ut tillsammans.',
+    evc_all:'Alla', evc_meetup:'Träff', evc_camping:'Camping', evc_trip:'Utflykt', evc_kids:'Med barn', evc_sport:'Sport', evc_food:'Mat', evc_other:'Övrigt', of_kind:'Typ av evenemang', of_title:'Skapa evenemang', of_sub:'Bjud in andra familjer att ta med barnen ut tillsammans.',
     of_yourname:'Ditt visningsnamn', of_place:'Plats (offentlig)', of_area:'Område',
     of_day:'Dag', of_time:'Tid', of_ages:'Barnens ålder', of_msg:'Meddelande',
     of_msg_ph:'Några rader om utflykten…', of_post:'Publicera utflykt', of_need:'Ange minst ett namn och en plats.',
@@ -5449,7 +5491,7 @@ const I18N = {
     hero_out_1:'Ta med barnen ut,', hero_out_2:'skaffa vänner som föräldrar', hero_out_sub:'Föräldrar bjuder in varandra att ta med barnen till offentliga platser i Sverige.', hero_out_safe_b:'Säkerhet först:', hero_out_safe:'varje utflykt sker offentligt. Träffas på livliga, öppna platser.',
     hero_mk_1:'Gemenskapsmarknad —', hero_mk_2:'ge, skänk, byt', hero_mk_sub:'Barnkläder, vietnamesisk mat, husgeråd, budhjälp.', hero_mk_note_b:'En marknad av vänlighet, inte för vinst:', hero_mk_note:'endast ge – skänk – byt och budhjälp.',
     hero_fr_1:'Hitta vänner —', hero_fr_2:'hitta någon som passar', hero_fr_sub:'För singlar i Sverige som söker en själsfrände.', hero_fr_safe_b:'Trygg dejting:', hero_fr_safe:'kontakt visas bara när båda gillar varandra. Träffas första gången offentligt.',
-    sub_discover:'Förslag', sub_matches:'Kontakter', sub_events:'Singelevenemang', fr_create_title:'Skapa en profil för att börja', fr_create_sub:'Berätta lite om dig så ni kan hitta varandra.', fr_create_btn:'Skapa singelprofil',
+    sub_discover:'Förslag', sub_matches:'Kontakter', sub_events:'Singelevenemang', sub_horo:'🔮 Horoskop', hr_pick:'Välj ditt stjärntecken för dagens horoskop 🔮', hr_love:'Kärlek', hr_work:'Arbete', hr_life:'Livet', hr_num:'Lyckotal', hr_color:'Lyckofärg', hr_match:'Passar bäst med', hr_fun:'Horoskop är bara på skoj — lita på dig själv 😊', fr_create_title:'Skapa en profil för att börja', fr_create_sub:'Berätta lite om dig så ni kan hitta varandra.', fr_create_btn:'Skapa singelprofil',
     hero_tr_1:'Tjänster i communityt —', hero_tr_2:'grannar hjälper grannar', hero_tr_sub:'Behöver du tolk, städning, flytt, reparation…? Hitta tjänsteleverantörer nära dig.', sub_find:'Hitta tjänster', sub_req:'Förfrågningar', hero_tr_note_b:'Gemenskapstjänster:', hero_tr_note:'kom överens om priset själva och kontrollera noga före affär.',
     svc_hero_1:'Tekniktjänster för', svc_hero_2:'restauranger & nagelsalonger', svc_hero_sub:'QiQa Shop hjälper småföretag i Sverige att modernisera.',
     svc_web:'Webbdesign', svc_web_for:'Restaurang · Nagelsalong · Tjänster', svc_web_d:'En snygg, mobilanpassad webbplats som visar din meny, öppettider, vägbeskrivning och bokning.', svc_web_1:'Anpassad design för ditt varumärke', svc_web_2:'Optimerad för mobil & snabbhet', svc_web_3:'Kartor, bokning, sociala medier integrerade',
@@ -5470,7 +5512,7 @@ const I18N = {
     fab_article:'＋ Ny guide', art_create:'Skapa en guide', art_edit:'Redigera guide', art_cat:'Ämne', art_title:'Titel', art_teaser:'Gratis intro (fånga läsaren)', art_teaser_ph:'Några rader som visar värdet och får folk att vilja läsa vidare…', art_body:'Hela innehållet (låst)', art_body_ph:'Hela guiden — bara medlemmar kan läsa denna del…', art_post:'Publicera guide', art_need:'Ange en titel och intro.', art_empty:'Inga guider än.',
     art_read:'Läs mer', art_locked_title:'Denna guide är för medlemmar', art_locked_sub:'Lås upp hela guiden för att läsa vidare.', art_buy_single:'Enskild guide', art_buy_month:'Månad', art_buy_year:'År', art_per_month:'/mån', art_per_year:'/år', art_soon:'Betalning kommer snart. För att köpa nu, kontakta:', art_disclaimer:'Endast för referens — ersätter inte officiell juridisk rådgivning.',
     sh_hero_1:'Forum —', sh_hero_2:'dela nyheter, foton & videor', sh_hero_sub:'Publicera, gilla 💖 och kommentera med andra. Inlägg raderas automatiskt efter 7 dagar.',
-    sh_note_b:'Obs:', sh_note:'varje inlägg försvinner automatiskt efter 7 dagar.', rk_pts:'bidragspoäng', rk_next:'{n} poäng kvar till {r} — {c} credit i belöning 🎁', rk_max:'Du har nått högsta nivån. Tack för allt! 💎', rk_how:'Tjäna poäng: inlägg (+5), kommentar (+2), varje 💖 du får (+1), lägg till plats (+10), ordna utflykt (+8), marknadsannons (+5), liveevent (+8), skriv en guide (+15), registrera tjänst (+10).', rk_up_t:'Grattis — du gick upp en nivå!', rk_up_d:'Tack för ditt bidrag till gemenskapen. Du fick {n} credit.', rk_ok:'Toppen!', rk_title:'Bidragsnivå', sh_edit:'Redigera inlägg', sh_save:'Spara ändringar', sh_day_short:'d', sh_like:'Gilla', sh_cmt:'Kommentar', cmt_ph:'Skriv en kommentar…', cmt_send:'Skicka', cmt_login:'Logga in för att kommentera', cmt_empty:'Inga kommentarer än. Bli först!', cmt_del_ask:'Radera denna kommentar?',
+    sh_note_b:'Obs:', sh_note:'varje inlägg försvinner automatiskt efter 7 dagar.', rk_pts:'bidragspoäng', rk_next:'{n} poäng kvar till {r} — {c} credit i belöning 🎁', rk_max:'Du har nått högsta nivån. Tack för allt! 💎', rk_how:'Tjäna poäng: inlägg (+5), kommentar (+2), varje 💖 du får (+1), lägg till plats (+10), ordna utflykt (+8), marknadsannons (+5), liveevent (+8), skriv en guide (+15), registrera tjänst (+10).', rk_up_t:'Grattis — du gick upp en nivå!', rk_up_d:'Tack för ditt bidrag till gemenskapen. Du fick {n} credit.', rk_ok:'Toppen!', rk_title:'Bidragsnivå', sh_edit:'Redigera inlägg', sh_save:'Spara ändringar', sh_day_short:'d', sp_hot:'Mest visade inlägg', sp_top:'Veckans toppbidragsgivare', sp_posts:'{n} inlägg', sh_views:'visningar', sh_like:'Gilla', sh_cmt:'Kommentar', cmt_ph:'Skriv en kommentar…', cmt_send:'Skicka', cmt_login:'Logga in för att kommentera', cmt_empty:'Inga kommentarer än. Bli först!', cmt_del_ask:'Radera denna kommentar?',
     fab_share:'＋ Nytt inlägg', sh_create:'Skapa ett inlägg', sh_content:'Vad vill du dela?',
     sh_content_ph:'Skriv något, klistra in en länk, dela nyheter…', sh_media:'Bild- eller videolänk (valfritt)',
     sh_media_ph:'Klistra in en YouTube / bild / TikTok-länk…', sh_post:'Publicera', sh_need:'Skriv något att dela.',
@@ -5505,7 +5547,7 @@ const I18N = {
   },
   ko: {
     all_sweden:'스웨덴 전체',
-    tab_home:'홈', tab_places:'체크인', tab_outings:'아이와 나들이', tab_market:'마켓',
+    tab_home:'홈', tab_places:'체크인', tab_outings:'이벤트', tab_market:'마켓',
     tab_friends:'친구 찾기', tab_translate:'서비스', tab_services:'Shoping', tab_about:'회사 소개', tab_member:'VIP', mb_hero_1:'QiQa', mb_hero_2:'VIP가 되기', mb_intro:'QiQa는 고향을 떠난 우리 커뮤니티의 공동의 집입니다. 이곳을 모두에게 안전하고 깨끗하며 광고 없이 유지하려면 여러분의 지원이 필요합니다.', mb_free_t:'둘러보기 (무료)', mb_free_d:'홍보 게시물과 공개 공지만 볼 수 있습니다.', mb_mem_t:'회원 — 전체 이용', mb_b1:'모든 가이드 읽기 (법률, 절차, 업데이트)', mb_b2:'프로필에 회원 배지', mb_b3:'건강한 커뮤니티 지원', mb_pick:'플랜 선택', mb_month:'1개월', mb_6month:'6개월', mb_year:'1년', mb_popular:'인기', mb_best:'최고의 가치', mb_pledge:'여러분의 기여는 모두를 위해 QiQa를 유지하는 데 도움이 됩니다 — 함께 건강한 커뮤니티를 만들어요.', mb_pay_t:'Swish로 결제하고 가입', mb_pay_step:'072-567 11 11로 금액을 Swish하고 메시지에 "회원 [플랜] + 이메일"을 적어주세요. 곧 활성화됩니다.', mb_you_member:'회원이십니다 💚', mb_until:'유효 기간', cr_use_t:'크레딧 사용처:', cr_use_1:'🌸 꽃 보내기 / 👏 박수 / 👋 인사 — 1 크레딧', cr_use_5:'🎥 5~8초 인사 영상 — 5 크레딧', cr_swish_t:'Swish 코드 스캔 — {n} 크레딧 패키지 ({price} kr)', cr_amt:'스캔하면 {price} kr 금액이 자동 입력됩니다.', cr_s1:'코드 스캔 → {price} kr 송금 확인', cr_s2:'"Meddelande"(메시지) 칸에 로그인 이메일을 적어주세요', cr_s3:'크레딧이 곧 계정에 추가됩니다', w_title:'QiQa에 오신 것을 환영합니다', w_sub:'색상 톤과 언어를 선택하세요', w_theme:'색상 테마', w_lang:'언어', w_start:'시작하기 →', pn_end:'여기까지입니다.', pn_next:'다음 둘러보기', theme_title:'테마', theme_sub:'원하는 색상 톤을 선택하세요.', cat_all:'전체', cat_food:'음식', cat_shop:'쇼핑', cat_service:'서비스', cat_community:'커뮤니티', cat_kids:'아동용품', cat_vietfood:'베트남 음식', cat_home:'생활용품', cat_carry:'대리 구매', cat_free:'무료 나눔', cat_health:'의료', cat_admin:'서류/행정', cat_legal:'법률', cat_escort:'동행', cat_doctrans:'문서 번역', ty_give:'나눔', ty_swap:'교환', ty_free:'무료', ty_carry:'대리구매', lbl_places:'곳', lbl_you:'나', lbl_joined:'✓ 참여함', lbl_join:'참여', lbl_match_cnt:'명의 잠재적 매칭', lbl_report:'신고', lbl_registered:'✓ 등록됨', lbl_register:'등록', lbl_be_interp:'통역하기', lbl_post_req:'요청 올리기', lbl_vip_member:'VIP 회원', tt_bold:'굵게', tt_italic:'기울임', tt_color:'글자 색', tt_emoji:'이모지', tt_gift:'선물 보내기', tt_credit:'크레딧 충전', tt_theme:'채팅 배경',
     login:'로그인', logout:'로그아웃',
     search_places:'음식, 아시아 마트, 네일 검색…', search_area:'지역으로 검색…',
@@ -5612,7 +5654,7 @@ const I18N = {
   },
   tl: {
     all_sweden:'Buong Sweden',
-    tab_home:'Home', tab_places:'Check-in', tab_outings:'Lakad kasama ang mga bata', tab_market:'Palengke',
+    tab_home:'Home', tab_places:'Check-in', tab_outings:'Mga Event', tab_market:'Palengke',
     tab_friends:'Maghanap ng kaibigan', tab_translate:'Mga Serbisyo', tab_services:'Shoping', tab_about:'Tungkol sa amin', tab_member:'VIP', mb_hero_1:'Maging', mb_hero_2:'QiQa VIP', mb_intro:'Ang QiQa ay tahanan ng ating komunidad na malayo sa bayan. Para panatilihing ligtas, malinis at walang ad para sa lahat, kailangan namin ang suporta mo.', mb_free_t:'Nagba-browse lang (libre)', mb_free_d:'Nakikita mo lang ang mga promotional bulletin at pampublikong abiso.', mb_mem_t:'Miyembro — buong access', mb_b1:'Basahin lahat ng Gabay (batas, proseso, update)', mb_b2:'Member badge sa profile mo', mb_b3:'Suportahan ang malusog na komunidad', mb_pick:'Piliin ang plano', mb_month:'1 buwan', mb_6month:'6 na buwan', mb_year:'1 taon', mb_popular:'Popular', mb_best:'Pinakasulit', mb_pledge:'Ang kontribusyon mo ay tumutulong na mapanatili ang QiQa para sa lahat — sama-sama tayong bumuo ng malusog na komunidad.', mb_pay_t:'Magbayad gamit ang Swish para sumali', mb_pay_step:'I-Swish ang halaga sa 072-567 11 11, at isulat ang "Miyembro [plano] + email mo" sa mensahe. Ma-aaktibo agad.', mb_you_member:'Miyembro ka na 💚', mb_until:'Valid hanggang', cr_use_t:'Gamitin ang credit para sa:', cr_use_1:'🌸 Magpadala ng bulaklak / 👏 palakpak / 👋 kumaway — 1 credit', cr_use_5:'🎥 5–8s na greeting video — 5 credits', cr_swish_t:'I-scan ang Swish code — {n} credit pack ({price} kr)', cr_amt:'Ang halagang {price} kr ay awtomatikong nakalagay kapag nag-scan.', cr_s1:'I-scan ang code → kumpirmahin ang {price} kr na paglilipat', cr_s2:'Sa "Meddelande" (mensahe), isulat ang iyong login email', cr_s3:'Idaragdag agad ang credits sa iyong account', w_title:'Maligayang pagdating sa QiQa', w_sub:'Piliin ang kulay at wika mo', w_theme:'Tema ng kulay', w_lang:'Wika', w_start:'Magsimula →', pn_end:'Wala nang iba rito.', pn_next:'Tuklasin ang susunod', theme_title:'Hitsura', theme_sub:'Piliin ang kulay na gusto mo.', cat_all:'Lahat', cat_food:'Pagkain', cat_shop:'Shopping', cat_service:'Serbisyo', cat_community:'Komunidad', cat_kids:'Gamit ng bata', cat_vietfood:'Pagkaing Vietnamese', cat_home:'Gamit sa bahay', cat_carry:'Pakidala', cat_free:'Libreng bigay', cat_health:'Kalusugan', cat_admin:'Dokumento/Admin', cat_legal:'Legal', cat_escort:'Pagsama', cat_doctrans:'Pagsasalin ng dokumento', ty_give:'Bigay', ty_swap:'Palit', ty_free:'Libre', ty_carry:'Pakidala', lbl_places:'lugar', lbl_you:'Ikaw', lbl_joined:'✓ Sumali na', lbl_join:'Sumali', lbl_match_cnt:'posibleng match', lbl_report:'I-report', lbl_registered:'✓ Nakarehistro', lbl_register:'Magrehistro', lbl_be_interp:'Maging interpreter', lbl_post_req:'Mag-post ng request', lbl_vip_member:'VIP member', tt_bold:'Bold', tt_italic:'Italic', tt_color:'Kulay ng teksto', tt_emoji:'Emoji', tt_gift:'Magpadala ng regalo', tt_credit:'Mag-top up ng credit', tt_theme:'Background ng chat',
     login:'Mag-log in', logout:'Mag-log out',
     search_places:'Maghanap ng pagkain, Asian store, kuko…', search_area:'Maghanap ayon sa lugar…',
@@ -5719,7 +5761,7 @@ const I18N = {
   },
   vi: {
     all_sweden:'Tất cả Thuỵ Điển',
-    tab_home:'Trang chủ', tab_places:'Check-in', tab_outings:'Đi chơi cùng con', tab_market:'Chợ cộng đồng',
+    tab_home:'Trang chủ', tab_places:'Check-in', tab_outings:'Sự kiện', tab_market:'Chợ cộng đồng',
     tab_friends:'Kết bạn', tab_translate:'Cung cấp dịch vụ', tab_services:'Shoping', tab_about:'Về chúng tôi', tab_member:'VIP', mb_hero_1:'Trở thành', mb_hero_2:'VIP QiQa', mb_intro:'QiQa là mái nhà chung của cộng đồng xa quê. Để giữ nơi này luôn an toàn, sạch sẽ và không quảng cáo cho mọi người, chúng tôi cần sự chung tay của bạn.', mb_free_t:'Chỉ ghé xem (miễn phí)', mb_free_d:'Bạn chỉ xem được các bản tin quảng cáo và thông báo công khai.', mb_mem_t:'Thành viên — xem toàn bộ', mb_b1:'Đọc toàn bộ Kiến thức (luật, thủ tục, tin mới)', mb_b2:'Huy hiệu thành viên trên hồ sơ', mb_b3:'Ủng hộ một cộng đồng lành mạnh', mb_b_credit:'Tặng 100 credit khi tham gia — dùng để đổi các dịch vụ trả phí', svc_use_credit:'💎 Dùng {n} credit (số dư: {bal})', svc_buy_credit:'💎 Chưa đủ credit — Nạp thêm', svc_or_swish:'Hoặc trả trực tiếp qua Swish:', mb_pick:'Chọn gói của bạn', mb_month:'1 tháng', mb_6month:'6 tháng', mb_year:'1 năm', mb_popular:'Phổ biến', mb_best:'Tiết kiệm nhất', mb_pledge:'Khoản đóng góp của bạn giúp chúng tôi duy trì QiQa cho mọi người — cùng nhau xây một cộng đồng lành mạnh.', mb_pay_t:'Thanh toán Swish để tham gia', mb_pay_step:'Swish số tiền tới 072-567 11 11, và ghi "Thành viên [gói] + email của bạn" trong lời nhắn. Tư cách thành viên sẽ được kích hoạt sớm nhất.', mb_you_member:'Bạn là thành viên 💚', mb_forever:'Vô thời hạn ♾️', mb_until:'Có hiệu lực đến', cr_use_t:'Dùng credit để:', cr_use_1:'🌸 Tặng hoa / 👏 vỗ tay / 👋 chào — 1 credit', cr_use_5:'🎥 Video chào hỏi 5-8 giây — 5 credit', cr_swish_t:'Quét mã Swish — gói {n} credit ({price} kr)', cr_amt:'Số tiền {price} kr đã điền sẵn khi quét.', cr_s1:'Quét mã → xác nhận chuyển {price} kr', cr_s2:'Trong ô "Meddelande" (lời nhắn), ghi email đăng nhập của bạn', cr_s3:'Credit sẽ được cộng vào tài khoản sớm nhất', w_title:'Chào mừng đến QiQa', w_sub:'Chọn tông màu và ngôn ngữ của bạn', w_theme:'Tông màu', w_lang:'Ngôn ngữ', w_start:'Bắt đầu →', pn_end:'Bạn đã xem hết mục này.', pn_next:'Khám phá tiếp', theme_title:'Giao diện', theme_sub:'Chọn tông màu bạn thích.', cat_all:'Tất cả', cat_food:'Ăn uống', cat_shop:'Mua sắm', cat_service:'Dịch vụ', cat_community:'Cộng đồng', cat_kids:'Đồ trẻ em', cat_vietfood:'Đồ ăn Việt', cat_home:'Đồ gia đình', cat_carry:'Nhờ xách tay', cat_free:'Cho tặng miễn phí', cat_health:'Y tế', cat_admin:'Giấy tờ/Hành chính', cat_legal:'Pháp lý', cat_escort:'Đi cùng thường', cat_doctrans:'Dịch văn bản', ty_give:'Tặng', ty_swap:'Đổi', ty_free:'Miễn phí', ty_carry:'Xách tay', lbl_places:'địa điểm', lbl_you:'Bạn', lbl_joined:'✓ Đã tham gia', lbl_join:'Tham gia', lbl_match_cnt:'người có thể hợp gu', lbl_report:'Báo cáo', lbl_registered:'✓ Đã đăng ký', lbl_register:'Đăng ký', lbl_be_interp:'Làm phiên dịch', lbl_post_req:'Đăng yêu cầu', lbl_vip_member:'Thành viên VIP', tt_bold:'In đậm', tt_italic:'In nghiêng', tt_color:'Màu chữ', tt_emoji:'Biểu cảm', tt_gift:'Tặng quà', tt_credit:'Nạp credit', tt_theme:'Nền phòng chat',
     login:'Đăng nhập', logout:'Đăng xuất',
     search_places:'Tìm phở, chợ Á, nail…', search_area:'Tìm theo khu vực…',
@@ -5739,7 +5781,7 @@ const I18N = {
     chat_safety:'Hãy lịch sự và tôn trọng nhau. Đừng chia sẻ thông tin nhạy cảm (địa chỉ nhà, số tài khoản). Bấm ⚑ để báo cáo tin xấu.',
     chat_placeholder:'Nhập tin nhắn…', chat_send:'Gửi', chat_login:'Đăng nhập để tham gia trò chuyện',
     chat_empty:'Chưa có tin nhắn nào. Hãy là người mở lời chào cộng đồng!',
-    fab_outing:'＋ Tạo buổi đi chơi', fab_post:'＋ Đăng tin', fab_profile:'✎ Hồ sơ của tôi',
+    fab_outing:'＋ Tạo sự kiện', fab_post:'＋ Đăng tin', fab_profile:'✎ Hồ sơ của tôi',
     join:'Tham gia', joined:'✓ Đã tham gia', contact:'Liên hệ', view_map:'Xem bản đồ', call:'Gọi',
     add_place:'+ Thêm địa điểm',
     au_login:'Đăng nhập', au_login_sub:'Đăng nhập để đăng tin và tham gia hoạt động cộng đồng.',
@@ -5755,7 +5797,7 @@ const I18N = {
     au_reset_btn:'Đặt lại mật khẩu', au_need_email_pass:'Vui lòng nhập email và mật khẩu.', au_need_6:'Nhập đủ 6 số.', au_resending:'Đang gửi lại mã…', au_need_email:'Vui lòng nhập email.', au_need_code_pass:'Nhập mã và mật khẩu mới.', au_hello:'Xin chào', au_min6:'Tối thiểu 6 ký tự',
     au_need_ep:'Vui lòng nhập email và mật khẩu.', au_need_6:'Nhập đủ 6 số.',
     err_generic:'Đã có lỗi xảy ra.',
-    of_title:'Tạo buổi đi chơi', of_sub:'Rủ các gia đình khác cùng đưa con đi chơi.',
+    evc_all:'Tất cả', evc_meetup:'Hội họp', evc_camping:'Cắm trại', evc_trip:'Dã ngoại', evc_kids:'Đi chơi cùng con', evc_sport:'Thể thao', evc_food:'Ăn uống', evc_other:'Khác', of_kind:'Loại sự kiện', of_title:'Tạo sự kiện', of_sub:'Rủ các gia đình khác cùng đưa con đi chơi.',
     of_yourname:'Tên hiển thị của bạn', of_place:'Địa điểm (công cộng)', of_area:'Khu vực',
     of_day:'Ngày', of_time:'Giờ', of_ages:'Độ tuổi các bé', of_msg:'Lời nhắn',
     of_msg_ph:'Vài dòng giới thiệu buổi đi chơi…', of_post:'Đăng buổi đi chơi', of_need:'Vui lòng nhập ít nhất tên và địa điểm.',
@@ -5792,10 +5834,10 @@ const I18N = {
     trf_medical:'Y tế', trf_admin:'Giấy tờ/Hành chính', trf_legal:'Pháp lý', trf_accompany:'Đi cùng thường', trf_doc:'Dịch văn bản',
     empty_outings:'Chưa có buổi nào khớp. Sao anh/chị không tạo một buổi mới?', empty_matches:'Chưa có kết nối nào. Vào tab Gợi ý và gửi lời thích tới người bạn thấy hợp.', empty_translators:'Chưa có người phiên dịch nào ở đây. Bạn biết tiếng? Hãy đăng ký giúp cộng đồng.', empty_sgevents:'Chưa có sự kiện độc thân nào ở đây. Ghé lại sau nhé.', empty_treq:'Chưa có yêu cầu nào ở đây. Cần người dịch? Bấm Đăng yêu cầu.', empty_discover:'Hết gợi ý rồi. Quay lại sau nhé, cộng đồng đang lớn dần mỗi ngày.', empty_market:'Chưa có tin nào khớp. Đăng tin đầu tiên nhé?', empty_places:'Chưa có địa điểm nào khớp. Thử bỏ bớt bộ lọc nhé.',
     hero_places_1:'Quán ngon, cửa hàng, dịch vụ cộng đồng —', hero_places_city:'ngay tại khu bạn', hero_places_sub:'Nơi cộng đồng tìm những chỗ hợp khẩu vị mình. Đánh giá thật, bằng ngôn ngữ của bạn.',
-    hero_out_1:'Cùng con đi chơi,', hero_out_2:'cùng bố mẹ kết bạn', hero_out_sub:'Các bậc phụ huynh rủ nhau đưa con đi chơi ở những địa điểm công cộng tại Thụy Điển.', hero_out_safe_b:'An toàn là trên hết:', hero_out_safe:'mọi buổi đi chơi diễn ra ở địa điểm công cộng. Hãy gặp nhau ở chỗ đông người.',
+    hero_out_1:'Sự kiện cộng đồng —', hero_out_2:'gặp gỡ, cắm trại, đi chơi', hero_out_sub:'Các bậc phụ huynh rủ nhau đưa con đi chơi ở những địa điểm công cộng tại Thụy Điển.', hero_out_safe_b:'An toàn là trên hết:', hero_out_safe:'mọi buổi đi chơi diễn ra ở địa điểm công cộng. Hãy gặp nhau ở chỗ đông người.',
     hero_mk_1:'Chợ cộng đồng —', hero_mk_2:'cho, tặng, đổi đồ', hero_mk_sub:'Quần áo trẻ em, đồ ăn Việt, đồ gia đình, nhờ xách tay.', hero_mk_note_b:'Chợ tình thương, không mua bán:', hero_mk_note:'chỉ cho – tặng – đổi và nhờ xách tay.',
     hero_fr_1:'Kết bạn —', hero_fr_2:'tìm người hợp gu', hero_fr_sub:'Dành cho những người độc thân ở Thụy Điển muốn tìm bạn tâm giao.', hero_fr_safe_b:'An toàn khi làm quen:', hero_fr_safe:'chỉ hiện cách liên hệ khi cả hai cùng thích. Gặp lần đầu ở nơi công cộng.',
-    sub_discover:'Gợi ý', sub_matches:'Đã kết nối', sub_events:'Sự kiện độc thân', fr_create_title:'Tạo hồ sơ để bắt đầu', fr_create_sub:'Giới thiệu đôi nét về bạn để mọi người tìm thấy nhau.', fr_create_btn:'Tạo hồ sơ độc thân',
+    sub_discover:'Gợi ý', sub_matches:'Đã kết nối', sub_events:'Sự kiện độc thân', sub_horo:'🔮 Tử vi', hr_pick:'Chọn cung hoàng đạo của bạn để xem tử vi hôm nay 🔮', hr_love:'Tình cảm', hr_work:'Công việc', hr_life:'Đời sống', hr_num:'Số may mắn', hr_color:'Màu may mắn', hr_match:'Hợp với cung', hr_fun:'Tử vi mang tính giải trí — hãy đọc cho vui và tin vào chính mình nhé 😊', fr_create_title:'Tạo hồ sơ để bắt đầu', fr_create_sub:'Giới thiệu đôi nét về bạn để mọi người tìm thấy nhau.', fr_create_btn:'Tạo hồ sơ độc thân',
     hero_tr_1:'Dịch vụ cộng đồng —', hero_tr_2:'người mình giúp người mình', hero_tr_sub:'Cần phiên dịch, dọn dẹp, chuyển nhà, sửa chữa…? Tìm người cung cấp dịch vụ ngay tại khu bạn.', sub_find:'Tìm dịch vụ', sub_req:'Cần dịch vụ', hero_tr_note_b:'Dịch vụ cộng đồng:', hero_tr_note:'hãy tự thoả thuận giá và kiểm tra kỹ trước khi giao dịch.',
     svc_hero_1:'Dịch vụ công nghệ cho', svc_hero_2:'nhà hàng & tiệm nail', svc_hero_sub:'QiQa Shop giúp các cơ sở kinh doanh nhỏ tại Thụy Điển hiện đại hơn.',
     svc_web:'Thiết kế Website', svc_web_for:'Nhà hàng · Tiệm nail · Dịch vụ', svc_web_d:'Website đẹp, chuẩn mobile, hiển thị thực đơn, giờ mở cửa, chỉ đường và đặt lịch.', svc_web_1:'Giao diện riêng theo thương hiệu', svc_web_2:'Tối ưu điện thoại & tốc độ tải', svc_web_3:'Tích hợp bản đồ, đặt lịch, mạng xã hội',
@@ -5815,7 +5857,7 @@ const I18N = {
     fab_article:'＋ Viết bài mới', art_create:'Viết bài cẩm nang', art_edit:'Sửa bài', art_cat:'Chủ đề', art_title:'Tiêu đề', art_teaser:'Phần mở đầu miễn phí (thu hút người đọc)', art_teaser_ph:'Vài dòng cho thấy giá trị và khiến người ta muốn đọc tiếp…', art_body:'Nội dung đầy đủ (khoá lại)', art_body_ph:'Toàn bộ bài viết — chỉ thành viên mới đọc được phần này…', art_post:'Đăng bài', art_need:'Vui lòng nhập tiêu đề và phần mở đầu.', art_empty:'Chưa có bài nào.',
     art_read:'Đọc tiếp', art_locked_title:'Nội dung này dành cho thành viên', art_locked_sub:'Mở khoá để đọc toàn bộ bài viết.', art_buy_single:'Mua lẻ bài này', art_buy_month:'Gói tháng', art_buy_year:'Gói năm', art_per_month:'/tháng', art_per_year:'/năm', art_soon:'Thanh toán sẽ sớm ra mắt. Để mua ngay, liên hệ:', art_disclaimer:'Chỉ mang tính tham khảo — không thay thế tư vấn pháp lý chính thức.',
     sh_hero_1:'Diễn đàn cộng đồng —', sh_hero_2:'chia sẻ tin tức, ảnh & video', sh_hero_sub:'Đăng bài, thả 💖 và bình luận cùng mọi người. Bài tự xoá sau 7 ngày để bảng tin luôn mới.',
-    sh_note_b:'Lưu ý:', sh_note:'mỗi bài sẽ tự động biến mất sau 7 ngày.', rk_pts:'điểm đóng góp', rk_next:'Còn {n} điểm nữa để lên hạng {r} — thưởng {c} credit 🎁', rk_max:'Bạn đã đạt hạng cao nhất. Cảm ơn vì tất cả! 💎', rk_how:'Cách kiếm điểm: đăng bài (+5), bình luận (+2), mỗi 💖 nhận được (+1), thêm địa điểm (+10), tổ chức đi chơi (+8), đăng tin chợ (+5), sự kiện live (+8), viết bài Luật & Xã hội (+15), đăng ký dịch vụ (+10).', rk_up_t:'Chúc mừng — bạn đã thăng hạng!', rk_up_d:'Cảm ơn bạn đã đóng góp cho cộng đồng. Bạn được thưởng {n} credit.', rk_ok:'Tuyệt!', rk_title:'Hạng đóng góp', sh_edit:'Sửa bài', sh_save:'Lưu thay đổi', sh_day_short:'ngày', sh_like:'Thích', sh_cmt:'Bình luận', cmt_ph:'Viết bình luận…', cmt_send:'Gửi', cmt_login:'Đăng nhập để bình luận', cmt_empty:'Chưa có bình luận. Hãy là người đầu tiên!', cmt_del_ask:'Xoá bình luận này?',
+    sh_note_b:'Lưu ý:', sh_note:'mỗi bài sẽ tự động biến mất sau 7 ngày.', rk_pts:'điểm đóng góp', rk_next:'Còn {n} điểm nữa để lên hạng {r} — thưởng {c} credit 🎁', rk_max:'Bạn đã đạt hạng cao nhất. Cảm ơn vì tất cả! 💎', rk_how:'Cách kiếm điểm: đăng bài (+5), bình luận (+2), mỗi 💖 nhận được (+1), thêm địa điểm (+10), tổ chức đi chơi (+8), đăng tin chợ (+5), sự kiện live (+8), viết bài Luật & Xã hội (+15), đăng ký dịch vụ (+10).', rk_up_t:'Chúc mừng — bạn đã thăng hạng!', rk_up_d:'Cảm ơn bạn đã đóng góp cho cộng đồng. Bạn được thưởng {n} credit.', rk_ok:'Tuyệt!', rk_title:'Hạng đóng góp', sh_edit:'Sửa bài', sh_save:'Lưu thay đổi', sh_day_short:'ngày', sp_hot:'Bài được xem nhiều nhất', sp_top:'Đóng góp nhiều nhất tuần này', sp_posts:'{n} bài', sh_views:'lượt xem', sh_like:'Thích', sh_cmt:'Bình luận', cmt_ph:'Viết bình luận…', cmt_send:'Gửi', cmt_login:'Đăng nhập để bình luận', cmt_empty:'Chưa có bình luận. Hãy là người đầu tiên!', cmt_del_ask:'Xoá bình luận này?',
     fab_share:'＋ Đăng bài', sh_create:'Đăng bài chia sẻ', sh_content:'Bạn muốn chia sẻ điều gì?',
     sh_content_ph:'Viết gì đó, dán link, chia sẻ tin tức…', sh_media:'Link ảnh hoặc video (tuỳ chọn)',
     sh_media_ph:'Dán link YouTube / ảnh / TikTok…', sh_post:'Đăng', sh_need:'Vui lòng viết nội dung chia sẻ.',
@@ -5983,7 +6025,7 @@ const MKT_CATS = ["Tất cả","Đồ trẻ em","Đồ ăn Việt","Đồ gia đ
 const TYPE_LABEL = { tang:"Tặng", doi:"Đổi", free:"Miễn phí", xach:"Xách tay", job:"Tuyển dụng" };
 Object.assign(I18N, {
   hi: {
-    all_sweden:'पूरा स्वीडन', tab_home:'होम', tab_places:'चेक-इन', tab_outings:'बच्चों के साथ सैर', tab_market:'बाज़ार', tab_friends:'दोस्त बनाएँ', tab_translate:'सेवाएँ', tab_services:'शॉपिंग', tab_about:'हमारे बारे में', tab_member:'VIP',
+    all_sweden:'पूरा स्वीडन', tab_home:'होम', tab_places:'चेक-इन', tab_outings:'इवेंट', tab_market:'बाज़ार', tab_friends:'दोस्त बनाएँ', tab_translate:'सेवाएँ', tab_services:'शॉपिंग', tab_about:'हमारे बारे में', tab_member:'VIP',
     mb_hero_1:'बनें', mb_hero_2:'QiQa VIP', mb_intro:'QiQa घर से दूर रह रहे हमारे समुदाय का साझा घर है। इस जगह को सबके लिए सुरक्षित, साफ़ और विज्ञापन-मुक्त रखने के लिए हमें आपके सहयोग की ज़रूरत है।', mb_free_t:'सिर्फ़ देखना (मुफ़्त)', mb_free_d:'आप केवल प्रचार सूचनाएँ और सार्वजनिक नोटिस देख सकते हैं।', mb_mem_t:'सदस्य — पूरी पहुँच', mb_b1:'सभी गाइड पढ़ें (कानून, प्रक्रियाएँ, अपडेट)', mb_b2:'आपकी प्रोफ़ाइल पर सदस्य बैज', mb_b3:'एक स्वस्थ समुदाय का समर्थन करें', mb_pick:'अपना प्लान चुनें', mb_month:'1 महीना', mb_6month:'6 महीने', mb_year:'1 साल', mb_popular:'लोकप्रिय', mb_best:'सबसे किफ़ायती', mb_pledge:'आपका योगदान QiQa को सबके लिए चलाए रखने में मदद करता है — मिलकर हम एक स्वस्थ समुदाय बनाते हैं।', mb_pay_t:'शामिल होने के लिए Swish से भुगतान करें', mb_pay_step:'राशि 072-567 11 11 पर Swish करें, और संदेश में "Member [प्लान] + आपका ईमेल" लिखें। आपकी सदस्यता जल्द ही सक्रिय हो जाएगी।', mb_you_member:'आप सदस्य हैं 💚', mb_until:'मान्य',
     cr_use_t:'क्रेडिट का उपयोग करें:', cr_use_1:'🌸 फूल भेजें / 👏 ताली / 👋 अभिवादन — 1 क्रेडिट', cr_use_5:'🎥 5–8 सेकंड का अभिवादन वीडियो — 5 क्रेडिट', cr_swish_t:'Swish कोड स्कैन करें — {n} क्रेडिट पैक ({price} kr)', cr_amt:'स्कैन करने पर {price} kr राशि पहले से भरी होती है।', cr_s1:'कोड स्कैन करें → {price} kr ट्रांसफर की पुष्टि करें', cr_s2:'"Meddelande" (संदेश) फ़ील्ड में अपना लॉगिन ईमेल लिखें', cr_s3:'क्रेडिट जल्द ही आपके खाते में जोड़ दिए जाएँगे',
     w_title:'QiQa में आपका स्वागत है', w_sub:'अपना रंग और भाषा चुनें', w_theme:'रंग थीम', w_lang:'भाषा', w_start:'शुरू करें →', pn_end:'यहाँ और कुछ नहीं है।', pn_next:'आगे देखें', theme_title:'रूप', theme_sub:'अपनी पसंद का रंग चुनें।',
@@ -6031,7 +6073,7 @@ Object.assign(I18N, {
     tr_show:'अनुवाद', tr_hide:'मूल दिखाएँ', tr_loading:'अनुवाद हो रहा है…', tr_fail:'अनुवाद विफल', feed_more:'और देखें'
   },
   bs: {
-    all_sweden:'Cijela Švedska', tab_home:'Početna', tab_places:'Prijava', tab_outings:'Izlasci s djecom', tab_market:'Tržnica', tab_friends:'Upoznaj prijatelje', tab_translate:'Usluge', tab_services:'Shoping', tab_about:'O nama', tab_member:'VIP',
+    all_sweden:'Cijela Švedska', tab_home:'Početna', tab_places:'Prijava', tab_outings:'Događaji', tab_market:'Tržnica', tab_friends:'Upoznaj prijatelje', tab_translate:'Usluge', tab_services:'Shoping', tab_about:'O nama', tab_member:'VIP',
     mb_hero_1:'Postani', mb_hero_2:'QiQa VIP', mb_intro:'QiQa je zajednički dom naše zajednice daleko od kuće. Da bismo ovo mjesto zadržali sigurnim, urednim i bez reklama za sve, treba nam vaša podrška.', mb_free_t:'Samo razgledavanje (besplatno)', mb_free_d:'Možete vidjeti samo promotivne objave i javne obavijesti.', mb_mem_t:'Član — puni pristup', mb_b1:'Čitajte sve vodiče (zakon, procedure, novosti)', mb_b2:'Oznaka člana na vašem profilu', mb_b3:'Podržite zdravu zajednicu', mb_pick:'Odaberite paket', mb_month:'1 mjesec', mb_6month:'6 mjeseci', mb_year:'1 godina', mb_popular:'Popularno', mb_best:'Najbolja vrijednost', mb_pledge:'Vaš doprinos pomaže nam da QiQa radi za sve — zajedno gradimo zdravu zajednicu.', mb_pay_t:'Platite Swishom da se pridružite', mb_pay_step:'Pošaljite iznos Swishom na 072-567 11 11 i u poruci napišite "Member [paket] + vaš email". Članstvo će uskoro biti aktivirano.', mb_you_member:'Vi ste član 💚', mb_until:'Vrijedi do',
     cr_use_t:'Iskoristite kredit za:', cr_use_1:'🌸 Pošalji cvijeće / 👏 pljesak / 👋 pozdrav — 1 kredit', cr_use_5:'🎥 Video pozdrav 5–8s — 5 kredita', cr_swish_t:'Skenirajte Swish kod — paket {n} kredita ({price} kr)', cr_amt:'Iznos od {price} kr je unaprijed popunjen kad skenirate.', cr_s1:'Skenirajte kod → potvrdite prijenos od {price} kr', cr_s2:'U polje "Meddelande" (poruka) upišite svoj email za prijavu', cr_s3:'Krediti će uskoro biti dodani na vaš račun',
     w_title:'Dobrodošli u QiQa', w_sub:'Odaberite boju i jezik', w_theme:'Tema boja', w_lang:'Jezik', w_start:'Započni →', pn_end:'Ovdje nema više ništa.', pn_next:'Istraži dalje', theme_title:'Izgled', theme_sub:'Odaberite boju koja vam se sviđa.',
@@ -6083,7 +6125,7 @@ Object.assign(I18N, {
 Object.assign(I18N, {
   fr: {
     all_sweden:'Toute la Suède',
-    tab_home:'Accueil', tab_places:'Check-in', tab_outings:'Sorties avec les enfants', tab_market:'Marché',
+    tab_home:'Accueil', tab_places:'Check-in', tab_outings:'Événements', tab_market:'Marché',
     tab_friends:'Rencontres', tab_translate:'Services', tab_services:'Boutique', tab_about:'À propos', tab_member:'VIP', mb_hero_1:'Devenez', mb_hero_2:'membre VIP QiQa', mb_intro:'QiQa est une maison commune pour notre communauté loin de chez elle. Pour que cet endroit reste sûr, propre et sans publicité pour tous, nous avons besoin de votre soutien.', mb_free_t:'Simple visite (gratuit)', mb_free_d:'Vous ne voyez que les annonces promotionnelles et les avis publics.', mb_mem_t:'Membre — accès complet', mb_b1:'Lire tous les guides (droit, démarches, actualités)', mb_b2:'Badge de membre sur votre profil', mb_b3:'Soutenir une communauté saine', mb_b_credit:'100 crédits offerts en cadeau de bienvenue — à échanger contre des services payants', svc_use_credit:'💎 Utiliser {n} crédits (solde : {bal})', svc_buy_credit:'💎 Crédits insuffisants — Recharger', svc_or_swish:'Ou payez directement avec Swish :', mb_pick:'Choisissez votre formule', mb_month:'1 mois', mb_6month:'6 mois', mb_year:'1 an', mb_popular:'Populaire', mb_best:'Meilleur prix', mb_pledge:'Votre contribution nous aide à faire vivre QiQa pour tous — ensemble, construisons une communauté saine.', mb_pay_t:'Payez avec Swish pour adhérer', mb_pay_step:'Envoyez le montant par Swish au 072-567 11 11 et écrivez « Membre [formule] + votre e-mail » dans le message. Votre adhésion sera activée sous peu.', mb_you_member:'Vous êtes membre 💚', mb_until:'Valable jusqu\'au', cr_use_t:'Utiliser les crédits pour :', cr_use_1:'🌸 Envoyer des fleurs / 👏 applaudir / 👋 saluer — 1 crédit', cr_use_5:'🎥 Vidéo de salutation 5–8 s — 5 crédits', cr_swish_t:'Scannez le code Swish — pack de {n} crédits ({price} kr)', cr_amt:'Le montant de {price} kr est prérempli lors du scan.', cr_s1:'Scannez le code → confirmez le virement de {price} kr', cr_s2:'Dans le champ « Meddelande » (message), indiquez votre e-mail de connexion', cr_s3:'Les crédits seront ajoutés à votre compte sous peu', w_title:'Bienvenue sur QiQa', w_sub:'Choisissez votre couleur et votre langue', w_theme:'Thème de couleur', w_lang:'Langue', w_start:'Commencer →', pn_end:'Rien de plus ici.', pn_next:'À découvrir ensuite', theme_title:'Apparence', theme_sub:'Choisissez la teinte qui vous plaît.', cat_all:'Tout', cat_food:'Manger & boire', cat_shop:'Shopping', cat_service:'Services', cat_community:'Communauté', cat_kids:'Pour enfants', cat_vietfood:'Cuisine vietnamienne', cat_home:'Maison', cat_carry:'Transport de colis', cat_free:'À donner', cat_health:'Santé', cat_admin:'Documents/Démarches', cat_legal:'Juridique', cat_escort:'Accompagnement', cat_doctrans:'Traduction de documents', ty_give:'Donner', ty_swap:'Échanger', ty_free:'Gratuit', ty_carry:'Transporter', lbl_places:'lieux', lbl_you:'Vous', lbl_joined:'✓ Inscrit', lbl_join:'Participer', lbl_match_cnt:'affinités possibles', lbl_report:'Signaler', lbl_registered:'✓ Enregistré', lbl_register:'S\'enregistrer', lbl_be_interp:'Devenir interprète', lbl_post_req:'Publier une demande', lbl_vip_member:'Membre VIP', tt_bold:'Gras', tt_italic:'Italique', tt_color:'Couleur du texte', tt_emoji:'Émoji', tt_gift:'Envoyer un cadeau', tt_credit:'Recharger des crédits', tt_theme:'Fond du chat',
     login:'Se connecter', logout:'Se déconnecter',
     search_places:'Chercher restaurants, épicerie asiatique, ongles…', search_area:'Chercher par zone…',
@@ -6972,7 +7014,63 @@ function memberGateDone(){
     </div>`;
 }
 
+
+// ===== 🔥 NỔI BẬT CỘNG ĐỒNG (trang chủ) =====
+// Bài nhiều người xem nhất + thành viên đăng nhiều bài nhất
+function renderSpotlight(){
+  const box = document.getElementById('homeSpotlight');
+  if (!box) return;
+  const live = POSTS.filter(p => (Date.now() - new Date(p.ngay_tao).getTime()) <= SHARE_TTL);
+  if (!live.length) { box.innerHTML = ''; return; }
+
+  // điểm nóng = người xem + 💖×3 + bình luận×2
+  const hot = live.slice().sort((a,b) =>
+    (pViews(b) + pLikes(b)*3 + pCmts(b).length*2) - (pViews(a) + pLikes(a)*3 + pCmts(a).length*2)
+  ).slice(0, 3).filter(p => pViews(p) > 0 || pLikes(p) > 0);
+
+  // người đăng nhiều bài nhất trong tuần
+  const by = {};
+  live.forEach(p => {
+    const em = String(p.nguoi_dang || p.email || '').toLowerCase();
+    if (!em) return;
+    if (!by[em]) by[em] = { em, ten: p.host, anh: p.anh_dd || '', n: 0, v: 0 };
+    by[em].n++; by[em].v += pViews(p);
+  });
+  const top = Object.values(by).sort((a,b) => (b.n - a.n) || (b.v - a.v)).slice(0, 3);
+
+  const cut = (s,n)=>{ s=(s||'').replace(/\s+/g,' ').trim(); return s.length>n ? s.slice(0,n)+'…' : s; };
+  const hotHTML = hot.map((p,i) => `
+    <div class="sp-item" onclick="switchTab('share')">
+      <div class="sp-rank">${['🥇','🥈','🥉'][i]}</div>
+      <div class="sp-b">
+        <div class="sp-tx">${escapeHtml(cut(p.noidung || t('feed_share'), 60))}</div>
+        <div class="sp-meta">${escapeHtml(p.host||'')}${rankBadge(p.nguoi_dang)} · 👁️ ${pViews(p)} · 💖 ${pLikes(p)} · 💬 ${pCmts(p).length}</div>
+      </div>
+    </div>`).join('');
+
+  const topHTML = top.map((u,i) => `
+    <div class="sp-item" onclick="switchTab('share')">
+      <div class="sp-rank">${['🥇','🥈','🥉'][i]}</div>
+      <div class="avatar sm" style="background:${AV[avColor(u.em)]}${u.anh?`;background-image:url('${u.anh}');background-size:cover`:''}">${u.anh?'':initials(u.ten)}</div>
+      <div class="sp-b">
+        <div class="sp-tx">${escapeHtml(u.ten||'')}${rankBadge(u.em)}</div>
+        <div class="sp-meta">${t('sp_posts').replace('{n}', u.n)} · 👁️ ${u.v}</div>
+      </div>
+    </div>`).join('');
+
+  box.innerHTML = `
+    <div class="sp-wrap">
+      ${hot.length ? `<div class="sp-card">
+        <div class="sp-head">🔥 ${t('sp_hot')}</div>${hotHTML}
+      </div>` : ''}
+      ${top.length ? `<div class="sp-card">
+        <div class="sp-head">⭐ ${t('sp_top')}</div>${topHTML}
+      </div>` : ''}
+    </div>`;
+}
+
 function renderLandingPosts(){
+  renderSpotlight();
   const el = document.getElementById('homePosts'); if (!el) return;
   let items = [];
   try { items = buildFeedItems(); } catch(e){ items = []; }
@@ -7315,8 +7413,33 @@ async function deletePost(postType, id) {
 }
 
 // ===== OUTINGS =====
+
+// ===== LOẠI SỰ KIỆN =====
+const EV_CATS = [
+  { id:'all',      ic:'✨', k:'evc_all' },
+  { id:'meetup',   ic:'🤝', k:'evc_meetup' },
+  { id:'camping',  ic:'⛺', k:'evc_camping' },
+  { id:'trip',     ic:'🚗', k:'evc_trip' },
+  { id:'kids',     ic:'🧸', k:'evc_kids' },
+  { id:'sport',    ic:'⚽', k:'evc_sport' },
+  { id:'food',     ic:'🍜', k:'evc_food' },
+  { id:'other',    ic:'📌', k:'evc_other' }
+];
+let evCat = 'all';
+function evCatOf(o){ const n = String(o.nhom||'').trim(); return n || 'kids'; }   // bài cũ = đi chơi cùng con
+function evCatLabel(id){ const c = EV_CATS.find(x=>x.id===id) || EV_CATS[EV_CATS.length-1]; return c.ic + ' ' + t(c.k); }
+function renderEvChips(){
+  const box = document.getElementById('ev-chips'); if (!box) return;
+  box.innerHTML = EV_CATS.map(c =>
+    `<div class="chip ${evCat===c.id?'on':''}" onclick="setEvCat('${c.id}')">${c.ic} ${t(c.k)}</div>`).join('');
+}
+function setEvCat(id){ evCat = id; renderEvChips(); renderFeed(); }
+
 function renderFeed() {
-  const list = OUTINGS.filter(o => cityMatch(o.tp) && (!query || [o.host,o.khuvuc,o.diadiem,o.note,o.tuoi].some(s=>String(s||'').toLowerCase().includes(query))));
+  const list = OUTINGS.filter(o => cityMatch(o.tp)
+    && (evCat === 'all' || evCatOf(o) === evCat)
+    && (!query || [o.host,o.khuvuc,o.diadiem,o.note,o.tuoi].some(s=>String(s||'').toLowerCase().includes(query))));
+  renderEvChips();
   const feed = document.getElementById('feed');
   if (!list.length) { feed.innerHTML = '<div class="empty">'+t('empty_outings')+'</div>'; return; }
   const me = currentUser ? (currentUser.ten||t('lbl_you')) : null;
@@ -7328,7 +7451,7 @@ function renderFeed() {
     <article class="outing">
       <div class="o-head">
         <div class="avatar" style="background:${AV[col%AV.length]}">${initials(o.host)}</div>
-        <div><div class="o-host">${o.host}${rankBadge(o.nguoi_dang)}</div><div class="o-sub">${o.khuvuc}</div></div>
+        <div><div class="o-host">${o.host}${rankBadge(o.nguoi_dang)}</div><div class="o-sub">${evCatLabel(evCatOf(o))} · ${o.khuvuc}</div></div>
         <div class="o-when"><div class="d">${o.ngay}</div><div class="t">${o.gio}</div></div>
       </div>
       <div class="o-title">${o.diadiem}</div>
@@ -7371,6 +7494,10 @@ function openCreate(editItem) {
       <h2>${isEdit?t('post_edit'):t('of_title')}</h2>
       <div class="sub" style="margin-bottom:18px;">${t('of_sub')}</div>
       ${photoFieldHTML(t('photo_img'), 'f-anh-prev', 'f-anh', e.anh||'', false)}
+      <div class="field"><label>${t('of_kind')}</label>
+        <select id="f-nhom">${EV_CATS.filter(c=>c.id!=='all').map(c=>
+          `<option value="${c.id}" ${ (e.nhom||'kids')===c.id ? 'selected':'' }>${c.ic} ${t(c.k)}</option>`).join('')}</select>
+      </div>
       <div class="field"><label>${t('of_yourname')}</label><input id="f-host" value="${esc(e.host||pdName())}" placeholder=""></div>
       <div class="field"><label>${t('of_place')}</label><input id="f-place" value="${e.diadiem||''}" placeholder=""></div>
       <div class="field"><label>${t('of_area')}</label><input id="f-area" value="${esc(e.khuvuc||pdArea())}" placeholder=""></div>
@@ -7389,7 +7516,8 @@ function submitOuting(editId) {
   const v = id => document.getElementById(id).value.trim();
   const host=v('f-host'), place=v('f-place');
   if (!host || !place) { alert(t('of_need')); return; }
-  const fields = { host, khuvuc:v('f-area')||activeCity, diadiem:place, dia_addr:v('f-area')||place, ngay:v('f-day')||'—', gio:v('f-time')||'', tuoi:v('f-age')||'—', note:v('f-note')||'', anh:v('f-anh')||'' };
+  const nhom = (document.getElementById('f-nhom')||{}).value || 'kids';
+  const fields = { host, khuvuc:v('f-area')||activeCity, diadiem:place, dia_addr:v('f-area')||place, ngay:v('f-day')||'—', gio:v('f-time')||'', tuoi:v('f-age')||'—', note:v('f-note')||'', anh:v('f-anh')||'', nhom };
   if (editId) {
     const o = OUTINGS.find(x=>String(x.id)===String(editId));
     if (o) Object.assign(o, fields);
@@ -7873,12 +8001,123 @@ function switchFrSub(s) {
   renderFriends();
 }
 
+
+// ===== 🔮 TỬ VI HÀNG NGÀY (12 cung hoàng đạo) =====
+const ZODIAC = [
+  { id:'aries',  ic:'♈', ten:'Bạch Dương', from:[3,21],  to:[4,19],  hop:['leo','sagittarius','gemini'] },
+  { id:'taurus', ic:'♉', ten:'Kim Ngưu',  from:[4,20],  to:[5,20],  hop:['virgo','capricorn','cancer'] },
+  { id:'gemini', ic:'♊', ten:'Song Tử',   from:[5,21],  to:[6,20],  hop:['libra','aquarius','aries'] },
+  { id:'cancer', ic:'♋', ten:'Cự Giải',   from:[6,21],  to:[7,22],  hop:['scorpio','pisces','taurus'] },
+  { id:'leo',    ic:'♌', ten:'Sư Tử',     from:[7,23],  to:[8,22],  hop:['aries','sagittarius','libra'] },
+  { id:'virgo',  ic:'♍', ten:'Xử Nữ',     from:[8,23],  to:[9,22],  hop:['taurus','capricorn','scorpio'] },
+  { id:'libra',  ic:'♎', ten:'Thiên Bình',from:[9,23],  to:[10,22], hop:['gemini','aquarius','leo'] },
+  { id:'scorpio',ic:'♏', ten:'Bọ Cạp',    from:[10,23], to:[11,21], hop:['cancer','pisces','virgo'] },
+  { id:'sagittarius', ic:'♐', ten:'Nhân Mã', from:[11,22], to:[12,21], hop:['aries','leo','aquarius'] },
+  { id:'capricorn',   ic:'♑', ten:'Ma Kết',  from:[12,22], to:[1,19],  hop:['taurus','virgo','pisces'] },
+  { id:'aquarius',    ic:'♒', ten:'Bảo Bình',from:[1,20],  to:[2,18],  hop:['gemini','libra','sagittarius'] },
+  { id:'pisces', ic:'♓', ten:'Song Ngư',  from:[2,19],  to:[3,20],  hop:['cancer','scorpio','capricorn'] }
+];
+const HORO_LOVE = [
+  'Trái tim bạn hôm nay rộng mở lạ thường. Một lời nhắn tưởng như vu vơ lại có thể mở ra điều gì đó đáng nhớ.',
+  'Đừng vội phán xét ai qua ấn tượng đầu tiên. Người khiến bạn thấy bình yên thường xuất hiện rất lặng lẽ.',
+  'Hôm nay hợp để chủ động. Nếu có ai đó bạn vẫn nghĩ tới, hãy nhắn trước — bạn sẽ không thiệt gì đâu.',
+  'Một mối quan hệ cũ có thể gợn lên trong tâm trí. Hãy trân trọng ký ức, nhưng đừng quay đầu lại.',
+  'Sự chân thành là vũ khí mạnh nhất của bạn lúc này. Cứ là chính mình, người phù hợp sẽ ở lại.',
+  'Có người đang âm thầm để ý đến bạn. Hãy để ý những cử chỉ nhỏ thay vì chờ lời tỏ bày lớn lao.'
+];
+const HORO_WORK = [
+  'Công việc trôi chảy nếu bạn chịu khó sắp xếp lại thứ tự ưu tiên ngay từ sáng.',
+  'Một cơ hội nhỏ có thể mở ra hướng đi lớn. Đừng bỏ qua chỉ vì nó chưa hoàn hảo.',
+  'Hôm nay nên lắng nghe nhiều hơn nói. Thông tin quý giá thường đến từ người bạn ít ngờ nhất.',
+  'Đừng ôm đồm. Biết từ chối đúng lúc cũng là một loại năng lực.',
+  'Sự kiên nhẫn hôm nay sẽ được đền đáp. Việc bạn theo đuổi bấy lâu đang gần đích hơn bạn tưởng.',
+  'Hãy hoàn tất việc còn dang dở trước khi bắt đầu điều mới — bạn sẽ nhẹ lòng hẳn.'
+];
+const HORO_LIFE = [
+  'Dành chút thời gian cho bản thân. Một buổi đi dạo ngắn cũng đủ làm đầu óc sáng ra.',
+  'Hãy gọi cho người thân ở quê nhà. Vài phút trò chuyện có thể sưởi ấm cả ngày của bạn.',
+  'Cơ thể đang nhắc bạn nghỉ ngơi. Đừng đợi đến lúc kiệt sức mới chịu dừng lại.',
+  'Một cuộc gặp gỡ tình cờ hôm nay có thể mang lại niềm vui bất ngờ.',
+  'Hãy dọn dẹp một góc nhỏ trong nhà — không gian gọn gàng sẽ kéo theo tâm trí nhẹ nhõm.',
+  'Đừng so sánh mình với người khác. Hành trình của bạn có nhịp riêng của nó.'
+];
+const HORO_COLORS = ['Đỏ san hô','Xanh ngọc','Vàng hổ phách','Trắng ngà','Xanh lá','Tím oải hương','Cam đất','Xanh biển'];
+
+function zodiacOf(dateStr){
+  if (!dateStr) return null;
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return null;
+  const m = d.getMonth()+1, day = d.getDate();
+  return ZODIAC.find(z => {
+    const [fm,fd] = z.from, [tm,td] = z.to;
+    if (fm <= tm) return (m===fm && day>=fd) || (m===tm && day<=td) || (m>fm && m<tm);
+    return (m===fm && day>=fd) || (m===tm && day<=td);   // Ma Kết vắt qua năm mới
+  }) || null;
+}
+// Bốc nội dung ổn định theo NGÀY + CUNG (mọi người cùng cung thấy giống nhau, mỗi ngày đổi mới)
+function horoSeed(zid){
+  const d = new Date();
+  const key = zid + '-' + d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
+  let h = 0;
+  for (let i=0;i<key.length;i++) h = (h*31 + key.charCodeAt(i)) >>> 0;
+  return h;
+}
+let horoPick = null;   // cung người dùng tự chọn
+function renderHoroscope(){
+  const box = document.getElementById('fr-horo'); if (!box) return;
+  // ưu tiên: cung tự chọn → ngày sinh trong hồ sơ
+  let z = horoPick ? ZODIAC.find(x=>x.id===horoPick) : null;
+  if (!z && currentUser && currentUser.ngay_sinh) z = zodiacOf(currentUser.ngay_sinh);
+
+  const picker = `<div class="hr-picker">${ZODIAC.map(x =>
+    `<div class="hr-chip ${z&&z.id===x.id?'on':''}" onclick="horoPick='${x.id}';renderHoroscope()">${x.ic} ${x.ten}</div>`).join('')}</div>`;
+
+  if (!z) {
+    box.innerHTML = `<div class="hr-intro">${t('hr_pick')}</div>${picker}`;
+    return;
+  }
+  const sd = horoSeed(z.id);
+  const love = HORO_LOVE[sd % HORO_LOVE.length];
+  const work = HORO_WORK[(sd>>3) % HORO_WORK.length];
+  const life = HORO_LIFE[(sd>>6) % HORO_LIFE.length];
+  const star = 3 + (sd % 3);                       // 3–5 sao
+  const num  = 1 + (sd >> 9) % 9;
+  const color = HORO_COLORS[(sd>>12) % HORO_COLORS.length];
+  const hop = z.hop.map(id => ZODIAC.find(x=>x.id===id)).filter(Boolean);
+  const today = new Date().toLocaleDateString('vi-VN');
+
+  box.innerHTML = `
+    ${picker}
+    <div class="hr-card">
+      <div class="hr-top">
+        <div class="hr-ic">${z.ic}</div>
+        <div><div class="hr-name">${z.ten}</div><div class="hr-date">${today}</div></div>
+        <div class="hr-stars">${'★'.repeat(star)}${'☆'.repeat(5-star)}</div>
+      </div>
+      <div class="hr-row"><b>💗 ${t('hr_love')}</b><p>${love}</p></div>
+      <div class="hr-row"><b>💼 ${t('hr_work')}</b><p>${work}</p></div>
+      <div class="hr-row"><b>🌿 ${t('hr_life')}</b><p>${life}</p></div>
+      <div class="hr-lucky">
+        <span>🔢 ${t('hr_num')}: <b>${num}</b></span>
+        <span>🎨 ${t('hr_color')}: <b>${color}</b></span>
+      </div>
+      <div class="hr-match">
+        <div class="hr-match-t">💞 ${t('hr_match')}</div>
+        <div class="hr-match-l">${hop.map(x=>`<span class="hr-m">${x.ic} ${x.ten}</span>`).join('')}</div>
+      </div>
+      <div class="hr-note">${t('hr_fun')}</div>
+    </div>`;
+}
+
 function renderFriends() {
   const needProfile = !myProfile;
   // màn hình gợi ý luôn xem được; chỉ khi thích/tạo hồ sơ mới cần đăng nhập
   document.getElementById('fr-discover').classList.toggle('hidden', frSub!=='discover');
   document.getElementById('fr-matches').classList.toggle('hidden', frSub!=='matches');
   document.getElementById('fr-events').classList.toggle('hidden', frSub!=='events');
+  const hb = document.getElementById('fr-horo');
+  if (hb) { hb.classList.toggle('hidden', frSub!=='horo'); if (frSub==='horo') renderHoroscope(); }
+  if (frSub==='horo') return;                       // trang tử vi không cần hồ sơ độc thân
   document.getElementById('fr-noprofile').classList.add('hidden');
 
   if (frSub==='discover') renderDiscover();
@@ -8624,6 +8863,50 @@ function mediaHTML(url) {
 // ===== 💖 THÍCH & 💬 BÌNH LUẬN =====
 let openCmt = {};   // id bài đang mở khung bình luận
 function pLikes(p){ return Number(p.likes||0); }
+function pViews(p){ return Number(p.views||0); }
+
+// ===== 👁️ ĐẾM NGƯỜI XEM (mỗi thiết bị/tài khoản chỉ tính 1 lần mỗi bài) =====
+function deviceId(){
+  let id = localStorage.getItem('qiqa_device');
+  if (!id) { id = 'dev-' + Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem('qiqa_device', id); }
+  return id;
+}
+let viewSent = {};
+try { viewSent = JSON.parse(localStorage.getItem('qiqa_viewed') || '{}'); } catch(e) { viewSent = {}; }
+let viewQueue = [], viewTimer = null;
+function markViewed(id){
+  const pid = String(id);
+  if (viewSent[pid]) return;                  // đã tính rồi
+  viewSent[pid] = 1;
+  localStorage.setItem('qiqa_viewed', JSON.stringify(viewSent));
+  // cộng ngay trên màn hình cho mượt
+  const p = POSTS.find(x=>String(x.id)===pid);
+  if (p) p.views = pViews(p) + 1;
+  viewQueue.push(pid);
+  clearTimeout(viewTimer);
+  viewTimer = setTimeout(flushViews, 1200);   // gộp nhiều bài rồi gửi 1 lần
+}
+function flushViews(){
+  if (!viewQueue.length) return;
+  const ids = viewQueue.slice(); viewQueue = [];
+  callApi({ action:'viewPost', post_ids: JSON.stringify(ids),
+            email: currentUser ? currentUser.email : '', device: deviceId() }).catch(()=>{});
+}
+// Bài lọt vào màn hình (đọc thật) mới tính là một lượt xem
+let viewObserver = null;
+function observeViews(){
+  if (!('IntersectionObserver' in window)) return;
+  if (viewObserver) viewObserver.disconnect();
+  viewObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{
+      if (en.isIntersecting && en.target.dataset.pid) {
+        markViewed(en.target.dataset.pid);
+        viewObserver.unobserve(en.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('#sh-feed .sh-card[data-pid]').forEach(el=>viewObserver.observe(el));
+}
 function pLiked(p){ return !!p.liked; }
 function pCmts(p){ return Array.isArray(p.comments) ? p.comments : []; }
 function ownsCmt(c){ return currentUser && String(c.email||'').toLowerCase() === String(currentUser.email||'').toLowerCase(); }
@@ -8702,7 +8985,7 @@ function syncBusyTyping(){
 // Vẽ lại đúng trang đang mở (và bảng tin trang chủ)
 function rerenderCurrent(){
   try {
-    if (curTab === 'home')      { renderFeed(); if (typeof renderHomeFeed==='function') renderHomeFeed(); if (typeof renderTeasers==='function') renderTeasers(); }
+    if (curTab === 'home')      { renderFeed(); if (typeof renderHomeFeed==='function') renderHomeFeed(); if (typeof renderLandingPosts==='function') renderLandingPosts(); if (typeof renderTeasers==='function') renderTeasers(); }
     else if (curTab === 'places')   renderPlaces();
     else if (curTab === 'outings')  { if (typeof renderCheckin==='function') renderCheckin(); renderFeed(); }
     else if (curTab === 'market')   renderMarket();
@@ -8752,7 +9035,7 @@ function renderShare() {
     const left = fmtTimeLeft(p.ngay_tao);
     const nL = pLikes(p), nC = pCmts(p).length;
     return `
-    <article class="sh-card">
+    <article class="sh-card" data-pid="${p.id}">
       <div class="sh-top">
         <div class="avatar" style="background:${AV[avColor(p.nguoi_dang||p.host)]}${p.anh_dd?`;background-image:url('${p.anh_dd}');background-size:cover`:''}">${p.anh_dd?'':initials(p.host)}</div>
         <div class="sh-who"><div class="sh-name">${escapeHtml(p.host)}${rankBadge(p.nguoi_dang||p.email)}</div><div class="sh-time">${timeAgo(p.ngay_tao)} · ⏳ ${left||t('sh_expired')}</div></div>
@@ -8763,6 +9046,7 @@ function renderShare() {
       </div>
       ${p.noidung?`<div class="sh-text">${escapeHtml(p.noidung)}</div>`:''}
       ${mediaHTML(p.media)}
+      <div class="sh-views">👁️ ${pViews(p)} ${t('sh_views')}</div>
       <div class="sh-acts">
         <button class="sh-act ${pLiked(p)?'on':''}" onclick="toggleLikePost('${p.id}')">
           <span class="sh-ic">💖</span><span>${nL>0?nL:''} ${t('sh_like')}</span>
@@ -8774,6 +9058,7 @@ function renderShare() {
       ${openCmt[p.id] ? cmtHTML(p) : ''}
     </article>`;
   }).join('');
+  observeViews();          // bắt đầu theo dõi bài nào lọt vào màn hình
 }
 function openShareForm(edit) {
   requireLogin(() => {
