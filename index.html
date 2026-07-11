@@ -753,6 +753,9 @@
   .rk-newname { font-size: 22px; font-weight: 800; color: var(--gold-text); }
   .rk-gift { display: inline-block; margin-top: 4px; padding: 7px 16px; border-radius: 99px; font-weight: 800; font-size: 15px;
     background: var(--tint-amber); border: 1px solid var(--tint-amber-bd); color: var(--gold-text); }
+  /* huy hiệu hạng cạnh tên tài khoản (mọi nơi) */
+  .u-rank { display: inline-flex; align-items: center; justify-content: center; margin-left: 5px;
+    font-size: 12px; line-height: 1; vertical-align: middle; transform: translateY(-1px); }
   .acc-rank { position: absolute; right: -3px; bottom: -3px; width: 19px; height: 19px;
     display: flex; align-items: center; justify-content: center; font-size: 12px; line-height: 1;
     border-radius: 999px; background: var(--paper); border: 1.5px solid var(--tint-amber-bd);
@@ -1459,7 +1462,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v123-rank-diag</span></p>
+  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v124-rank-everywhere</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -6319,7 +6322,7 @@ function renderShop(){
       <div class="item-body">
         <div class="item-title">${esc(title)}</div>
         <div class="item-desc">${esc(desc)}</div>
-        <div class="item-meta"><span class="who">${esc(m.who||'')}</span><span class="where">📍 ${esc(m.khuvuc||'')}</span></div>
+        <div class="item-meta"><span class="who">${esc(m.who||'')}${rankBadge(m.nguoi_dang)}</span><span class="where">📍 ${esc(m.khuvuc||'')}</span></div>
         <div style="display:flex;gap:6px;align-items:center;margin-top:10px">
           ${contact}
           ${ownsPost(m)?`<button class="edit-post" title="${t('post_edit')}" onclick="openShopForm(MARKET.find(x=>String(x.id)==='${m.id}'))">✎</button><button class="del-post" title="${t('post_delete')}" onclick="deletePost('market','${m.id}')">🗑</button>`:''}
@@ -7323,7 +7326,7 @@ function renderFeed() {
     <article class="outing">
       <div class="o-head">
         <div class="avatar" style="background:${AV[col%AV.length]}">${initials(o.host)}</div>
-        <div><div class="o-host">${o.host}</div><div class="o-sub">${o.khuvuc}</div></div>
+        <div><div class="o-host">${o.host}${rankBadge(o.nguoi_dang)}</div><div class="o-sub">${o.khuvuc}</div></div>
         <div class="o-when"><div class="d">${o.ngay}</div><div class="t">${o.gio}</div></div>
       </div>
       <div class="o-title">${o.diadiem}</div>
@@ -8503,7 +8506,7 @@ function renderEvents() {
         </div>
         <div class="ev-title">${escapeHtml(e.title)}</div>
         <div class="ev-meta">
-          <span class="ev-host">👤 ${escapeHtml(e.host)}</span>
+          <span class="ev-host">👤 ${escapeHtml(e.host)}${rankBadge(e.nguoi_dang)}</span>
           <span class="ev-when">🕐 ${evWhenText(e)}</span>
           ${countHtml}
         </div>
@@ -8666,7 +8669,7 @@ function cmtHTML(p){
     <div class="cmt">
       <div class="avatar sm" style="background:${AV[avColor(c.email||c.ten)]}${c.anh_dd?`;background-image:url('${c.anh_dd}');background-size:cover`:''}">${c.anh_dd?'':initials(c.ten)}</div>
       <div class="cmt-b">
-        <div class="cmt-h"><b>${escapeHtml(c.ten||'')}</b><span>${timeAgo(c.ngay_tao)}</span>
+        <div class="cmt-h"><b>${escapeHtml(c.ten||'')}</b>${rankBadge(c.email)}<span>${timeAgo(c.ngay_tao)}</span>
           ${ownsCmt(c)?`<button class="cmt-x" onclick="delCmt('${p.id}','${c.id}')" title="${t('post_delete')}">✕</button>`:''}
         </div>
         <div class="cmt-t">${escapeHtml(c.noidung||'')}</div>
@@ -8695,7 +8698,7 @@ function renderShare() {
     <article class="sh-card">
       <div class="sh-top">
         <div class="avatar" style="background:${AV[avColor(p.nguoi_dang||p.host)]}${p.anh_dd?`;background-image:url('${p.anh_dd}');background-size:cover`:''}">${p.anh_dd?'':initials(p.host)}</div>
-        <div class="sh-who"><div class="sh-name">${escapeHtml(p.host)}</div><div class="sh-time">${timeAgo(p.ngay_tao)} · ⏳ ${left||t('sh_expired')}</div></div>
+        <div class="sh-who"><div class="sh-name">${escapeHtml(p.host)}${rankBadge(p.nguoi_dang||p.email)}</div><div class="sh-time">${timeAgo(p.ngay_tao)} · ⏳ ${left||t('sh_expired')}</div></div>
         ${ownsPost(p)?`<div style="display:flex;gap:6px">
           <button class="edit-post" title="${t('post_edit')}" onclick="openShareForm(POSTS.find(x=>String(x.id)==='${p.id}'))">✎</button>
           ${delBtnHTML('post', p.id)}
@@ -8957,7 +8960,7 @@ function renderChatMsg(m) {
     <div class="av" style="background:${AV[avColor(m.email||name)]}${m.anh?`;background-image:url('${m.anh}');background-size:cover;background-position:center`:''}">${m.anh?'':initials(name)}</div>
     <div class="cmsg-body">
       <div class="cmsg-top">
-        <span class="cmsg-name">${escapeHtml(name)}</span>${m.vip?'<span class="vip-badge" title="'+t('lbl_vip_member')+'">👑</span>':''}
+        <span class="cmsg-name">${escapeHtml(name)}</span>${rankBadge(m.email)}${m.vip?'<span class="vip-badge" title="'+t('lbl_vip_member')+'">👑</span>':''}
         <span class="cmsg-time">${hh}</span>
         <button class="cmsg-report" title="${t('lbl_report')}" onclick="reportChatMsg('${m.id}')">⚑</button>
       </div>
@@ -9286,6 +9289,21 @@ const RANKS_UI = [
 ];
 let myRank = null;
 let rankErr = '';
+let RANK_MAP = {};   // { email: cấp hạng } — dùng để hiện huy hiệu ở mọi nơi
+// Huy hiệu hạng cạnh tên bất kỳ tài khoản nào
+function userRankLv(email){
+  if (!email) return 0;
+  const e = String(email).toLowerCase().trim();
+  // bản thân mình thì ưu tiên số liệu mới nhất
+  if (currentUser && e === String(currentUser.email||'').toLowerCase())
+    return Number(currentUser.hang) || (myRank && Number(myRank.hang)) || 0;
+  return Number(RANK_MAP[e]) || 0;
+}
+function rankBadge(email){
+  const lv = userRankLv(email);
+  if (!lv) return '';
+  return `<span class="u-rank" title="${escapeHtml(rankName(lv))}">${rankIcon(lv)}</span>`;
+}
 function rankIcon(lv){ return (RANKS_UI[lv]||RANKS_UI[0]).icon; }
 function rankName(lv){ return (RANKS_UI[lv]||RANKS_UI[0]).ten; }
 
@@ -9717,6 +9735,7 @@ async function loadData() {
     if (Array.isArray(r.posts))       POSTS = r.posts;
     if (Array.isArray(r.articles))    ARTICLES = r.articles;
     if (Array.isArray(r.myLikes))     myLikes = r.myLikes.map(Number);
+    if (r.ranks && typeof r.ranks === 'object') RANK_MAP = r.ranks;   // hạng của mọi thành viên
     // khôi phục hồ sơ độc thân của mình (nếu có)
     if (currentUser && Array.isArray(r.singles)) {
       const mine = r.singles.find(s => String(s.email||'').toLowerCase() === currentUser.email.toLowerCase());
