@@ -1462,7 +1462,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v125-lifetime</span></p>
+  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v127-realtime</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -6445,6 +6445,8 @@ function updatePageNav(tab){
 }
 function switchTab(tab) {
   window.scrollTo(0,0);
+  curTab = tab;                                   // ghi nhớ trang đang mở
+  if (typeof syncNow === 'function') setTimeout(()=>syncNow(false), 60);   // vào trang → lấy dữ liệu mới nhất
   document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x.dataset.tab===tab));
   document.getElementById('view-home').classList.toggle('hidden', tab!=='home');
   document.getElementById('view-places').classList.toggle('hidden', tab!=='places');
@@ -8684,6 +8686,61 @@ function cmtHTML(p){
   return `<div class="sh-cmts">${items || `<div class="cmt-empty">${t('cmt_empty')}</div>`}${input}</div>`;
 }
 
+// ===== ĐỒNG BỘ THỜI GIAN THỰC CHO TẤT CẢ CÁC TRANG =====
+let curTab = 'home';          // tab đang mở
+let syncTimer = null;
+let syncBusy = false;
+
+// Đang gõ / đang mở hộp thoại → hoãn vẽ lại để không mất chữ
+function syncBusyTyping(){
+  const el = document.activeElement;
+  if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable)) return true;
+  const modal = document.getElementById('modal');
+  if (modal && !modal.classList.contains('hidden')) return true;
+  return false;
+}
+// Vẽ lại đúng trang đang mở (và bảng tin trang chủ)
+function rerenderCurrent(){
+  try {
+    if (curTab === 'home')      { renderFeed(); if (typeof renderHomeFeed==='function') renderHomeFeed(); if (typeof renderTeasers==='function') renderTeasers(); }
+    else if (curTab === 'places')   renderPlaces();
+    else if (curTab === 'outings')  { if (typeof renderCheckin==='function') renderCheckin(); renderFeed(); }
+    else if (curTab === 'market')   renderMarket();
+    else if (curTab === 'friends')  renderFriends();
+    else if (curTab === 'translate') renderTranslate();
+    else if (curTab === 'fun')      renderEvents();
+    else if (curTab === 'share')    renderShare();
+    else if (curTab === 'articles') renderArticles();
+    else if (curTab === 'services') { if (typeof renderShop==='function') renderShop(); }
+    else if (curTab === 'member')   renderMemberPage();
+  } catch(e) {}
+}
+// Lấy dữ liệu mới nhất từ máy chủ rồi vẽ lại
+async function syncNow(force){
+  if (syncBusy || document.hidden) return;
+  if (!force && syncBusyTyping()) return;     // đang gõ thì để yên
+  syncBusy = true;
+  try {
+    if (curTab === 'share') {                 // diễn đàn: gọi bản nhẹ (chỉ bài + 💖 + bình luận)
+      const r = await callApi({ action:'getPosts', email: currentUser ? currentUser.email : '' });
+      if (r && r.ok && Array.isArray(r.posts)) {
+        POSTS = r.posts;
+        if (r.ranks && typeof r.ranks === 'object') RANK_MAP = r.ranks;
+      }
+    } else {                                  // các trang khác: tải toàn bộ dữ liệu
+      await loadData(true);                   // true = không vẽ lại bên trong, để mình tự vẽ
+    }
+    if (!syncBusyTyping()) rerenderCurrent();
+  } catch(e) {}
+  syncBusy = false;
+}
+function startSync(){
+  if (syncTimer) clearInterval(syncTimer);
+  syncTimer = setInterval(() => syncNow(false), 20000);   // 20 giây/lần
+}
+document.addEventListener('visibilitychange', () => { if (!document.hidden) syncNow(false); });
+startSync();
+
 function renderShare() {
   const feed = document.getElementById('sh-feed');
   const list = POSTS
@@ -9725,7 +9782,7 @@ async function callApi(payload) {
 
 // ===== NẠP DỮ LIỆU TỪ GOOGLE SHEET =====
 let dataLoaded = false;
-async function loadData() {
+async function loadData(quiet) {
   try {
     const r = await callApi({ action:'getAll', email: currentUser ? currentUser.email : '' });
     if (!r || !r.ok) return;
@@ -9749,6 +9806,7 @@ async function loadData() {
       if (mine) myProfile = mine;
     }
     dataLoaded = true;
+    if (quiet) return;                 // chế độ đồng bộ nền: chỉ cập nhật dữ liệu, không vẽ lại/không reset bộ lọc
     initCitySelector();
     renderPlaces(); renderFeed(); renderMarket(); renderJobs(); renderTranslate(); renderEvents(); renderShare(); renderArticles(); renderHomeFeed(); renderLandingPosts();
     if (!document.getElementById('view-friends').classList.contains('hidden')) renderFriends();
