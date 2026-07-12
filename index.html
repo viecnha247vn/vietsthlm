@@ -322,6 +322,18 @@
   #sh-feed { display: grid; gap: 14px; }
   .sh-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 15px 16px; }
   /* 💖 thích & 💬 bình luận */
+  /* 🛠️ Bảng quản trị */
+  .adm-box { margin-top: 12px; padding: 12px 13px; border-radius: 13px; background: var(--paper-2); border: 1px solid var(--line); }
+  .adm-t { font-size: 13px; font-weight: 800; color: var(--ink); margin-bottom: 8px; }
+  .adm-row { display: flex; gap: 8px; }
+  .adm-row select, .adm-row input { flex: 1; min-width: 0; padding: 10px; border: 1px solid var(--line);
+    border-radius: 10px; background: var(--surface); color: var(--ink); font-family: inherit; font-size: 13.5px; }
+  .adm-go { flex: 0 0 auto; border: none; border-radius: 10px; padding: 10px 16px; cursor: pointer;
+    font-family: inherit; font-size: 13px; font-weight: 700;
+    background: linear-gradient(135deg, var(--btn-b), var(--btn-c)); color: var(--btn-text); }
+  .adm-msg { margin-top: 12px; font-size: 13px; line-height: 1.45; text-align: center; }
+  .adm-msg.ok { color: var(--jade); }
+  .adm-msg.err { color: var(--alert); }
   /* 📲 Nút cài app vào màn hình chính */
   .pwa-btn { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(84px + env(safe-area-inset-bottom)); z-index: 900;
     display: flex; align-items: center; gap: 8px; padding: 11px 14px 11px 16px; border: none;
@@ -1547,7 +1559,7 @@
   <div class="foot-brand"><span class="qlogo qlogo-f" role="img" aria-label="QiQa"></span></div>
   <p class="foot-tag" data-i18n="foot_tag">Cộng đồng cho mọi người xa quê tại Thụy Điển</p>
   <a class="foot-mail" href="mailto:weshare.sverige@gmail.com">✉ weshare.sverige@gmail.com</a>
-  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v142-pwa-btn</span></p>
+  <p class="foot-copy">© 2026 QiQa Shop <span style="opacity:.5">· v143-admin</span></p>
 </footer>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
@@ -9991,6 +10003,116 @@ function selectPlan(i) {
       </div>` : ''}
     </div>`;
 }
+
+// ============================================================
+// ===== BẢNG QUẢN TRỊ (chỉ admin thấy) =====
+// ============================================================
+function openAdminPanel(){
+  if (!isAdminUser()) return;
+  document.getElementById('sheet').innerHTML = `
+    <button class="close-x" onclick="closeModal()">✕</button>
+    <div class="sheet-body">
+      <h2>🛠️ Quản trị</h2>
+      <div class="auth-note">Nâng cấp tài khoản cho thành viên.</div>
+
+      <div class="field">
+        <label>Email của người cần nâng cấp</label>
+        <input id="adm-email" placeholder="vidu@gmail.com" autocomplete="off">
+      </div>
+
+      <div class="adm-box">
+        <div class="adm-t">👑 Cấp VIP</div>
+        <div class="adm-row">
+          <select id="adm-months">
+            <option value="1">1 tháng</option>
+            <option value="3">3 tháng</option>
+            <option value="6">6 tháng</option>
+            <option value="12" selected>1 năm</option>
+            <option value="1200">Vô thời hạn</option>
+          </select>
+          <button class="adm-go" onclick="admGrantVip()">Cấp VIP</button>
+        </div>
+      </div>
+
+      <div class="adm-box">
+        <div class="adm-t">💎 Tặng credit</div>
+        <div class="adm-row">
+          <input id="adm-credit" type="number" value="100" min="1">
+          <button class="adm-go" onclick="admGrantCredit()">Tặng</button>
+        </div>
+      </div>
+
+      <div class="adm-box">
+        <div class="adm-t">🏅 Cấp hạng danh dự</div>
+        <div class="adm-row">
+          <select id="adm-rank">
+            <option value="1">🥉 Tích cực</option>
+            <option value="2">🥈 Nòng cốt</option>
+            <option value="3">🥇 Kỳ cựu</option>
+            <option value="4">💎 Đại sứ</option>
+          </select>
+          <button class="adm-go" onclick="admSetRank()">Cấp hạng</button>
+        </div>
+      </div>
+
+      <div id="adm-msg" class="adm-msg"></div>
+    </div>`;
+  openModalEl();
+}
+function admEmail(){
+  const e = (document.getElementById('adm-email')||{}).value || '';
+  return e.trim().toLowerCase();
+}
+function admSay(txt, ok){
+  const m = document.getElementById('adm-msg');
+  if (m) { m.textContent = txt; m.className = 'adm-msg ' + (ok ? 'ok' : 'err'); }
+}
+async function admGrantVip(){
+  const email = admEmail(); if (!email) return admSay('Hãy nhập email.', false);
+  const months = Number(document.getElementById('adm-months').value) || 1;
+  admSay('Đang xử lý…', true);
+  try {
+    const r = await callApi({ action:'setMember', email, months, adminEmail: currentUser.email });
+    if (r && r.ok) {
+      const d = new Date(r.member_until);
+      const txt = d.getFullYear() >= 2090 ? 'vô thời hạn' : ('đến ' + d.toLocaleDateString('vi-VN'));
+      admSay('✅ Đã cấp VIP cho ' + email + ' — ' + txt, true);
+      if (email === String(currentUser.email).toLowerCase() && r.user) {
+        Object.assign(currentUser, r.user);
+        localStorage.setItem('vietsthlm_user', JSON.stringify(currentUser));
+        refreshAccBtn(); refreshCreditChip();
+      }
+    } else admSay('❌ ' + ((r && r.msg) || 'Không cấp được.'), false);
+  } catch(e){ admSay('❌ Lỗi kết nối.', false); }
+}
+async function admGrantCredit(){
+  const email = admEmail(); if (!email) return admSay('Hãy nhập email.', false);
+  const amount = Number(document.getElementById('adm-credit').value) || 0;
+  if (amount <= 0) return admSay('Số credit phải lớn hơn 0.', false);
+  admSay('Đang xử lý…', true);
+  try {
+    const r = await callApi({ action:'addCredit', email, amount, adminEmail: currentUser.email });
+    if (r && r.ok) {
+      admSay('✅ Đã tặng ' + amount + ' credit — số dư mới: ' + r.credit, true);
+      if (email === String(currentUser.email).toLowerCase()) {
+        currentUser.credit = r.credit;
+        localStorage.setItem('vietsthlm_user', JSON.stringify(currentUser));
+        refreshCreditChip();
+      }
+    } else admSay('❌ ' + ((r && r.msg) || 'Không tặng được.'), false);
+  } catch(e){ admSay('❌ Lỗi kết nối.', false); }
+}
+async function admSetRank(){
+  const email = admEmail(); if (!email) return admSay('Hãy nhập email.', false);
+  const hang = Number(document.getElementById('adm-rank').value) || 1;
+  admSay('Đang xử lý…', true);
+  try {
+    const r = await callApi({ action:'setRank', email, hang, adminEmail: currentUser.email });
+    if (r && r.ok) admSay('✅ Đã cấp hạng ' + r.icon + ' ' + r.ten_hang + ' cho ' + email, true);
+    else admSay('❌ ' + ((r && r.msg) || 'Không cấp được.'), false);
+  } catch(e){ admSay('❌ Lỗi kết nối.', false); }
+}
+
 async function adminGrantMember() {
   const email = document.getElementById('adm-mb-email').value.trim();
   const months = Number(document.getElementById('adm-mb-months').value)||0;
@@ -10200,6 +10322,7 @@ function openAccountMenu(){
       '<button class="acc-menu-item" onclick="closeModal();reopenSplash()"><span>🌐</span><span>'+t('w_lang')+'</span></button>'+
       '<button class="acc-menu-item" onclick="openThemePicker()"><span>🎨</span><span>'+t('theme_title')+'</span></button>'+
       (isStandalone() ? '' : '<button class="acc-menu-item" onclick="closeModal();installApp()"><span>📲</span><span>'+t('pwa_add')+'</span></button>')+
+      (isAdminUser() ? '<button class="acc-menu-item" onclick="openAdminPanel()"><span>🛠️</span><span>Quản trị</span></button>' : '')+
     '</div></div>';
   openModalEl();
 }
